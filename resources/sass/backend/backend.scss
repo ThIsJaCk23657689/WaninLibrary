@@ -1,0 +1,23 @@
+// Import Custom Variables
+@import "variables";
+
+// Import Bootstrap
+@import '~bootstrap/scss/bootstrap';
+@import '~jquery-ui/themes/base/all.css';
+
+// Import custom styles
+@import "./mixins.scss";
+@import "./global.scss";
+@import "./utilities.scss";
+@import "./navbar.scss";
+@import "./cards.scss";
+@import "./login.scss";
+@import "./footer.scss";
+
+body{
+    font-family: '微軟正黑體';
+}
+
+#go_top_btn{
+    z-index: 100;
+}
