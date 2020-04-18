@@ -3,23 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\AgencyRequest;
-use App\Services\AgencyService;
+use App\Http\Requests\BookRequest;
+use App\Services\BookService;
 
-class AgencyController extends Controller
+class BookController extends Controller
 {
-    public $AgencyService;
+    public $BookService;
 
 
     public function __construct()
     {
         $this->middleware('auth');
-        $this->AgencyService = new AgencyService();
+        $this->BookService = new BookService();
     }
     public function index()
     {
-        $agencies = $this->AgencyService->getList();
-        return view('agencies.index', compact('agencies'));
+        $books = $this->BookService->getList();
+        return view('books.index', compact('books'));
     }
 
     /**
@@ -29,7 +29,7 @@ class AgencyController extends Controller
      */
     public function create()
     {
-        return view('agencies.create');
+        return view('books.create');
     }
 
     /**
@@ -38,10 +38,10 @@ class AgencyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AgencyRequest $request)
+    public function store(BookRequest $request)
     {
-        $agency_id = $this->AgencyService->add($request);
-        return response()->json(['status'=>'OK','added_id'=>$agency_id,'url'=>route('agencies.index')],200);
+        $book_id = $this->BookService->add($request);
+        return response()->json(['status'=>'OK','added_id'=>$book_id,'url'=>route('books.index')],200);
     }
 
     /**
@@ -52,8 +52,8 @@ class AgencyController extends Controller
      */
     public function show($id)
     {
-        $agency = $this->AgencyService->getOne($id);
-        return view('agencies.show', compact('agency'));
+        $book = $this->BookService->getOne($id);
+        return view('books.show', compact('book'));
     }
 
     /**
@@ -64,8 +64,8 @@ class AgencyController extends Controller
      */
     public function edit($id)
     {
-        $agency = $this->AgencyService->getOne($id);
-        return view('agencies.edit', compact('agency'));
+        $book = $this->BookService->getOne($id);
+        return view('books.edit', compact('book'));
     }
 
     /**
@@ -75,12 +75,12 @@ class AgencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AgencyRequest $request, $id)
+    public function update(BookRequest $request, $id)
     {
-        $agency_id = $this->AgencyService->update($request, $id);
+        $book_id = $this->BookService->update($request, $id);
         return response()->json(['status'=>'OK',
-                                'added_id'=>$agency_id,
-                                'url'=>route('agencies.show',[$agency_id])],200);
+                                'added_id'=>$book_id,
+                                'url'=>route('books.show',[$book_id])],200);
     }
 
     /**
@@ -92,7 +92,7 @@ class AgencyController extends Controller
     public function destroy($id)
     {
         //日後注意是否有人在該群組底下，若有無法刪除
-        $this->AgencyService->delete($id);
-        return  response()->json(['status'=>'OK','url'=>route('agencies.index')],200);
+        $this->BookService->delete($id);
+        return  response()->json(['status'=>'OK','url'=>route('books.index')],200);
     }
 }

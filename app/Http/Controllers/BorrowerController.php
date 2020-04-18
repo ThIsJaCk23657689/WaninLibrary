@@ -78,7 +78,7 @@ class BorrowerController extends Controller
     public function update(BorrowerRequest $request, $id)
     {
         $borrower_id = $this->BorrowerService->update($request, $id);
-        return response()->json(['status'=>'OK','added_id'=>$borrower_id,'url'=>route('borrowers.show')],200);
+        return response()->json(['status'=>'OK','added_id'=>$borrower_id,'url'=>route('borrowers.show',[$borrower_id])],200);
     }
 
     /**

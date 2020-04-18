@@ -1,76 +1,66 @@
 <?php
 
 namespace App\Services;
-use App\Borrower as BorrowerEloquent;
+use App\Donor as DonorEloquent;
 
 
-class BorrowerService extends BaseService
+class DonorService extends BaseService
 {
     public function add($request)
     {
-        $borrower = BorrowerEloquent::create([
-            'agency_id' => $request->agency_id,
-
+        $donor = DonorEloquent::create([
             'name' => $request->name,
             'birthday' => $request->birthday,
             'email' => $request->email,
             'tel' => $request->tel,
-            'job_title' => $request->job_title,
-            'status' => $request->status,
-            'activated' => $request->activated,
-            
+            'cellphone' => $request->cellphone,
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
             'content' => $request->content,
-            'count' => $request->count,
+            'exposure' => $request->exposure,
         ]);
-        return $borrower->id;
+        return $donor->id;
     }
 
     public function getList()
     {
-        $borrowers = BorrowerEloquent::withTrashed()->get();
-        return $borrowers;
+        $donors = DonorEloquent::withTrashed()->get();
+        return $donors;
     }
 
     public function getOne($id)
     {
-        $borrower = BorrowerEloquent::withTrashed()->findOrFail($id);
-        return $borrower;
+        $donor = DonorEloquent::withTrashed()->findOrFail($id);
+        return $donor;
     }
 
     public function update($request, $id)
     {
-        $borrowers = $this->getOne($id);
-        $borrowers->update([
-            'agency_id' => $request->agency_id,
-
+        $donor = $this->getOne($id);
+        $donor->update([
             'name' => $request->name,
             'birthday' => $request->birthday,
             'email' => $request->email,
             'tel' => $request->tel,
-            'job_title' => $request->job_title,
-            'status' => $request->status,
-            'activated' => $request->activated,
-            
+            'cellphone' => $request->cellphone,
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
             'content' => $request->content,
-            'count' => $request->count,
+            'exposure' => $request->exposure,
         ]);
 
-        return $borrowers->id;
+        return $donor->id;
     }
 
     public function delete($id)
     {
-        $borrowers = $this->getOne($id);
-        $borrowers->delete();
+        $donor = $this->getOne($id);
+        $donor->delete();
     }
 }

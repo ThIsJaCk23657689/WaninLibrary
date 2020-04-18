@@ -25,7 +25,7 @@ class BorrowerRequest extends FormRequest
     {
         return [
 
-            'agency_id' => "exists:agencies,id",
+            'agency_id' => "nullable|exists:agencies,id",
 
             'name' => 'required|string|max:100',
             'birthday' => 'required|date',

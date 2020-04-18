@@ -30,8 +30,8 @@ class AgencyService extends BaseService
 
     public function getOne($id)
     {
-        $agencies = AgencyEloquent::withTrashed()->findOrFail($id);
-        return $agencies;
+        $agency = AgencyEloquent::withTrashed()->findOrFail($id);
+        return $agency;
     }
 
     public function update($request, $id)

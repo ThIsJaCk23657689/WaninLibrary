@@ -3,23 +3,24 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\AgencyRequest;
-use App\Services\AgencyService;
+use App\Http\Requests\DonorRequest;
+use App\Services\DonorService;
 
-class AgencyController extends Controller
+
+class DonorController extends Controller
 {
-    public $AgencyService;
+    public $DonorService;
 
 
     public function __construct()
     {
         $this->middleware('auth');
-        $this->AgencyService = new AgencyService();
+        $this->DonorService = new DonorService();
     }
     public function index()
     {
-        $agencies = $this->AgencyService->getList();
-        return view('agencies.index', compact('agencies'));
+        $donors = $this->DonorService->getList();
+        return view('donors.index', compact('donors'));
     }
 
     /**
@@ -29,7 +30,7 @@ class AgencyController extends Controller
      */
     public function create()
     {
-        return view('agencies.create');
+        return view('donors.create');
     }
 
     /**
@@ -38,10 +39,10 @@ class AgencyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AgencyRequest $request)
+    public function store(DonorRequest $request)
     {
-        $agency_id = $this->AgencyService->add($request);
-        return response()->json(['status'=>'OK','added_id'=>$agency_id,'url'=>route('agencies.index')],200);
+        $donor_id = $this->DonorService->add($request);
+        return response()->json(['status'=>'OK','added_id'=>$donor_id,'url'=>route('donors.index')],200);
     }
 
     /**
@@ -52,8 +53,8 @@ class AgencyController extends Controller
      */
     public function show($id)
     {
-        $agency = $this->AgencyService->getOne($id);
-        return view('agencies.show', compact('agency'));
+        $donor = $this->DonorService->getOne($id);
+        return view('donors.show', compact('donor'));
     }
 
     /**
@@ -64,8 +65,8 @@ class AgencyController extends Controller
      */
     public function edit($id)
     {
-        $agency = $this->AgencyService->getOne($id);
-        return view('agencies.edit', compact('agency'));
+        $donor = $this->DonorService->getOne($id);
+        return view('donors.edit', compact('donor'));
     }
 
     /**
@@ -75,12 +76,10 @@ class AgencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AgencyRequest $request, $id)
+    public function update(DonorRequest $request, $id)
     {
-        $agency_id = $this->AgencyService->update($request, $id);
-        return response()->json(['status'=>'OK',
-                                'added_id'=>$agency_id,
-                                'url'=>route('agencies.show',[$agency_id])],200);
+        $donor_id = $this->DonorService->update($request, $id);
+        return response()->json(['status'=>'OK','added_id'=>$donor_id,'url'=>route('donors.show',[$donor_id])],200);
     }
 
     /**
@@ -92,7 +91,7 @@ class AgencyController extends Controller
     public function destroy($id)
     {
         //日後注意是否有人在該群組底下，若有無法刪除
-        $this->AgencyService->delete($id);
-        return  response()->json(['status'=>'OK','url'=>route('agencies.index')],200);
+        $this->DonorService->delete($id);
+        return  response()->json(['status'=>'OK','url'=>route('donors.index')],200);
     }
 }
