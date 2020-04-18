@@ -1,3 +1,6 @@
+import 'jquery-ui/ui/widgets/datepicker.js';
+import 'jquery-ui/ui/i18n/datepicker-zh-TW.js';
+
 window._ = require('lodash');
 
 /**

@@ -18,12 +18,10 @@
 	"Login": "登入",
 	"Logout": "登出",
 
-	"ShangDa": "尚達塑膠",
-	"Shangda Plastic Co., Ltd.": "尚達塑膠有限公司",
-
 	"Home": "首頁",
-	"About": "關於尚達",
+	"About": "關於我們",
 	"News": "最新消息",
+	"Events": "近期活動",
 	"Products": "商品",
 	"Location": "位置",
 	"Contact": "聯絡我們",
@@ -85,33 +83,38 @@
 	"Charts": "圖表",
 	"Tables": "表格",
 
+	"Backend Control": "後臺管理",
 	"Basic:" : "基本管理",
 	"Related:" : "相關管理",
-	"People Management" : "人物管理",
-	"Staffs" : "員工", 
-	"Suppliers": "供應商", 
-	"Consumers": "顧客",
-	"Job Titles": "職稱",
-	"Produces": "商品庫存",
-
-	"Stuffs Management": "物品管理",
-	"Materials": "原物料",
-	"Categories": "類別",
-	"Orders Management": "訂單管理",
-	"Purchase Orders": "進貨單",
-	"Sales Orders": "銷貨單",
-	"Return Orders": "退貨單",
 	"Index": "首頁",
 	"Create": "創建",
 	"Show": "顯示",
 	"Edit": "編輯",
-	"Material": "原物料",
-	"Basic Materials" : "基本原物料",
-	"Backend Control": "後臺管理",
 	"Last Updated": "最近修改日期：",
 
-	"System Management": "系統管理",
-	"Web Setting": "網站設定",
-	"Log File": "日誌檔",
-	"Discounts": "折扣管理"
+	"People Management" : "人事管理",
+	"Admin" : "管理員",
+	"Borrower" : "借閱人",
+	"Donors" : "捐贈人",
+	"Agency" : "機構",
+
+	"Books Management" : "圖書管理",
+	"Books" : "書本",
+	"Purchase" : "購入",
+	"Donate" : "捐入與轉贈",
+	"Barcode" : "條碼",
+
+	"Circulation" : "借閱管理",
+	"Borrow" : "借書",
+	"Return" : "還書",
+	"Overdue" : "逾期",
+
+	"General Settings" : "通用設定",
+	"Recommend" : "推薦書本",
+	
+	"Change Password" : "更改密碼",
+
+	"Notification" : "通知",
+	"Log File" : "日誌檔",
+	"Statistics" : "統計"
 }

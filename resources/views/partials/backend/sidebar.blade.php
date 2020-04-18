@@ -14,55 +14,69 @@
 		</a>
 		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
-			<a class="dropdown-item" href="{{ route('users.index') }}">{{ __('Staffs') }}</a>
-			<a class="dropdown-item" href="{{ route('suppliers.index') }}">{{ __('Suppliers') }}</a>
-			<a class="dropdown-item" href="{{ route('consumers.index') }}">{{ __('Consumers') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Admin') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Borrower') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Donors') }}</a>
 			<div class="dropdown-divider"></div>
 			<h6 class="dropdown-header">{{ __('Related:') }}</h6>
-			<a class="dropdown-item" href="{{ route('jobtitles.index') }}">{{ __('Job Titles') }}</a>
-			<a class="dropdown-item" href="{{ route('discounts.index') }}">{{ __('Discounts') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Agency') }}</a>
 		</div>
 	</li>
 
 	<li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			<i class="fas fa-dolly-flatbed"></i>
-			<span>{{ __('Stuffs Management') }}</span>
+			<i class="fas fa-book-open"></i>
+			<span>{{ __('Books Management') }}</span>
 		</a>
 		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
-			<a class="dropdown-item" href="{{ route('materials.index') }}">{{ __('Materials') }}</a>
-			<a class="dropdown-item" href="{{ route('products.index') }}">{{ __('Products') }}</a>
-			<a class="dropdown-item" href="{{ route('produces.index') }}">{{ __('Produces') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Books') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Purchase') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Donate') }}</a>
+			<div class="dropdown-divider"></div>
 			<h6 class="dropdown-header">{{ __('Related:') }}</h6>
-			<a class="dropdown-item" href="{{ route('categories.index') }}">{{ __('Categories') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Barcode') }}</a>
 		</div>
 	</li>
 
 	<li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			<i class="fab fa-wpforms"></i>
-			<span>{{ __('Orders Management') }}</span>
+			<i class="fas fa-exchange-alt"></i>
+			<span>{{ __('Circulation') }}</span>
 		</a>
 		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
-			<a class="dropdown-item" href="{{ route('purchase.index') }}">{{ __('Purchase Orders') }}</a>
-			<a class="dropdown-item" href="{{ route('sales.index') }}">{{ __('Sales Orders') }}</a>
-			<a class="dropdown-item" href="#">{{ __('Return Orders') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Borrow') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Return') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Overdue') }}</a>
 		</div>
 	</li>
 
 	<li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<i class="fas fa-cog"></i>
-			<span>{{ __('System Management') }}</span>
+			<span>{{ __('General Settings') }}</span>
 		</a>
 		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
-			<a class="dropdown-item" href="#">{{ __('Web Setting') }}</a>
 			<a class="dropdown-item" href="#">{{ __('News') }}</a>
-			<a class="dropdown-item" href="#">{{ __('Log File') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Events') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Recommend') }}</a>
 		</div>
 	</li>
-	
+
+	<li class="nav-item dropdown">
+		<a class="nav-link" href="#" role="button">
+			<i class="far fa-file-alt"></i>
+			<span>{{ __('Log File') }}</span>
+		</a>
+	</li>
+
+	<li class="nav-item dropdown">
+		<a class="nav-link" href="#" role="button">
+			<i class="far fa-chart-bar"></i>
+			<span>{{ __('Statistics') }}</span>
+		</a>
+	</li>
+
 </ul>
