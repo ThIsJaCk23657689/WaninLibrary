@@ -1,60 +1,66 @@
 <?php
 
 namespace App\Services;
-use App\Agency as AgencyEloquent;
+use App\Donor as DonorEloquent;
 
 
-class AgencyService extends BaseService
+class DonorService extends BaseService
 {
     public function add($request)
     {
-        $agency = AgencyEloquent::create([
+        $donor = DonorEloquent::create([
             'name' => $request->name,
+            'birthday' => $request->birthday,
+            'email' => $request->email,
             'tel' => $request->tel,
-            'principal' => $request->principal,
+            'cellphone' => $request->cellphone,
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
             'content' => $request->content,
+            'exposure' => $request->exposure,
         ]);
-        return $agency->id;
+        return $donor->id;
     }
 
     public function getList()
     {
-        $agencies = AgencyEloquent::get();
-        return $agencies;
+        $donors = DonorEloquent::get();
+        return $donors;
     }
 
     public function getOne($id)
     {
-        $agencies = AgencyEloquent::findOrFail($id);
-        return $agencies;
+        $donor = DonorEloquent::findOrFail($id);
+        return $donor;
     }
 
     public function update($request, $id)
     {
-        $agency = $this->getOne($id);
-        $agency->update([
+        $donor = $this->getOne($id);
+        $donor->update([
             'name' => $request->name,
+            'birthday' => $request->birthday,
+            'email' => $request->email,
             'tel' => $request->tel,
-            'principal' => $request->principal,
+            'cellphone' => $request->cellphone,
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
             'content' => $request->content,
+            'exposure' => $request->exposure,
         ]);
 
-        return $agency->id;
+        return $donor->id;
     }
 
     public function delete($id)
     {
-        $agency = $this->getOne($id);
-        $agency->delete();
+        $donor = $this->getOne($id);
+        $donor->delete();
     }
 }

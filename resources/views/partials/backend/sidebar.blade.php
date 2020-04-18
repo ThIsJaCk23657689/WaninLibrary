@@ -19,7 +19,7 @@
 			<a class="dropdown-item" href="#">{{ __('Donors') }}</a>
 			<div class="dropdown-divider"></div>
 			<h6 class="dropdown-header">{{ __('Related:') }}</h6>
-			<a class="dropdown-item" href="#">{{ __('Agency') }}</a>
+			<a class="dropdown-item" href="{{ route('agencies.index') }}">{{ __('Agencies') }}</a>
 		</div>
 	</li>
 

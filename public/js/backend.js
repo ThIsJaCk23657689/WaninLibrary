@@ -1934,6 +1934,32 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('LoadingModal.vue mounted.');
@@ -39890,7 +39916,8 @@ var staticRenderFns = [
           role: "dialog",
           "aria-labelledby": "LoadingModalLabel",
           "aria-hidden": "true",
-          "data-keyboard": "false"
+          "data-keyboard": "false",
+          "data-backdrop": "static"
         }
       },
       [
@@ -39924,7 +39951,7 @@ var staticRenderFns = [
                                     width: "3rem",
                                     height: "3rem"
                                   },
-                                  attrs: { role: "status" }
+                                  attrs: { id: "modal_spinner", role: "status" }
                                 },
                                 [
                                   _c("span", { staticClass: "sr-only" }, [
@@ -39935,11 +39962,129 @@ var staticRenderFns = [
                             ]
                           ),
                           _vm._v(" "),
-                          _c("div", { staticClass: "my-2" }, [
-                            _c("span", { attrs: { id: "LoadingMsg" } }, [
-                              _vm._v("正在讀取")
-                            ])
-                          ])
+                          _c(
+                            "div",
+                            { staticClass: "row justify-content-center" },
+                            [
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "swal2-icon swal2-success swal2-animate-success-icon",
+                                  staticStyle: { display: "none" },
+                                  attrs: { id: "modal_good" }
+                                },
+                                [
+                                  _c("div", {
+                                    staticClass:
+                                      "swal2-success-circular-line-left",
+                                    staticStyle: {
+                                      "background-color": "rgb(255, 255, 255)"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "swal2-success-line-tip"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "swal2-success-line-long"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "swal2-success-ring"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass: "swal2-success-fix",
+                                    staticStyle: {
+                                      "background-color": "rgb(255, 255, 255)"
+                                    }
+                                  }),
+                                  _vm._v(" "),
+                                  _c("div", {
+                                    staticClass:
+                                      "swal2-success-circular-line-right",
+                                    staticStyle: {
+                                      "background-color": "rgb(255, 255, 255)"
+                                    }
+                                  })
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "swal2-icon swal2-error swal2-animate-error-icon",
+                                  staticStyle: { display: "none" },
+                                  attrs: { id: "modal_error" }
+                                },
+                                [
+                                  _c("span", { staticClass: "swal2-x-mark" }, [
+                                    _c("span", {
+                                      staticClass: "swal2-x-mark-line-left"
+                                    }),
+                                    _vm._v(" "),
+                                    _c("span", {
+                                      staticClass: "swal2-x-mark-line-right"
+                                    })
+                                  ])
+                                ]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "row justify-content-center my-2" },
+                            [
+                              _c(
+                                "span",
+                                {
+                                  staticClass: "text-center",
+                                  attrs: { id: "modal_msg" }
+                                },
+                                [_vm._v("正在讀取")]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "row justify-content-center my-2" },
+                            [
+                              _c(
+                                "a",
+                                {
+                                  staticClass: "btn btn-md btn-dark",
+                                  staticStyle: { display: "none" },
+                                  attrs: { href: "#", id: "modal_link" }
+                                },
+                                [_vm._v("返回列表")]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "row justify-content-center my-2" },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-md btn-dark",
+                                  staticStyle: { display: "none" },
+                                  attrs: {
+                                    type: "button",
+                                    id: "modal_close",
+                                    "data-dismiss": "modal"
+                                  }
+                                },
+                                [_vm._v("返回")]
+                              )
+                            ]
+                          )
                         ])
                       ]
                     )
