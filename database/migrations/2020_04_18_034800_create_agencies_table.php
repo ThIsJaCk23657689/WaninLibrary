@@ -23,6 +23,7 @@ class CreateAgenciesTable extends Migration
             $table->string('address_county',10)->nullable()->comment('縣市別');
             $table->string('address_district',10)->nullable()->comment('鄉鎮市區');
             $table->string('address_others')->nullable()->comment('其他住址');
+            $table->string('content')->nullable()->comment('備註');
 
             $table->timestamps();
         });

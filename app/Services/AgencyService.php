@@ -17,6 +17,7 @@ class AgencyService extends BaseService
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
+            'content' => $request->content,
         ]);
         return $agency->id;
     }
@@ -45,6 +46,7 @@ class AgencyService extends BaseService
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
+            'content' => $request->content,
         ]);
 
         return $agency->id;
