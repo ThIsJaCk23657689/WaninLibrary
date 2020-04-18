@@ -16,7 +16,8 @@ class AdminOnly
      */
     public function handle($request, Closure $next)
     {
-        $user = JWTAuth::getToken()->authenticate();
+        $token = JWTAuth::getToken();
+        $user = JWTAuth::toUser($token);
 
         if($user->status == 0){
             $response = $next($request);

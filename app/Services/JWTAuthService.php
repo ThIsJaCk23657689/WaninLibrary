@@ -51,7 +51,7 @@ class JWTAuthService extends BaseService
         $now = Carbon::now();
         // 寄信
         $destination = collect([
-            ['name' => 'Jason', 'email' => $email]
+            ['name' => $user->name, 'email' => $email]
         ]);
 
         // 提供給模板的參數
@@ -67,7 +67,8 @@ class JWTAuthService extends BaseService
 
     public function resetPassword($new_password){
         // get user by jwt token
-        $user = JWTAuth::getToken()->authenticate();
+        $token = JWTAuth::getToken();
+        $user = JWTAuth::toUser($token);
 
         $user->password = bcrypt($new_password);
         $user->save();
