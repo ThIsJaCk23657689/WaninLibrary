@@ -76,7 +76,11 @@ class AgencyController extends Controller
     public function update(AgencyRequest $request, $id)
     {
         $agency_id = $this->AgencyService->update($request, $id);
-        return response()->json(['status'=>'OK','added_id'=>$agency_id,'url'=>route('agencies.show')],200);
+        return response()->json([
+            'status' => 'OK',
+            'added_id' => $agency_id,
+            'url' => route('agencies.show', [$agency_id])
+        ],200);
     }
 
     /**
@@ -89,6 +93,24 @@ class AgencyController extends Controller
     {
         //日後注意是否有人在該群組底下，若有無法刪除
         $this->AgencyService->delete($id);
-        return  response()->json(['status'=>'OK','url'=>route('agencies.index')],200);
+        // return response()->json(['status'=>'OK','url'=>route('agencies.index')],200);
+        return redirect()->route('agencies.index');
+    }
+
+    // API
+    public function getlist(){
+        $agencies = $this->AgencyService->getList();
+        return response()->json([
+            'status' => 'OK',
+            'agencies' => $agencies
+        ]);
+    }
+
+    public function getOne($id){
+        $agency = $this->AgencyService->getOne($id);
+        return response()->json([
+            'status' => 'OK',
+            'agency' => $agency
+        ]);
     }
 }

@@ -26,5 +26,7 @@ Route::prefix('/backend')->group(function(){
     Route::get('/', 'HomeController@backend')->name('backend');
 
     // 機構管理路由
+    Route::get('/agencies/json', 'AgencyController@getList')->name('agencies.getList');
+    Route::get('/agencies/{id}/json', 'AgencyController@getOne')->name('agencies.getOne');
     Route::resource('/agencies', 'AgencyController');
 });

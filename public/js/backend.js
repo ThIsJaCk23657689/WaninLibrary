@@ -1956,6 +1956,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   mounted: function mounted() {
     console.log('LoadingModal.vue mounted.');
@@ -39912,7 +39916,8 @@ var staticRenderFns = [
           role: "dialog",
           "aria-labelledby": "LoadingModalLabel",
           "aria-hidden": "true",
-          "data-keyboard": "false"
+          "data-keyboard": "false",
+          "data-backdrop": "static"
         }
       },
       [
@@ -40057,6 +40062,26 @@ var staticRenderFns = [
                                   attrs: { href: "#", id: "modal_link" }
                                 },
                                 [_vm._v("返回列表")]
+                              )
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            { staticClass: "row justify-content-center my-2" },
+                            [
+                              _c(
+                                "button",
+                                {
+                                  staticClass: "btn btn-md btn-dark",
+                                  staticStyle: { display: "none" },
+                                  attrs: {
+                                    type: "button",
+                                    id: "modal_close",
+                                    "data-dismiss": "modal"
+                                  }
+                                },
+                                [_vm._v("返回")]
                               )
                             ]
                           )

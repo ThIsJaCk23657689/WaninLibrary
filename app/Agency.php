@@ -14,4 +14,8 @@ class Agency extends Model
     public function borrowers(){
         return $this->hasMany(BorrowerEloquent::class);
     }
+
+    public function showAddress(){
+        return ($this->address_zipcode . $this->address_county . $this->address_district . $this->address_others) ?? '無';
+    }
 }

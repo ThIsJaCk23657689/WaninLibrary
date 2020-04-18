@@ -31,6 +31,7 @@ class AgencyRequest extends FormRequest
             'address_county' => 'nullable|string|max:10',
             'address_district' => 'nullable|string|max:10',
             'address_others' => 'nullable|string|max:255',
+            'content' => 'nullable|string|max:255'
         ];
     }
 }

@@ -1,5 +1,7 @@
 {
     "/js/agencies/create.js": "/js/agencies/create.js",
+    "/js/agencies/edit.js": "/js/agencies/edit.js",
+    "/js/agencies/index.js": "/js/agencies/index.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/backend.css": "/css/backend.css",

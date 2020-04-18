@@ -1,6 +1,6 @@
 <template>
 <!-- data-backdrop="static" -->
-<div class="modal fade" id="LoadingModal" tabindex="-1" role="dialog" aria-labelledby="LoadingModalLabel" aria-hidden="true" data-keyboard="false">
+<div class="modal fade" id="LoadingModal" tabindex="-1" role="dialog" aria-labelledby="LoadingModalLabel" aria-hidden="true" data-keyboard="false" data-backdrop="static">
     <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content" style="height:55vh;">
             <div class="modal-body">
@@ -36,6 +36,10 @@
 
                             <div class="row justify-content-center my-2">
                                 <a href="#" id="modal_link" class="btn btn-md btn-dark" style="display:none;">返回列表</a>
+                            </div>
+
+                            <div class="row justify-content-center my-2">
+                                <button type="button" id="modal_close" class="btn btn-md btn-dark" data-dismiss="modal" style="display:none;">返回</button>
                             </div>
                         </div>
                     </div>

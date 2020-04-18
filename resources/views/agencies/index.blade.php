@@ -57,11 +57,11 @@
 										<i class="fas fa-info-circle"></i>
 									</a>
 									<a href="{{ route('agencies.edit', [$agency->id]) }}" class="btn btn-md btn-success">
-										<i class="fas fa-edit"></i>
+										<i class="fas fa-pencil-alt"></i>
 									</a>
 									<a href="#" class="btn btn-md btn-danger" onclick="
 										event.preventDefault();
-										ans = confirm('確定要下架此商品嗎?');
+										ans = confirm('確定要刪除此機構嗎?');
 										if(ans){
 											$('#deleteform-{{ $agency->id }}').submit();
 										}

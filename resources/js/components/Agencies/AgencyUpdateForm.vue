@@ -1,7 +1,7 @@
 <template>
 <div class="row justify-content-center">
     <div class="col-md-8">
-        <form method="POST" id="agency_create_form" :action="AgenciesStoreURL">
+        <form method="POST" id="agency_edit_form" :action="AgenciesUpdateURL">
             <div class="row">
 
                 <div class="col-md-4">
@@ -9,21 +9,21 @@
                         <label for="name">
                             <span class="text-danger mr-2">*</span>機構名稱
                         </label>
-                        <input id="name" name="name" type="text" class="form-control mb-2" value="" required autocomplete="off" autofocus>
+                        <input id="name" name="name" type="text" class="form-control mb-2" :value="agency.name" required autocomplete="off" autofocus>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="tel">電話</label>
-                        <input id="tel" name="tel" type="text" class="form-control mb-2" value="" autocomplete="off">
+                        <input id="tel" name="tel" type="text" class="form-control mb-2" :value="agency.tel" autocomplete="off">
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="principal">負責人</label>
-                        <input id="principal" name="principal" type="text" class="form-control" value="" autocomplete="off">
+                        <input id="principal" name="principal" type="text" class="form-control" :value="agency.principal" autocomplete="off">
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <input id="address_others" type="text" class="form-control" name="address_others" value="" autocomplete="off">
+                                <input id="address_others" type="text" class="form-control" name="address_others" :value="agency.address_others" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -60,12 +60,12 @@
                         <textarea name="content" id="content" class="form-control" cols="30" rows="5"></textarea>
                     </div>
                 </div>
-            </div>
+            </div> 
 
             <div class="form-group row justify-content-center">
                 <div class="col-md-8">
-                    <button type="submit" class="btn btn-block btn-primary">
-                        確認新增
+                    <button type="submit" class="btn btn-block btn-success">
+                        確認修改
                     </button>
                     <a :href="AgenciesIndexURL" class="btn btn-block btn-danger">
                         返回列表
@@ -82,27 +82,39 @@
 export default {
     data(){
         return {
+            agency: [],
             AgenciesIndexURL: $('#AgenciesIndexURL').html(),
-            AgenciesStoreURL: $('#AgenciesStoreURL').html(),
+            AgenciesUpdateURL: $('#AgenciesUpdateURL').html(),
             FormErrorsMsg: [],
         }
     },
     methods: {    
     },
+    created(){  
+        let AgenciesGetOneURL = $('#AgenciesGetOneURL').html();
+        axios.get(AgenciesGetOneURL).then(response => {
+            this.agency = response.data.agency;
+
+            // 地址
+            $('#address_twzipcode').twzipcode({
+                'zipcodeSel': response.data.agency.address_zipcode
+            }); 
+        });
+    },
     mounted(){
-        console.log('AgencyCreateForm.vue mounted');
+        console.log('AgencyEditForm.vue mounted');
 
-        // 地址
-        $('#address_twzipcode').twzipcode({
-            'readonly': true
-        }); 
-
-        $('#agency_create_form').submit(function(e){
+        $('#agency_edit_form').submit(function(e){
             e.preventDefault();
 
             let url = $(this).attr('action');
 
             let data = $(this).serializeObject();
+            let formdata = new FormData();
+            Object.keys(data).forEach(
+                key => formdata.append(key, data[key])
+            );
+            console.log(formdata);
             
             $('#modal_good').css({'display':'none'});
             $('#modal_error').css({'display':'none'});
@@ -111,14 +123,14 @@ export default {
             $('#modal_link').slideUp();
             $('#modal_close').slideUp();
             $('#LoadingModal').modal('show');
-            axios.post(url, data).then(response => {
+            axios.patch(url, data).then(response => {
                 $('#modal_good').css({'display':'flex'});
                 $('#modal_spinner').css({'display':'none'});
-                $('#modal_msg').html('新增成功');
+                $('#modal_msg').html('編輯成功');
                 $('#modal_link').attr('href', response.data.url);
                 $('#modal_link').slideDown();
             }).catch((error) => {
-                console.error('新增機構時發生錯誤，錯誤訊息：' + error);
+                console.error('編輯機構時發生錯誤，錯誤訊息：' + error);
                 $('#modal_error').css({'display':'flex'});
                 $('#modal_spinner').css({'display':'none'});
                 $('#modal_msg').html('發生錯誤<br>錯誤訊息：' + error + '<br>');

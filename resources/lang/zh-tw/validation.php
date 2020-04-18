@@ -174,7 +174,11 @@ return [
         'username'              => '使用者名字',
         'year'                  => '年',
 
-
+        'tel'                   => '電話',
         'principal'             => '負責人',
+        'address_zipcode'       => '郵遞區號',
+        'address_county'        => '縣市',
+        'address_district'      => '鄉鎮市區',
+        'address_others'        => '巷弄路段',
     ],
 ];

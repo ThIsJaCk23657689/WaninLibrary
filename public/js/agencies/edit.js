@@ -81,14 +81,14 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 4);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agencies/AgencyCreateForm.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=script&lang=js&":
 /*!************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Agencies/AgencyCreateForm.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=script&lang=js& ***!
   \************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -178,22 +178,36 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
+      agency: [],
       AgenciesIndexURL: $('#AgenciesIndexURL').html(),
-      AgenciesStoreURL: $('#AgenciesStoreURL').html(),
+      AgenciesUpdateURL: $('#AgenciesUpdateURL').html(),
       FormErrorsMsg: []
     };
   },
   methods: {},
-  mounted: function mounted() {
-    console.log('AgencyCreateForm.vue mounted'); // 地址
+  created: function created() {
+    var _this = this;
 
-    $('#address_twzipcode').twzipcode({
-      'readonly': true
+    var AgenciesGetOneURL = $('#AgenciesGetOneURL').html();
+    axios.get(AgenciesGetOneURL).then(function (response) {
+      _this.agency = response.data.agency; // 地址
+
+      $('#address_twzipcode').twzipcode({
+        'zipcodeSel': response.data.agency.address_zipcode
+      });
     });
-    $('#agency_create_form').submit(function (e) {
+  },
+  mounted: function mounted() {
+    console.log('AgencyEditForm.vue mounted');
+    $('#agency_edit_form').submit(function (e) {
       e.preventDefault();
       var url = $(this).attr('action');
       var data = $(this).serializeObject();
+      var formdata = new FormData();
+      Object.keys(data).forEach(function (key) {
+        return formdata.append(key, data[key]);
+      });
+      console.log(formdata);
       $('#modal_good').css({
         'display': 'none'
       });
@@ -205,18 +219,18 @@ __webpack_require__.r(__webpack_exports__);
       $('#modal_link').slideUp();
       $('#modal_close').slideUp();
       $('#LoadingModal').modal('show');
-      axios.post(url, data).then(function (response) {
+      axios.patch(url, data).then(function (response) {
         $('#modal_good').css({
           'display': 'flex'
         });
         $('#modal_spinner').css({
           'display': 'none'
         });
-        $('#modal_msg').html('新增成功');
+        $('#modal_msg').html('編輯成功');
         $('#modal_link').attr('href', response.data.url);
         $('#modal_link').slideDown();
       })["catch"](function (error) {
-        console.error('新增機構時發生錯誤，錯誤訊息：' + error);
+        console.error('編輯機構時發生錯誤，錯誤訊息：' + error);
         $('#modal_error').css({
           'display': 'flex'
         });
@@ -237,9 +251,9 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agencies/AgencyCreateForm.vue?vue&type=template&id=e1dbda94&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa&":
 /*!****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Agencies/AgencyCreateForm.vue?vue&type=template&id=e1dbda94& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa& ***!
   \****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -259,14 +273,99 @@ var render = function() {
         {
           attrs: {
             method: "POST",
-            id: "agency_create_form",
-            action: _vm.AgenciesStoreURL
+            id: "agency_edit_form",
+            action: _vm.AgenciesUpdateURL
           }
         },
         [
-          _vm._m(0),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control mb-2",
+                  attrs: {
+                    id: "name",
+                    name: "name",
+                    type: "text",
+                    required: "",
+                    autocomplete: "off",
+                    autofocus: ""
+                  },
+                  domProps: { value: _vm.agency.name }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control mb-2",
+                  attrs: {
+                    id: "tel",
+                    name: "tel",
+                    type: "text",
+                    autocomplete: "off"
+                  },
+                  domProps: { value: _vm.agency.tel }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "principal" } }, [
+                  _vm._v("負責人")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "principal",
+                    name: "principal",
+                    type: "text",
+                    autocomplete: "off"
+                  },
+                  domProps: { value: _vm.agency.principal }
+                })
+              ])
+            ])
+          ]),
           _vm._v(" "),
-          _vm._m(1),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c(
+                "div",
+                {
+                  staticClass: "form-group",
+                  attrs: { id: "address_twzipcode" }
+                },
+                [
+                  _c("label", [_vm._v("地址")]),
+                  _vm._v(" "),
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row" }, [
+                    _c("div", { staticClass: "col-md-12" }, [
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: {
+                          id: "address_others",
+                          type: "text",
+                          name: "address_others",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: _vm.agency.address_others }
+                      })
+                    ])
+                  ])
+                ]
+              )
+            ])
+          ]),
           _vm._v(" "),
           _vm._m(2),
           _vm._v(" "),
@@ -275,12 +374,12 @@ var render = function() {
               _c(
                 "button",
                 {
-                  staticClass: "btn btn-block btn-primary",
+                  staticClass: "btn btn-block btn-success",
                   attrs: { type: "submit" }
                 },
                 [
                   _vm._v(
-                    "\r\n                        確認新增\r\n                    "
+                    "\r\n                        確認修改\r\n                    "
                   )
                 ]
               ),
@@ -309,127 +408,47 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "name" } }, [
-            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("機構名稱\r\n                        ")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-2",
-            attrs: {
-              id: "name",
-              name: "name",
-              type: "text",
-              value: "",
-              required: "",
-              autocomplete: "off",
-              autofocus: ""
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-2",
-            attrs: {
-              id: "tel",
-              name: "tel",
-              type: "text",
-              value: "",
-              autocomplete: "off"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "principal" } }, [_vm._v("負責人")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "principal",
-              name: "principal",
-              type: "text",
-              value: "",
-              autocomplete: "off"
-            }
-          })
-        ])
-      ])
+    return _c("label", { attrs: { for: "name" } }, [
+      _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+      _vm._v("機構名稱\r\n                        ")
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c(
-          "div",
-          { staticClass: "form-group", attrs: { id: "address_twzipcode" } },
-          [
-            _c("label", [_vm._v("地址")]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row mb-2" }, [
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("div", {
-                  attrs: {
-                    "data-role": "county",
-                    "data-style": "form-control",
-                    "data-name": "address_county",
-                    "data-value": ""
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("div", {
-                  attrs: {
-                    "data-role": "district",
-                    "data-style": "form-control",
-                    "data-name": "address_district",
-                    "data-value": ""
-                  }
-                })
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "col-md-4" }, [
-                _c("div", {
-                  attrs: {
-                    "data-role": "zipcode",
-                    "data-style": "form-control",
-                    "data-name": "address_zipcode",
-                    "data-value": ""
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-12" }, [
-                _c("input", {
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "address_others",
-                    type: "text",
-                    name: "address_others",
-                    value: "",
-                    autocomplete: "off"
-                  }
-                })
-              ])
-            ])
-          ]
-        )
+    return _c("div", { staticClass: "row mb-2" }, [
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", {
+          attrs: {
+            "data-role": "county",
+            "data-style": "form-control",
+            "data-name": "address_county",
+            "data-value": ""
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", {
+          attrs: {
+            "data-role": "district",
+            "data-style": "form-control",
+            "data-name": "address_district",
+            "data-value": ""
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", {
+          attrs: {
+            "data-role": "zipcode",
+            "data-style": "form-control",
+            "data-name": "address_zipcode",
+            "data-value": ""
+          }
+        })
       ])
     ])
   },
@@ -564,14 +583,14 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/agencies/create.js":
-/*!*****************************************!*\
-  !*** ./resources/js/agencies/create.js ***!
-  \*****************************************/
+/***/ "./resources/js/agencies/edit.js":
+/*!***************************************!*\
+  !*** ./resources/js/agencies/edit.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-Vue.component('agency-create-form', __webpack_require__(/*! ./../components/Agencies/AgencyCreateForm.vue */ "./resources/js/components/Agencies/AgencyCreateForm.vue")["default"]);
+Vue.component('agency-update-form', __webpack_require__(/*! ./../components/Agencies/AgencyUpdateForm.vue */ "./resources/js/components/Agencies/AgencyUpdateForm.vue")["default"]);
 var app = new Vue({
   el: '#agency',
   data: function data() {
@@ -584,17 +603,17 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ "./resources/js/components/Agencies/AgencyCreateForm.vue":
+/***/ "./resources/js/components/Agencies/AgencyUpdateForm.vue":
 /*!***************************************************************!*\
-  !*** ./resources/js/components/Agencies/AgencyCreateForm.vue ***!
+  !*** ./resources/js/components/Agencies/AgencyUpdateForm.vue ***!
   \***************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AgencyCreateForm_vue_vue_type_template_id_e1dbda94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AgencyCreateForm.vue?vue&type=template&id=e1dbda94& */ "./resources/js/components/Agencies/AgencyCreateForm.vue?vue&type=template&id=e1dbda94&");
-/* harmony import */ var _AgencyCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AgencyCreateForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Agencies/AgencyCreateForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _AgencyUpdateForm_vue_vue_type_template_id_e81ae4fa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa& */ "./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa&");
+/* harmony import */ var _AgencyUpdateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AgencyUpdateForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -604,9 +623,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _AgencyCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AgencyCreateForm_vue_vue_type_template_id_e1dbda94___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AgencyCreateForm_vue_vue_type_template_id_e1dbda94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _AgencyUpdateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _AgencyUpdateForm_vue_vue_type_template_id_e81ae4fa___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _AgencyUpdateForm_vue_vue_type_template_id_e81ae4fa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -616,51 +635,51 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Agencies/AgencyCreateForm.vue"
+component.options.__file = "resources/js/components/Agencies/AgencyUpdateForm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Agencies/AgencyCreateForm.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=script&lang=js&":
 /*!****************************************************************************************!*\
-  !*** ./resources/js/components/Agencies/AgencyCreateForm.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=script&lang=js& ***!
   \****************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AgencyCreateForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agencies/AgencyCreateForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyUpdateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AgencyUpdateForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyUpdateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Agencies/AgencyCreateForm.vue?vue&type=template&id=e1dbda94&":
+/***/ "./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa&":
 /*!**********************************************************************************************!*\
-  !*** ./resources/js/components/Agencies/AgencyCreateForm.vue?vue&type=template&id=e1dbda94& ***!
+  !*** ./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa& ***!
   \**********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyCreateForm_vue_vue_type_template_id_e1dbda94___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AgencyCreateForm.vue?vue&type=template&id=e1dbda94& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agencies/AgencyCreateForm.vue?vue&type=template&id=e1dbda94&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyCreateForm_vue_vue_type_template_id_e1dbda94___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyUpdateForm_vue_vue_type_template_id_e81ae4fa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyUpdateForm_vue_vue_type_template_id_e81ae4fa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyCreateForm_vue_vue_type_template_id_e1dbda94___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyUpdateForm_vue_vue_type_template_id_e81ae4fa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ 3:
-/*!***********************************************!*\
-  !*** multi ./resources/js/agencies/create.js ***!
-  \***********************************************/
+/***/ 4:
+/*!*********************************************!*\
+  !*** multi ./resources/js/agencies/edit.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\agencies\create.js */"./resources/js/agencies/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\agencies\edit.js */"./resources/js/agencies/edit.js");
 
 
 /***/ })
