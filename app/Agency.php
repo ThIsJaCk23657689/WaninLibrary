@@ -8,7 +8,7 @@ use App\Borrower as BorrowerEloquent;
 class Agency extends Model
 {
     protected $fillable = [
-        'name', 'tel', 'principal', 'address_zipcode', 'address_county', 'address_district', 'address_others', 
+        'name', 'tel', 'principal', 'address_zipcode', 'address_county', 'address_district', 'address_others', 'content'
     ];
 
     public function borrowers(){

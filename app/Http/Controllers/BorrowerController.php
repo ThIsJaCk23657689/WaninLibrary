@@ -3,24 +3,23 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Requests\AgencyRequest;
-use App\Services\AgencyService;
+use App\Http\Requests\BorrowerRequest;
+use App\Services\BorrowerService;
 
-class AgencyController extends Controller
+class BorrowerController extends Controller
 {
-    public $AgencyService;
+    public $BorrowerService;
 
 
     public function __construct()
     {
         $this->middleware('auth');
-        $this->AgencyService = new AgencyService();
+        $this->BorrowerService = new BorrowerService();
     }
     public function index()
     {
-        $agencies = $this->AgencyService->getList();
-        $lastUpdate = $this->AgencyService->getlastupdate();
-        return view('agencies.index', compact('agencies', 'lastUpdate'));
+        $borrowers = $this->BorrowerService->getList();
+        return view('borrowers.index', compact('borrowers'));
     }
 
     /**
@@ -30,7 +29,7 @@ class AgencyController extends Controller
      */
     public function create()
     {
-        return view('agencies.create');
+        return view('borrowers.create');
     }
 
     /**
@@ -39,10 +38,10 @@ class AgencyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AgencyRequest $request)
+    public function store(BorrowerRequest $request)
     {
-        $agency_id = $this->AgencyService->add($request);
-        return response()->json(['status'=>'OK','added_id'=>$agency_id,'url'=>route('agencies.index')],200);
+        $borrower_id = $this->BorrowerService->add($request);
+        return response()->json(['status'=>'OK','added_id'=>$borrower_id,'url'=>route('borrowers.index')],200);
     }
 
     /**
@@ -53,8 +52,8 @@ class AgencyController extends Controller
      */
     public function show($id)
     {
-        $agency = $this->AgencyService->getOne($id);
-        return view('agencies.show', compact('agency'));
+        $borrower = $this->BorrowerService->getOne($id);
+        return view('borrowers.show', compact('borrower'));
     }
 
     /**
@@ -65,8 +64,8 @@ class AgencyController extends Controller
      */
     public function edit($id)
     {
-        $agency = $this->AgencyService->getOne($id);
-        return view('agencies.edit', compact('agency'));
+        $borrower = $this->BorrowerService->getOne($id);
+        return view('borrowers.edit', compact('borrower'));
     }
 
     /**
@@ -76,10 +75,10 @@ class AgencyController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AgencyRequest $request, $id)
+    public function update(BorrowerRequest $request, $id)
     {
-        $agency_id = $this->AgencyService->update($request, $id);
-        return response()->json(['status'=>'OK','added_id'=>$agency_id,'url'=>route('agencies.show')],200);
+        $borrower_id = $this->BorrowerService->update($request, $id);
+        return response()->json(['status'=>'OK','added_id'=>$borrower_id,'url'=>route('borrowers.show')],200);
     }
 
     /**
@@ -91,7 +90,7 @@ class AgencyController extends Controller
     public function destroy($id)
     {
         //日後注意是否有人在該群組底下，若有無法刪除
-        $this->AgencyService->delete($id);
-        return  response()->json(['status'=>'OK','url'=>route('agencies.index')],200);
+        $this->BorrowerService->delete($id);
+        return  response()->json(['status'=>'OK','url'=>route('borrowers.index')],200);
     }
 }
