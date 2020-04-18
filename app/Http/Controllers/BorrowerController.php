@@ -89,7 +89,6 @@ class BorrowerController extends Controller
      */
     public function destroy($id)
     {
-        //日後注意是否有人在該群組底下，若有無法刪除
         $this->BorrowerService->delete($id);
         return  response()->json(['status'=>'OK','url'=>route('borrowers.index')],200);
     }
