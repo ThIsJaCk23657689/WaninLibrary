@@ -10,17 +10,14 @@ class AgencyController extends Controller
 {
     public $AgencyService;
 
-
-    public function __construct()
-    {
+    public function __construct(){
         $this->middleware('auth');
         $this->AgencyService = new AgencyService();
     }
-    public function index()
-    {
+
+    public function index(){
         $agencies = $this->AgencyService->getList();
-        $lastUpdate = $this->AgencyService->getlastupdate();
-        return view('agencies.index', compact('agencies', 'lastUpdate'));
+        return view('agencies.index', compact('agencies'));
     }
 
     /**

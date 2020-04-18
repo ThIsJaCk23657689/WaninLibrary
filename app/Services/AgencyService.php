@@ -23,13 +23,13 @@ class AgencyService extends BaseService
 
     public function getList()
     {
-        $agencies = AgencyEloquent::withTrashed()->get();
+        $agencies = AgencyEloquent::get();
         return $agencies;
     }
 
     public function getOne($id)
     {
-        $agencies = AgencyEloquent::withTrashed()->findOrFail($id);
+        $agencies = AgencyEloquent::findOrFail($id);
         return $agencies;
     }
 

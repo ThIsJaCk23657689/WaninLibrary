@@ -24,4 +24,7 @@ Route::get('/home', 'HomeController@index')->name('home');
 // 後臺管理路由
 Route::prefix('/backend')->group(function(){
     Route::get('/', 'HomeController@backend')->name('backend');
+
+    // 機構管理路由
+    Route::resource('/agencies', 'AgencyController');
 });

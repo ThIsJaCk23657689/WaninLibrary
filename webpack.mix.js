@@ -15,4 +15,7 @@ mix.js('resources/js/app.js', 'public/js')
    .sass('resources/sass/app.scss', 'public/css');
 
    mix.js('resources/js/backend.js', 'public/js')
+   .js('resources/js/agencies/create.js', 'public/js/agencies')
+
+
    .sass('resources/sass/backend/backend.scss', 'public/css');

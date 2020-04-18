@@ -24,13 +24,13 @@ class AgencyRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'require|string|max:100',
-            'tel' => 'nullable|string|max:30',
-            'principal' => 'nullable|string|max:100',
-            'address_zipcode' => 'nullable|string|max:5',
-            'address_county' => 'nullable|string|max:10',
-            'address_district' => 'nullable|string|max:10',
-            'address_others' => 'nullable|string|max:255',
+            'name' => 'required|string|max:100',
+            'tel' => 'required|string|max:30',
+            'principal' => 'required|string|max:100',
+            'address_zipcode' => 'required|string|max:5',
+            'address_county' => 'required|string|max:10',
+            'address_district' => 'required|string|max:10',
+            'address_others' => 'required|string|max:255',
         ];
     }
 }
