@@ -32,13 +32,13 @@ class BorrowerService extends BaseService
 
     public function getList()
     {
-        $borrowers = BorrowerEloquent::withTrashed()->get();
+        $borrowers = BorrowerEloquent::get();
         return $borrowers;
     }
 
     public function getOne($id)
     {
-        $borrower = BorrowerEloquent::withTrashed()->findOrFail($id);
+        $borrower = BorrowerEloquent::findOrFail($id);
         return $borrower;
     }
 

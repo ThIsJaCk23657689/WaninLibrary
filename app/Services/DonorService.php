@@ -27,13 +27,13 @@ class DonorService extends BaseService
 
     public function getList()
     {
-        $donors = DonorEloquent::withTrashed()->get();
+        $donors = DonorEloquent::get();
         return $donors;
     }
 
     public function getOne($id)
     {
-        $donor = DonorEloquent::withTrashed()->findOrFail($id);
+        $donor = DonorEloquent::findOrFail($id);
         return $donor;
     }
 

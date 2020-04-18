@@ -35,13 +35,13 @@ class BookService extends BaseService
 
     public function getList()
     {
-        $books = BookEloquent::withTrashed()->get();
+        $books = BookEloquent::get();
         return $books;
     }
 
     public function getOne($id)
     {
-        $book = BookEloquent::withTrashed()->findOrFail($id);
+        $book = BookEloquent::findOrFail($id);
         return $book;
     }
 
