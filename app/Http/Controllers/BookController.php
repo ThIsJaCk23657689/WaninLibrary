@@ -13,7 +13,7 @@ class BookController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        //$this->middleware('auth');
         $this->BookService = new BookService();
     }
     public function index()
@@ -47,6 +47,13 @@ class BookController extends Controller
                                     'url'=>route('books.index')],
                                     200);
     }
+
+
+    public function barcodeCreate(Request $request)
+    {
+        return  response()->json('1223',200);
+    }
+
 
     /**
      * Display the specified resource.
