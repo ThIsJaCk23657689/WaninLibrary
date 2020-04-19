@@ -24,6 +24,9 @@
         "vue-template-compiler": "^2.6.10"
     },
     "dependencies": {
-        "jquery-ui": "^1.12.1"
+        "@alfsnd/vue-bootstrap-select": "^0.4.4",
+        "bootstrap-select": "^1.13.14",
+        "jquery-ui": "^1.12.1",
+        "vue-bootstrap-selectpicker": "^1.0.6"
     }
 }

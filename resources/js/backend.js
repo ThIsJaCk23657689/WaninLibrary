@@ -5,6 +5,8 @@
  */
 
 require('./bootstrap');
+require('./../../node_modules/bootstrap-select/dist/js/bootstrap-select');
+require('./../../node_modules/bootstrap-select/dist/js/i18n/defaults-zh_TW');
 
 window.Vue = require('vue');
 
