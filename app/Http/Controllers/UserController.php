@@ -69,7 +69,7 @@ class UserController extends Controller
         return response()->json($msg, 200);
     }
 
-    public function update(UserRequest $request, $id)
+    public function update(Request $request, $id)
     {
         $msg = $this->UserService->update($request, $id);
         return response()->json($msg, 200);

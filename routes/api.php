@@ -34,7 +34,8 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     // Users only for admin  except getUserByToken
     Route::get('getUsersByName', 'UserController@getUsersByName');
     Route::get('getUserByToken', 'UserController@getUserByToken');
-    Route::get('/users/store', 'UserController@store');
-    Route::patch('/users/update', 'UserController@update');
-    Route::delete('/users/destroy', 'UserController@destroy');
+    // POST api/users   PATCH api/users/{user}  DELETE api/users/{user}
+    // postman 測試的話用post 然後 多一個 _method = PATCH
+    Route::resource('users', 'UserController')->only(['store', 'update', 'destroy']);
+
 });

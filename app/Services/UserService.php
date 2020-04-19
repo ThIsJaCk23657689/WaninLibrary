@@ -74,7 +74,7 @@ class UserService extends BaseService
             'address_others' => $request->address_others,
         ]);
 
-        return ['status'=>'OK','updated_id'=> $user->id,'url'=>route('users.show',[$user->id])];
+        return ['status'=>'OK','updated_id'=> $user->id,];
     }
 
     public function delete($id)
