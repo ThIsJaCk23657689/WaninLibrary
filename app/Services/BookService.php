@@ -81,6 +81,7 @@ class BookService extends BaseService
         }
     }
 
+    
     public function getList()
     {
         $books = BookEloquent::get();
