@@ -23,7 +23,7 @@ class CreateBorrowersTable extends Migration
             $table->string('email')->nullable()->unique()->comment('信箱');
             $table->string('tel')->comment('電話');
             $table->string('job_title')->nullable()->comment('職稱');
-            $table->integer('status')->comment('身分別'); //1.一般民眾 2.符合社福資格
+            $table->integer('status')->comment('身分別'); //0.一般民眾 1.符合社福資格
             $table->boolean('activated')->default(0)->comment('是否停權'); //0.未停權 1.停權中
             
             $table->string('address_zipcode',5)->comment('郵遞區號');
