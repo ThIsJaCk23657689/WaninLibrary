@@ -3,28 +3,28 @@
 namespace App\Services;
 use App\User as UserEloquent;
 use Auth;
+use JWTAuth;
 
 class UserService extends BaseService
 {
     public function add($request)
     {
+
         $user = UserEloquent::create([
             'name' => $request->name,
-            'gender' => $request->gender,
+            'account' => $request->gender,
             'email' => $request->email,
             'password' => bcrypt($request->password),
-            'birthday' => $request->birthday,
+            'status' => $request->birthday,
+            'tel' => $request->birthday,
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
         ]);
-        if(!empty($request->jobTitle)){
-            $user->job_title_id = $request->jobTitle;
-            $user->save();
-        }
-        return $user;
+
+        return ['status'=>'OK','added_id'=>$user->id,'url'=>route('users.index')];
     }
 
     public function getList()
@@ -39,36 +39,57 @@ class UserService extends BaseService
         return $user;
     }
 
+    public function getUserByToken(){
+
+        $token = JWTAuth::getToken();
+        $user = JWTAuth::toUser($token);
+
+        return $user;
+    }
+
+    public function getUsersByName($name){
+
+        $keyword = '%'.$name.'%';
+        $users = UserEloquent::where('name', 'like', $keyword)->get();
+
+        return $users;
+    }
+
     public function update($request, $id)
     {
         $user = $this->getOne($id);
         $user->update([
             'name' => $request->name,
-            'gender' => $request->gender,
-            'birthday' => $request->birthday,
+            'account' => $request->account,
+            'email' => $request->email,
+            'tel' => $request->tel,
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
         ]);
-        if(!empty($request->jobTitle)){
-            $user->job_title_id = $request->jobTitle;
-            $user->save();
-        }
-        return $user;
+
+        return ['status'=>'OK','updated_id'=> $user->id,'url'=>route('users.show',[$user->id])];
     }
 
     public function delete($id)
     {
+        $token = JWTAuth::getToken();
+        $act_user = JWTAuth::toUser($token);
+
         $user = $this->getOne($id);
-        if($id != 1 && Auth::id() != $id){
+
+        // 本人不能刪除, 最高管理者不能刪
+        if($act_user->id != $id && $id !=1){
             if($user->trashed()){
                 $user->restore();
             }else{
                 $user->delete();
             }
         }
+
+        return ['status'=>'OK','url'=>route('users.index')];
     }
 
     public function getlastupdate()

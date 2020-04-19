@@ -34,4 +34,10 @@ Route::prefix('/backend')->group(function(){
     Route::get('/borrowers/json', 'BorrowerController@getList')->name('borrowers.getList');
     Route::get('/borrowers/{id}/json', 'BorrowerController@getOne')->name('borrowers.getOne');
     Route::resource('/borrowers', 'BorrowerController');
+
+    // 使用者帳號管理相關路由
+    Route::resource('/users', 'UserController', ['only' => [
+        'index', 'show', 'create', 'edit'
+    ]]);
+    Route::get('/users/usersByName', 'UserController@usersByName');
 });

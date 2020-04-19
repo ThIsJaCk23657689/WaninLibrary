@@ -40,8 +40,12 @@ class BookController extends Controller
      */
     public function store(BookRequest $request)
     {
-        $book_id = $this->BookService->add($request);
-        return response()->json(['status'=>'OK','added_id'=>$book_id,'url'=>route('books.index')],200);
+        $book = $this->BookService->add($request);
+        return response()->json([   'status'=>'OK',
+                                    'added_id'=>$book[0],
+                                    'barcode'=>$book[1],
+                                    'url'=>route('books.index')],
+                                    200);
     }
 
     /**
