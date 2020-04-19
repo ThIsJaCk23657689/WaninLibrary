@@ -45,7 +45,18 @@ class BorrowerController extends Controller
 
     public function update(BorrowerRequest $request, $id){
         $borrower_id = $this->BorrowerService->update($request, $id);
-        return response()->json(['status' => 'OK','added_id' => $borrower_id,'url' => route('borrowers.show',[$borrower_id])],200);
+        return response()->json(['status' => 'OK','id' => $borrower_id,'url' => route('borrowers.show',[$borrower_id])],200);
+    }
+
+    public function activateControll(Request $request)
+    {
+        $request->validate([
+            'id' => 'required|exist:borrowers,id',
+            'content' => 'nullable|max:255|string',
+        ]);
+        $borrower = $this->BorrowerService->activated($request);
+        return response()->json(['status' => 'OK','massage' => $borrower],200);
+
     }
 
     public function destroy($id){

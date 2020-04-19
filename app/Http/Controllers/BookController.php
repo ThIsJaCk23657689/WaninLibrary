@@ -33,12 +33,6 @@ class BookController extends Controller
         ], 200);
     }
 
-    public function barcodeCreate(Request $request){
-        return response()->json([
-            '1223'
-        ], 200);
-    }
-
     public function show($id){
         $book = $this->BookService->getOne($id);
         return view('books.show', compact('book'));

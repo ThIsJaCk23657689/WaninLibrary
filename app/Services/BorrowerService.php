@@ -65,4 +65,22 @@ class BorrowerService extends BaseService
         $borrowers = $this->getOne($id);
         $borrowers->delete();
     }
+
+    public function activated($request){
+        $borrower = $this->getOne($request->id);
+        //1.代表未停權 0.停權
+        if($borrower->acticated == 1){
+            $borrower->update([
+                'content' => $request->content,
+                'activated' => 0,
+            ]);
+            return $borrower->name."已被停權";
+        }else{
+            $borrower->update([
+                'content' => $request->content,
+                'activated' => 1,
+            ]);
+            return $borrower->name."已被解除停權";
+        }
+    }
 }

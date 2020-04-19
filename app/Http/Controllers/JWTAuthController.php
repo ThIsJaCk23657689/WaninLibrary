@@ -8,15 +8,18 @@ use App\Http\Requests\ForgetPasswordRequest;
 use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Http\Request;
 use App\Services\JWTAuthService;
+use App\Services\LoginLogService;
 use JWTAuth;
 
 class JWTAuthController extends Controller
 {
     public $JWTAuthService;
+    public $LoginLogService;
 
     public function __construct(){
         $this->middleware('auth.jwt')->only('logout');
         $this->JWTAuthService = new JWTAuthService();
+        $this->LoginLogService = new LoginLogService();
     }
 
     public function register(AuthRequest $request){
@@ -42,6 +45,8 @@ class JWTAuthController extends Controller
         $token = JWTAuth::getToken();
         if ($token) {
             JWTAuth::invalidate($token);
+            //紀錄登出資訊
+            $this->LoginLogService->update();
             return response()->json(['已登出'], 200);
         } else {
             return response()->json(['已登出'], 200);

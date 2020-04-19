@@ -89,7 +89,7 @@ class UserService extends BaseService
             if($user->trashed()){
                 $user->restore();
             }else{
-                $user->softDeletes();
+                $user->delete()();
             }
         }
 
