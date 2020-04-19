@@ -21,12 +21,14 @@ class CreateDonorsTable extends Migration
             $table->string('email')->nullable()->comment('信箱');
             $table->string('tel')->nullable()->comment('電話');
             $table->string('cellphone')->nullable()->comment('行動電話');
-            $table->string('address_zipcode',5)->nullable()->comment('郵遞區號');
-            $table->string('address_county',10)->nullable()->comment('縣市別');
-            $table->string('address_district',10)->nullable()->comment('鄉鎮市區');
+            
+            $table->string('address_zipcode' ,5)->nullable()->comment('郵遞區號');
+            $table->string('address_county', 10)->nullable()->comment('縣市別');
+            $table->string('address_district', 10)->nullable()->comment('鄉鎮市區');
             $table->string('address_others')->nullable()->comment('其他住址');
-            $table->integer('exposure')->nullable()->comment('曝光程度');//1.完全公開 2.半公開 3.前台不曝光
-            $table->string('content')->comment('備註內容');
+
+            $table->integer('exposure')->default(1)->comment('曝光程度');//1.完全公開 2.半公開 3.前台不曝光
+            $table->string('content')->nullable()->comment('備註內容');
             
             $table->timestamps();
         });

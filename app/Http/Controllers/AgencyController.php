@@ -76,9 +76,11 @@ class AgencyController extends Controller
     public function update(AgencyRequest $request, $id)
     {
         $agency_id = $this->AgencyService->update($request, $id);
-        return response()->json(['status'=>'OK',
-                                'added_id'=>$agency_id,
-                                'url'=>route('agencies.show',[$agency_id])],200);
+        return response()->json([
+            'status' => 'OK',
+            'added_id' => $agency_id,
+            'url' => route('agencies.show', [$agency_id])
+        ], 200);
     }
 
     /**

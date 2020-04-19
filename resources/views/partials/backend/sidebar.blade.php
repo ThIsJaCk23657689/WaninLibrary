@@ -16,7 +16,7 @@
 			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
 			<a class="dropdown-item" href="#">{{ __('Admins') }}</a>
 			<a class="dropdown-item" href="{{ route('borrowers.index') }}">{{ __('Borrowers') }}</a>
-			<a class="dropdown-item" href="#">{{ __('Donors') }}</a>
+			<a class="dropdown-item" href="{{ route('donors.index') }}">{{ __('Donors') }}</a>
 			<div class="dropdown-divider"></div>
 			<h6 class="dropdown-header">{{ __('Related:') }}</h6>
 			<a class="dropdown-item" href="{{ route('agencies.index') }}">{{ __('Agencies') }}</a>
@@ -30,7 +30,7 @@
 		</a>
 		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
-			<a class="dropdown-item" href="#">{{ __('Books') }}</a>
+			<a class="dropdown-item" href="{{ route('books.index') }}">{{ __('Books') }}</a>
 			<a class="dropdown-item" href="#">{{ __('Purchase') }}</a>
 			<a class="dropdown-item" href="#">{{ __('Donate') }}</a>
 			<div class="dropdown-divider"></div>
