@@ -81,7 +81,7 @@ class UserService extends BaseService
         $user = $this->getOne($id);
 
         // 本人不能刪除, 最高管理者不能刪
-        if($act_user->id != $id && $id !=0){
+        if($act_user->id != $id && $id !=1){
             if($user->trashed()){
                 $user->restore();
             }else{
