@@ -66,10 +66,10 @@ class BookService extends BaseService
         if($callnum < 0 or $callnum > 999)
             return "Call number error.";
         
-        if($book_id > 10000000){
+        if($book_id >= 10000000){
             return "Book id out of range.";
         }else{
-            $book_id = str_pad($book_id,9,"0",STR_PAD_LEFT);
+            $book_id = str_pad($book_id,6,"0",STR_PAD_LEFT);
         }
         
         $code = $cate.$callnum.$book_id;

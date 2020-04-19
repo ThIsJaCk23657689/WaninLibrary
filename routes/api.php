@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+
+
 // JWTAuth
 Route::post('login', 'JWTAuthController@login');
 Route::post('register', 'JWTAuthController@register');
@@ -48,4 +50,8 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getLoginLogsByDate', 'LoginLogController@getLoginLogsByDate');
     Route::get('getLoginLogsByMonth', 'LoginLogController@getLoginLogsByMonth');
     Route::get('getLoginLogsByYear', 'LoginLogController@getLoginLogsByYear');
+
+    //借閱者管理相關
+    Route::post('activateControll','BorrowerController@activateControll');
+
 });
