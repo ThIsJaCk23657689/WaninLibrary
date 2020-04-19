@@ -18,6 +18,8 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
+Route::post('barcodeCreate','BookController@barcodeCreate');
+
 // JWTAuth
 Route::post('login', 'JWTAuthController@login');
 Route::post('register', 'JWTAuthController@register');

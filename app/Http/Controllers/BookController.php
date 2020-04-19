@@ -13,7 +13,7 @@ class BookController extends Controller
 
     public function __construct()
     {
-        $this->middleware('auth');
+        // $this->middleware('auth');
         $this->BookService = new BookService();
     }
     public function index()
