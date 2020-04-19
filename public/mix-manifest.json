@@ -5,5 +5,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/backend.css": "/css/backend.css",
-    "/js/backend.js": "/js/backend.js"
+    "/js/backend.js": "/js/backend.js",
+    "/js/borrowers/create.js": "/js/borrowers/create.js",
+    "/js/borrowers/edit.js": "/js/borrowers/edit.js"
 }

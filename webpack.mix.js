@@ -19,5 +19,7 @@ mix.js('resources/js/app.js', 'public/js')
    .js('resources/js/agencies/create.js', 'public/js/agencies')
    .js('resources/js/agencies/edit.js', 'public/js/agencies')
 
+   .js('resources/js/borrowers/create.js', 'public/js/borrowers')
+   .js('resources/js/borrowers/edit.js', 'public/js/borrowers')
 
    .sass('resources/sass/backend/backend.scss', 'public/css');

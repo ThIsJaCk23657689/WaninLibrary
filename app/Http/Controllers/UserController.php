@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Services\UserService;
+use App\Services\JWTAuthService;
 
 class UserController extends Controller
 {
@@ -13,6 +14,7 @@ class UserController extends Controller
 
     public function __construct(){
         $this->middleware('admin.auth.jwt')->except('getUserByToken');
+        $this->JWTAuthService = new JWTAuthService();
         $this->UserService = new UserService();
     }
 
@@ -63,7 +65,7 @@ class UserController extends Controller
 
     public function store(UserRequest $request)
     {
-        $msg = $this->UserService->add($request);
+        $msg = $this->JWTAuthService->register($request);
         return response()->json($msg, 200);
     }
 

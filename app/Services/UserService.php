@@ -49,8 +49,12 @@ class UserService extends BaseService
 
     public function getUsersByName($name){
 
-        $keyword = '%'.$name.'%';
-        $users = UserEloquent::where('name', 'like', $keyword)->get();
+        if($name == ''){
+            $users = UserEloquent::withTrashed()->get();
+        }else{
+            $keyword = '%'.$name.'%';
+            $users = UserEloquent::where('name', 'like', $keyword)->get();
+        }
 
         return $users;
     }
@@ -85,7 +89,7 @@ class UserService extends BaseService
             if($user->trashed()){
                 $user->restore();
             }else{
-                $user->delete();
+                $user->softDeletes();
             }
         }
 
