@@ -41,4 +41,7 @@ Route::prefix('/backend')->group(function(){
         'index', 'show', 'create', 'edit'
     ]]);
     Route::get('/users/usersByName', 'UserController@usersByName');
+
+    // 登入紀錄相關
+    Route::resource('loginLogs', 'LoginLogController')->only(['index', 'show']);
 });

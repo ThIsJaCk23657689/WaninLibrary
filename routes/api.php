@@ -25,17 +25,27 @@ Route::post('forgetPassword', 'JWTAuthController@forgetPassword');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
 
-
     // JWTAuth
     Route::get('logout', 'JWTAuthController@logout');
     Route::post('refreshToken', 'JWTAuthController@refreshToken');
     Route::post('resetPassword', 'JWTAuthController@resetPassword');
 
-    // Users only for admin  except getUserByToken
+    // 使用者管理 only for admin  except getUserByToken
     Route::get('getUsersByName', 'UserController@getUsersByName');
     Route::get('getUserByToken', 'UserController@getUserByToken');
-    // POST api/users   PATCH api/users/{user}  DELETE api/users/{user}
-    // postman 測試的話用post 然後 多一個 _method = PATCH
+        // POST api/users   PATCH api/users/{user}  DELETE api/users/{user}
+        // postman 測試的話用post 然後 多一個 _method = PATCH
     Route::resource('users', 'UserController')->only(['store', 'update', 'destroy']);
 
+    // 登入紀錄
+    Route::get('getLoginLogs', 'LoginLogController@getLoginLogs');
+    Route::get('getListOrderByASC', 'LoginLogController@getListOrderByASC');
+    Route::get('getListOrderByUserId', 'LoginLogController@getListOrderByUserId');
+    Route::get('getListOrderByUserIdASC', 'LoginLogController@getListOrderByUserIdASC');
+    Route::get('getLoginLogsById', 'LoginLogController@getLoginLogsById');
+    Route::get('getLoginLogsByUserId', 'LoginLogController@getLoginLogsByUserId');
+    Route::get('getLoginLogsByUserName', 'LoginLogController@getLoginLogsByUserName');
+    Route::get('getLoginLogsByDate', 'LoginLogController@getLoginLogsByDate');
+    Route::get('getLoginLogsByMonth', 'LoginLogController@getLoginLogsByMonth');
+    Route::get('getLoginLogsByYear', 'LoginLogController@getLoginLogsByYear');
 });
