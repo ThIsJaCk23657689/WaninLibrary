@@ -41,9 +41,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     // 登入紀錄
     Route::get('getLoginLogs', 'LoginLogController@getLoginLogs');
-    Route::get('getListOrderByASC', 'LoginLogController@getListOrderByASC');
-    Route::get('getListOrderByUserId', 'LoginLogController@getListOrderByUserId');
-    Route::get('getListOrderByUserIdASC', 'LoginLogController@getListOrderByUserIdASC');
+    Route::get('getLoginLogsOrderByASC', 'LoginLogController@getListOrderByASC');
+    Route::get('getLoginLogsOrderByUserId', 'LoginLogController@getListOrderByUserId');
+    Route::get('getLoginLogsOrderByUserIdASC', 'LoginLogController@getListOrderByUserIdASC');
     Route::get('getLoginLogsById', 'LoginLogController@getLoginLogsById');
     Route::get('getLoginLogsByUserId', 'LoginLogController@getLoginLogsByUserId');
     Route::get('getLoginLogsByUserName', 'LoginLogController@getLoginLogsByUserName');
