@@ -3,11 +3,9 @@
 namespace App\Services;
 use App\Borrower as BorrowerEloquent;
 
-
 class BorrowerService extends BaseService
 {
-    public function add($request)
-    {
+    public function add($request){
         $borrower = BorrowerEloquent::create([
             'agency_id' => $request->agency_id,
 
@@ -17,8 +15,7 @@ class BorrowerService extends BaseService
             'tel' => $request->tel,
             'job_title' => $request->job_title,
             'status' => $request->status,
-            'activated' => $request->activated,
-            
+            'activated' => $request->activated ?? 0,
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
@@ -30,20 +27,17 @@ class BorrowerService extends BaseService
         return $borrower->id;
     }
 
-    public function getList()
-    {
+    public function getList(){
         $borrowers = BorrowerEloquent::get();
         return $borrowers;
     }
 
-    public function getOne($id)
-    {
+    public function getOne($id){
         $borrower = BorrowerEloquent::findOrFail($id);
         return $borrower;
     }
 
-    public function update($request, $id)
-    {
+    public function update($request, $id){
         $borrowers = $this->getOne($id);
         $borrowers->update([
             'agency_id' => $request->agency_id,
@@ -54,9 +48,8 @@ class BorrowerService extends BaseService
             'tel' => $request->tel,
             'job_title' => $request->job_title,
             'status' => $request->status,
-            'activated' => $request->activated,
+            'activated' => $request->activated ?? 0,
             
-
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,
@@ -68,8 +61,7 @@ class BorrowerService extends BaseService
         return $borrowers->id;
     }
 
-    public function delete($id)
-    {
+    public function delete($id){
         $borrowers = $this->getOne($id);
         $borrowers->delete();
     }
