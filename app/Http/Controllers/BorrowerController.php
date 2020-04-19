@@ -11,7 +11,7 @@ class BorrowerController extends Controller
     public $BorrowerService;
 
     public function __construct(){
-        $this->middleware('auth');
+        //$this->middleware('auth');
         $this->BorrowerService = new BorrowerService();
     }
 

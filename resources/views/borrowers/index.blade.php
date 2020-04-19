@@ -38,9 +38,10 @@
 						<tr>
                             <th>編號</th>
 							<th>名稱</th>
-							<th>負責人</th>
 							<th>電話</th>
-							<th>借閱人數量</th>
+							<th>隸屬單位</th>
+							<th>借閱數量</th>
+							<th>逾期數量</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -49,8 +50,9 @@
 							<tr>
                                 <td>{{ $borrower->id }}</td>
 								<td>{{ $borrower->name }}</td>
-								<td>{{ $borrower->principal }}</td>
 								<td>{{ $borrower->tel }}</td>
+								<td>{{ $borrower->agency->name }}</td>
+								<td>0</td>
 								<td>0</td>
 								<td>
 									<a href="{{ route('borrowers.show', [$borrower->id]) }}" class="btn btn-md btn-info">

@@ -11,7 +11,7 @@ class AgencyController extends Controller
     public $AgencyService;
 
     public function __construct(){
-        $this->middleware('auth');
+        // $this->middleware('auth');
         $this->AgencyService = new AgencyService();
     }
 

@@ -14,8 +14,8 @@
 		</a>
 		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
-			<a class="dropdown-item" href="#">{{ __('Admin') }}</a>
-			<a class="dropdown-item" href="{{ route('borrowers.index') }}">{{ __('Borrower') }}</a>
+			<a class="dropdown-item" href="#">{{ __('Admins') }}</a>
+			<a class="dropdown-item" href="{{ route('borrowers.index') }}">{{ __('Borrowers') }}</a>
 			<a class="dropdown-item" href="#">{{ __('Donors') }}</a>
 			<div class="dropdown-divider"></div>
 			<h6 class="dropdown-header">{{ __('Related:') }}</h6>
