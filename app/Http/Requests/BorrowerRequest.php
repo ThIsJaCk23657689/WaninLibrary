@@ -24,12 +24,10 @@ class BorrowerRequest extends FormRequest
     public function rules()
     {
         return [
-
-            'agency_id' => "nullable|exists:agencies,id",
-
+            'agency_id' => "nullable",
             'name' => 'required|string|max:100',
             'birthday' => 'required|date',
-            'email' => 'nullable|email',
+            'email' => 'nullable|email|unique:borrowers,email',
             'tel' => 'required|string|max:30',
             'job_title' => 'nullable|string|max:100',
             'status' => 'required|integer',
@@ -40,6 +38,12 @@ class BorrowerRequest extends FormRequest
             'address_others' => 'nullable|string|max:255',
             'content' => 'nullable|string|max:255',
             'count' => 'nullable|integer',
+        ];
+    }
+
+    public function messages(){
+        return [
+            'individual_phone.required_without' => '手機與電話必須擇一必填。',
         ];
     }
 }

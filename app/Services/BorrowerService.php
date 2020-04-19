@@ -22,7 +22,7 @@ class BorrowerService extends BaseService
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
             'content' => $request->content,
-            'count' => $request->count,
+            'count' => $request->count ?? 0,
         ]);
         return $borrower->id;
     }
@@ -55,7 +55,7 @@ class BorrowerService extends BaseService
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
             'content' => $request->content,
-            'count' => $request->count,
+            'count' => $request->count ?? 0,
         ]);
 
         return $borrowers->id;
