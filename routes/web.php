@@ -36,6 +36,21 @@ Route::prefix('/backend')->group(function(){
     Route::get('/borrowers/{id}/json', 'BorrowerController@getOne')->name('borrowers.getOne');
     Route::resource('/borrowers', 'BorrowerController');
 
+    // 捐書人管理路由
+    Route::resource('/donors', 'DonorController', ['only' => [
+        'index', 'show', 'create', 'edit'
+    ]]);
+
+    // 借閱人管理路由
+    Route::resource('/borrowers', 'BorrowerController', ['only' => [
+        'index', 'show', 'create', 'edit'
+    ]]);
+
+    // 書籍管理路由
+    Route::resource('/books', 'BookController', ['only' => [
+        'index', 'show', 'create', 'edit'
+    ]]);
+
     // 使用者帳號管理相關路由
     Route::resource('/users', 'UserController', ['only' => [
         'index', 'show', 'create', 'edit'

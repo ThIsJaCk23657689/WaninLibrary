@@ -52,6 +52,19 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getLoginLogsByYear', 'LoginLogController@getLoginLogsByYear');
 
     //借閱者管理相關
+    Route::resource('/borrowers', 'BorrowerController', ['only' => [
+        'store', 'update', 'destroy'
+    ]]);
     Route::post('activateControll','BorrowerController@activateControll');
+
+    // 捐書人管理路由
+    Route::resource('/donors', 'DonorController', ['only' => [
+        'store', 'update', 'destroy'
+    ]]);
+
+    //書籍管理相關
+    Route::resource('/books', 'BookController', ['only' => [
+        'store', 'update', 'destroy'
+    ]]);
 
 });

@@ -49,12 +49,6 @@ class BookController extends Controller
     }
 
 
-    public function barcodeCreate(Request $request)
-    {
-        return  response()->json('1223',200);
-    }
-
-
     /**
      * Display the specified resource.
      *
