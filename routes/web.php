@@ -29,4 +29,10 @@ Route::prefix('/backend')->group(function(){
     Route::get('/agencies/json', 'AgencyController@getList')->name('agencies.getList');
     Route::get('/agencies/{id}/json', 'AgencyController@getOne')->name('agencies.getOne');
     Route::resource('/agencies', 'AgencyController');
+
+    // 使用者帳號管理相關路由
+    Route::resource('/users', 'UserController', ['only' => [
+        'index', 'show', 'create', 'edit'
+    ]]);
+    Route::get('/users/usersByName', 'UserController@usersByName');
 });

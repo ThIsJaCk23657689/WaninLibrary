@@ -17,6 +17,7 @@ class DonorController extends Controller
         $this->middleware('auth');
         $this->DonorService = new DonorService();
     }
+
     public function index()
     {
         $donors = $this->DonorService->getList();
