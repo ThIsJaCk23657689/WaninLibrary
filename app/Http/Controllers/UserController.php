@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Services\UserService;
-
+use App\Services\JWTAuthService;
 
 class UserController extends Controller
 {
@@ -14,6 +14,7 @@ class UserController extends Controller
 
     public function __construct(){
         $this->middleware('admin.auth.jwt')->except('getUserByToken');
+        $this->JWTAuthService = new JWTAuthService();
         $this->UserService = new UserService();
     }
 
@@ -30,7 +31,6 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
-    // 新增使用者用JWTAuth 的 register
     public function create()
     {
         return view('users.create');
@@ -60,6 +60,13 @@ class UserController extends Controller
         $name = $request->name;
         $users = $this->UserService->getUsersByName($name);
         return response()->json($users, 200);
+    }
+
+
+    public function store(UserRequest $request)
+    {
+        $msg = $this->JWTAuthService->register($request);
+        return response()->json($msg, 200);
     }
 
     public function update(UserRequest $request, $id)

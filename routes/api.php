@@ -14,9 +14,9 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
 
 // JWTAuth
 Route::post('login', 'JWTAuthController@login');
@@ -24,6 +24,7 @@ Route::post('register', 'JWTAuthController@register');
 Route::post('forgetPassword', 'JWTAuthController@forgetPassword');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
+
 
     // JWTAuth
     Route::get('logout', 'JWTAuthController@logout');
@@ -33,6 +34,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     // Users only for admin  except getUserByToken
     Route::get('getUsersByName', 'UserController@getUsersByName');
     Route::get('getUserByToken', 'UserController@getUserByToken');
+    Route::get('/users/store', 'UserController@store');
     Route::patch('/users/update', 'UserController@update');
     Route::delete('/users/destroy', 'UserController@destroy');
 });

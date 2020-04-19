@@ -29,7 +29,7 @@ Route::prefix('/backend')->group(function(){
     Route::get('/agencies/json', 'AgencyController@getList')->name('agencies.getList');
     Route::get('/agencies/{id}/json', 'AgencyController@getOne')->name('agencies.getOne');
     Route::resource('/agencies', 'AgencyController');
-    
+
     // 借閱人管理路由
     Route::get('/borrowers/json', 'BorrowerController@getList')->name('borrowers.getList');
     Route::get('/borrowers/{id}/json', 'BorrowerController@getOne')->name('borrowers.getOne');
