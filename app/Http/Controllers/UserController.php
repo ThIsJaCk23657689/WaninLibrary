@@ -6,6 +6,7 @@ use App\Http\Requests\UserRequest;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 
+
 class UserController extends Controller
 {
 
@@ -29,6 +30,7 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
+    // 新增使用者用JWTAuth 的 register
     public function create()
     {
         return view('users.create');
@@ -58,13 +60,6 @@ class UserController extends Controller
         $name = $request->name;
         $users = $this->UserService->getUsersByName($name);
         return response()->json($users, 200);
-    }
-
-
-    public function store(UserRequest $request)
-    {
-        $msg = $this->UserService->add($request);
-        return response()->json($msg, 200);
     }
 
     public function update(UserRequest $request, $id)

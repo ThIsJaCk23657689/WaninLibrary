@@ -33,7 +33,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     // Users only for admin  except getUserByToken
     Route::get('getUsersByName', 'UserController@getUsersByName');
     Route::get('getUserByToken', 'UserController@getUserByToken');
-    Route::post('store', 'UserController@store');
-    Route::patch('update', 'UserController@update');
-    Route::delete('destroy', 'UserController@destroy');
+    Route::patch('/users/update', 'UserController@update');
+    Route::delete('/users/destroy', 'UserController@destroy');
 });
