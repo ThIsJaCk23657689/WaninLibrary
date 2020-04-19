@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('barcodeCreate','BookController@barcodeCreate');
+
 
 // JWTAuth
 Route::post('login', 'JWTAuthController@login');
@@ -39,5 +39,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     // POST api/users   PATCH api/users/{user}  DELETE api/users/{user}
     // postman 測試的話用post 然後 多一個 _method = PATCH
     Route::resource('users', 'UserController')->only(['store', 'update', 'destroy']);
+
+
+    //借閱者管理相關
+    Route::post('activateControll','BorrowerController@activateControll');
 
 });
