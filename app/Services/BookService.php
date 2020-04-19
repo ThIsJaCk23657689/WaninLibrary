@@ -6,11 +6,9 @@ use App\Book as BookEloquent;
 
 class BookService extends BaseService
 {
-    public function add($request)
-    {
-        
-
-        $barcode = barcode_code($request->category, $request->callnum);
+    public function add($request){
+    
+        $barcode = $this->barcodeCode($request->category, $request->callnum);
 
         $book = BookEloquent::create([
             'donor_id' => $request->donor_id,
@@ -29,7 +27,7 @@ class BookService extends BaseService
             'ISBN' => $request->ISBN,
 
             'published_date' => $request->published_date,
-            'price' => $request->price,
+            'price' => $request->price ?? 0,
             'content' => $request->content,
             'count' => $request->count,
 
@@ -39,9 +37,8 @@ class BookService extends BaseService
         return $rbook;
     }
     
-    public function getLastUpdatedID()
-    {
-        $book = BookEloquent::orderBy('id', 'DESC')->first();
+    private function getLastUpdatedID(){
+        $book = BookEloquent::orderBy('id', 'ASC')->first();
         if(!empty($user)){
             return $book->id;
         }
@@ -49,27 +46,26 @@ class BookService extends BaseService
     }
 
 
-    public function barcode_code($cate, $callnum)
-    {
-        $book_id = getLastUpdatedID()+1;
+    private function barcodeCode($cate, $callnum){
+        $book_id = $this->getLastUpdatedID() + 1;
 
-        if($cate == 10){
+        if($cate == 11){
             $cate = 2;
-        }elseif($cate == 11){
+        }elseif($cate == 12){
             $cate = 3;
-        }elseif($cate >= 0 and $cate <= 9){
+        }elseif($cate >= 0 and $cate <= 10){
             $cate = 1;
         }else{
             return "Category number error.";
         }
 
-        if($callnum < 0 or $callnum > 999)
+        if(strlen($callnum) != 3)
             return "Call number error.";
         
         if($book_id > 10000000){
             return "Book id out of range.";
         }else{
-            $book_id = str_pad($book_id,9,"0",STR_PAD_LEFT);
+            $book_id = str_pad($book_id, 9, "0", STR_PAD_LEFT);
         }
         
         $code = $cate.$callnum.$book_id;
@@ -81,21 +77,17 @@ class BookService extends BaseService
         }
     }
 
-    
-    public function getList()
-    {
+    public function getList(){
         $books = BookEloquent::get();
         return $books;
     }
 
-    public function getOne($id)
-    {
+    public function getOne($id){
         $book = BookEloquent::findOrFail($id);
         return $book;
     }
 
-    public function update($request, $id)
-    {
+    public function update($request, $id){
         $book = $this->getOne($id);
         $book->update([
             'donor_id' => $request->donor_id,
@@ -122,8 +114,7 @@ class BookService extends BaseService
         return $book->id;
     }
 
-    public function delete($id)
-    {
+    public function delete($id){
         $book = $this->getOne($id);
         $book->delete();
     }

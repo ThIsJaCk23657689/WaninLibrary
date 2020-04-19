@@ -24,11 +24,11 @@ class BookRequest extends FormRequest
     public function rules()
     {
         return [
-            'donor_id' => "nullable|exists:donors,id",
+            'donor_id' => "nullable",
 
-            'barcode' => 'required|integer|unique',
-            'callnum' => 'nullable|integer',
-            'category' => 'required|integer',
+            // 'barcode' => 'required|integer|unique',
+            'callnum' => 'required|string|size:3',
+            'category' => 'required|string',
             'status' => 'required|integer',
 
             'title' => 'required|string|max:255',
@@ -40,7 +40,7 @@ class BookRequest extends FormRequest
             'cover_image' => 'nullable|string|max:255',
             'ISBN' => 'nullable|string|max:50',
             'published_date' => 'nullable|date',
-            'price' => 'required|numeric',
+            'price' => 'nullable|numeric',
 
             'content' => 'nullable|string|max:255',
             'count' => 'required|integer',

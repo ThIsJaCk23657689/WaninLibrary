@@ -36,10 +36,9 @@
 					<thead>
 						<tr>
                             <th>編號</th>
-							<th>名稱</th>
-							<th>聯絡方式</th>
-							<th>曝光程度</th>
-							<th>捐贈數量</th>
+							<th>標題</th>
+							<th>借閱次數</th>
+							<th>狀態</th>
 							<th>操作</th>
 						</tr>
 					</thead>
@@ -47,10 +46,9 @@
 						@foreach ($books as $book)
 							<tr>
                                 <td>{{ $book->id }}</td>
-								<td>{{ $book->name }}</td>
-								<td>{{ $book->showContact() }}</td>
-								<td>{{ $book->showExposure() }}</td>
-								<td>{{ $book->books->count() }}</td>
+								<td>{{ $book->title }}</td>
+								<td>0</td>
+								<td>{{ $book->showStatus() }}</td>
 								<td>
 									<a href="{{ route('books.show', [$book->id]) }}" class="btn btn-md btn-info">
 										<i class="fas fa-info-circle"></i>

@@ -66,4 +66,57 @@ class BookController extends Controller
             'url' => route('books.index')
         ], 200);
     }
+
+    // API
+    public function getlist(){
+        $borrowers = $this->BorrowerService->getList();
+        return response()->json([
+            'status' => 'OK',
+            'borrowers' => $borrowers
+        ]);
+    }
+
+    public function getOne($id){
+        $borrower = $this->BorrowerService->getOne($id);
+        return response()->json([
+            'status' => 'OK',
+            'borrower' => $borrower
+        ]);
+    }
+
+    public function getDataByISBN($isbn){
+
+        return response()->json([
+            'status' => 'OK',
+        ]);
+    }
+
+    public function getDataByISBNFromGoogle($isbn){
+        // use key 'http' even if you send the request to https://...
+        $options = [
+            'http' => [
+                'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+                'method'  => 'GET',
+                'content' => null,
+            ]
+        ];
+
+        // 先查詢此統編的類型 (公司、分公司、商業)
+        $data = [
+            'q' => 'isbn:' . $isbn,
+            'key' => 'AIzaSyD-x-3Fc0swG4kazBihtZmDMKXBDaZLu38',
+        ];
+        $url = 'https://www.googleapis.com/books/v1/volumes?' . http_build_query($data);
+
+        $context  = stream_context_create($options);
+        $result = file_get_contents($url, false, $context);
+
+        // $result 是string 必須先轉成array
+        $result = json_decode($result, true);
+
+        return response()->json([
+            'status' => 'OK',
+            'result' => $result
+        ]);
+    }
 }

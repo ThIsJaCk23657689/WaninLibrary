@@ -20,9 +20,10 @@
     <div id="book">
         <span id="BooksIndexURL" class="d-none">{{ route('books.index') }}</span>
         <span id="BooksStoreURL" class="d-none">{{ route('books.store') }}</span>
-        <span id="BooksListURL" class="d-none">{{ route('books.getList') }}</span>
+        <span id="DonorsListURL" class="d-none">{{ route('donors.getList') }}</span>
+        <span id="backendURL" class="d-none">{{ route('backend') }}</span>
 
-        <book-create-form></book-create-form>
+        <book-create-form :uploadimg="'{{ asset('images/upload-init.png') }}'"></book-create-form>
         <loading-modal></loading-modal>
     </div>
 

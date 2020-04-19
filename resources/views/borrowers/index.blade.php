@@ -24,15 +24,6 @@
 			</a>
 		</div>
     </div>
-	
-	{{-- <div class="row mb-3">
-		<img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('1234567890123', 'C128') }}" alt="barcode"   />
-		
-	</div>
-
-	<div class="row mb-3">
-		<img src="data:image/png;base64,{{ DNS1D::getBarcodePNG('12345678901', 'C128') }}" alt="barcode"   />
-	</div> --}}
 
 	<!-- DataTables Example -->
 	<div class="card mb-3">
