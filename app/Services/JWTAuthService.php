@@ -25,8 +25,13 @@ class JWTAuthService extends BaseService
             'address_others' => $request->address_others,
             'content' => $request->content,
         ]);
+        if($user){
+            return $user;
+        }else{
+            return "failed";
+        }
 
-        return $user;
+
     }
 
     public function login($request){

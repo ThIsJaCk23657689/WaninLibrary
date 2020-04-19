@@ -15,14 +15,14 @@ class JWTAuthController extends Controller
     public $JWTAuthService;
 
     public function __construct(){
-        // $this->middleware('auth.jwt',['only'=>'logout']);
+        $this->middleware('auth.jwt')->only('logout');
         $this->JWTAuthService = new JWTAuthService();
     }
 
     public function register(AuthRequest $request){
         $user = $this->JWTAuthService->register($request);
-        //['status'=>'OK','added_id'=>$agency_id,'url'=>route('agencies.index')]
         return response()->json($user, 200);
+        // return response()->json('5555', 200);
     }
 
     public function login(LoginRequest $request){

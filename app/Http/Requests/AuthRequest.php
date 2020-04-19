@@ -13,7 +13,7 @@ class AuthRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,12 +24,12 @@ class AuthRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'require|string|max:100',
-            'account' => 'require|string|max:20|min:6',
-            'password' => 'require|string|max:20|min:6|confirmed',
-            'status' => 'require|integer|max:1',
+            'name' => 'required|string|max:100',
+            'account' => 'required|string|max:20|min:6',
+            'password' => 'required|string|max:20|min:6|confirmed',
+            'status' => 'required|integer|max:1',
             'tel' => 'nullable|string|max:30',
-            'email' => 'require|string|max:255',
+            'email' => 'required|string|max:255',
             'address_zipcode' => 'nullable|string|max:5',
             'address_county' => 'nullable|string|max:10',
             'address_district' => 'nullable|string|max:10',
