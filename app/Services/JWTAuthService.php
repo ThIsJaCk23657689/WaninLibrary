@@ -32,17 +32,20 @@ class JWTAuthService extends BaseService
             'address_others' => $request->address_others,
             'content' => $request->content,
         ]);
+
         if($user){
             return $user;
         }else{
             return "failed";
         }
-
-
     }
 
     public function login($request){
-        $token = JWTAuth::attempt(['account'=>$request->account, 'password'=>$request->password]);
+        $token = JWTAuth::attempt([
+            'account' => $request->account, 
+            'password' => $request->password
+        ]);
+
         try{
             if(!$token){
                 return 'invalid_credentials'; //401
@@ -55,7 +58,11 @@ class JWTAuthService extends BaseService
         //紀錄登入資訊
         $this->LoginLogService->add();
 
-        return ['token'=>$token, 'cookie'=> $cookie_token];
+        return [
+            'token' => $token, 
+            'cookie' => $cookie_token,
+            'expires_in' => JWTAuth::factory()->getTTL() * 60,
+        ];
     }
 
     public function forgetPassword($email){
@@ -90,7 +97,6 @@ class JWTAuthService extends BaseService
 
         return '重設密碼成功';
     }
-
 
     // 產生隨機碼
     protected function randomkeys($length){

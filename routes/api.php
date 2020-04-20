@@ -21,14 +21,15 @@ use Illuminate\Support\Facades\Route;
 Route::post('test_crul','BookController@test_crul');
 
 // JWTAuth
-Route::post('login', 'JWTAuthController@login');
 Route::post('register', 'JWTAuthController@register');
+Route::post('login', 'JWTAuthController@login');
+Route::get('me', 'JWTAuthController@me');
+Route::post('logout', 'JWTAuthController@logout')->name('logout');
 Route::post('forgetPassword', 'JWTAuthController@forgetPassword');
 
 Route::group(['middleware' => 'auth.jwt'], function () {
 
     // JWTAuth
-    Route::get('logout', 'JWTAuthController@logout');
     Route::post('refreshToken', 'JWTAuthController@refreshToken');
     Route::post('resetPassword', 'JWTAuthController@resetPassword');
 
@@ -51,11 +52,18 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getLoginLogsByMonth', 'LoginLogController@getLoginLogsByMonth');
     Route::get('getLoginLogsByYear', 'LoginLogController@getLoginLogsByYear');
 
+    // 機構管理路由
+    Route::get('/agencies/json', 'AgencyController@getList')->name('agencies.getList');
+    Route::get('/agencies/{id}/json', 'AgencyController@getOne')->name('agencies.getOne');
+    Route::resource('/agencies', 'AgencyController', ['only' => [
+        'store', 'update', 'destroy'
+    ]]);
+    
     //借閱者管理相關
+    Route::post('activateControll','BorrowerController@activateControll');
     Route::resource('/borrowers', 'BorrowerController', ['only' => [
         'store', 'update', 'destroy'
     ]]);
-    Route::post('activateControll','BorrowerController@activateControll');
 
     // 捐書人管理路由
     Route::resource('/donors', 'DonorController', ['only' => [
