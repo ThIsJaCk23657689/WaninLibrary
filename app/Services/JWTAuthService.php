@@ -5,10 +5,17 @@ use App\User as UserEloquent;
 use JWTAuth;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\forgetPassword;
+use App\Services\LoginLogService;
 use Carbon\Carbon;
 
 class JWTAuthService extends BaseService
 {
+    public $LoginLogService;
+
+    public function __construct(){
+        $this->LoginLogService = new LoginLogService();
+    }
+
     public function register($request)
     {
         $user = UserEloquent::create([
@@ -44,6 +51,9 @@ class JWTAuthService extends BaseService
             return 'could_not_create_token'; //500
         }
         $cookie_token = 'Bearer ' . $token;
+
+        //紀錄登入資訊
+        $this->LoginLogService->add();
 
         return ['token'=>$token, 'cookie'=> $cookie_token];
     }

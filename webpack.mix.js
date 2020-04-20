@@ -22,4 +22,10 @@ mix.js('resources/js/app.js', 'public/js')
    .js('resources/js/borrowers/create.js', 'public/js/borrowers')
    .js('resources/js/borrowers/edit.js', 'public/js/borrowers')
 
+   .js('resources/js/donors/create.js', 'public/js/donors')
+   .js('resources/js/donors/edit.js', 'public/js/donors')
+
+   .js('resources/js/books/create.js', 'public/js/books')
+   .js('resources/js/books/edit.js', 'public/js/books')
+
    .sass('resources/sass/backend/backend.scss', 'public/css');

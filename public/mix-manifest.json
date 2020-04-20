@@ -6,6 +6,10 @@
     "/css/app.css": "/css/app.css",
     "/css/backend.css": "/css/backend.css",
     "/js/backend.js": "/js/backend.js",
+    "/js/books/create.js": "/js/books/create.js",
+    "/js/books/edit.js": "/js/books/edit.js",
     "/js/borrowers/create.js": "/js/borrowers/create.js",
-    "/js/borrowers/edit.js": "/js/borrowers/edit.js"
+    "/js/borrowers/edit.js": "/js/borrowers/edit.js",
+    "/js/donors/create.js": "/js/donors/create.js",
+    "/js/donors/edit.js": "/js/donors/edit.js"
 }

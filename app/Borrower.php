@@ -15,4 +15,8 @@ class Borrower extends Model
     public function agency(){
         return $this->belongsTo(AgencyEloquent::class);
     }
+
+    public function showAgencyName(){
+        return is_null($this->agency) ? '無' : $this->agency->name ;
+    }
 }

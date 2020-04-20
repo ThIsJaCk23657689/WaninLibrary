@@ -63,4 +63,21 @@ class BorrowerController extends Controller
         $this->BorrowerService->delete($id);
         return  response()->json(['status' => 'OK','url' => route('borrowers.index')],200);
     }
+
+    // API
+    public function getlist(){
+        $borrowers = $this->BorrowerService->getList();
+        return response()->json([
+            'status' => 'OK',
+            'borrowers' => $borrowers
+        ]);
+    }
+
+    public function getOne($id){
+        $borrower = $this->BorrowerService->getOne($id);
+        return response()->json([
+            'status' => 'OK',
+            'borrower' => $borrower
+        ]);
+    }
 }

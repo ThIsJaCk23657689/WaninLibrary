@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\UserRequest;
+use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Services\JWTAuthService;
@@ -69,7 +70,7 @@ class UserController extends Controller
         return response()->json($msg, 200);
     }
 
-    public function update(Request $request, $id)
+    public function update(UserUpdateRequest $request, $id)
     {
         $msg = $this->UserService->update($request, $id);
         return response()->json($msg, 200);

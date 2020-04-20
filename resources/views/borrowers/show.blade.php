@@ -64,7 +64,7 @@
                 <div class="col-md-8">
                     <a href="{{ route('agencies.edit', [$agency->id]) }}" class="btn btn-block btn-success">
                         編輯修改
-                    </button>
+                    </a>
                     <a href="{{ route('agencies.index') }}" class="btn btn-block btn-danger">
                         返回列表
                     </a>
