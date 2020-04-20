@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-
+Route::post('test_crul','BookController@test_crul');
 
 // JWTAuth
 Route::post('login', 'JWTAuthController@login');

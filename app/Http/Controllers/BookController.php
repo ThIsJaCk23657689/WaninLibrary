@@ -106,4 +106,35 @@ class BookController extends Controller
         $this->BookService->delete($id);
         return  response()->json(['status'=>'OK','url'=>route('books.index')],200);
     }
+
+
+    public function test_crul(Request $request){
+        
+        // $html = file_get_contents($request->url);
+        // $dom = new \DOMDocument();
+        // @$dom->loadHTML($html);
+        
+        // $tds = $dom->getElementsByTagName('td');
+
+        $doc = new \DOMDocument();
+        $html = file_get_contents($request->url);
+        $html = strstr($html,'<form');
+        $html = strstr($html,'<table');
+        $html = strstr($html,'<input',true);
+        // return $html;
+        @$doc->loadHTML($html);
+        $tds = $doc->getElementsByTagName('td');
+        $arr = [];
+        $count = 0;
+        foreach($tds as $td){
+            $count++;
+            $arr[] = $td->nodeValue;
+        }
+        $headers = array('Content-Type' => 'application/json; charset=utf-8');
+        return response()->json($arr, 200)->header('Content-Type', 'application/json; charset=utf-8')->header('Charset', 'utf-8');
+        // return response()->json($arr, 200,  ['Content-Type' => 'application/json;charset=UTF-8', 'Charset' => 'utf-8'],
+        // JSON_UNESCAPED_UNICODE);
+        // return $tds;
+
+    }
 }
