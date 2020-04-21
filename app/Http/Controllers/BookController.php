@@ -116,7 +116,7 @@ class BookController extends Controller
 
 
 
-public function test_crul(Request $request)
+public function test_curl(Request $request)
 {
     // $html = file_get_contents($request->url);
     // $dom = new \DOMDocument();
@@ -130,7 +130,18 @@ public function test_crul(Request $request)
     @$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
     $tds = $doc->getElementsByTagName('td');
     $arr = [];
-    $info = [];
+    $info = [
+        'title'=>'',
+        'subtitle'=>'',
+        'author'=>'',
+        'ISBN'=>'',
+        'publisher'=>'',
+        'published_date'=>'',
+        'edition'=>'',
+        'callnum'=>'',
+        'language'=>'',
+        'content'=>'',
+    ];
     $count = 0;
     foreach($tds as $td){
         $str = str_replace("\n","",$td->nodeValue);
@@ -155,8 +166,8 @@ public function test_crul(Request $request)
                 break;
             case "出版項Publication":
                 $str = str_replace("\n","",$td->nextSibling->nodeValue);
-                $info['publisher'] = strstr(strstr($str,' : '), ", ", true);
-                $info['published_date'] =strstr(strstr(strstr($str,' : '), ", ")," : ", true);
+                $info['publisher'] = trim(str_replace(':','',strstr(strstr($str,':'), ", ", true)));
+                $info['published_date'] =trim(str_replace(',','',strstr(strstr($str,' : '), ", ")));
                 break;
             case "版本Edition":
                 $str = str_replace("\n","",$td->nextSibling->nodeValue);
@@ -165,6 +176,18 @@ public function test_crul(Request $request)
             case "中文圖書分類號CCL No.":
                 $str = str_replace("\n","",$td->nextSibling->nodeValue);
                 $info['callnum'] = $str;
+                break;
+            case "備註Notes":
+                $str = str_replace("\n","",$td->nextSibling->nodeValue);
+                $info['content'] = $str;
+                break;
+            case "杜威分類號Dewey No.":
+                $str = str_replace("\n","",$td->nextSibling->nodeValue);
+                $str = str_replace('-', '',$str);
+                $Dewey = $str;
+                if($info['callnum'] == ""){
+                    $info['callnum'] = $str;
+                }
                 break;
             case "語文Language":
                 $str = str_replace("\n","",$td->nextSibling->nodeValue);
@@ -176,6 +199,10 @@ public function test_crul(Request $request)
                 break;
         }
         $count++;
+    }
+
+    if($info['language'] != "中文" || $info['language'] != "國語" ){
+        $info['callnum'] = $Dewey;
     }
     $res['all'] = $arr;
     $res['data'] = $info;

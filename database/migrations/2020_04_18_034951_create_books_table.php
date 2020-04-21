@@ -37,7 +37,7 @@ class CreateBooksTable extends Migration
             $table->string('content')->nullable()->comment('備註');
             $table->integer('count')->default(0)->comment('借閱次數');
 
-            
+
             $table->timestamps();
         });
     }
