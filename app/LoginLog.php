@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User as UserEloquent;
 
-class Login_log extends Model
+class LoginLog extends Model
 {
     use SoftDeletes;
 
