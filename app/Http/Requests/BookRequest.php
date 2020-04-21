@@ -41,6 +41,7 @@ class BookRequest extends FormRequest
             'ISBN' => 'nullable|string|max:50',
             'published_date' => 'nullable|date',
             'price' => 'nullable|numeric',
+            'language' => 'nullable|string',
 
             'content' => 'nullable|string|max:255',
             'count' => 'required|integer',

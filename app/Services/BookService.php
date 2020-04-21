@@ -7,7 +7,7 @@ use App\Book as BookEloquent;
 class BookService extends BaseService
 {
     public function add($request){
-    
+
         $barcode = $this->barcodeCode($request->category, $request->callnum);
 
         $book = BookEloquent::create([
@@ -28,6 +28,7 @@ class BookService extends BaseService
 
             'published_date' => $request->published_date,
             'price' => $request->price ?? 0,
+            'language' => $request->language,
             'content' => $request->content,
             'count' => $request->count,
 
@@ -36,7 +37,7 @@ class BookService extends BaseService
 
         return $rbook;
     }
-    
+
     private function getLastUpdatedID(){
         $book = BookEloquent::orderBy('id', 'ASC')->first();
         if(!empty($user)){
@@ -61,13 +62,13 @@ class BookService extends BaseService
 
         if(strlen($callnum) != 3)
             return "Call number error.";
-        
+
         if($book_id >= 10000000){
             return "Book id out of range.";
         }else{
             $book_id = str_pad($book_id, 9, "0", STR_PAD_LEFT);
         }
-        
+
         $code = $cate.$callnum.$book_id;
 
         if(strlen($code) != 13){
@@ -107,6 +108,7 @@ class BookService extends BaseService
 
             'published_date' => $request->published_date,
             'price' => $request->price,
+            'language' => $request->language,
             'content' => $request->content,
             'count' => $request->count,
         ]);

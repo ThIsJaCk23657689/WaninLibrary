@@ -33,6 +33,7 @@ class CreateBooksTable extends Migration
             $table->string('ISBN')->nullable()->comment('ISBN');
             $table->date('published_date')->nullable()->comment('出版日');
             $table->float('price')->default(0)->comment('價格');
+            $table->string('language')->default(0)->comment('語言別');
 
             $table->string('content')->nullable()->comment('備註');
             $table->integer('count')->default(0)->comment('借閱次數');
