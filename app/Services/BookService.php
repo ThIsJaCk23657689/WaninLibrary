@@ -52,17 +52,21 @@ class BookService extends BaseService
 
         if($cate == 11){
             $cate = 2;
+            $callnum = 000;
         }elseif($cate == 12){
             $cate = 3;
+            $callnum = 000;
+        }elseif($cate == 13){
+            $cate = 4;              //非中文
+            $callnum = 000;
         }elseif($cate >= 0 and $cate <= 10){
             $cate = 1;
+            $callnum = substr($callnum, 0, 3);
         }else{
             return "Category number error.";
         }
 
-        if(strlen($callnum) != 3)
-            return "Call number error.";
-
+       
         if($book_id >= 10000000){
             return "Book id out of range.";
         }else{
