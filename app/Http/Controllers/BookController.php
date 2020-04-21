@@ -115,30 +115,72 @@ class BookController extends Controller
     }
 
 
-    public function test_crul(Request $request){
 
-        // $html = file_get_contents($request->url);
-        // $dom = new \DOMDocument();
-        // @$dom->loadHTML($html);
-
-        // $tds = $dom->getElementsByTagName('td');
-
-        $doc = new \DOMDocument();
-        $html = file_get_contents($request->url);
-        $html = strstr($html,'<form');
-        $html = strstr($html,'<table');
-        $html = strstr($html,'<input',true);
-        @$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
-        $tds = $doc->getElementsByTagName('td');
-
-        $arr = [];
-        $count = 0;
-        foreach($tds as $td){
-            $count++;
-            $arr[] = str_replace("\n","",$td->nodeValue);
+public function test_crul(Request $request)
+{
+    // $html = file_get_contents($request->url);
+    // $dom = new \DOMDocument();
+    // @$dom->loadHTML($html);
+    // $tds = $dom->getElementsByTagName('td');
+    $doc = new \DOMDocument();
+    $html = file_get_contents($request->url);
+    $html = strstr($html,'<form');
+    $html = strstr($html,'<table');
+    $html = strstr($html,'<input',true);
+    @$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
+    $tds = $doc->getElementsByTagName('td');
+    $arr = [];
+    $info = [];
+    $count = 0;
+    foreach($tds as $td){
+        $str = str_replace("\n","",$td->nodeValue);
+        $arr[] = $str;
+        switch ($str) {
+            case "題名Title":
+                $str = str_replace("\n","",$td->nextSibling->nodeValue);
+                $info['title'] = $str;
+                break;
+            case "作者Creator":
+                $str = str_replace("\n","",$td->nextSibling->nodeValue);
+                $info['author'] = $str;
+                break;
+            case "貢獻者Other agent":
+                $str = str_replace("\n","",$td->nextSibling->nodeValue);
+                $info['author'] .= ', '.$str;
+                break;
+            case "國際標準書號ISBN":
+                $str = str_replace("\n","",$td->nextSibling->nodeValue);
+                $str = str_replace('-', '',$str);
+                $info['ISBN'] = strstr($str,' ',true);
+                break;
+            case "出版項Publication":
+                $str = str_replace("\n","",$td->nextSibling->nodeValue);
+                $info['publisher'] = strstr(strstr($str,' : '), ", ", true);
+                $info['published_date'] =strstr(strstr(strstr($str,' : '), ", ")," : ", true);
+                break;
+            case "版本Edition":
+                $str = str_replace("\n","",$td->nextSibling->nodeValue);
+                $info['edition'] = $str;
+                break;
+            case "中文圖書分類號CCL No.":
+                $str = str_replace("\n","",$td->nextSibling->nodeValue);
+                $info['callnum'] = $str;
+                break;
+            case "語文Language":
+                $str = str_replace("\n","",$td->nextSibling->nodeValue);
+                $info['language'] = $str;
+                break;
+            case "相關題名Other Title":
+                $str = str_replace("\n","",$td->nextSibling->nodeValue);
+                $info['subtitle'] = $str;
+                break;
         }
-        return response()->json($arr, 200)->header('Content-Type', 'application/json; charset=utf-8');
-
-
+        $count++;
     }
+    $res['all'] = $arr;
+    $res['data'] = $info;
+    return response()->json($res, 200)->header('Content-Type', 'application/json; charset=utf-8');
+
+}
+
 }
