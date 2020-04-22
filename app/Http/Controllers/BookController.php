@@ -11,9 +11,9 @@ class BookController extends Controller
     public $BookService;
 
     public function __construct(){
-        $this->middleware('auth.web')->only([
-            'index', 'create', 'edit', 'show'
-        ]);
+        // $this->middleware('auth.web')->only([
+        //     'index', 'create', 'edit', 'show'
+        // ]);
         $this->BookService = new BookService();
     }
     public function index(){
