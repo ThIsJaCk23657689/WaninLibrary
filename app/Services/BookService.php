@@ -182,6 +182,7 @@ class BookService extends BaseService
                 case "國際標準書號ISBN":
                     $str = str_replace("\n","",$td->nextSibling->nodeValue);
                     $str = str_replace('-', '',$str);
+                    $str = str_replace(';', '',$str);
                     $info['ISBN'] = strstr($str,' ',true);
                     break;
                 case "出版項Publication":
