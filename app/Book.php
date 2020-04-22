@@ -9,8 +9,8 @@ class Book extends Model
 {
     protected $fillable = [
         'donor_id', 'barcode', 'callnum', 'category', 'status', 'title', 'subtitle',
-        'author', 'translator', 'publisher', 'edition', 'cover_image', 'ISBN', 
-        'published_date', 'price', 'content', 'count',
+        'author', 'translator', 'publisher', 'edition', 'cover_image', 'ISBN',
+        'published_date', 'price', 'content', 'count', 'language',
     ];
 
     public function doner(){

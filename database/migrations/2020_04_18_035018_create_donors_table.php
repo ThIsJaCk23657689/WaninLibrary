@@ -26,14 +26,9 @@ class CreateDonorsTable extends Migration
             $table->string('address_county', 10)->nullable()->comment('縣市別');
             $table->string('address_district', 10)->nullable()->comment('鄉鎮市區');
             $table->string('address_others')->nullable()->comment('其他住址');
-<<<<<<< HEAD
-            $table->integer('exposure')->default(1)->comment('曝光程度');//1.完全公開 2.半公開 3.前台不曝光
-            $table->string('content')->comment('備註內容');
-=======
 
             $table->integer('exposure')->default(1)->comment('曝光程度');//1.完全公開 2.半公開 3.前台不曝光
             $table->string('content')->nullable()->comment('備註內容');
->>>>>>> 45a9e08d89f8b583aba3aed387eff6937755a8c8
             
             $table->timestamps();
         });

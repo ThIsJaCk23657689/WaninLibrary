@@ -115,30 +115,13 @@ class BookController extends Controller
     }
 
 
-    public function test_crul(Request $request){
 
-        // $html = file_get_contents($request->url);
-        // $dom = new \DOMDocument();
-        // @$dom->loadHTML($html);
-
-        // $tds = $dom->getElementsByTagName('td');
-
-        $doc = new \DOMDocument();
-        $html = file_get_contents($request->url);
-        $html = strstr($html,'<form');
-        $html = strstr($html,'<table');
-        $html = strstr($html,'<input',true);
-        @$doc->loadHTML(mb_convert_encoding($html, 'HTML-ENTITIES', 'UTF-8'));
-        $tds = $doc->getElementsByTagName('td');
-
-        $arr = [];
-        $count = 0;
-        foreach($tds as $td){
-            $count++;
-            $arr[] = str_replace("\n","",$td->nodeValue);
-        }
-        return response()->json($arr, 200)->header('Content-Type', 'application/json; charset=utf-8');
-
+    public function getBookDataByURL(Request $request)
+    {
+        $url = $request->url;
+        $res = $this->BookService->getBookDataByURL($url);
+        return response()->json($res, 200)->header('Content-Type', 'application/json; charset=utf-8');
 
     }
+
 }

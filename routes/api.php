@@ -18,7 +18,7 @@ use Illuminate\Support\Facades\Route;
 //     return $request->user();
 // });
 
-Route::post('test_crul','BookController@test_crul');
+Route::post('test_getBookDataByURL','BookController@getBookDataByURL');
 
 // JWTAuth
 Route::post('register', 'JWTAuthController@register');
@@ -58,7 +58,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::resource('/agencies', 'AgencyController', ['only' => [
         'store', 'update', 'destroy'
     ]]);
-    
+
     //借閱者管理相關
     Route::post('activateControll','BorrowerController@activateControll');
     Route::resource('/borrowers', 'BorrowerController', ['only' => [
@@ -74,5 +74,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::resource('/books', 'BookController', ['only' => [
         'store', 'update', 'destroy'
     ]]);
+        // 爬蟲
+    Route::post('getBookDataByURL','BookController@getBookDataByURL');
 
 });
