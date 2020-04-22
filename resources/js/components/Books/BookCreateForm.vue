@@ -449,6 +449,10 @@ export default {
                         $('#edition').val($bookInfo.edition);
                         $('#callnum').val($bookInfo.callnum);
                         $('#language').val($bookInfo.language);
+                        if($bookInfo.cover_img != null && $bookInfo.cover_img != ''){
+                            $('#previewImg-upload').attr('src', $bookInfo.cover_img);
+                        }
+                        alert($bookInfo.cover_img);
                     }
                     // if(response.data.result.totalItems == 0){
                     //     $('#modal_error').css({'display':'flex'});
