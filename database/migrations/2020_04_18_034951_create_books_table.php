@@ -31,7 +31,7 @@ class CreateBooksTable extends Migration
             $table->string('edition')->nullable()->comment('版次');
             $table->string('cover_image')->nullable()->comment('封面圖片');
             $table->string('ISBN')->nullable()->comment('ISBN');
-            $table->date('published_date')->nullable()->comment('出版日');
+            $table->string('published_date')->nullable()->comment('出版日');
             $table->float('price')->default(0)->comment('價格');
             $table->string('language')->default(0)->comment('語言別');
 

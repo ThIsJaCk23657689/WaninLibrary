@@ -66,7 +66,7 @@ class BookService extends BaseService
             return "Category number error.";
         }
 
-       
+
         if($book_id >= 10000000){
             return "Book id out of range.";
         }else{
@@ -134,7 +134,13 @@ class BookService extends BaseService
         $iframe_src = $iframe[0]->getAttribute('src');
 
         $doc = new \DOMDocument();
+        $doc_img = new \DOMDocument();
+
         $html = file_get_contents($iframe_src);
+        @$doc_img->loadHTML($html);
+        $img = $doc_img->getElementsByTagName('img');
+        $len = count($img);
+        $img_src = $img[$len-1]->getAttribute('src');
 
         $html = strstr($html,'<form');
         $html = strstr($html,'<table');
@@ -153,6 +159,7 @@ class BookService extends BaseService
             'callnum'=>'',
             'language'=>'',
             'content'=>'',
+            'cover_img'=>$img_src,
         ];
         $Dewey ="";
         $count = 0;
