@@ -5,6 +5,7 @@ namespace App\Exceptions;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
 use Throwable;
 
+use Illuminate\Auth\AuthenticationException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
 
@@ -59,7 +60,9 @@ class Handler extends ExceptionHandler
                     'msg' => 'Token無效'
                 ], 401);
             }else{
-                return redirect()->route('login');
+                throw new AuthenticationException(
+                    'Unauthenticated.', ['api'], route('login')
+                );
             }
         }else if ($exception instanceof TokenBlacklistedException) {
             if($request->wantsJson()){
@@ -67,7 +70,9 @@ class Handler extends ExceptionHandler
                     'msg' => 'Token逾期'
                 ], 401);
             }else{
-                return redirect()->route('login');
+                throw new AuthenticationException(
+                    'Unauthenticated.', ['api'], route('login')
+                );
             }
         }
         return parent::render($request, $exception);

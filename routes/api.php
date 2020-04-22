@@ -74,7 +74,10 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::resource('/books', 'BookController', ['only' => [
         'store', 'update', 'destroy'
     ]]);
-        // 爬蟲
-    Route::post('getBookDataByURL','BookController@getBookDataByURL');
+    
+    
 
 });
+
+// 爬蟲
+Route::post('getBookDataByURL','BookController@getBookDataByURL')->name('books.bugurl');

@@ -11,8 +11,9 @@ class AgencyController extends Controller
     public $AgencyService;
 
     public function __construct(){
-        // $this->middleware('auth');
-        // $this->middleware('auth.web');
+        $this->middleware('auth.web')->only([
+            'index', 'create', 'edit', 'show'
+        ]);
         $this->AgencyService = new AgencyService();
     }
 
@@ -22,8 +23,10 @@ class AgencyController extends Controller
     }
 
     public function create(Request $request){
-        return response()->json($bearer_token = $request->cookie('authorization'));
-        // return view('agencies.create');
+
+
+        // return response()->json($_COOKIE["authorization"]);
+        return view('agencies.create');
     }
 
     public function store(Request $request){

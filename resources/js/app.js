@@ -5,7 +5,7 @@
  */
 
 require('./bootstrap');
-require('./../../node_modules/js-cookie/src/js.cookie');
+// require('./../../node_modules/js-cookie/src/js.cookie');
 
 window.Vue = require('vue');
 

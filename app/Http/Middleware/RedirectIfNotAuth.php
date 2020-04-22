@@ -18,7 +18,7 @@ class RedirectIfNotAuth
     public function handle($request, Closure $next)
     {
         // 從cookie取得token
-        $bearer_token = $request->cookie('authorization');
+        $bearer_token = $_COOKIE["authorization"];
         $rawtoken = trim(strstr($bearer_token, ' '));
         $token = new Token($rawtoken);
         // 解析token

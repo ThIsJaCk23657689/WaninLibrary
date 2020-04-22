@@ -11,7 +11,9 @@ class BookController extends Controller
     public $BookService;
 
     public function __construct(){
-        //$this->middleware('auth');
+        $this->middleware('auth.web')->only([
+            'index', 'create', 'edit', 'show'
+        ]);
         $this->BookService = new BookService();
     }
     public function index(){
@@ -114,14 +116,11 @@ class BookController extends Controller
         ]);
     }
 
-
-
     public function getBookDataByURL(Request $request)
     {
-        $url = $request->url;
+        $url = $request->bugurl;
         $res = $this->BookService->getBookDataByURL($url);
         return response()->json($res, 200)->header('Content-Type', 'application/json; charset=utf-8');
-
     }
 
 }
