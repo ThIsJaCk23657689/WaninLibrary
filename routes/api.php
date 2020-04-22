@@ -22,9 +22,9 @@ Route::post('test_crul','BookController@test_crul');
 
 // JWTAuth
 Route::post('register', 'JWTAuthController@register');
-Route::post('login', 'JWTAuthController@login');
+Route::post('login', 'JWTAuthController@login')->name('api.login');
 Route::get('me', 'JWTAuthController@me');
-Route::post('logout', 'JWTAuthController@logout')->name('logout');
+Route::post('logout', 'JWTAuthController@logout')->name('api.logout');
 Route::post('forgetPassword', 'JWTAuthController@forgetPassword');
 
 Route::group(['middleware' => 'auth.jwt'], function () {

@@ -9,8 +9,9 @@ use App\Http\Requests\ResetPasswordRequest;
 use Illuminate\Http\Request;
 use App\Services\JWTAuthService;
 use App\Services\LoginLogService;
+use Illuminate\Validation\ValidationException;
 use JWTAuth;
-use Validator;
+use Cookie;
 
 class JWTAuthController extends Controller
 {
@@ -19,74 +20,59 @@ class JWTAuthController extends Controller
 
     public function __construct(){
         $this->middleware('auth.jwt')->only([
-            'me', 'logout'
+            'logout'
+        ]);
+
+        $this->middleware('auth.web')->only([
+            'me'
         ]);
 
         $this->middleware('guest:api')->only([
-            'register', 'login', 'forgetPassword'
+            'register', 'showLoginForm', 'login', 'forgetPassword'
         ]);
 
         $this->JWTAuthService = new JWTAuthService();
         $this->LoginLogService = new LoginLogService();
     }
 
-    public function register(Request $request){
-        // 驗證資料
-        $validator = Validator::make($request->all(), $this->generateRules($request));
-        if ($validator->fails()) {
-            return response()->json($validator->messages(), 422);
-        }
+    public function register(AuthRequest $request){
+        // 註冊
         $user = $this->JWTAuthService->register($request);
 
-        // 登入
-        $msg = $this->JWTAuthService->login($request);
+        return response()->json($user);
 
-        return response()->json($msg, 200)->cookie('authorization', $msg['cookie'], 200);
+        // // 登入
+        // $msg = $this->JWTAuthService->login($request);
+        // return response()->json($msg, 200)->cookie('authorization', $msg['cookie'], 200);
     }
 
-    protected function generateRules(Request $request){
-        return [
-            'name' => 'required|string|max:100',
-            'account' => 'required|string|max:20|min:6|unique:users,account',
-            'password' => 'required|string|max:20|min:6|confirmed',
-            'status' => 'required|integer|max:1',
-            'tel' => 'nullable|string|max:30',
-            'email' => 'required|email|max:255|unique:users,email',
-            'address_zipcode' => 'nullable|string|max:5',
-            'address_county' => 'nullable|string|max:10',
-            'address_district' => 'nullable|string|max:10',
-            'address_others' => 'nullable|string|max:255',
-            'check_code' => 'nullable|string|max:255',
-            'content' => 'nullable|string|max:255',
-        ];
+    public function showLoginForm(){
+        return view('auth.login');
     }
 
-    public function login(Request $request){
-        // 驗證資料
-        $validator = Validator::make($request->all(), [
-            'account' => 'required|string|max:20|min:6|exists:users',
-            'password' => 'required|string|max:20|min:6'
-        ]);
-        if ($validator->fails()) {
-            return response()->json($validator->messages(), 422);
-        }
-
+    public function login(LoginRequest $request){
         $msg = $this->JWTAuthService->login($request);
         if($msg == 'invalid_credentials'){
-            return response()->json(['error' => $msg], 401);
+            throw ValidationException::withMessages([
+                'account' => [trans('auth.failed')],
+            ]);
         }elseif($msg == 'could_not_create_token'){
-            return response()->json(['error' => $msg], 500);
+            throw ValidationException::withMessages([
+                'account' => '發生錯誤，無法創建token',
+            ]);
         }else{
             return response()->json($msg, 200)->cookie('authorization', $msg['cookie'], 200);
         }
     }
 
-    public function me(){
-        // return response()->json([
-        //     JWTAuth::getToken(),
-        //     JWTAuth::getToken()->get(),
-        //     JWTAuth::toUser(JWTAuth::getToken()->get()),
-        // ]);
+    public function me(Request $request){
+        // 從header中抓token
+        // $bearer_token = $request->cookie('authorization');
+        // $rawtoken = trim(strstr($bearer_token, ' '));
+
+        // 從cookie中抓token
+        // $rawtoken = JWTAuth::getToken()->get();
+        // $token = new Token($rawtoken);  
         return response()->json(auth('api')->user());
     }
 
@@ -98,7 +84,7 @@ class JWTAuthController extends Controller
 
         return response()->json([
             'message' => '已成功登出'
-        ]);
+        ])->withCookie(Cookie::forget('authorization'));
     }
 
 

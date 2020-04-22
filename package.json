@@ -27,6 +27,7 @@
         "@alfsnd/vue-bootstrap-select": "^0.4.4",
         "bootstrap-select": "^1.13.14",
         "jquery-ui": "^1.12.1",
+        "js-cookie": "^2.2.1",
         "vue-bootstrap-selectpicker": "^1.0.6"
     }
 }

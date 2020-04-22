@@ -17,6 +17,9 @@ Route::get('/', function () {
 });
 
 // Auth::routes();
+Route::get('login', 'JWTAuthController@showLoginForm')->name('login');
+
+
 Route::get('/home', 'HomeController@index')->name('home');
 
 // 後臺管理路由

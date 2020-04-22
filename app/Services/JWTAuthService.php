@@ -1,16 +1,22 @@
 <?php
 
 namespace App\Services;
-use App\User as UserEloquent;
-use JWTAuth;
-use Illuminate\Support\Facades\Mail;
+
 use App\Mail\forgetPassword;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Foundation\Auth\RedirectsUsers;
 use App\Services\LoginLogService;
+use App\User as UserEloquent;
 use Carbon\Carbon;
+use JWTAuth;
 
 class JWTAuthService extends BaseService
 {
+    use RedirectsUsers;
+
     public $LoginLogService;
+
+    protected $redirectTo = '/';
 
     public function __construct(){
         $this->LoginLogService = new LoginLogService();
@@ -62,6 +68,7 @@ class JWTAuthService extends BaseService
             'token' => $token, 
             'cookie' => $cookie_token,
             'expires_in' => JWTAuth::factory()->getTTL() * 60,
+            'redirect_url' => redirect()->intended($this->redirectPath())->getTargetUrl()
         ];
     }
 

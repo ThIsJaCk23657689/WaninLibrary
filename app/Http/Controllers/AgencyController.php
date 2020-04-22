@@ -12,7 +12,7 @@ class AgencyController extends Controller
 
     public function __construct(){
         // $this->middleware('auth');
-        $this->middleware('auth.jwt');
+        // $this->middleware('auth.web');
         $this->AgencyService = new AgencyService();
     }
 
@@ -21,17 +21,19 @@ class AgencyController extends Controller
         return view('agencies.index', compact('agencies'));
     }
 
-    public function create(){
-        return view('agencies.create');
+    public function create(Request $request){
+        return response()->json($bearer_token = $request->cookie('authorization'));
+        // return view('agencies.create');
     }
 
-    public function store(AgencyRequest $request){
-        $agency_id = $this->AgencyService->add($request);
-        return response()->json([
-            'status' => 'OK',
-            'added_id' => $agency_id,
-            'url' => route('agencies.index')
-        ], 200);
+    public function store(Request $request){
+        return 'd';
+        // $agency_id = $this->AgencyService->add($request);
+        // return response()->json([
+        //     'status' => 'OK',
+        //     'added_id' => $agency_id,
+        //     'url' => route('agencies.index')
+        // ], 200);
     }
 
     public function show($id){

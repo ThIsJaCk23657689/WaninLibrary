@@ -5,6 +5,7 @@
  */
 
 require('./bootstrap');
+require('./../../node_modules/js-cookie/src/js.cookie');
 
 window.Vue = require('vue');
 
@@ -27,6 +28,40 @@ Vue.component('example-component', require('./components/ExampleComponent.vue').
  * or customize the JavaScript scaffolding to fit your unique needs.
  */
 
-const app = new Vue({
-    el: '#app',
+// const app = new Vue({
+//     el: '#app',
+// });
+
+$(function(){
+    // 表單Object 格式化
+    $.fn.serializeObject = function()
+    {
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function() {
+            if (o[this.name] !== undefined) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+
+    // input為$()所指向的input element。
+    // 檢查value是否為小數點或數字，value可以是字串、整數、浮點數。
+    $.isFloatOrInt = function(input){
+        let value = input.val();
+        var float = /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/;
+        if (float.test(value)) {
+            return true;
+        }else {
+            alert("請輸入有效的整數或浮點數。");
+            input.val(0);
+            return false;
+        }
+    }
 });
