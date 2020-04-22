@@ -362,6 +362,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['uploadimg'],
   data: function data() {
@@ -452,13 +464,53 @@ __webpack_require__.r(__webpack_exports__);
         $('#price_required_star').fadeIn();
       }
     }); // ISBN查詢 (Google Book API) 9789865003913
+    // $('#isbn').change(function(){
+    //     if($(this).val().length != 13 && $(this).val().length != 10){
+    //         alert('請輸入正確的ISBN格式');
+    //         $(this).val('');
+    //     }else{
+    //         let backendURL = $('#backendURL').html();
+    //         $('#modal_good').css({'display':'none'});
+    //         $('#modal_error').css({'display':'none'});
+    //         $('#modal_spinner').slideDown();
+    //         $('#modal_msg').html('請稍等...');
+    //         $('#modal_link').slideUp();
+    //         $('#modal_close').slideUp();
+    //         $('#LoadingModal').modal('show');
+    //         axios.get(backendURL + '/books/isbn/' + $(this).val() + '/google').then(response => {
+    //             if(response.data.result.totalItems == 0){
+    //                 $('#modal_error').css({'display':'flex'});
+    //                 $('#modal_spinner').css({'display':'none'});
+    //                 $('#modal_msg').html('很抱歉無法透過ISBN獲取資料');
+    //                 $('#modal_close').slideDown();
+    //             }else{
+    //                 $('#LoadingModal').modal('hide');
+    //                 let $bookInfo = response.data.result.items[0].volumeInfo;
+    //                 $('#title').val($bookInfo.title);
+    //                 $('#subtitle').val($bookInfo.subtitle);
+    //                 $('#author').val($bookInfo.authors);
+    //                 $('#publisher').val($bookInfo.publisher);
+    //                 $('#published_year').val($bookInfo.publishedDate);
+    //             }
+    //         }).catch((error) => {
+    //             console.error('透過ISBN抓取資料時發生錯誤，錯誤訊息：' + error);
+    //             $('#modal_error').css({'display':'flex'});
+    //             $('#modal_spinner').css({'display':'none'});
+    //             $('#modal_msg').html('透過ISBN抓取資料時發生錯誤<br>錯誤訊息：' + error + '<br>');
+    //             $('#modal_close').slideDown();
+    //             let $key = Object.keys(error.response.data.errors);
+    //             $key.forEach(function(item, index){
+    //                 $('#modal_msg').append(error.response.data.errors[item]+ '<br>');
+    //                 $('#' + item).addClass('is-invalid');
+    //             });
+    //         });
+    //     }
+    // });
 
-    $('#isbn').change(function () {
-      if ($(this).val().length != 13 && $(this).val().length != 10) {
-        alert('請輸入正確的ISBN格式');
-        $(this).val('');
-      } else {
-        var backendURL = $('#backendURL').html();
+    $('#bugurl').change(function () {
+      if (false) {} else {
+        var BooksBugURL = $('#BooksBugURL').html();
+        var data = $(this).serializeObject();
         $('#modal_good').css({
           'display': 'none'
         });
@@ -470,40 +522,41 @@ __webpack_require__.r(__webpack_exports__);
         $('#modal_link').slideUp();
         $('#modal_close').slideUp();
         $('#LoadingModal').modal('show');
-        axios.get(backendURL + '/books/isbn/' + $(this).val() + '/google').then(function (response) {
-          if (response.data.result.totalItems == 0) {
-            $('#modal_error').css({
-              'display': 'flex'
-            });
-            $('#modal_spinner').css({
-              'display': 'none'
-            });
-            $('#modal_msg').html('很抱歉無法透過ISBN獲取資料');
-            $('#modal_close').slideDown();
-          } else {
+        axios.post(BooksBugURL, data).then(function (response) {
+          console.log(response.data.data);
+          var $bookInfo = response.data.data;
+
+          if ($bookInfo == null) {} else {
             $('#LoadingModal').modal('hide');
-            var $bookInfo = response.data.result.items[0].volumeInfo;
             $('#title').val($bookInfo.title);
             $('#subtitle').val($bookInfo.subtitle);
-            $('#author').val($bookInfo.authors);
+            $('#author').val($bookInfo.author);
+            $('#isbn').val($bookInfo.ISBN);
             $('#publisher').val($bookInfo.publisher);
-            $('#published_year').val($bookInfo.publishedDate);
-          }
+            $('#published_year').val($bookInfo.published_date);
+            $('#edition').val($bookInfo.edition);
+            $('#callnum').val($bookInfo.callnum);
+            $('#language').val($bookInfo.language);
+          } // if(response.data.result.totalItems == 0){
+          //     $('#modal_error').css({'display':'flex'});
+          //     $('#modal_spinner').css({'display':'none'});
+          //     $('#modal_msg').html('很抱歉無法透過ISBN獲取資料');
+          //     $('#modal_close').slideDown();
+          // }else{
+          //     $('#LoadingModal').modal('hide');
+          //     
+          // }
+
         })["catch"](function (error) {
-          console.error('透過ISBN抓取資料時發生錯誤，錯誤訊息：' + error);
+          console.error('爬蟲時發生錯誤，錯誤訊息：' + error);
           $('#modal_error').css({
             'display': 'flex'
           });
           $('#modal_spinner').css({
             'display': 'none'
           });
-          $('#modal_msg').html('透過ISBN抓取資料時發生錯誤<br>錯誤訊息：' + error + '<br>');
+          $('#modal_msg').html('透爬蟲時發生錯誤<br>錯誤訊息：' + error + '<br>');
           $('#modal_close').slideDown();
-          var $key = Object.keys(error.response.data.errors);
-          $key.forEach(function (item, index) {
-            $('#modal_msg').append(error.response.data.errors[item] + '<br>');
-            $('#' + item).addClass('is-invalid');
-          });
         });
       }
     });
@@ -892,40 +945,15 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-6" }, [
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-12" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "data_resource" } }, [
-              _vm._v("資料來源")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                staticClass: "form-control",
-                attrs: { id: "data_resource", name: "data_resource" }
-              },
-              [
-                _c("option", { attrs: { value: "1" } }, [
-                  _vm._v("全新的書籍資料")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [
-                  _vm._v("已在庫藏內的書籍資料")
-                ])
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "isbn" } }, [_vm._v("ISBN")]),
+            _c("label", { attrs: { for: "bugurl" } }, [_vm._v("爬蟲網址")]),
             _vm._v(" "),
             _c("input", {
               staticClass: "form-control",
               attrs: {
-                id: "isbn",
-                name: "isbn",
+                id: "bugurl",
+                name: "bugurl",
                 type: "text",
                 value: "",
                 autocomplete: "off"
@@ -997,7 +1025,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "col-md-9" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "translator" } }, [_vm._v("譯者")]),
             _vm._v(" "),
@@ -1006,6 +1034,23 @@ var staticRenderFns = [
               attrs: {
                 id: "translator",
                 name: "translator",
+                type: "text",
+                value: "",
+                autocomplete: "off"
+              }
+            })
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-3" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "language" } }, [_vm._v("語言")]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                id: "language",
+                name: "language",
                 type: "text",
                 value: "",
                 autocomplete: "off"
@@ -1052,7 +1097,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-4" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "published_year" } }, [
               _vm._v("出版年份")
@@ -1071,7 +1116,7 @@ var staticRenderFns = [
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "col-md-3" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "published_month" } }, [
               _vm._v("出版月份")
@@ -1111,6 +1156,23 @@ var staticRenderFns = [
                 _c("option", { attrs: { value: "12" } }, [_vm._v("12")])
               ]
             )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "col-md-5" }, [
+          _c("div", { staticClass: "form-group" }, [
+            _c("label", { attrs: { for: "isbn" } }, [_vm._v("ISBN")]),
+            _vm._v(" "),
+            _c("input", {
+              staticClass: "form-control",
+              attrs: {
+                id: "isbn",
+                name: "isbn",
+                type: "text",
+                value: "",
+                autocomplete: "off"
+              }
+            })
           ])
         ])
       ]),

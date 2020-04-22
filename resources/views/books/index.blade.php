@@ -50,7 +50,6 @@
 								<td>0</td>
 								<td>{{ $book->showStatus() }}</td>
 								<td>
-									<a href="http://metadata.ncl.edu.tw/blstkmc/blstkm?00117C149BC1010200000000000100A000000001000000000^#tudorkmtop">jj</a>
 									<a href="{{ route('books.show', [$book->id]) }}" class="btn btn-md btn-info">
 										<i class="fas fa-info-circle"></i>
 									</a>
