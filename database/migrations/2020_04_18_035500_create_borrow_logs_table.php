@@ -11,10 +11,19 @@ class CreateBorrowLogsTable extends Migration
      *
      * @return void
      */
+
+
     public function up()
     {
         Schema::create('borrow_logs', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id')->comment('編號');
+            $table->unsignedBigInteger('borrower_id')->comment('借閱者編號');
+            $table->string('borrower_name')->comment('借閱人名稱');
+            $table->unsignedBigInteger('book_id')->comment('書籍編號');
+            $table->string('book_title')->comment('書名或雜誌名');
+            $table->string('callnum', 10)->comment('索書號');
+
+            $table->integer('status')->default(1)->comment('借閱狀態');//1.未逾期 2.已歸還  3逾期過久無法討回
             $table->timestamps();
         });
     }
