@@ -3,6 +3,7 @@
 namespace App\Services;
 use App\Book as BookEloquent;
 
+use Exception;
 
 class BookService extends BaseService
 {
@@ -128,7 +129,12 @@ class BookService extends BaseService
     public function getBookDataByURL($url){
 
         $iframe_doc = new \DOMDocument();
-        $orig_html = file_get_contents($url);
+        try{
+            $orig_html = file_get_contents($url);
+        }catch(Exception $e){
+            return response()->json('url已失效', 200);
+        }
+
         @$iframe_doc->loadHTML($orig_html);
         $iframe = $iframe_doc->getElementsByTagName('iframe');
         $iframe_src = $iframe[0]->getAttribute('src');

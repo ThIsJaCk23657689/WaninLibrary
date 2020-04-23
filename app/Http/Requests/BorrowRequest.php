@@ -25,7 +25,7 @@ class BorrowRequest extends FormRequest
     {
         return [
             'borrower_id' => 'required|integer|exists:borrowers,id',
-            'book_id' => 'required|integer|exists:books,id',
+            'barcode' => 'required|integer|exists:books,barcode',
         ];
     }
 }

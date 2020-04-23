@@ -76,11 +76,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     ]]);
 
     // 借閱管理相關
-    Route::resource('/borrows', 'BorrowController', ['only' => [
-        'store'
-    ]]);
     Route::get('getBookListByStatus','BorrowController@getBookListByStatus');
     Route::get('getBookListByNoticed','BorrowController@getBookListByNoticed');
+    Route::post('borrowBookByBarcode','BorrowController@borrowBookByBarcode');
     Route::post('returnBookByBarcode','BorrowController@returnBookByBarcode');
     Route::post('bookExpired','BorrowController@bookExpired');
     Route::post('Notified','BorrowController@Notified');

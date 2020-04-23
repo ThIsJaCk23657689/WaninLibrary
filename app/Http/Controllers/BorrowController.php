@@ -33,7 +33,7 @@ class BorrowController extends Controller
     }
 
     //APIs
-    public function store(BorrowRequest $request)
+    public function borrowBookByBarcode(BorrowRequest $request)
     {
         $msg = $this->BorrowService->add($request);
         return response()->json([
@@ -42,6 +42,7 @@ class BorrowController extends Controller
             'url' => route('borrows.index')
         ], 200);
     }
+
 
    public function getBookListByStatus(Request $request){
     $msg = $this->BorrowService->getBookListByStatus($request->status);

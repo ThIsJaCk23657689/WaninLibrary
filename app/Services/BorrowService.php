@@ -15,16 +15,18 @@ class BorrowService extends BaseService
     public function add($request){
 
         $borrower = BorrowerEloquent::find($request->borrower_id);
+        $book = BookEloquent::where('barcode', $request->barcode)->first();
         if($borrower->activated !=0){
             $borrow = BorrowEloquent::create([
                 'borrower_id' => $request->borrower_id,
-                'book_id' => $request->book_id,
+                'book_id' => $book->id,
                 'borrow_date' => Carbon::now(),
                 'return_date' => Carbon::now()->addMonth(),
             ]);
+
             // 增加該書的借閱次數
-            $borrow->book->count += 1;
-            $borrow->book->save();
+            $book->count += 1;
+            $book->save();
 
             BorrowLogEloquent::create([
                 'borrower_id' => $borrow->borrower_id,
