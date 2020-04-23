@@ -18,14 +18,22 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
 
+            <div class="row mb-4">
+                <div class="col-md-12">
+                    <a href="{{ route('books.barcode', [$book->id]) }}" class="btn btn-md btn-primary">
+                        <i class="fas fa-print mr-2"></i>
+                        Print
+                    </a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12">
+                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($book->barcode, 'C128') }}" alt="barcode"   />
+                </div>
+            </div>
             <div class="row">
                 <div class="col-md-12">
                     {{ $book->barcode }}
-                </div>
-            </div>
-            <div class="row mb-2">
-                <div class="col-md-12">
-                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($book->barcode, 'C128') }}" alt="barcode"   />
                 </div>
             </div>
 

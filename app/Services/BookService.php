@@ -40,8 +40,8 @@ class BookService extends BaseService
     }
 
     private function getLastUpdatedID(){
-        $book = BookEloquent::orderBy('id', 'ASC')->first();
-        if(!empty($user)){
+        $book = BookEloquent::orderBy('id', 'DESC')->first();
+        if(!empty($book)){
             return $book->id;
         }
         return 0;
