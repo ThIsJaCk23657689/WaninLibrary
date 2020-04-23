@@ -21,9 +21,6 @@
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "milon/barcode": "^7.0",
-        "org_heigl/ghostscript": "^2.3",
-        "spatie/browsershot": "^3.36",
-        "spatie/pdf-to-image": "^2.0",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {
