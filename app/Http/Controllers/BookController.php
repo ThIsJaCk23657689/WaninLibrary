@@ -5,6 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use App\Services\BookService;
+use PDF;
+// use Spatie\PdfToImage\Pdf as PDFtoImg;
+// use Org_Heigl\Ghostscript\Ghostscript;
+// use Spatie\Browsershot\Browsershot;
+// use Knp\Snappy\Image;
+use App;
+use Response;
+// use SnappyPdf;
+use DNS1D;
 
 class BookController extends Controller
 {
@@ -16,6 +25,7 @@ class BookController extends Controller
         // ]);
         $this->BookService = new BookService();
     }
+
     public function index(){
         $books = $this->BookService->getList();
         return view('books.index', compact('books'));
@@ -121,6 +131,37 @@ class BookController extends Controller
         $url = $request->bugurl;
         $res = $this->BookService->getBookDataByURL($url);
         return response()->json($res, 200)->header('Content-Type', 'application/json; charset=utf-8');
+    }
+
+    public function printBarcode($id){
+        $book = $this->BookService->getOne($id);
+
+        $snappy = App::make('snappy.image');
+        $html = '<table><tbody><tr><td><img src="data:image/png;base64,'.DNS1D::getBarcodePNG($book->barcode, 'C128').'" alt="barcode"   /></td></tr><tr><td style="text-align:center;">'.$book->barcode.'</td></tr></tbody></table>';
+        $path = public_path() . '/pdf/'. $book->barcode .'.jpg';
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        $snappy->generateFromHtml($html, $path);
+
+        $width = 280;
+        $height = 70;
+        
+        $newimage = imagecreatetruecolor($width, $height);
+        $oimage = imagecreatefromjpeg($path);
+        imagecopy($newimage, 
+            $oimage,
+            0, 0,
+            0, 
+            0, 
+            $width, $height);
+        $ext = 'jpg';
+        $imageName = $book->barcode . '.' . $ext;
+        $save_path = public_path('pdf') . '/';
+
+        imagejpeg($newimage, $save_path . $imageName);
+
+        return view('books.barcode', compact('book'));
     }
 
 }

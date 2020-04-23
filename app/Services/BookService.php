@@ -3,6 +3,7 @@
 namespace App\Services;
 use App\Book as BookEloquent;
 
+use Exception;
 
 class BookService extends BaseService
 {
@@ -40,12 +41,11 @@ class BookService extends BaseService
 
     private function getLastUpdatedID(){
         $book = BookEloquent::orderBy('id', 'DESC')->first();
-        if(!empty($user)){
+        if(!empty($book)){
             return $book->id;
         }
         return 0;
     }
-
 
     private function barcodeCode($cate, $callnum){
         $book_id = $this->getLastUpdatedID() + 1;
@@ -65,8 +65,7 @@ class BookService extends BaseService
         }else{
             return "Category number error.";
         }
-
-
+        
         if($book_id >= 10000000){
             return "Book id out of range.";
         }else{
@@ -128,7 +127,12 @@ class BookService extends BaseService
     public function getBookDataByURL($url){
 
         $iframe_doc = new \DOMDocument();
-        $orig_html = file_get_contents($url);
+        try{
+            $orig_html = file_get_contents($url);
+        }catch(Exception $e){
+            return response()->json('url已失效', 200);
+        }
+
         @$iframe_doc->loadHTML($orig_html);
         $iframe = $iframe_doc->getElementsByTagName('iframe');
         $iframe_src = $iframe[0]->getAttribute('src');
@@ -182,6 +186,7 @@ class BookService extends BaseService
                 case "國際標準書號ISBN":
                     $str = str_replace("\n","",$td->nextSibling->nodeValue);
                     $str = str_replace('-', '',$str);
+                    $str = str_replace(';', '',$str);
                     $info['ISBN'] = strstr($str,' ',true);
                     break;
                 case "出版項Publication":

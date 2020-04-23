@@ -42,12 +42,18 @@ Route::prefix('/backend')->group(function(){
     Route::resource('/donors', 'DonorController');
 
     // 書本管理路由
+    Route::get('/books/{id}/barcode', 'BookController@printBarcode')->name('books.barcode');
     Route::get('/books/isbn/{isbn}/', 'BookController@getDataByISBN')->name('books.isbn');
     Route::get('/books/isbn/{isbn}/google', 'BookController@getDataByISBNFromGoogle')->name('books.isbn.google');
     Route::get('/books/json', 'BookController@getList')->name('books.getList');
     Route::get('/books/{id}/json', 'BookController@getOne')->name('books.getOne');
     Route::resource('/books', 'BookController');
-    
+
+    // 借閱管理相關
+    Route::resource('/borrows', 'BorrowController', ['only' => [
+        'index', 'show', 'create'
+    ]]);
+
     // // 捐書人管理路由
     // Route::resource('/donors', 'DonorController', ['only' => [
     //     'index', 'show', 'create', 'edit'

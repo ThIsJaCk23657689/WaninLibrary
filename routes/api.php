@@ -74,7 +74,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getLoginLogsByDate', 'LoginLogController@getLoginLogsByDate');
     Route::get('getLoginLogsByMonth', 'LoginLogController@getLoginLogsByMonth');
     Route::get('getLoginLogsByYear', 'LoginLogController@getLoginLogsByYear');
-
 });
 
 // 爬蟲

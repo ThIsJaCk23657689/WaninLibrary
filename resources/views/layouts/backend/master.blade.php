@@ -4,7 +4,6 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-	
 	<!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
@@ -18,7 +17,7 @@
 	<script src="{{ asset('vendor/chart.js/Chart.min.js') }}" defer></script>
 	<script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}" defer></script>
 	<script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js') }}" defer></script>
-	
+
 	<!-- Custom scripts for all pages-->
 	<script src="{{ asset('js/admin/sb-admin.min.js') }}" defer></script>
 	@stack('CustomJS')
@@ -36,10 +35,10 @@
 </head>
 <body id="page-top">
 	@include('partials.backend.navbar')
-	  
+
 	<div id="wrapper">
 		@include('partials.backend.sidebar')
-		
+
     	<div id="content-wrapper">
 
 			<div class="container-fluid">
@@ -48,7 +47,7 @@
 
 			@include('partials.backend.footer')
 		</div>
-		
+
   	</div>
 
 	<a id="go_top_btn" class="scroll-to-top rounded" href="#page-top">
