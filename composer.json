@@ -9,13 +9,21 @@
     "license": "MIT",
     "require": {
         "php": "^7.2.5",
+        "barryvdh/laravel-dompdf": "^0.8.6",
+        "barryvdh/laravel-snappy": "^0.4.7",
         "fideloper/proxy": "^4.2",
         "fruitcake/laravel-cors": "^1.0",
         "guzzlehttp/guzzle": "^6.5",
+        "h4cc/wkhtmltoimage-amd64": "0.12.x",
+        "h4cc/wkhtmltopdf-amd64": "0.12.x",
+        "knplabs/knp-snappy": "^1.2",
         "laravel/framework": "^7.0",
         "laravel/tinker": "^2.0",
         "laravel/ui": "^2.0",
         "milon/barcode": "^7.0",
+        "org_heigl/ghostscript": "^2.3",
+        "spatie/browsershot": "^3.36",
+        "spatie/pdf-to-image": "^2.0",
         "tymon/jwt-auth": "dev-develop"
     },
     "require-dev": {

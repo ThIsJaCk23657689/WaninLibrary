@@ -5,17 +5,25 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use App\Services\BookService;
+use PDF;
+use Spatie\PdfToImage\Pdf as PDFtoImg;
+use Org_Heigl\Ghostscript\Ghostscript;
+use Spatie\Browsershot\Browsershot;
+use Knp\Snappy\Image;
+use App;
+use SnappyPdf;
 
 class BookController extends Controller
 {
     public $BookService;
 
     public function __construct(){
-        $this->middleware('auth.web')->only([
-            'index', 'create', 'edit', 'show'
-        ]);
+        // $this->middleware('auth.web')->only([
+        //     'index', 'create', 'edit', 'show'
+        // ]);
         $this->BookService = new BookService();
     }
+
     public function index(){
         $books = $this->BookService->getList();
         return view('books.index', compact('books'));
@@ -121,6 +129,50 @@ class BookController extends Controller
         $url = $request->bugurl;
         $res = $this->BookService->getBookDataByURL($url);
         return response()->json($res, 200)->header('Content-Type', 'application/json; charset=utf-8');
+    }
+
+    public function printBarcode($id){
+        $book = $this->BookService->getOne($id);
+
+        return SnappyPdf::loadFile('https://tw.yahoo.com')->inline('yahoo.pdf');
+ 
+		// // 从 URL 链接生成 PDF
+		// $snappy->generate('http://www.github.com', '/tmp/test.php');
+ 
+		// // 获取转换后的 PDF 字符串
+		// $pdf_response = $snappy->getOutputFromHtml($html);
+		// // 直接输出到浏览器下载
+		// return response($pdf_response, 200, [
+		// 	'Content-Type'          => 'application/pdf',
+		// 	'Content-Disposition'   => 'attachment; filename="file.pdf"'
+		// ]);
+
+        // Browsershot::url('https://google.com')->save(public_path() . '\pdf\example.pdf');
+        // Browsershot::html('<h1>Hello world!!</h1>')->save(public_path() . '\images\example.jpg');
+
+        // $customPaper = array(30, 0, 120.00, 227.00);
+        // $pdf = PDF::loadView('books.barcode', compact('book'))->setPaper($customPaper, 'landscape');
+
+        // $path = public_path().'\pdf\barcode.pdf';
+        // $pdf->save($path);
+
+        // $pdf = new PDFtoImg($path);
+        // $pdf->saveImage(public_path().'\pdf\barcode.jpg');
+
+        // $gs = new Ghostscript ();
+        // $gs->setDevice('jpeg')
+        // // Set the input file
+        // ->setInputFile($path)
+        // // Set the output file that will be created in the same directory as the input
+        // ->setOutputFile(public_path().'\pdf\dd.jpg')
+        // // Set the resolution to 96 pixel per inch
+        // ->setResolution(96)
+        // // Set Text-antialiasing to the highest level
+        // ->setTextAntiAliasing(Ghostscript::ANTIALIASING_HIGH);  
+
+        // return $pdf->download(storage_path().'_filename.png');
+
+        return view('books.barcode', compact('book'));
     }
 
 }

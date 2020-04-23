@@ -42,6 +42,7 @@ Route::prefix('/backend')->group(function(){
     Route::resource('/donors', 'DonorController');
 
     // 書本管理路由
+    Route::get('/books/{id}/barcode', 'BookController@printBarcode')->name('books.barcode');
     Route::get('/books/isbn/{isbn}/', 'BookController@getDataByISBN')->name('books.isbn');
     Route::get('/books/isbn/{isbn}/google', 'BookController@getDataByISBNFromGoogle')->name('books.isbn.google');
     Route::get('/books/json', 'BookController@getList')->name('books.getList');
