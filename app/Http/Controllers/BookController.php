@@ -138,7 +138,29 @@ class BookController extends Controller
 
         $snappy = App::make('snappy.image');
         $html = '<table><tbody><tr><td><img src="data:image/png;base64,'.DNS1D::getBarcodePNG($book->barcode, 'C128').'" alt="barcode"   /></td></tr><tr><td style="text-align:center;">'.$book->barcode.'</td></tr></tbody></table>';
-        $snappy->generateFromHtml($html, public_path() . '\pdf\example.jpg');
+        $path = public_path() . '/pdf/'. $book->barcode .'.jpg';
+        if (file_exists($path)) {
+            unlink($path);
+        }
+        $snappy->generateFromHtml($html, $path);
+
+        $width = 280;
+        $height = 70;
+        
+        $newimage = imagecreatetruecolor($width, $height);
+        $oimage = imagecreatefromjpeg($path);
+        imagecopy($newimage, 
+            $oimage,
+            0, 0,
+            0, 
+            0, 
+            $width, $height);
+        $ext = 'jpg';
+        $imageName = $book->barcode . '.' . $ext;
+        $save_path = public_path('pdf') . '/';
+
+        imagejpeg($newimage, $save_path . $imageName);
+
         return view('books.barcode', compact('book'));
     }
 
