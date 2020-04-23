@@ -27,7 +27,7 @@ class AgencyRequest extends FormRequest
             'name' => 'required|string|max:100',
             'tel' => 'nullable|string|max:30',
             'principal' => 'nullable|string|max:100',
-            'address_zipcode' => 'nullable|string|max:5',
+            'address_zipcode' => 'nullable|string|max:6',
             'address_county' => 'nullable|string|max:10',
             'address_district' => 'nullable|string|max:10',
             'address_others' => 'nullable|string|max:255',

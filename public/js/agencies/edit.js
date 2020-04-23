@@ -367,7 +367,42 @@ var render = function() {
             ])
           ]),
           _vm._v(" "),
-          _vm._m(2),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "content" } }, [
+                  _vm._v("備註內容")
+                ]),
+                _vm._v(" "),
+                _c("textarea", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.agency.content,
+                      expression: "agency.content"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    name: "content",
+                    id: "content",
+                    cols: "30",
+                    rows: "5"
+                  },
+                  domProps: { value: _vm.agency.content },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.agency, "content", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          ]),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row justify-content-center" }, [
             _c("div", { staticClass: "col-md-8" }, [
@@ -449,23 +484,6 @@ var staticRenderFns = [
             "data-value": ""
           }
         })
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "content" } }, [_vm._v("備註內容")]),
-          _vm._v(" "),
-          _c("textarea", {
-            staticClass: "form-control",
-            attrs: { name: "content", id: "content", cols: "30", rows: "5" }
-          })
-        ])
       ])
     ])
   }

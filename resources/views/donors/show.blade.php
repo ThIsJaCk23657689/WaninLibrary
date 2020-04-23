@@ -21,7 +21,7 @@
     
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="name">機構名稱</label>
+                        <label for="name">捐贈人名稱</label>
                         <input id="name" name="name" type="text" class="form-control mb-2" value="{{ $donor->name ?? '無' }}" readonly>
                     </div>
                 </div>

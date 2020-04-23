@@ -347,33 +347,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['uploadimg'],
   data: function data() {
@@ -533,16 +506,18 @@ __webpack_require__.r(__webpack_exports__);
             $('#author').val($bookInfo.author);
             $('#isbn').val($bookInfo.ISBN);
             $('#publisher').val($bookInfo.publisher);
-            $('#published_year').val($bookInfo.published_date);
+            $('#published_date').val($bookInfo.published_date);
             $('#edition').val($bookInfo.edition);
             $('#callnum').val($bookInfo.callnum);
+            $('#category').val($bookInfo.callnum.substr(0, 1));
             $('#language').val($bookInfo.language);
+            var $cover_img_name = $bookInfo.cover_img.split('/').pop();
 
-            if ($bookInfo.cover_img != null && $bookInfo.cover_img != '') {
+            if ($bookInfo.cover_img != null && $bookInfo.cover_img != '' && $cover_img_name != 'qrcode.png') {
               $('#previewImg-upload').attr('src', $bookInfo.cover_img);
+            } else {
+              console.log('Cover Images URL:' + $bookInfo.cover_img);
             }
-
-            alert($bookInfo.cover_img);
           } // if(response.data.result.totalItems == 0){
           //     $('#modal_error').css({'display':'flex'});
           //     $('#modal_spinner').css({'display':'none'});
@@ -874,7 +849,7 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-2" }, [
+      _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "status" } }, [_vm._v("狀態")]),
           _vm._v(" "),
@@ -882,28 +857,10 @@ var staticRenderFns = [
             "select",
             {
               staticClass: "form-control",
-              attrs: { id: "status", name: "status", readonly: "" }
+              attrs: { id: "status", name: "status", disabled: "" }
             },
             [_c("option", { attrs: { value: "4" } }, [_vm._v("庫藏待上架")])]
           )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-2" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "count" } }, [_vm._v("借閱次數")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "count",
-              name: "count",
-              type: "text",
-              value: "0",
-              readonly: "",
-              autocomplete: "off"
-            }
-          })
         ])
       ])
     ])
@@ -1103,17 +1060,17 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "published_year" } }, [
-              _vm._v("出版年份")
+            _c("label", { attrs: { for: "published_date" } }, [
+              _vm._v("出版日期")
             ]),
             _vm._v(" "),
             _c("input", {
               staticClass: "form-control",
               attrs: {
-                id: "published_year",
-                name: "published_year",
+                id: "published_date",
+                name: "published_date",
                 type: "text",
                 value: "",
                 autocomplete: "off"
@@ -1122,50 +1079,7 @@ var staticRenderFns = [
           ])
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "col-md-3" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "published_month" } }, [
-              _vm._v("出版月份")
-            ]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                staticClass: "form-control",
-                attrs: { id: "published_month", name: "published_month" }
-              },
-              [
-                _c("option", { attrs: { value: "" } }, [_vm._v("請選擇...")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("1")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [_vm._v("2")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "3" } }, [_vm._v("3")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "4" } }, [_vm._v("4")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "5" } }, [_vm._v("5")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "6" } }, [_vm._v("6")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "7" } }, [_vm._v("7")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "8" } }, [_vm._v("8")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "9" } }, [_vm._v("9")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "10" } }, [_vm._v("10")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "11" } }, [_vm._v("11")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "12" } }, [_vm._v("12")])
-              ]
-            )
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-5" }, [
+        _c("div", { staticClass: "col-md-6" }, [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "isbn" } }, [_vm._v("ISBN")]),
             _vm._v(" "),
@@ -1232,19 +1146,19 @@ var staticRenderFns = [
                 _vm._v(" "),
                 _c("option", { attrs: { value: "6" } }, [_vm._v("600 史地類")]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "7" } }, [
+                _c("option", { attrs: { value: "6" } }, [
                   _vm._v("610 中國史地類")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "8" } }, [
+                _c("option", { attrs: { value: "7" } }, [
                   _vm._v("710 世界史地類")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "9" } }, [
+                _c("option", { attrs: { value: "8" } }, [
                   _vm._v("800 語文文學類")
                 ]),
                 _vm._v(" "),
-                _c("option", { attrs: { value: "10" } }, [_vm._v("900 藝術類")])
+                _c("option", { attrs: { value: "9" } }, [_vm._v("900 藝術類")])
               ]
             )
           ])

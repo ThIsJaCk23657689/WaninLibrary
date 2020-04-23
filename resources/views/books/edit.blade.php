@@ -9,7 +9,7 @@
 				
 	@component('components.breadcrumbs')
 		<li class="breadcrumb-item">
-			<a href="#">{{ __('People Management') }}</a>
+			<a href="#">{{ __('Books Management') }}</a>
 		</li>
 		<li class="breadcrumb-item">
 			<a href="{{ route('books.index') }}">{{ __('Books') }}</a>

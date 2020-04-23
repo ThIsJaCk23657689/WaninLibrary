@@ -65,7 +65,7 @@ class JWTAuthController extends Controller
         }
     }
 
-    public function me(Request $request){
+    public function me(){
         // 從header中抓token
         // $bearer_token = $request->cookie('authorization');
         // $rawtoken = trim(strstr($bearer_token, ' '));
@@ -76,15 +76,19 @@ class JWTAuthController extends Controller
         return response()->json(auth('api')->user());
     }
 
-    public function logout(){
+    public function logout(Request $request){
         JWTAuth::parseToken()->invalidate();
 
         //紀錄登出資訊
         $this->LoginLogService->update();
 
-        return response()->json([
-            'message' => '已成功登出'
-        ])->withCookie(Cookie::forget('authorization'));
+        if($request->wantsJson()){
+            return response()->json([
+                'message' => '已成功登出'
+            ])->withCookie(Cookie::forget('authorization'));
+        }else{
+            return redirect()->route('login')->withCookie(Cookie::forget('authorization'));
+        }
     }
 
 

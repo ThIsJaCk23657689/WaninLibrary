@@ -24,9 +24,9 @@ class CreateUsersTable extends Migration
             $table->string('password')->comment('密碼');
             $table->integer('status')->default(1)->comment('權限別，0為系統管理者；1為一般使用者');
             $table->string('tel')->nullable()->comment('電話號碼');
-            $table->string('address_zipcode',5)->nullable()->comment('郵遞區號');
-            $table->string('address_county',10)->nullable()->comment('縣市別');
-            $table->string('address_district',10)->nullable()->comment('鄉鎮市區');
+            $table->string('address_zipcode', 6)->nullable()->comment('郵遞區號');
+            $table->string('address_county', 10)->nullable()->comment('縣市別');
+            $table->string('address_district', 10)->nullable()->comment('鄉鎮市區');
             $table->string('address_others')->nullable()->comment('其他住址');
             $table->string('content')->nullable()->comment('備註');
             $table->softDeletes();

@@ -65,19 +65,12 @@
                     </div>
                 </div>
 
-                <div class="col-md-2">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="status">狀態</label>
-                        <select id="status" name="status" class="form-control" readonly>
+                        <select id="status" name="status" class="form-control" disabled>
                             <option value="4">庫藏待上架</option>
                         </select>
-                    </div>
-                </div>
-
-                <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="count">借閱次數</label>
-                        <input id="count" name="count" type="text" class="form-control" value="0" readonly autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -181,33 +174,13 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-4">
+                        <div class="col-md-6">
                             <div class="form-group">
-                                <label for="published_year">出版年份</label>
-                                <input id="published_year" name="published_year" type="text" class="form-control" value="" autocomplete="off">
+                                <label for="published_date">出版日期</label>
+                                <input id="published_date" name="published_date" type="text" class="form-control" value="" autocomplete="off">
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="published_month">出版月份</label>
-                                <select id="published_month" name="published_month" class="form-control">
-                                    <option value="">請選擇...</option>
-                                    <option value="1">1</option>
-                                    <option value="2">2</option>
-                                    <option value="3">3</option>
-                                    <option value="4">4</option>
-                                    <option value="5">5</option>
-                                    <option value="6">6</option>
-                                    <option value="7">7</option>
-                                    <option value="8">8</option>
-                                    <option value="9">9</option>
-                                    <option value="10">10</option>
-                                    <option value="11">11</option>
-                                    <option value="12">12</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-5">
+                        <div class="col-md-6">
                             <div class="form-group">
                                 <label for="isbn">ISBN</label>
                                 <input id="isbn" name="isbn" type="text" class="form-control" value="" autocomplete="off">
@@ -234,10 +207,10 @@
                                     <option value="4">400 應用科學類</option>
                                     <option value="5">500 社會學類</option>
                                     <option value="6">600 史地類</option>
-                                    <option value="7">610 中國史地類</option>
-                                    <option value="8">710 世界史地類</option>
-                                    <option value="9">800 語文文學類</option>
-                                    <option value="10">900 藝術類</option>
+                                    <option value="6">610 中國史地類</option>
+                                    <option value="7">710 世界史地類</option>
+                                    <option value="8">800 語文文學類</option>
+                                    <option value="9">900 藝術類</option>
                                 </select>
                             </div>
                         </div>
@@ -445,14 +418,18 @@ export default {
                         $('#author').val($bookInfo.author);
                         $('#isbn').val($bookInfo.ISBN);
                         $('#publisher').val($bookInfo.publisher);
-                        $('#published_year').val($bookInfo.published_date);
+                        $('#published_date').val($bookInfo.published_date);
                         $('#edition').val($bookInfo.edition);
                         $('#callnum').val($bookInfo.callnum);
+                        $('#category').val($bookInfo.callnum.substr(0, 1));
                         $('#language').val($bookInfo.language);
-                        if($bookInfo.cover_img != null && $bookInfo.cover_img != ''){
+                        
+                        let $cover_img_name = $bookInfo.cover_img.split('/').pop();
+                        if($bookInfo.cover_img != null && $bookInfo.cover_img != '' && $cover_img_name != 'qrcode.png'){
                             $('#previewImg-upload').attr('src', $bookInfo.cover_img);
+                        }else{
+                            console.log('Cover Images URL:' + $bookInfo.cover_img);
                         }
-                        alert($bookInfo.cover_img);
                     }
                     // if(response.data.result.totalItems == 0){
                     //     $('#modal_error').css({'display':'flex'});

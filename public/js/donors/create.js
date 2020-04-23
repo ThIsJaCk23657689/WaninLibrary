@@ -213,7 +213,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     // 地址
     $('#address_twzipcode').twzipcode({
-      'readonly': true
+      'readonly': false
     }); // 生日
 
     $("#birthday").datepicker({

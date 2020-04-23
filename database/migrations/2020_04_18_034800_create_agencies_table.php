@@ -19,9 +19,9 @@ class CreateAgenciesTable extends Migration
             $table->string('name')->comment('單位名稱');
             $table->string('tel')->nullable()->comment('電話');
             $table->string('principal')->nullable()->comment('負責人');
-            $table->string('address_zipcode',5)->nullable()->comment('郵遞區號');
-            $table->string('address_county',10)->nullable()->comment('縣市別');
-            $table->string('address_district',10)->nullable()->comment('鄉鎮市區');
+            $table->string('address_zipcode', 6)->nullable()->comment('郵遞區號');
+            $table->string('address_county', 10)->nullable()->comment('縣市別');
+            $table->string('address_district', 10)->nullable()->comment('鄉鎮市區');
             $table->string('address_others')->nullable()->comment('其他住址');
             $table->string('content')->nullable()->comment('備註內容');
 

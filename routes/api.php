@@ -27,6 +27,29 @@ Route::get('me', 'JWTAuthController@me');
 Route::post('logout', 'JWTAuthController@logout')->name('api.logout');
 Route::post('forgetPassword', 'JWTAuthController@forgetPassword');
 
+// 機構管理路由
+Route::get('/agencies/json', 'AgencyController@getList')->name('agencies.getList');
+Route::get('/agencies/{id}/json', 'AgencyController@getOne')->name('agencies.getOne');
+Route::resource('/agencies', 'AgencyController', ['only' => [
+    'store', 'update', 'destroy'
+]]);
+
+//借閱者管理相關
+Route::post('activateControll','BorrowerController@activateControll');
+Route::resource('/borrowers', 'BorrowerController', ['only' => [
+    'store', 'update', 'destroy'
+]]);
+
+// 捐書人管理路由
+Route::resource('/donors', 'DonorController', ['only' => [
+    'store', 'update', 'destroy'
+]]);
+
+//書籍管理相關
+Route::resource('/books', 'BookController', ['only' => [
+    'store', 'update', 'destroy'
+]]);
+
 Route::group(['middleware' => 'auth.jwt'], function () {
 
     // JWTAuth
@@ -51,31 +74,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getLoginLogsByDate', 'LoginLogController@getLoginLogsByDate');
     Route::get('getLoginLogsByMonth', 'LoginLogController@getLoginLogsByMonth');
     Route::get('getLoginLogsByYear', 'LoginLogController@getLoginLogsByYear');
-
-    // 機構管理路由
-    Route::get('/agencies/json', 'AgencyController@getList')->name('agencies.getList');
-    Route::get('/agencies/{id}/json', 'AgencyController@getOne')->name('agencies.getOne');
-    Route::resource('/agencies', 'AgencyController', ['only' => [
-        'store', 'update', 'destroy'
-    ]]);
-
-    //借閱者管理相關
-    Route::post('activateControll','BorrowerController@activateControll');
-    Route::resource('/borrowers', 'BorrowerController', ['only' => [
-        'store', 'update', 'destroy'
-    ]]);
-
-    // 捐書人管理路由
-    Route::resource('/donors', 'DonorController', ['only' => [
-        'store', 'update', 'destroy'
-    ]]);
-
-    //書籍管理相關
-    Route::resource('/books', 'BookController', ['only' => [
-        'store', 'update', 'destroy'
-    ]]);
-    
-    
 
 });
 

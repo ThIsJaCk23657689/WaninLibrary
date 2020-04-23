@@ -238,7 +238,7 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     // 地址
     $('#address_twzipcode').twzipcode({
-      'readonly': true
+      'readonly': false
     }); // 生日
 
     $("#birthday").datepicker({
@@ -418,10 +418,7 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "birthday" } }, [
-            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("生日")
-          ]),
+          _c("label", { attrs: { for: "birthday" } }, [_vm._v("生日")]),
           _vm._v(" "),
           _c("input", {
             staticClass: "form-control mb-2",
@@ -430,7 +427,6 @@ var staticRenderFns = [
               name: "birthday",
               type: "text",
               value: "",
-              required: "",
               autocomplete: "off",
               placeholder: "例：1950-01-01"
             }

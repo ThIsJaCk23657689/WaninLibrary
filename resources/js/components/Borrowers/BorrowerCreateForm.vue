@@ -22,8 +22,8 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="birthday"><span class="text-danger mr-2">*</span>生日</label>
-                        <input id="birthday" name="birthday" type="text" class="form-control mb-2" value="" required autocomplete="off" placeholder="例：1950-01-01">
+                        <label for="birthday">生日</label>
+                        <input id="birthday" name="birthday" type="text" class="form-control mb-2" value="" autocomplete="off" placeholder="例：1950-01-01">
                     </div>
                 </div>
             </div>
@@ -140,7 +140,7 @@ export default {
     mounted(){
         // 地址
         $('#address_twzipcode').twzipcode({
-            'readonly': true
+            'readonly': false
         });
 
         // 生日

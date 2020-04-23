@@ -23,20 +23,16 @@ class AgencyController extends Controller
     }
 
     public function create(Request $request){
-
-
-        // return response()->json($_COOKIE["authorization"]);
         return view('agencies.create');
     }
 
     public function store(Request $request){
-        return 'd';
-        // $agency_id = $this->AgencyService->add($request);
-        // return response()->json([
-        //     'status' => 'OK',
-        //     'added_id' => $agency_id,
-        //     'url' => route('agencies.index')
-        // ], 200);
+        $agency_id = $this->AgencyService->add($request);
+        return response()->json([
+            'status' => 'OK',
+            'added_id' => $agency_id,
+            'url' => route('agencies.index')
+        ], 200);
     }
 
     public function show($id){

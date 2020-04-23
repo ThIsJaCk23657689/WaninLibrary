@@ -7,7 +7,7 @@
 				
 	@component('components.breadcrumbs')
 		<li class="breadcrumb-item">
-			<a href="#">{{ __('People Management') }}</a>
+			<a href="#">{{ __('Books Management') }}</a>
 		</li>
 		<li class="breadcrumb-item">
 			<a href="{{ route('books.index') }}">{{ __('Books') }}</a>
@@ -19,13 +19,18 @@
         <div class="col-md-8">
 
             <div class="row">
-                <div class="col-md-12">
-                    {{ $book->barcode }}
+                <div class="col-md-12 text-center">
+                    網銀基金會 / 拾本書堂
                 </div>
             </div>
-            <div class="row mb-2">
-                <div class="col-md-12">
+            <div class="row">
+                <div class="col-md-12  text-center">
                     <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($book->barcode, 'C128') }}" alt="barcode"   />
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 text-center">
+                    {{ $book->barcode }}
                 </div>
             </div>
 

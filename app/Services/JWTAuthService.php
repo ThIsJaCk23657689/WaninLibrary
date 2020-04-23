@@ -16,7 +16,7 @@ class JWTAuthService extends BaseService
 
     public $LoginLogService;
 
-    protected $redirectTo = '/';
+    protected $redirectTo = '/backend';
 
     public function __construct(){
         $this->LoginLogService = new LoginLogService();

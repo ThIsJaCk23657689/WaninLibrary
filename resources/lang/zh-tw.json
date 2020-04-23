@@ -96,11 +96,11 @@
 	"Admins" : "管理員",
 	"Borrowers" : "借閱人",
 	"Donors" : "捐贈人",
-	"Agencies" : "機構",
+	"Agencies" : "單位",
 
 	"Books Management" : "圖書管理",
-	"Books" : "書本",
-	"Purchase" : "購入",
+	"Books" : "全部書籍",
+	"Purchase" : "採購書籍",
 	"Donate" : "捐入與轉贈",
 	"Barcode" : "條碼",
 

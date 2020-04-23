@@ -7,7 +7,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="name">
-                            <span class="text-danger mr-2">*</span>機構名稱
+                            <span class="text-danger mr-2">*</span>單位名稱
                         </label>
                         <input id="name" name="name" type="text" class="form-control mb-2" value="" required autocomplete="off" autofocus>
                     </div>
@@ -22,7 +22,7 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="principal">負責人</label>
+                        <label for="principal">聯絡窗口</label>
                         <input id="principal" name="principal" type="text" class="form-control" value="" autocomplete="off">
                     </div>
                 </div>
@@ -94,7 +94,7 @@ export default {
 
         // 地址
         $('#address_twzipcode').twzipcode({
-            'readonly': true
+            'readonly': false
         }); 
 
         $('#agency_create_form').submit(function(e){

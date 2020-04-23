@@ -42,7 +42,10 @@
                 <a class="dropdown-item" href="#">{{ __('Profile') }}</a>
                 <a class="dropdown-item" href="#">{{ __('Change Password') }}</a>
                 <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">{{ __('Logout') }}</a>
+                <a id="logoutBtn" class="dropdown-item" href="#">{{ __('Logout') }}</a>
+                <form id="logout_form" action="{{ route('api.logout') }}" method="POST" style="displat: none;">
+                    @csrf
+                </form>
             </div>
         </li>
     </ul>

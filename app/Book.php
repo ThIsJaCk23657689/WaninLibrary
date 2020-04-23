@@ -17,6 +17,15 @@ class Book extends Model
         return $this->belongsTo(DonerEloquent::class);
     }
 
+    public function showTitle(){
+        $maxString = 80;
+        if(strlen($this->title) >= $maxString){
+            return mb_substr($this->title, 0, $maxString) . '...';
+        }else{
+            return $this->title;
+        }
+    }
+
     public function showStatus(){
         switch ($this->status) {
             case '1':

@@ -96,5 +96,28 @@ $(function(){
 				"sortDescending": ": 降冪排列"
 			}
 		}
-	});
+    });
+
+    $.getCookie = function(name) {
+        var value = "; " + document.cookie;
+        var parts = value.split("; " + name + "=");
+        if (parts.length == 2) return parts.pop().split(";").shift();
+    }
+    
+    $('#logoutBtn').click(function(){
+        $('#logout_form').submit();
+    });
+
+    $('#logout_form').submit(function(e){
+        e.preventDefault();
+
+        let url = $(this).attr('action');
+        axios.post(url, {
+            headers: {"Authorization" : 'Bearer ${token}'}
+        }).then(response => {
+            console.log(response.data);
+        }).catch((error) => {
+            console.error('登出時發生錯誤，錯誤訊息：' + error);
+        });
+    });
 });

@@ -8,7 +8,7 @@
 				
     @component('components.breadcrumbs')
         <li class="breadcrumb-item">
-            <a href="#">{{ __('People Management') }}</a>
+            <a href="#">{{ __('Books Management') }}</a>
         </li>
         <li class="breadcrumb-item">
             <a href="{{ route('books.index') }}">{{ __('Books') }}</a>
@@ -46,7 +46,7 @@
 						@foreach ($books as $book)
 							<tr>
                                 <td>{{ $book->id }}</td>
-								<td>{{ $book->title }}</td>
+								<td>{{ $book->showTitle() }}</td>
 								<td>0</td>
 								<td>{{ $book->showStatus() }}</td>
 								<td>

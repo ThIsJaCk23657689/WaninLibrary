@@ -121,7 +121,7 @@ export default {
     mounted(){
         // 地址
         $('#address_twzipcode').twzipcode({
-            'readonly': true
+            'readonly': false
         });
 
         // 生日

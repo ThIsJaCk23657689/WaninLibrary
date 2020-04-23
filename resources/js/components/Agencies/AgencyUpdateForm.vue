@@ -57,7 +57,7 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="content">備註內容</label>
-                        <textarea name="content" id="content" class="form-control" cols="30" rows="5"></textarea>
+                        <textarea name="content" id="content" class="form-control" cols="30" rows="5" v-model="agency.content"></textarea>
                     </div>
                 </div>
             </div> 

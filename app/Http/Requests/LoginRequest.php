@@ -28,4 +28,10 @@ class LoginRequest extends FormRequest
             'password' => 'required|string'
         ];
     }
+
+    public function messages(){
+        return [
+            'account.exists' => '無此帳號',
+        ];
+    }
 }

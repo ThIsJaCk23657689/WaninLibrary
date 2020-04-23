@@ -29,7 +29,7 @@ class DonorRequest extends FormRequest
             'email' => 'nullable|email',
             'tel' => 'nullable|string|max:30',
             'cellphone' => 'nullable|string|max:30',
-            'address_zipcode' => 'nullable|string|max:5',
+            'address_zipcode' => 'nullable|string|max:6',
             'address_county' => 'nullable|string|max:10',
             'address_district' => 'nullable|string|max:10',
             'address_others' => 'nullable|string|max:255',

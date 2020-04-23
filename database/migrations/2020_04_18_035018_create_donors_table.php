@@ -22,7 +22,7 @@ class CreateDonorsTable extends Migration
             $table->string('tel')->nullable()->comment('電話');
             $table->string('cellphone')->nullable()->comment('行動電話');
             
-            $table->string('address_zipcode' ,5)->nullable()->comment('郵遞區號');
+            $table->string('address_zipcode', 6)->nullable()->comment('郵遞區號');
             $table->string('address_county', 10)->nullable()->comment('縣市別');
             $table->string('address_district', 10)->nullable()->comment('鄉鎮市區');
             $table->string('address_others')->nullable()->comment('其他住址');

@@ -17,18 +17,22 @@ class RedirectIfNotAuth
      */
     public function handle($request, Closure $next)
     {
-        // 從cookie取得token
-        $bearer_token = $_COOKIE["authorization"];
-        $rawtoken = trim(strstr($bearer_token, ' '));
-        $token = new Token($rawtoken);
-        // 解析token
-        $payload = JWTAuth::decode($token);
-        
-        if(!is_null($payload)){
-            // 驗證成功
-            $request->headers->set('authorization', 'Bearer ' . $token);
-            return $next($request);
+        if (isset($_COOKIE['authorization'])) {
+            // 有登入 cookie
+
+            // 從cookie取得token
+            $bearer_token = $_COOKIE['authorization'];
+            $rawtoken = trim(strstr($bearer_token, ' '));
+            $token = new Token($rawtoken);
+
+            // 解析token
+            $payload = JWTAuth::decode($token);
+            if(!is_null($payload)){
+                // 驗證成功
+                $request->headers->set('authorization', 'Bearer ' . $token);
+                return $next($request);
+            }
         }
-        return route('login');
+        return redirect()->route('login');
     }
 }
