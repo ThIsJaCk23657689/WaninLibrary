@@ -124,6 +124,8 @@ class BookService extends BaseService
         $book->delete();
     }
 
+    
+
     public function getBookDataByURL($url){
 
         $iframe_doc = new \DOMDocument();
