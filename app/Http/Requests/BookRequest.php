@@ -28,7 +28,7 @@ class BookRequest extends FormRequest
 
             // 'barcode' => 'required|integer|unique',
             'callnum' => 'required|string|min:3',
-            'category' => 'required|string',
+            'category' => 'required|integer',
             'status' => 'required|integer',
 
             'title' => 'required|string|max:255',

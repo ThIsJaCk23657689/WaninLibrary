@@ -126,6 +126,13 @@ class BookController extends Controller
         ]);
     }
 
+
+    //type:1.一般中文圖書 2.論文 3.雜誌期刊 4.一般非中文圖書
+    public function getBookByKeyword(Request $request){
+        $msg = $this->BorrowService->getBookByKeyword($request->category, $request->type, $request->keyword);
+        return response()->json($msg, 200);
+    }
+
     public function getBookDataByURL(Request $request)
     {
         $url = $request->bugurl;
