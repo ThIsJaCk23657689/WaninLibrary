@@ -49,7 +49,7 @@ class BorrowService extends BaseService
     }
 
 
-    public function getBookListByStatus($status){
+    public function getBorrowListByStatus($status){
         if($status == 1){
             $borrows = BorrowEloquent::Borrowed()->with('book:id,title,barcode')->with('borrower:id,name')->get();
         }elseif($status == 2){
@@ -62,7 +62,7 @@ class BorrowService extends BaseService
         return $borrows;
     }
 
-    public function getBookListByNoticed($noticed){
+    public function getBorrowListByNoticed($noticed){
         if($noticed == 1){
             $borrows = BorrowEloquent::Noticed()->with('book:id,title,barcode')
             ->with('borrower:id,name')->get();
