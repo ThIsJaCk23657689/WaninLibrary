@@ -15,8 +15,8 @@ class BorrowerController extends Controller
         $this->BorrowerService = new BorrowerService();
     }
 
-    public function index(){
-        $borrowers = $this->BorrowerService->getList();
+    public function index(Request $request){
+        $borrowers = $this->BorrowerService->getList($request->skip, $request->take);
         return view('borrowers.index', compact('borrowers'));
     }
 
@@ -65,8 +65,8 @@ class BorrowerController extends Controller
     }
 
     // API
-    public function getlist(){
-        $borrowers = $this->BorrowerService->getList();
+    public function getlist(Request $request){
+        $borrowers = $this->BorrowerService->getList($request->skip, $request->take);
         return response()->json([
             'status' => 'OK',
             'borrowers' => $borrowers

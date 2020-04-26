@@ -25,9 +25,9 @@ class DonorService extends BaseService
         return $donor->id;
     }
 
-    public function getList()
+    public function getList($skip, $take)
     {
-        $donors = DonorEloquent::get();
+        $donors = DonorEloquent::skip($skip)->take($take)->get();
         return $donors;
     }
 

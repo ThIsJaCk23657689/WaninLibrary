@@ -11,7 +11,7 @@ class BookSeeder extends Seeder
      */
     public function run()
     {
-        for($i = 0; $i++ ; $i<100){
+        for($i = 0;$i<100;$i++){
             $books = factory(BookEloquent::class, 1000)->create();
         }
     }

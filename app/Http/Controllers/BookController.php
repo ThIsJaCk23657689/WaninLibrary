@@ -26,8 +26,9 @@ class BookController extends Controller
         $this->BookService = new BookService();
     }
 
-    public function index(){
-        $books = $this->BookService->getList();
+    public function index(Request $request){
+
+        $books = $this->BookService->getList($request->skip, $request->take);
         return view('books.index', compact('books'));
     }
 
@@ -69,8 +70,8 @@ class BookController extends Controller
     }
 
     // API
-    public function getlist(){
-        $books = $this->BookService->getList();
+    public function getlist(Request $request){
+        $books = $this->BookService->getList($request->skip, $request->take);
         return response()->json([
             'status' => 'OK',
             'books' => $books
@@ -124,7 +125,7 @@ class BookController extends Controller
 
     //type:1.一般中文圖書 2.論文 3.雜誌期刊 4.一般非中文圖書
     public function getBookByKeyword(Request $request){
-        $msg = $this->BorrowService->getBookByKeyword($request->category, $request->type, $request->keyword);
+        $msg = $this->BorrowService->getBookByKeyword($request->category, $request->type, $request->keyword, $request->skip, $request->take);
         return response()->json($msg, 200);
     }
 

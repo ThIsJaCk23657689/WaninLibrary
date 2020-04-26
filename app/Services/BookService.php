@@ -124,8 +124,8 @@ class BookService extends BaseService
         }
     }
 
-    public function getList(){
-        $books = BookEloquent::get();
+    public function getList($skip, $take){
+        $books = BookEloquent::skip($skip)->take($take)->get();
         return $books;
     }
 
@@ -161,7 +161,7 @@ class BookService extends BaseService
         // 圖片儲存
         $msg = $this->saveImage($request, $book);
 
-        $res = ['status' => $msg['state'], 'msg' => $msg['message'], 'book_id' => $book->id, 'barcode' => $barcode ,'cover_image' => $msg['result'], 'url' => route('books.index')];
+        $res = ['status' => $msg['state'], 'msg' => $msg['message'], 'book_id' => $book->id, 'barcode' => $book->barcode ,'cover_image' => $msg['result'], 'url' => route('books.index')];
         return $res;
     }
 
@@ -172,7 +172,7 @@ class BookService extends BaseService
 
     //category:1.一般中文圖書 2.論文 3.雜誌期刊 4.一般非中文圖書 5.不分類
     //type:1.書名 2.作者 3.ISBN 4.出版商 5.依種類
-    public function getBookByKeyword($category, $type, $keyword){
+    public function getBookByKeyword($category, $type, $keyword, $skip, $take){
         if($category>5)
             return "Undefined category.";
         if($type>5)
@@ -182,82 +182,82 @@ class BookService extends BaseService
             case 1:
                 switch ($type){
                     case 1:
-                        $book = BookEloquent::NormalCh()->where("title", 'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::NormalCh()->where("title", 'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 2:
-                        $book = BookEloquent::NormalCh()->where("author",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::NormalCh()->where("author",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 3:
-                        $book = BookEloquent::NormalCh()->where("ISBN",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::NormalCh()->where("ISBN",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 4:
-                        $book = BookEloquent::NormalCh()->where("publisher",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::NormalCh()->where("publisher",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 5:
-                        $book = BookEloquent::NormalCh()->where("category",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::NormalCh()->where("category",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                 }
             case 2:
                 switch ($type){
                     case 1:
-                        $book = BookEloquent::Paper()->where("title",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::Paper()->where("title",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 2:
-                        $book = BookEloquent::Paper()->where("author",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::Paper()->where("author",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 3:
-                        $book = BookEloquent::Paper()->where("ISBN",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::Paper()->where("ISBN",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 4:
-                        $book = BookEloquent::Paper()->where("publisher",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::Paper()->where("publisher",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                 }
             case 3:
                 switch ($type){
                     case 1:
-                        $book = BookEloquent::Magazine()->where("title",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::Magazine()->where("title",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 2:
-                        $book = BookEloquent::Magazine()->where("author",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::Magazine()->where("author",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 3:
-                        $book = BookEloquent::Magazine()->where("ISBN",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::Magazine()->where("ISBN",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 4:
-                        $book = BookEloquent::Magazine()->where("publisher",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::Magazine()->where("publisher",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                 }
             case 4:
                 switch ($type){
                     case 1:
-                        $book = BookEloquent::NormalEn()->where("title",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::NormalEn()->where("title",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 2:
-                        $book = BookEloquent::NormalEn()->where("author",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::NormalEn()->where("author",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 3:
-                        $book = BookEloquent::NormalEn()->where("ISBN",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::NormalEn()->where("ISBN",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 4:
-                        $book = BookEloquent::NormalEn()->where("publisher",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::NormalEn()->where("publisher",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                 }
             case 5:
                 switch ($type){
                     case 1:
-                        $book = BookEloquent::where("title",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::where("title",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 2:
-                        $book = BookEloquent::where("author",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::where("author",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 3:
-                        $book = BookEloquent::where("ISBN",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::where("ISBN",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 4:
-                        $book = BookEloquent::where("publisher",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::where("publisher",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                     case 5:
-                        $book = BookEloquent::NormalCh()->where("category",'like',"%".$keyword."%")->get();
+                        $book = BookEloquent::NormalCh()->where("category",'like',"%".$keyword."%")->skip($skip)->take($take)->get();
                         break;
                 }
         }
