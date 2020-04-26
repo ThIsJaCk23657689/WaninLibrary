@@ -12,7 +12,7 @@ $factory->define(Book::class, function (Faker $faker) {
         'callnum' =>$faker->numberBetween($min = 100, $max = 999),
         'category'=>$faker->numberBetween($min = 1, $max = 12),
         'status'=>$faker->numberBetween($min = 1, $max = 10),
-        'title' => $faker->title,
+        'title' => $faker->sentence($nbWords = 5, $variableNbWords = true) ,
         'author' => $faker->name,
         'translator'=> $faker->name,
         'publisher' =>$faker->company,

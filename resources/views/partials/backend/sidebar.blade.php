@@ -46,6 +46,7 @@
 		</a>
 		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
+			<a class="dropdown-item" href="{{ route('books.circulation') }}">借書與還書</a>
 			<a class="dropdown-item" href="#">{{ __('Borrow') }}</a>
 			<a class="dropdown-item" href="#">{{ __('Return') }}</a>
 			<a class="dropdown-item" href="#">{{ __('Overdue') }}</a>

@@ -172,50 +172,47 @@
                             </div>
                         </div>
                     </div>
+                </div>
+            </div>
 
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="published_date">出版日期</label>
-                                <input id="published_date" name="published_date" type="text" class="form-control" value="" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="isbn">ISBN</label>
-                                <input id="isbn" name="isbn" type="text" class="form-control" value="" autocomplete="off">
-                            </div>
-                        </div>
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="published_date">出版日期</label>
+                        <input id="published_date" name="published_date" type="text" class="form-control" value="" autocomplete="off">
                     </div>
-
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="callnum">索書號</label>
-                                <input id="callnum" name="callnum" type="text" class="form-control" value="" autocomplete="off">
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="category">總類</label>
-                                <select id="category" name="category" class="form-control">
-                                    <option value="">請選擇...</option>
-                                    <option value="0">000 總類</option>
-                                    <option value="1">100 哲學類</option>
-                                    <option value="2">200 宗教類</option>
-                                    <option value="3">300 科學類</option>
-                                    <option value="4">400 應用科學類</option>
-                                    <option value="5">500 社會學類</option>
-                                    <option value="6">600 史地類</option>
-                                    <option value="6">610 中國史地類</option>
-                                    <option value="7">710 世界史地類</option>
-                                    <option value="8">800 語文文學類</option>
-                                    <option value="9">900 藝術類</option>
-                                </select>
-                            </div>
-                        </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="isbn">ISBN</label>
+                        <input id="isbn" name="isbn" type="text" class="form-control" value="" autocomplete="off">
                     </div>
+                </div>
 
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="callnum">索書號</label>
+                        <input id="callnum" name="callnum" type="text" class="form-control" value="" autocomplete="off">
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="category">圖書類別</label>
+                        <select id="category" name="category" class="form-control">
+                            <option value="">請選擇...</option>
+                            <option value="0">000 總類</option>
+                            <option value="1">100 哲學類</option>
+                            <option value="2">200 宗教類</option>
+                            <option value="3">300 科學類</option>
+                            <option value="4">400 應用科學類</option>
+                            <option value="5">500 社會學類</option>
+                            <option value="6">600 史地類</option>
+                            <option value="6">610 中國史地類</option>
+                            <option value="7">710 世界史地類</option>
+                            <option value="8">800 語文文學類</option>
+                            <option value="9">900 藝術類</option>
+                        </select>
+                    </div>
                 </div>
             </div>
 
@@ -392,7 +389,7 @@ export default {
         // });
 
         $('#bugurl').change(function(){
-            if(false){
+            if($.isUrl($(this).val())){
                 alert('請輸入正確的網頁格式');
                 $(this).val('');
             }else{
@@ -420,9 +417,19 @@ export default {
                         $('#publisher').val($bookInfo.publisher);
                         $('#published_date').val($bookInfo.published_date);
                         $('#edition').val($bookInfo.edition);
-                        $('#callnum').val($bookInfo.callnum);
-                        $('#category').val($bookInfo.callnum.substr(0, 1));
-                        $('#language').val($bookInfo.language);
+
+                        if($bookInfo.language != '中文'){
+                            // 此書籍是外文，索書號會抓取【杜威碼】
+                            $('#callnum').val($bookInfo.callnum);
+                            
+                            // 種類選項強制鎖定13
+                            $('#category').find('option').remove().end().append('<option>13 外文書</option>').val('13');
+                            $('#category').val(13);
+                        }else{
+                            $('#language').val($bookInfo.language);
+                            $('#callnum').val($bookInfo.callnum);
+                            $('#category').val($bookInfo.callnum.substr(0, 1));
+                        }
                         
                         let $cover_img_name = $bookInfo.cover_img.split('/').pop();
                         if($bookInfo.cover_img != null && $bookInfo.cover_img != '' && $cover_img_name != 'qrcode.png'){
@@ -439,7 +446,6 @@ export default {
                     // }else{
                     //     $('#LoadingModal').modal('hide');
                     //     
-
                     // }
                 }).catch((error) => {
                     console.error('爬蟲時發生錯誤，錯誤訊息：' + error);

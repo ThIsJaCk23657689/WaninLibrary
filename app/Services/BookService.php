@@ -170,6 +170,102 @@ class BookService extends BaseService
         $book->delete();
     }
 
+    //category:1.一般中文圖書 2.論文 3.雜誌期刊 4.一般非中文圖書 5.不分類
+    //type:1.書名 2.作者 3.ISBN 4.出版商 5.依種類
+    public function getBookByKeyword($category, $type, $keyword){
+        if($category>5)
+            return "Undefined category.";
+        if($type>5)
+            return "Undefined type.";
+
+        switch ($category){
+            case 1:
+                switch ($type){
+                    case 1:
+                        $book = BookEloquent::NormalCh()->where("title", 'like',"%".$keyword."%")->get();
+                        break;
+                    case 2:
+                        $book = BookEloquent::NormalCh()->where("author",'like',"%".$keyword."%")->get();
+                        break;
+                    case 3:
+                        $book = BookEloquent::NormalCh()->where("ISBN",'like',"%".$keyword."%")->get();
+                        break;
+                    case 4:
+                        $book = BookEloquent::NormalCh()->where("publisher",'like',"%".$keyword."%")->get();
+                        break;
+                    case 5:
+                        $book = BookEloquent::NormalCh()->where("category",'like',"%".$keyword."%")->get();
+                        break;
+                }
+            case 2:
+                switch ($type){
+                    case 1:
+                        $book = BookEloquent::Paper()->where("title",'like',"%".$keyword."%")->get();
+                        break;
+                    case 2:
+                        $book = BookEloquent::Paper()->where("author",'like',"%".$keyword."%")->get();
+                        break;
+                    case 3:
+                        $book = BookEloquent::Paper()->where("ISBN",'like',"%".$keyword."%")->get();
+                        break;
+                    case 4:
+                        $book = BookEloquent::Paper()->where("publisher",'like',"%".$keyword."%")->get();
+                        break;
+                }
+            case 3:
+                switch ($type){
+                    case 1:
+                        $book = BookEloquent::Magazine()->where("title",'like',"%".$keyword."%")->get();
+                        break;
+                    case 2:
+                        $book = BookEloquent::Magazine()->where("author",'like',"%".$keyword."%")->get();
+                        break;
+                    case 3:
+                        $book = BookEloquent::Magazine()->where("ISBN",'like',"%".$keyword."%")->get();
+                        break;
+                    case 4:
+                        $book = BookEloquent::Magazine()->where("publisher",'like',"%".$keyword."%")->get();
+                        break;
+                }
+            case 4:
+                switch ($type){
+                    case 1:
+                        $book = BookEloquent::NormalEn()->where("title",'like',"%".$keyword."%")->get();
+                        break;
+                    case 2:
+                        $book = BookEloquent::NormalEn()->where("author",'like',"%".$keyword."%")->get();
+                        break;
+                    case 3:
+                        $book = BookEloquent::NormalEn()->where("ISBN",'like',"%".$keyword."%")->get();
+                        break;
+                    case 4:
+                        $book = BookEloquent::NormalEn()->where("publisher",'like',"%".$keyword."%")->get();
+                        break;
+                }
+            case 5:
+                switch ($type){
+                    case 1:
+                        $book = BookEloquent::where("title",'like',"%".$keyword."%")->get();
+                        break;
+                    case 2:
+                        $book = BookEloquent::where("author",'like',"%".$keyword."%")->get();
+                        break;
+                    case 3:
+                        $book = BookEloquent::where("ISBN",'like',"%".$keyword."%")->get();
+                        break;
+                    case 4:
+                        $book = BookEloquent::where("publisher",'like',"%".$keyword."%")->get();
+                        break;
+                    case 5:
+                        $book = BookEloquent::NormalCh()->where("category",'like',"%".$keyword."%")->get();
+                        break;
+                }
+        }
+
+        return $book;
+    }
+
+
     public function getBookDataByURL($url){
 
         $iframe_doc = new \DOMDocument();

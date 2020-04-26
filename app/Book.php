@@ -26,6 +26,20 @@ class Book extends Model
         }
     }
 
+    public function scopeNormalCh($query){
+        $query->where('category', '<', 10);
+    }
+    public function scopePaper($query){
+        $query->where('category',11);
+    }
+    public function scopeMagazine($query){
+        $query->where('category', 12);
+    }
+    public function scopeNormalEn($query){
+        $query->where('category', 13);
+    }
+
+
     public function showStatus(){
         switch ($this->status) {
             case '1':

@@ -48,6 +48,11 @@ class BorrowService extends BaseService
         return $borrows;
     }
 
+    public function getBorrowListByBorrowerId($id){
+        $borrows = BorrowEloquent::where('borrower_id', $id)->with('book:id,title')->get();
+        return $borrows;
+    }
+
 
     public function getBorrowListByStatus($status){
         if($status == 1){
