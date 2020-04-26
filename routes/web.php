@@ -32,45 +32,26 @@ Route::prefix('/backend')->group(function(){
     ]]);
 
     // 借閱人管理路由
-    Route::get('/borrowers/json', 'BorrowerController@getList')->name('borrowers.getList');
-    Route::get('/borrowers/{id}/json', 'BorrowerController@getOne')->name('borrowers.getOne');
-    Route::resource('/borrowers', 'BorrowerController');
+    Route::resource('/borrowers', 'BorrowerController', ['only' => [
+        'index', 'show', 'create', 'edit'
+    ]]);
 
     // 捐贈人管理路由
-    Route::get('/donors/json', 'DonorController@getList')->name('donors.getList');
-    Route::get('/donors/{id}/json', 'DonorController@getOne')->name('donors.getOne');
-    Route::resource('/donors', 'DonorController');
+    Route::resource('/donors', 'DonorController', ['only' => [
+        'index', 'show', 'create', 'edit'
+    ]]);
 
     // 書本管理路由
     Route::get('/books/{id}/barcode', 'BookController@printBarcode')->name('books.barcode');
-    Route::get('/books/isbn/{isbn}/', 'BookController@getDataByISBN')->name('books.isbn');
-    Route::get('/books/isbn/{isbn}/google', 'BookController@getDataByISBNFromGoogle')->name('books.isbn.google');
-    Route::get('/books/json', 'BookController@getList')->name('books.getList');
-    Route::get('/books/{id}/json', 'BookController@getOne')->name('books.getOne');
-    Route::resource('/books', 'BookController');
-
-    // 借書與還書頁面
     Route::get('/books/circulation', 'BookController@circulation')->name('books.circulation');
+    Route::resource('/books', 'BookController', ['only' => [
+        'index', 'show', 'create', 'edit'
+    ]]);
 
     // 借閱管理相關
     Route::resource('/borrows', 'BorrowController', ['only' => [
         'index', 'show', 'create'
     ]]);
-
-    // // 捐書人管理路由
-    // Route::resource('/donors', 'DonorController', ['only' => [
-    //     'index', 'show', 'create', 'edit'
-    // ]]);
-
-    // // 借閱人管理路由
-    // Route::resource('/borrowers', 'BorrowerController', ['only' => [
-    //     'index', 'show', 'create', 'edit'
-    // ]]);
-
-    // // 書籍管理路由
-    // Route::resource('/books', 'BookController', ['only' => [
-    //     'index', 'show', 'create', 'edit'
-    // ]]);
 
     // 使用者帳號管理相關路由
     Route::get('/users/usersByName', 'UserController@usersByName');

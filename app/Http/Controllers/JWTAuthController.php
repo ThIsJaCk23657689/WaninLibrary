@@ -20,15 +20,11 @@ class JWTAuthController extends Controller
 
     public function __construct(){
         $this->middleware('auth.jwt')->only([
-            'logout'
-        ]);
-
-        $this->middleware('auth.web')->only([
-            'me'
+            'me', 'logout', 'refreshToken'
         ]);
 
         $this->middleware('guest:api')->only([
-            'register', 'showLoginForm', 'login', 'forgetPassword'
+            'register', 'showLoginForm', 'login', 'forgetPassword', 'resetPassword'
         ]);
 
         $this->JWTAuthService = new JWTAuthService();
@@ -82,15 +78,11 @@ class JWTAuthController extends Controller
         //紀錄登出資訊
         $this->LoginLogService->update();
 
-        if($request->wantsJson()){
-            return response()->json([
-                'message' => '已成功登出'
-            ])->withCookie(Cookie::forget('authorization'));
-        }else{
-            return redirect()->route('login')->withCookie(Cookie::forget('authorization'));
-        }
+        return response()->json([
+            'message' => '已成功登出',
+            'url' => route('login')
+        ])->withCookie(Cookie::forget('authorization'));
     }
-
 
     public function refreshToken(){
        $newToken = JWTAuth::parseToken()->refresh();
