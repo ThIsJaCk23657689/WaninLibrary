@@ -17,6 +17,7 @@
 	<script src="{{ asset('vendor/chart.js/Chart.min.js') }}" defer></script>
 	<script src="{{ asset('vendor/datatables/jquery.dataTables.js') }}" defer></script>
 	<script src="{{ asset('vendor/datatables/dataTables.bootstrap4.js') }}" defer></script>
+	<script src="{{ asset('vendor/jquery-cookie/jquery.cookie.js') }}" defer></script>
 
 	<!-- Custom scripts for all pages-->
 	<script src="{{ asset('js/admin/sb-admin.min.js') }}" defer></script>

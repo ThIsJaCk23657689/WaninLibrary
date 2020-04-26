@@ -344,9 +344,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['uploadimg'],
   data: function data() {
@@ -481,7 +478,10 @@ __webpack_require__.r(__webpack_exports__);
     // });
 
     $('#bugurl').change(function () {
-      if (false) {} else {
+      if ($.isUrl($(this).val())) {
+        alert('請輸入正確的網頁格式');
+        $(this).val('');
+      } else {
         var BooksBugURL = $('#BooksBugURL').html();
         var data = $(this).serializeObject();
         $('#modal_good').css({
@@ -508,9 +508,19 @@ __webpack_require__.r(__webpack_exports__);
             $('#publisher').val($bookInfo.publisher);
             $('#published_date').val($bookInfo.published_date);
             $('#edition').val($bookInfo.edition);
-            $('#callnum').val($bookInfo.callnum);
-            $('#category').val($bookInfo.callnum.substr(0, 1));
-            $('#language').val($bookInfo.language);
+
+            if ($bookInfo.language != '中文') {
+              // 此書籍是外文，索書號會抓取【杜威碼】
+              $('#callnum').val($bookInfo.callnum); // 種類選項強制鎖定13
+
+              $('#category').find('option').remove().end().append('<option>13 外文書</option>').val('13');
+              $('#category').val(13);
+            } else {
+              $('#language').val($bookInfo.language);
+              $('#callnum').val($bookInfo.callnum);
+              $('#category').val($bookInfo.callnum.substr(0, 1));
+            }
+
             var $cover_img_name = $bookInfo.cover_img.split('/').pop();
 
             if ($bookInfo.cover_img != null && $bookInfo.cover_img != '' && $cover_img_name != 'qrcode.png') {
@@ -644,6 +654,8 @@ var render = function() {
           ]),
           _vm._v(" "),
           _vm._m(5),
+          _vm._v(" "),
+          _vm._m(6),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row justify-content-center" }, [
             _c("div", { staticClass: "col-md-8" }, [
@@ -1057,111 +1069,111 @@ var staticRenderFns = [
             })
           ])
         ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "published_date" } }, [
-              _vm._v("出版日期")
-            ]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                id: "published_date",
-                name: "published_date",
-                type: "text",
-                value: "",
-                autocomplete: "off"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "isbn" } }, [_vm._v("ISBN")]),
-            _vm._v(" "),
-            _c("input", {
-              staticClass: "form-control",
-              attrs: {
-                id: "isbn",
-                name: "isbn",
-                type: "text",
-                value: "",
-                autocomplete: "off"
-              }
-            })
-          ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "published_date" } }, [
+            _vm._v("出版日期")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "published_date",
+              name: "published_date",
+              type: "text",
+              value: "",
+              autocomplete: "off"
+            }
+          })
         ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "row" }, [
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "callnum" } }, [_vm._v("索書號")]),
-            _vm._v(" "),
-            _c("input", {
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "isbn" } }, [_vm._v("ISBN")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "isbn",
+              name: "isbn",
+              type: "text",
+              value: "",
+              autocomplete: "off"
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "callnum" } }, [_vm._v("索書號")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "callnum",
+              name: "callnum",
+              type: "text",
+              value: "",
+              autocomplete: "off"
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "category" } }, [_vm._v("圖書類別")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
               staticClass: "form-control",
-              attrs: {
-                id: "callnum",
-                name: "callnum",
-                type: "text",
-                value: "",
-                autocomplete: "off"
-              }
-            })
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "col-md-6" }, [
-          _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "category" } }, [_vm._v("總類")]),
-            _vm._v(" "),
-            _c(
-              "select",
-              {
-                staticClass: "form-control",
-                attrs: { id: "category", name: "category" }
-              },
-              [
-                _c("option", { attrs: { value: "" } }, [_vm._v("請選擇...")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "0" } }, [_vm._v("000 總類")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "1" } }, [_vm._v("100 哲學類")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "2" } }, [_vm._v("200 宗教類")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "3" } }, [_vm._v("300 科學類")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "4" } }, [
-                  _vm._v("400 應用科學類")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "5" } }, [
-                  _vm._v("500 社會學類")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "6" } }, [_vm._v("600 史地類")]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "6" } }, [
-                  _vm._v("610 中國史地類")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "7" } }, [
-                  _vm._v("710 世界史地類")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "8" } }, [
-                  _vm._v("800 語文文學類")
-                ]),
-                _vm._v(" "),
-                _c("option", { attrs: { value: "9" } }, [_vm._v("900 藝術類")])
-              ]
-            )
-          ])
+              attrs: { id: "category", name: "category" }
+            },
+            [
+              _c("option", { attrs: { value: "" } }, [_vm._v("請選擇...")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "0" } }, [_vm._v("000 總類")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "1" } }, [_vm._v("100 哲學類")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "2" } }, [_vm._v("200 宗教類")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "3" } }, [_vm._v("300 科學類")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "4" } }, [
+                _vm._v("400 應用科學類")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "5" } }, [_vm._v("500 社會學類")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "6" } }, [_vm._v("600 史地類")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "6" } }, [
+                _vm._v("610 中國史地類")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "7" } }, [
+                _vm._v("710 世界史地類")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "8" } }, [
+                _vm._v("800 語文文學類")
+              ]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "9" } }, [_vm._v("900 藝術類")])
+            ]
+          )
         ])
       ])
     ])

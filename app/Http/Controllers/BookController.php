@@ -73,6 +73,10 @@ class BookController extends Controller
         ], 200);
     }
 
+    public function circulation(){
+        return view('books.circulation');
+    }
+
     // API
     public function getlist(){
         $borrowers = $this->BorrowerService->getList();
