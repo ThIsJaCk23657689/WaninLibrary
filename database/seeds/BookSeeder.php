@@ -1,0 +1,18 @@
+<?php
+
+use Illuminate\Database\Seeder;
+use App\Book as BookEloquent;
+class BookSeeder extends Seeder
+{
+    /**
+     * Run the database seeds.
+     *
+     * @return void
+     */
+    public function run()
+    {
+        for($i = 0; $i++ ; $i<100){
+            $books = factory(BookEloquent::class, 1000)->create();
+        }
+    }
+}

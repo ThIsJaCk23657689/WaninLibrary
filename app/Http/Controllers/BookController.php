@@ -36,13 +36,8 @@ class BookController extends Controller
     }
 
     public function store(BookRequest $request){
-        $book = $this->BookService->add($request);
-        return response()->json([
-            'status' => 'OK',
-            'book_id' => $book[0],
-            'barcode' => $book[1],
-            'url' => route('books.index')
-        ], 200);
+        $res = $this->BookService->add($request);
+        return response()->json($res, $res['status']);
     }
 
     public function show($id){
@@ -56,12 +51,8 @@ class BookController extends Controller
     }
 
     public function update(BookRequest $request, $id){
-        $book_id = $this->BookService->update($request, $id);
-        return response()->json([
-            'status' => 'OK',
-            'added_id' => $book_id,
-            'url' => route('books.show', [$book_id])
-        ], 200);
+        $res = $this->BookService->update($request, $id);
+        return response()->json($res, $res['status']);
     }
 
     public function destroy($id){
@@ -78,18 +69,18 @@ class BookController extends Controller
 
     // API
     public function getList(){
-        $borrowers = $this->BorrowerService->getList();
+        $books = $this->BookService->getList();
         return response()->json([
             'status' => 'OK',
-            'borrowers' => $borrowers
+            'books' => $books
         ]);
     }
 
     public function getOne($id){
-        $borrower = $this->BorrowerService->getOne($id);
+        $book = $this->BookService->getOne($id);
         return response()->json([
             'status' => 'OK',
-            'borrower' => $borrower
+            'book' => $book
         ]);
     }
 
@@ -123,6 +114,12 @@ class BookController extends Controller
         ]);
     }
 
+    // type: 1.中文圖書 2.論文 3.雜誌期刊 4.外文圖書
+    public function getBookByKeyword(Request $request){
+        $msg = $this->BorrowService->getBookByKeyword($request->category, $request->type, $request->keyword);
+        return response()->json($msg, 200);
+    }
+
     // 使用台灣書目查詢系統，透過網址來爬蟲(抓取資料)
     public function getBookDataByURL(Request $request){
         $url = $request->bugurl;
@@ -144,18 +141,19 @@ class BookController extends Controller
         if (file_exists($path)) {
             unlink($path);
         }
+        // html轉圖片
         $snappy->generateFromHtml($html, $path);
 
         $width = 280;
         $height = 70;
-        
+
         $newimage = imagecreatetruecolor($width, $height);
         $oimage = imagecreatefromjpeg($path);
-        imagecopy($newimage, 
+        imagecopy($newimage,
             $oimage,
             0, 0,
-            0, 
-            0, 
+            0,
+            0,
             $width, $height);
         $ext = 'jpg';
         $imageName = $book->barcode . '.' . $ext;
