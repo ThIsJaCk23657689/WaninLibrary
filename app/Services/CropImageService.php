@@ -51,7 +51,7 @@ class CropImageService extends BaseService{
 		switch ($argType) {
 			case 'book':
 				// 使用者頭貼
-				$this->path = 'images/books/';
+				$this->path = 'images/books/cover_images/';
 				break;
 			default:
 				$this->path = 'images/default/';

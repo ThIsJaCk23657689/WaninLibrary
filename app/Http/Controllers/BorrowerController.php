@@ -11,7 +11,12 @@ class BorrowerController extends Controller
     public $BorrowerService;
 
     public function __construct(){
-        //$this->middleware('auth');
+        $this->middleware('auth.web')->only([
+            'index', 'create', 'show', 'edit', 
+        ]);
+        $this->middleware('auth.jwt')->only([
+            'store', 'update', 'destroy', 'getList', 'getOne', 'activate'
+        ]);
         $this->BorrowerService = new BorrowerService();
     }
 
@@ -45,27 +50,39 @@ class BorrowerController extends Controller
 
     public function update(BorrowerRequest $request, $id){
         $borrower_id = $this->BorrowerService->update($request, $id);
-        return response()->json(['status' => 'OK','id' => $borrower_id,'url' => route('borrowers.show',[$borrower_id])],200);
+        return response()->json([
+            'status' => 'OK',
+            'id' => $borrower_id,
+            'url' => route('borrowers.show', [$borrower_id])
+        ], 200);
     }
 
-    public function activateControll(Request $request)
+    public function activate(Request $request)
     {
         $request->validate([
             'id' => 'required|exist:borrowers,id',
             'content' => 'nullable|max:255|string',
         ]);
+
         $borrower = $this->BorrowerService->activated($request);
-        return response()->json(['status' => 'OK','massage' => $borrower],200);
+
+        return response()->json([
+            'status' => 'OK',
+            'massage' => $borrower
+        ], 200);
 
     }
 
     public function destroy($id){
         $this->BorrowerService->delete($id);
-        return  response()->json(['status' => 'OK','url' => route('borrowers.index')],200);
+        return  response()->json([
+            'status' => 'OK',
+            'url' => route('borrowers.index')
+        ], 200);
     }
 
     // API
-    public function getlist(Request $request){
+    public function getList(Request $request){
         $borrowers = $this->BorrowerService->getList($request->skip, $request->take);
         return response()->json([
             'status' => 'OK',

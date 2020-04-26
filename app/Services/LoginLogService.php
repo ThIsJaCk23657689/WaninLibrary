@@ -26,7 +26,7 @@ class LoginLogService extends BaseService
         $user = auth('api')->user();
 
         // 抓最新的那筆資料
-        $log = LoginLogEloquent::where('user_id', $user->id)->lastest()->first();
+        $log = LoginLogEloquent::where('user_id', $user->id)->latest()->first();
         $log->update([
             'logout_date' => Carbon::now(),
         ]);

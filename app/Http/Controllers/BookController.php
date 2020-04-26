@@ -5,24 +5,24 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use App\Services\BookService;
-use PDF;
-// use Spatie\PdfToImage\Pdf as PDFtoImg;
-// use Org_Heigl\Ghostscript\Ghostscript;
-// use Spatie\Browsershot\Browsershot;
-// use Knp\Snappy\Image;
 use App;
+use PDF;
+use DNS1D;
 use Response;
 // use SnappyPdf;
-use DNS1D;
 
 class BookController extends Controller
 {
     public $BookService;
 
     public function __construct(){
-        // $this->middleware('auth.web')->only([
-        //     'index', 'create', 'edit', 'show'
-        // ]);
+        $this->middleware('auth.web')->only([
+            'index', 'create', 'show', 'edit', 'circulation', 'printBarcode'
+        ]);
+        $this->middleware('auth.jwt')->only([
+            'store', 'update', 'destroy', 'getList', 'getOne',
+            'getDataByISBNFromGoogle', 'getBookDataByURL'
+        ]);
         $this->BookService = new BookService();
     }
 
@@ -57,7 +57,6 @@ class BookController extends Controller
     }
 
     public function destroy($id){
-        // 日後注意是否有人在該群組底下，若有無法刪除
         $this->BookService->delete($id);
         return response()->json([
             'status' => 'OK',
@@ -70,7 +69,7 @@ class BookController extends Controller
     }
 
     // API
-    public function getlist(Request $request){
+    public function getList(Request $request){
         $books = $this->BookService->getList($request->skip, $request->take);
         return response()->json([
             'status' => 'OK',
@@ -86,13 +85,7 @@ class BookController extends Controller
         ]);
     }
 
-    // public function getBookListByISBN($isbn){
-
-    //     return response()->json([
-    //         'status' => 'OK',
-    //     ]);
-    // }
-
+    // 使用Google Books API透過ISBN來抓取書籍資料
     public function getDataByISBNFromGoogle($isbn){
         // use key 'http' even if you send the request to https://...
         $options = [
@@ -122,29 +115,34 @@ class BookController extends Controller
         ]);
     }
 
-
-    //type:1.一般中文圖書 2.論文 3.雜誌期刊 4.一般非中文圖書
+    // type: 1.中文圖書 2.論文 3.雜誌期刊 4.外文圖書
     public function getBookByKeyword(Request $request){
         $msg = $this->BorrowService->getBookByKeyword($request->category, $request->type, $request->keyword, $request->skip, $request->take);
         return response()->json($msg, 200);
     }
 
-    public function getBookDataByURL(Request $request)
-    {
+    // 使用台灣書目查詢系統，透過網址來爬蟲(抓取資料)
+    public function getBookDataByURL(Request $request){
         $url = $request->bugurl;
         $res = $this->BookService->getBookDataByURL($url);
         return response()->json($res, 200)->header('Content-Type', 'application/json; charset=utf-8');
     }
 
+    // 將Barcode輸出成圖片
     public function printBarcode($id){
         $book = $this->BookService->getOne($id);
 
         $snappy = App::make('snappy.image');
+
+        // 生成html語法
         $html = '<table><tbody><tr><td><img src="data:image/png;base64,'.DNS1D::getBarcodePNG($book->barcode, 'C128').'" alt="barcode"   /></td></tr><tr><td style="text-align:center;">'.$book->barcode.'</td></tr></tbody></table>';
-        $path = public_path() . '/pdf/'. $book->barcode .'.jpg';
+        
+        // 圖片儲存路徑
+        $path = public_path() . '/images/books/barcode/'. $book->barcode .'.jpg';
         if (file_exists($path)) {
             unlink($path);
         }
+        // html轉圖片
         $snappy->generateFromHtml($html, $path);
 
         $width = 280;
@@ -160,7 +158,7 @@ class BookController extends Controller
             $width, $height);
         $ext = 'jpg';
         $imageName = $book->barcode . '.' . $ext;
-        $save_path = public_path('pdf') . '/';
+        $save_path = public_path() . '/images/books/barcode/';
 
         imagejpeg($newimage, $save_path . $imageName);
 

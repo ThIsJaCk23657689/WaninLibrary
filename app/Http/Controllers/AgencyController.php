@@ -12,7 +12,10 @@ class AgencyController extends Controller
 
     public function __construct(){
         $this->middleware('auth.web')->only([
-            'index', 'create', 'edit', 'show'
+            'index', 'create', 'show', 'edit', 
+        ]);
+        $this->middleware('auth.jwt')->only([
+            'store', 'update', 'destroy', 'getList', 'getOne'
         ]);
         $this->AgencyService = new AgencyService();
     }
@@ -62,7 +65,7 @@ class AgencyController extends Controller
     }
 
     // API
-    public function getlist(){
+    public function getList(){
         $agencies = $this->AgencyService->getList();
         return response()->json([
             'status' => 'OK',

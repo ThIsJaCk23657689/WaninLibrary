@@ -62,9 +62,17 @@ class Kernel extends HttpKernel
         'signed' => \Illuminate\Routing\Middleware\ValidateSignature::class,
         'throttle' => \Illuminate\Routing\Middleware\ThrottleRequests::class,
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
-        'auth.jwt' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class, // JWTToken default middleware
-        'admin.auth.jwt' => \App\Http\Middleware\AdminOnly::class, // JWTToken only for admin
 
+        // // JWTToken 預設 middleware
+        // 'auth.jwt' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class, 
+
+        // JWTToken 給 api 的middleware
+        'auth.jwt' => \App\Http\Middleware\AuthenticateAPI::class, 
+        
+        // JWTToken only for admin
+        'admin.auth.jwt' => \App\Http\Middleware\AdminOnly::class, 
+
+        // JWTToken 給 web 的middleware
         'auth.web' => \App\Http\Middleware\RedirectIfNotAuth::class,
     ];
 }
