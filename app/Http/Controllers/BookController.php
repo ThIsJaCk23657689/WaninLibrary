@@ -36,13 +36,8 @@ class BookController extends Controller
     }
 
     public function store(BookRequest $request){
-        $book = $this->BookService->add($request);
-        return response()->json([
-            'status' => 'OK',
-            'book_id' => $book[0],
-            'barcode' => $book[1],
-            'url' => route('books.index')
-        ], 200);
+        $res = $this->BookService->add($request);
+        return response()->json($res, $res['status']);
     }
 
     public function show($id){
@@ -56,12 +51,8 @@ class BookController extends Controller
     }
 
     public function update(BookRequest $request, $id){
-        $book_id = $this->BookService->update($request, $id);
-        return response()->json([
-            'status' => 'OK',
-            'added_id' => $book_id,
-            'url' => route('books.show', [$book_id])
-        ], 200);
+        $res = $this->BookService->update($request, $id);
+        return response()->json($res, $res['status']);
     }
 
     public function destroy($id){
@@ -75,27 +66,27 @@ class BookController extends Controller
 
     // API
     public function getlist(){
-        $borrowers = $this->BorrowerService->getList();
+        $books = $this->BookService->getList();
         return response()->json([
             'status' => 'OK',
-            'borrowers' => $borrowers
+            'books' => $books
         ]);
     }
 
     public function getOne($id){
-        $borrower = $this->BorrowerService->getOne($id);
+        $book = $this->BookService->getOne($id);
         return response()->json([
             'status' => 'OK',
-            'borrower' => $borrower
+            'book' => $book
         ]);
     }
 
-    public function getDataByISBN($isbn){
+    // public function getBookListByISBN($isbn){
 
-        return response()->json([
-            'status' => 'OK',
-        ]);
-    }
+    //     return response()->json([
+    //         'status' => 'OK',
+    //     ]);
+    // }
 
     public function getDataByISBNFromGoogle($isbn){
         // use key 'http' even if you send the request to https://...
@@ -146,14 +137,14 @@ class BookController extends Controller
 
         $width = 280;
         $height = 70;
-        
+
         $newimage = imagecreatetruecolor($width, $height);
         $oimage = imagecreatefromjpeg($path);
-        imagecopy($newimage, 
+        imagecopy($newimage,
             $oimage,
             0, 0,
-            0, 
-            0, 
+            0,
+            0,
             $width, $height);
         $ext = 'jpg';
         $imageName = $book->barcode . '.' . $ext;

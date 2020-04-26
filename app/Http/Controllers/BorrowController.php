@@ -45,28 +45,28 @@ class BorrowController extends Controller
 
 
    public function getBorrowListByStatus(Request $request){
-    $msg = $this->BorrowService->getBorrowListByStatus($request->status);
-    return response()->json($msg, 200);
+        $msg = $this->BorrowService->getBorrowListByStatus($request->status);
+        return response()->json($msg, 200);
    }
 
    public function getBorrowListByNoticed(Request $request){
-    $msg = $this->BorrowService->getBorrowListByNoticed($request->noticed);
-    return response()->json($msg, 200);
+        $msg = $this->BorrowService->getBorrowListByNoticed($request->noticed);
+        return response()->json($msg, 200);
    }
 
    public function returnBookByBarcode(Request $request){
-    $msg = $this->BorrowService->returnBookByBarcode($request->barcode);
-    return response()->json(['msg'=> $msg], 200);
+        $msg = $this->BorrowService->returnBookByBarcode($request->barcode);
+        return response()->json(['msg'=> $msg], 200);
    }
 
    public function bookExpired(Request $request){
-    $msg = $this->BorrowService->bookExpired($request->id);
-    return response()->json(['msg'=> $msg], 200);
+        $msg = $this->BorrowService->bookExpired($request->id);
+        return response()->json(['msg'=> $msg], 200);
    }
 
    public function Notified(Request $request){
-    $msg = $this->BorrowService->bookExpired($request->id);
-    return response()->json(['msg'=> $msg], 200);
+        $msg = $this->BorrowService->bookExpired($request->id);
+        return response()->json(['msg'=> $msg], 200);
    }
 
 }
