@@ -11,12 +11,17 @@ class DonorController extends Controller
     public $DonorService;
 
     public function __construct(){
-        //$this->middleware('auth');
+        $this->middleware('auth.web')->only([
+            'index', 'create', 'show', 'edit', 
+        ]);
+        $this->middleware('auth.jwt')->only([
+            'store', 'update', 'destroy', 'getList', 'getOne',
+        ]);
         $this->DonorService = new DonorService();
     }
 
-    public function index(){
-        $donors = $this->DonorService->getList();
+    public function index(Request $request){
+        $donors = $this->DonorService->getList($request->skip, $request->take);
         return view('donors.index', compact('donors'));
     }
 
@@ -62,8 +67,8 @@ class DonorController extends Controller
     }
 
     // API
-    public function getlist(){
-        $donors = $this->DonorService->getList();
+    public function getList(Request $request){
+        $donors = $this->DonorService->getList($request->skip, $request->take);
         return response()->json([
             'status' => 'OK',
             'donors' => $donors

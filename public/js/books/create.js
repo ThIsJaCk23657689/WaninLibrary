@@ -478,7 +478,7 @@ __webpack_require__.r(__webpack_exports__);
     // });
 
     $('#bugurl').change(function () {
-      if ($.isUrl($(this).val())) {
+      if (!$.isUrl($(this).val())) {
         alert('請輸入正確的網頁格式');
         $(this).val('');
       } else {
@@ -511,11 +511,54 @@ __webpack_require__.r(__webpack_exports__);
 
             if ($bookInfo.language != '中文') {
               // 此書籍是外文，索書號會抓取【杜威碼】
-              $('#callnum').val($bookInfo.callnum); // 種類選項強制鎖定13
+              $('#callnum').val($bookInfo.Dewey_callnum); // 種類選項強制鎖定13
 
-              $('#category').find('option').remove().end().append('<option>13 外文書</option>').val('13');
-              $('#category').val(13);
+              $('#category').find('option').remove().end().append($('<option></option>').val('12').text('12 外文圖書'));
+              $('#category').val(12);
             } else {
+              var $cate_option = [{
+                id: null,
+                text: '請選擇...'
+              }, {
+                id: 0,
+                text: '000 總類'
+              }, {
+                id: 1,
+                text: '100 哲學類'
+              }, {
+                id: 2,
+                text: '200 宗教類'
+              }, {
+                id: 3,
+                text: '300 科學類'
+              }, {
+                id: 4,
+                text: '400 應用科學類'
+              }, {
+                id: 5,
+                text: '500 社會學類'
+              }, {
+                id: 6,
+                text: '600 史地類'
+              }, {
+                id: 6,
+                text: '610 中國史地類'
+              }, {
+                id: 7,
+                text: '710 世界史地類'
+              }, {
+                id: 8,
+                text: '800 語文文學類'
+              }, {
+                id: 9,
+                text: '900 藝術類'
+              }];
+              $('#category').find('option').remove();
+
+              for (var i = 0; i < $cate_option.length; i++) {
+                $('#category').append($('<option></option>').val($cate_option[i].id).text($cate_option[i].text));
+              }
+
               $('#language').val($bookInfo.language);
               $('#callnum').val($bookInfo.callnum);
               $('#category').val($bookInfo.callnum.substr(0, 1));

@@ -26,8 +26,11 @@ Route::post('login', 'JWTAuthController@login')->name('api.login');
 Route::get('me', 'JWTAuthController@me');
 Route::post('logout', 'JWTAuthController@logout')->name('api.logout');
 Route::post('forgetPassword', 'JWTAuthController@forgetPassword');
+Route::post('refreshToken', 'JWTAuthController@refreshToken');
+Route::post('resetPassword', 'JWTAuthController@resetPassword');
 
 Route::prefix('/backend')->group(function(){
+
     // 機構管理路由
     Route::get('/agencies/json', 'AgencyController@getList')->name('agencies.getList');
     Route::get('/agencies/{id}/json', 'AgencyController@getOne')->name('agencies.getOne');
@@ -36,27 +39,31 @@ Route::prefix('/backend')->group(function(){
     ]]);
 
     //借閱者管理相關
-    Route::post('activateControll','BorrowerController@activateControll');
+    Route::post('/borrowers/activate','BorrowerController@activate');
+    Route::get('/borrowers/json', 'AgencyController@getList')->name('borrowers.getList');
+    Route::get('/borrowers/{id}/json', 'AgencyController@getOne')->name('borrowers.getOne');
     Route::resource('/borrowers', 'BorrowerController', ['only' => [
         'store', 'update', 'destroy'
     ]]);
 
     // 捐書人管理路由
+    Route::get('/donors/json', 'DonorController@getList')->name('donors.getList');
+    Route::get('/donors/{id}/json', 'DonorController@getOne')->name('donors.getOne');
     Route::resource('/donors', 'DonorController', ['only' => [
         'store', 'update', 'destroy'
     ]]);
 
     //書籍管理相關
+    Route::post('getBookDataByURL','BookController@getBookDataByURL')->name('books.bugurl');
+    Route::get('/books/isbn/{isbn}/google', 'BookController@getDataByISBNFromGoogle')->name('books.isbn.google');
+    Route::get('/books/json', 'BookController@getList')->name('books.getList');
+    Route::get('/books/{id}/json', 'BookController@getOne')->name('books.getOne');
     Route::resource('/books', 'BookController', ['only' => [
         'store', 'update', 'destroy'
     ]]);
 });
 
 Route::group(['middleware' => 'auth.jwt'], function () {
-    // JWTAuth
-    Route::post('refreshToken', 'JWTAuthController@refreshToken');
-    Route::post('resetPassword', 'JWTAuthController@resetPassword');
-
     // 使用者管理 only for admin  except getUserByToken
     Route::get('getUsersByName', 'UserController@getUsersByName');
     Route::get('getUserByToken', 'UserController@getUserByToken');
@@ -79,9 +86,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     // 借閱管理相關
     Route::get('getBookListByStatus','BorrowController@getBookListByStatus');
     Route::get('getBookListByNoticed','BorrowController@getBookListByNoticed');
-        // 還書
+    // 還書
     Route::post('returnBookByBarcode','BorrowController@returnBookByBarcode');
-        // 借書
+    // 借書
     Route::post('borrowBookByBarcode','BorrowController@borrowBookByBarcode');
     Route::post('bookExpired','BorrowController@bookExpired');
     Route::post('Notified','BorrowController@Notified');

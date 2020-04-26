@@ -27,8 +27,8 @@ class BorrowerService extends BaseService
         return $borrower->id;
     }
 
-    public function getList(){
-        $borrowers = BorrowerEloquent::get();
+    public function getList($skip, $take){
+        $borrowers = BorrowerEloquent::skip($skip)->take($take)->get();
         return $borrowers;
     }
 

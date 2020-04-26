@@ -48,5 +48,8 @@
                 </form>
             </div>
         </li>
+
+        @include('partials.backend.modals.logoutMsg')
+
     </ul>
 </nav>
