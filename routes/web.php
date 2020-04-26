@@ -49,6 +49,9 @@ Route::prefix('/backend')->group(function(){
     Route::get('/books/{id}/json', 'BookController@getOne')->name('books.getOne');
     Route::resource('/books', 'BookController');
 
+    // 借書與還書頁面
+    Route::get('/books/circulation', 'BookController@circulation')->name('books.circulation');
+
     // 借閱管理相關
     Route::resource('/borrows', 'BorrowController', ['only' => [
         'index', 'show', 'create'
