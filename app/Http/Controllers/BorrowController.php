@@ -44,13 +44,13 @@ class BorrowController extends Controller
     }
 
 
-   public function getBookListByStatus(Request $request){
-    $msg = $this->BorrowService->getBookListByStatus($request->status);
+   public function getBorrowListByStatus(Request $request){
+    $msg = $this->BorrowService->getBorrowListByStatus($request->status);
     return response()->json($msg, 200);
    }
 
-   public function getBookListByNoticed(Request $request){
-    $msg = $this->BorrowService->getBookListByNoticed($request->noticed);
+   public function getBorrowListByNoticed(Request $request){
+    $msg = $this->BorrowService->getBorrowListByNoticed($request->noticed);
     return response()->json($msg, 200);
    }
 

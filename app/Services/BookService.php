@@ -65,7 +65,7 @@ class BookService extends BaseService
         }else{
             return "Category number error.";
         }
-        
+
         if($book_id >= 10000000){
             return "Book id out of range.";
         }else{
@@ -163,6 +163,8 @@ class BookService extends BaseService
             'published_date'=>'',
             'edition'=>'',
             'callnum'=>'',
+            'Dewey_callnum'=>'',
+            'category'=>'',
             'language'=>'',
             'content'=>'',
             'cover_img'=>$img_src,
@@ -203,6 +205,7 @@ class BookService extends BaseService
                 case "中文圖書分類號CCL No.":
                     $str = str_replace("\n","",$td->nextSibling->nodeValue);
                     $info['callnum'] = $str;
+                    $info['category'] = (int)substr($str , 0, 1);
                     break;
                 case "備註Notes":
                     $str = str_replace("\n","",$td->nextSibling->nodeValue);
@@ -215,6 +218,8 @@ class BookService extends BaseService
                     if($info['callnum'] == ""){
                         $info['callnum'] = $str;
                     }
+                    $info['Dewey_callnum'] = $Dewey;
+                    $info['category'] = 13;
                     break;
                 case "語文Language":
                     $str = str_replace("\n","",$td->nextSibling->nodeValue);
@@ -228,9 +233,7 @@ class BookService extends BaseService
             $count++;
         }
 
-        if($info['language'] != "中文" && $info['language'] != "國語" ){
-            $info['callnum'] = $Dewey;
-        }
+
         $res['all'] = $arr;
         $res['data'] = $info;
 
