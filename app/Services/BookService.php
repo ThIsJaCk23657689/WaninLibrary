@@ -161,7 +161,7 @@ class BookService extends BaseService
         // 圖片儲存
         $msg = $this->saveImage($request, $book);
 
-        $res = ['status' => $msg['state'], 'msg' => $msg['message'], 'book_id' => $book->id, 'barcode' => $barcode ,'cover_image' => $msg['result'], 'url' => route('books.index')];
+        $res = ['status' => $msg['state'], 'msg' => $msg['message'], 'book_id' => $book->id, 'barcode' => $book->barcode ,'cover_image' => $msg['result'], 'url' => route('books.index')];
         return $res;
     }
 

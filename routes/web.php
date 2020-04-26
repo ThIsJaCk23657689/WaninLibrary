@@ -80,4 +80,8 @@ Route::prefix('/backend')->group(function(){
 
     // 登入紀錄相關
     Route::resource('loginLogs', 'LoginLogController')->only(['index', 'show']);
+
+    // 借閱日誌(logs)相關
+    Route::resource('borrowLogs', 'BorrowLogController')->only(['index', 'show']);
+
 });

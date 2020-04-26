@@ -66,19 +66,19 @@ class LoginLogController extends Controller
     }
 
 
-    // request包含 type(1:login date； 2:logount date) & date
+    // request包含 type(1:login date； 2:logount date) & date'YYYY-MM-DD'
     // & sort_by (1:DESC, 2:ASC)
     public function getLoginLogsByDate(Request $request){
         $logs = $this->LoginLogService->getLoginLogsByDate($request);
         return response()->json($logs, 200);
     }
-    // request包含 type(1:login date； 2:logount date) & month & year
+    // request包含 type(1:login date； 2:logount date) & month 'MM' & year 'YYYY'
     // & sort_by (1:DESC, 2:ASC)
     public function getLoginLogsByMonth(Request $request){
         $logs = $this->LoginLogService->getLoginLogsByMonth($request);
         return response()->json($logs, 200);
     }
-    // request包含 type(1:login date； 2:logount date) & year
+    // request包含 type(1:login date； 2:logount date) & year 'YYYY'
     // & sort_by (1:DESC, 2:ASC)
     public function getLoginLogsByYear(Request $request){
         $logs = $this->LoginLogService->getLoginLogsByYear($request);

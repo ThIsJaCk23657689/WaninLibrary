@@ -9,7 +9,7 @@ class Donor extends Model
 {
     protected $fillable = [
         'name', 'birthday', 'email', 'tel', 'cellphone',
-        'address_zipcode', 'address_county', 'address_district', 'address_others', 'content', 'exposure', 
+        'address_zipcode', 'address_county', 'address_district', 'address_others', 'content', 'exposure',
     ];
 
     public function books(){

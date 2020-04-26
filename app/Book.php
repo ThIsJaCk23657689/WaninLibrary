@@ -3,7 +3,8 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-use App\Doner as DonerEloquent;
+use App\Donor as DonorEloquent;
+use App\BorrowLog as BorrowLogEloquent;
 
 class Book extends Model
 {
@@ -13,8 +14,12 @@ class Book extends Model
         'published_date', 'price', 'content', 'count', 'language',
     ];
 
-    public function doner(){
-        return $this->belongsTo(DonerEloquent::class);
+    public function donor(){
+        return $this->belongsTo(DonorEloquent::class);
+    }
+
+    public function borrowLogs(){
+        return $this->hasMany(BorrowLogEloquent::class);
     }
 
     public function showTitle(){

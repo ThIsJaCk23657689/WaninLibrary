@@ -85,6 +85,15 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('borrowBookByBarcode','BorrowController@borrowBookByBarcode');
     Route::post('bookExpired','BorrowController@bookExpired');
     Route::post('Notified','BorrowController@Notified');
+
+    // 借閱日誌(logs)相關
+    Route::get('getBorrowLogs','BorrowLogController@getBorrowLogs');
+    Route::get('getBorrowLogsByBorrowerId','BorrowLogController@getBorrowLogsByBorrowerId');
+    Route::get('getBorrowLogsByBookId','BorrowLogController@getBorrowLogsByBookId');
+    Route::get('getBorrowLogsByStatus','BorrowLogController@getBorrowLogsByStatus');
+    Route::get('getBorrowLogsByTime','BorrowLogController@getBorrowLogsByTime');
+    Route::get('getBorrowLogsByTimeRange','BorrowLogController@getBorrowLogsByTimeRange');
+
 });
 
 // 爬蟲
