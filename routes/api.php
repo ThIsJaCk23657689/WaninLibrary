@@ -30,7 +30,7 @@ Route::post('refreshToken', 'JWTAuthController@refreshToken');
 Route::post('resetPassword', 'JWTAuthController@resetPassword');
 
 Route::prefix('/backend')->group(function(){
-    
+
     // 機構管理路由
     Route::get('/agencies/json', 'AgencyController@getList')->name('agencies.getList');
     Route::get('/agencies/{id}/json', 'AgencyController@getOne')->name('agencies.getOne');
@@ -92,4 +92,16 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('borrowBookByBarcode','BorrowController@borrowBookByBarcode');
     Route::post('bookExpired','BorrowController@bookExpired');
     Route::post('Notified','BorrowController@Notified');
+
+    // 借閱日誌(logs)相關
+    Route::get('getBorrowLogs','BorrowLogController@getBorrowLogs');
+    Route::get('getBorrowLogsByBorrowerId','BorrowLogController@getBorrowLogsByBorrowerId');
+    Route::get('getBorrowLogsByBookId','BorrowLogController@getBorrowLogsByBookId');
+    Route::get('getBorrowLogsByStatus','BorrowLogController@getBorrowLogsByStatus');
+    Route::get('getBorrowLogsByTime','BorrowLogController@getBorrowLogsByTime');
+    Route::get('getBorrowLogsByTimeRange','BorrowLogController@getBorrowLogsByTimeRange');
+
 });
+
+// 爬蟲
+Route::post('getBookDataByURL','BookController@getBookDataByURL')->name('books.bugurl');

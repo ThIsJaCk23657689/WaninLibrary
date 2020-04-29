@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Agency as AgencyEloquent;
 use App\Borrow as BorrowEloquent;
+use App\BorrowLog as BorrowLogEloquent;
 
 class Borrower extends Model
 {
@@ -17,8 +18,12 @@ class Borrower extends Model
         return $this->belongsTo(AgencyEloquent::class);
     }
 
-    public function borrow(){
+    public function borrows(){
         return $this->hasMany(BorrowEloquent::class);
+    }
+
+    public function borrowLogs(){
+        return $this->hasMany(BorrowLogEloquent::class);
     }
 
     public function showAgencyName(){
