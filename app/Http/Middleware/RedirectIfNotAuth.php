@@ -3,6 +3,7 @@
 namespace App\Http\Middleware;
 
 use Tymon\JWTAuth\Token;
+use Illuminate\Auth\AuthenticationException;
 use Closure;
 use JWTAuth;
 
@@ -33,6 +34,15 @@ class RedirectIfNotAuth
                 return $next($request);
             }
         }
-        return redirect()->route('login');
+        throw new AuthenticationException(
+            'Unauthenticated.', ['api'], $this->redirectTo($request)
+        );
+    }
+
+    protected function redirectTo($request)
+    {
+        if (! $request->expectsJson()) {
+            return route('login');
+        }
     }
 }

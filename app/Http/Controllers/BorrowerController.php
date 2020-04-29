@@ -12,7 +12,7 @@ class BorrowerController extends Controller
 
     public function __construct(){
         $this->middleware('auth.web')->only([
-            'index', 'create', 'show', 'edit', 
+            'index', 'create', 'show', 'edit',
         ]);
         $this->middleware('auth.jwt')->only([
             'store', 'update', 'destroy', 'getList', 'getOne', 'activate'

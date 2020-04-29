@@ -6,10 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use App\Services\BookService;
 use App;
-use PDF;
-use DNS1D;
-use Response;
-// use SnappyPdf;
+use SnappyImage;
 
 class BookController extends Controller
 {
@@ -17,7 +14,7 @@ class BookController extends Controller
 
     public function __construct(){
         $this->middleware('auth.web')->only([
-            'index', 'create', 'show', 'edit', 'circulation', 'printBarcode'
+            'index', 'create', 'show', 'edit', 'printBarcode'
         ]);
         $this->middleware('auth.jwt')->only([
             'store', 'update', 'destroy', 'getList', 'getOne',
@@ -26,10 +23,9 @@ class BookController extends Controller
         $this->BookService = new BookService();
     }
 
-    public function index(Request $request){
-
-        $books = $this->BookService->getList($request->skip, $request->take);
-        return view('books.index', compact('books'));
+    public function index(){
+        $total_page = ceil($this->BookService->count() / 20);
+        return view('books.index', compact('total_page'));
     }
 
     public function create(){
@@ -64,15 +60,21 @@ class BookController extends Controller
         ], 200);
     }
 
-    public function circulation(){
-        return view('books.circulation');
-    }
-
     // API
     public function getList(Request $request){
-        $books = $this->BookService->getList($request->skip, $request->take);
+        $this->validate($request, [
+            'skip' => 'nullable|integer|',
+            'take' => 'nullable|integer|max:100'
+        ]);
+
+        $skip = $request->skip ?? 0;
+        $take = $request->take ?? 20;
+
+        $books = $this->BookService->getList($skip, $take);
+
         return response()->json([
             'status' => 'OK',
+            'count' => $take,
             'books' => $books
         ]);
     }
@@ -132,21 +134,27 @@ class BookController extends Controller
     public function printBarcode($id){
         $book = $this->BookService->getOne($id);
 
-        $snappy = App::make('snappy.image');
-
-        // 生成html語法
-        $html = '<table><tbody><tr><td><img src="data:image/png;base64,'.DNS1D::getBarcodePNG($book->barcode, 'C128').'" alt="barcode"   /></td></tr><tr><td style="text-align:center;">'.$book->barcode.'</td></tr></tbody></table>';
-        
         // 圖片儲存路徑
         $path = public_path() . '/images/books/barcode/'. $book->barcode .'.jpg';
         if (file_exists($path)) {
+            // 如果已經有圖檔，就先刪除。
             unlink($path);
         }
-        // html轉圖片
-        $snappy->generateFromHtml($html, $path);
 
-        $width = 280;
-        $height = 70;
+        // 注意：使用barryvdh/laravel-snappy套件，請務必要安裝wkhtmltox。
+        // 安裝好wkhtmltox要到config/snappy.php 設定wkhtmltopdf和wkhtmltoimage兩者的路徑
+
+        // 載入snappy到服務容器IoC 這是Laravel 4.x的用法
+        // $snappy = App::make('snappy.image');
+        // $snappy->generateFromHtml(view('books.barcode', compact('book'))->render(), $path);
+
+        // Laravel 5.5以上，可以到config的alias註冊，引用SnappyImage就可以了。
+        $html = view('books.barcode', compact('book'))->render();
+        SnappyImage::generateFromHtml($html, $path);
+
+        // 單位為像素px。
+        $width = 270;
+        $height = 100;
 
         $newimage = imagecreatetruecolor($width, $height);
         $oimage = imagecreatefromjpeg($path);
@@ -164,5 +172,4 @@ class BookController extends Controller
 
         return view('books.barcode', compact('book'));
     }
-
 }

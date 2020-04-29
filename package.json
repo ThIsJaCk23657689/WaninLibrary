@@ -28,6 +28,7 @@
         "bootstrap-select": "^1.13.14",
         "jquery-ui": "^1.12.1",
         "js-cookie": "^2.2.1",
-        "vue-bootstrap-selectpicker": "^1.0.6"
+        "vue-bootstrap-selectpicker": "^1.0.6",
+        "vuejs-paginate": "^2.1.0"
     }
 }

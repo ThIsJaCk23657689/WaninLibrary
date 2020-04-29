@@ -43,12 +43,12 @@ Route::prefix('/backend')->group(function(){
 
     // 書本管理路由
     Route::get('/books/{id}/barcode', 'BookController@printBarcode')->name('books.barcode');
-    Route::get('/books/circulation', 'BookController@circulation')->name('books.circulation');
     Route::resource('/books', 'BookController', ['only' => [
         'index', 'show', 'create', 'edit'
     ]]);
 
     // 借閱管理相關
+    Route::get('/circulation', 'BorrowController@circulation')->name('circulation');
     Route::resource('/borrows', 'BorrowController', ['only' => [
         'index', 'show', 'create'
     ]]);

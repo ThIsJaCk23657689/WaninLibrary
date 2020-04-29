@@ -124,6 +124,10 @@ class BookService extends BaseService
         }
     }
 
+    public function count(){
+        return BookEloquent::count();
+    }
+
     public function getList($skip, $take){
         $books = BookEloquent::skip($skip)->take($take)->get();
         return $books;

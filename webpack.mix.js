@@ -27,7 +27,10 @@ mix.js('resources/js/app.js', 'public/js')
    .js('resources/js/donors/create.js', 'public/js/donors')
    .js('resources/js/donors/edit.js', 'public/js/donors')
 
+   .js('resources/js/books/index.js', 'public/js/books')
    .js('resources/js/books/create.js', 'public/js/books')
    .js('resources/js/books/edit.js', 'public/js/books')
+
+   .js('resources/js/circulation/index.js', 'public/js/circulation')
 
    .sass('resources/sass/backend/backend.scss', 'public/css');

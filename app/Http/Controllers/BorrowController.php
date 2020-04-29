@@ -10,10 +10,19 @@ class BorrowController extends Controller
 {
     public $BorrowService;
 
-    public function __construct()
-    {
-        $this->middleware('auth.jwt');
+    public function __construct(){
+        $this->middleware('auth.web')->only([
+            'index', 'create', 'show', 'edit', 'circulation'
+        ]);
+        $this->middleware('auth.jwt')->only([
+            'store', 'update', 'destroy',
+        ]);
         $this->BorrowService = new BorrowService();
+    }
+
+    // 顯示借還書頁面
+    public function circulation(){
+        return view('circulation.index');
     }
 
     public function index()

@@ -54,7 +54,7 @@ Route::prefix('/backend')->group(function(){
     ]]);
 
     //書籍管理相關
-    Route::post('getBookDataByURL','BookController@getBookDataByURL')->name('books.bugurl');
+    Route::post('/books/getBookDataByURL','BookController@getBookDataByURL')->name('books.bugurl');
     Route::get('/books/isbn/{isbn}/google', 'BookController@getDataByISBNFromGoogle')->name('books.isbn.google');
     Route::get('/books/json', 'BookController@getList')->name('books.getList');
     Route::get('/books/{id}/json', 'BookController@getOne')->name('books.getOne');
@@ -86,9 +86,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     // 借閱管理相關
     Route::get('getBookListByStatus','BorrowController@getBookListByStatus');
     Route::get('getBookListByNoticed','BorrowController@getBookListByNoticed');
-    // 還書
+        // 還書
     Route::post('returnBookByBarcode','BorrowController@returnBookByBarcode');
-    // 借書
+        // 借書
     Route::post('borrowBookByBarcode','BorrowController@borrowBookByBarcode');
     Route::post('bookExpired','BorrowController@bookExpired');
     Route::post('Notified','BorrowController@Notified');
