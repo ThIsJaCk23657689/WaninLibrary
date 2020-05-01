@@ -1,12 +1,13 @@
 <template>
     <paginate
-        :value="this.currentPage"
-        :page-count="this.totalPage"
+        :value="currentPageNum"
+        :page-count="totalPage"
         :click-handler="chagePage"
-        :page-range="3"
+        :page-range="5"
+        :margin-pages="2"
         :prev-text="'Prev'"
         :next-text="'Next'"
-        :container-class="'pagination'"
+        :container-class="'pagination justify-content-center'"
         :page-class="'page-item'"
         :page-link-class="'page-link'"
         :prev-class="'page-item'"
@@ -19,14 +20,25 @@
 
 <script>
 export default {
-    props: ['currentPage', 'totalPage'],
+    props: {
+        pageNum: {
+            type: Number,
+            default: 1,
+        },
+        totalPage: {
+            type: Number
+        }
+    },
     data(){
         return {
-
+            currentPageNum: this.pageNum,
         }
     },
     methods: {
-
+        chagePage(num) {
+            this.currentPageNum = num;
+            this.$emit('updatePage', num);
+        }
     },
     created(){
 

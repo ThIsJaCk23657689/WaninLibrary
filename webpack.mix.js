@@ -16,7 +16,7 @@ mix.js('resources/js/app.js', 'public/js')
 
    .sass('resources/sass/app.scss', 'public/css');
 
-   mix.js('resources/js/backend.js', 'public/js')
+mix.js('resources/js/backend.js', 'public/js')
    .js('resources/js/agencies/index.js', 'public/js/agencies')
    .js('resources/js/agencies/create.js', 'public/js/agencies')
    .js('resources/js/agencies/edit.js', 'public/js/agencies')

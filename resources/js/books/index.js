@@ -1,7 +1,5 @@
-import Paginate from 'vuejs-paginate';
-
-Vue.component('paginate', Paginate);
 Vue.component('books-table', require('./../components/Books/BooksTable.vue').default);
+Vue.component('paginate-custom', require('./../components/Partials/PaginateCustom.vue').default);
 
 const app = new Vue({
     el: '#book',
@@ -11,7 +9,9 @@ const app = new Vue({
         }
     },
     methods: {
-        
+        updateBook(books) {
+            this.books = books;
+        }
     },
     created(){
         let BooksGetList = $('#BooksGetList').html();
