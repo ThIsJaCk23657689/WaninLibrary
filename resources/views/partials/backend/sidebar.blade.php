@@ -64,13 +64,18 @@
 			<a class="dropdown-item" href="#">{{ __('Events') }}</a>
 			<a class="dropdown-item" href="#">{{ __('Recommend') }}</a>
 		</div>
-	</li>
+    </li>
 
-	<li class="nav-item dropdown">
-		<a class="nav-link" href="#" role="button">
+    <li class="nav-item dropdown">
+		<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<i class="far fa-file-alt"></i>
 			<span>{{ __('Log File') }}</span>
 		</a>
+		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
+			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
+        <a class="dropdown-item" href="{{ route('loginLogs.index') }}">{{ __('Login') }}</a>
+			<a class="dropdown-item" href="#">借還書</a>
+		</div>
 	</li>
 
 	<li class="nav-item dropdown">

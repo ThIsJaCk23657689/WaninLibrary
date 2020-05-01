@@ -9,14 +9,14 @@
                         <label for="name">
                             <span class="text-danger mr-2">*</span>姓名
                         </label>
-                        <input id="name" name="name" type="text" class="form-control mb-2" :value="user.name" required autofocus>
+                        <input id="name" name="name" type="text" class="form-control mb-2" v-model="user.name" required autofocus>
                     </div>
                 </div>
 
                 <div class="col-md-8">
                     <div class="form-group">
                         <label for="email"><span class="text-danger mr-2">*</span>信箱</label>
-                        <input id="email" name="email" type="email" class="form-control" :value="user.email" required>
+                        <input id="email" name="email" type="email" class="form-control" v-model="user.email" required>
                     </div>
                 </div>
 
@@ -35,7 +35,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="tel">電話</label>
-                        <input id="tel" name="tel" type="text" class="form-control mb-2" :value="user.tel">
+                        <input id="tel" name="tel" type="text" class="form-control mb-2" v-model="user.tel">
                     </div>
                 </div>
                 <div class="col-md-8">
@@ -54,7 +54,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <input id="address_others" type="text" class="form-control" name="address_others" :value="user.address_others">
+                                <input id="address_others" type="text" class="form-control" name="address_others" v-model="user.address_others">
                             </div>
                         </div>
                     </div>

@@ -290,6 +290,14 @@ var render = function() {
                 _vm._m(0),
                 _vm._v(" "),
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user.name,
+                      expression: "user.name"
+                    }
+                  ],
                   staticClass: "form-control mb-2",
                   attrs: {
                     id: "name",
@@ -298,7 +306,15 @@ var render = function() {
                     required: "",
                     autofocus: ""
                   },
-                  domProps: { value: _vm.user.name }
+                  domProps: { value: _vm.user.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.user, "name", $event.target.value)
+                    }
+                  }
                 })
               ])
             ]),
@@ -308,6 +324,14 @@ var render = function() {
                 _vm._m(1),
                 _vm._v(" "),
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user.email,
+                      expression: "user.email"
+                    }
+                  ],
                   staticClass: "form-control",
                   attrs: {
                     id: "email",
@@ -315,7 +339,15 @@ var render = function() {
                     type: "email",
                     required: ""
                   },
-                  domProps: { value: _vm.user.email }
+                  domProps: { value: _vm.user.email },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.user, "email", $event.target.value)
+                    }
+                  }
                 })
               ])
             ])
@@ -327,9 +359,25 @@ var render = function() {
                 _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
                 _vm._v(" "),
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.user.tel,
+                      expression: "user.tel"
+                    }
+                  ],
                   staticClass: "form-control mb-2",
                   attrs: { id: "tel", name: "tel", type: "text" },
-                  domProps: { value: _vm.user.tel }
+                  domProps: { value: _vm.user.tel },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.user, "tel", $event.target.value)
+                    }
+                  }
                 })
               ])
             ]),
@@ -349,13 +397,33 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-md-12" }, [
                       _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.user.address_others,
+                            expression: "user.address_others"
+                          }
+                        ],
                         staticClass: "form-control",
                         attrs: {
                           id: "address_others",
                           type: "text",
                           name: "address_others"
                         },
-                        domProps: { value: _vm.user.address_others }
+                        domProps: { value: _vm.user.address_others },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.user,
+                              "address_others",
+                              $event.target.value
+                            )
+                          }
+                        }
                       })
                     ])
                   ])

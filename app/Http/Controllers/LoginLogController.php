@@ -12,7 +12,7 @@ class LoginLogController extends Controller
     public $LoginLogService;
 
     public function __construct(){
-        $this->middleware('admin.auth.jwt');
+        $this->middleware('admin.auth.jwt')->except(['index', 'show']);
         $this->LoginLogService = new LoginLogService();
     }
 

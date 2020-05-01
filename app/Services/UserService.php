@@ -21,6 +21,7 @@ class UserService extends BaseService
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
+            'content' => $request->content,
         ]);
 
         return ['status'=>'OK','added_id'=>$user->id,'url'=>route('users.index')];
@@ -70,9 +71,10 @@ class UserService extends BaseService
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
+            'content' => $request->content,
         ]);
 
-        return ['status'=>'OK','updated_id'=> $user->id,'url'=>route('users.show',[$user->id])];
+        return ['status'=>'OK','updated_id'=> $user->id,'url'=>route('users.index')];
     }
 
     public function delete($id)
