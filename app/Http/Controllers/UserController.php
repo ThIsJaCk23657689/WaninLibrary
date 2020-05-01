@@ -14,7 +14,14 @@ class UserController extends Controller
     public $UserService;
 
     public function __construct(){
-        $this->middleware('admin.auth.jwt')->except('getUserByToken');
+        $this->middleware('admin.auth.jwt')->except([
+            'getUserByToken', 'index', 'create', 'show', 'edit'
+        ]);
+
+        $this->middleware('admin.auth.web')->only([
+            'index', 'create', 'show', 'edit',
+        ]);
+
         $this->JWTAuthService = new JWTAuthService();
         $this->UserService = new UserService();
     }
@@ -26,11 +33,11 @@ class UserController extends Controller
         return view('users.index', compact('users'));
     }
 
-    public function usersByName(Request $request){
-        $name = $request->name;
-        $users = $this->UserService->getUsersByName($name);
-        return view('users.index', compact('users'));
-    }
+    // public function usersByName(Request $request){
+    //     $name = $request->name;
+    //     $users = $this->UserService->getUsersByName($name);
+    //     return view('users.index', compact('users'));
+    // }
 
     public function create()
     {
@@ -67,7 +74,7 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         $msg = $this->JWTAuthService->register($request);
-        return response()->json($msg, 200);
+        return response()->json([$msg, 'url'=>route('users.index')], 200);
     }
 
     public function update(UserUpdateRequest $request, $id)
@@ -79,7 +86,15 @@ class UserController extends Controller
     public function destroy($id)
     {
         $msg = $this->UserService->delete($id);
-        return  response()->json($msg, 200);
+        return redirect()->route('users.index');
+        // return  response()->json($msg, 200);
     }
 
+    public function getOne($id){
+        $user = $this->UserService->getOne($id);
+        return response()->json([
+            'status' => 'OK',
+            'user' => $user
+        ]);
+    }
 }

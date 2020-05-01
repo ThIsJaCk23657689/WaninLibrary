@@ -25,8 +25,8 @@ class UserUpdateRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:100',
-            'account' => 'required|string|max:20|min:6',
-            'status' => 'required|integer|max:1',
+            'account' => 'nullable|string|max:20|min:6',
+            'status' => 'nullable|integer|max:1',
             'tel' => 'nullable|string|max:30',
             'email' => 'required|string|max:255',
             'address_zipcode' => 'nullable|string|max:5',

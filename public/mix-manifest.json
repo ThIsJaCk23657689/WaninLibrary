@@ -14,5 +14,7 @@
     "/js/borrowers/edit.js": "/js/borrowers/edit.js",
     "/js/circulation/index.js": "/js/circulation/index.js",
     "/js/donors/create.js": "/js/donors/create.js",
-    "/js/donors/edit.js": "/js/donors/edit.js"
+    "/js/donors/edit.js": "/js/donors/edit.js",
+    "/js/users/create.js": "/js/users/create.js",
+    "/js/users/edit.js": "/js/users/edit.js"
 }

@@ -2,11 +2,12 @@
 
 namespace App\Http\Middleware;
 
+use Tymon\JWTAuth\Token;
+use Illuminate\Auth\AuthenticationException;
 use Closure;
 use JWTAuth;
-use Tymon\JWTAuth\Token;
 
-class AdminOnly
+class RedirectIfNotAdmin
 {
     /**
      * Handle an incoming request.
@@ -31,18 +32,24 @@ class AdminOnly
                 // 驗證成功
                 $request->headers->set('authorization', 'Bearer ' . $token);
 
-
                 $user = auth('api')->user();
 
                 if($user->status == 0){
-                    $response = $next($request);
-                    $response->headers->set('Content-Type', 'application/json; charset=UTF-8');
-                    $response->headers->set('charset', 'utf-8');
-                    return $response;
+                    return $next($request);
                 }else{
-                    return response()->json('你不是系統管理者，沒有此權限', 400);
+                    abort(403, '你不是系統管理者，無法瀏覽此頁面。');
                 }
             }
+        }
+        throw new AuthenticationException(
+            'Unauthenticated.', ['api'], $this->redirectTo($request)
+        );
+    }
+
+    protected function redirectTo($request)
+    {
+        if (! $request->expectsJson()) {
+            return route('login');
         }
     }
 }

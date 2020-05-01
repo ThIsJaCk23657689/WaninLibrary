@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=script&lang=js&":
-/*!************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=script&lang=js& ***!
-  \************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/UserUpdateForm.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Users/UserUpdateForm.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -175,12 +175,20 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      agency: [],
-      AgenciesIndexURL: $('#AgenciesIndexURL').html(),
-      AgenciesUpdateURL: $('#AgenciesUpdateURL').html(),
+      user: [],
+      UsersIndexURL: $('#UsersIndexURL').html(),
+      UsersUpdateURL: $('#UsersUpdateURL').html(),
       FormErrorsMsg: []
     };
   },
@@ -188,26 +196,24 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {
     var _this = this;
 
-    var AgenciesGetOneURL = $('#AgenciesGetOneURL').html();
-    axios.get(AgenciesGetOneURL).then(function (response) {
-      _this.agency = response.data.agency; // 地址
+    var UsersGetOneURL = $('#UsersGetOneURL').html();
+    axios.get(UsersGetOneURL).then(function (response) {
+      _this.user = response.data.user; // 地址
 
       $('#address_twzipcode').twzipcode({
-        'zipcodeSel': response.data.agency.address_zipcode
+        'zipcodeSel': response.data.user.address_zipcode
       });
     });
   },
   mounted: function mounted() {
-    console.log('AgencyEditForm.vue mounted');
-    $('#agency_edit_form').submit(function (e) {
+    // 地址
+    $('#address_twzipcode').twzipcode({
+      'readonly': false
+    });
+    $('#user_update_form').submit(function (e) {
       e.preventDefault();
       var url = $(this).attr('action');
       var data = $(this).serializeObject();
-      var formdata = new FormData();
-      Object.keys(data).forEach(function (key) {
-        return formdata.append(key, data[key]);
-      });
-      console.log(formdata);
       $('#modal_good').css({
         'display': 'none'
       });
@@ -230,14 +236,14 @@ __webpack_require__.r(__webpack_exports__);
         $('#modal_link').attr('href', response.data.url);
         $('#modal_link').slideDown();
       })["catch"](function (error) {
-        console.error('編輯機構時發生錯誤，錯誤訊息：' + error);
+        console.error('編輯使用者時發生錯誤，錯誤訊息：' + error);
         $('#modal_error').css({
           'display': 'flex'
         });
         $('#modal_spinner').css({
           'display': 'none'
         });
-        $('#modal_msg').html('發生錯誤<br>錯誤訊息：' + error + '<br>');
+        $('#modal_msg').html('發生錯誤<br>錯誤訊息：' + error.response.data.message + '<br>');
         $('#modal_close').slideDown();
         var $key = Object.keys(error.response.data.errors);
         $key.forEach(function (item, index) {
@@ -251,10 +257,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa&":
-/*!****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa& ***!
-  \****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/UserUpdateForm.vue?vue&type=template&id=0fe50bca&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Users/UserUpdateForm.vue?vue&type=template&id=0fe50bca& ***!
+  \***********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -273,8 +279,8 @@ var render = function() {
         {
           attrs: {
             method: "POST",
-            id: "agency_edit_form",
-            action: _vm.AgenciesUpdateURL
+            id: "user_update_form",
+            action: _vm.UsersUpdateURL
           }
         },
         [
@@ -290,53 +296,45 @@ var render = function() {
                     name: "name",
                     type: "text",
                     required: "",
-                    autocomplete: "off",
                     autofocus: ""
                   },
-                  domProps: { value: _vm.agency.name }
+                  domProps: { value: _vm.user.name }
                 })
               ])
             ]),
             _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
+            _c("div", { staticClass: "col-md-8" }, [
               _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
-                _vm._v(" "),
-                _c("input", {
-                  staticClass: "form-control mb-2",
-                  attrs: {
-                    id: "tel",
-                    name: "tel",
-                    type: "text",
-                    autocomplete: "off"
-                  },
-                  domProps: { value: _vm.agency.tel }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "principal" } }, [
-                  _vm._v("負責人")
-                ]),
+                _vm._m(1),
                 _vm._v(" "),
                 _c("input", {
                   staticClass: "form-control",
                   attrs: {
-                    id: "principal",
-                    name: "principal",
-                    type: "text",
-                    autocomplete: "off"
+                    id: "email",
+                    name: "email",
+                    type: "email",
+                    required: ""
                   },
-                  domProps: { value: _vm.agency.principal }
+                  domProps: { value: _vm.user.email }
                 })
               ])
             ])
           ]),
           _vm._v(" "),
           _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control mb-2",
+                  attrs: { id: "tel", name: "tel", type: "text" },
+                  domProps: { value: _vm.user.tel }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-8" }, [
               _c(
                 "div",
                 {
@@ -346,7 +344,7 @@ var render = function() {
                 [
                   _c("label", [_vm._v("地址")]),
                   _vm._v(" "),
-                  _vm._m(1),
+                  _vm._m(2),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-md-12" }, [
@@ -355,10 +353,9 @@ var render = function() {
                         attrs: {
                           id: "address_others",
                           type: "text",
-                          name: "address_others",
-                          autocomplete: "off"
+                          name: "address_others"
                         },
-                        domProps: { value: _vm.agency.address_others }
+                        domProps: { value: _vm.user.address_others }
                       })
                     ])
                   ])
@@ -379,8 +376,8 @@ var render = function() {
                     {
                       name: "model",
                       rawName: "v-model",
-                      value: _vm.agency.content,
-                      expression: "agency.content"
+                      value: _vm.user.content,
+                      expression: "user.content"
                     }
                   ],
                   staticClass: "form-control",
@@ -390,13 +387,13 @@ var render = function() {
                     cols: "30",
                     rows: "5"
                   },
-                  domProps: { value: _vm.agency.content },
+                  domProps: { value: _vm.user.content },
                   on: {
                     input: function($event) {
                       if ($event.target.composing) {
                         return
                       }
-                      _vm.$set(_vm.agency, "content", $event.target.value)
+                      _vm.$set(_vm.user, "content", $event.target.value)
                     }
                   }
                 })
@@ -414,7 +411,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        確認修改\r\n                    "
+                    "\n                        確認修改\n                    "
                   )
                 ]
               ),
@@ -423,11 +420,11 @@ var render = function() {
                 "a",
                 {
                   staticClass: "btn btn-block btn-danger",
-                  attrs: { href: _vm.AgenciesIndexURL }
+                  attrs: { href: _vm.UsersIndexURL }
                 },
                 [
                   _vm._v(
-                    "\r\n                        返回列表\r\n                    "
+                    "\n                        返回列表\n                    "
                   )
                 ]
               )
@@ -445,7 +442,16 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "name" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("機構名稱\r\n                        ")
+      _vm._v("姓名\n                        ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "email" } }, [
+      _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+      _vm._v("信箱")
     ])
   },
   function() {
@@ -601,16 +607,85 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/agencies/edit.js":
-/*!***************************************!*\
-  !*** ./resources/js/agencies/edit.js ***!
-  \***************************************/
+/***/ "./resources/js/components/Users/UserUpdateForm.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/Users/UserUpdateForm.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UserUpdateForm_vue_vue_type_template_id_0fe50bca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserUpdateForm.vue?vue&type=template&id=0fe50bca& */ "./resources/js/components/Users/UserUpdateForm.vue?vue&type=template&id=0fe50bca&");
+/* harmony import */ var _UserUpdateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserUpdateForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Users/UserUpdateForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UserUpdateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UserUpdateForm_vue_vue_type_template_id_0fe50bca___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UserUpdateForm_vue_vue_type_template_id_0fe50bca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Users/UserUpdateForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Users/UserUpdateForm.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/Users/UserUpdateForm.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserUpdateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserUpdateForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/UserUpdateForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserUpdateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Users/UserUpdateForm.vue?vue&type=template&id=0fe50bca&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Users/UserUpdateForm.vue?vue&type=template&id=0fe50bca& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserUpdateForm_vue_vue_type_template_id_0fe50bca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserUpdateForm.vue?vue&type=template&id=0fe50bca& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/UserUpdateForm.vue?vue&type=template&id=0fe50bca&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserUpdateForm_vue_vue_type_template_id_0fe50bca___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserUpdateForm_vue_vue_type_template_id_0fe50bca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/users/edit.js":
+/*!************************************!*\
+  !*** ./resources/js/users/edit.js ***!
+  \************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-Vue.component('agency-update-form', __webpack_require__(/*! ./../components/Agencies/AgencyUpdateForm.vue */ "./resources/js/components/Agencies/AgencyUpdateForm.vue")["default"]);
+Vue.component('user-update-form', __webpack_require__(/*! ./../components/Users/UserUpdateForm.vue */ "./resources/js/components/Users/UserUpdateForm.vue")["default"]);
 var app = new Vue({
-  el: '#agency',
+  el: '#user',
   data: function data() {
     return {};
   },
@@ -621,83 +696,14 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ "./resources/js/components/Agencies/AgencyUpdateForm.vue":
-/*!***************************************************************!*\
-  !*** ./resources/js/components/Agencies/AgencyUpdateForm.vue ***!
-  \***************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AgencyUpdateForm_vue_vue_type_template_id_e81ae4fa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa& */ "./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa&");
-/* harmony import */ var _AgencyUpdateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AgencyUpdateForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _AgencyUpdateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AgencyUpdateForm_vue_vue_type_template_id_e81ae4fa___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AgencyUpdateForm_vue_vue_type_template_id_e81ae4fa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Agencies/AgencyUpdateForm.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=script&lang=js&":
-/*!****************************************************************************************!*\
-  !*** ./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=script&lang=js& ***!
-  \****************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyUpdateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AgencyUpdateForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyUpdateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa&":
-/*!**********************************************************************************************!*\
-  !*** ./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa& ***!
-  \**********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyUpdateForm_vue_vue_type_template_id_e81ae4fa___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Agencies/AgencyUpdateForm.vue?vue&type=template&id=e81ae4fa&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyUpdateForm_vue_vue_type_template_id_e81ae4fa___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AgencyUpdateForm_vue_vue_type_template_id_e81ae4fa___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ 5:
-/*!*********************************************!*\
-  !*** multi ./resources/js/agencies/edit.js ***!
-  \*********************************************/
+/***/ 9:
+/*!******************************************!*\
+  !*** multi ./resources/js/users/edit.js ***!
+  \******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\agencies\edit.js */"./resources/js/agencies/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\users\edit.js */"./resources/js/users/edit.js");
 
 
 /***/ })

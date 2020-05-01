@@ -1,4 +1,4 @@
-Vue.component('user-create-form', require('./../components/Users/UserCreateForm.vue').default);
+Vue.component('user-update-form', require('./../components/Users/UserUpdateForm.vue').default);
 
 const app = new Vue({
     el: '#user',

@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Borrowers/BorrowerCreateForm.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Borrowers/BorrowerCreateForm.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/UserCreateForm.vue?vue&type=script&lang=js&":
+/*!*******************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Users/UserCreateForm.vue?vue&type=script&lang=js& ***!
+  \*******************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -204,54 +204,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      BorrowersIndexURL: $('#BorrowersIndexURL').html(),
-      BorrowersStoreURL: $('#BorrowersStoreURL').html(),
-      FormErrorsMsg: [],
-      agencies: []
+      UsersIndexURL: $('#UsersIndexURL').html(),
+      UsersStoreURL: $('#UsersStoreURL').html(),
+      FormErrorsMsg: []
     };
   },
   methods: {},
-  created: function created() {
-    var _this = this;
-
-    var AgenciesListURL = $('#AgenciesListURL').html();
-    axios.get(AgenciesListURL).then(function (response) {
-      _this.agencies = response.data.agencies;
-
-      for (var i = 0; i < _this.agencies.length; i++) {
-        $("#agency_id").append($("<option></option>").attr("value", _this.agencies[i].id).text(_this.agencies[i].name));
-      }
-
-      $('#agency_id').selectpicker('refresh');
-    });
-  },
   mounted: function mounted() {
     // 地址
     $('#address_twzipcode').twzipcode({
       'readonly': false
-    }); // 生日
-
-    $("#birthday").datepicker({
-      dateFormat: 'yy-mm-dd',
-      changeYear: true,
-      changeMonth: true,
-      yearRange: "-80:+0",
-      maxDate: '-15y'
     });
-    $('#agency_id').selectpicker({
-      liveSearch: true
-    });
-    $('#borrower_create_form').submit(function (e) {
+    $('#user_create_form').submit(function (e) {
       e.preventDefault();
       var url = $(this).attr('action');
       var data = $(this).serializeObject();
@@ -277,14 +244,14 @@ __webpack_require__.r(__webpack_exports__);
         $('#modal_link').attr('href', response.data.url);
         $('#modal_link').slideDown();
       })["catch"](function (error) {
-        console.error('新增借閱人時發生錯誤，錯誤訊息：' + error);
+        console.error('新增使用者時發生錯誤，錯誤訊息：' + error);
         $('#modal_error').css({
           'display': 'flex'
         });
         $('#modal_spinner').css({
           'display': 'none'
         });
-        $('#modal_msg').html('發生錯誤<br>錯誤訊息：' + error + '<br>');
+        $('#modal_msg').html('發生錯誤<br>錯誤訊息：' + error.response.data.message + '<br>');
         $('#modal_close').slideDown();
         var $key = Object.keys(error.response.data.errors);
         $key.forEach(function (item, index) {
@@ -298,10 +265,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Borrowers/BorrowerCreateForm.vue?vue&type=template&id=ff9be72a&":
-/*!*******************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Borrowers/BorrowerCreateForm.vue?vue&type=template&id=ff9be72a& ***!
-  \*******************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/UserCreateForm.vue?vue&type=template&id=130490fd&":
+/*!***********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Users/UserCreateForm.vue?vue&type=template&id=130490fd& ***!
+  \***********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -320,8 +287,8 @@ var render = function() {
         {
           attrs: {
             method: "POST",
-            id: "borrower_create_form",
-            action: _vm.BorrowersStoreURL
+            id: "user_create_form",
+            action: _vm.UsersStoreURL
           }
         },
         [
@@ -343,7 +310,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        確認新增\r\n                    "
+                    "\n                        確認新增\n                    "
                   )
                 ]
               ),
@@ -352,11 +319,11 @@ var render = function() {
                 "a",
                 {
                   staticClass: "btn btn-block btn-danger",
-                  attrs: { href: _vm.BorrowersIndexURL }
+                  attrs: { href: _vm.UsersIndexURL }
                 },
                 [
                   _vm._v(
-                    "\r\n                        返回列表\r\n                    "
+                    "\n                        返回列表\n                    "
                   )
                 ]
               )
@@ -377,7 +344,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "name" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("名稱\r\n                        ")
+            _vm._v("姓名\n                        ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -395,18 +362,67 @@ var staticRenderFns = [
         ])
       ]),
       _vm._v(" "),
+      _c("div", { staticClass: "col-md-5" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "email" } }, [
+            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+            _vm._v("信箱")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "email",
+              name: "email",
+              type: "email",
+              value: "",
+              required: "",
+              autocomplete: "off"
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "status" } }, [
+            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+            _vm._v("帳號類型")
+          ]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { name: "status", id: "status", required: "" }
+            },
+            [
+              _c("option", { attrs: { value: "1" } }, [_vm._v("一般使用者")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "0" } }, [_vm._v("管理者")])
+            ]
+          )
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "tel" } }, [
+          _c("label", { attrs: { for: "account" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("電話")
+            _vm._v("帳號")
           ]),
           _vm._v(" "),
           _c("input", {
             staticClass: "form-control mb-2",
             attrs: {
-              id: "tel",
-              name: "tel",
+              id: "account",
+              name: "account",
               type: "text",
               value: "",
               required: "",
@@ -418,125 +434,70 @@ var staticRenderFns = [
       _vm._v(" "),
       _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "birthday" } }, [_vm._v("生日")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-2",
-            attrs: {
-              id: "birthday",
-              name: "birthday",
-              type: "text",
-              value: "",
-              autocomplete: "off",
-              placeholder: "例：1950-01-01"
-            }
-          })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "status" } }, [
+          _c("label", { attrs: { for: "password" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("身分別\r\n                        ")
+            _vm._v("密碼")
           ]),
           _vm._v(" "),
-          _c(
-            "select",
-            {
-              staticClass: "form-control",
-              attrs: { name: "status", id: "status" }
-            },
-            [
-              _c("option", { attrs: { value: "" } }, [_vm._v("請選擇...")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "0" } }, [_vm._v("一般民眾")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "1" } }, [_vm._v("具有社輔資格")])
-            ]
-          )
+          _c("input", {
+            staticClass: "form-control mb-2",
+            attrs: {
+              id: "password",
+              name: "password",
+              type: "password",
+              value: "",
+              required: "",
+              autocomplete: "off"
+            }
+          })
         ])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "agency_id" } }, [_vm._v("隸屬單位")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              staticClass: "form-control",
-              attrs: { id: "agency_id", name: "agency_id" }
-            },
-            [_c("option", { attrs: { value: "0" } }, [_vm._v("請選擇...")])]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "job_title" } }, [_vm._v("職稱")]),
+          _c("label", { attrs: { for: "password_confirmation" } }, [
+            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+            _vm._v("密碼確認")
+          ]),
           _vm._v(" "),
           _c("input", {
             staticClass: "form-control mb-2",
             attrs: {
-              id: "job_title",
-              name: "job_title",
+              id: "password_confirmation",
+              name: "password_confirmation",
+              type: "password",
+              value: "",
+              required: "",
+              autocomplete: "off"
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control mb-2",
+            attrs: {
+              id: "tel",
+              name: "tel",
               type: "text",
               value: "",
               autocomplete: "off"
             }
           })
         ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "email" } }, [_vm._v("信箱")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "email",
-              name: "email",
-              type: "email",
-              value: "",
-              autocomplete: "off"
-            }
-          })
-        ])
       ]),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "content" } }, [_vm._v("備註內容")]),
-          _vm._v(" "),
-          _c("textarea", {
-            staticClass: "form-control",
-            attrs: { name: "content", id: "content", cols: "30", rows: "3" }
-          })
-        ])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "col-md-8" }, [
         _c(
           "div",
           { staticClass: "form-group", attrs: { id: "address_twzipcode" } },
@@ -594,6 +555,23 @@ var staticRenderFns = [
             ])
           ]
         )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "content" } }, [_vm._v("備註內容")]),
+          _vm._v(" "),
+          _c("textarea", {
+            staticClass: "form-control",
+            attrs: { name: "content", id: "content", cols: "30", rows: "5" }
+          })
+        ])
       ])
     ])
   }
@@ -711,16 +689,85 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/borrowers/create.js":
-/*!******************************************!*\
-  !*** ./resources/js/borrowers/create.js ***!
-  \******************************************/
+/***/ "./resources/js/components/Users/UserCreateForm.vue":
+/*!**********************************************************!*\
+  !*** ./resources/js/components/Users/UserCreateForm.vue ***!
+  \**********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _UserCreateForm_vue_vue_type_template_id_130490fd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UserCreateForm.vue?vue&type=template&id=130490fd& */ "./resources/js/components/Users/UserCreateForm.vue?vue&type=template&id=130490fd&");
+/* harmony import */ var _UserCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UserCreateForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Users/UserCreateForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _UserCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UserCreateForm_vue_vue_type_template_id_130490fd___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UserCreateForm_vue_vue_type_template_id_130490fd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Users/UserCreateForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Users/UserCreateForm.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************!*\
+  !*** ./resources/js/components/Users/UserCreateForm.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserCreateForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/UserCreateForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Users/UserCreateForm.vue?vue&type=template&id=130490fd&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Users/UserCreateForm.vue?vue&type=template&id=130490fd& ***!
+  \*****************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCreateForm_vue_vue_type_template_id_130490fd___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./UserCreateForm.vue?vue&type=template&id=130490fd& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Users/UserCreateForm.vue?vue&type=template&id=130490fd&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCreateForm_vue_vue_type_template_id_130490fd___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UserCreateForm_vue_vue_type_template_id_130490fd___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/users/create.js":
+/*!**************************************!*\
+  !*** ./resources/js/users/create.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-Vue.component('borrower-create-form', __webpack_require__(/*! ./../components/Borrowers/BorrowerCreateForm.vue */ "./resources/js/components/Borrowers/BorrowerCreateForm.vue")["default"]);
+Vue.component('user-create-form', __webpack_require__(/*! ./../components/Users/UserCreateForm.vue */ "./resources/js/components/Users/UserCreateForm.vue")["default"]);
 var app = new Vue({
-  el: '#borrower',
+  el: '#user',
   data: function data() {
     return {};
   },
@@ -731,83 +778,14 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ "./resources/js/components/Borrowers/BorrowerCreateForm.vue":
-/*!******************************************************************!*\
-  !*** ./resources/js/components/Borrowers/BorrowerCreateForm.vue ***!
-  \******************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BorrowerCreateForm_vue_vue_type_template_id_ff9be72a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BorrowerCreateForm.vue?vue&type=template&id=ff9be72a& */ "./resources/js/components/Borrowers/BorrowerCreateForm.vue?vue&type=template&id=ff9be72a&");
-/* harmony import */ var _BorrowerCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BorrowerCreateForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Borrowers/BorrowerCreateForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _BorrowerCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _BorrowerCreateForm_vue_vue_type_template_id_ff9be72a___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BorrowerCreateForm_vue_vue_type_template_id_ff9be72a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Borrowers/BorrowerCreateForm.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Borrowers/BorrowerCreateForm.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************************!*\
-  !*** ./resources/js/components/Borrowers/BorrowerCreateForm.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowerCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BorrowerCreateForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Borrowers/BorrowerCreateForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowerCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Borrowers/BorrowerCreateForm.vue?vue&type=template&id=ff9be72a&":
-/*!*************************************************************************************************!*\
-  !*** ./resources/js/components/Borrowers/BorrowerCreateForm.vue?vue&type=template&id=ff9be72a& ***!
-  \*************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowerCreateForm_vue_vue_type_template_id_ff9be72a___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BorrowerCreateForm.vue?vue&type=template&id=ff9be72a& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Borrowers/BorrowerCreateForm.vue?vue&type=template&id=ff9be72a&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowerCreateForm_vue_vue_type_template_id_ff9be72a___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowerCreateForm_vue_vue_type_template_id_ff9be72a___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ 6:
-/*!************************************************!*\
-  !*** multi ./resources/js/borrowers/create.js ***!
-  \************************************************/
+/***/ 8:
+/*!********************************************!*\
+  !*** multi ./resources/js/users/create.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\borrowers\create.js */"./resources/js/borrowers/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\users\create.js */"./resources/js/users/create.js");
 
 
 /***/ })

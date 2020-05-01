@@ -9,7 +9,6 @@ class UserService extends BaseService
 {
     public function add($request)
     {
-
         $user = UserEloquent::create([
             'name' => $request->name,
             'account' => $request->gender,
@@ -64,7 +63,6 @@ class UserService extends BaseService
         $user = $this->getOne($id);
         $user->update([
             'name' => $request->name,
-            'account' => $request->account,
             'email' => $request->email,
             'tel' => $request->tel,
 
@@ -89,7 +87,7 @@ class UserService extends BaseService
             if($user->trashed()){
                 $user->restore();
             }else{
-                $user->delete()();
+                $user->delete();
             }
         }
 
