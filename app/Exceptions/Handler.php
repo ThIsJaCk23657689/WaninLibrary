@@ -8,6 +8,7 @@ use Throwable;
 use Illuminate\Auth\AuthenticationException;
 use Tymon\JWTAuth\Exceptions\TokenInvalidException;
 use Tymon\JWTAuth\Exceptions\TokenBlacklistedException;
+use Tymon\JWTAuth\Exceptions\TokenExpiredException;
 
 class Handler extends ExceptionHandler
 {
@@ -65,6 +66,16 @@ class Handler extends ExceptionHandler
                 );
             }
         }else if ($exception instanceof TokenBlacklistedException) {
+            if($request->wantsJson()){
+                return response()->json([
+                    'msg' => 'Token被黑名單'
+                ], 401);
+            }else{
+                throw new AuthenticationException(
+                    'Unauthenticated.', ['api'], route('login')
+                );
+            }
+        }else if ($exception instanceof TokenExpiredException) {
             if($request->wantsJson()){
                 return response()->json([
                     'msg' => 'Token逾期'

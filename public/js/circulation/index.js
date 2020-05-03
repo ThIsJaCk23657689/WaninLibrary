@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 13);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -331,14 +331,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 13:
+/***/ 15:
 /*!*************************************************!*\
   !*** multi ./resources/js/circulation/index.js ***!
   \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\circulation\index.js */"./resources/js/circulation/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\circulation\index.js */"./resources/js/circulation/index.js");
 
 
 /***/ })

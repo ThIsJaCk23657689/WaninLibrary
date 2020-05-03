@@ -13,7 +13,6 @@ const mix = require('laravel-mix');
 
 mix.js('resources/js/app.js', 'public/js')
    .js('resources/js/auth/login.js', 'public/js/auth')
-
    .sass('resources/sass/app.scss', 'public/css');
 
 mix.js('resources/js/backend.js', 'public/js')
@@ -23,6 +22,9 @@ mix.js('resources/js/backend.js', 'public/js')
 
    .js('resources/js/borrowers/create.js', 'public/js/borrowers')
    .js('resources/js/borrowers/edit.js', 'public/js/borrowers')
+
+   .js('resources/js/users/create.js', 'public/js/users')
+   .js('resources/js/users/edit.js', 'public/js/users')
 
    .js('resources/js/donors/create.js', 'public/js/donors')
    .js('resources/js/donors/edit.js', 'public/js/donors')

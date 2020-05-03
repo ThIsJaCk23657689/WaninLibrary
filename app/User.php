@@ -67,4 +67,12 @@ class User extends Authenticatable implements JWTSubject
     public function loginLogs(){
         return $this->hasMany(LoginLogEloquent::class);
     }
+
+    public function showStatus(){
+        return ($this->status)? '一般使用者' : '管理者' ;
+    }
+
+    public function showAddress(){
+        return ($this->address_zipcode . $this->address_county . $this->address_district . $this->address_others) ?? '無';
+    }
 }

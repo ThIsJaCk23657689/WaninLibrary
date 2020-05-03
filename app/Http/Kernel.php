@@ -64,15 +64,17 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
 
         // // JWTToken 預設 middleware
-        // 'auth.jwt' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class, 
+        // 'auth.jwt' => \Tymon\JWTAuth\Http\Middleware\Authenticate::class,
 
         // JWTToken 給 api 的middleware
-        'auth.jwt' => \App\Http\Middleware\AuthenticateAPI::class, 
-        
+        'auth.jwt' => \App\Http\Middleware\AuthenticateAPI::class,
+
         // JWTToken only for admin
-        'admin.auth.jwt' => \App\Http\Middleware\AdminOnly::class, 
+        'admin.auth.jwt' => \App\Http\Middleware\AdminOnly::class,
 
         // JWTToken 給 web 的middleware
         'auth.web' => \App\Http\Middleware\RedirectIfNotAuth::class,
+        'admin.auth.web' => \App\Http\Middleware\RedirectIfNotAdmin::class,
+
     ];
 }
