@@ -603,7 +603,6 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-<<<<<<< HEAD
 /***/ "./resources/js/components/Partials/PaginateCustom.vue":
 /*!*************************************************************!*\
   !*** ./resources/js/components/Partials/PaginateCustom.vue ***!
@@ -673,17 +672,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 10:
-=======
 /***/ 12:
->>>>>>> d7e4d48c4c75ea4e6e8cf2256b4456915684f34d
 /*!*******************************************!*\
   !*** multi ./resources/js/books/index.js ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\index.js */"./resources/js/books/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\index.js */"./resources/js/books/index.js");
 
 
 /***/ })
