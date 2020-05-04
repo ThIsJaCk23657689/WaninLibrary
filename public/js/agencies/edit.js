@@ -284,6 +284,14 @@ var render = function() {
                 _vm._m(0),
                 _vm._v(" "),
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.agency.name,
+                      expression: "agency.name"
+                    }
+                  ],
                   staticClass: "form-control mb-2",
                   attrs: {
                     id: "name",
@@ -293,7 +301,15 @@ var render = function() {
                     autocomplete: "off",
                     autofocus: ""
                   },
-                  domProps: { value: _vm.agency.name }
+                  domProps: { value: _vm.agency.name },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.agency, "name", $event.target.value)
+                    }
+                  }
                 })
               ])
             ]),
@@ -303,6 +319,14 @@ var render = function() {
                 _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
                 _vm._v(" "),
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.agency.tel,
+                      expression: "agency.tel"
+                    }
+                  ],
                   staticClass: "form-control mb-2",
                   attrs: {
                     id: "tel",
@@ -310,7 +334,15 @@ var render = function() {
                     type: "text",
                     autocomplete: "off"
                   },
-                  domProps: { value: _vm.agency.tel }
+                  domProps: { value: _vm.agency.tel },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.agency, "tel", $event.target.value)
+                    }
+                  }
                 })
               ])
             ]),
@@ -322,6 +354,14 @@ var render = function() {
                 ]),
                 _vm._v(" "),
                 _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.agency.principal,
+                      expression: "agency.principal"
+                    }
+                  ],
                   staticClass: "form-control",
                   attrs: {
                     id: "principal",
@@ -329,7 +369,15 @@ var render = function() {
                     type: "text",
                     autocomplete: "off"
                   },
-                  domProps: { value: _vm.agency.principal }
+                  domProps: { value: _vm.agency.principal },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.agency, "principal", $event.target.value)
+                    }
+                  }
                 })
               ])
             ])
@@ -351,6 +399,14 @@ var render = function() {
                   _c("div", { staticClass: "row" }, [
                     _c("div", { staticClass: "col-md-12" }, [
                       _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.agency.address_others,
+                            expression: "agency.address_others"
+                          }
+                        ],
                         staticClass: "form-control",
                         attrs: {
                           id: "address_others",
@@ -358,7 +414,19 @@ var render = function() {
                           name: "address_others",
                           autocomplete: "off"
                         },
-                        domProps: { value: _vm.agency.address_others }
+                        domProps: { value: _vm.agency.address_others },
+                        on: {
+                          input: function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.agency,
+                              "address_others",
+                              $event.target.value
+                            )
+                          }
+                        }
                       })
                     ])
                   ])

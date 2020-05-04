@@ -130,6 +130,10 @@ class BookService extends BaseService
 
     public function getList($skip, $take){
         $books = BookEloquent::skip($skip)->take($take)->get();
+        foreach($books as $book){
+            $book['showTitle'] = $book->showTitle();
+            $book['showStatus'] = $book->showStatus();
+        }
         return $books;
     }
 

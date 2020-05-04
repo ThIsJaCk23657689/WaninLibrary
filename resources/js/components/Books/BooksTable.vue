@@ -19,41 +19,27 @@
                     <tbody>
                         <tr v-for="book in books" :key="book.id">
                             <td>{{ book.id }}</td>
-                            <td>{{ book.title }}</td>
-                            <td>Hello</td>
-                            <td>{{ book.status }}</td>
-                            <td>Hello</td>
+                            <td>{{ book.showTitle }}</td>
+                            <td>0</td>
+                            <td>{{ book.showStatus }}</td>
+                            <td>
+                                <a href="#" class="btn btn-md btn-info">
+									<i class="fas fa-info-circle"></i>
+								</a>
+								<a href="#" class="btn btn-md btn-success">
+									<i class="fas fa-pencil-alt"></i>
+								</a>
+								<a href="#" class="btn btn-md btn-danger">
+									<i class="far fa-trash-alt"></i>
+								</a>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
             </div>
         </div>
         <div class="card-footer">
-            <!-- <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled"><a class="page-link" href="#">Prev</a></li>
-                    <li class="page-item active"><a class="page-link" href="#">1</a></li>
-                    <li class="page-item"><a class="page-link" href="#">2</a></li>
-                    <li class="page-item"><a class="page-link" href="#">3</a></li>
-                    <li class="page-item"><a class="page-link" href="#">Next</a></li>
-                </ul>
-            </nav> -->
-    <paginate
-        :page-count="this.total_page"
-        :click-handler="chagePage"
-        :page-range="5"
-        :margin-pages="2"
-        :prev-text="'Prev'"
-        :next-text="'Next'"
-        :container-class="'pagination'"
-        :page-class="'page-item'"
-        :page-link-class="'page-link'"
-        :prev-class="'page-item'"
-        :next-class="'page-item'"
-        :prev-link-class="'page-link'"
-        :next-link-class="'page-link'"
-        :active-class="'active'">
-    </paginate>
+            <paginate-custom @updatePage="getBookList" :pageNum="pageNum" :totalPage="totalPage"></paginate-custom>
         </div>
     </div>
 </div>
@@ -61,19 +47,33 @@
 
 <script>
 export default {
-    props: ['books', 'total_page'],
+    props: ['books', 'totalcount'],
     data(){
         return {
-
+            rowsPerPage: 20,
+            pageNum: 1,
+            totalPage: 0,
         }
     },
     methods: {
-        chagePage (pageNum){
-            console.log(pageNum);
+        getBookList (pageNum){
+            let skip = (pageNum - 1) * this.rowsPerPage;
+            let take = this.rowsPerPage;
+
+            let BooksGetList = $('#BooksGetList').html();
+
+            axios.get(BooksGetList, {
+                params: {
+                    skip: skip,
+                    take: take
+                }
+            }).then(response => {
+                this.$emit('update-book', response.data.books);
+            });
         }
     },
     created() {
-        
+        this.totalPage = Math.ceil(this.totalcount / this.rowsPerPage)
     },
     mounted() {
         

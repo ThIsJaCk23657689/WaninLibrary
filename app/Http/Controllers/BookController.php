@@ -24,8 +24,8 @@ class BookController extends Controller
     }
 
     public function index(){
-        $total_page = ceil($this->BookService->count() / 20);
-        return view('books.index', compact('total_page'));
+        $dataTotalCount = $this->BookService->count();
+        return view('books.index', compact('dataTotalCount'));
     }
 
     public function create(){

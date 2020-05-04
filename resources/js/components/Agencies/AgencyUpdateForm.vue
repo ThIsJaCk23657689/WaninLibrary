@@ -9,21 +9,21 @@
                         <label for="name">
                             <span class="text-danger mr-2">*</span>機構名稱
                         </label>
-                        <input id="name" name="name" type="text" class="form-control mb-2" :value="agency.name" required autocomplete="off" autofocus>
+                        <input id="name" name="name" type="text" class="form-control mb-2" v-model="agency.name" required autocomplete="off" autofocus>
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="tel">電話</label>
-                        <input id="tel" name="tel" type="text" class="form-control mb-2" :value="agency.tel" autocomplete="off">
+                        <input id="tel" name="tel" type="text" class="form-control mb-2" v-model="agency.tel" autocomplete="off">
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="principal">負責人</label>
-                        <input id="principal" name="principal" type="text" class="form-control" :value="agency.principal" autocomplete="off">
+                        <input id="principal" name="principal" type="text" class="form-control" v-model="agency.principal" autocomplete="off">
                     </div>
                 </div>
 
@@ -46,7 +46,7 @@
                         </div>
                         <div class="row">
                             <div class="col-md-12">
-                                <input id="address_others" type="text" class="form-control" name="address_others" :value="agency.address_others" autocomplete="off">
+                                <input id="address_others" type="text" class="form-control" name="address_others" v-model="agency.address_others" autocomplete="off">
                             </div>
                         </div>
                     </div>

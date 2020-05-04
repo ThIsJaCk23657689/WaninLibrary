@@ -1,3 +1,4 @@
+import Paginate from 'vuejs-paginate';
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -24,6 +25,7 @@ window.Vue = require('vue');
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('option-item', require('./components/Partials/OptionItem.vue').default);
 Vue.component('loading-modal', require('./components/Modals/LoadingModal.vue').default);
+Vue.component('paginate', Paginate);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
