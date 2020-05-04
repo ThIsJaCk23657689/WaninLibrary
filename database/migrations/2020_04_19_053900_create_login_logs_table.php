@@ -17,6 +17,7 @@ class CreateLoginLogsTable extends Migration
             $table->bigIncrements('id')->comment('編號');
             $table->unsignedBigInteger('user_id')->comment('使用者編號');
             $table->dateTime('logout_date')->nullable()->comment('登出時間');
+            $table->text('content')->default('系統於2小時後自動登出')->comment('備註');
             $table->softDeletes();
             $table->timestamps();
         });

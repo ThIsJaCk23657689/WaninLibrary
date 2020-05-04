@@ -17,6 +17,7 @@ class LoginLogService extends BaseService
         LoginLogEloquent::create([
             'user_id' => $user->id,
             'logout_date' => null,
+            'content' => '系統於2小時後自動登出',
         ]);
     }
 
@@ -34,6 +35,12 @@ class LoginLogService extends BaseService
 
     public function getList(){
         $logs = LoginLogEloquent::withTrashed()->orderBy('id','desc')->with('user:id,name')->get();
+        foreach($logs as $log){
+            $url =  route('loginLogs.show', [$log->id]);
+            $href = '<a href="' .$url. '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
+            $log->url = $href;
+            $log->logout_date = $log->logout_date ? $log->logout_date : $log->content;
+        }
         return $logs;
     }
 
@@ -70,27 +77,46 @@ class LoginLogService extends BaseService
     public function getLoginLogsByDate($request){
         $type = $request->type;
         $date = $request->date;
-        $sort_by =$request->sort_by;
-        if($sort_by == 1){
-            $logs = LoginLogEloquent::ofDate($type, $date)->sortByDate_DESC($type)->with('user:id,name')->get();
-        }else{
-            $logs = LoginLogEloquent::ofDate($type, $date)->sortByDate_ASC($type)->with('user:id,name')->get();
-        }
+        // $sort_by =$request->sort_by;
+        // if($sort_by == 1){
+        //     $logs = LoginLogEloquent::ofDate($type, $date)->sortByDate_DESC($type)->with('user:id,name')->get();
+        // }else{
+        //     $logs = LoginLogEloquent::ofDate($type, $date)->sortByDate_ASC($type)->with('user:id,name')->get();
+        // }
 
+        $logs = LoginLogEloquent::ofDate($type, $date)->sortByDate_DESC($type)->with('user:id,name')->get();
+        foreach($logs as $log){
+            $url =  route('loginLogs.show', [$log->id]);
+            $href = '<a href="' .$url. '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
+            $log->url = $href;
+            $log->logout_date = $log->logout_date ? $log->logout_date : $log->content;
+        }
         return $logs;
     }
 
     public function getLoginLogsByMonth($request){
         $type = $request->type;
-        $month = $request->month;
-        $year = $request->year;
-        $sort_by =$request->sort_by;
-        if($sort_by == 1){
-            $logs = LoginLogEloquent::ofYear($type, $year)
+        $year_month = $request->year_month;
+        $year_month_arr = explode("-",$year_month);
+        $year = $year_month_arr[0];
+        $month = $year_month_arr[1];
+        // $sort_by =$request->sort_by;
+        // if($sort_by == 1){
+        //     $logs = LoginLogEloquent::ofYear($type, $year)
+        //     ->ofMonth ($type, $month)->sortByDate_DESC($type)->with('user:id,name')->get();
+        // }else{
+        //     $logs = LoginLogEloquent::ofYear($type, $year)
+        //     ->ofMonth ($type, $month)->sortByDate_ASC($type)->with('user:id,name')->get();
+        // }
+
+        $logs = LoginLogEloquent::ofYear($type, $year)
             ->ofMonth ($type, $month)->sortByDate_DESC($type)->with('user:id,name')->get();
-        }else{
-            $logs = LoginLogEloquent::ofYear($type, $year)
-            ->ofMonth ($type, $month)->sortByDate_ASC($type)->with('user:id,name')->get();
+
+        foreach($logs as $log){
+            $url =  route('loginLogs.show', [$log->id]);
+            $href = '<a href="' .$url. '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
+            $log->url = $href;
+            $log->logout_date = $log->logout_date ? $log->logout_date : $log->content;
         }
 
         return $logs;
@@ -99,11 +125,20 @@ class LoginLogService extends BaseService
     public function getLoginLogsByYear($request){
         $type = $request->type;
         $year = $request->year;
-        $sort_by =$request->sort_by;
-        if($sort_by == 1){
-            $logs = LoginLogEloquent::ofYear($type, $year)->sortByDate_DESC($type)->with('user:id,name')->get();
-        }else{
-            $logs = LoginLogEloquent::ofYear($type, $year)->sortByDate_ASC($type)->with('user:id,name')->get();
+        // $sort_by =$request->sort_by;
+        // if($sort_by == 1){
+        //     $logs = LoginLogEloquent::ofYear($type, $year)->sortByDate_DESC($type)->with('user:id,name')->get();
+        // }else{
+        //     $logs = LoginLogEloquent::ofYear($type, $year)->sortByDate_ASC($type)->with('user:id,name')->get();
+        // }
+
+        $logs = LoginLogEloquent::ofYear($type, $year)->sortByDate_DESC($type)->with('user:id,name')->get();
+
+        foreach($logs as $log){
+            $url =  route('loginLogs.show', [$log->id]);
+            $href = '<a href="' .$url. '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
+            $log->url = $href;
+            $log->logout_date = $log->logout_date ? $log->logout_date : $log->content;
         }
 
         return $logs;

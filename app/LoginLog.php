@@ -11,7 +11,7 @@ class LoginLog extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'user_id', 'logout_date'
+        'user_id', 'logout_date','content'
     ];
 
     protected $dates = ['deleted_at'];

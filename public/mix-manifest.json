@@ -15,6 +15,7 @@
     "/js/circulation/index.js": "/js/circulation/index.js",
     "/js/donors/create.js": "/js/donors/create.js",
     "/js/donors/edit.js": "/js/donors/edit.js",
+    "/js/loginLogs/index.js": "/js/loginLogs/index.js",
     "/js/users/create.js": "/js/users/create.js",
     "/js/users/edit.js": "/js/users/edit.js"
 }

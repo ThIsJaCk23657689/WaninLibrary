@@ -73,16 +73,16 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::resource('users', 'UserController')->only(['store', 'update', 'destroy']);
 
     // 登入紀錄
-    Route::get('getLoginLogs', 'LoginLogController@getLoginLogs');
+    Route::get('getLoginLogs', 'LoginLogController@getLoginLogs')->name('loginLogs.getList');
     Route::get('getLoginLogsOrderByASC', 'LoginLogController@getListOrderByASC');
     Route::get('getLoginLogsOrderByUserId', 'LoginLogController@getListOrderByUserId');
     Route::get('getLoginLogsOrderByUserIdASC', 'LoginLogController@getListOrderByUserIdASC');
     Route::get('getLoginLogsById', 'LoginLogController@getLoginLogsById');
     Route::get('getLoginLogsByUserId', 'LoginLogController@getLoginLogsByUserId');
     Route::get('getLoginLogsByUserName', 'LoginLogController@getLoginLogsByUserName');
-    Route::get('getLoginLogsByDate', 'LoginLogController@getLoginLogsByDate');
-    Route::get('getLoginLogsByMonth', 'LoginLogController@getLoginLogsByMonth');
-    Route::get('getLoginLogsByYear', 'LoginLogController@getLoginLogsByYear');
+    Route::get('getLoginLogsByDate', 'LoginLogController@getLoginLogsByDate')->name('loginLogs.getLoginLogsByDate');
+    Route::get('getLoginLogsByMonth', 'LoginLogController@getLoginLogsByMonth')->name('loginLogs.getLoginLogsByMonth');
+    Route::get('getLoginLogsByYear', 'LoginLogController@getLoginLogsByYear')->name('loginLogs.getLoginLogsByYear');
 
     // 借閱管理相關
     Route::get('getBookListByStatus','BorrowController@getBookListByStatus');

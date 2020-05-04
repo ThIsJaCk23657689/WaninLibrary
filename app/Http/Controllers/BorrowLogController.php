@@ -10,7 +10,7 @@ class BorrowLogController extends Controller
     public $BorrowLogService;
 
     public function __construct(){
-        $this->middleware('auth.jwt');
+        $this->middleware('auth.jwt')->except(['index', 'show']);
         $this->BorrowLogService = new BorrowLogService();
     }
 
