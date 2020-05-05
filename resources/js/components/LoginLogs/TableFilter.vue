@@ -109,7 +109,6 @@ export default {
     },
     methods: {
         GetListByDateTime: function(e){
-            console.log(e.target);
             let url = $(e.target).attr('action');
             let data = $(e.target).serializeObject();
 

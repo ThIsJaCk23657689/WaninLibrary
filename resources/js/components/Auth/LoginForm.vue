@@ -79,12 +79,17 @@ export default {
                 }
             }).catch((error) => {
                 console.error('登入失敗，錯誤訊息：' + error);
-                console.error(error.response.data.errors);
-                let $key = Object.keys(error.response.data.errors);
-                $key.forEach(function(item, index){
-                    $('#' + item).addClass('is-invalid');
-                    $('#' + item + '_error').html('<strong>'+ error.response.data.errors[item] + '</strong>');
-                });
+                // console.error(error.response);
+                if(error.response.data.errors == null){
+                    alert('登入失敗，錯誤訊息：' + error.response.data.message + '\n請聯絡系統設計師處理。');
+                }else{
+                    console.error(error.response.data.errors);
+                    let $key = Object.keys(error.response.data.errors);
+                    $key.forEach(function(item, index){
+                        $('#' + item).addClass('is-invalid');
+                        $('#' + item + '_error').html('<strong>'+ error.response.data.errors[item] + '</strong>');
+                    });
+                }
             });
         }); 
     }

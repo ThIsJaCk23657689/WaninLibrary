@@ -6,7 +6,7 @@
         </div>
         <div class="card-body">
             <div class="table-responsive">
-                <table class="table table-bordered" width="100%" cellspacing="0">
+                <table id="BooksDataTable" class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
                             <th>編號</th>
@@ -16,7 +16,7 @@
                             <th>操作</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <!-- <tbody>
                         <tr v-for="book in books" :key="book.id">
                             <td>{{ book.id }}</td>
                             <td>{{ book.showTitle }}</td>
@@ -34,7 +34,7 @@
 								</a>
                             </td>
                         </tr>
-                    </tbody>
+                    </tbody> -->
                 </table>
             </div>
         </div>
@@ -47,33 +47,19 @@
 
 <script>
 export default {
-    props: ['books', 'totalcount'],
+    props: ['books', 'rowsPerPage', 'pageNum' ,'totalPage'],
     data(){
         return {
-            rowsPerPage: 20,
-            pageNum: 1,
-            totalPage: 0,
+            
         }
     },
     methods: {
         getBookList (pageNum){
-            let skip = (pageNum - 1) * this.rowsPerPage;
-            let take = this.rowsPerPage;
-
-            let BooksGetList = $('#BooksGetList').html();
-
-            axios.get(BooksGetList, {
-                params: {
-                    skip: skip,
-                    take: take
-                }
-            }).then(response => {
-                this.$emit('update-book', response.data.books);
-            });
+            this.$emit('update-book', pageNum);
         }
     },
     created() {
-        this.totalPage = Math.ceil(this.totalcount / this.rowsPerPage)
+
     },
     mounted() {
         

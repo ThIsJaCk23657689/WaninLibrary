@@ -1961,12 +1961,61 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  mounted: function mounted() {
-    console.log('LoadingModal.vue mounted.');
-  },
+  props: [],
   data: function data() {
     return {};
-  }
+  },
+  methods: {
+    initalModal: function initalModal() {
+      // 初始化並顯示 Loading Modal
+      $('#modal_good').css({
+        'display': 'none'
+      });
+      $('#modal_error').css({
+        'display': 'none'
+      });
+      $('#modal_spinner').slideDown();
+      $('#modal_msg').html('請稍等...');
+      $('#modal_link').slideUp();
+      $('#modal_close').slideUp();
+      $('#LoadingModal').modal('show');
+    },
+    successfulResponse: function successfulResponse(message, url) {
+      // 顯示成功的訊息 message為訊息，url為欲前往之連結
+      $('#modal_good').css({
+        'display': 'flex'
+      });
+      $('#modal_spinner').css({
+        'display': 'none'
+      });
+      $('#modal_msg').html(message);
+      $('#modal_link').attr('href', url);
+      $('#modal_link').slideDown();
+    },
+    failureResponse: function failureResponse(error) {
+      // 顯示錯誤的訊息 message為訊息
+      $('#modal_error').css({
+        'display': 'flex'
+      });
+      $('#modal_spinner').css({
+        'display': 'none'
+      });
+      $('#modal_msg').html('發生錯誤！<br>錯誤訊息：' + error.response.data.message + '<br>');
+      $('#modal_close').slideDown();
+
+      if (error.response.data.errors == null) {
+        alert('錯誤訊息：' + error.response.data.message + '\n請聯絡系統設計師處理。');
+      } else {
+        var $key = Object.keys(error.response.data.errors);
+        $key.forEach(function (item, index) {
+          $('#modal_msg').append(error.response.data.errors[item] + '<br>');
+          $('#' + item).addClass('is-invalid');
+        });
+      }
+    }
+  },
+  created: function created() {},
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -55887,7 +55936,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\backend.js */"./resources/js/backend.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\backend.js */"./resources/js/backend.js");
 
 
 /***/ })

@@ -133,6 +133,11 @@ class BookService extends BaseService
         foreach($books as $book){
             $book['showTitle'] = $book->showTitle();
             $book['showStatus'] = $book->showStatus();
+            $book['borrowCounts'] = 0;
+            $book['action'] = 
+                '<a href="' . route('books.show', [$book->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
+                <a href="' . route('books.edit', [$book->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
+                <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';
         }
         return $books;
     }

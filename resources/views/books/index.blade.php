@@ -28,11 +28,9 @@
 
 	<div id="book">
 		<span id="BooksGetList" class="d-none">{{ route('books.getList') }}</span>
+		<span id="DataTotalCount" class="d-none">{{ $DataTotalCount }}</span>
 
-		<span id="cuurent_page" class="d-none">1</span>
-		<span id="count_pre_page" class="d-none">20</span>
-
-		<books-table :books="books" :totalcount="{{ $dataTotalCount }}" v-on:update-book="updateBook"></books-table>
+		<books-table :books="books" :rows-per-page="rowsPerPage" :page-num="pageNum" :total-page="totalPage" v-on:update-book="updateBook"></books-table>
 		<loading-modal></loading-modal>
 	</div>
 

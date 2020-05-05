@@ -22,7 +22,6 @@
         <span id="AgenciesStoreURL" class="d-none">{{ route('agencies.store') }}</span>
 
         <agency-create-form></agency-create-form>
-        <loading-modal></loading-modal>
     </div>
 
 @endsection

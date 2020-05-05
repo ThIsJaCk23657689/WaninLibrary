@@ -143,34 +143,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['books', 'totalcount'],
+  props: ['books', 'rowsPerPage', 'pageNum', 'totalPage'],
   data: function data() {
-    return {
-      rowsPerPage: 20,
-      pageNum: 1,
-      totalPage: 0
-    };
+    return {};
   },
   methods: {
     getBookList: function getBookList(pageNum) {
-      var _this = this;
-
-      var skip = (pageNum - 1) * this.rowsPerPage;
-      var take = this.rowsPerPage;
-      var BooksGetList = $('#BooksGetList').html();
-      axios.get(BooksGetList, {
-        params: {
-          skip: skip,
-          take: take
-        }
-      }).then(function (response) {
-        _this.$emit('update-book', response.data.books);
-      });
+      this.$emit('update-book', pageNum);
     }
   },
-  created: function created() {
-    this.totalPage = Math.ceil(this.totalcount / this.rowsPerPage);
-  },
+  created: function created() {},
   mounted: function mounted() {}
 });
 
@@ -251,38 +233,7 @@ var render = function() {
     _c("div", { staticClass: "card mb-3" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "table-responsive" }, [
-          _c(
-            "table",
-            {
-              staticClass: "table table-bordered",
-              attrs: { width: "100%", cellspacing: "0" }
-            },
-            [
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "tbody",
-                _vm._l(_vm.books, function(book) {
-                  return _c("tr", { key: book.id }, [
-                    _c("td", [_vm._v(_vm._s(book.id))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(book.showTitle))]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v("0")]),
-                    _vm._v(" "),
-                    _c("td", [_vm._v(_vm._s(book.showStatus))]),
-                    _vm._v(" "),
-                    _vm._m(2, true)
-                  ])
-                }),
-                0
-              )
-            ]
-          )
-        ])
-      ]),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "div",
@@ -312,35 +263,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("thead", [
-      _c("tr", [
-        _c("th", [_vm._v("編號")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("標題")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("借閱次數")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("狀態")]),
-        _vm._v(" "),
-        _c("th", [_vm._v("操作")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("td", [
-      _c("a", { staticClass: "btn btn-md btn-info", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fas fa-info-circle" })
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "btn btn-md btn-success", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "fas fa-pencil-alt" })
-      ]),
-      _vm._v(" "),
-      _c("a", { staticClass: "btn btn-md btn-danger", attrs: { href: "#" } }, [
-        _c("i", { staticClass: "far fa-trash-alt" })
+    return _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "table-responsive" }, [
+        _c(
+          "table",
+          {
+            staticClass: "table table-bordered",
+            attrs: { id: "BooksDataTable", width: "100%", cellspacing: "0" }
+          },
+          [
+            _c("thead", [
+              _c("tr", [
+                _c("th", [_vm._v("編號")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("標題")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("借閱次數")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("狀態")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("操作")])
+              ])
+            ])
+          ]
+        )
       ])
     ])
   }
@@ -373,8 +319,8 @@ var render = function() {
       "click-handler": _vm.chagePage,
       "page-range": 5,
       "margin-pages": 2,
-      "prev-text": "Prev",
-      "next-text": "Next",
+      "prev-text": "上一頁",
+      "next-text": "下一頁",
       "container-class": "pagination justify-content-center",
       "page-class": "page-item",
       "page-link-class": "page-link",
@@ -513,23 +459,73 @@ var app = new Vue({
   el: '#book',
   data: function data() {
     return {
+      rowsPerPage: 10,
+      pageNum: 1,
+      totalPage: 0,
       books: []
     };
   },
   methods: {
-    updateBook: function updateBook(books) {
-      this.books = books;
+    updateBook: function updateBook(pageNum) {
+      var _this = this;
+
+      var skip = (pageNum - 1) * this.rowsPerPage;
+      var take = this.rowsPerPage;
+      var BooksGetList = $('#BooksGetList').html();
+      $('.dataTables_processing', $('#BooksDataTable').closest('.dataTables_wrapper')).fadeIn();
+      axios.get(BooksGetList, {
+        params: {
+          skip: skip,
+          take: take
+        }
+      }).then(function (response) {
+        _this.books = response.data.books;
+        $('.dataTables_processing', $('#BooksDataTable').closest('.dataTables_wrapper')).fadeOut();
+        $('#BooksDataTable').dataTable().fnClearTable();
+
+        if (_this.books.length != 0) {
+          $('#BooksDataTable').dataTable().fnAddData(_this.books);
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
     }
   },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     var BooksGetList = $('#BooksGetList').html();
     axios.get(BooksGetList).then(function (response) {
-      _this.books = response.data.books;
+      _this2.books = response.data.books;
+      $('#BooksDataTable').on('draw.dt', function () {
+        console.log('Loading');
+      }).on('init.dt', function () {
+        console.log('Loaded');
+      }).dataTable({
+        data: _this2.books,
+        columns: [{
+          data: 'id'
+        }, {
+          data: 'showTitle'
+        }, {
+          data: 'borrowCounts'
+        }, {
+          data: 'showStatus'
+        }, {
+          data: 'action'
+        }],
+        lengthChange: false,
+        searching: false,
+        pageLength: _this2.rowsPerPage,
+        info: false,
+        paging: false,
+        processing: true
+      });
     });
   },
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
+  }
 });
 
 /***/ }),
@@ -679,7 +675,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\index.js */"./resources/js/books/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\index.js */"./resources/js/books/index.js");
 
 
 /***/ })

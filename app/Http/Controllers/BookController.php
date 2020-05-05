@@ -24,8 +24,8 @@ class BookController extends Controller
     }
 
     public function index(){
-        $dataTotalCount = $this->BookService->count();
-        return view('books.index', compact('dataTotalCount'));
+        $DataTotalCount = $this->BookService->count();
+        return view('books.index', compact('DataTotalCount'));
     }
 
     public function create(){

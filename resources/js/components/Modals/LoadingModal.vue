@@ -52,13 +52,54 @@
 
 <script>
 export default {
-    mounted() {
-        console.log('LoadingModal.vue mounted.');
-    },
+    props: [],
     data(){
         return {
             
         }
+    },
+    methods: {
+        initalModal() {
+            // 初始化並顯示 Loading Modal
+            $('#modal_good').css({'display':'none'});
+            $('#modal_error').css({'display':'none'});
+            $('#modal_spinner').slideDown();
+            $('#modal_msg').html('請稍等...');
+            $('#modal_link').slideUp();
+            $('#modal_close').slideUp();
+            $('#LoadingModal').modal('show');
+        },
+        successfulResponse(message, url) {
+            // 顯示成功的訊息 message為訊息，url為欲前往之連結
+            $('#modal_good').css({'display':'flex'});
+            $('#modal_spinner').css({'display':'none'});
+            $('#modal_msg').html(message);
+            $('#modal_link').attr('href', url);
+            $('#modal_link').slideDown();
+        },
+        failureResponse(error) {
+            // 顯示錯誤的訊息 message為訊息
+            $('#modal_error').css({'display':'flex'});
+            $('#modal_spinner').css({'display':'none'});
+            $('#modal_msg').html('發生錯誤！<br>錯誤訊息：' + error.response.data.message + '<br>');
+            $('#modal_close').slideDown();
+
+            if(error.response.data.errors == null){
+                alert('錯誤訊息：' + error.response.data.message + '\n請聯絡系統設計師處理。');
+            }else{
+                let $key = Object.keys(error.response.data.errors);
+                $key.forEach(function(item, index){
+                    $('#modal_msg').append(error.response.data.errors[item]+ '<br>');
+                    $('#' + item).addClass('is-invalid');
+                });
+            }
+        }
+    },
+    created() {
+        
+    },
+    mounted() {
+        
     },
 }
 </script>
