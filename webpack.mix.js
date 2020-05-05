@@ -20,13 +20,15 @@ mix.js('resources/js/backend.js', 'public/js')
     .js('resources/js/agencies/create.js', 'public/js/agencies')
     .js('resources/js/agencies/edit.js', 'public/js/agencies')
 
-.js('resources/js/borrowers/create.js', 'public/js/borrowers')
+.js('resources/js/borrowers/index.js', 'public/js/borrowers')
+    .js('resources/js/borrowers/create.js', 'public/js/borrowers')
     .js('resources/js/borrowers/edit.js', 'public/js/borrowers')
 
 .js('resources/js/users/create.js', 'public/js/users')
     .js('resources/js/users/edit.js', 'public/js/users')
 
-.js('resources/js/donors/create.js', 'public/js/donors')
+.js('resources/js/donors/index.js', 'public/js/donors')
+    .js('resources/js/donors/create.js', 'public/js/donors')
     .js('resources/js/donors/edit.js', 'public/js/donors')
 
 .js('resources/js/books/index.js', 'public/js/books')

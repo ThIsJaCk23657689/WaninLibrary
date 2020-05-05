@@ -21,8 +21,8 @@ class BorrowerController extends Controller
     }
 
     public function index(Request $request){
-        $borrowers = $this->BorrowerService->getList($request->skip, $request->take);
-        return view('borrowers.index', compact('borrowers'));
+        $DataTotalCount = $this->BorrowerService->count();
+        return view('borrowers.index', compact('DataTotalCount'));
     }
 
     public function create(){
@@ -83,9 +83,19 @@ class BorrowerController extends Controller
 
     // API
     public function getList(Request $request){
-        $borrowers = $this->BorrowerService->getList($request->skip, $request->take);
+        $this->validate($request, [
+            'skip' => 'nullable|integer|',
+            'take' => 'nullable|integer|max:100'
+        ]);
+
+        $skip = $request->skip ?? 0;
+        $take = $request->take ?? 10;
+
+        $borrowers = $this->BorrowerService->getList($skip, $take);
+
         return response()->json([
             'status' => 'OK',
+            'count' => $take,
             'borrowers' => $borrowers
         ]);
     }

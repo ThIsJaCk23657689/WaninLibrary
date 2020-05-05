@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -204,61 +204,36 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       UsersIndexURL: $('#UsersIndexURL').html(),
-      UsersStoreURL: $('#UsersStoreURL').html(),
-      FormErrorsMsg: []
+      UsersStoreURL: $('#UsersStoreURL').html()
     };
   },
-  methods: {},
+  methods: {
+    userCreateForm: function userCreateForm(e) {
+      var _this = this;
+
+      var url = this.UsersStoreURL;
+      var data = $(e.target).serializeObject();
+      this.$refs.loadingModal.initalModal();
+      axios.post(url, data).then(function (response) {
+        _this.$refs.loadingModal.successfulResponse('新增成功', response.data.url);
+      })["catch"](function (error) {
+        console.error('新增使用者時發生錯誤，錯誤訊息：' + error);
+
+        _this.$refs.loadingModal.failureResponse(error);
+      });
+    }
+  },
   mounted: function mounted() {
     // 地址
     $('#address_twzipcode').twzipcode({
       'readonly': false
-    });
-    $('#user_create_form').submit(function (e) {
-      e.preventDefault();
-      var url = $(this).attr('action');
-      var data = $(this).serializeObject();
-      $('#modal_good').css({
-        'display': 'none'
-      });
-      $('#modal_error').css({
-        'display': 'none'
-      });
-      $('#modal_spinner').slideDown();
-      $('#modal_msg').html('請稍等...');
-      $('#modal_link').slideUp();
-      $('#modal_close').slideUp();
-      $('#LoadingModal').modal('show');
-      axios.post(url, data).then(function (response) {
-        $('#modal_good').css({
-          'display': 'flex'
-        });
-        $('#modal_spinner').css({
-          'display': 'none'
-        });
-        $('#modal_msg').html('新增成功');
-        $('#modal_link').attr('href', response.data.url);
-        $('#modal_link').slideDown();
-      })["catch"](function (error) {
-        console.error('新增使用者時發生錯誤，錯誤訊息：' + error);
-        $('#modal_error').css({
-          'display': 'flex'
-        });
-        $('#modal_spinner').css({
-          'display': 'none'
-        });
-        $('#modal_msg').html('發生錯誤<br>錯誤訊息：' + error.response.data.message + '<br>');
-        $('#modal_close').slideDown();
-        var $key = Object.keys(error.response.data.errors);
-        $key.forEach(function (item, index) {
-          $('#modal_msg').append(error.response.data.errors[item] + '<br>');
-          $('#' + item).addClass('is-invalid');
-        });
-      });
     });
   }
 });
@@ -280,59 +255,73 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center" }, [
-    _c("div", { staticClass: "col-md-8" }, [
-      _c(
-        "form",
-        {
-          attrs: {
-            method: "POST",
-            id: "user_create_form",
-            action: _vm.UsersStoreURL
-          }
-        },
-        [
-          _vm._m(0),
-          _vm._v(" "),
-          _vm._m(1),
-          _vm._v(" "),
-          _vm._m(2),
-          _vm._v(" "),
-          _vm._m(3),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row justify-content-center" }, [
-            _c("div", { staticClass: "col-md-8" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-block btn-primary",
-                  attrs: { type: "submit" }
-                },
-                [
-                  _vm._v(
-                    "\r\n                        確認新增\r\n                    "
-                  )
-                ]
-              ),
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c(
+            "form",
+            {
+              attrs: { method: "POST", id: "user_create_form", action: "#" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.userCreateForm($event)
+                }
+              }
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _vm._m(3),
               _vm._v(" "),
               _c(
-                "a",
-                {
-                  staticClass: "btn btn-block btn-danger",
-                  attrs: { href: _vm.UsersIndexURL }
-                },
+                "div",
+                { staticClass: "form-group row justify-content-center" },
                 [
-                  _vm._v(
-                    "\r\n                        返回列表\r\n                    "
-                  )
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-block btn-primary",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            確認新增\r\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-block btn-danger",
+                        attrs: { href: _vm.UsersIndexURL }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            返回列表\r\n                        "
+                        )
+                      ]
+                    )
+                  ])
                 ]
               )
-            ])
-          ])
-        ]
-      )
-    ])
-  ])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("loading-modal", { ref: "loadingModal" })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -344,7 +333,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "name" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("姓名\r\n                        ")
+            _vm._v("姓名\r\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -778,7 +767,7 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 8:
+/***/ 9:
 /*!********************************************!*\
   !*** multi ./resources/js/users/create.js ***!
   \********************************************/

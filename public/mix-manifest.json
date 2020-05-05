@@ -12,9 +12,11 @@
     "/js/books/index.js": "/js/books/index.js",
     "/js/borrowers/create.js": "/js/borrowers/create.js",
     "/js/borrowers/edit.js": "/js/borrowers/edit.js",
+    "/js/borrowers/index.js": "/js/borrowers/index.js",
     "/js/circulation/index.js": "/js/circulation/index.js",
     "/js/donors/create.js": "/js/donors/create.js",
     "/js/donors/edit.js": "/js/donors/edit.js",
+    "/js/donors/index.js": "/js/donors/index.js",
     "/js/loginLogs/index.js": "/js/loginLogs/index.js",
     "/js/users/create.js": "/js/users/create.js",
     "/js/users/edit.js": "/js/users/edit.js"

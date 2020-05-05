@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 10);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -183,74 +183,38 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['user'],
   data: function data() {
     return {
-      user: [],
       UsersIndexURL: $('#UsersIndexURL').html(),
-      UsersUpdateURL: $('#UsersUpdateURL').html(),
-      FormErrorsMsg: []
+      UsersUpdateURL: $('#UsersUpdateURL').html()
     };
   },
-  methods: {},
-  created: function created() {
-    var _this = this;
+  methods: {
+    userUpdateForm: function userUpdateForm(e) {
+      var _this = this;
 
-    var UsersGetOneURL = $('#UsersGetOneURL').html();
-    axios.get(UsersGetOneURL).then(function (response) {
-      _this.user = response.data.user; // 地址
+      var url = this.UsersUpdateURL;
+      var data = $(e.target).serializeObject();
+      this.$refs.loadingModal.initalModal();
+      axios.patch(url, data).then(function (response) {
+        _this.$refs.loadingModal.successfulResponse('編輯成功', response.data.url);
+      })["catch"](function (error) {
+        console.error('編輯使用者時發生錯誤，錯誤訊息：' + error);
 
-      $('#address_twzipcode').twzipcode({
-        'zipcodeSel': response.data.user.address_zipcode
+        _this.$refs.loadingModal.failureResponse(error);
       });
-    });
+    }
   },
+  created: function created() {},
   mounted: function mounted() {
     // 地址
     $('#address_twzipcode').twzipcode({
       'readonly': false
-    });
-    $('#user_update_form').submit(function (e) {
-      e.preventDefault();
-      var url = $(this).attr('action');
-      var data = $(this).serializeObject();
-      $('#modal_good').css({
-        'display': 'none'
-      });
-      $('#modal_error').css({
-        'display': 'none'
-      });
-      $('#modal_spinner').slideDown();
-      $('#modal_msg').html('請稍等...');
-      $('#modal_link').slideUp();
-      $('#modal_close').slideUp();
-      $('#LoadingModal').modal('show');
-      axios.patch(url, data).then(function (response) {
-        $('#modal_good').css({
-          'display': 'flex'
-        });
-        $('#modal_spinner').css({
-          'display': 'none'
-        });
-        $('#modal_msg').html('編輯成功');
-        $('#modal_link').attr('href', response.data.url);
-        $('#modal_link').slideDown();
-      })["catch"](function (error) {
-        console.error('編輯使用者時發生錯誤，錯誤訊息：' + error);
-        $('#modal_error').css({
-          'display': 'flex'
-        });
-        $('#modal_spinner').css({
-          'display': 'none'
-        });
-        $('#modal_msg').html('發生錯誤<br>錯誤訊息：' + error.response.data.message + '<br>');
-        $('#modal_close').slideDown();
-        var $key = Object.keys(error.response.data.errors);
-        $key.forEach(function (item, index) {
-          $('#modal_msg').append(error.response.data.errors[item] + '<br>');
-          $('#' + item).addClass('is-invalid');
-        });
-      });
     });
   }
 });
@@ -272,236 +236,250 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center" }, [
-    _c("div", { staticClass: "col-md-8" }, [
-      _c(
-        "form",
-        {
-          attrs: {
-            method: "POST",
-            id: "user_update_form",
-            action: _vm.UsersUpdateURL
-          }
-        },
-        [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.user.name,
-                      expression: "user.name"
-                    }
-                  ],
-                  staticClass: "form-control mb-2",
-                  attrs: {
-                    id: "name",
-                    name: "name",
-                    type: "text",
-                    required: "",
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.user.name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c(
+            "form",
+            {
+              attrs: { method: "POST", id: "user_update_form", action: "#" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.userUpdateForm($event)
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.name,
+                          expression: "user.name"
+                        }
+                      ],
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "name",
+                        name: "name",
+                        type: "text",
+                        required: "",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.user.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "name", $event.target.value)
+                        }
                       }
-                      _vm.$set(_vm.user, "name", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-8" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(1),
+                    })
+                  ])
+                ]),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.user.email,
-                      expression: "user.email"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "email",
-                    name: "email",
-                    type: "email",
-                    required: ""
-                  },
-                  domProps: { value: _vm.user.email },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.email,
+                          expression: "user.email"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "email",
+                        name: "email",
+                        type: "email",
+                        required: ""
+                      },
+                      domProps: { value: _vm.user.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "email", $event.target.value)
+                        }
                       }
-                      _vm.$set(_vm.user, "email", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.tel,
+                          expression: "user.tel"
+                        }
+                      ],
+                      staticClass: "form-control mb-2",
+                      attrs: { id: "tel", name: "tel", type: "text" },
+                      domProps: { value: _vm.user.tel },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "tel", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c(
+                    "div",
                     {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.user.tel,
-                      expression: "user.tel"
-                    }
-                  ],
-                  staticClass: "form-control mb-2",
-                  attrs: { id: "tel", name: "tel", type: "text" },
-                  domProps: { value: _vm.user.tel },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                      staticClass: "form-group",
+                      attrs: { id: "address_twzipcode" }
+                    },
+                    [
+                      _c("label", [_vm._v("地址")]),
+                      _vm._v(" "),
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-12" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.user.address_others,
+                                expression: "user.address_others"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              id: "address_others",
+                              type: "text",
+                              name: "address_others"
+                            },
+                            domProps: { value: _vm.user.address_others },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.user,
+                                  "address_others",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "content" } }, [
+                      _vm._v("備註內容")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.user.content,
+                          expression: "user.content"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        name: "content",
+                        id: "content",
+                        cols: "30",
+                        rows: "5"
+                      },
+                      domProps: { value: _vm.user.content },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.user, "content", $event.target.value)
+                        }
                       }
-                      _vm.$set(_vm.user, "tel", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-8" }, [
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
               _c(
                 "div",
-                {
-                  staticClass: "form-group",
-                  attrs: { id: "address_twzipcode" }
-                },
+                { staticClass: "form-group row justify-content-center" },
                 [
-                  _c("label", [_vm._v("地址")]),
-                  _vm._v(" "),
-                  _vm._m(2),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.user.address_others,
-                            expression: "user.address_others"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          id: "address_others",
-                          type: "text",
-                          name: "address_others"
-                        },
-                        domProps: { value: _vm.user.address_others },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.user,
-                              "address_others",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-block btn-success",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            確認修改\r\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-block btn-danger",
+                        attrs: { href: _vm.UsersIndexURL }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            返回列表\r\n                        "
+                        )
+                      ]
+                    )
                   ])
                 ]
               )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "content" } }, [
-                  _vm._v("備註內容")
-                ]),
-                _vm._v(" "),
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.user.content,
-                      expression: "user.content"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    name: "content",
-                    id: "content",
-                    cols: "30",
-                    rows: "5"
-                  },
-                  domProps: { value: _vm.user.content },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.user, "content", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row justify-content-center" }, [
-            _c("div", { staticClass: "col-md-8" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-block btn-success",
-                  attrs: { type: "submit" }
-                },
-                [
-                  _vm._v(
-                    "\r\n                        確認修改\r\n                    "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "btn btn-block btn-danger",
-                  attrs: { href: _vm.UsersIndexURL }
-                },
-                [
-                  _vm._v(
-                    "\r\n                        返回列表\r\n                    "
-                  )
-                ]
-              )
-            ])
-          ])
-        ]
-      )
-    ])
-  ])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("loading-modal", { ref: "loadingModal" })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -510,7 +488,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "name" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("姓名\r\n                        ")
+      _vm._v("姓名\r\n                            ")
     ])
   },
   function() {
@@ -755,16 +733,29 @@ Vue.component('user-update-form', __webpack_require__(/*! ./../components/Users/
 var app = new Vue({
   el: '#user',
   data: function data() {
-    return {};
+    return {
+      user: []
+    };
   },
   methods: {},
-  created: function created() {},
+  created: function created() {
+    var _this = this;
+
+    var UsersGetOneURL = $('#UsersGetOneURL').html();
+    axios.get(UsersGetOneURL).then(function (response) {
+      _this.user = response.data.user; // 地址
+
+      $('#address_twzipcode').twzipcode({
+        'zipcodeSel': response.data.user.address_zipcode
+      });
+    });
+  },
   mounted: function mounted() {}
 });
 
 /***/ }),
 
-/***/ 9:
+/***/ 10:
 /*!******************************************!*\
   !*** multi ./resources/js/users/edit.js ***!
   \******************************************/

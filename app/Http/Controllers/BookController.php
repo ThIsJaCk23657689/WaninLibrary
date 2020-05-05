@@ -68,7 +68,7 @@ class BookController extends Controller
         ]);
 
         $skip = $request->skip ?? 0;
-        $take = $request->take ?? 20;
+        $take = $request->take ?? 10;
 
         $books = $this->BookService->getList($skip, $take);
 

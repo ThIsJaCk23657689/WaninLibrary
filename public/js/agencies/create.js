@@ -182,8 +182,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       AgenciesIndexURL: $('#AgenciesIndexURL').html(),
-      AgenciesStoreURL: $('#AgenciesStoreURL').html(),
-      FormErrorsMsg: []
+      AgenciesStoreURL: $('#AgenciesStoreURL').html()
     };
   },
   methods: {

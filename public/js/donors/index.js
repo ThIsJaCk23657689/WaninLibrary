@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 14);
+/******/ 	return __webpack_require__(__webpack_require__.s = 11);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Books/BooksTable.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Books/BooksTable.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Donors/DonorsTable.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Donors/DonorsTable.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -124,32 +124,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['books', 'rowsPerPage', 'pageNum', 'totalPage'],
+  props: ['donors', 'rowsPerPage', 'pageNum', 'totalPage'],
   data: function data() {
     return {};
   },
   methods: {
-    getBookList: function getBookList(pageNum) {
-      this.$emit('update-book', pageNum);
+    getDonorList: function getDonorList(pageNum) {
+      this.$emit('update-donors', pageNum);
     }
   },
   created: function created() {},
@@ -214,10 +196,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Books/BooksTable.vue?vue&type=template&id=55045458&":
-/*!*******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Books/BooksTable.vue?vue&type=template&id=55045458& ***!
-  \*******************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Donors/DonorsTable.vue?vue&type=template&id=20aa3eca&":
+/*!*********************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Donors/DonorsTable.vue?vue&type=template&id=20aa3eca& ***!
+  \*********************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -241,7 +223,7 @@ var render = function() {
         [
           _c("paginate-custom", {
             attrs: { pageNum: _vm.pageNum, totalPage: _vm.totalPage },
-            on: { updatePage: _vm.getBookList }
+            on: { updatePage: _vm.getDonorList }
           })
         ],
         1
@@ -255,8 +237,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-table mr-2" }),
-      _vm._v("書本列表\r\n        ")
+      _c("i", { staticClass: "fas fa-table" }),
+      _vm._v("借閱人列表\r\n        ")
     ])
   },
   function() {
@@ -269,18 +251,20 @@ var staticRenderFns = [
           "table",
           {
             staticClass: "table table-bordered",
-            attrs: { id: "BooksDataTable", width: "100%", cellspacing: "0" }
+            attrs: { id: "DonorsDataTable", width: "100%", cellspacing: "0" }
           },
           [
             _c("thead", [
               _c("tr", [
                 _c("th", [_vm._v("編號")]),
                 _vm._v(" "),
-                _c("th", [_vm._v("標題")]),
+                _c("th", [_vm._v("名稱")]),
                 _vm._v(" "),
-                _c("th", [_vm._v("借閱次數")]),
+                _c("th", [_vm._v("聯絡方式")]),
                 _vm._v(" "),
-                _c("th", [_vm._v("狀態")]),
+                _c("th", [_vm._v("曝光程度")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("捐贈數量")]),
                 _vm._v(" "),
                 _c("th", [_vm._v("操作")])
               ])
@@ -446,101 +430,17 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/books/index.js":
-/*!*************************************!*\
-  !*** ./resources/js/books/index.js ***!
-  \*************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-Vue.component('books-table', __webpack_require__(/*! ./../components/Books/BooksTable.vue */ "./resources/js/components/Books/BooksTable.vue")["default"]);
-Vue.component('paginate-custom', __webpack_require__(/*! ./../components/Partials/PaginateCustom.vue */ "./resources/js/components/Partials/PaginateCustom.vue")["default"]);
-var app = new Vue({
-  el: '#book',
-  data: function data() {
-    return {
-      rowsPerPage: 10,
-      pageNum: 1,
-      totalPage: 0,
-      books: []
-    };
-  },
-  methods: {
-    updateBook: function updateBook(pageNum) {
-      var _this = this;
-
-      var skip = (pageNum - 1) * this.rowsPerPage;
-      var take = this.rowsPerPage;
-      var BooksGetList = $('#BooksGetList').html();
-      $('.dataTables_processing', $('#BooksDataTable').closest('.dataTables_wrapper')).fadeIn();
-      axios.get(BooksGetList, {
-        params: {
-          skip: skip,
-          take: take
-        }
-      }).then(function (response) {
-        _this.books = response.data.books;
-        $('.dataTables_processing', $('#BooksDataTable').closest('.dataTables_wrapper')).fadeOut();
-        $('#BooksDataTable').dataTable().fnClearTable();
-
-        if (_this.books.length != 0) {
-          $('#BooksDataTable').dataTable().fnAddData(_this.books);
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  },
-  created: function created() {
-    var _this2 = this;
-
-    var BooksGetList = $('#BooksGetList').html();
-    axios.get(BooksGetList).then(function (response) {
-      _this2.books = response.data.books;
-      $('#BooksDataTable').on('draw.dt', function () {
-        console.log('drawing a table');
-      }).on('init.dt', function () {
-        console.log('intial a table');
-      }).dataTable({
-        data: _this2.books,
-        columns: [{
-          data: 'id'
-        }, {
-          data: 'showTitle'
-        }, {
-          data: 'borrowCounts'
-        }, {
-          data: 'showStatus'
-        }, {
-          data: 'action'
-        }],
-        lengthChange: false,
-        searching: false,
-        pageLength: _this2.rowsPerPage,
-        info: false,
-        paging: false,
-        processing: true
-      });
-    });
-  },
-  mounted: function mounted() {
-    this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
-  }
-});
-
-/***/ }),
-
-/***/ "./resources/js/components/Books/BooksTable.vue":
-/*!******************************************************!*\
-  !*** ./resources/js/components/Books/BooksTable.vue ***!
-  \******************************************************/
+/***/ "./resources/js/components/Donors/DonorsTable.vue":
+/*!********************************************************!*\
+  !*** ./resources/js/components/Donors/DonorsTable.vue ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BooksTable_vue_vue_type_template_id_55045458___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BooksTable.vue?vue&type=template&id=55045458& */ "./resources/js/components/Books/BooksTable.vue?vue&type=template&id=55045458&");
-/* harmony import */ var _BooksTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BooksTable.vue?vue&type=script&lang=js& */ "./resources/js/components/Books/BooksTable.vue?vue&type=script&lang=js&");
+/* harmony import */ var _DonorsTable_vue_vue_type_template_id_20aa3eca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DonorsTable.vue?vue&type=template&id=20aa3eca& */ "./resources/js/components/Donors/DonorsTable.vue?vue&type=template&id=20aa3eca&");
+/* harmony import */ var _DonorsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DonorsTable.vue?vue&type=script&lang=js& */ "./resources/js/components/Donors/DonorsTable.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -550,9 +450,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _BooksTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _BooksTable_vue_vue_type_template_id_55045458___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BooksTable_vue_vue_type_template_id_55045458___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _DonorsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DonorsTable_vue_vue_type_template_id_20aa3eca___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DonorsTable_vue_vue_type_template_id_20aa3eca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -562,38 +462,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Books/BooksTable.vue"
+component.options.__file = "resources/js/components/Donors/DonorsTable.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Books/BooksTable.vue?vue&type=script&lang=js&":
-/*!*******************************************************************************!*\
-  !*** ./resources/js/components/Books/BooksTable.vue?vue&type=script&lang=js& ***!
-  \*******************************************************************************/
+/***/ "./resources/js/components/Donors/DonorsTable.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************!*\
+  !*** ./resources/js/components/Donors/DonorsTable.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BooksTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BooksTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Books/BooksTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BooksTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DonorsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./DonorsTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Donors/DonorsTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DonorsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Books/BooksTable.vue?vue&type=template&id=55045458&":
-/*!*************************************************************************************!*\
-  !*** ./resources/js/components/Books/BooksTable.vue?vue&type=template&id=55045458& ***!
-  \*************************************************************************************/
+/***/ "./resources/js/components/Donors/DonorsTable.vue?vue&type=template&id=20aa3eca&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/Donors/DonorsTable.vue?vue&type=template&id=20aa3eca& ***!
+  \***************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BooksTable_vue_vue_type_template_id_55045458___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BooksTable.vue?vue&type=template&id=55045458& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Books/BooksTable.vue?vue&type=template&id=55045458&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BooksTable_vue_vue_type_template_id_55045458___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DonorsTable_vue_vue_type_template_id_20aa3eca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./DonorsTable.vue?vue&type=template&id=20aa3eca& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Donors/DonorsTable.vue?vue&type=template&id=20aa3eca&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DonorsTable_vue_vue_type_template_id_20aa3eca___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BooksTable_vue_vue_type_template_id_55045458___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DonorsTable_vue_vue_type_template_id_20aa3eca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -668,14 +568,100 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 14:
-/*!*******************************************!*\
-  !*** multi ./resources/js/books/index.js ***!
-  \*******************************************/
+/***/ "./resources/js/donors/index.js":
+/*!**************************************!*\
+  !*** ./resources/js/donors/index.js ***!
+  \**************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\index.js */"./resources/js/books/index.js");
+Vue.component('donors-table', __webpack_require__(/*! ./../components/Donors/DonorsTable.vue */ "./resources/js/components/Donors/DonorsTable.vue")["default"]);
+Vue.component('paginate-custom', __webpack_require__(/*! ./../components/Partials/PaginateCustom.vue */ "./resources/js/components/Partials/PaginateCustom.vue")["default"]);
+var app = new Vue({
+  el: '#donor',
+  data: function data() {
+    return {
+      rowsPerPage: 10,
+      pageNum: 1,
+      totalPage: 0,
+      donors: []
+    };
+  },
+  methods: {
+    updateDonors: function updateDonors(pageNum) {
+      var _this = this;
+
+      var skip = (pageNum - 1) * this.rowsPerPage;
+      var take = this.rowsPerPage;
+      var DonorsGetList = $('#DonorsGetList').html();
+      $('.dataTables_processing', $('#DonorsDataTable').closest('.dataTables_wrapper')).fadeIn();
+      axios.get(DonorsGetList, {
+        params: {
+          skip: skip,
+          take: take
+        }
+      }).then(function (response) {
+        _this.donors = response.data.donors;
+        $('.dataTables_processing', $('#DonorsDataTable').closest('.dataTables_wrapper')).fadeOut();
+        $('#DonorsDataTable').dataTable().fnClearTable();
+
+        if (_this.donors.length != 0) {
+          $('#DonorsDataTable').dataTable().fnAddData(_this.donors);
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    var DonorsGetList = $('#DonorsGetList').html();
+    axios.get(DonorsGetList).then(function (response) {
+      _this2.donors = response.data.donors;
+      $('#DonorsDataTable').on('draw.dt', function () {
+        console.log('drawing a table');
+      }).on('init.dt', function () {
+        console.log('intial a table');
+      }).dataTable({
+        data: _this2.donors,
+        columns: [{
+          data: 'id'
+        }, {
+          data: 'name'
+        }, {
+          data: 'showContact'
+        }, {
+          data: 'showExposure'
+        }, {
+          data: 'donateAmount'
+        }, {
+          data: 'action'
+        }],
+        lengthChange: false,
+        searching: false,
+        pageLength: _this2.rowsPerPage,
+        info: false,
+        paging: false,
+        processing: true
+      });
+    });
+  },
+  mounted: function mounted() {
+    this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
+  }
+});
+
+/***/ }),
+
+/***/ 11:
+/*!********************************************!*\
+  !*** multi ./resources/js/donors/index.js ***!
+  \********************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\donors\index.js */"./resources/js/donors/index.js");
 
 
 /***/ })

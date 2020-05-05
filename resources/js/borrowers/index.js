@@ -1,34 +1,34 @@
-Vue.component('books-table', require('./../components/Books/BooksTable.vue').default);
+Vue.component('borrowers-table', require('./../components/Borrowers/BorrowersTable.vue').default);
 Vue.component('paginate-custom', require('./../components/Partials/PaginateCustom.vue').default);
 
 const app = new Vue({
-    el: '#book',
+    el: '#borrower',
     data() {
         return {
             rowsPerPage: 10,
             pageNum: 1,
             totalPage: 0,
-            books: []
+            borrowers: []
         }
     },
     methods: {
-        updateBook(pageNum) {
+        updateBorrowers(pageNum) {
             let skip = (pageNum - 1) * this.rowsPerPage;
             let take = this.rowsPerPage;
 
-            let BooksGetList = $('#BooksGetList').html();
-            $('.dataTables_processing', $('#BooksDataTable').closest('.dataTables_wrapper')).fadeIn();
-            axios.get(BooksGetList, {
+            let BorrowersGetList = $('#BorrowersGetList').html();
+            $('.dataTables_processing', $('#BorrowersDataTable').closest('.dataTables_wrapper')).fadeIn();
+            axios.get(BorrowersGetList, {
                 params: {
                     skip: skip,
                     take: take
                 }
             }).then(response => {
-                this.books = response.data.books;
-                $('.dataTables_processing', $('#BooksDataTable').closest('.dataTables_wrapper')).fadeOut();
-                $('#BooksDataTable').dataTable().fnClearTable();
-                if (this.books.length != 0) {
-                    $('#BooksDataTable').dataTable().fnAddData(this.books);
+                this.borrowers = response.data.borrowers;
+                $('.dataTables_processing', $('#BorrowersDataTable').closest('.dataTables_wrapper')).fadeOut();
+                $('#BorrowersDataTable').dataTable().fnClearTable();
+                if (this.borrowers.length != 0) {
+                    $('#BorrowersDataTable').dataTable().fnAddData(this.borrowers);
                 }
             }).catch(error => {
                 console.log(error);
@@ -36,21 +36,23 @@ const app = new Vue({
         }
     },
     created(){
-        let BooksGetList = $('#BooksGetList').html();
-        axios.get(BooksGetList).then(response => {
-            this.books = response.data.books;
+        let BorrowersGetList = $('#BorrowersGetList').html();
+        axios.get(BorrowersGetList).then(response => {
+            this.borrowers = response.data.borrowers;
 
-            $('#BooksDataTable').on('draw.dt', function () {
+            $('#BorrowersDataTable').on('draw.dt', function () {
                 console.log('drawing a table');
             }).on('init.dt', function () {
                 console.log('intial a table');
             }).dataTable({
-                data: this.books,
+                data: this.borrowers,
                 columns: [
                     { data: 'id' },
-                    { data: 'showTitle' },
+                    { data: 'name' },
+                    { data: 'tel' },
+                    { data: 'showAgencyName' },
                     { data: 'borrowCounts' },
-                    { data: 'showStatus' },
+                    { data: 'expiredCounts' },
                     { data: 'action' },
                 ],
                 lengthChange: false,

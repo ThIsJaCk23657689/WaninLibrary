@@ -87,7 +87,6 @@ export default {
         return {
             AgenciesIndexURL: $('#AgenciesIndexURL').html(),
             AgenciesStoreURL: $('#AgenciesStoreURL').html(),
-            FormErrorsMsg: [],
         }
     },
     methods: {

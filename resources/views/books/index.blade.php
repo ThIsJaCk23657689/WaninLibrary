@@ -31,7 +31,6 @@
 		<span id="DataTotalCount" class="d-none">{{ $DataTotalCount }}</span>
 
 		<books-table :books="books" :rows-per-page="rowsPerPage" :page-num="pageNum" :total-page="totalPage" v-on:update-book="updateBook"></books-table>
-		<loading-modal></loading-modal>
 	</div>
 
 @endsection

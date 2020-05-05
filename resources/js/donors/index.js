@@ -1,34 +1,34 @@
-Vue.component('books-table', require('./../components/Books/BooksTable.vue').default);
+Vue.component('donors-table', require('./../components/Donors/DonorsTable.vue').default);
 Vue.component('paginate-custom', require('./../components/Partials/PaginateCustom.vue').default);
 
 const app = new Vue({
-    el: '#book',
+    el: '#donor',
     data() {
         return {
             rowsPerPage: 10,
             pageNum: 1,
             totalPage: 0,
-            books: []
+            donors: []
         }
     },
     methods: {
-        updateBook(pageNum) {
+        updateDonors(pageNum) {
             let skip = (pageNum - 1) * this.rowsPerPage;
             let take = this.rowsPerPage;
 
-            let BooksGetList = $('#BooksGetList').html();
-            $('.dataTables_processing', $('#BooksDataTable').closest('.dataTables_wrapper')).fadeIn();
-            axios.get(BooksGetList, {
+            let DonorsGetList = $('#DonorsGetList').html();
+            $('.dataTables_processing', $('#DonorsDataTable').closest('.dataTables_wrapper')).fadeIn();
+            axios.get(DonorsGetList, {
                 params: {
                     skip: skip,
                     take: take
                 }
             }).then(response => {
-                this.books = response.data.books;
-                $('.dataTables_processing', $('#BooksDataTable').closest('.dataTables_wrapper')).fadeOut();
-                $('#BooksDataTable').dataTable().fnClearTable();
-                if (this.books.length != 0) {
-                    $('#BooksDataTable').dataTable().fnAddData(this.books);
+                this.donors = response.data.donors;
+                $('.dataTables_processing', $('#DonorsDataTable').closest('.dataTables_wrapper')).fadeOut();
+                $('#DonorsDataTable').dataTable().fnClearTable();
+                if (this.donors.length != 0) {
+                    $('#DonorsDataTable').dataTable().fnAddData(this.donors);
                 }
             }).catch(error => {
                 console.log(error);
@@ -36,21 +36,22 @@ const app = new Vue({
         }
     },
     created(){
-        let BooksGetList = $('#BooksGetList').html();
-        axios.get(BooksGetList).then(response => {
-            this.books = response.data.books;
+        let DonorsGetList = $('#DonorsGetList').html();
+        axios.get(DonorsGetList).then(response => {
+            this.donors = response.data.donors;
 
-            $('#BooksDataTable').on('draw.dt', function () {
+            $('#DonorsDataTable').on('draw.dt', function () {
                 console.log('drawing a table');
             }).on('init.dt', function () {
                 console.log('intial a table');
             }).dataTable({
-                data: this.books,
+                data: this.donors,
                 columns: [
                     { data: 'id' },
-                    { data: 'showTitle' },
-                    { data: 'borrowCounts' },
-                    { data: 'showStatus' },
+                    { data: 'name' },
+                    { data: 'showContact' },
+                    { data: 'showExposure' },
+                    { data: 'donateAmount' },
                     { data: 'action' },
                 ],
                 lengthChange: false,

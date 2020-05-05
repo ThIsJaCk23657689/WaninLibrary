@@ -22,8 +22,7 @@
         <span id="UsersGetOneURL" class="d-none">{{ route('users.getOne', [$user->id]) }}</span>
         <span id="UsersUpdateURL" class="d-none">{{ route('users.update', [$user->id]) }}</span>
 
-        <user-update-form></user-update-form>
-        <loading-modal></loading-modal>
+        <user-update-form :user="user"></user-update-form>
     </div>
 
 @endsection

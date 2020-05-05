@@ -27,8 +27,21 @@ class BorrowerService extends BaseService
         return $borrower->id;
     }
 
+    public function count(){
+        return BorrowerEloquent::count();
+    }
+
     public function getList($skip, $take){
         $borrowers = BorrowerEloquent::skip($skip)->take($take)->get();
+        foreach($borrowers as $borrower){
+            $borrower['showAgencyName'] = $borrower->showAgencyName();
+            $borrower['borrowCounts'] = 0;
+            $borrower['expiredCounts'] = 0;
+            $borrower['action'] = 
+                '<a href="' . route('borrowers.show', [$borrower->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
+                <a href="' . route('borrowers.edit', [$borrower->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
+                <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';
+        }
         return $borrowers;
     }
 
@@ -68,7 +81,7 @@ class BorrowerService extends BaseService
 
     public function activated($request){
         $borrower = $this->getOne($request->id);
-        //1.代表未停權 0.停權
+        // 1.代表未停權 0.停權
         if($borrower->acticated == 1){
             $borrower->update([
                 'content' => $request->content,

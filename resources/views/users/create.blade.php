@@ -22,7 +22,6 @@
         <span id="UsersStoreURL" class="d-none">{{ route('users.store') }}</span>
 
         <user-create-form></user-create-form>
-        <loading-modal></loading-modal>
     </div>
 
 @endsection

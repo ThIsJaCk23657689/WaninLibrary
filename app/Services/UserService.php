@@ -74,7 +74,11 @@ class UserService extends BaseService
             'content' => $request->content,
         ]);
 
-        return ['status'=>'OK','updated_id'=> $user->id,'url'=>route('users.index')];
+        return [
+            'status' => 'OK',
+            'updated_id' => $user->id,
+            'url' => route('users.show', [$id])
+        ];
     }
 
     public function delete($id)
