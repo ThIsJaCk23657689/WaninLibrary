@@ -37,7 +37,7 @@ class BorrowerService extends BaseService
             $borrower['showAgencyName'] = $borrower->showAgencyName();
             $borrower['borrowCounts'] = 0;
             $borrower['expiredCounts'] = 0;
-            $borrower['action'] = 
+            $borrower['action'] =
                 '<a href="' . route('borrowers.show', [$borrower->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
                 <a href="' . route('borrowers.edit', [$borrower->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
                 <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';
@@ -47,6 +47,7 @@ class BorrowerService extends BaseService
 
     public function getOne($id){
         $borrower = BorrowerEloquent::findOrFail($id);
+        $borrower['showAgencyName'] = $borrower->showAgencyName();
         return $borrower;
     }
 
@@ -62,7 +63,7 @@ class BorrowerService extends BaseService
             'job_title' => $request->job_title,
             'status' => $request->status,
             'activated' => $request->activated ?? 0,
-            
+
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,

@@ -9,10 +9,18 @@ use Carbon\Carbon;
 
 class BorrowLogService extends BaseService
 {
-
+    public function count(){
+        return BorrowLogEloquent::count();
+    }
 
     public function getList($skip, $take){
         $logs = BorrowLogEloquent::skip($skip)->take($take)->get();
+        foreach($logs as $log){
+            $log['showStatus'] = $log->showStatus();
+            $log['showTitle'] = $log->showTitle();
+            $log['action'] =
+                '<a href="' . route('borrowLogs.show', [$log->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
+        }
         return $logs;
     }
 

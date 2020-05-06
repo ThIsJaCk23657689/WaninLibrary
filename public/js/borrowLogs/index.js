@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 19);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Donors/DonorsTable.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Donors/DonorsTable.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -124,14 +124,17 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['donors', 'rowsPerPage', 'pageNum', 'totalPage'],
+  props: ['borrowLogs', 'rowsPerPage', 'pageNum', 'totalPage'],
   data: function data() {
     return {};
   },
   methods: {
-    getDonorList: function getDonorList(pageNum) {
-      this.$emit('update-donors', pageNum);
+    getBorrowLogList: function getBorrowLogList(pageNum) {
+      this.$emit('update-borrow-log', pageNum);
     }
   },
   created: function created() {},
@@ -196,10 +199,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Donors/DonorsTable.vue?vue&type=template&id=20aa3eca&":
-/*!*********************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Donors/DonorsTable.vue?vue&type=template&id=20aa3eca& ***!
-  \*********************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=template&id=c0961dac&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=template&id=c0961dac& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -223,7 +226,7 @@ var render = function() {
         [
           _c("paginate-custom", {
             attrs: { pageNum: _vm.pageNum, totalPage: _vm.totalPage },
-            on: { updatePage: _vm.getDonorList }
+            on: { updatePage: _vm.getBorrowLogList }
           })
         ],
         1
@@ -237,8 +240,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-table" }),
-      _vm._v("借閱人列表\r\n        ")
+      _c("i", { staticClass: "fas fa-table mr-2" }),
+      _vm._v("借還書紀錄\n        ")
     ])
   },
   function() {
@@ -251,20 +254,30 @@ var staticRenderFns = [
           "table",
           {
             staticClass: "table table-bordered",
-            attrs: { id: "DonorsDataTable", width: "100%", cellspacing: "0" }
+            attrs: {
+              id: "BorrowLogsDataTable",
+              width: "100%",
+              cellspacing: "0"
+            }
           },
           [
             _c("thead", [
               _c("tr", [
                 _c("th", [_vm._v("編號")]),
                 _vm._v(" "),
-                _c("th", [_vm._v("名稱")]),
+                _c("th", [_vm._v("借閱人編號")]),
                 _vm._v(" "),
-                _c("th", [_vm._v("聯絡方式")]),
+                _c("th", [_vm._v("借閱人姓名")]),
                 _vm._v(" "),
-                _c("th", [_vm._v("曝光程度")]),
+                _c("th", [_vm._v("書籍編號")]),
                 _vm._v(" "),
-                _c("th", [_vm._v("捐贈數量")]),
+                _c("th", [_vm._v("書名")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("索書號")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("狀態")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("日期")]),
                 _vm._v(" "),
                 _c("th", [_vm._v("操作")])
               ])
@@ -430,17 +443,109 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/components/Donors/DonorsTable.vue":
-/*!********************************************************!*\
-  !*** ./resources/js/components/Donors/DonorsTable.vue ***!
-  \********************************************************/
+/***/ "./resources/js/borrowLogs/index.js":
+/*!******************************************!*\
+  !*** ./resources/js/borrowLogs/index.js ***!
+  \******************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+Vue.component('borrow-logs-table', __webpack_require__(/*! ./../components/BorrowLogs/BorrowLogsTable.vue */ "./resources/js/components/BorrowLogs/BorrowLogsTable.vue")["default"]);
+Vue.component('paginate-custom', __webpack_require__(/*! ./../components/Partials/PaginateCustom.vue */ "./resources/js/components/Partials/PaginateCustom.vue")["default"]);
+var app = new Vue({
+  el: '#borrowLog',
+  data: function data() {
+    return {
+      rowsPerPage: 10,
+      pageNum: 1,
+      totalPage: 0,
+      borrowLogs: []
+    };
+  },
+  methods: {
+    updateBorrowLog: function updateBorrowLog(pageNum) {
+      var _this = this;
+
+      var skip = (pageNum - 1) * this.rowsPerPage;
+      var take = this.rowsPerPage;
+      var BorrowLogsGetList = $('#BorrowLogsGetList').html();
+      $('.dataTables_processing', $('#BorrowLogsDataTable').closest('.dataTables_wrapper')).fadeIn();
+      axios.get(BorrowLogsGetList, {
+        params: {
+          skip: skip,
+          take: take
+        }
+      }).then(function (response) {
+        _this.borrowLogs = response.data.logs;
+        $('.dataTables_processing', $('#BorrowLogsDataTable').closest('.dataTables_wrapper')).fadeOut();
+        $('#BorrowLogsDataTable').dataTable().fnClearTable();
+
+        if (_this.borrowLogs.length != 0) {
+          $('#BorrowLogsDataTable').dataTable().fnAddData(_this.borrowLogs);
+        }
+      })["catch"](function (error) {
+        console.log(error);
+      });
+    }
+  },
+  created: function created() {
+    var _this2 = this;
+
+    var BorrowLogsGetList = $('#BorrowLogsGetList').html();
+    axios.get(BorrowLogsGetList).then(function (response) {
+      _this2.borrowLogs = response.data.logs;
+      $('#BorrowLogsDataTable').on('draw.dt', function () {
+        console.log('drawing a table');
+      }).on('init.dt', function () {
+        console.log('intial a table');
+      }).dataTable({
+        data: _this2.borrowLogs,
+        columns: [{
+          data: 'id'
+        }, {
+          data: 'borrower_id'
+        }, {
+          data: 'borrower_name'
+        }, {
+          data: 'book_id'
+        }, {
+          data: 'showTitle'
+        }, {
+          data: 'callnum'
+        }, {
+          data: 'showStatus'
+        }, {
+          data: 'created_at'
+        }, {
+          data: 'action'
+        }],
+        lengthChange: false,
+        searching: false,
+        pageLength: _this2.rowsPerPage,
+        info: false,
+        paging: false,
+        processing: true
+      });
+    });
+  },
+  mounted: function mounted() {
+    this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
+  }
+});
+
+/***/ }),
+
+/***/ "./resources/js/components/BorrowLogs/BorrowLogsTable.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/BorrowLogs/BorrowLogsTable.vue ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _DonorsTable_vue_vue_type_template_id_20aa3eca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DonorsTable.vue?vue&type=template&id=20aa3eca& */ "./resources/js/components/Donors/DonorsTable.vue?vue&type=template&id=20aa3eca&");
-/* harmony import */ var _DonorsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DonorsTable.vue?vue&type=script&lang=js& */ "./resources/js/components/Donors/DonorsTable.vue?vue&type=script&lang=js&");
+/* harmony import */ var _BorrowLogsTable_vue_vue_type_template_id_c0961dac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BorrowLogsTable.vue?vue&type=template&id=c0961dac& */ "./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=template&id=c0961dac&");
+/* harmony import */ var _BorrowLogsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BorrowLogsTable.vue?vue&type=script&lang=js& */ "./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -450,9 +555,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _DonorsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _DonorsTable_vue_vue_type_template_id_20aa3eca___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _DonorsTable_vue_vue_type_template_id_20aa3eca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _BorrowLogsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BorrowLogsTable_vue_vue_type_template_id_c0961dac___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BorrowLogsTable_vue_vue_type_template_id_c0961dac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -462,38 +567,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Donors/DonorsTable.vue"
+component.options.__file = "resources/js/components/BorrowLogs/BorrowLogsTable.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Donors/DonorsTable.vue?vue&type=script&lang=js&":
-/*!*********************************************************************************!*\
-  !*** ./resources/js/components/Donors/DonorsTable.vue?vue&type=script&lang=js& ***!
-  \*********************************************************************************/
+/***/ "./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DonorsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./DonorsTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Donors/DonorsTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DonorsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowLogsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BorrowLogsTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowLogsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Donors/DonorsTable.vue?vue&type=template&id=20aa3eca&":
-/*!***************************************************************************************!*\
-  !*** ./resources/js/components/Donors/DonorsTable.vue?vue&type=template&id=20aa3eca& ***!
-  \***************************************************************************************/
+/***/ "./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=template&id=c0961dac&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=template&id=c0961dac& ***!
+  \***********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DonorsTable_vue_vue_type_template_id_20aa3eca___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./DonorsTable.vue?vue&type=template&id=20aa3eca& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Donors/DonorsTable.vue?vue&type=template&id=20aa3eca&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DonorsTable_vue_vue_type_template_id_20aa3eca___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowLogsTable_vue_vue_type_template_id_c0961dac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BorrowLogsTable.vue?vue&type=template&id=c0961dac& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=template&id=c0961dac&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowLogsTable_vue_vue_type_template_id_c0961dac___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DonorsTable_vue_vue_type_template_id_20aa3eca___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowLogsTable_vue_vue_type_template_id_c0961dac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -568,100 +673,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./resources/js/donors/index.js":
-/*!**************************************!*\
-  !*** ./resources/js/donors/index.js ***!
-  \**************************************/
+/***/ 19:
+/*!************************************************!*\
+  !*** multi ./resources/js/borrowLogs/index.js ***!
+  \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-Vue.component('donors-table', __webpack_require__(/*! ./../components/Donors/DonorsTable.vue */ "./resources/js/components/Donors/DonorsTable.vue")["default"]);
-Vue.component('paginate-custom', __webpack_require__(/*! ./../components/Partials/PaginateCustom.vue */ "./resources/js/components/Partials/PaginateCustom.vue")["default"]);
-var app = new Vue({
-  el: '#donor',
-  data: function data() {
-    return {
-      rowsPerPage: 10,
-      pageNum: 1,
-      totalPage: 0,
-      donors: []
-    };
-  },
-  methods: {
-    updateDonors: function updateDonors(pageNum) {
-      var _this = this;
-
-      var skip = (pageNum - 1) * this.rowsPerPage;
-      var take = this.rowsPerPage;
-      var DonorsGetList = $('#DonorsGetList').html();
-      $('.dataTables_processing', $('#DonorsDataTable').closest('.dataTables_wrapper')).fadeIn();
-      axios.get(DonorsGetList, {
-        params: {
-          skip: skip,
-          take: take
-        }
-      }).then(function (response) {
-        _this.donors = response.data.donors;
-        $('.dataTables_processing', $('#DonorsDataTable').closest('.dataTables_wrapper')).fadeOut();
-        $('#DonorsDataTable').dataTable().fnClearTable();
-
-        if (_this.donors.length != 0) {
-          $('#DonorsDataTable').dataTable().fnAddData(_this.donors);
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    }
-  },
-  created: function created() {
-    var _this2 = this;
-
-    var DonorsGetList = $('#DonorsGetList').html();
-    axios.get(DonorsGetList).then(function (response) {
-      _this2.donors = response.data.donors;
-      $('#DonorsDataTable').on('draw.dt', function () {
-        console.log('drawing a table');
-      }).on('init.dt', function () {
-        console.log('intial a table');
-      }).dataTable({
-        data: _this2.donors,
-        columns: [{
-          data: 'id'
-        }, {
-          data: 'name'
-        }, {
-          data: 'showContact'
-        }, {
-          data: 'showExposure'
-        }, {
-          data: 'donateAmount'
-        }, {
-          data: 'action'
-        }],
-        lengthChange: false,
-        searching: false,
-        pageLength: _this2.rowsPerPage,
-        info: false,
-        paging: false,
-        processing: true
-      });
-    });
-  },
-  mounted: function mounted() {
-    this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
-  }
-});
-
-/***/ }),
-
-/***/ 11:
-/*!********************************************!*\
-  !*** multi ./resources/js/donors/index.js ***!
-  \********************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\donors\index.js */"./resources/js/donors/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\borrowLogs\index.js */"./resources/js/borrowLogs/index.js");
 
 
 /***/ })

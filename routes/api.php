@@ -95,7 +95,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::post('Notified','BorrowController@Notified');
 
     // 借閱日誌(logs)相關
-    Route::get('getBorrowLogs','BorrowLogController@getBorrowLogs');
+    Route::get('getBorrowLogs','BorrowLogController@getList')->name('borrowLogs.getList');
     Route::get('getBorrowLogsByBorrowerId','BorrowLogController@getBorrowLogsByBorrowerId');
     Route::get('getBorrowLogsByBookId','BorrowLogController@getBorrowLogsByBookId');
     Route::get('getBorrowLogsByStatus','BorrowLogController@getBorrowLogsByStatus');

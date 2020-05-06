@@ -74,7 +74,7 @@
 		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
         <a class="dropdown-item" href="{{ route('loginLogs.index') }}">{{ __('Login') }}</a>
-			<a class="dropdown-item" href="#">借還書</a>
+			<a class="dropdown-item" href="{{ route('borrowLogs.index') }}">借還書</a>
 		</div>
 	</li>
 

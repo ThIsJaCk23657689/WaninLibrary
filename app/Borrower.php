@@ -29,4 +29,34 @@ class Borrower extends Model
     public function showAgencyName(){
         return is_null($this->agency) ? '無' : $this->agency->name ;
     }
+    //0.一般民眾 1.符合社福資格
+    public function showStatus(){
+        switch ($this->status){
+            case 0:
+                $result = '一般民眾';
+                break;
+            case 1:
+                $result = '符合社福資格';
+                break;
+        }
+        return $result;
+    }
+
+    public function showAddress(){
+        $address = $this->address_zipcode . $this->address_county . $this->address_district . $this->address_others;
+        return ($address == "" || $address == null) ? '無' : $address;
+    }
+
+    //0.停權 1.未停權
+    public function showActivated(){
+        switch ($this->status){
+            case 0:
+                $result = '停權';
+                break;
+            case 1:
+                $result = '未停權';
+                break;
+        }
+        return $result;
+    }
 }

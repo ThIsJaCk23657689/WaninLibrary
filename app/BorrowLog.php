@@ -36,6 +36,15 @@ class BorrowLog extends Model
         return $result;
     }
 
+    public function showTitle(){
+        $maxString = 80;
+        if(strlen($this->book_title) >= $maxString){
+            return mb_substr($this->book_title, 0, $maxString) . '...';
+        }else{
+            return $this->book_title;
+        }
+    }
+
     public function scopeOrderByType($query, $type){
         if($type==1){
             $query->orderBy('created_at', 'DESC');

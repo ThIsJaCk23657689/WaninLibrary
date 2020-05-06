@@ -10,27 +10,46 @@ class BorrowLogController extends Controller
     public $BorrowLogService;
 
     public function __construct(){
-        $this->middleware('auth.jwt')->except(['index', 'show']);
+        $this->middleware('auth.jwt')->except([
+            'index', 'show',
+        ]);
+
+        $this->middleware('auth.web')->only([
+            'index', 'show',
+        ]);
         $this->BorrowLogService = new BorrowLogService();
     }
 
     public function index(Request $request)
     {
-        $logs = $this->BorrowLogService->getList($request->skip, $request->take);
-        return view('borrowLogs.index', compact('logs'));
+        $DataTotalCount = $this->BorrowLogService->count();
+        return view('borrowLogs.index', compact('DataTotalCount'));
     }
 
 
     public function show($id)
     {
-        $logs = $this->BorrowLogService->getOne($id);
-        return view('borrowLogs.show', compact('logs'));
+        $log = $this->BorrowLogService->getOne($id);
+        return view('borrowLogs.show', compact('log'));
     }
 
     //APIs
-    public function getBorrowLogs(Request $request){
-        $logs = $this->BorrowLogService->getList($request->skip, $request->take);
-        return response()->json($logs, 200);
+    public function getList(Request $request){
+        $this->validate($request, [
+            'skip' => 'nullable|integer|',
+            'take' => 'nullable|integer|max:100'
+        ]);
+
+        $skip = $request->skip ?? 0;
+        $take = $request->take ?? 10;
+
+        $logs = $this->BorrowLogService->getList($skip, $take);
+
+        return response()->json([
+            'status' => 'OK',
+            'count' => $take,
+            'logs' => $logs
+        ]);
     }
 
     // 依各欄位搜尋  order_by都一律依created_at
