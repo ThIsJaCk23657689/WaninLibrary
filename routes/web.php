@@ -59,6 +59,11 @@ Route::prefix('/backend')->group(function(){
         'index', 'show', 'create', 'edit'
     ]]);
 
+    // 基本資料管理相關路由
+    Route::resource('/information', 'InformationController', ['only' => [
+        'show', 'edit'
+    ]]);
+
     // 登入紀錄相關
     Route::resource('loginLogs', 'LoginLogController')->only(['index', 'show']);
 
