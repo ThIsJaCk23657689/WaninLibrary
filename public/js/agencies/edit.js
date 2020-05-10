@@ -175,78 +175,46 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
       agency: [],
       AgenciesIndexURL: $('#AgenciesIndexURL').html(),
-      AgenciesUpdateURL: $('#AgenciesUpdateURL').html(),
-      FormErrorsMsg: []
+      AgenciesUpdateURL: $('#AgenciesUpdateURL').html()
     };
   },
-  methods: {},
+  methods: {
+    agencyEditForm: function agencyEditForm(e) {
+      var _this = this;
+
+      var url = this.AgenciesUpdateURL;
+      var data = $(e.target).serializeObject();
+      this.$refs.loadingModal.initalModal();
+      axios.patch(url, data).then(function (response) {
+        _this.$refs.loadingModal.successfulResponse('編輯成功', response.data.url);
+      })["catch"](function (error) {
+        console.error('編輯單位時發生錯誤，錯誤訊息：' + error);
+
+        _this.$refs.loadingModal.failureResponse(error);
+      });
+    }
+  },
   created: function created() {
-    var _this = this;
+    var _this2 = this;
 
     var AgenciesGetOneURL = $('#AgenciesGetOneURL').html();
     axios.get(AgenciesGetOneURL).then(function (response) {
-      _this.agency = response.data.agency; // 地址
+      _this2.agency = response.data.agency; // 地址
 
       $('#address_twzipcode').twzipcode({
         'zipcodeSel': response.data.agency.address_zipcode
       });
     });
   },
-  mounted: function mounted() {
-    console.log('AgencyEditForm.vue mounted');
-    $('#agency_edit_form').submit(function (e) {
-      e.preventDefault();
-      var url = $(this).attr('action');
-      var data = $(this).serializeObject();
-      var formdata = new FormData();
-      Object.keys(data).forEach(function (key) {
-        return formdata.append(key, data[key]);
-      });
-      console.log(formdata);
-      $('#modal_good').css({
-        'display': 'none'
-      });
-      $('#modal_error').css({
-        'display': 'none'
-      });
-      $('#modal_spinner').slideDown();
-      $('#modal_msg').html('請稍等...');
-      $('#modal_link').slideUp();
-      $('#modal_close').slideUp();
-      $('#LoadingModal').modal('show');
-      axios.patch(url, data).then(function (response) {
-        $('#modal_good').css({
-          'display': 'flex'
-        });
-        $('#modal_spinner').css({
-          'display': 'none'
-        });
-        $('#modal_msg').html('編輯成功');
-        $('#modal_link').attr('href', response.data.url);
-        $('#modal_link').slideDown();
-      })["catch"](function (error) {
-        console.error('編輯機構時發生錯誤，錯誤訊息：' + error);
-        $('#modal_error').css({
-          'display': 'flex'
-        });
-        $('#modal_spinner').css({
-          'display': 'none'
-        });
-        $('#modal_msg').html('發生錯誤<br>錯誤訊息：' + error + '<br>');
-        $('#modal_close').slideDown();
-        var $key = Object.keys(error.response.data.errors);
-        $key.forEach(function (item, index) {
-          $('#modal_msg').append(error.response.data.errors[item] + '<br>');
-          $('#' + item).addClass('is-invalid');
-        });
-      });
-    });
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -266,245 +234,259 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "row justify-content-center" }, [
-    _c("div", { staticClass: "col-md-8" }, [
-      _c(
-        "form",
-        {
-          attrs: {
-            method: "POST",
-            id: "agency_edit_form",
-            action: _vm.AgenciesUpdateURL
-          }
-        },
-        [
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _vm._m(0),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.agency.name,
-                      expression: "agency.name"
-                    }
-                  ],
-                  staticClass: "form-control mb-2",
-                  attrs: {
-                    id: "name",
-                    name: "name",
-                    type: "text",
-                    required: "",
-                    autocomplete: "off",
-                    autofocus: ""
-                  },
-                  domProps: { value: _vm.agency.name },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c(
+            "form",
+            {
+              attrs: { method: "POST", id: "agency_edit_form", action: "#" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.agencyEditForm($event)
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.agency.name,
+                          expression: "agency.name"
+                        }
+                      ],
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "name",
+                        name: "name",
+                        type: "text",
+                        required: "",
+                        autocomplete: "off",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.agency.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.agency, "name", $event.target.value)
+                        }
                       }
-                      _vm.$set(_vm.agency, "name", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
-                _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.agency.tel,
-                      expression: "agency.tel"
-                    }
-                  ],
-                  staticClass: "form-control mb-2",
-                  attrs: {
-                    id: "tel",
-                    name: "tel",
-                    type: "text",
-                    autocomplete: "off"
-                  },
-                  domProps: { value: _vm.agency.tel },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.agency, "tel", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ]),
-            _vm._v(" "),
-            _c("div", { staticClass: "col-md-4" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "principal" } }, [
-                  _vm._v("負責人")
+                    })
+                  ])
                 ]),
                 _vm._v(" "),
-                _c("input", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.agency.principal,
-                      expression: "agency.principal"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    id: "principal",
-                    name: "principal",
-                    type: "text",
-                    autocomplete: "off"
-                  },
-                  domProps: { value: _vm.agency.principal },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.agency.tel,
+                          expression: "agency.tel"
+                        }
+                      ],
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "tel",
+                        name: "tel",
+                        type: "text",
+                        autocomplete: "off"
+                      },
+                      domProps: { value: _vm.agency.tel },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.agency, "tel", $event.target.value)
+                        }
                       }
-                      _vm.$set(_vm.agency, "principal", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "principal" } }, [
+                      _vm._v("負責人")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.agency.principal,
+                          expression: "agency.principal"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "principal",
+                        name: "principal",
+                        type: "text",
+                        autocomplete: "off"
+                      },
+                      domProps: { value: _vm.agency.principal },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.agency, "principal", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      attrs: { id: "address_twzipcode" }
+                    },
+                    [
+                      _c("label", [_vm._v("地址")]),
+                      _vm._v(" "),
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-12" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.agency.address_others,
+                                expression: "agency.address_others"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              id: "address_others",
+                              type: "text",
+                              name: "address_others",
+                              autocomplete: "off"
+                            },
+                            domProps: { value: _vm.agency.address_others },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.agency,
+                                  "address_others",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-12" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "content" } }, [
+                      _vm._v("備註內容")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.agency.content,
+                          expression: "agency.content"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        name: "content",
+                        id: "content",
+                        cols: "30",
+                        rows: "5"
+                      },
+                      domProps: { value: _vm.agency.content },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.agency, "content", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
               _c(
                 "div",
-                {
-                  staticClass: "form-group",
-                  attrs: { id: "address_twzipcode" }
-                },
+                { staticClass: "form-group row justify-content-center" },
                 [
-                  _c("label", [_vm._v("地址")]),
-                  _vm._v(" "),
-                  _vm._m(1),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row" }, [
-                    _c("div", { staticClass: "col-md-12" }, [
-                      _c("input", {
-                        directives: [
-                          {
-                            name: "model",
-                            rawName: "v-model",
-                            value: _vm.agency.address_others,
-                            expression: "agency.address_others"
-                          }
-                        ],
-                        staticClass: "form-control",
-                        attrs: {
-                          id: "address_others",
-                          type: "text",
-                          name: "address_others",
-                          autocomplete: "off"
-                        },
-                        domProps: { value: _vm.agency.address_others },
-                        on: {
-                          input: function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.agency,
-                              "address_others",
-                              $event.target.value
-                            )
-                          }
-                        }
-                      })
-                    ])
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-block btn-success",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            確認編輯\r\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-block btn-danger",
+                        attrs: { href: _vm.AgenciesIndexURL }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            返回列表\r\n                        "
+                        )
+                      ]
+                    )
                   ])
                 ]
               )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "row" }, [
-            _c("div", { staticClass: "col-md-12" }, [
-              _c("div", { staticClass: "form-group" }, [
-                _c("label", { attrs: { for: "content" } }, [
-                  _vm._v("備註內容")
-                ]),
-                _vm._v(" "),
-                _c("textarea", {
-                  directives: [
-                    {
-                      name: "model",
-                      rawName: "v-model",
-                      value: _vm.agency.content,
-                      expression: "agency.content"
-                    }
-                  ],
-                  staticClass: "form-control",
-                  attrs: {
-                    name: "content",
-                    id: "content",
-                    cols: "30",
-                    rows: "5"
-                  },
-                  domProps: { value: _vm.agency.content },
-                  on: {
-                    input: function($event) {
-                      if ($event.target.composing) {
-                        return
-                      }
-                      _vm.$set(_vm.agency, "content", $event.target.value)
-                    }
-                  }
-                })
-              ])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("div", { staticClass: "form-group row justify-content-center" }, [
-            _c("div", { staticClass: "col-md-8" }, [
-              _c(
-                "button",
-                {
-                  staticClass: "btn btn-block btn-success",
-                  attrs: { type: "submit" }
-                },
-                [
-                  _vm._v(
-                    "\r\n                        確認修改\r\n                    "
-                  )
-                ]
-              ),
-              _vm._v(" "),
-              _c(
-                "a",
-                {
-                  staticClass: "btn btn-block btn-danger",
-                  attrs: { href: _vm.AgenciesIndexURL }
-                },
-                [
-                  _vm._v(
-                    "\r\n                        返回列表\r\n                    "
-                  )
-                ]
-              )
-            ])
-          ])
-        ]
-      )
-    ])
-  ])
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("loading-modal", { ref: "loadingModal" })
+    ],
+    1
+  )
 }
 var staticRenderFns = [
   function() {
@@ -513,7 +495,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "name" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("機構名稱\r\n                        ")
+      _vm._v("機構名稱\r\n                            ")
     ])
   },
   function() {
@@ -765,7 +747,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\agencies\edit.js */"./resources/js/agencies/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\agencies\edit.js */"./resources/js/agencies/edit.js");
 
 
 /***/ })

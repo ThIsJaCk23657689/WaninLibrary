@@ -17,6 +17,6 @@ class DonorSeeder extends Seeder
             'exposure' => 1,
             'content' => '這是給完全匿名的捐贈人使用。'
         ]);
-        $donors = factory(DonorEloquent::class, 20)->create();
+        $donors = factory(DonorEloquent::class, 100)->create();
     }
 }

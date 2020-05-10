@@ -8,7 +8,7 @@ const app = new Vue({
         }
     },
     methods: {
-
+        
     },
     created(){
         

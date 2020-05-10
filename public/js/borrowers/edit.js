@@ -99,10 +99,21 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: [],
   data: function data() {
-    return {};
-  }
+    return {
+      agency: [],
+      AgenciesIndexURL: $('#AgenciesIndexURL').html(),
+      AgenciesUpdateURL: $('#AgenciesUpdateURL').html()
+    };
+  },
+  methods: {},
+  created: function created() {},
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -122,7 +133,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c("div", [_c("loading-modal", { ref: "loadingModal" })], 1)
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -334,7 +345,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\borrowers\edit.js */"./resources/js/borrowers/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\borrowers\edit.js */"./resources/js/borrowers/edit.js");
 
 
 /***/ })

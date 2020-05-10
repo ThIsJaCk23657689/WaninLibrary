@@ -99,12 +99,196 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   data: function data() {
-    return {};
+    return {
+      CirculationIndexURL: $('#CirculationIndexURL').html(),
+      GetBooksDataByBarcodeURL: $('#GetBooksDataByBarcodeURL').html(),
+      book: []
+    };
   },
-  methods: {},
+  methods: {
+    getBookDataByBarcode: function getBookDataByBarcode(e) {
+      var _this = this;
+
+      $(e.target).removeClass('is-invalid');
+      var $value = e.target.value;
+      var patt = /^[0-9]{13}$/;
+
+      if (patt.test($value)) {
+        axios.get(this.GetBooksDataByBarcodeURL, {
+          params: {
+            barcode: $value
+          }
+        }).then(function (response) {
+          if (response.data.book == null || response.data.book == []) {
+            $(e.target).addClass('is-invalid');
+            $('#barcode_error').html('<strong>查無此書本，請檢查條碼是否有誤。</strong>');
+            _this.book = [];
+          } else {
+            _this.book = response.data.book;
+          }
+        })["catch"](function (error) {
+          console.log('發生錯誤！<br>錯誤訊息：' + error.response.data.message);
+
+          if (error.response.data.errors == null) {
+            $(e.target).addClass('is-invalid');
+            alert('錯誤訊息：' + error.response.data.message + '\n請聯絡系統設計師處理。');
+          } else {
+            var $key = Object.keys(error.response.data.errors);
+            $key.forEach(function (item, index) {
+              $('#' + item).addClass('is-invalid');
+              $('#' + item + '_error').html('<strong>' + error.response.data.errors[item] + '</strong>');
+            });
+          }
+        });
+      } else {
+        $(e.target).addClass('is-invalid');
+        $('#barcode_error').html('<strong>請輸入正確格式的書本條碼。</strong>');
+      }
+    },
+    searchBorrower: function searchBorrower(e) {
+      var $name = $('#name').val();
+      var $tel = $('#tel').val();
+      var $birthday = $('#birthday').val();
+      console.log({
+        $name: $name,
+        $tel: $tel,
+        $birthday: $birthday
+      });
+    }
+  },
   created: function created() {},
   mounted: function mounted() {}
 });
@@ -126,9 +310,345 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c(
+            "form",
+            {
+              attrs: {
+                method: "POST",
+                id: "circulation_index_form",
+                action: "#"
+              },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.circulationIndexForm($event)
+                }
+              }
+            },
+            [
+              _vm._m(0),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "barcode",
+                        name: "barcode",
+                        type: "text",
+                        value: "",
+                        required: "",
+                        autocomplete: "off",
+                        autofocus: ""
+                      },
+                      on: { change: _vm.getBookDataByBarcode }
+                    }),
+                    _vm._v(" "),
+                    _c("span", {
+                      staticClass: "invalid-feedback",
+                      attrs: { id: "barcode_error", role: "alert" }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-6" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "title" } }, [_vm._v("書名")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "title",
+                        name: "title",
+                        type: "text",
+                        readonly: ""
+                      },
+                      domProps: { value: this.book.title }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-5" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "author" } }, [_vm._v("作者")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "author",
+                        name: "author",
+                        type: "text",
+                        readonly: ""
+                      },
+                      domProps: { value: this.book.author }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "publisher" } }, [
+                      _vm._v("出版商")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "publisher",
+                        name: "publisher",
+                        type: "text",
+                        readonly: ""
+                      },
+                      domProps: { value: this.book.publisher }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-3" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "callnum" } }, [
+                      _vm._v("索書號")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "callnum",
+                        name: "callnum",
+                        type: "text",
+                        readonly: ""
+                      },
+                      domProps: { value: this.book.callnum }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "count" } }, [
+                      _vm._v("借閱次數")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "count",
+                        name: "count",
+                        type: "text",
+                        readonly: ""
+                      },
+                      domProps: { value: this.book.count }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "donor" } }, [
+                      _vm._v("捐贈人")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "donor",
+                        name: "donor",
+                        type: "text",
+                        readonly: ""
+                      },
+                      domProps: { value: this.book.donorName }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "status" } }, [_vm._v("狀態")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "status",
+                        name: "status",
+                        type: "text",
+                        readonly: ""
+                      },
+                      domProps: { value: this.book.showStatus }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _vm._m(2),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "name" } }, [_vm._v("姓名")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "name",
+                        name: "name",
+                        type: "text",
+                        value: ""
+                      },
+                      on: { change: _vm.searchBorrower }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "tel",
+                        name: "tel",
+                        type: "text",
+                        value: ""
+                      },
+                      on: { change: _vm.searchBorrower }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "birthday" } }, [
+                      _vm._v("生日")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "birthday",
+                        name: "birthday",
+                        type: "text",
+                        value: ""
+                      },
+                      on: { change: _vm.searchBorrower }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }),
+              _vm._v(" "),
+              _c("hr"),
+              _vm._v(" "),
+              _vm._m(3),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group row justify-content-center" },
+                [
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-block btn-primary",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            確認\r\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-block btn-danger",
+                        attrs: { href: _vm.CirculationIndexURL }
+                      },
+                      [
+                        _vm._v(
+                          "\r\n                            取消\r\n                        "
+                        )
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("loading-modal", { ref: "loadingModal" })
+    ],
+    1
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row", attrs: { id: "step1" } }, [
+      _c("div", { staticClass: "col-md-12 mb-2" }, [
+        _c("h4", [_vm._v("1. 請掃描書本條碼或自行輸入書本條碼號")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "barcode" } }, [
+      _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+      _vm._v("書本條碼\r\n                            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row", attrs: { id: "step2" } }, [
+      _c("div", { staticClass: "col-md-12 mb-2" }, [
+        _c("h4", [_vm._v("2. 請選擇借閱人")]),
+        _vm._v(" "),
+        _c("small", [_vm._v("請輸入姓名、電話或生日來找尋借閱人")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "content" } }, [_vm._v("備註內容")]),
+          _vm._v(" "),
+          _c("textarea", {
+            staticClass: "form-control",
+            attrs: { name: "content", id: "content", cols: "30", rows: "5" }
+          })
+        ])
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -338,7 +858,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\circulation\index.js */"./resources/js/circulation/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\circulation\index.js */"./resources/js/circulation/index.js");
 
 
 /***/ })

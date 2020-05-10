@@ -23,7 +23,6 @@
         <span id="AgenciesListURL" class="d-none">{{ route('agencies.getList') }}</span>
 
         <borrower-create-form></borrower-create-form>
-        <loading-modal></loading-modal>
     </div>
 
 @endsection

@@ -31,7 +31,7 @@ Route::post('resetPassword', 'JWTAuthController@resetPassword');
 
 Route::prefix('/backend')->group(function(){
 
-    // 機構管理路由
+    // 單位管理路由
     Route::get('/agencies/json', 'AgencyController@getList')->name('agencies.getList');
     Route::get('/agencies/{id}/json', 'AgencyController@getOne')->name('agencies.getOne');
     Route::resource('/agencies', 'AgencyController', ['only' => [
@@ -40,8 +40,8 @@ Route::prefix('/backend')->group(function(){
 
     //借閱者管理相關
     Route::post('/borrowers/activate','BorrowerController@activate');
-    Route::get('/borrowers/json', 'AgencyController@getList')->name('borrowers.getList');
-    Route::get('/borrowers/{id}/json', 'AgencyController@getOne')->name('borrowers.getOne');
+    Route::get('/borrowers/json', 'BorrowerController@getList')->name('borrowers.getList');
+    Route::get('/borrowers/{id}/json', 'BorrowerController@getOne')->name('borrowers.getOne');
     Route::resource('/borrowers', 'BorrowerController', ['only' => [
         'store', 'update', 'destroy'
     ]]);
@@ -56,6 +56,7 @@ Route::prefix('/backend')->group(function(){
     //書籍管理相關
     Route::post('/books/getBookDataByURL','BookController@getBookDataByURL')->name('books.bugurl');
     Route::get('/books/isbn/{isbn}/google', 'BookController@getDataByISBNFromGoogle')->name('books.isbn.google');
+    Route::get('/books/getBookDataByBarcode', 'BookController@getBookDataByBarcode')->name('books.barcode.json');
     Route::get('/books/json', 'BookController@getList')->name('books.getList');
     Route::get('/books/{id}/json', 'BookController@getOne')->name('books.getOne');
     Route::resource('/books', 'BookController', ['only' => [

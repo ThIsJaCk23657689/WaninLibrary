@@ -20,7 +20,7 @@
         <div class="col-md-12">
             <a href="{{ route('agencies.create') }}" class="btn btn-md btn-primary">
                 <i class="fas fa-plus"></i>
-                新增機構
+                新增單位
 			</a>
 		</div>
     </div>
@@ -29,7 +29,7 @@
 	<div class="card mb-3">
 		<div class="card-header">
 			<i class="fas fa-table"></i>
-			機構列表
+			單位列表
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">
@@ -61,7 +61,7 @@
 									</a>
 									<a href="#" class="btn btn-md btn-danger" onclick="
 										event.preventDefault();
-										ans = confirm('確定要刪除此機構嗎?');
+										ans = confirm('確定要刪除此單位嗎?');
 										if(ans){
 											$('#deleteform-{{ $agency->id }}').submit();
 										}

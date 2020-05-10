@@ -23,7 +23,6 @@
         <span id="AgenciesUpdateURL" class="d-none">{{ route('agencies.update', [$agency->id]) }}</span>
 
         <agency-update-form></agency-update-form>
-        <loading-modal></loading-modal>
     </div>
 
 @endsection

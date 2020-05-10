@@ -18,7 +18,7 @@ class BookController extends Controller
         ]);
         $this->middleware('auth.jwt')->only([
             'store', 'update', 'destroy', 'getList', 'getOne',
-            'getDataByISBNFromGoogle', 'getBookDataByURL'
+            'getDataByISBNFromGoogle', 'getBookDataByURL', 'getBookDataByBarcode'
         ]);
         $this->BookService = new BookService();
     }
@@ -81,6 +81,18 @@ class BookController extends Controller
 
     public function getOne($id){
         $book = $this->BookService->getOne($id);
+        return response()->json([
+            'status' => 'OK',
+            'book' => $book
+        ]);
+    }
+
+    // 使用barcode來找尋書本
+    public function getBookDataByBarcode(Request $request) {
+        $this->validate($request, [
+            'barcode' => 'required|string|size:13'
+        ]);
+        $book = $this->BookService->getBookDataByBarcode($request->barcode);
         return response()->json([
             'status' => 'OK',
             'book' => $book

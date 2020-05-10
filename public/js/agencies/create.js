@@ -195,7 +195,7 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(url, data).then(function (response) {
         _this.$refs.loadingModal.successfulResponse('新增成功', response.data.url);
       })["catch"](function (error) {
-        console.error('新增機構時發生錯誤，錯誤訊息：' + error);
+        console.error('新增單位時發生錯誤，錯誤訊息：' + error);
 
         _this.$refs.loadingModal.failureResponse(error);
       });
@@ -648,7 +648,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\agencies\create.js */"./resources/js/agencies/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\agencies\create.js */"./resources/js/agencies/create.js");
 
 
 /***/ })

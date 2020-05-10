@@ -183,6 +183,13 @@ class BookService extends BaseService
         $book->delete();
     }
 
+    public function getBookDataByBarcode($barcode) {
+        $book = BookEloquent::where('barcode', $barcode)->first();
+        $book['showStatus'] = $book->showStatus();
+        $book['donorName'] = $book->donor->name;
+        return $book;
+    }
+
     //category:1.一般中文圖書 2.論文 3.雜誌期刊 4.一般非中文圖書 5.不分類
     //type:1.書名 2.作者 3.ISBN 4.出版商 5.依種類
     public function getBookByKeyword($category, $type, $keyword, $skip, $take){

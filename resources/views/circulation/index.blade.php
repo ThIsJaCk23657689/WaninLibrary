@@ -18,14 +18,16 @@
     @endcomponent
     
     <div id="circulation">
-        <span id="BooksIndexURL" class="d-none">{{ route('books.index') }}</span>
+        <span id="CirculationIndexURL" class="d-none">{{ route('circulation') }}</span>
+        <span id="GetBooksDataByBarcodeURL" class="d-none">{{ route('books.barcode.json') }}</span>
+
+        
         <span id="BooksStoreURL" class="d-none">{{ route('books.store') }}</span>
         <span id="DonorsListURL" class="d-none">{{ route('donors.getList') }}</span>
         <span id="backendURL" class="d-none">{{ route('backend') }}</span>
         <span id="BooksBugURL" class="d-none">{{ route('books.bugurl') }}</span>
 
         <book-circulation-form></book-circulation-form>
-        <loading-modal></loading-modal>
     </div>
 
 @endsection
