@@ -38,12 +38,17 @@ Route::prefix('/backend')->group(function(){
         'store', 'update', 'destroy'
     ]]);
 
-    //借閱者管理相關
+    // 借閱者管理相關路由
     Route::post('/borrowers/activate','BorrowerController@activate');
     Route::get('/borrowers/json', 'BorrowerController@getList')->name('borrowers.getList');
     Route::get('/borrowers/{id}/json', 'BorrowerController@getOne')->name('borrowers.getOne');
     Route::resource('/borrowers', 'BorrowerController', ['only' => [
         'store', 'update', 'destroy'
+    ]]);
+
+    // 基本資料相關路由
+    Route::resource('/information', 'InformationController', ['only' => [
+        'update'
     ]]);
 
     // 捐書人管理路由
