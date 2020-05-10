@@ -83,25 +83,24 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="name">姓名</label>
-                            <input id="name" name="name" type="text" class="form-control mb-2" value="" @change="searchBorrower">
+                            <input id="name" name="name" type="text" class="form-control mb-2" v-model="keywords.name" @change="searchBorrower" @keyup.enter="searchBorrower">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="tel">電話</label>
-                            <input id="tel" name="tel" type="text" class="form-control mb-2" value="" @change="searchBorrower">
+                            <input id="tel" name="tel" type="text" class="form-control mb-2" v-model="keywords.tel" @change="searchBorrower" @keyup.enter="searchBorrower">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="birthday">生日</label>
-                            <input id="birthday" name="birthday" type="text" class="form-control mb-2" value="" @change="searchBorrower">
+                            <input id="birthday" name="birthday" type="text" class="form-control mb-2" v-model="keywords.birthday" autocomplete="off" @change="searchBorrower" @keyup.enter="searchBorrower">
                         </div>
                     </div>
                 </div>
 
-                <div class="row">
-                </div>
+                <filter-table :borrowers="borrowers" :pageNum="pageNum" :totalPage="totalPage" @update-page-num="updatePageNum"></filter-table>
 
                 <hr>
 
@@ -140,9 +139,22 @@ export default {
             CirculationIndexURL: $('#CirculationIndexURL').html(),
             GetBooksDataByBarcodeURL: $('#GetBooksDataByBarcodeURL').html(),
             book: [],
+            borrowers: [],
+
+            pageNum: 1,
+            totalPage: 0,
+            totalCount: 0,
+            countPerPage: 5,
+
+            keywords: {
+                name: null,
+                tel: null,
+                birthday: null
+            }
         }
     },
-    methods: {
+    methods: { 
+        // 透過條碼尋找書籍
         getBookDataByBarcode(e) {
             $(e.target).removeClass('is-invalid');
 
@@ -181,19 +193,89 @@ export default {
             }
         },
 
-        searchBorrower(e){
-            let $name = $('#name').val();
-            let $tel = $('#tel').val();
-            let $birthday = $('#birthday').val();
+        // 更新頁碼
+        updatePageNum(pageNum){
+            this.pageNum = pageNum;
+            this.updateTable();
+        },
 
-            console.log({$name, $tel, $birthday});
-        }
+        // 更新資料
+        updateTable(){
+            let BorrowersFilterURL = $('#BorrowersFilterURL').html();
+            $('.dataTables_processing', $('#FilterTable').closest('.dataTables_wrapper')).fadeIn();
+            axios.get(BorrowersFilterURL, {
+                params: {
+                    name: this.keywords.name,
+                    tel: this.keywords.tel,
+                    birthday: this.keywords.birthday,
+                    skip: (this.pageNum - 1) * this.countPerPage,
+                    take: this.countPerPage,
+                }
+            }).then(response => {
+                this.borrowers = response.data.borrowers;
+                this.totalCount = response.data.count;
+                this.totalPage = this.totalCount / this.countPerPage;
+                $('.dataTables_processing', $('#FilterTable').closest('.dataTables_wrapper')).fadeOut();
+                $('#FilterTable').dataTable().fnClearTable();
+                if (this.borrowers.length != 0) {
+                    $('#FilterTable').dataTable().fnAddData(this.borrowers);
+                }
+            }).catch(error => {
+                console.log(error);
+            });
+        },
+
+        // 搜尋資料
+        searchBorrower(e){
+            if(this.keywords.name != '' || this.keywords.tel != '' || this.keywords.birthday != ''){
+                this.updateTable();
+            }
+        },
     },
     created(){
-
+        
     },
     mounted(){
+        // 生日
+        $("#birthday").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeYear: true,
+            changeMonth: true,
+            yearRange: "-80:+0",
+        });
 
+        // 宣告 dataTable
+        $('#FilterTable').dataTable({
+            data: this.borrowers,
+            columns: [
+                { data: 'name' },
+                { data: 'tel' },
+                {
+                    data: 'birthday',
+                    render: function(data, type, full){
+                        return data ? data : '無' ;
+                    }
+                },
+                { 
+                    data: null,
+                    render: function(data, type, full){
+                        return '<button type="button" class="btn btn-info btn-select" href="#">選擇</button><span class="d-none">'+full.id+'<span>';
+                    }
+                },
+            ],
+            lengthChange: false,
+            searching: false,
+            pageLength: this.rowsPerPage,
+            info: false,
+            paging: false,
+            processing: true
+        });
+
+        // 新增選擇按鈕事件
+        $('#FilterTable').on('click', '.btn-select', function(e){
+            let select_id = $(this).next().text();
+            alert(select_id);
+        });
     },
 }
 </script>

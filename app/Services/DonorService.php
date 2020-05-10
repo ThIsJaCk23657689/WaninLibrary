@@ -31,17 +31,26 @@ class DonorService extends BaseService
 
     public function getList($skip, $take)
     {
-        $donors = DonorEloquent::skip($skip)->take($take)->get();
+        $donorsModel = new DonorEloquent();
+        $count = $donorsModel->count();
+
+        // 搜尋
+
+        $donors = $donorsModel->skip($skip)->take($take)->get();
+
         foreach($donors as $donor){
             $donor['showContact'] = $donor->showContact();
             $donor['showExposure'] = $donor->showExposure();
-            $donor['donateAmount'] = $donor->books->count();
+            $donor['donateAmount'] = $donor->books()->count();
             $donor['action'] = 
                 '<a href="' . route('donors.show', [$donor->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
                 <a href="' . route('donors.edit', [$donor->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
                 <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';
         }
-        return $donors;
+        return [
+            'donors' => $donors,
+            'count' => $count
+        ];
     }
 
     public function getOne($id)

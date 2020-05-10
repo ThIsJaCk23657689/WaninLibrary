@@ -28,7 +28,6 @@
 	
 	<div id="borrower">
 		<span id="BorrowersGetList" class="d-none">{{ route('borrowers.getList') }}</span>
-		<span id="DataTotalCount" class="d-none">{{ $DataTotalCount }}</span>
 
 		<borrowers-table :borrowers="borrowers" :rows-per-page="rowsPerPage" :page-num="pageNum" :total-page="totalPage" v-on:update-borrowers="updateBorrowers"></borrowers-table>
 	</div>

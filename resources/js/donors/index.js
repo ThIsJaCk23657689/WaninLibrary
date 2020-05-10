@@ -8,7 +8,8 @@ const app = new Vue({
             rowsPerPage: 10,
             pageNum: 1,
             totalPage: 0,
-            donors: []
+            donors: [],
+            dataTotalCount: 0,
         }
     },
     methods: {
@@ -39,6 +40,8 @@ const app = new Vue({
         let DonorsGetList = $('#DonorsGetList').html();
         axios.get(DonorsGetList).then(response => {
             this.donors = response.data.donors;
+            this.dataTotalCount = response.data.dataTotalCount;
+            this.totalPage = Math.ceil(this.dataTotalCount / this.rowsPerPage);
 
             $('#DonorsDataTable').on('draw.dt', function () {
                 console.log('drawing a table');
@@ -64,6 +67,6 @@ const app = new Vue({
         });
     },
     mounted(){
-        this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
+        
     }
 });

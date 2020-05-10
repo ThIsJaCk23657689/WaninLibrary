@@ -20,7 +20,7 @@
     <div id="circulation">
         <span id="CirculationIndexURL" class="d-none">{{ route('circulation') }}</span>
         <span id="GetBooksDataByBarcodeURL" class="d-none">{{ route('books.barcode.json') }}</span>
-
+        <span id="BorrowersFilterURL" class="d-none">{{ route('borrowers.filter') }}</span>
         
         <span id="BooksStoreURL" class="d-none">{{ route('books.store') }}</span>
         <span id="DonorsListURL" class="d-none">{{ route('donors.getList') }}</span>

@@ -42,6 +42,7 @@ Route::prefix('/backend')->group(function(){
     Route::post('/borrowers/activate','BorrowerController@activate');
     Route::get('/borrowers/json', 'BorrowerController@getList')->name('borrowers.getList');
     Route::get('/borrowers/{id}/json', 'BorrowerController@getOne')->name('borrowers.getOne');
+    Route::get('/borrowers/filter', 'BorrowerController@filter')->name('borrowers.filter');
     Route::resource('/borrowers', 'BorrowerController', ['only' => [
         'store', 'update', 'destroy'
     ]]);

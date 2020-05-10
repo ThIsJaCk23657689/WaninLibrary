@@ -10,26 +10,30 @@ class BorrowerController extends Controller
 {
     public $BorrowerService;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth.web')->only([
             'index', 'create', 'show', 'edit',
         ]);
         $this->middleware('auth.jwt')->only([
-            'store', 'update', 'destroy', 'getList', 'getOne', 'activate'
+            'store', 'update', 'destroy', 'getList', 'getOne', 'activate', 'filter'
         ]);
         $this->BorrowerService = new BorrowerService();
     }
 
-    public function index(Request $request){
+    public function index(Request $request)
+    {
         $DataTotalCount = $this->BorrowerService->count();
         return view('borrowers.index', compact('DataTotalCount'));
     }
 
-    public function create(){
+    public function create()
+    {
         return view('borrowers.create');
     }
 
-    public function store(BorrowerRequest $request){
+    public function store(BorrowerRequest $request)
+    {
         $borrower_id = $this->BorrowerService->add($request);
         return response()->json([
             'status' => 'OK',
@@ -38,17 +42,20 @@ class BorrowerController extends Controller
         ], 200);
     }
 
-    public function show($id){
+    public function show($id)
+    {
         $borrower = $this->BorrowerService->getOne($id);
         return view('borrowers.show', compact('borrower'));
     }
 
-    public function edit($id){
+    public function edit($id)
+    {
         $borrower = $this->BorrowerService->getOne($id);
         return view('borrowers.edit', compact('borrower'));
     }
 
-    public function update(BorrowerRequest $request, $id){
+    public function update(BorrowerRequest $request, $id)
+    {
         $borrower_id = $this->BorrowerService->update($request, $id);
         return response()->json([
             'status' => 'OK',
@@ -70,10 +77,10 @@ class BorrowerController extends Controller
             'status' => 'OK',
             'massage' => $borrower
         ], 200);
-
     }
 
-    public function destroy($id){
+    public function destroy($id)
+    {
         $this->BorrowerService->delete($id);
         return  response()->json([
             'status' => 'OK',
@@ -82,7 +89,8 @@ class BorrowerController extends Controller
     }
 
     // API
-    public function getList(Request $request){
+    public function getList(Request $request)
+    {
         $this->validate($request, [
             'skip' => 'nullable|integer|',
             'take' => 'nullable|integer|max:100'
@@ -100,11 +108,35 @@ class BorrowerController extends Controller
         ]);
     }
 
-    public function getOne($id){
+    public function getOne($id)
+    {
         $borrower = $this->BorrowerService->getOne($id);
         return response()->json([
             'status' => 'OK',
             'borrower' => $borrower
+        ]);
+    }
+
+    public function filter(Request $request)
+    { 
+        $this->validate($request, [
+            'name' => 'nullable|string|max:100',
+            'tel' => 'nullable|string|max:30',
+            'birthday' => 'nullable|string',
+            'skip' => 'nullable|integer|',
+            'take' => 'nullable|integer|max:100'
+        ]);
+
+        $result = $this->BorrowerService->filter($request);
+        $borrowers = $result['borrowers'];
+        foreach ($borrowers as $borrower){
+            $borrower['action'] = '<button type="button" class="btn btn-md btn-primary" onclick="selectBorrower(' . $borrower->id . ')">選擇</button>';
+        }
+
+        return response()->json([
+            'status' => 'OK',
+            'count' => $result['totalCount'],
+            'borrowers' => $borrowers,
         ]);
     }
 }

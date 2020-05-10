@@ -1,11 +1,14 @@
 <?php
 
 namespace App\Services;
+
+use Illuminate\Http\Request;
 use App\Borrower as BorrowerEloquent;
 
 class BorrowerService extends BaseService
 {
-    public function add($request){
+    public function add($request)
+    {
         $borrower = BorrowerEloquent::create([
             'agency_id' => $request->agency_id,
 
@@ -27,13 +30,15 @@ class BorrowerService extends BaseService
         return $borrower->id;
     }
 
-    public function count(){
+    public function count()
+    {
         return BorrowerEloquent::count();
     }
 
-    public function getList($skip, $take){
+    public function getList($skip, $take)
+    {
         $borrowers = BorrowerEloquent::skip($skip)->take($take)->get();
-        foreach($borrowers as $borrower){
+        foreach ($borrowers as $borrower) {
             $borrower['showAgencyName'] = $borrower->showAgencyName();
             $borrower['borrowCounts'] = 0;
             $borrower['expiredCounts'] = 0;
@@ -45,13 +50,15 @@ class BorrowerService extends BaseService
         return $borrowers;
     }
 
-    public function getOne($id){
+    public function getOne($id)
+    {
         $borrower = BorrowerEloquent::findOrFail($id);
         $borrower['showAgencyName'] = $borrower->showAgencyName();
         return $borrower;
     }
 
-    public function update($request, $id){
+    public function update($request, $id)
+    {
         $borrowers = $this->getOne($id);
         $borrowers->update([
             'agency_id' => $request->agency_id,
@@ -75,26 +82,55 @@ class BorrowerService extends BaseService
         return $borrowers->id;
     }
 
-    public function delete($id){
+    public function delete($id)
+    {
         $borrowers = $this->getOne($id);
         $borrowers->delete();
     }
 
-    public function activated($request){
+    public function activated($request)
+    {
         $borrower = $this->getOne($request->id);
         // 1.代表未停權 0.停權
-        if($borrower->acticated == 1){
+        if ($borrower->acticated == 1) {
             $borrower->update([
                 'content' => $request->content,
                 'activated' => 0,
             ]);
-            return $borrower->name."已被停權";
-        }else{
+            return $borrower->name . "已被停權";
+        } else {
             $borrower->update([
                 'content' => $request->content,
                 'activated' => 1,
             ]);
-            return $borrower->name."已被解除停權";
+            return $borrower->name . "已被解除停權";
         }
+    }
+
+    public function filter(Request $request)
+    {
+        $borrowers = new BorrowerEloquent();
+        if(!is_null($request->name)){
+            $borrowers = $borrowers->where('name', 'like', '%' . $request->name . '%');
+        }
+        
+        if(!is_null($request->tel)){
+            $borrowers = $borrowers->where('tel', 'like', '%' . $request->tel . '%');
+        }
+        
+        if(!is_null($request->birthday)){
+            $borrowers = $borrowers->where('birthday', 'like', '%' . $request->birthday . '%');
+        }
+
+        $skip = $request->skip ?? 0;
+        $take = $request->take ?? 5;
+
+        $totalCount = $borrowers->count();
+        $borrowers = $borrowers->skip($skip)->take($take)->get();
+
+        return [
+            'totalCount' => $totalCount,
+            'borrowers' => $borrowers
+        ];
     }
 }

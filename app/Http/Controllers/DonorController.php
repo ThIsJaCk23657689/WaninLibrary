@@ -21,8 +21,8 @@ class DonorController extends Controller
     }
 
     public function index(Request $request){
-        $DataTotalCount = $this->DonorService->count();
-        return view('donors.index', compact('DataTotalCount'));
+        // $DataTotalCount = $this->DonorService->count();
+        return view('donors.index');
     }
 
     public function create(){
@@ -76,12 +76,13 @@ class DonorController extends Controller
         $skip = $request->skip ?? 0;
         $take = $request->take ?? 10;
 
-        $donors = $this->DonorService->getList($skip, $take);
+        $result = $this->DonorService->getList($skip, $take);
 
         return response()->json([
             'status' => 'OK',
             'count' => $take,
-            'donors' => $donors
+            'donors' => $result['donors'],
+            'dataTotalCount' => $result['count']
         ]);
     }
 

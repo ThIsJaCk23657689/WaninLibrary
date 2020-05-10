@@ -584,7 +584,8 @@ var app = new Vue({
       rowsPerPage: 10,
       pageNum: 1,
       totalPage: 0,
-      donors: []
+      donors: [],
+      dataTotalCount: 0
     };
   },
   methods: {
@@ -619,6 +620,8 @@ var app = new Vue({
     var DonorsGetList = $('#DonorsGetList').html();
     axios.get(DonorsGetList).then(function (response) {
       _this2.donors = response.data.donors;
+      _this2.dataTotalCount = response.data.dataTotalCount;
+      _this2.totalPage = Math.ceil(_this2.dataTotalCount / _this2.rowsPerPage);
       $('#DonorsDataTable').on('draw.dt', function () {
         console.log('drawing a table');
       }).on('init.dt', function () {
@@ -647,9 +650,7 @@ var app = new Vue({
       });
     });
   },
-  mounted: function mounted() {
-    this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
