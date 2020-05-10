@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Services\BorrowLogService;
+use Illuminate\Validation\Rule;
 
 class BorrowLogController extends Controller
 {
@@ -22,8 +23,8 @@ class BorrowLogController extends Controller
 
     public function index(Request $request)
     {
-        $DataTotalCount = $this->BorrowLogService->count();
-        return view('borrowLogs.index', compact('DataTotalCount'));
+        // $DataTotalCount = $this->BorrowLogService->count();
+        return view('borrowLogs.index');
     }
 
 
@@ -37,55 +38,53 @@ class BorrowLogController extends Controller
     public function getList(Request $request){
         $this->validate($request, [
             'skip' => 'nullable|integer|',
-            'take' => 'nullable|integer|max:100'
+            'take' => 'nullable|integer|max:100',
+            'status' => [
+                'nullable',
+                Rule::in([1, 2, 3, 4]),
+            ],
+            'keywords' => 'nullable',
+            'start_date' => 'nullable|date',
+            'end_date' => 'nullable|date',
+
         ]);
 
-        $skip = $request->skip ?? 0;
-        $take = $request->take ?? 10;
+        $request->skip = $request->skip ?? 0;
+        $request->take = $request->take ?? 10;
+        $request->status = $request->status ?? 4;
 
-        $logs = $this->BorrowLogService->getList($skip, $take);
+        $res = $this->BorrowLogService->getList($request);
 
         return response()->json([
             'status' => 'OK',
-            'count' => $take,
-            'logs' => $logs
+            'DataTotalCount' => $res['count'],
+            'logs' => $res['logs'],
+            'start_date' => $res['start_date'],
+            'request' => $request,
         ]);
     }
 
-    // 依各欄位搜尋  order_by都一律依created_at
-    // request 包含 borrower_id, order_by (1:DESC, 2:ASC)
-    public function getBorrowLogsByBorrowerId(Request $request){
-        $logs = $this->BorrowLogService->getBorrowLogsByBorrowerId($request);
-        return response()->json($logs, 200);
-    }
-
-    // request 包含 book_id, order_by (1:DESC, 2:ASC)
-    public function getBorrowLogsByBookId(Request $request){
-        $logs = $this->BorrowLogService->getBorrowLogsByBookId($request);
-        return response()->json($logs, 200);
-    }
-
-    // request 包含 status(1-3), order_by (1:DESC, 2:ASC)
-    public function getBorrowLogsByStatus(Request $request){
-        $logs = $this->BorrowLogService->getBorrowLogsByStatus($request);
-        return response()->json($logs, 200);
-    }
-
-
-    // 依時間搜尋
-    // type (1:date, 2:month, 3:year) , value (type=1:'YYYY-MM-DD',2:'MM',3:'YYYY')
-    //, value2 (type = 2, 'YYYY' nullable), order_by (1:DESC, 2:ASC),
-    // colunm_name (string), colunm_value => 這兩個nullable
-    public function getBorrowLogsByTime(Request $request){
-        $logs = $this->BorrowLogService->getBorrowLogsByTime($request);
-        return response()->json($logs, 200);
-    }
-
-    // upper_date , lower_date, order_by (1:DESC, 2:ASC)
-    // colunm_name (string), colunm_value => 這兩個nullable
+    // 依時間範圍搜尋
+    // start_date , end_date
     public function getBorrowLogsByTimeRange(Request $request){
         $logs = $this->BorrowLogService->getBorrowLogsByTimeRange($request);
         return response()->json($logs, 200);
+    }
+
+    // 關鍵字搜尋
+    // request包含 status(預設4:全找) , keyword
+    public function getBorrowLogsByKeywords(Request $request){
+        $this->validate($request, [
+            'status' => [
+                'required',
+                Rule::in([1, 2, 3, 4]),
+            ],
+            'keyword' => 'nullable',
+        ]);
+
+        $logs = $this->BorrowLogService->getBorrowLogsByKeywords($request);
+        return response()->json($logs, 200);
+
     }
 
 }

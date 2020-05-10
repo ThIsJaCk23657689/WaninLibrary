@@ -22,6 +22,7 @@
 		<span id="getLoginLogsByDate" class="d-none">{{ route('loginLogs.getLoginLogsByDate') }}</span>
 		<span id="getLoginLogsByMonth" class="d-none">{{ route('loginLogs.getLoginLogsByMonth') }}</span>
         <span id="getLoginLogsByYear" class="d-none">{{ route('loginLogs.getLoginLogsByYear') }}</span>
+        <span id="getLoginLogsByTimeRange" class="d-none">{{ route('loginLogs.getLoginLogsByTimeRange') }}</span>
 
         <table-filter v-on:refresh-table="refreshTable"></table-filter>
 		<login-log-table :loginlogs="loginlogs" :loginlogsjson="loginlogsjson"></login-log-table>

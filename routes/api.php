@@ -84,6 +84,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getLoginLogsByDate', 'LoginLogController@getLoginLogsByDate')->name('loginLogs.getLoginLogsByDate');
     Route::get('getLoginLogsByMonth', 'LoginLogController@getLoginLogsByMonth')->name('loginLogs.getLoginLogsByMonth');
     Route::get('getLoginLogsByYear', 'LoginLogController@getLoginLogsByYear')->name('loginLogs.getLoginLogsByYear');
+    Route::get('getLoginLogsByTimeRange', 'LoginLogController@getLoginLogsByTimeRange')->name('loginLogs.getLoginLogsByTimeRange');
 
     // 借閱管理相關
     Route::get('getBookListByStatus','BorrowController@getBookListByStatus');
@@ -97,11 +98,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     // 借閱日誌(logs)相關
     Route::get('getBorrowLogs','BorrowLogController@getList')->name('borrowLogs.getList');
-    Route::get('getBorrowLogsByBorrowerId','BorrowLogController@getBorrowLogsByBorrowerId');
-    Route::get('getBorrowLogsByBookId','BorrowLogController@getBorrowLogsByBookId');
-    Route::get('getBorrowLogsByStatus','BorrowLogController@getBorrowLogsByStatus');
-    Route::get('getBorrowLogsByTime','BorrowLogController@getBorrowLogsByTime');
-    Route::get('getBorrowLogsByTimeRange','BorrowLogController@getBorrowLogsByTimeRange');
+    // Route::get('getBorrowLogsByBorrowerId','BorrowLogController@getBorrowLogsByBorrowerId');
+    // Route::get('getBorrowLogsByBookId','BorrowLogController@getBorrowLogsByBookId');
+    // Route::get('getBorrowLogsByStatus','BorrowLogController@getBorrowLogsByStatus');
 
 });
 

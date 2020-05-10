@@ -35,8 +35,8 @@ class DonorService extends BaseService
         foreach($donors as $donor){
             $donor['showContact'] = $donor->showContact();
             $donor['showExposure'] = $donor->showExposure();
-            $donor['donateAmount'] = $donor->books->count();
-            $donor['action'] = 
+            $donor['donateAmount'] = $donor->books()->count();
+            $donor['action'] =
                 '<a href="' . route('donors.show', [$donor->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
                 <a href="' . route('donors.edit', [$donor->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
                 <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';

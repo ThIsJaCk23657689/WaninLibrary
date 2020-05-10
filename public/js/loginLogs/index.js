@@ -241,6 +241,37 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   data: function data() {
@@ -248,6 +279,7 @@ __webpack_require__.r(__webpack_exports__);
       getLoginLogsByDateURL: $('#getLoginLogsByDate').html(),
       getLoginLogsByMonthURL: $('#getLoginLogsByMonth').html(),
       getLoginLogsByYearURL: $('#getLoginLogsByYear').html(),
+      getLoginLogsByTimeRangeURL: $('#getLoginLogsByTimeRange').html(),
       FormErrorsMsg: []
     };
   },
@@ -257,6 +289,7 @@ __webpack_require__.r(__webpack_exports__);
 
       var url = $(e.target).attr('action');
       var data = $(e.target).serializeObject();
+      console.log(data);
       axios.get(url, {
         params: data
       }).then(function (response) {
@@ -272,7 +305,19 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {},
   mounted: function mounted() {
     // 依日期
-    $("#date").datepicker({
+    // $("#date").datepicker({
+    //     dateFormat: 'yy-mm-dd',
+    //     changeYear: true,
+    //     changeMonth: true,
+    //     yearRange: "-80:+0",
+    // });
+    $("#start_date").datepicker({
+      dateFormat: 'yy-mm-dd',
+      changeYear: true,
+      changeMonth: true,
+      yearRange: "-80:+0"
+    });
+    $("#end_date").datepicker({
       dateFormat: 'yy-mm-dd',
       changeYear: true,
       changeMonth: true,
@@ -299,21 +344,26 @@ __webpack_require__.r(__webpack_exports__);
       });
     }); // 按鈕
 
-    $("#search-by-date-btn").click(function () {
-      $("#search-by-date-form").toggle();
+    $("#search-by-time-range-btn").click(function () {
+      $("#search-by-time-range-form").toggle();
+      $("#search-by-date-form").hide();
       $("#search-by-month-form").hide();
       $("#search-by-year-form").hide();
-    });
-    $("#search-by-month-btn").click(function () {
-      $("#search-by-month-form").toggle();
-      $("#search-by-date-form").hide();
-      $("#search-by-year-form").hide();
-    });
-    $("#search-by-year-btn").click(function () {
-      $("#search-by-year-form").toggle();
-      $("#search-by-month-form").hide();
-      $("#search-by-date-form").hide();
-    });
+    }); // $("#search-by-date-btn").click(function(){
+    //     $("#search-by-date-form").toggle();
+    //     $("#search-by-month-form").hide();
+    //     $("#search-by-year-form").hide();
+    // });
+    // $("#search-by-month-btn").click(function(){
+    //     $("#search-by-month-form").toggle();
+    //     $("#search-by-date-form").hide();
+    //     $("#search-by-year-form").hide();
+    // });
+    // $("#search-by-year-btn").click(function(){
+    //     $("#search-by-year-form").toggle();
+    //     $("#search-by-month-form").hide();
+    //     $("#search-by-date-form").hide();
+    // });
   }
 });
 
@@ -406,6 +456,34 @@ var render = function() {
       _c(
         "div",
         {
+          staticClass: "col-md-9",
+          staticStyle: { display: "none" },
+          attrs: { id: "search-by-time-range-form" }
+        },
+        [
+          _c(
+            "form",
+            {
+              attrs: {
+                method: "GET",
+                id: "get_login_logs_by_time_range",
+                action: _vm.getLoginLogsByTimeRangeURL
+              },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.GetListByDateTime($event)
+                }
+              }
+            },
+            [_vm._m(1)]
+          )
+        ]
+      ),
+      _vm._v(" "),
+      _c(
+        "div",
+        {
           staticClass: "col-md-6",
           staticStyle: { display: "none" },
           attrs: { id: "search-by-date-form" }
@@ -426,7 +504,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._m(1)]
+            [_vm._m(2)]
           )
         ]
       ),
@@ -454,7 +532,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._m(2)]
+            [_vm._m(3)]
           )
         ]
       ),
@@ -482,7 +560,7 @@ var render = function() {
                 }
               }
             },
-            [_vm._m(3)]
+            [_vm._m(4)]
           )
         ]
       )
@@ -495,36 +573,81 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row justify-content-center mb-3" }, [
-      _c("div", { staticClass: "col-md-3" }, [
+      _c("div", { staticClass: "col-md-6" }, [
         _c(
           "button",
           {
             staticClass: "btn btn-block btn-primary",
-            attrs: { id: "search-by-date-btn", type: "button" }
+            attrs: { id: "search-by-time-range-btn", type: "button" }
           },
-          [_vm._v("依日期查詢")]
+          [_vm._v("依日期範圍查詢")]
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mb-3" }, [
+      _c("div", { staticClass: "col-md-3" }, [
+        _c(
+          "select",
+          { staticClass: "form-control", attrs: { name: "type", id: "type" } },
+          [
+            _c("option", { attrs: { value: "1" } }, [_vm._v("依登入日期")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "2" } }, [_vm._v("依登出日期")])
+          ]
         )
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-3" }, [
-        _c(
-          "button",
-          {
-            staticClass: "btn btn-block btn-primary",
-            attrs: { id: "search-by-month-btn", type: "button" }
-          },
-          [_vm._v("依月份查詢")]
-        )
+        _c("input", {
+          staticClass: "form-control mb-2",
+          attrs: {
+            id: "start_date",
+            name: "start_date",
+            type: "text",
+            value: "",
+            autocomplete: "off",
+            required: "",
+            placeholder: "例：2020-01-01"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-0 text-center py-1" }, [
+        _c("label", { attrs: { for: "" } }, [_vm._v("到")])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-3" }, [
+        _c("input", {
+          staticClass: "form-control mb-2",
+          attrs: {
+            id: "end_date",
+            name: "end_date",
+            type: "text",
+            value: "",
+            autocomplete: "off",
+            required: "",
+            placeholder: "例：2020-02-01"
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-2" }, [
         _c(
           "button",
           {
             staticClass: "btn btn-block btn-primary",
-            attrs: { id: "search-by-year-btn", type: "button" }
+            attrs: { type: "submit" }
           },
-          [_vm._v("依年份查詢")]
+          [
+            _vm._v(
+              "\n                            確認\n                        "
+            )
+          ]
         )
       ])
     ])
@@ -570,7 +693,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                            確認\r\n                        "
+              "\n                            確認\n                        "
             )
           ]
         )
@@ -618,7 +741,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                            確認\r\n                        "
+              "\n                            確認\n                        "
             )
           ]
         )
@@ -666,7 +789,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                            確認\r\n                        "
+              "\n                            確認\n                        "
             )
           ]
         )
@@ -974,7 +1097,7 @@ var app = new Vue({
 
     var LoginLogsGetList = $('#LoginLogsGetList').html();
     axios.get(LoginLogsGetList).then(function (response) {
-      console.log(response);
+      // console.log(response);
       _this.loginlogs = response.data;
       _this.loginlogsjson = JSON.stringify(response.data);
       $('#LoginLogsDataTable').dataTable({
@@ -1007,7 +1130,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\loginLogs\index.js */"./resources/js/loginLogs/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\loginLogs\index.js */"./resources/js/loginLogs/index.js");
 
 
 /***/ })

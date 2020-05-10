@@ -127,6 +127,47 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['borrowLogs', 'rowsPerPage', 'pageNum', 'totalPage'],
   data: function data() {
@@ -135,10 +176,37 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getBorrowLogList: function getBorrowLogList(pageNum) {
       this.$emit('update-borrow-log', pageNum);
+    },
+    changeStatus: function changeStatus(e) {
+      var status = e.target.value;
+      this.$emit('change-status', status);
+    },
+    changeKeywords: function changeKeywords(e) {
+      var keywords = e.target.value;
+      this.$emit('change-keywords', keywords);
+    },
+    changeRange: function changeRange(e) {
+      var data = $(e.target).serializeObject();
+      var start_date = data.start_date;
+      var end_date = data.end_date;
+      this.$emit('change-range', start_date, end_date);
     }
   },
   created: function created() {},
-  mounted: function mounted() {}
+  mounted: function mounted() {
+    $("#start_date").datepicker({
+      dateFormat: 'yy-mm-dd',
+      changeYear: true,
+      changeMonth: true,
+      yearRange: "-80:+0"
+    });
+    $("#end_date").datepicker({
+      dateFormat: 'yy-mm-dd',
+      changeYear: true,
+      changeMonth: true,
+      yearRange: "-80:+0"
+    });
+  }
 });
 
 /***/ }),
@@ -218,7 +286,97 @@ var render = function() {
     _c("div", { staticClass: "card mb-3" }, [
       _vm._m(0),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c(
+            "div",
+            {
+              staticClass: "col-md-12 justify-content-center",
+              attrs: { id: "" }
+            },
+            [
+              _c(
+                "form",
+                {
+                  attrs: { method: "GET", id: "time-range-form" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.changeRange($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "row mb-3 justify-content-center" },
+                    [
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c(
+                          "select",
+                          {
+                            staticClass: "form-control",
+                            attrs: { name: "status", id: "status" },
+                            on: { change: _vm.changeStatus }
+                          },
+                          [
+                            _c("option", { attrs: { value: "4" } }, [
+                              _vm._v("全部書籍")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("出借")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("已歸還")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "3" } }, [
+                              _vm._v("逾期過久")
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _vm._m(3),
+                      _vm._v(" "),
+                      _vm._m(4),
+                      _vm._v(" "),
+                      _vm._m(5)
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "row justify-content-center" }, [
+                    _c("div", { staticClass: "col-md-6" }, [
+                      _c("div", { staticClass: "form-group" }, [
+                        _c("input", {
+                          staticClass: "form-control mb-2",
+                          attrs: {
+                            id: "keywords",
+                            name: "keywords",
+                            type: "text",
+                            value: "",
+                            autocomplete: "off",
+                            placeholder: "關鍵字搜尋..."
+                          },
+                          on: { change: _vm.changeKeywords }
+                        })
+                      ])
+                    ])
+                  ])
+                ]
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(6)
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -241,50 +399,110 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table mr-2" }),
-      _vm._v("借還書紀錄\r\n        ")
+      _vm._v("借還書紀錄\n        ")
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "table-responsive" }, [
-        _c(
-          "table",
-          {
-            staticClass: "table table-bordered",
-            attrs: {
-              id: "BorrowLogsDataTable",
-              width: "100%",
-              cellspacing: "0"
-            }
-          },
-          [
-            _c("thead", [
-              _c("tr", [
-                _c("th", [_vm._v("編號")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("借閱人編號")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("借閱人姓名")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("書籍編號")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("書名")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("索書號")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("狀態")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("日期")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("操作")])
-              ])
+    return _c("div", { staticClass: "col-md-0 text-center py-1" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("從")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3" }, [
+      _c("input", {
+        staticClass: "form-control mb-2",
+        attrs: {
+          id: "start_date",
+          name: "start_date",
+          type: "text",
+          value: "",
+          autocomplete: "off",
+          required: "",
+          placeholder: "例：2020-01-01"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-0 text-center py-1" }, [
+      _c("label", { attrs: { for: "" } }, [_vm._v("到")])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-3" }, [
+      _c("input", {
+        staticClass: "form-control mb-2",
+        attrs: {
+          id: "end_date",
+          name: "end_date",
+          type: "text",
+          value: "",
+          autocomplete: "off",
+          required: "",
+          placeholder: "例：2020-02-01"
+        }
+      })
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-2" }, [
+      _c(
+        "button",
+        { staticClass: "btn btn-block btn-primary", attrs: { type: "submit" } },
+        [
+          _vm._v(
+            "\n                                    確認\n                                "
+          )
+        ]
+      )
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "table-responsive" }, [
+      _c(
+        "table",
+        {
+          staticClass: "table table-bordered",
+          attrs: { id: "BorrowLogsDataTable", width: "100%", cellspacing: "0" }
+        },
+        [
+          _c("thead", [
+            _c("tr", [
+              _c("th", [_vm._v("編號")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("借閱人姓名")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("書名")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("索書號")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("狀態")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("日期")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("操作")])
             ])
-          ]
-        )
-      ])
+          ])
+        ]
+      )
     ])
   }
 ]
@@ -459,23 +677,56 @@ var app = new Vue({
       rowsPerPage: 10,
       pageNum: 1,
       totalPage: 0,
-      borrowLogs: []
+      borrowLogs: [],
+      DataTotalCount: 0,
+      status: 4,
+      keywords: '',
+      start_date: '',
+      end_date: ''
     };
   },
   methods: {
-    updateBorrowLog: function updateBorrowLog(pageNum) {
+    changeStatus: function changeStatus(status) {
+      this.status = status;
+      this.updateBorrowLog(this.pageNum, true);
+    },
+    changeKeywords: function changeKeywords(keywords) {
+      this.keywords = keywords;
+      this.updateBorrowLog(this.pageNum, true);
+    },
+    changeRange: function changeRange(start_date, end_date) {
+      this.start_date = start_date;
+      this.end_date = end_date;
+      this.updateBorrowLog(this.pageNum, true);
+    },
+    updateBorrowLog: function updateBorrowLog(pageNum, first_page) {
       var _this = this;
+
+      if (first_page) {
+        this.pageNum = 1;
+      } else {
+        this.pageNum = pageNum;
+      }
 
       var skip = (pageNum - 1) * this.rowsPerPage;
       var take = this.rowsPerPage;
+      var status = this.status;
+      var keywords = this.keywords;
+      var start_date = this.start_date;
+      var end_date = this.end_date;
       var BorrowLogsGetList = $('#BorrowLogsGetList').html();
       $('.dataTables_processing', $('#BorrowLogsDataTable').closest('.dataTables_wrapper')).fadeIn();
       axios.get(BorrowLogsGetList, {
         params: {
           skip: skip,
-          take: take
+          take: take,
+          status: status,
+          keywords: keywords,
+          start_date: start_date,
+          end_date: end_date
         }
       }).then(function (response) {
+        console.log(response);
         _this.borrowLogs = response.data.logs;
         $('.dataTables_processing', $('#BorrowLogsDataTable').closest('.dataTables_wrapper')).fadeOut();
         $('#BorrowLogsDataTable').dataTable().fnClearTable();
@@ -493,6 +744,8 @@ var app = new Vue({
 
     var BorrowLogsGetList = $('#BorrowLogsGetList').html();
     axios.get(BorrowLogsGetList).then(function (response) {
+      _this2.DataTotalCount = response.data.DataTotalCount;
+      _this2.totalPage = Math.ceil(_this2.DataTotalCount / _this2.rowsPerPage);
       _this2.borrowLogs = response.data.logs;
       $('#BorrowLogsDataTable').on('draw.dt', function () {
         console.log('drawing a table');
@@ -503,11 +756,7 @@ var app = new Vue({
         columns: [{
           data: 'id'
         }, {
-          data: 'borrower_id'
-        }, {
           data: 'borrower_name'
-        }, {
-          data: 'book_id'
         }, {
           data: 'showTitle'
         }, {
@@ -528,9 +777,7 @@ var app = new Vue({
       });
     });
   },
-  mounted: function mounted() {
-    this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -680,7 +927,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\borrowLogs\index.js */"./resources/js/borrowLogs/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\borrowLogs\index.js */"./resources/js/borrowLogs/index.js");
 
 
 /***/ })

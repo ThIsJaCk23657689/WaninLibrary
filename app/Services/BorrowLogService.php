@@ -13,8 +13,54 @@ class BorrowLogService extends BaseService
         return BorrowLogEloquent::count();
     }
 
-    public function getList($skip, $take){
-        $logs = BorrowLogEloquent::skip($skip)->take($take)->get();
+    public function getList($request){
+        $skip = $request->skip;
+        $take = $request->take;
+        $status = $request->status;
+        $start_date = ($request->start_date != "") ? $request->start_date : null;
+        $end_date = ($request->end_date != "") ? $request->end_date : null;
+        $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
+
+        if($keywords == [] && $status== 4 && $start_date == null && $end_date== null){
+            $logs = BorrowLogEloquent::skip($skip)->take($take)->get();
+            $count = $logs->count();
+        }else{
+            $logs_tmp = BorrowLogEloquent::query()->where(function ($query) use ($keywords, $status, $start_date, $end_date) {
+                foreach ($keywords as $keyword) {
+                    $query->ofColumns($keyword);
+                }
+
+                if($status != 4){
+                    $query->where('status', $status);
+                }
+                if($start_date != null &&  $end_date != null){
+                    $query->whereBetween('created_at', [$start_date, $end_date]);
+                }
+
+
+            });
+            $logs = $logs_tmp->skip($skip)->take($take)->get();
+            $count = $logs_tmp->count();
+        }
+
+        foreach($logs as $log){
+            $log['showStatus'] = $log->showStatus();
+            $log['showTitle'] = $log->showTitle();
+            $log['action'] =
+                '<a href="' . route('borrowLogs.show', [$log->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
+        }
+        $res = ['logs' => $logs, 'count' => $count, 'start_date' => $start_date];
+        return $res;
+    }
+
+    public function getOne($id){
+        $log = BorrowLogEloquent::findOrFail($id);
+        return $log;
+    }
+
+
+    public function getBorrowLogsByTimeRange($request){
+        $logs = BorrowLogEloquent::ofRange($request->start_date, $request->end_date)->get();
         foreach($logs as $log){
             $log['showStatus'] = $log->showStatus();
             $log['showTitle'] = $log->showTitle();
@@ -24,58 +70,21 @@ class BorrowLogService extends BaseService
         return $logs;
     }
 
-    public function getOne($id){
-        $log = BorrowLogEloquent::findOrFail($id);
-        return $log;
-    }
+    public function getBorrowLogsByKeywords($request){
+        $keywords = explode(" ", $request->keyword);
+        $status = $request->status;
 
-    public function getBorrowLogsByBorrowerId($request){
-        $logs = BorrowLogEloquent::where('borrower_id', $request->borrower_id)
-        ->OrderByType($request->order_by)->get();
-        return $logs;
-    }
+        $logs = BorrowLogEloquent::query()->where(function ($query) use ($keywords, $status) {
+            foreach ($keywords as $keyword) {
+                $query->ofColumns($status, $keyword);
+            }
+        })->get();
 
-    public function getBorrowLogsByBookId($request){
-        $logs = BorrowLogEloquent::where('book_id', $request->book_id)
-        ->OrderByType($request->order_by)->get();
-        return $logs;
-    }
-
-    public function getBorrowLogsByStatus($request){
-        $logs = BorrowLogEloquent::where('status', $request->status)
-        ->OrderByType($request->order_by)->get();
-        return $logs;
-    }
-
-    // type (1:date, 2:month, 3:year) , value (type=1:'YYYY-MM-DD',2:'MM',3:'YYYY')
-    //, value2 (type = 2, 'YYYY' nullable), order_by (1:DESC, 2:ASC),
-    // colunm_name (string), colunm_value => 這兩個nullable
-    public function getBorrowLogsByTime($request){
-        $col_name = $request->column_name;
-        $col_value = $request->column_value;
-        if($col_name && $col_value){
-            $logs = BorrowLogEloquent::OfColumn($col_name, $col_value)
-                    ->OfTime($request->type, $request->value, $request->value2)
-                    ->OrderByType($request->order_by)->get();
-        }else{
-            $logs = BorrowLogEloquent::OfTime($request->type, $request->value, $request->value2)
-            ->OrderByType($request->order_by)->get();
-        }
-        return $logs;
-    }
-
-    // upper_date , lower_date, order_by (1:DESC, 2:ASC)
-    // colunm_name (string), colunm_value => 這兩個nullable
-    public function getBorrowLogsByTimeRange($request){
-        $col_name = $request->column_name;
-        $col_value = $request->column_value;
-        if($col_name && $col_value){
-            $logs = BorrowLogEloquent::OfColumn($col_name, $col_value)
-                    ->whereBetween('created_at', [$request->upper_date, $request->lower_date])
-                    ->OrderByType($request->order_by)->get();
-        }else{
-            $logs = BorrowLogEloquent::whereBetween('created_at', [$request->upper_date, $request->lower_date])
-            ->OrderByType($request->order_by)->get();
+        foreach($logs as $log){
+            $log['showStatus'] = $log->showStatus();
+            $log['showTitle'] = $log->showTitle();
+            $log['action'] =
+                '<a href="' . route('borrowLogs.show', [$log->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
         }
         return $logs;
     }

@@ -24,7 +24,7 @@ const app = new Vue({
     created() {
         let LoginLogsGetList = $('#LoginLogsGetList').html();
         axios.get(LoginLogsGetList).then(response => {
-            console.log(response);
+            // console.log(response);
             this.loginlogs = response.data;
             this.loginlogsjson = JSON.stringify(response.data);
 

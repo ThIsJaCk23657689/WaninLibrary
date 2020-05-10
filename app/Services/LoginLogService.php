@@ -143,4 +143,24 @@ class LoginLogService extends BaseService
 
         return $logs;
     }
+
+    public function getLoginLogsByTimeRange($request){
+        // type(1:login date； 2:logount date) & start_date & end_date 'YYYY-MM-DD'
+        $type = $request->type;
+        $start_date = $request->start_date;
+        $end_date = $request->end_date;
+
+        $logs = LoginLogEloquent::ofRange($type, $start_date, $end_date)->sortByDate_DESC(1)->with('user:id,name')->get();
+
+        foreach($logs as $log){
+            $url =  route('loginLogs.show', [$log->id]);
+            $href = '<a href="' .$url. '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
+            $log->url = $href;
+            $log->logout_date = $log->logout_date ? $log->logout_date : $log->content;
+        }
+
+        return $logs;
+
+
+    }
 }

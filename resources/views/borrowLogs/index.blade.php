@@ -19,9 +19,10 @@
 
 	<div id="borrowLog">
 		<span id="BorrowLogsGetList" class="d-none">{{ route('borrowLogs.getList') }}</span>
-		<span id="DataTotalCount" class="d-none">{{ $DataTotalCount }}</span>
 
-		<borrow-logs-table :borrow-logs="borrowLogs" :rows-per-page="rowsPerPage" :page-num="pageNum" :total-page="totalPage" v-on:update-borrow-log="updateBorrowLog"></borrow-logs-table>
+
+        <borrow-logs-table :borrow-logs="borrowLogs" :rows-per-page="rowsPerPage" :page-num="pageNum" :total-page="totalPage" v-on:update-borrow-log="updateBorrowLog"
+        v-on:change-status="changeStatus" v-on:change-keywords="changeKeywords" v-on:change-range="changeRange"></borrow-logs-table>
 	</div>
 
 @endsection
