@@ -1,7 +1,10 @@
 <template>
 <div>
     <div class="row justify-content-center mb-3">
-        <div class="col-md-3">
+        <div class="col-md-6">
+            <button id="search-by-time-range-btn" type="button" class="btn btn-block btn-primary">依日期範圍查詢</button>
+        </div>
+        <!-- <div class="col-md-3">
             <button id="search-by-date-btn" type="button" class="btn btn-block btn-primary">依日期查詢</button>
         </div>
         <div class="col-md-3">
@@ -9,10 +12,38 @@
         </div>
         <div class="col-md-3">
             <button id="search-by-year-btn" type="button" class="btn btn-block btn-primary">依年份查詢</button>
-        </div>
+        </div> -->
     </div>
-    <!-- 依日期查詢 -->
+
     <div class="row justify-content-center">
+        <!-- 依日期範圍查詢 -->
+        <div class="col-md-9" style="display:none" id="search-by-time-range-form">
+            <form method="GET" id="get_login_logs_by_time_range" :action="getLoginLogsByTimeRangeURL" @submit.prevent="GetListByDateTime">
+                <div class="row mb-3">
+                    <div class="col-md-3">
+                        <select name="type" id="type" class="form-control">
+                            <option value="1">依登入日期</option>
+                            <option value="2">依登出日期</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <input id="start_date" name="start_date" type="text" class="form-control mb-2" value="" autocomplete="off" required placeholder="例：2020-01-01">
+                    </div>
+                    <div class="col-md-0 text-center py-1">
+                        <label for="" class="">到</label>
+                    </div>
+                    <div class="col-md-3">
+                        <input id="end_date" name="end_date" type="text" class="form-control mb-2" value="" autocomplete="off" required placeholder="例：2020-02-01">
+                    </div>
+                    <div class="col-md-2">
+                        <button type="submit" class="btn btn-block btn-primary">
+                            確認
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <!-- 依日期查詢 -->
         <div class="col-md-6" style="display:none" id="search-by-date-form">
             <form method="GET" id="get_login_logs_by_date" :action="getLoginLogsByDateURL" @submit.prevent="GetListByDateTime">
                 <div class="row mb-3">
@@ -70,7 +101,6 @@
                 </div>
             </form>
         </div>
-
         <!-- 依年份查詢 -->
         <div class="col-md-6" style="display:none" id="search-by-year-form">
             <form method="GET" id="get_login_logs_by_year" :action="getLoginLogsByYearURL" @submit.prevent="GetListByDateTime">
@@ -92,6 +122,7 @@
                 </div>
             </form>
         </div>
+
     </div>
 </div>
 </template>
@@ -104,6 +135,7 @@ export default {
             getLoginLogsByDateURL : $('#getLoginLogsByDate').html(),
             getLoginLogsByMonthURL : $('#getLoginLogsByMonth').html(),
             getLoginLogsByYearURL : $('#getLoginLogsByYear').html(),
+            getLoginLogsByTimeRangeURL : $('#getLoginLogsByTimeRange').html(),
             FormErrorsMsg: [],
         }
     },
@@ -111,7 +143,7 @@ export default {
         GetListByDateTime: function(e){
             let url = $(e.target).attr('action');
             let data = $(e.target).serializeObject();
-
+            console.log(data)
             axios.get(url, {
                 params: data
             }).then(response => {
@@ -127,7 +159,19 @@ export default {
     },
     mounted(){
         // 依日期
-        $("#date").datepicker({
+        // $("#date").datepicker({
+        //     dateFormat: 'yy-mm-dd',
+        //     changeYear: true,
+        //     changeMonth: true,
+        //     yearRange: "-80:+0",
+        // });
+        $("#start_date").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeYear: true,
+            changeMonth: true,
+            yearRange: "-80:+0",
+        });
+        $("#end_date").datepicker({
             dateFormat: 'yy-mm-dd',
             changeYear: true,
             changeMonth: true,
@@ -156,21 +200,27 @@ export default {
         });
 
         // 按鈕
-        $("#search-by-date-btn").click(function(){
-            $("#search-by-date-form").toggle();
+        $("#search-by-time-range-btn").click(function(){
+            $("#search-by-time-range-form").toggle();
+            $("#search-by-date-form").hide();
             $("#search-by-month-form").hide();
             $("#search-by-year-form").hide();
         });
-        $("#search-by-month-btn").click(function(){
-            $("#search-by-month-form").toggle();
-            $("#search-by-date-form").hide();
-            $("#search-by-year-form").hide();
-        });
-        $("#search-by-year-btn").click(function(){
-            $("#search-by-year-form").toggle();
-            $("#search-by-month-form").hide();
-            $("#search-by-date-form").hide();
-        });
+        // $("#search-by-date-btn").click(function(){
+        //     $("#search-by-date-form").toggle();
+        //     $("#search-by-month-form").hide();
+        //     $("#search-by-year-form").hide();
+        // });
+        // $("#search-by-month-btn").click(function(){
+        //     $("#search-by-month-form").toggle();
+        //     $("#search-by-date-form").hide();
+        //     $("#search-by-year-form").hide();
+        // });
+        // $("#search-by-year-btn").click(function(){
+        //     $("#search-by-year-form").toggle();
+        //     $("#search-by-month-form").hide();
+        //     $("#search-by-date-form").hide();
+        // });
     }
 }
 </script>

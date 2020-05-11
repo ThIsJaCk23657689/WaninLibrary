@@ -91,5 +91,12 @@ class LoginLogController extends Controller
         return response()->json($logs, 200);
     }
 
+    // request包含 type(1:login date； 2:logount date) & start_date & end_date 'YYYY-MM-DD'
+    //
+    public function getLoginLogsByTimeRange(Request $request){
+        $logs = $this->LoginLogService->getLoginLogsByTimeRange($request);
+        return response()->json($logs, 200);
+    }
+
 
 }

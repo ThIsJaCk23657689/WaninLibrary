@@ -38,13 +38,18 @@ Route::prefix('/backend')->group(function(){
         'store', 'update', 'destroy'
     ]]);
 
-    //借閱者管理相關
+    // 借閱者管理相關路由
     Route::post('/borrowers/activate','BorrowerController@activate');
     Route::get('/borrowers/json', 'BorrowerController@getList')->name('borrowers.getList');
     Route::get('/borrowers/{id}/json', 'BorrowerController@getOne')->name('borrowers.getOne');
     Route::get('/borrowers/filter', 'BorrowerController@filter')->name('borrowers.filter');
     Route::resource('/borrowers', 'BorrowerController', ['only' => [
         'store', 'update', 'destroy'
+    ]]);
+
+    // 基本資料相關路由
+    Route::resource('/information', 'InformationController', ['only' => [
+        'update'
     ]]);
 
     // 捐書人管理路由
@@ -85,6 +90,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getLoginLogsByDate', 'LoginLogController@getLoginLogsByDate')->name('loginLogs.getLoginLogsByDate');
     Route::get('getLoginLogsByMonth', 'LoginLogController@getLoginLogsByMonth')->name('loginLogs.getLoginLogsByMonth');
     Route::get('getLoginLogsByYear', 'LoginLogController@getLoginLogsByYear')->name('loginLogs.getLoginLogsByYear');
+    Route::get('getLoginLogsByTimeRange', 'LoginLogController@getLoginLogsByTimeRange')->name('loginLogs.getLoginLogsByTimeRange');
 
     // 借閱管理相關
     Route::get('getBookListByStatus','BorrowController@getBookListByStatus');
@@ -98,11 +104,9 @@ Route::group(['middleware' => 'auth.jwt'], function () {
 
     // 借閱日誌(logs)相關
     Route::get('getBorrowLogs','BorrowLogController@getList')->name('borrowLogs.getList');
-    Route::get('getBorrowLogsByBorrowerId','BorrowLogController@getBorrowLogsByBorrowerId');
-    Route::get('getBorrowLogsByBookId','BorrowLogController@getBorrowLogsByBookId');
-    Route::get('getBorrowLogsByStatus','BorrowLogController@getBorrowLogsByStatus');
-    Route::get('getBorrowLogsByTime','BorrowLogController@getBorrowLogsByTime');
-    Route::get('getBorrowLogsByTimeRange','BorrowLogController@getBorrowLogsByTimeRange');
+    // Route::get('getBorrowLogsByBorrowerId','BorrowLogController@getBorrowLogsByBorrowerId');
+    // Route::get('getBorrowLogsByBookId','BorrowLogController@getBorrowLogsByBookId');
+    // Route::get('getBorrowLogsByStatus','BorrowLogController@getBorrowLogsByStatus');
 
 });
 

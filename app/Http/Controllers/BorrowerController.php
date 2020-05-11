@@ -130,7 +130,7 @@ class BorrowerController extends Controller
         $result = $this->BorrowerService->filter($request);
         $borrowers = $result['borrowers'];
         foreach ($borrowers as $borrower){
-            $borrower['action'] = '<button type="button" class="btn btn-md btn-primary" onclick="selectBorrower(' . $borrower->id . ')">選擇</button>';
+            $borrower['getOneUrl'] = route('borrowers.getOne', [$borrower->id]);
         }
 
         return response()->json([

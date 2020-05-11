@@ -13,6 +13,15 @@ class BorrowLog extends Model
          'status'
     ];
 
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d'
+    ];
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format($this->dataFormat? : 'Y-m-d H:i:s');
+    }
+
     public function book(){
         return $this->belongsTo(BookEloquent::class);
     }
@@ -45,6 +54,7 @@ class BorrowLog extends Model
         }
     }
 
+
     public function scopeOrderByType($query, $type){
         if($type==1){
             $query->orderBy('created_at', 'DESC');
@@ -54,27 +64,20 @@ class BorrowLog extends Model
 
     }
 
+    public function scopeOfColumns($query,$keyword = []){
+        $arr_cols = ['borrower_id', 'borrower_name', 'book_id', 'book_title', 'callnum'];
 
-    public function scopeOfTime($query, $type, $value, $value2 = NULL){
-        switch ($type){
-            case 1: // date
-                $query->whereDate('created_at', $value);
-                break;
-            case 2: // month
-                $query->whereYear('created_at', $value2)->whereMonth('created_at', $value);
-                break;
-            case 3: // year
-                $query->whereYear('created_at', $value);
-                break;
-        }
-    }
 
-    public function scopeOfColumn($query, $column_name, $value){
-        if($column_name == 'borrower_id'||$column_name == 'book_id'||$column_name == 'status'){
-            $query->where($column_name, $value);
-        }else{
-            $query->where($column_name, 'like', '%'.$value.'%');
+        if($keyword!=[]){
+            foreach($arr_cols as $col){
+                if($col == 'borrower_id'||$col == 'book_id'){
+                    $query->orWhere($col, $keyword);
+                }else{
+                    $query->orWhere($col, 'like', '%'.$keyword.'%');
+                }
+            }
         }
+
 
     }
 

@@ -21,6 +21,14 @@ class LoginLog extends Model
     }
 
     // scope
+    public function scopeOfRange($query, $type, $start_date, $end_date){
+        if($type == 1){
+            $query->whereBetween('created_at', [$start_date, $end_date]);
+        }else{
+            $query->whereBetween('logout_date', [$start_date, $end_date]);
+        }
+    }
+
     public function scopeOfDate($query, $type, $date){
         if($type == 1){
             $query->whereDate('created_at', $date);

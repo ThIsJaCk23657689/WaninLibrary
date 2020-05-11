@@ -150,7 +150,8 @@ export default {
                 name: null,
                 tel: null,
                 birthday: null
-            }
+            },
+            currentBorrower: []
         }
     },
     methods: { 
@@ -257,9 +258,9 @@ export default {
                     }
                 },
                 { 
-                    data: null,
+                    data: 'getOneUrl',
                     render: function(data, type, full){
-                        return '<button type="button" class="btn btn-info btn-select" href="#">選擇</button><span class="d-none">'+full.id+'<span>';
+                        return '<button type="button" class="btn btn-info btn-select" href="#">選擇</button><span class="d-none">' + data + '<span>';
                     }
                 },
             ],
@@ -273,8 +274,12 @@ export default {
 
         // 新增選擇按鈕事件
         $('#FilterTable').on('click', '.btn-select', function(e){
-            let select_id = $(this).next().text();
-            alert(select_id);
+            let select_url = $(this).next().text();
+            axios.get(select_url).then(response => {
+                this.currentBorrower = response.data.borrower;
+            }).catch(error => {
+                console.log(error);
+            });
         });
     },
 }

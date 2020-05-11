@@ -244,7 +244,8 @@ __webpack_require__.r(__webpack_exports__);
         name: null,
         tel: null,
         birthday: null
-      }
+      },
+      currentBorrower: []
     };
   },
   methods: {
@@ -350,9 +351,9 @@ __webpack_require__.r(__webpack_exports__);
           return data ? data : '無';
         }
       }, {
-        data: null,
+        data: 'getOneUrl',
         render: function render(data, type, full) {
-          return '<button type="button" class="btn btn-info btn-select" href="#">選擇</button><span class="d-none">' + full.id + '<span>';
+          return '<button type="button" class="btn btn-info btn-select" href="#">選擇</button><span class="d-none">' + data + '<span>';
         }
       }],
       lengthChange: false,
@@ -364,8 +365,14 @@ __webpack_require__.r(__webpack_exports__);
     }); // 新增選擇按鈕事件
 
     $('#FilterTable').on('click', '.btn-select', function (e) {
-      var select_id = $(this).next().text();
-      alert(select_id);
+      var _this3 = this;
+
+      var select_url = $(this).next().text();
+      axios.get(select_url).then(function (response) {
+        _this3.currentBorrower = response.data.borrower;
+      })["catch"](function (error) {
+        console.log(error);
+      });
     });
   }
 });
