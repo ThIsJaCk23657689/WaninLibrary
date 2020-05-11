@@ -51,6 +51,7 @@ Route::prefix('/backend')->group(function(){
     Route::resource('/information', 'InformationController', ['only' => [
         'update'
     ]]);
+    Route::get('/information/getFirst','InformationController@getFirst')->name('information.getFirst');
 
     // 捐書人管理路由
     Route::get('/donors/json', 'DonorController@getList')->name('donors.getList');

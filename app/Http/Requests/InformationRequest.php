@@ -28,8 +28,8 @@ class InformationRequest extends FormRequest
             'tel' => 'required|string|max:30',
             'fax' => 'required|string|max:30',
             'address' => 'required|string|max:50',
-            'open_at' => 'required|time',
-            'close_at' => 'required|time',
+            'open_at' => 'required|date_format:H:i:s',
+            'close_at' => 'required|date_format:H:i:s',
         ];
     }
 }

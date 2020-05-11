@@ -11,7 +11,7 @@ $factory->define(Information::class, function (Faker $faker) {
         'tel' => '(04)2382-5559',
         'fax' => '(04)2382-1977',
         'address' => '412028台中市大里區泉水路86號1樓',
-        'open_at' => '11:00:00',
-        'close_at' => '18:00:00',
+        'open_at' => '11:00',
+        'close_at' => '18:00',
     ];
 });

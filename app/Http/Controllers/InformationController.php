@@ -38,8 +38,8 @@ class InformationController extends Controller
         ], 200);
     }
 
-    public function getOne($id){
-        $information = $this->InformationService->getOne($id);
+    public function getFirst(){
+        $information = $this->InformationService->getFirst();
         return response()->json([
             'status' => 'OK',
             'information' => $information
