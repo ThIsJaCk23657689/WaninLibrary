@@ -11,7 +11,7 @@ class InformationController extends Controller
 
     public function __construct(){
         $this->middleware('auth.web')->only([
-            'show', 'edit', 
+            'index', 'edit',
         ]);
         $this->middleware('auth.jwt')->only([
             'update'
@@ -19,9 +19,9 @@ class InformationController extends Controller
         $this->InformationService = new InformationService();
     }
 
-    public function show(){
+    public function index(){
         $information = $this->InformationService->getFirst();
-        return view('information.show', compact('information'));
+        return view('information.index', compact('information'));
     }
 
     public function edit(){
@@ -33,8 +33,16 @@ class InformationController extends Controller
         $information_id = $this->InformationService->update($request);
         return response()->json([
             'status' => 'OK',
-            'added_id' => $information_id,
-            'url' => route('information.show', [$information_id])
+            // 'added_id' => $information_id,
+            'url' => route('information.index')
         ], 200);
+    }
+
+    public function getOne($id){
+        $information = $this->InformationService->getOne($id);
+        return response()->json([
+            'status' => 'OK',
+            'information' => $information
+        ]);
     }
 }

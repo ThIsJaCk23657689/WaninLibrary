@@ -43,4 +43,6 @@ mix.js('resources/js/backend.js', 'public/js')
 
 .js('resources/js/activities/create.js', 'public/js/activities')
 
+.js('resources/js/information/edit.js', 'public/js/information')
+
 .sass('resources/sass/backend/backend.scss', 'public/css');

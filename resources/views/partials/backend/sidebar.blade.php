@@ -63,6 +63,7 @@
 			<a class="dropdown-item" href="#">{{ __('News') }}</a>
 			<a class="dropdown-item" href="#">{{ __('Events') }}</a>
 			<a class="dropdown-item" href="#">{{ __('Recommend') }}</a>
+			<a class="dropdown-item" href="{{ route('information.index') }}">{{ __('Information') }}</a>
 		</div>
     </li>
 

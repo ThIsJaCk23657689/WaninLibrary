@@ -61,7 +61,7 @@ Route::prefix('/backend')->group(function(){
 
     // 基本資料管理相關路由
     Route::resource('/information', 'InformationController', ['only' => [
-        'show', 'edit'
+        'index', 'edit'
     ]]);
 
     // 登入紀錄相關
