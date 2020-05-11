@@ -311,7 +311,7 @@ __webpack_require__.r(__webpack_exports__);
       }).then(function (response) {
         _this2.borrowers = response.data.borrowers;
         _this2.totalCount = response.data.count;
-        _this2.totalPage = _this2.totalCount / _this2.countPerPage;
+        _this2.totalPage = Math.ceil(_this2.totalCount / _this2.countPerPage);
         $('.dataTables_processing', $('#FilterTable').closest('.dataTables_wrapper')).fadeOut();
         $('#FilterTable').dataTable().fnClearTable();
 
@@ -1398,7 +1398,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\circulation\index.js */"./resources/js/circulation/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\circulation\index.js */"./resources/js/circulation/index.js");
 
 
 /***/ })
