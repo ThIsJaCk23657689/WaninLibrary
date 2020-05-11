@@ -68,6 +68,9 @@ Route::prefix('/backend')->group(function(){
     Route::resource('/books', 'BookController', ['only' => [
         'store', 'update', 'destroy'
     ]]);
+    
+    // Image Upload
+    Route::post('ckeditor/upload', 'CKEditorController@upload')->name('ckeditor.upload');
 });
 
 Route::group(['middleware' => 'auth.jwt'], function () {
