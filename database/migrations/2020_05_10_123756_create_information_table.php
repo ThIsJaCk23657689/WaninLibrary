@@ -18,7 +18,7 @@ class CreateInformationTable extends Migration
             $table->string('email')->comment('信箱');
             $table->string('tel')->comment('電話');
             $table->string('fax')->comment('傳真');
-            $table->string('address')->comment('傳真');
+            $table->string('address')->comment('地址');
             $table->time('open_at')->comment('開館時間');
             $table->time('close_at')->comment('閉館時間');
         });

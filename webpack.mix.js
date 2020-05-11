@@ -41,4 +41,6 @@ mix.js('resources/js/backend.js', 'public/js')
 
 .js('resources/js/borrowLogs/index.js', 'public/js/borrowLogs')
 
+.js('resources/js/information/edit.js', 'public/js/information')
+
 .sass('resources/sass/backend/backend.scss', 'public/css');
