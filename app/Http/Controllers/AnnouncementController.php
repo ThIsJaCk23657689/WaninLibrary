@@ -3,82 +3,66 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\service\AnnouncementService;
+use App\http\request\AnnouncementRequest;
 
 class AnnouncementController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        //
+    public $AnnouncementService;
+
+    public function __construct(){
+        $this->middleware('auth.web')->only([
+            'index', 'create', 'show', 'edit', 
+        ]);
+        $this->middleware('auth.jwt')->only([
+            'store', 'update', 'destroy', 'change_top'
+        ]);
+        $this->AnnouncementService = new AnnouncementService();
+    }
+    public function index(){
+        $announcements = $this->AnnouncementService->getList();
+        return view('announcements.index', compact('announcements'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+    public function create(){
+        return view('announcements.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request){
+        $announcement_id = $this->AnnouncementService->add($request);
+        return response()->json([
+            'status' => 'OK',
+            'added_id' => $announcement_id,
+            'url' => route('announcements.index')
+        ], 200);
     }
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+    public function show($id){
+        $announcement = $this->AnnouncementService->getOne($id);
+        return view('announcements.show', compact('announcement'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
+    public function edit($id){
+        $announcement = $this->AnnouncementService->getOne($id);
+        return view('announcements.edit', compact('announcement'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
+    public function update(AnnouncementRequest $request, $id){
+        $announcement_id = $this->AnnouncementService->update($request, $id);
+        return response()->json([
+            'status' => 'OK',
+            'added_id' => $announcement_id,
+            'url' => route('announcements.show', [$announcement_id])
+        ], 200);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+    public function destroy($id){
+        $this->AnnouncementService->delete($id);
+        return redirect()->route('announcements.index');
+    }
+
+    public function change_top($id){
+        $this->AnnouncementService->change_top($id);
+        return redirect()->route('announcements.index');
     }
 }

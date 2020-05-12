@@ -59,51 +59,51 @@ class BookService extends BaseService
         ]);
 
         // 圖片儲存
-        $msg = $this->saveImage($request, $book);
+        // $msg = $this->saveImage($request, $book);
 
-        $res = ['status' => $msg['state'], 'msg' => $msg['message'], 'book_id' => $book->id, 'barcode' => $barcode ,'cover_image' => $msg['result'], 'url' => route('books.index')];
+        $res = ['book_id' => $book->id, 'barcode' => $barcode, 'url' => route('books.index')];
         return $res;
     }
 
-    private function saveImage(Request $request, $book){
-        if(!preg_match("/^[a-zA-Z]+:\/\//", $request->cover_image)){
-            // 不是網址
-            $crop = new CropImageService(
-                $request->has('image_src') ? $request->image_src : null,
-                $request->has('image_data') ? $request->image_data : null,
-                isset($_FILES['image_file']) ? $_FILES['image_file'] : null,
-                $book->id,
-                ['type' => 'book']
-            );
-            if (is_null($crop->getMsg())) {
-                //代表上傳成功
-                $ImageURL = $book->cover_image;
-                if(!preg_match("/^[a-zA-Z]+:\/\//", $ImageURL)){
-                    if (!empty($ImageURL)) {
-                        //刪除原本的圖片
-                        //代表不是網址 是server上檔檔案 先刪除原圖檔
-                        unlink($ImageURL);
-                    }
-                }
-                //資料庫新增
-                $book->update([
-                    'cover_image' => $crop->getResult(),
-                ]);
+    // private function saveImage(Request $request, $book){
+    //     if(!preg_match("/^[a-zA-Z]+:\/\//", $request->cover_image)){
+    //         // 不是網址
+    //         $crop = new CropImageService(
+    //             $request->has('image_src') ? $request->image_src : null,
+    //             $request->has('image_data') ? $request->image_data : null,
+    //             isset($_FILES['image_file']) ? $_FILES['image_file'] : null,
+    //             $book->id,
+    //             ['type' => 'book']
+    //         );
+    //         if (is_null($crop->getMsg())) {
+    //             //代表上傳成功
+    //             $ImageURL = $book->cover_image;
+    //             if(!preg_match("/^[a-zA-Z]+:\/\//", $ImageURL)){
+    //                 if (!empty($ImageURL)) {
+    //                     //刪除原本的圖片
+    //                     //代表不是網址 是server上檔檔案 先刪除原圖檔
+    //                     unlink($ImageURL);
+    //                 }
+    //             }
+    //             //資料庫新增
+    //             $book->update([
+    //                 'cover_image' => $crop->getResult(),
+    //             ]);
 
-                return ['status' => 200,'message' => $crop->getMsg(),'result' => URL::asset($crop->getResult())];
-            }else{
-                // failed
-                return ['status' => 422,'message' => $crop -> getMsg(),'result' => URL::asset($crop -> getResult())] ;
-            }
-        }else{
-            // 是網址
-            $url = $request->cover_image;
-            $book->update([
-                'cover_image' => $url,
-            ]);
-            return ['status' => 200, 'message' => 'OK', 'result' => $url];
-        }
-    }
+    //             return ['status' => 200,'message' => $crop->getMsg(),'result' => URL::asset($crop->getResult())];
+    //         }else{
+    //             // failed
+    //             return ['status' => 422,'message' => $crop -> getMsg(),'result' => URL::asset($crop -> getResult())] ;
+    //         }
+    //     }else{
+    //         // 是網址
+    //         $url = $request->cover_image;
+    //         $book->update([
+    //             'cover_image' => $url,
+    //         ]);
+    //         return ['status' => 200, 'message' => 'OK', 'result' => $url];
+    //     }
+    // }
 
     private function getLastUpdatedID(){
         $book = BookEloquent::orderBy('id', 'DESC')->first();
@@ -220,6 +220,33 @@ class BookService extends BaseService
 
     public function update($request, $id){
         $book = $this->getOne($id);
+
+        // 若書封面未做更動，不執行圖片裁切。
+        if($book->image_cover != $request->image_cover){
+            if(!preg_match("/^[a-zA-Z]+:\/\//", $request->cover_image)){
+                $crop = new CropImageService(
+                    $request->has('image_src') ? $request->image_src : null,
+                    $request->has('image_data') ? $request->image_data : null,
+                    isset($_FILES['image_file']) ? $_FILES['image_file'] : null,
+                    ['type' => 'books']
+                );
+                if(preg_match("/^[a-zA-Z]+:\/\//", $crop)){
+                    $cover_image = $crop;
+                }else{
+                    $res = ['status' => 422, 
+                            'msg' => 'Image insert error : '.$crop, 
+                            ];
+                    return $res;
+                }
+            }else{
+                $cover_image = $request->cover_image;
+            }
+            $book->update([
+                'cover_image' => $cover_image
+            ]);
+        }
+
+
         $book->update([
             'donor_id' => $request->donor_id,
             'barcode' => $request->barcode,
@@ -233,7 +260,6 @@ class BookService extends BaseService
             'translator' => $request->translator,
             'publisher' => $request->publisher,
             'edition' => $request->edition,
-            'cover_image' => null,
             'ISBN' => $request->ISBN,
 
             'published_date' => $request->published_date,
@@ -242,8 +268,6 @@ class BookService extends BaseService
             'content' => $request->content,
             'count' => $request->count,
         ]);
-        // 圖片儲存
-        $msg = $this->saveImage($request, $book);
 
         $res = ['status' => $msg['state'], 'msg' => $msg['message'], 'book_id' => $book->id, 'barcode' => $book->barcode ,'cover_image' => $msg['result'], 'url' => route('books.index')];
         return $res;
