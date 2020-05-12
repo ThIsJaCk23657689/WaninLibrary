@@ -12,7 +12,7 @@ class DonorController extends Controller
 
     public function __construct(){
         $this->middleware('auth.web')->only([
-            'index', 'create', 'show', 'edit', 
+            'index', 'create', 'show', 'edit',
         ]);
         $this->middleware('auth.jwt')->only([
             'store', 'update', 'destroy', 'getList', 'getOne',
@@ -69,20 +69,19 @@ class DonorController extends Controller
     // API
     public function getList(Request $request){
         $this->validate($request, [
+            'type' => 'nullable|integer|', // 0.(default)全部 2.依姓名 3.依照電話 4.手機 5. 信箱
+            'keywords' => 'nullable|string|',
+            'exposure' => 'nullable|integer|', //(default)0.all  1.完全公開 2.半公開 3.前台不曝光
             'skip' => 'nullable|integer|',
             'take' => 'nullable|integer|max:100'
         ]);
 
-        $skip = $request->skip ?? 0;
-        $take = $request->take ?? 10;
-
-        $result = $this->DonorService->getList($skip, $take);
+        $result = $this->DonorService->getList($request);
 
         return response()->json([
             'status' => 'OK',
-            'count' => $take,
             'donors' => $result['donors'],
-            'dataTotalCount' => $result['count']
+            'DataTotalCount' => $result['count']
         ]);
     }
 

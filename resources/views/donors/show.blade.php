@@ -1,10 +1,11 @@
 @extends('layouts.backend.master')
 
 @push('CustomJS')
-@endpush   
+	<script src="{{ asset('js/admin/demo/datatables-demo.js') }}" defer></script>
+@endpush
 
 @section('content')
-				
+
 	@component('components.breadcrumbs')
 		<li class="breadcrumb-item">
 			<a href="#">{{ __('People Management') }}</a>
@@ -18,7 +19,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="row">
-    
+
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="name">捐贈人名稱</label>
@@ -68,6 +69,48 @@
                     <a href="{{ route('donors.index') }}" class="btn btn-block btn-danger">
                         返回列表
                     </a>
+                </div>
+            </div>
+
+            <div class="row justify-content-center">
+                <div class="col-md-12">
+                     <!-- DataTables Example -->
+                    <div class="card mb-3">
+                        <div class="card-header">
+                            <i class="fas fa-table"></i>
+                            捐書列表
+                        </div>
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>書籍條碼</th>
+                                            <th>書籍名稱</th>
+                                            <th>書籍狀態</th>
+                                            <th>借閱次數</th>
+                                            <th>操作</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($donor->books as $book)
+                                            <tr>
+                                                <td>{{ $book->barcode }}</td>
+                                                <td>{{ $book->title }}</td>
+                                                <td>{{ $book->showStatus() }}</td>
+                                                <td>{{ $book->count }}</td>
+                                                <td>
+                                                    <a href="{{ route('books.show', [$book->id]) }}" class="btn btn-md btn-info">
+                                                        <i class="fas fa-info-circle"></i>
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

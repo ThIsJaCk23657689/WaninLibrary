@@ -29,20 +29,55 @@ class DonorService extends BaseService
         return DonorEloquent::count();
     }
 
-    public function getList($skip, $take)
+    public function getList($request)
     {
-        $donorsModel = new DonorEloquent();
-        $count = $donorsModel->count();
+        $skip = $request->skip ?? 0;
+        $take = $request->take ?? 10;
+        $type = $request->type ?? 0;
+        $exposure = $request->exposure ?? 0;
+        $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
+
+        $type_arr = ['','name', 'tel', 'cellphone', 'email'];
 
         // 搜尋
+        if($keywords == [] && $exposure== 0 && $type== 0){
+            // all default
+            $donorsModel = new DonorEloquent();
+            $count = $donorsModel->count();
+            $donors = $donorsModel->skip($skip)->take($take)->get();
 
-        $donors = $donorsModel->skip($skip)->take($take)->get();
+        }else{
+            $donorsModel = DonorEloquent::query()->where(function ($query) use ($keywords, $type, $exposure, $type_arr) {
+
+                if($type != 0 && $keywords != []){
+                    foreach ($keywords as $keyword) {
+                        $keyword = '%'.$keyword.'%';
+                        $query->orWhere($type_arr[$type], 'like',$keyword);
+                    }
+                }elseif($keywords != []){
+                    foreach ($keywords as $keyword) {
+                        $keyword = '%'.$keyword.'%';
+                        for($i = 1; $i<=4; $i++){
+                            $query->orWhere($type_arr[$i], 'like',$keyword);
+                        }
+                    }
+                }
+
+                if($exposure != 0){
+                    $query->where('exposure', $exposure);
+                }
+
+            });
+            $count = $donorsModel->count();
+            $donors = $donorsModel->skip($skip)->take($take)->get();
+
+        }
 
         foreach($donors as $donor){
             $donor['showContact'] = $donor->showContact();
             $donor['showExposure'] = $donor->showExposure();
             $donor['donateAmount'] = $donor->books()->count();
-            $donor['action'] = 
+            $donor['action'] =
                 '<a href="' . route('donors.show', [$donor->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
                 <a href="' . route('donors.edit', [$donor->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
                 <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';

@@ -1,5 +1,4 @@
 {
-    "/js/activities/create.js": "/js/activities/create.js",
     "/js/agencies/create.js": "/js/agencies/create.js",
     "/js/agencies/edit.js": "/js/agencies/edit.js",
     "/js/agencies/index.js": "/js/agencies/index.js",
@@ -19,6 +18,7 @@
     "/js/donors/create.js": "/js/donors/create.js",
     "/js/donors/edit.js": "/js/donors/edit.js",
     "/js/donors/index.js": "/js/donors/index.js",
+    "/js/information/edit.js": "/js/information/edit.js",
     "/js/loginLogs/index.js": "/js/loginLogs/index.js",
     "/js/users/create.js": "/js/users/create.js",
     "/js/users/edit.js": "/js/users/edit.js"
