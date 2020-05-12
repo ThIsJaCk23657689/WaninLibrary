@@ -82,4 +82,9 @@ class Book extends Model
     public function scopeNormalEn($query){
         $query->where('category', 13);
     }
+    //1.在庫、2.借出 3.逾期 4.庫藏待上架 5.已淘汰
+    //6.已轉贈、7.待索取 8.已被索取、9.無外借、10.無歸還
+    public function scopeOfStatus($query, $status){
+        $query->where('status', $status);
+    }
 }

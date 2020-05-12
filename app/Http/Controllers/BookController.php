@@ -63,19 +63,21 @@ class BookController extends Controller
     // API
     public function getList(Request $request){
         $this->validate($request, [
-            'skip' => 'nullable|integer|',
+            'category' => 'nullable| integer|', //category: 0~9.中文圖書 10.論文 11.雜誌期刊 12.非中文圖書 13.全部(default)
+            'type' => 'nullable| integer|', //type:(default) 0.全部 1.書名 2.作者 3.ISBN 4.出版商
+            'status' => 'nullable| integer|', //status: (default) 0.全部 1.在庫、2.借出 3.逾期 4.庫藏待上架 5.已淘汰 6.已轉贈、7.待索取 8.已被索取、9.無外借、10.無歸還
+            'keywords' => 'nullable| string|',
+            'skip' => 'nullable| integer|',
             'take' => 'nullable|integer|max:100'
         ]);
 
-        $skip = $request->skip ?? 0;
-        $take = $request->take ?? 10;
-
-        $books = $this->BookService->getList($skip, $take);
+        $res = $this->BookService->getList($request);
 
         return response()->json([
             'status' => 'OK',
-            'count' => $take,
-            'books' => $books
+            'DataTotalCount' => $res['count'],
+            'books' => $res['books'],
+            'request' => $request,
         ]);
     }
 

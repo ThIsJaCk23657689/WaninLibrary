@@ -728,19 +728,17 @@ Vue.component('information-update-form', __webpack_require__(/*! ./../components
 var app = new Vue({
   el: '#information',
   data: function data() {
-    return {};
+    return {
+      information: []
+    };
   },
   methods: {},
   created: function created() {
     var _this = this;
 
-    var UsersGetOneURL = $('#UsersGetOneURL').html();
-    axios.get(UsersGetOneURL).then(function (response) {
-      _this.user = response.data.user; // 地址
-
-      $('#address_twzipcode').twzipcode({
-        'zipcodeSel': response.data.user.address_zipcode
-      });
+    var InformationGetFirstURL = $('#InformationGetFirstURL').html();
+    axios.get(InformationGetFirstURL).then(function (response) {
+      _this.information = response.data.information;
     });
   },
   mounted: function mounted() {}

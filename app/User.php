@@ -8,6 +8,9 @@ use Illuminate\Notifications\Notifiable;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\LoginLog as LoginLogEloquent;
+use App\Activity as ActivityEloquent;
+use App\Announcement as AnnouncementEloquent;
+
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -66,6 +69,14 @@ class User extends Authenticatable implements JWTSubject
 
     public function loginLogs(){
         return $this->hasMany(LoginLogEloquent::class);
+    }
+
+    public function Activity(){
+        return $this->hasMany(ActivityEloquent::class);
+    }
+
+    public function Announcement(){
+        return $this->hasMany(AnnouncementEloquent::class);
     }
 
     public function showStatus(){

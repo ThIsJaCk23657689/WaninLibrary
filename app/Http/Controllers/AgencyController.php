@@ -25,11 +25,11 @@ class AgencyController extends Controller
         return view('agencies.index', compact('agencies'));
     }
 
-    public function create(Request $request){
+    public function create(){
         return view('agencies.create');
     }
 
-    public function store(Request $request){
+    public function store(AgencyRequest $request){
         $agency_id = $this->AgencyService->add($request);
         return response()->json([
             'status' => 'OK',

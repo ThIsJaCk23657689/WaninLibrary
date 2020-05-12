@@ -9,23 +9,51 @@ const app = new Vue({
             pageNum: 1,
             totalPage: 0,
             donors: [],
-            dataTotalCount: 0,
+            DataTotalCount: 0,
+            exposure: 0,
+            type: 0,
+            keywords: '',
         }
     },
     methods: {
-        updateDonors(pageNum) {
+        changeKeywordsType(keywords, type, exposure) {
+            this.exposure = exposure;
+            this.keywords = keywords;
+            this.type = type;
+            this.updateDonors(this.pageNum, true)
+        },
+        changeExposure: function(exposure) {
+            this.exposure = exposure;
+            this.updateDonors(this.pageNum, true)
+
+        },
+        updateDonors(pageNum, first_page) {
+            if (first_page) {
+                this.pageNum = 1;
+            } else {
+                this.pageNum = pageNum;
+            }
+
             let skip = (pageNum - 1) * this.rowsPerPage;
             let take = this.rowsPerPage;
+            let exposure = this.exposure;
+            let keywords = this.keywords;
+            let type = this.type;
 
             let DonorsGetList = $('#DonorsGetList').html();
             $('.dataTables_processing', $('#DonorsDataTable').closest('.dataTables_wrapper')).fadeIn();
             axios.get(DonorsGetList, {
                 params: {
                     skip: skip,
-                    take: take
+                    take: take,
+                    keywords: keywords,
+                    type: type,
+                    exposure: exposure,
                 }
             }).then(response => {
                 this.donors = response.data.donors;
+                this.DataTotalCount = response.data.DataTotalCount;
+                this.totalPage = Math.ceil(this.DataTotalCount / this.rowsPerPage);
                 $('.dataTables_processing', $('#DonorsDataTable').closest('.dataTables_wrapper')).fadeOut();
                 $('#DonorsDataTable').dataTable().fnClearTable();
                 if (this.donors.length != 0) {
@@ -36,16 +64,16 @@ const app = new Vue({
             });
         }
     },
-    created(){
+    created() {
         let DonorsGetList = $('#DonorsGetList').html();
         axios.get(DonorsGetList).then(response => {
             this.donors = response.data.donors;
-            this.dataTotalCount = response.data.dataTotalCount;
-            this.totalPage = Math.ceil(this.dataTotalCount / this.rowsPerPage);
+            this.DataTotalCount = response.data.DataTotalCount;
+            this.totalPage = Math.ceil(this.DataTotalCount / this.rowsPerPage);
 
-            $('#DonorsDataTable').on('draw.dt', function () {
+            $('#DonorsDataTable').on('draw.dt', function() {
                 console.log('drawing a table');
-            }).on('init.dt', function () {
+            }).on('init.dt', function() {
                 console.log('intial a table');
             }).dataTable({
                 data: this.donors,
@@ -66,7 +94,7 @@ const app = new Vue({
             });
         });
     },
-    mounted(){
-        
+    mounted() {
+
     }
 });

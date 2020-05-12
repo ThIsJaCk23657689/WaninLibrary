@@ -17,12 +17,12 @@
 		<li class="breadcrumb-item active">{{ __('Edit') }}</li>
     @endcomponent
 
-    <div id="donor">
+    <div id="information">
         <span id="InformationIndexURL" class="d-none">{{ route('information.index') }}</span>
         <span id="InformationUpdateURL" class="d-none">{{ route('information.update', [$information->id]) }}</span>
-        <span id="InformationGetOneURL" class="d-none">{{ route('information.getOne', [$information->id]) }}</span>
+        <span id="InformationGetFirstURL" class="d-none">{{ route('information.getFirst') }}</span>
 
-        <information-update-form></information-update-form>
+        <information-update-form :information="information"></information-update-form>
         <loading-modal></loading-modal>
     </div>
 

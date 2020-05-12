@@ -9,7 +9,30 @@ use Exception;
 class BookService extends BaseService
 {
     public function add($request){
+        //條碼編號生成
         $barcode = $this->barcodeCode($request->category, $request->callnum);
+
+        //圖片路徑生成與裁切
+        //若不是網路網址
+        if(!preg_match("/^[a-zA-Z]+:\/\//", $request->cover_image)){
+            $crop = new CropImageService(
+                $request->has('image_src') ? $request->image_src : null,
+                $request->has('image_data') ? $request->image_data : null,
+                isset($_FILES['image_file']) ? $_FILES['image_file'] : null,
+                ['type' => 'books']
+            );
+            if(preg_match("/^[a-zA-Z]+:\/\//", $crop)){
+                $cover_image = $crop;
+            }else{
+                $res = ['status' => 422, 
+                        'msg' => 'Image insert error : '.$crop, 
+                        ];
+                return $res;
+            }
+        }else{
+            $cover_image = $request->cover_image;
+        }
+        
 
         $book = BookEloquent::create([
             'donor_id' => $request->donor_id,
@@ -24,7 +47,7 @@ class BookService extends BaseService
             'translator' => $request->translator,
             'publisher' => $request->publisher,
             'edition' => $request->edition,
-            'cover_image' => null,
+            'cover_image' => $cover_image,
             'ISBN' => $request->ISBN,
 
             'published_date' => $request->published_date,
@@ -36,51 +59,51 @@ class BookService extends BaseService
         ]);
 
         // 圖片儲存
-        $msg = $this->saveImage($request, $book);
+        // $msg = $this->saveImage($request, $book);
 
-        $res = ['status' => $msg['state'], 'msg' => $msg['message'], 'book_id' => $book->id, 'barcode' => $barcode ,'cover_image' => $msg['result'], 'url' => route('books.index')];
+        $res = ['book_id' => $book->id, 'barcode' => $barcode, 'url' => route('books.index')];
         return $res;
     }
 
-    private function saveImage(Request $request, $book){
-        if(!preg_match("/^[a-zA-Z]+:\/\//", $request->cover_image)){
-            // 不是網址
-            $crop = new CropImageService(
-                $request->has('image_src') ? $request->image_src : null,
-                $request->has('image_data') ? $request->image_data : null,
-                isset($_FILES['image_file']) ? $_FILES['image_file'] : null,
-                $book->id,
-                ['type' => 'book']
-            );
-            if (is_null($crop->getMsg())) {
-                //代表上傳成功
-                $ImageURL = $book->cover_image;
-                if(!preg_match("/^[a-zA-Z]+:\/\//", $ImageURL)){
-                    if (!empty($ImageURL)) {
-                        //刪除原本的圖片
-                        //代表不是網址 是server上檔檔案 先刪除原圖檔
-                        unlink($ImageURL);
-                    }
-                }
-                //資料庫新增
-                $book->update([
-                    'cover_image' => $crop->getResult(),
-                ]);
+    // private function saveImage(Request $request, $book){
+    //     if(!preg_match("/^[a-zA-Z]+:\/\//", $request->cover_image)){
+    //         // 不是網址
+    //         $crop = new CropImageService(
+    //             $request->has('image_src') ? $request->image_src : null,
+    //             $request->has('image_data') ? $request->image_data : null,
+    //             isset($_FILES['image_file']) ? $_FILES['image_file'] : null,
+    //             $book->id,
+    //             ['type' => 'book']
+    //         );
+    //         if (is_null($crop->getMsg())) {
+    //             //代表上傳成功
+    //             $ImageURL = $book->cover_image;
+    //             if(!preg_match("/^[a-zA-Z]+:\/\//", $ImageURL)){
+    //                 if (!empty($ImageURL)) {
+    //                     //刪除原本的圖片
+    //                     //代表不是網址 是server上檔檔案 先刪除原圖檔
+    //                     unlink($ImageURL);
+    //                 }
+    //             }
+    //             //資料庫新增
+    //             $book->update([
+    //                 'cover_image' => $crop->getResult(),
+    //             ]);
 
-                return ['status' => 200,'message' => $crop->getMsg(),'result' => URL::asset($crop->getResult())];
-            }else{
-                // failed
-                return ['status' => 422,'message' => $crop -> getMsg(),'result' => URL::asset($crop -> getResult())] ;
-            }
-        }else{
-            // 是網址
-            $url = $request->cover_image;
-            $book->update([
-                'cover_image' => $url,
-            ]);
-            return ['status' => 200, 'message' => 'OK', 'result' => $url];
-        }
-    }
+    //             return ['status' => 200,'message' => $crop->getMsg(),'result' => URL::asset($crop->getResult())];
+    //         }else{
+    //             // failed
+    //             return ['status' => 422,'message' => $crop -> getMsg(),'result' => URL::asset($crop -> getResult())] ;
+    //         }
+    //     }else{
+    //         // 是網址
+    //         $url = $request->cover_image;
+    //         $book->update([
+    //             'cover_image' => $url,
+    //         ]);
+    //         return ['status' => 200, 'message' => 'OK', 'result' => $url];
+    //     }
+    // }
 
     private function getLastUpdatedID(){
         $book = BookEloquent::orderBy('id', 'DESC')->first();
@@ -128,18 +151,66 @@ class BookService extends BaseService
         return BookEloquent::count();
     }
 
-    public function getList($skip, $take){
-        $books = BookEloquent::skip($skip)->take($take)->get();
+    //category: 0~9.中文圖書 10.論文 11.雜誌期刊 12.非中文圖書 13.全部(default)
+    //type:(default) 0.全部 1.書名 2.作者 3.ISBN 4.出版商
+    //status: (default) 0.全部 1.在庫、2.借出 3.逾期 4.庫藏待上架 5.已淘汰 6.已轉贈、7.待索取 8.已被索取、9.無外借、10.無歸還
+    public function getList($request){
+        $skip = $request->skip ?? 0 ;
+        $take = $request->take ?? 10;
+        $status = $request->status ?? 0; //default 0
+        $category = $request->category ?? 13; //default 13
+        $type = $request->type ?? 0; //default 0
+        $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
+
+        $type_arr = ['','title', 'author', 'ISBN', 'publisher'];
+
+        if($keywords == [] && $status== 0 && $category == 13 && $type== 0){
+            // all default
+            $books_tmp = new BookEloquent();
+            $books = $books_tmp->skip($skip)->take($take)->get();
+            $count = $books_tmp->count();
+
+        }else{
+            $books_tmp = BookEloquent::query()->where(function ($query) use ($keywords, $status, $category, $type, $type_arr) {
+
+                if($type != 0 && $keywords != []){
+                    foreach ($keywords as $keyword) {
+                        $keyword = '%'.$keyword.'%';
+                        $query->orWhere($type_arr[$type], 'like',$keyword);
+                    }
+                }elseif($keywords != []){
+                    foreach ($keywords as $keyword) {
+                        $keyword = '%'.$keyword.'%';
+                        for($i = 1; $i<=4; $i++){
+                            $query->orWhere($type_arr[$i], 'like',$keyword);
+                        }
+                    }
+                }
+
+                if($status != 0){
+                    $query->where('status', $status);
+                }
+                if($category != 13){
+                    $query->where('category', $category);
+                }
+
+            });
+            $count = $books_tmp->count();
+            $books = $books_tmp->skip($skip)->take($take)->get();
+
+        }
+
         foreach($books as $book){
             $book['showTitle'] = $book->showTitle();
             $book['showStatus'] = $book->showStatus();
             $book['borrowCounts'] = 0;
-            $book['action'] = 
+            $book['action'] =
                 '<a href="' . route('books.show', [$book->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
                 <a href="' . route('books.edit', [$book->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
                 <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';
         }
-        return $books;
+        $res = ['books'=>$books, 'count' => $count];
+        return $res;
     }
 
     public function getOne($id){
@@ -149,6 +220,33 @@ class BookService extends BaseService
 
     public function update($request, $id){
         $book = $this->getOne($id);
+
+        // 若書封面未做更動，不執行圖片裁切。
+        if($book->image_cover != $request->image_cover){
+            if(!preg_match("/^[a-zA-Z]+:\/\//", $request->cover_image)){
+                $crop = new CropImageService(
+                    $request->has('image_src') ? $request->image_src : null,
+                    $request->has('image_data') ? $request->image_data : null,
+                    isset($_FILES['image_file']) ? $_FILES['image_file'] : null,
+                    ['type' => 'books']
+                );
+                if(preg_match("/^[a-zA-Z]+:\/\//", $crop)){
+                    $cover_image = $crop;
+                }else{
+                    $res = ['status' => 422, 
+                            'msg' => 'Image insert error : '.$crop, 
+                            ];
+                    return $res;
+                }
+            }else{
+                $cover_image = $request->cover_image;
+            }
+            $book->update([
+                'cover_image' => $cover_image
+            ]);
+        }
+
+
         $book->update([
             'donor_id' => $request->donor_id,
             'barcode' => $request->barcode,
@@ -162,7 +260,6 @@ class BookService extends BaseService
             'translator' => $request->translator,
             'publisher' => $request->publisher,
             'edition' => $request->edition,
-            'cover_image' => null,
             'ISBN' => $request->ISBN,
 
             'published_date' => $request->published_date,
@@ -171,8 +268,6 @@ class BookService extends BaseService
             'content' => $request->content,
             'count' => $request->count,
         ]);
-        // 圖片儲存
-        $msg = $this->saveImage($request, $book);
 
         $res = ['status' => $msg['state'], 'msg' => $msg['message'], 'book_id' => $book->id, 'barcode' => $book->barcode ,'cover_image' => $msg['result'], 'url' => route('books.index')];
         return $res;
