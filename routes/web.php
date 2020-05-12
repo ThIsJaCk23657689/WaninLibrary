@@ -69,5 +69,9 @@ Route::prefix('/backend')->group(function(){
 
     // 借閱日誌(logs)相關
     Route::resource('borrowLogs', 'BorrowLogController')->only(['index', 'show']);
-
+    
+    // 
+    Route::resource('/activities', 'ActivityController', ['only' => [
+        'index', 'show', 'create', 'edit'
+    ]]);
 });

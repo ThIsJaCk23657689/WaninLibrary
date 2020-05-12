@@ -215,7 +215,7 @@ export default {
             }).then(response => {
                 this.borrowers = response.data.borrowers;
                 this.totalCount = response.data.count;
-                this.totalPage = this.totalCount / this.countPerPage;
+                this.totalPage = Math.ceil(this.totalCount / this.countPerPage);
                 $('.dataTables_processing', $('#FilterTable').closest('.dataTables_wrapper')).fadeOut();
                 $('#FilterTable').dataTable().fnClearTable();
                 if (this.borrowers.length != 0) {
