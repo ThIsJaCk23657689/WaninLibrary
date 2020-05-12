@@ -22,8 +22,10 @@ class BorrowLogService extends BaseService
         $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
 
         if($keywords == [] && $status== 4 && $start_date == null && $end_date== null){
-            $logs = BorrowLogEloquent::skip($skip)->take($take)->get();
+            $logs_tmp = new BorrowLogEloquent();
+            $logs = $logs_tmp->skip($skip)->take($take)->get();
             $count = $logs->count();
+
         }else{
             $logs_tmp = BorrowLogEloquent::query()->where(function ($query) use ($keywords, $status, $start_date, $end_date) {
                 foreach ($keywords as $keyword) {
@@ -39,8 +41,9 @@ class BorrowLogService extends BaseService
 
 
             });
-            $logs = $logs_tmp->skip($skip)->take($take)->get();
             $count = $logs_tmp->count();
+            $logs = $logs_tmp->skip($skip)->take($take)->get();
+
         }
 
         foreach($logs as $log){

@@ -63,6 +63,7 @@ Route::prefix('/backend')->group(function(){
     //書籍管理相關
     Route::post('/books/getBookDataByURL','BookController@getBookDataByURL')->name('books.bugurl');
     Route::get('/books/isbn/{isbn}/google', 'BookController@getDataByISBNFromGoogle')->name('books.isbn.google');
+    Route::get('/books/getBookByKeyword', 'BookController@getBookByKeyword')->name('books.getBookByKeyword');
     Route::get('/books/getBookDataByBarcode', 'BookController@getBookDataByBarcode')->name('books.barcode.json');
     Route::get('/books/json', 'BookController@getList')->name('books.getList');
     Route::get('/books/{id}/json', 'BookController@getOne')->name('books.getOne');

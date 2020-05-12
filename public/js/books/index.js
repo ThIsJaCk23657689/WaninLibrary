@@ -142,6 +142,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['books', 'rowsPerPage', 'pageNum', 'totalPage'],
   data: function data() {
@@ -150,6 +198,22 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getBookList: function getBookList(pageNum) {
       this.$emit('update-book', pageNum);
+    },
+    changeStatus: function changeStatus(e) {
+      var status = e.target.value;
+      this.$emit('change-status', status);
+    },
+    changeKeywordsType: function changeKeywordsType(e) {
+      var data = $(e.target).serializeObject();
+      var keywords = data.keywords;
+      var type = data.type;
+      var category = data.category;
+      var status = data.status;
+      this.$emit('change-keywords-type', keywords, type, status, category);
+    },
+    changeCategory: function changeCategory(e) {
+      var category = e.target.value;
+      this.$emit('change-category', category);
     }
   },
   created: function created() {},
@@ -233,7 +297,170 @@ var render = function() {
     _c("div", { staticClass: "card mb-3" }, [
       _vm._m(0),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c(
+            "div",
+            {
+              staticClass: "col-md-12 justify-content-center",
+              attrs: { id: "" }
+            },
+            [
+              _c(
+                "form",
+                {
+                  attrs: { method: "GET", id: "search-by-keywords-form" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.changeKeywordsType($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "row mb-3 justify-content-center" },
+                    [
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c(
+                          "select",
+                          {
+                            staticClass: "form-control",
+                            attrs: { name: "status", id: "status" },
+                            on: { change: _vm.changeStatus }
+                          },
+                          [
+                            _c("option", { attrs: { value: "0" } }, [
+                              _vm._v("全部書籍")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("在庫中")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("借出")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "3" } }, [
+                              _vm._v("逾期")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "4" } }, [
+                              _vm._v("庫藏待上架")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "5" } }, [
+                              _vm._v("已淘汰")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "6" } }, [
+                              _vm._v("已轉贈")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "7" } }, [
+                              _vm._v("待索取")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "8" } }, [
+                              _vm._v("已被索取")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "9" } }, [
+                              _vm._v("無外借")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "10" } }, [
+                              _vm._v("無歸還")
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c(
+                          "select",
+                          {
+                            staticClass: "form-control",
+                            attrs: { name: "category", id: "category" },
+                            on: { change: _vm.changeCategory }
+                          },
+                          [
+                            _c("option", { attrs: { value: "13" } }, [
+                              _vm._v("全部書籍")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "0" } }, [
+                              _vm._v("000 總類")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("100 哲學類")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("200 宗教類")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "3" } }, [
+                              _vm._v("300 科學類")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "4" } }, [
+                              _vm._v("400 應用科學類")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "5" } }, [
+                              _vm._v("500 社會學類")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "6" } }, [
+                              _vm._v("600 史地類")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "6" } }, [
+                              _vm._v("610 中國史地類")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "7" } }, [
+                              _vm._v("710 世界史地類")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "8" } }, [
+                              _vm._v("800 語文文學類")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "9" } }, [
+                              _vm._v("900 藝術類")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "10" } }, [
+                              _vm._v("論文")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "11" } }, [
+                              _vm._v("期刊雜誌")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "12" } }, [
+                              _vm._v("非中文圖書")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ]
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(2)
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -256,38 +483,93 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table mr-2" }),
-      _vm._v("書本列表\r\n        ")
+      _vm._v("書本列表\n        ")
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "table-responsive" }, [
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-3" }, [
         _c(
-          "table",
+          "select",
+          { staticClass: "form-control", attrs: { name: "type", id: "type" } },
+          [
+            _c("option", { attrs: { value: "0" } }, [_vm._v("依欄位進行搜尋")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "0" } }, [_vm._v("不分類")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "1" } }, [_vm._v("書名")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "2" } }, [_vm._v("作者")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "3" } }, [_vm._v("ISBN")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "4" } }, [_vm._v("出版商")])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            staticClass: "form-control mb-2",
+            attrs: {
+              id: "keywords",
+              name: "keywords",
+              type: "text",
+              value: "",
+              autocomplete: "off",
+              placeholder: "關鍵字搜尋..."
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c(
+          "button",
           {
-            staticClass: "table table-bordered",
-            attrs: { id: "BooksDataTable", width: "100%", cellspacing: "0" }
+            staticClass: "btn btn-block btn-primary",
+            attrs: { type: "submit" }
           },
           [
-            _c("thead", [
-              _c("tr", [
-                _c("th", [_vm._v("編號")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("標題")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("借閱次數")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("狀態")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("操作")])
-              ])
-            ])
+            _vm._v(
+              "\n                                    確認\n                                "
+            )
           ]
         )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "table-responsive" }, [
+      _c(
+        "table",
+        {
+          staticClass: "table table-bordered",
+          attrs: { id: "BooksDataTable", width: "100%", cellspacing: "0" }
+        },
+        [
+          _c("thead", [
+            _c("tr", [
+              _c("th", [_vm._v("編號")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("標題")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("借閱次數")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("狀態")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("操作")])
+            ])
+          ])
+        ]
+      )
     ])
   }
 ]
@@ -462,24 +744,60 @@ var app = new Vue({
       rowsPerPage: 10,
       pageNum: 1,
       totalPage: 0,
-      books: []
+      DataTotalCount: 0,
+      books: [],
+      status: 0,
+      category: 13,
+      type: 0,
+      keywords: ''
     };
   },
   methods: {
-    updateBook: function updateBook(pageNum) {
+    changeStatus: function changeStatus(status) {
+      this.status = status;
+      this.updateBook(this.pageNum, true);
+    },
+    changeKeywordsType: function changeKeywordsType(keywords, type, status, category) {
+      this.category = category;
+      this.keywords = keywords;
+      this.type = type;
+      this.status = status;
+      this.updateBook(this.pageNum, true);
+    },
+    changeCategory: function changeCategory(category) {
+      this.category = category;
+      this.updateBook(this.pageNum, true);
+    },
+    updateBook: function updateBook(pageNum, first_page) {
       var _this = this;
+
+      if (first_page) {
+        this.pageNum = 1;
+      } else {
+        this.pageNum = pageNum;
+      }
 
       var skip = (pageNum - 1) * this.rowsPerPage;
       var take = this.rowsPerPage;
+      var status = this.status;
+      var keywords = this.keywords;
+      var type = this.type;
+      var category = this.category;
       var BooksGetList = $('#BooksGetList').html();
       $('.dataTables_processing', $('#BooksDataTable').closest('.dataTables_wrapper')).fadeIn();
       axios.get(BooksGetList, {
         params: {
           skip: skip,
-          take: take
+          take: take,
+          status: status,
+          keywords: keywords,
+          type: type,
+          category: category
         }
       }).then(function (response) {
         _this.books = response.data.books;
+        _this.DataTotalCount = response.data.DataTotalCount;
+        _this.totalPage = Math.ceil(_this.DataTotalCount / _this.rowsPerPage);
         $('.dataTables_processing', $('#BooksDataTable').closest('.dataTables_wrapper')).fadeOut();
         $('#BooksDataTable').dataTable().fnClearTable();
 
@@ -496,6 +814,8 @@ var app = new Vue({
 
     var BooksGetList = $('#BooksGetList').html();
     axios.get(BooksGetList).then(function (response) {
+      _this2.DataTotalCount = response.data.DataTotalCount;
+      _this2.totalPage = Math.ceil(_this2.DataTotalCount / _this2.rowsPerPage);
       _this2.books = response.data.books;
       $('#BooksDataTable').on('draw.dt', function () {
         console.log('drawing a table');
@@ -523,8 +843,7 @@ var app = new Vue({
       });
     });
   },
-  mounted: function mounted() {
-    this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
+  mounted: function mounted() {// this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
   }
 });
 

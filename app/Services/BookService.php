@@ -128,18 +128,66 @@ class BookService extends BaseService
         return BookEloquent::count();
     }
 
-    public function getList($skip, $take){
-        $books = BookEloquent::skip($skip)->take($take)->get();
+    //category: 0~9.中文圖書 10.論文 11.雜誌期刊 12.非中文圖書 13.全部(default)
+    //type:(default) 0.全部 1.書名 2.作者 3.ISBN 4.出版商
+    //status: (default) 0.全部 1.在庫、2.借出 3.逾期 4.庫藏待上架 5.已淘汰 6.已轉贈、7.待索取 8.已被索取、9.無外借、10.無歸還
+    public function getList($request){
+        $skip = $request->skip ?? 0 ;
+        $take = $request->take ?? 10;
+        $status = $request->status ?? 0; //default 0
+        $category = $request->category ?? 13; //default 13
+        $type = $request->type ?? 0; //default 0
+        $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
+
+        $type_arr = ['','title', 'author', 'ISBN', 'publisher'];
+
+        if($keywords == [] && $status== 0 && $category == 13 && $type== 0){
+            // all default
+            $books_tmp = new BookEloquent();
+            $books = $books_tmp->skip($skip)->take($take)->get();
+            $count = $books_tmp->count();
+
+        }else{
+            $books_tmp = BookEloquent::query()->where(function ($query) use ($keywords, $status, $category, $type, $type_arr) {
+
+                if($type != 0 && $keywords != []){
+                    foreach ($keywords as $keyword) {
+                        $keyword = '%'.$keyword.'%';
+                        $query->orWhere($type_arr[$type], 'like',$keyword);
+                    }
+                }elseif($keywords != []){
+                    foreach ($keywords as $keyword) {
+                        $keyword = '%'.$keyword.'%';
+                        for($i = 1; $i<=4; $i++){
+                            $query->orWhere($type_arr[$i], 'like',$keyword);
+                        }
+                    }
+                }
+
+                if($status != 0){
+                    $query->where('status', $status);
+                }
+                if($category != 13){
+                    $query->where('category', $category);
+                }
+
+            });
+            $count = $books_tmp->count();
+            $books = $books_tmp->skip($skip)->take($take)->get();
+
+        }
+
         foreach($books as $book){
             $book['showTitle'] = $book->showTitle();
             $book['showStatus'] = $book->showStatus();
             $book['borrowCounts'] = 0;
-            $book['action'] = 
+            $book['action'] =
                 '<a href="' . route('books.show', [$book->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
                 <a href="' . route('books.edit', [$book->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
                 <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';
         }
-        return $books;
+        $res = ['books'=>$books, 'count' => $count];
+        return $res;
     }
 
     public function getOne($id){

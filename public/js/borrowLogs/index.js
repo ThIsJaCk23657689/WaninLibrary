@@ -727,6 +727,8 @@ var app = new Vue({
         }
       }).then(function (response) {
         console.log(response);
+        _this.DataTotalCount = response.data.DataTotalCount;
+        _this.totalPage = Math.ceil(_this.DataTotalCount / _this.rowsPerPage);
         _this.borrowLogs = response.data.logs;
         $('.dataTables_processing', $('#BorrowLogsDataTable').closest('.dataTables_wrapper')).fadeOut();
         $('#BorrowLogsDataTable').dataTable().fnClearTable();
