@@ -11,7 +11,7 @@ class CropImageService extends BaseService{
 	private $extension;
 	private $msg;
 
-	private $id;
+	//private $id;
 
 	// string $path 圖片生成路徑
 	private $path;
@@ -26,17 +26,11 @@ class CropImageService extends BaseService{
 	// @param int $id 為圖片對應之編號
 	// @param string $arg 為陣列
 	// $arg['type']只有 'book'
-	public function __construct($src, $data, $file, $id, $arg) {
-
-		// 抓取id
-		$this->id = $id;
-
-		// 生成路徑
-		$this->setPath($arg['type']);
+	public function __construct($src, $data, $file, $arg) {    
+        $this->setPath($arg['type']);
 
 		//生成檔名
 		$this->setFilename($arg);
-
 		$this->setSrc($src);
 		$this->setData($data);
 		$this->setFile($file);
@@ -45,25 +39,41 @@ class CropImageService extends BaseService{
 		$this->setDataSize($arg['type'], $this->data);
 
 		$this->crop($this->src, $this->dst, $this->data);
+        if (is_null($this->getMsg()))
+			return $this->dst;
+		else
+			return $this->getMsg();
+        
+		// 生成目錄路徑
+		
 	}
 
 	private function setPath($argType){
-		switch ($argType) {
-			case 'book':
-				// 使用者頭貼
-				$this->path = 'images/books/cover_images/';
-				break;
-			default:
-				$this->path = 'images/default/';
-				break;
-		}
+		// switch ($argType) {
+		// 	case 'book':
+		// 		// 書的封面
+		// 		$this->path = 'images/books/cover_images/';
+		// 		break;
+		// 	case 'activity':
+		// 		// 活動封面
+		// 		$this->path = 'images/books/cover_images/';
+		// 		break;
+		// 	default:
+		// 		$this->path = 'images/default/';
+		// 		break;
+		// }
+		if($argType)
+			$this->path = 'images/'.$argType.'/'.'cover_images'.'/';
+		else
+			$this->path = 'images/default/';
+
 	}
 
 	private function setFilename($arg){
 		switch ($arg['type']) {
 			default:
 				//預設命名格式 [編號]
-				$this->filename = $this->id;
+				$this->filename = time();
 				break;
 		}
 	}
@@ -275,4 +285,6 @@ class CropImageService extends BaseService{
 	public function getMsg() {
 		return $this->msg;
 	}
+
+
 }

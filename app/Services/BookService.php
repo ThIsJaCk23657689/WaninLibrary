@@ -9,7 +9,30 @@ use Exception;
 class BookService extends BaseService
 {
     public function add($request){
+        //條碼編號生成
         $barcode = $this->barcodeCode($request->category, $request->callnum);
+
+        //圖片路徑生成與裁切
+        //若不是網路網址
+        if(!preg_match("/^[a-zA-Z]+:\/\//", $request->cover_image)){
+            $crop = new CropImageService(
+                $request->has('image_src') ? $request->image_src : null,
+                $request->has('image_data') ? $request->image_data : null,
+                isset($_FILES['image_file']) ? $_FILES['image_file'] : null,
+                ['type' => 'books']
+            );
+            if(preg_match("/^[a-zA-Z]+:\/\//", $crop)){
+                $cover_image = $crop;
+            }else{
+                $res = ['status' => 422, 
+                        'msg' => 'Image insert error : '.$crop, 
+                        ];
+                return $res;
+            }
+        }else{
+            $cover_image = $request->cover_image;
+        }
+        
 
         $book = BookEloquent::create([
             'donor_id' => $request->donor_id,
@@ -24,7 +47,7 @@ class BookService extends BaseService
             'translator' => $request->translator,
             'publisher' => $request->publisher,
             'edition' => $request->edition,
-            'cover_image' => null,
+            'cover_image' => $cover_image,
             'ISBN' => $request->ISBN,
 
             'published_date' => $request->published_date,
