@@ -81,15 +81,174 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 17);
+/******/ 	return __webpack_require__(__webpack_require__.s = 18);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/BookCirculationForm.vue?vue&type=script&lang=js&":
-/*!******************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Circulation/BookCirculationForm.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/BorrowBookForm.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Circulation/BorrowBookForm.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+/* harmony default export */ __webpack_exports__["default"] = ({
+  props: [],
+  data: function data() {
+    return {
+      borrowers: [],
+      pageNum: 1,
+      totalPage: 0,
+      totalCount: 0,
+      countPerPage: 5,
+      keywords: {
+        name: null,
+        tel: null,
+        birthday: null
+      },
+      currentBorrower: [],
+      historyBorrowRecords: []
+    };
+  },
+  methods: {
+    // 更新借閱人搜尋頁碼
+    updatePageNum: function updatePageNum(pageNum) {
+      this.pageNum = pageNum;
+      this.updateTable();
+    },
+    // 更新借閱人搜尋資料
+    updateTable: function updateTable() {
+      var _this = this;
+
+      var BorrowersFilterURL = $('#BorrowersFilterURL').html();
+      $.showLoadingModal();
+      axios.get(BorrowersFilterURL, {
+        params: {
+          name: this.keywords.name,
+          tel: this.keywords.tel,
+          birthday: this.keywords.birthday,
+          skip: (this.pageNum - 1) * this.countPerPage,
+          take: this.countPerPage
+        }
+      }).then(function (response) {
+        _this.borrowers = response.data.borrowers;
+        _this.totalCount = response.data.count;
+        _this.totalPage = Math.ceil(_this.totalCount / _this.countPerPage);
+        $.closeModal();
+      })["catch"](function (error) {
+        console.error('抓取借閱人列表時發生錯誤，錯誤訊息：' + error);
+        $.showErrorModal(error);
+      });
+    },
+    // 搜尋資料
+    searchBorrower: function searchBorrower(e) {
+      if (this.keywords.name != '' || this.keywords.tel != '' || this.keywords.birthday != '') {
+        this.updateTable();
+      }
+    },
+    // 選擇借閱人並抓取資料
+    updateCurrentBorrower: function updateCurrentBorrower(url) {
+      var _this2 = this;
+
+      $.showLoadingModal('抓取借閱人資料中');
+      axios.get(url, {
+        params: {
+          "with": 'borrows'
+        }
+      }).then(function (response) {
+        if (response.data.borrower.activated == 0) {
+          $.showWarningModal('很抱歉，此借閱人已被停權，無法進行借閱。');
+          _this2.currentBorrower = [];
+          _this2.historyBorrowRecords = [];
+        } else {
+          _this2.currentBorrower = response.data.borrower;
+          _this2.historyBorrowRecords = response.data.borrower.borrows;
+          $.closeModal();
+        }
+      })["catch"](function (error) {
+        console.error('抓取借閱人資料時發生錯誤，錯誤訊息：' + error);
+        $.showErrorModal(error);
+      });
+    },
+    borrowBookForm: function borrowBookForm() {
+      alert('f');
+    }
+  },
+  created: function created() {},
+  mounted: function mounted() {
+    // 生日
+    $("#birthday").datepicker({
+      dateFormat: 'yy-mm-dd',
+      changeYear: true,
+      changeMonth: true,
+      yearRange: "-80:+0"
+    });
+  }
+});
+
+/***/ }),
+
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/BorrowerInfo.vue?vue&type=script&lang=js&":
+/*!***********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Circulation/BorrowerInfo.vue?vue&type=script&lang=js& ***!
+  \***********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -179,202 +338,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: [],
+  props: ['borrower', 'borrowsRecords'],
   data: function data() {
-    return {
-      CirculationIndexURL: $('#CirculationIndexURL').html(),
-      GetBooksDataByBarcodeURL: $('#GetBooksDataByBarcodeURL').html(),
-      book: [],
-      borrowers: [],
-      pageNum: 1,
-      totalPage: 0,
-      totalCount: 0,
-      countPerPage: 5,
-      keywords: {
-        name: null,
-        tel: null,
-        birthday: null
-      },
-      currentBorrower: []
-    };
+    return {};
   },
-  methods: {
-    // 透過條碼尋找書籍
-    getBookDataByBarcode: function getBookDataByBarcode(e) {
-      var _this = this;
-
-      $(e.target).removeClass('is-invalid');
-      var $value = e.target.value;
-      var patt = /^[0-9]{13}$/;
-
-      if (patt.test($value)) {
-        axios.get(this.GetBooksDataByBarcodeURL, {
-          params: {
-            barcode: $value
-          }
-        }).then(function (response) {
-          if (response.data.book == null || response.data.book == []) {
-            $(e.target).addClass('is-invalid');
-            $('#barcode_error').html('<strong>查無此書本，請檢查條碼是否有誤。</strong>');
-            _this.book = [];
-          } else {
-            _this.book = response.data.book;
-          }
-        })["catch"](function (error) {
-          console.log('發生錯誤！<br>錯誤訊息：' + error.response.data.message);
-
-          if (error.response.data.errors == null) {
-            $(e.target).addClass('is-invalid');
-            alert('錯誤訊息：' + error.response.data.message + '\n請聯絡系統設計師處理。');
-          } else {
-            var $key = Object.keys(error.response.data.errors);
-            $key.forEach(function (item, index) {
-              $('#' + item).addClass('is-invalid');
-              $('#' + item + '_error').html('<strong>' + error.response.data.errors[item] + '</strong>');
-            });
-          }
-        });
-      } else {
-        $(e.target).addClass('is-invalid');
-        $('#barcode_error').html('<strong>請輸入正確格式的書本條碼。</strong>');
-      }
-    },
-    // 更新頁碼
-    updatePageNum: function updatePageNum(pageNum) {
-      this.pageNum = pageNum;
-      this.updateTable();
-    },
-    // 更新資料
-    updateTable: function updateTable() {
-      var _this2 = this;
-
-      var BorrowersFilterURL = $('#BorrowersFilterURL').html();
-      $('.dataTables_processing', $('#FilterTable').closest('.dataTables_wrapper')).fadeIn();
-      axios.get(BorrowersFilterURL, {
-        params: {
-          name: this.keywords.name,
-          tel: this.keywords.tel,
-          birthday: this.keywords.birthday,
-          skip: (this.pageNum - 1) * this.countPerPage,
-          take: this.countPerPage
-        }
-      }).then(function (response) {
-        _this2.borrowers = response.data.borrowers;
-        _this2.totalCount = response.data.count;
-        _this2.totalPage = Math.ceil(_this2.totalCount / _this2.countPerPage);
-        $('.dataTables_processing', $('#FilterTable').closest('.dataTables_wrapper')).fadeOut();
-        $('#FilterTable').dataTable().fnClearTable();
-
-        if (_this2.borrowers.length != 0) {
-          $('#FilterTable').dataTable().fnAddData(_this2.borrowers);
-        }
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    },
-    // 搜尋資料
-    searchBorrower: function searchBorrower(e) {
-      if (this.keywords.name != '' || this.keywords.tel != '' || this.keywords.birthday != '') {
-        this.updateTable();
-      }
-    }
-  },
+  methods: {},
   created: function created() {},
-  mounted: function mounted() {
-    // 生日
-    $("#birthday").datepicker({
-      dateFormat: 'yy-mm-dd',
-      changeYear: true,
-      changeMonth: true,
-      yearRange: "-80:+0"
-    }); // 宣告 dataTable
-
-    $('#FilterTable').dataTable({
-      data: this.borrowers,
-      columns: [{
-        data: 'name'
-      }, {
-        data: 'tel'
-      }, {
-        data: 'birthday',
-        render: function render(data, type, full) {
-          return data ? data : '無';
-        }
-      }, {
-        data: 'getOneUrl',
-        render: function render(data, type, full) {
-          return '<button type="button" class="btn btn-info btn-select">選擇</button><span class="d-none">' + data + '</span>';
-        }
-      }],
-      lengthChange: false,
-      searching: false,
-      pageLength: this.rowsPerPage,
-      info: false,
-      paging: false,
-      processing: true
-    }); // 新增選擇按鈕事件
-
-    $('#FilterTable').on('click', '.btn-select', function (e) {
-      var _this3 = this;
-
-      var select_url = $(this).next().text();
-      axios.get(select_url).then(function (response) {
-        _this3.currentBorrower = response.data.borrower;
-      })["catch"](function (error) {
-        console.log(error);
-      });
-    });
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -501,10 +472,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/BookCirculationForm.vue?vue&type=template&id=d35a3402&":
-/*!**********************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Circulation/BookCirculationForm.vue?vue&type=template&id=d35a3402& ***!
-  \**********************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/BorrowBookForm.vue?vue&type=template&id=f9778116&":
+/*!*****************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Circulation/BorrowBookForm.vue?vue&type=template&id=f9778116& ***!
+  \*****************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -516,420 +487,158 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c(
-            "form",
-            {
-              attrs: {
-                method: "POST",
-                id: "circulation_index_form",
-                action: "#"
-              },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.circulationIndexForm($event)
-                }
-              }
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-md-8" }, [
+      _c(
+        "form",
+        {
+          attrs: { method: "POST", id: "borrow_book_form", action: "#" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.borrowBookForm($event)
+            }
+          }
+        },
+        [
+          _vm._m(0),
+          _vm._v(" "),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "search_name" } }, [
+                  _vm._v("姓名")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.keywords.name,
+                      expression: "keywords.name"
+                    }
+                  ],
+                  staticClass: "form-control mb-2",
+                  attrs: {
+                    id: "search_name",
+                    name: "search_name",
+                    type: "text"
+                  },
+                  domProps: { value: _vm.keywords.name },
+                  on: {
+                    change: _vm.searchBorrower,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.keywords, "name", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "search_tel" } }, [_vm._v("電話")]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.keywords.tel,
+                      expression: "keywords.tel"
+                    }
+                  ],
+                  staticClass: "form-control mb-2",
+                  attrs: { id: "search_tel", name: "search_tel", type: "text" },
+                  domProps: { value: _vm.keywords.tel },
+                  on: {
+                    change: _vm.searchBorrower,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.keywords, "tel", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _c("label", { attrs: { for: "search_birthday" } }, [
+                  _vm._v("生日")
+                ]),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.keywords.birthday,
+                      expression: "keywords.birthday"
+                    }
+                  ],
+                  staticClass: "form-control mb-2",
+                  attrs: {
+                    id: "search_birthday",
+                    name: "search_birthday",
+                    type: "text",
+                    autocomplete: "off"
+                  },
+                  domProps: { value: _vm.keywords.birthday },
+                  on: {
+                    change: _vm.searchBorrower,
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.$set(_vm.keywords, "birthday", $event.target.value)
+                    }
+                  }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _c("filter-table", {
+            attrs: {
+              borrowers: _vm.borrowers,
+              pageNum: _vm.pageNum,
+              totalPage: _vm.totalPage
             },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "barcode",
-                        name: "barcode",
-                        type: "text",
-                        value: "",
-                        required: "",
-                        autocomplete: "off",
-                        autofocus: ""
-                      },
-                      on: { change: _vm.getBookDataByBarcode }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "invalid-feedback",
-                      attrs: { id: "barcode_error", role: "alert" }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "title" } }, [_vm._v("書名")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "title",
-                        name: "title",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.title }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-5" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "author" } }, [_vm._v("作者")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "author",
-                        name: "author",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.author }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "publisher" } }, [
-                      _vm._v("出版商")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "publisher",
-                        name: "publisher",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.publisher }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-3" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "callnum" } }, [
-                      _vm._v("索書號")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "callnum",
-                        name: "callnum",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.callnum }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "count" } }, [
-                      _vm._v("借閱次數")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "count",
-                        name: "count",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.count }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "donor" } }, [
-                      _vm._v("捐贈人")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "donor",
-                        name: "donor",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.donorName }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "status" } }, [_vm._v("狀態")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "status",
-                        name: "status",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.showStatus }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "name" } }, [_vm._v("姓名")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.keywords.name,
-                          expression: "keywords.name"
-                        }
-                      ],
-                      staticClass: "form-control mb-2",
-                      attrs: { id: "name", name: "name", type: "text" },
-                      domProps: { value: _vm.keywords.name },
-                      on: {
-                        change: _vm.searchBorrower,
-                        keyup: function($event) {
-                          if (
-                            !$event.type.indexOf("key") &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.searchBorrower($event)
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.keywords, "name", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.keywords.tel,
-                          expression: "keywords.tel"
-                        }
-                      ],
-                      staticClass: "form-control mb-2",
-                      attrs: { id: "tel", name: "tel", type: "text" },
-                      domProps: { value: _vm.keywords.tel },
-                      on: {
-                        change: _vm.searchBorrower,
-                        keyup: function($event) {
-                          if (
-                            !$event.type.indexOf("key") &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.searchBorrower($event)
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.keywords, "tel", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "birthday" } }, [
-                      _vm._v("生日")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.keywords.birthday,
-                          expression: "keywords.birthday"
-                        }
-                      ],
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "birthday",
-                        name: "birthday",
-                        type: "text",
-                        autocomplete: "off"
-                      },
-                      domProps: { value: _vm.keywords.birthday },
-                      on: {
-                        change: _vm.searchBorrower,
-                        keyup: function($event) {
-                          if (
-                            !$event.type.indexOf("key") &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.searchBorrower($event)
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.keywords,
-                            "birthday",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ])
-              ]),
-              _vm._v(" "),
-              _c("filter-table", {
-                attrs: {
-                  borrowers: _vm.borrowers,
-                  pageNum: _vm.pageNum,
-                  totalPage: _vm.totalPage
-                },
-                on: { "update-page-num": _vm.updatePageNum }
-              }),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "form-group row justify-content-center" },
-                [
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-block btn-primary",
-                        attrs: { type: "submit" }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                            確認\r\n                        "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-block btn-danger",
-                        attrs: { href: _vm.CirculationIndexURL }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                            取消\r\n                        "
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ],
-            1
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("loading-modal", { ref: "loadingModal" })
-    ],
-    1
-  )
+            on: {
+              "update-page-num": _vm.updatePageNum,
+              "update-current-borrower": _vm.updateCurrentBorrower
+            }
+          }),
+          _vm._v(" "),
+          _c("borrower-info", {
+            attrs: {
+              borrower: _vm.currentBorrower,
+              "borrows-records": _vm.historyBorrowRecords
+            }
+          }),
+          _vm._v(" "),
+          _vm._m(1)
+        ],
+        1
+      )
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row", attrs: { id: "step1" } }, [
-      _c("div", { staticClass: "col-md-12 mb-2" }, [
-        _c("h4", [_vm._v("1. 請掃描書本條碼或自行輸入書本條碼號")])
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "barcode" } }, [
-      _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("書本條碼\r\n                            ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row", attrs: { id: "step2" } }, [
       _c("div", { staticClass: "col-md-12 mb-2" }, [
-        _c("h4", [_vm._v("2. 請選擇借閱人")]),
+        _c("h4", [_vm._v("1. 請選擇借閱人")]),
         _vm._v(" "),
         _c("small", [_vm._v("請輸入姓名、電話或生日來找尋借閱人")])
       ])
@@ -939,16 +648,191 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
+    return _c("div", { staticClass: "form-group row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-block btn-primary",
+            attrs: { type: "submit" }
+          },
+          [_vm._v("\r\n                        確認\r\n                    ")]
+        )
+      ])
+    ])
+  }
+]
+render._withStripped = true
+
+
+
+/***/ }),
+
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/BorrowerInfo.vue?vue&type=template&id=388f4803&":
+/*!***************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Circulation/BorrowerInfo.vue?vue&type=template&id=388f4803& ***!
+  \***************************************************************************************************************************************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
+var render = function() {
+  var _vm = this
+  var _h = _vm.$createElement
+  var _c = _vm._self._c || _h
+  return _c("div", [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-4" }, [
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "content" } }, [_vm._v("備註內容")]),
+          _c("label", { attrs: { for: "name" } }, [_vm._v("姓名")]),
           _vm._v(" "),
-          _c("textarea", {
-            staticClass: "form-control",
-            attrs: { name: "content", id: "content", cols: "30", rows: "5" }
+          _c("input", {
+            staticClass: "form-control mb-2",
+            attrs: { id: "name", name: "name", type: "text" },
+            domProps: { value: _vm.borrower.name }
           })
         ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control mb-2",
+            attrs: { id: "tel", name: "tel", type: "text" },
+            domProps: { value: _vm.borrower.tel }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "birthday" } }, [_vm._v("生日")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control mb-2",
+            attrs: { id: "birthday", name: "birthday", type: "text" },
+            domProps: { value: _vm.borrower.birthday }
+          })
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "agency" } }, [_vm._v("隸屬機構")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control mb-2",
+            attrs: { id: "agency", name: "agency", type: "text" },
+            domProps: { value: _vm.borrower.showAgencyName }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "status" } }, [_vm._v("身分")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control mb-2",
+            attrs: { id: "status", name: "status", type: "text" },
+            domProps: { value: _vm.borrower.showStatus }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "activate" } }, [_vm._v("狀態")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control mb-2",
+            attrs: { id: "activate", name: "activate", type: "text" },
+            domProps: { value: _vm.borrower.showActivated }
+          })
+        ])
+      ])
+    ]),
+    _vm._v(" "),
+    _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "row" }, [
+          _c("div", { staticClass: "col-md-12" }, [
+            _c(
+              "table",
+              { staticClass: "table", attrs: { id: "BorrowRecordTable" } },
+              [
+                _vm._m(1),
+                _vm._v(" "),
+                _c(
+                  "tbody",
+                  _vm._l(_vm.borrowsRecords, function(record) {
+                    return _c("tr", { key: record.id }, [
+                      _c("td", [_vm._v(_vm._s(record.book.id))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(record.book.name))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(record.borrow_date))]),
+                      _vm._v(" "),
+                      _c("td", [_vm._v(_vm._s(record.status))])
+                    ])
+                  }),
+                  0
+                )
+              ]
+            )
+          ])
+        ]),
+        _vm._v(" "),
+        _c("div", { staticClass: "row" }, [
+          _c(
+            "div",
+            { staticClass: "col-md-12" },
+            [
+              _c("paginate-custom", {
+                attrs: { pageNum: _vm.pageNum, totalPage: _vm.totalPage },
+                on: { updatePage: _vm.getBorrowerList }
+              })
+            ],
+            1
+          )
+        ])
+      ])
+    ])
+  ])
+}
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row", attrs: { id: "step2" } }, [
+      _c("div", { staticClass: "col-md-12 mb-2" }, [
+        _c("h4", [_vm._v("借閱人資料")])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("thead", [
+      _c("tr", [
+        _c("th", [_vm._v("書籍條碼")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("書籍名稱")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("借閱日期")]),
+        _vm._v(" "),
+        _c("th", [_vm._v("目前狀態")])
       ])
     ])
   }
@@ -1214,14 +1098,15 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/circulation/index.js":
-/*!*******************************************!*\
-  !*** ./resources/js/circulation/index.js ***!
-  \*******************************************/
+/***/ "./resources/js/circulation/borrow.js":
+/*!********************************************!*\
+  !*** ./resources/js/circulation/borrow.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-Vue.component('book-circulation-form', __webpack_require__(/*! ./../components/Circulation/BookCirculationForm.vue */ "./resources/js/components/Circulation/BookCirculationForm.vue")["default"]);
+Vue.component('borrow-book-form', __webpack_require__(/*! ./../components/Circulation/BorrowBookForm.vue */ "./resources/js/components/Circulation/BorrowBookForm.vue")["default"]);
+Vue.component('borrower-info', __webpack_require__(/*! ./../components/Circulation/BorrowerInfo.vue */ "./resources/js/components/Circulation/BorrowerInfo.vue")["default"]);
 Vue.component('filter-table', __webpack_require__(/*! ./../components/Circulation/FilterTable.vue */ "./resources/js/components/Circulation/FilterTable.vue")["default"]);
 Vue.component('paginate-custom', __webpack_require__(/*! ./../components/Partials/PaginateCustom.vue */ "./resources/js/components/Partials/PaginateCustom.vue")["default"]);
 var app = new Vue({
@@ -1236,17 +1121,17 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ "./resources/js/components/Circulation/BookCirculationForm.vue":
-/*!*********************************************************************!*\
-  !*** ./resources/js/components/Circulation/BookCirculationForm.vue ***!
-  \*********************************************************************/
+/***/ "./resources/js/components/Circulation/BorrowBookForm.vue":
+/*!****************************************************************!*\
+  !*** ./resources/js/components/Circulation/BorrowBookForm.vue ***!
+  \****************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BookCirculationForm_vue_vue_type_template_id_d35a3402___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BookCirculationForm.vue?vue&type=template&id=d35a3402& */ "./resources/js/components/Circulation/BookCirculationForm.vue?vue&type=template&id=d35a3402&");
-/* harmony import */ var _BookCirculationForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BookCirculationForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Circulation/BookCirculationForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _BorrowBookForm_vue_vue_type_template_id_f9778116___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BorrowBookForm.vue?vue&type=template&id=f9778116& */ "./resources/js/components/Circulation/BorrowBookForm.vue?vue&type=template&id=f9778116&");
+/* harmony import */ var _BorrowBookForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BorrowBookForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Circulation/BorrowBookForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -1256,9 +1141,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _BookCirculationForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _BookCirculationForm_vue_vue_type_template_id_d35a3402___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BookCirculationForm_vue_vue_type_template_id_d35a3402___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _BorrowBookForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BorrowBookForm_vue_vue_type_template_id_f9778116___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BorrowBookForm_vue_vue_type_template_id_f9778116___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -1268,38 +1153,107 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Circulation/BookCirculationForm.vue"
+component.options.__file = "resources/js/components/Circulation/BorrowBookForm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Circulation/BookCirculationForm.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************!*\
-  !*** ./resources/js/components/Circulation/BookCirculationForm.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************/
+/***/ "./resources/js/components/Circulation/BorrowBookForm.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************!*\
+  !*** ./resources/js/components/Circulation/BorrowBookForm.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BookCirculationForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BookCirculationForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/BookCirculationForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BookCirculationForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowBookForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BorrowBookForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/BorrowBookForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowBookForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Circulation/BookCirculationForm.vue?vue&type=template&id=d35a3402&":
-/*!****************************************************************************************************!*\
-  !*** ./resources/js/components/Circulation/BookCirculationForm.vue?vue&type=template&id=d35a3402& ***!
-  \****************************************************************************************************/
+/***/ "./resources/js/components/Circulation/BorrowBookForm.vue?vue&type=template&id=f9778116&":
+/*!***********************************************************************************************!*\
+  !*** ./resources/js/components/Circulation/BorrowBookForm.vue?vue&type=template&id=f9778116& ***!
+  \***********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookCirculationForm_vue_vue_type_template_id_d35a3402___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BookCirculationForm.vue?vue&type=template&id=d35a3402& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/BookCirculationForm.vue?vue&type=template&id=d35a3402&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookCirculationForm_vue_vue_type_template_id_d35a3402___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowBookForm_vue_vue_type_template_id_f9778116___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BorrowBookForm.vue?vue&type=template&id=f9778116& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/BorrowBookForm.vue?vue&type=template&id=f9778116&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowBookForm_vue_vue_type_template_id_f9778116___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BookCirculationForm_vue_vue_type_template_id_d35a3402___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowBookForm_vue_vue_type_template_id_f9778116___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/components/Circulation/BorrowerInfo.vue":
+/*!**************************************************************!*\
+  !*** ./resources/js/components/Circulation/BorrowerInfo.vue ***!
+  \**************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _BorrowerInfo_vue_vue_type_template_id_388f4803___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BorrowerInfo.vue?vue&type=template&id=388f4803& */ "./resources/js/components/Circulation/BorrowerInfo.vue?vue&type=template&id=388f4803&");
+/* harmony import */ var _BorrowerInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BorrowerInfo.vue?vue&type=script&lang=js& */ "./resources/js/components/Circulation/BorrowerInfo.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _BorrowerInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BorrowerInfo_vue_vue_type_template_id_388f4803___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BorrowerInfo_vue_vue_type_template_id_388f4803___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Circulation/BorrowerInfo.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Circulation/BorrowerInfo.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************!*\
+  !*** ./resources/js/components/Circulation/BorrowerInfo.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowerInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BorrowerInfo.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/BorrowerInfo.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowerInfo_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Circulation/BorrowerInfo.vue?vue&type=template&id=388f4803&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/Circulation/BorrowerInfo.vue?vue&type=template&id=388f4803& ***!
+  \*********************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowerInfo_vue_vue_type_template_id_388f4803___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BorrowerInfo.vue?vue&type=template&id=388f4803& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/BorrowerInfo.vue?vue&type=template&id=388f4803&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowerInfo_vue_vue_type_template_id_388f4803___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowerInfo_vue_vue_type_template_id_388f4803___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -1443,14 +1397,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 17:
-/*!*************************************************!*\
-  !*** multi ./resources/js/circulation/index.js ***!
-  \*************************************************/
+/***/ 18:
+/*!**************************************************!*\
+  !*** multi ./resources/js/circulation/borrow.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\circulation\index.js */"./resources/js/circulation/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\circulation\borrow.js */"./resources/js/circulation/borrow.js");
 
 
 /***/ })

@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -23,7 +24,7 @@ Route::get('login', 'JWTAuthController@showLoginForm')->name('login');
 Route::get('/home', 'HomeController@index')->name('home');
 
 // 後臺管理路由
-Route::prefix('/backend')->group(function(){
+Route::prefix('/backend')->group(function () {
     Route::get('/', 'HomeController@backend')->name('backend');
 
     // 機構管理路由
@@ -49,6 +50,7 @@ Route::prefix('/backend')->group(function(){
 
     // 借閱管理相關
     Route::get('/circulation', 'BorrowController@circulation')->name('circulation');
+    Route::get('/circulation/borrow', 'BorrowController@borrow')->name('circulation.borrow');
     Route::resource('/borrows', 'BorrowController', ['only' => [
         'index', 'show', 'create'
     ]]);
@@ -69,8 +71,8 @@ Route::prefix('/backend')->group(function(){
 
     // 借閱日誌(logs)相關
     Route::resource('borrowLogs', 'BorrowLogController')->only(['index', 'show']);
-    
-    // 
+
+    // 近期活動管理路由
     Route::resource('/activities', 'ActivityController', ['only' => [
         'index', 'show', 'create', 'edit'
     ]]);

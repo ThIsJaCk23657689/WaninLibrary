@@ -15,6 +15,7 @@ class Borrow extends Model
     public function book(){
         return $this->belongsTo(BookEloquent::class);
     }
+    
     public function borrower(){
         return $this->belongsTo(BorrowerEloquent::class);
     }

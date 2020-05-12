@@ -53,7 +53,13 @@ class BorrowerService extends BaseService
     public function getOne($id)
     {
         $borrower = BorrowerEloquent::findOrFail($id);
-        $borrower['showAgencyName'] = $borrower->showAgencyName();
+        return $borrower;
+    }
+
+    // $model 必須是字串。
+    public function getOneWithRelation($id, $model)
+    {
+        $borrower = BorrowerEloquent::with($model)->findOrFail($id);
         return $borrower;
     }
 

@@ -1,7 +1,6 @@
 @extends('layouts.backend.master')
 
 @push('CustomJS')
-    <script src="{{ asset('vendor/jQuery-TWzipcode-master/jquery.twzipcode.min.js') }}" defer></script>
     <script src="{{ asset('js/circulation/index.js') }}" defer></script>
 @endpush   
 

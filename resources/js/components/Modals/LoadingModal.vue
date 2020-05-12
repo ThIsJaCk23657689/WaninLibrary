@@ -28,6 +28,10 @@
                                         <span class="swal2-x-mark-line-right"></span>
                                     </span>
                                 </div>
+                                <div class="f-modal-icon f-modal-warning scaleWarning">
+                                    <span class="f-modal-body pulseWarningIns"></span>
+                                    <span class="f-modal-dot pulseWarningIns"></span>
+                                </div>
                             </div>
 
                             <div class="row justify-content-center my-2">
@@ -59,7 +63,7 @@ export default {
         }
     },
     methods: {
-        initalModal() {
+        initalModal(){
             // 初始化並顯示 Loading Modal
             $('#modal_good').css({'display':'none'});
             $('#modal_error').css({'display':'none'});
@@ -69,7 +73,19 @@ export default {
             $('#modal_close').slideUp();
             $('#LoadingModal').modal('show');
         },
-        successfulResponse(message, url) {
+        closeModal(){
+            // 關閉 Loading Modal
+            setTimeout(function(){
+                $('#LoadingModal').modal('hide')
+            }, 500);
+        },
+        warningResponse(message){
+            // 顯示警告訊息
+            $('#modal_spinner').css({'display':'none'});
+            $('#modal_msg').html(message);
+            $('#modal_close').slideDown();
+        },
+        successfulResponse(message, url){
             // 顯示成功的訊息 message為訊息，url為欲前往之連結
             $('#modal_good').css({'display':'flex'});
             $('#modal_spinner').css({'display':'none'});
@@ -77,7 +93,7 @@ export default {
             $('#modal_link').attr('href', url);
             $('#modal_link').slideDown();
         },
-        failureResponse(error) {
+        failureResponse(error){
             // 顯示錯誤的訊息 message為訊息
             $('#modal_error').css({'display':'flex'});
             $('#modal_spinner').css({'display':'none'});

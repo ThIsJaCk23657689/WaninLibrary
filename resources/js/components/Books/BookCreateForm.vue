@@ -36,13 +36,13 @@
             </div>
         </div>
         
-        <form id="book_create_form" method="POST" :action="BooksStoreURL" style="display:none;">
+        <form id="book_create_form" method="POST" :action="BooksStoreURL" enctype="multipart/form-data" style="display:none;" @submit.prevent="bookCreateForm">
 
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="add_type">入庫方式</label>
-                        <select id="add_type" name="add_type" class="form-control">
+                        <select id="add_type" name="add_type" class="form-control" @change="changeAddType">
                             <option value="1" selected>捐贈入庫</option>
                             <option value="2">購買入庫</option>
                         </select>
@@ -77,39 +77,16 @@
 
             <div class="row">
                 <div class="col-md-6 text-center">
-                    <div class="form-group">
-                        <div id="preview-upload" class="col-md-12">
-                            <img id="previewImg-upload" class="img-fluid rounded" :src="uploadimg">
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="picture" class="mb-2">
-                            商品圖片
-                        </label>
-                        <div class="custom-file">
-                            <input type="file" id="picture" name="picture" class="custom-file-input" accept="image/jpeg,image/png,image/bmp" aria-describedby="PictureHelp">
-                            <small id="PictureHelp" class="form-text text-muted">僅支援JPG、JPEG、PNG與BMP格式圖片，且檔案大小上限為20MB。</small>
-                            <label class="custom-file-label" for="picture">請選擇檔案</label>
-                        </div>
-                    </div>
+                    <upload-images ref="uploadBookImages" :uploadimg="uploadimg"></upload-images>
                 </div>
 
                 <div class="col-md-6">
 
                     <div class="row">
-                        <!-- <div class="col-md-6">
-                            <div class="form-group">
-                                <label for="data_resource">資料來源</label>
-                                <select id="data_resource" name="data_resource" class="form-control">
-                                    <option value="1">全新的書籍資料</option>
-                                    <option value="2">已在庫藏內的書籍資料</option>
-                                </select>
-                            </div>
-                        </div> -->
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="bugurl">爬蟲網址</label>
-                                <input id="bugurl" name="bugurl" type="text" class="form-control" value="" autocomplete="off">
+                                <input id="bugurl" name="bugurl" type="text" class="form-control" value="" autocomplete="off" @change="getBookDataFromWeb">
                             </div>
                         </div>
                     </div>
@@ -216,8 +193,6 @@
                 </div>
             </div>
 
-            
-
             <div class="row mb-2">
                 <div class="col-md-12">
                     <div class="form-group">
@@ -259,72 +234,9 @@ export default {
         }
     },
     methods: {
-        
-    },
-    created(){
-        let DonorsListURL = $('#DonorsListURL').html();
-        axios.get(DonorsListURL).then(response => {
-            this.donors = response.data.donors;
-            for(let i = 0; i < this.donors.length; i++){
-                $("#donor_id").append($("<option></option>").attr("value", this.donors[i].id).text(this.donors[i].name));
-            }
-            $('#donor_id').selectpicker('refresh');
-        });
-    },
-    mounted(){
-
-        $('#book_btn').click(function(e){
-            $('#book_create_form').slideDown();
-            $('#book_btn').attr('disabled', true);
-            $('#paper_btn').attr('disabled', true);
-            $('#step1').slideUp();
-            $('#goback2step1').slideDown();
-            $('#add_type').focus();
-        });
-
-        $('#paper_btn').click(function(e){
-            $('#papper_create_form').slideDown();
-            $('#book_btn').attr('disabled', true);
-            $('#paper_btn').attr('disabled', true);
-            $('#step1').slideUp();
-            $('#goback2step1').slideDown();
-        });
-
-        $('#goback2step1_btn').click(function(e){
-            $('#book_create_form').slideUp();
-            $('#papper_create_form').slideUp();
-            $('#book_btn').attr('disabled', false);
-            $('#paper_btn').attr('disabled', false);
-            $('#step1').slideDown();
-            $('#goback2step1').slideUp();
-        });
-
-        // 圖片上傳
-        $('#picture').change(function(){
-            let input = $(this)[0];
-            readURL(input);
-        });
-
-        // 預覽圖生成
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                $('#preview-upload').fadeIn();
-                var reader = new FileReader();
-                reader.onload = function(e) {
-                    $('#previewImg-upload').attr('src', e.target.result);
-                }
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-
-        // 捐贈人
-        $('#donor_id').selectpicker({
-            liveSearch: true
-        });
-
-        // 入庫方式
-        $('#add_type').change(function(){
-            let x = $(this).val();
+        changeAddType(e){
+            // 更動入庫方式
+            let x = $(e.target).val();
             if(x == '1'){
                 // 捐贈入庫
                 $('#donor_id').prop('disabled', false).selectpicker('refresh');
@@ -340,76 +252,23 @@ export default {
                 $('#price').val('0').prop('disabled', false).attr('required', true);
                 $('#price_required_star').fadeIn();
             }
-        });
-
-        // ISBN查詢 (Google Book API) 9789865003913
-        // $('#isbn').change(function(){
-        //     if($(this).val().length != 13 && $(this).val().length != 10){
-        //         alert('請輸入正確的ISBN格式');
-        //         $(this).val('');
-        //     }else{
-        //         let backendURL = $('#backendURL').html();
-
-        //         $('#modal_good').css({'display':'none'});
-        //         $('#modal_error').css({'display':'none'});
-        //         $('#modal_spinner').slideDown();
-        //         $('#modal_msg').html('請稍等...');
-        //         $('#modal_link').slideUp();
-        //         $('#modal_close').slideUp();
-        //         $('#LoadingModal').modal('show');
-        //         axios.get(backendURL + '/books/isbn/' + $(this).val() + '/google').then(response => {
-        //             if(response.data.result.totalItems == 0){
-        //                 $('#modal_error').css({'display':'flex'});
-        //                 $('#modal_spinner').css({'display':'none'});
-        //                 $('#modal_msg').html('很抱歉無法透過ISBN獲取資料');
-        //                 $('#modal_close').slideDown();
-        //             }else{
-        //                 $('#LoadingModal').modal('hide');
-        //                 let $bookInfo = response.data.result.items[0].volumeInfo;
-        //                 $('#title').val($bookInfo.title);
-        //                 $('#subtitle').val($bookInfo.subtitle);
-        //                 $('#author').val($bookInfo.authors);
-        //                 $('#publisher').val($bookInfo.publisher);
-        //                 $('#published_year').val($bookInfo.publishedDate);
-        //             }
-        //         }).catch((error) => {
-        //             console.error('透過ISBN抓取資料時發生錯誤，錯誤訊息：' + error);
-        //             $('#modal_error').css({'display':'flex'});
-        //             $('#modal_spinner').css({'display':'none'});
-        //             $('#modal_msg').html('透過ISBN抓取資料時發生錯誤<br>錯誤訊息：' + error + '<br>');
-        //             $('#modal_close').slideDown();
-
-        //             let $key = Object.keys(error.response.data.errors);
-        //             $key.forEach(function(item, index){
-        //                 $('#modal_msg').append(error.response.data.errors[item]+ '<br>');
-        //                 $('#' + item).addClass('is-invalid');
-        //             });
-        //         });
-        //     }
-        // });
-
-        $('#bugurl').change(function(){
-            if(!$.isUrl($(this).val())){
-                alert('請輸入正確的網頁格式');
-                $(this).val('');
+        },
+        getBookDataFromWeb(e){
+            if(!$.isUrl($(e.target).val())){
+                $.showErrorModalWithoutError('請輸入正確的網頁格式。');
+                $(e.target).val('');
             }else{
                 let BooksBugURL = $('#BooksBugURL').html();
-                let data = $(this).serializeObject();
+                let data = $(e.target).serializeObject();
 
-                $('#modal_good').css({'display':'none'});
-                $('#modal_error').css({'display':'none'});
-                $('#modal_spinner').slideDown();
-                $('#modal_msg').html('請稍等...');
-                $('#modal_link').slideUp();
-                $('#modal_close').slideUp();
-                $('#LoadingModal').modal('show');
+                $.showLoadingModal();
                 axios.post(BooksBugURL, data).then(response => {
                     console.log(response.data.data);
                     let $bookInfo = response.data.data;
                     if($bookInfo == null){
                         
                     }else{
-                        $('#LoadingModal').modal('hide');
+                        $.closeModal();
                         $('#title').val($bookInfo.title);
                         $('#subtitle').val($bookInfo.subtitle);
                         $('#author').val($bookInfo.author);
@@ -444,70 +303,90 @@ export default {
                             for(let i = 0; i < $cate_option.length; i++){
                                 $('#category').append($('<option></option>').val($cate_option[i].id).text($cate_option[i].text));
                             }
-
                             $('#language').val($bookInfo.language);
                             $('#callnum').val($bookInfo.callnum);
                             $('#category').val($bookInfo.callnum.substr(0, 1));
                         }
                         
-                        let $cover_img_name = $bookInfo.cover_img.split('/').pop();
-                        if($bookInfo.cover_img != null && $bookInfo.cover_img != '' && $cover_img_name != 'qrcode.png'){
-                            $('#previewImg-upload').attr('src', $bookInfo.cover_img);
-                        }else{
-                            console.log('Cover Images URL:' + $bookInfo.cover_img);
-                        }
+                        // 爬蟲抓圖片網址
+                        // let $cover_img_name = $bookInfo.cover_img.split('/').pop();
+                        // if($bookInfo.cover_img != null && $bookInfo.cover_img != '' && $cover_img_name != 'qrcode.png'){
+                        //     $('#previewImg-upload').attr('src', $bookInfo.cover_img);
+                        // }else{
+                        //     console.log('Cover Images URL:' + $bookInfo.cover_img);
+                        // }
                     }
-                    // if(response.data.result.totalItems == 0){
-                    //     $('#modal_error').css({'display':'flex'});
-                    //     $('#modal_spinner').css({'display':'none'});
-                    //     $('#modal_msg').html('很抱歉無法透過ISBN獲取資料');
-                    //     $('#modal_close').slideDown();
-                    // }else{
-                    //     $('#LoadingModal').modal('hide');
-                    //     
-                    // }
                 }).catch((error) => {
                     console.error('爬蟲時發生錯誤，錯誤訊息：' + error);
-                    $('#modal_error').css({'display':'flex'});
-                    $('#modal_spinner').css({'display':'none'});
-                    $('#modal_msg').html('透爬蟲時發生錯誤<br>錯誤訊息：' + error + '<br>');
-                    $('#modal_close').slideDown();
+                    $.showErrorModal(error);
                 });
             }
+        },
+        bookCreateForm(e){
+            // 如果 file 沒有值時，請重新選擇圖片。
+            if(!$('#image_file').val()){
+                $.showErrorModalWithoutError('請重新選擇圖片。');
+                return false;
+            }
+
+            let url = $(e.target).attr('action');
+            let data = $(e.target).serializeObject();
+            
+            $.showLoadingModal();
+            axios.post(url, data).then(response => {
+                this.$refs.uploadBookImages.stopCropper();
+                $.showSuccessModal('新增成功', response.data.url);
+            }).catch(error => {
+                console.error('新增借閱人時發生錯誤，錯誤訊息：' + error);
+                $.showErrorModal(error);
+            });
+        }
+    },
+    created(){
+        let DonorsListURL = $('#DonorsListURL').html();
+        axios.get(DonorsListURL).then(response => {
+            this.donors = response.data.donors;
+            for(let i = 0; i < this.donors.length; i++){
+                $("#donor_id").append($("<option></option>").attr("value", this.donors[i].id).text(this.donors[i].name));
+            }
+            $('#donor_id').selectpicker('refresh');
+        });
+    },
+    mounted(){
+        $('#book_btn').click(function(e){
+            $('#book_create_form').slideDown();
+            $('#book_btn').attr('disabled', true);
+            $('#paper_btn').attr('disabled', true);
+            $('#step1').slideUp();
+            $('#goback2step1').slideDown();
+            $('#add_type').focus();
         });
 
-        $('#book_create_form').submit(function(e){
-            e.preventDefault();
+        $('#paper_btn').click(function(e){
+            $('#papper_create_form').slideDown();
+            $('#book_btn').attr('disabled', true);
+            $('#paper_btn').attr('disabled', true);
+            $('#step1').slideUp();
+            $('#goback2step1').slideDown();
+        });
 
-            let url = $(this).attr('action');
-            let data = $(this).serializeObject();
+        $('#goback2step1_btn').click(function(e){
+            $('#book_create_form').slideUp();
+            $('#papper_create_form').slideUp();
+            $('#book_btn').attr('disabled', false);
+            $('#paper_btn').attr('disabled', false);
+            $('#step1').slideDown();
+            $('#goback2step1').slideUp();
+        });
+
+        // 捐贈人
+        $('#donor_id').selectpicker({
+            liveSearch: true
+        });
+
+
+        $('#bugurl').change(function(){
             
-            $('#modal_good').css({'display':'none'});
-            $('#modal_error').css({'display':'none'});
-            $('#modal_spinner').slideDown();
-            $('#modal_msg').html('請稍等...');
-            $('#modal_link').slideUp();
-            $('#modal_close').slideUp();
-            $('#LoadingModal').modal('show');
-            axios.post(url, data).then(response => {
-                $('#modal_good').css({'display':'flex'});
-                $('#modal_spinner').css({'display':'none'});
-                $('#modal_msg').html('新增成功');
-                $('#modal_link').attr('href', response.data.url);
-                $('#modal_link').slideDown();
-            }).catch((error) => {
-                console.error('新增借閱人時發生錯誤，錯誤訊息：' + error);
-                $('#modal_error').css({'display':'flex'});
-                $('#modal_spinner').css({'display':'none'});
-                $('#modal_msg').html('發生錯誤<br>錯誤訊息：' + error + '<br>');
-                $('#modal_close').slideDown();
-
-                let $key = Object.keys(error.response.data.errors);
-                $key.forEach(function(item, index){
-                    $('#modal_msg').append(error.response.data.errors[item]+ '<br>');
-                    $('#' + item).addClass('is-invalid');
-                });
-            });
         });
     },
 }

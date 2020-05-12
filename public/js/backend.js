@@ -1960,6 +1960,10 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   data: function data() {
@@ -1979,6 +1983,20 @@ __webpack_require__.r(__webpack_exports__);
       $('#modal_link').slideUp();
       $('#modal_close').slideUp();
       $('#LoadingModal').modal('show');
+    },
+    closeModal: function closeModal() {
+      // 關閉 Loading Modal
+      setTimeout(function () {
+        $('#LoadingModal').modal('hide');
+      }, 500);
+    },
+    warningResponse: function warningResponse(message) {
+      // 顯示警告訊息
+      $('#modal_spinner').css({
+        'display': 'none'
+      });
+      $('#modal_msg').html(message);
+      $('#modal_close').slideDown();
     },
     successfulResponse: function successfulResponse(message, url) {
       // 顯示成功的訊息 message為訊息，url為欲前往之連結
@@ -9799,6 +9817,3715 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
 
 })));
 //# sourceMappingURL=bootstrap.js.map
+
+
+/***/ }),
+
+/***/ "./node_modules/cropperjs/dist/cropper.js":
+/*!************************************************!*\
+  !*** ./node_modules/cropperjs/dist/cropper.js ***!
+  \************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * Cropper.js v1.5.6
+ * https://fengyuanchen.github.io/cropperjs
+ *
+ * Copyright 2015-present Chen Fengyuan
+ * Released under the MIT license
+ *
+ * Date: 2019-10-04T04:33:48.372Z
+ */
+
+(function (global, factory) {
+   true ? module.exports = factory() :
+  undefined;
+}(this, function () { 'use strict';
+
+  function _typeof(obj) {
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function (obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+
+    return _typeof(obj);
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+  }
+
+  function _defineProperty(obj, key, value) {
+    if (key in obj) {
+      Object.defineProperty(obj, key, {
+        value: value,
+        enumerable: true,
+        configurable: true,
+        writable: true
+      });
+    } else {
+      obj[key] = value;
+    }
+
+    return obj;
+  }
+
+  function ownKeys(object, enumerableOnly) {
+    var keys = Object.keys(object);
+
+    if (Object.getOwnPropertySymbols) {
+      var symbols = Object.getOwnPropertySymbols(object);
+      if (enumerableOnly) symbols = symbols.filter(function (sym) {
+        return Object.getOwnPropertyDescriptor(object, sym).enumerable;
+      });
+      keys.push.apply(keys, symbols);
+    }
+
+    return keys;
+  }
+
+  function _objectSpread2(target) {
+    for (var i = 1; i < arguments.length; i++) {
+      var source = arguments[i] != null ? arguments[i] : {};
+
+      if (i % 2) {
+        ownKeys(source, true).forEach(function (key) {
+          _defineProperty(target, key, source[key]);
+        });
+      } else if (Object.getOwnPropertyDescriptors) {
+        Object.defineProperties(target, Object.getOwnPropertyDescriptors(source));
+      } else {
+        ownKeys(source).forEach(function (key) {
+          Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key));
+        });
+      }
+    }
+
+    return target;
+  }
+
+  function _toConsumableArray(arr) {
+    return _arrayWithoutHoles(arr) || _iterableToArray(arr) || _nonIterableSpread();
+  }
+
+  function _arrayWithoutHoles(arr) {
+    if (Array.isArray(arr)) {
+      for (var i = 0, arr2 = new Array(arr.length); i < arr.length; i++) arr2[i] = arr[i];
+
+      return arr2;
+    }
+  }
+
+  function _iterableToArray(iter) {
+    if (Symbol.iterator in Object(iter) || Object.prototype.toString.call(iter) === "[object Arguments]") return Array.from(iter);
+  }
+
+  function _nonIterableSpread() {
+    throw new TypeError("Invalid attempt to spread non-iterable instance");
+  }
+
+  var IS_BROWSER = typeof window !== 'undefined' && typeof window.document !== 'undefined';
+  var WINDOW = IS_BROWSER ? window : {};
+  var IS_TOUCH_DEVICE = IS_BROWSER ? 'ontouchstart' in WINDOW.document.documentElement : false;
+  var HAS_POINTER_EVENT = IS_BROWSER ? 'PointerEvent' in WINDOW : false;
+  var NAMESPACE = 'cropper'; // Actions
+
+  var ACTION_ALL = 'all';
+  var ACTION_CROP = 'crop';
+  var ACTION_MOVE = 'move';
+  var ACTION_ZOOM = 'zoom';
+  var ACTION_EAST = 'e';
+  var ACTION_WEST = 'w';
+  var ACTION_SOUTH = 's';
+  var ACTION_NORTH = 'n';
+  var ACTION_NORTH_EAST = 'ne';
+  var ACTION_NORTH_WEST = 'nw';
+  var ACTION_SOUTH_EAST = 'se';
+  var ACTION_SOUTH_WEST = 'sw'; // Classes
+
+  var CLASS_CROP = "".concat(NAMESPACE, "-crop");
+  var CLASS_DISABLED = "".concat(NAMESPACE, "-disabled");
+  var CLASS_HIDDEN = "".concat(NAMESPACE, "-hidden");
+  var CLASS_HIDE = "".concat(NAMESPACE, "-hide");
+  var CLASS_INVISIBLE = "".concat(NAMESPACE, "-invisible");
+  var CLASS_MODAL = "".concat(NAMESPACE, "-modal");
+  var CLASS_MOVE = "".concat(NAMESPACE, "-move"); // Data keys
+
+  var DATA_ACTION = "".concat(NAMESPACE, "Action");
+  var DATA_PREVIEW = "".concat(NAMESPACE, "Preview"); // Drag modes
+
+  var DRAG_MODE_CROP = 'crop';
+  var DRAG_MODE_MOVE = 'move';
+  var DRAG_MODE_NONE = 'none'; // Events
+
+  var EVENT_CROP = 'crop';
+  var EVENT_CROP_END = 'cropend';
+  var EVENT_CROP_MOVE = 'cropmove';
+  var EVENT_CROP_START = 'cropstart';
+  var EVENT_DBLCLICK = 'dblclick';
+  var EVENT_TOUCH_START = IS_TOUCH_DEVICE ? 'touchstart' : 'mousedown';
+  var EVENT_TOUCH_MOVE = IS_TOUCH_DEVICE ? 'touchmove' : 'mousemove';
+  var EVENT_TOUCH_END = IS_TOUCH_DEVICE ? 'touchend touchcancel' : 'mouseup';
+  var EVENT_POINTER_DOWN = HAS_POINTER_EVENT ? 'pointerdown' : EVENT_TOUCH_START;
+  var EVENT_POINTER_MOVE = HAS_POINTER_EVENT ? 'pointermove' : EVENT_TOUCH_MOVE;
+  var EVENT_POINTER_UP = HAS_POINTER_EVENT ? 'pointerup pointercancel' : EVENT_TOUCH_END;
+  var EVENT_READY = 'ready';
+  var EVENT_RESIZE = 'resize';
+  var EVENT_WHEEL = 'wheel';
+  var EVENT_ZOOM = 'zoom'; // Mime types
+
+  var MIME_TYPE_JPEG = 'image/jpeg'; // RegExps
+
+  var REGEXP_ACTIONS = /^e|w|s|n|se|sw|ne|nw|all|crop|move|zoom$/;
+  var REGEXP_DATA_URL = /^data:/;
+  var REGEXP_DATA_URL_JPEG = /^data:image\/jpeg;base64,/;
+  var REGEXP_TAG_NAME = /^img|canvas$/i; // Misc
+  // Inspired by the default width and height of a canvas element.
+
+  var MIN_CONTAINER_WIDTH = 200;
+  var MIN_CONTAINER_HEIGHT = 100;
+
+  var DEFAULTS = {
+    // Define the view mode of the cropper
+    viewMode: 0,
+    // 0, 1, 2, 3
+    // Define the dragging mode of the cropper
+    dragMode: DRAG_MODE_CROP,
+    // 'crop', 'move' or 'none'
+    // Define the initial aspect ratio of the crop box
+    initialAspectRatio: NaN,
+    // Define the aspect ratio of the crop box
+    aspectRatio: NaN,
+    // An object with the previous cropping result data
+    data: null,
+    // A selector for adding extra containers to preview
+    preview: '',
+    // Re-render the cropper when resize the window
+    responsive: true,
+    // Restore the cropped area after resize the window
+    restore: true,
+    // Check if the current image is a cross-origin image
+    checkCrossOrigin: true,
+    // Check the current image's Exif Orientation information
+    checkOrientation: true,
+    // Show the black modal
+    modal: true,
+    // Show the dashed lines for guiding
+    guides: true,
+    // Show the center indicator for guiding
+    center: true,
+    // Show the white modal to highlight the crop box
+    highlight: true,
+    // Show the grid background
+    background: true,
+    // Enable to crop the image automatically when initialize
+    autoCrop: true,
+    // Define the percentage of automatic cropping area when initializes
+    autoCropArea: 0.8,
+    // Enable to move the image
+    movable: true,
+    // Enable to rotate the image
+    rotatable: true,
+    // Enable to scale the image
+    scalable: true,
+    // Enable to zoom the image
+    zoomable: true,
+    // Enable to zoom the image by dragging touch
+    zoomOnTouch: true,
+    // Enable to zoom the image by wheeling mouse
+    zoomOnWheel: true,
+    // Define zoom ratio when zoom the image by wheeling mouse
+    wheelZoomRatio: 0.1,
+    // Enable to move the crop box
+    cropBoxMovable: true,
+    // Enable to resize the crop box
+    cropBoxResizable: true,
+    // Toggle drag mode between "crop" and "move" when click twice on the cropper
+    toggleDragModeOnDblclick: true,
+    // Size limitation
+    minCanvasWidth: 0,
+    minCanvasHeight: 0,
+    minCropBoxWidth: 0,
+    minCropBoxHeight: 0,
+    minContainerWidth: 200,
+    minContainerHeight: 100,
+    // Shortcuts of events
+    ready: null,
+    cropstart: null,
+    cropmove: null,
+    cropend: null,
+    crop: null,
+    zoom: null
+  };
+
+  var TEMPLATE = '<div class="cropper-container" touch-action="none">' + '<div class="cropper-wrap-box">' + '<div class="cropper-canvas"></div>' + '</div>' + '<div class="cropper-drag-box"></div>' + '<div class="cropper-crop-box">' + '<span class="cropper-view-box"></span>' + '<span class="cropper-dashed dashed-h"></span>' + '<span class="cropper-dashed dashed-v"></span>' + '<span class="cropper-center"></span>' + '<span class="cropper-face"></span>' + '<span class="cropper-line line-e" data-cropper-action="e"></span>' + '<span class="cropper-line line-n" data-cropper-action="n"></span>' + '<span class="cropper-line line-w" data-cropper-action="w"></span>' + '<span class="cropper-line line-s" data-cropper-action="s"></span>' + '<span class="cropper-point point-e" data-cropper-action="e"></span>' + '<span class="cropper-point point-n" data-cropper-action="n"></span>' + '<span class="cropper-point point-w" data-cropper-action="w"></span>' + '<span class="cropper-point point-s" data-cropper-action="s"></span>' + '<span class="cropper-point point-ne" data-cropper-action="ne"></span>' + '<span class="cropper-point point-nw" data-cropper-action="nw"></span>' + '<span class="cropper-point point-sw" data-cropper-action="sw"></span>' + '<span class="cropper-point point-se" data-cropper-action="se"></span>' + '</div>' + '</div>';
+
+  /**
+   * Check if the given value is not a number.
+   */
+
+  var isNaN = Number.isNaN || WINDOW.isNaN;
+  /**
+   * Check if the given value is a number.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is a number, else `false`.
+   */
+
+  function isNumber(value) {
+    return typeof value === 'number' && !isNaN(value);
+  }
+  /**
+   * Check if the given value is a positive number.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is a positive number, else `false`.
+   */
+
+  var isPositiveNumber = function isPositiveNumber(value) {
+    return value > 0 && value < Infinity;
+  };
+  /**
+   * Check if the given value is undefined.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is undefined, else `false`.
+   */
+
+  function isUndefined(value) {
+    return typeof value === 'undefined';
+  }
+  /**
+   * Check if the given value is an object.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is an object, else `false`.
+   */
+
+  function isObject(value) {
+    return _typeof(value) === 'object' && value !== null;
+  }
+  var hasOwnProperty = Object.prototype.hasOwnProperty;
+  /**
+   * Check if the given value is a plain object.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is a plain object, else `false`.
+   */
+
+  function isPlainObject(value) {
+    if (!isObject(value)) {
+      return false;
+    }
+
+    try {
+      var _constructor = value.constructor;
+      var prototype = _constructor.prototype;
+      return _constructor && prototype && hasOwnProperty.call(prototype, 'isPrototypeOf');
+    } catch (error) {
+      return false;
+    }
+  }
+  /**
+   * Check if the given value is a function.
+   * @param {*} value - The value to check.
+   * @returns {boolean} Returns `true` if the given value is a function, else `false`.
+   */
+
+  function isFunction(value) {
+    return typeof value === 'function';
+  }
+  var slice = Array.prototype.slice;
+  /**
+   * Convert array-like or iterable object to an array.
+   * @param {*} value - The value to convert.
+   * @returns {Array} Returns a new array.
+   */
+
+  function toArray(value) {
+    return Array.from ? Array.from(value) : slice.call(value);
+  }
+  /**
+   * Iterate the given data.
+   * @param {*} data - The data to iterate.
+   * @param {Function} callback - The process function for each element.
+   * @returns {*} The original data.
+   */
+
+  function forEach(data, callback) {
+    if (data && isFunction(callback)) {
+      if (Array.isArray(data) || isNumber(data.length)
+      /* array-like */
+      ) {
+          toArray(data).forEach(function (value, key) {
+            callback.call(data, value, key, data);
+          });
+        } else if (isObject(data)) {
+        Object.keys(data).forEach(function (key) {
+          callback.call(data, data[key], key, data);
+        });
+      }
+    }
+
+    return data;
+  }
+  /**
+   * Extend the given object.
+   * @param {*} target - The target object to extend.
+   * @param {*} args - The rest objects for merging to the target object.
+   * @returns {Object} The extended object.
+   */
+
+  var assign = Object.assign || function assign(target) {
+    for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+      args[_key - 1] = arguments[_key];
+    }
+
+    if (isObject(target) && args.length > 0) {
+      args.forEach(function (arg) {
+        if (isObject(arg)) {
+          Object.keys(arg).forEach(function (key) {
+            target[key] = arg[key];
+          });
+        }
+      });
+    }
+
+    return target;
+  };
+  var REGEXP_DECIMALS = /\.\d*(?:0|9){12}\d*$/;
+  /**
+   * Normalize decimal number.
+   * Check out {@link http://0.30000000000000004.com/}
+   * @param {number} value - The value to normalize.
+   * @param {number} [times=100000000000] - The times for normalizing.
+   * @returns {number} Returns the normalized number.
+   */
+
+  function normalizeDecimalNumber(value) {
+    var times = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 100000000000;
+    return REGEXP_DECIMALS.test(value) ? Math.round(value * times) / times : value;
+  }
+  var REGEXP_SUFFIX = /^width|height|left|top|marginLeft|marginTop$/;
+  /**
+   * Apply styles to the given element.
+   * @param {Element} element - The target element.
+   * @param {Object} styles - The styles for applying.
+   */
+
+  function setStyle(element, styles) {
+    var style = element.style;
+    forEach(styles, function (value, property) {
+      if (REGEXP_SUFFIX.test(property) && isNumber(value)) {
+        value = "".concat(value, "px");
+      }
+
+      style[property] = value;
+    });
+  }
+  /**
+   * Check if the given element has a special class.
+   * @param {Element} element - The element to check.
+   * @param {string} value - The class to search.
+   * @returns {boolean} Returns `true` if the special class was found.
+   */
+
+  function hasClass(element, value) {
+    return element.classList ? element.classList.contains(value) : element.className.indexOf(value) > -1;
+  }
+  /**
+   * Add classes to the given element.
+   * @param {Element} element - The target element.
+   * @param {string} value - The classes to be added.
+   */
+
+  function addClass(element, value) {
+    if (!value) {
+      return;
+    }
+
+    if (isNumber(element.length)) {
+      forEach(element, function (elem) {
+        addClass(elem, value);
+      });
+      return;
+    }
+
+    if (element.classList) {
+      element.classList.add(value);
+      return;
+    }
+
+    var className = element.className.trim();
+
+    if (!className) {
+      element.className = value;
+    } else if (className.indexOf(value) < 0) {
+      element.className = "".concat(className, " ").concat(value);
+    }
+  }
+  /**
+   * Remove classes from the given element.
+   * @param {Element} element - The target element.
+   * @param {string} value - The classes to be removed.
+   */
+
+  function removeClass(element, value) {
+    if (!value) {
+      return;
+    }
+
+    if (isNumber(element.length)) {
+      forEach(element, function (elem) {
+        removeClass(elem, value);
+      });
+      return;
+    }
+
+    if (element.classList) {
+      element.classList.remove(value);
+      return;
+    }
+
+    if (element.className.indexOf(value) >= 0) {
+      element.className = element.className.replace(value, '');
+    }
+  }
+  /**
+   * Add or remove classes from the given element.
+   * @param {Element} element - The target element.
+   * @param {string} value - The classes to be toggled.
+   * @param {boolean} added - Add only.
+   */
+
+  function toggleClass(element, value, added) {
+    if (!value) {
+      return;
+    }
+
+    if (isNumber(element.length)) {
+      forEach(element, function (elem) {
+        toggleClass(elem, value, added);
+      });
+      return;
+    } // IE10-11 doesn't support the second parameter of `classList.toggle`
+
+
+    if (added) {
+      addClass(element, value);
+    } else {
+      removeClass(element, value);
+    }
+  }
+  var REGEXP_CAMEL_CASE = /([a-z\d])([A-Z])/g;
+  /**
+   * Transform the given string from camelCase to kebab-case
+   * @param {string} value - The value to transform.
+   * @returns {string} The transformed value.
+   */
+
+  function toParamCase(value) {
+    return value.replace(REGEXP_CAMEL_CASE, '$1-$2').toLowerCase();
+  }
+  /**
+   * Get data from the given element.
+   * @param {Element} element - The target element.
+   * @param {string} name - The data key to get.
+   * @returns {string} The data value.
+   */
+
+  function getData(element, name) {
+    if (isObject(element[name])) {
+      return element[name];
+    }
+
+    if (element.dataset) {
+      return element.dataset[name];
+    }
+
+    return element.getAttribute("data-".concat(toParamCase(name)));
+  }
+  /**
+   * Set data to the given element.
+   * @param {Element} element - The target element.
+   * @param {string} name - The data key to set.
+   * @param {string} data - The data value.
+   */
+
+  function setData(element, name, data) {
+    if (isObject(data)) {
+      element[name] = data;
+    } else if (element.dataset) {
+      element.dataset[name] = data;
+    } else {
+      element.setAttribute("data-".concat(toParamCase(name)), data);
+    }
+  }
+  /**
+   * Remove data from the given element.
+   * @param {Element} element - The target element.
+   * @param {string} name - The data key to remove.
+   */
+
+  function removeData(element, name) {
+    if (isObject(element[name])) {
+      try {
+        delete element[name];
+      } catch (error) {
+        element[name] = undefined;
+      }
+    } else if (element.dataset) {
+      // #128 Safari not allows to delete dataset property
+      try {
+        delete element.dataset[name];
+      } catch (error) {
+        element.dataset[name] = undefined;
+      }
+    } else {
+      element.removeAttribute("data-".concat(toParamCase(name)));
+    }
+  }
+  var REGEXP_SPACES = /\s\s*/;
+
+  var onceSupported = function () {
+    var supported = false;
+
+    if (IS_BROWSER) {
+      var once = false;
+
+      var listener = function listener() {};
+
+      var options = Object.defineProperty({}, 'once', {
+        get: function get() {
+          supported = true;
+          return once;
+        },
+
+        /**
+         * This setter can fix a `TypeError` in strict mode
+         * {@link https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Errors/Getter_only}
+         * @param {boolean} value - The value to set
+         */
+        set: function set(value) {
+          once = value;
+        }
+      });
+      WINDOW.addEventListener('test', listener, options);
+      WINDOW.removeEventListener('test', listener, options);
+    }
+
+    return supported;
+  }();
+  /**
+   * Remove event listener from the target element.
+   * @param {Element} element - The event target.
+   * @param {string} type - The event type(s).
+   * @param {Function} listener - The event listener.
+   * @param {Object} options - The event options.
+   */
+
+
+  function removeListener(element, type, listener) {
+    var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+    var handler = listener;
+    type.trim().split(REGEXP_SPACES).forEach(function (event) {
+      if (!onceSupported) {
+        var listeners = element.listeners;
+
+        if (listeners && listeners[event] && listeners[event][listener]) {
+          handler = listeners[event][listener];
+          delete listeners[event][listener];
+
+          if (Object.keys(listeners[event]).length === 0) {
+            delete listeners[event];
+          }
+
+          if (Object.keys(listeners).length === 0) {
+            delete element.listeners;
+          }
+        }
+      }
+
+      element.removeEventListener(event, handler, options);
+    });
+  }
+  /**
+   * Add event listener to the target element.
+   * @param {Element} element - The event target.
+   * @param {string} type - The event type(s).
+   * @param {Function} listener - The event listener.
+   * @param {Object} options - The event options.
+   */
+
+  function addListener(element, type, listener) {
+    var options = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : {};
+    var _handler = listener;
+    type.trim().split(REGEXP_SPACES).forEach(function (event) {
+      if (options.once && !onceSupported) {
+        var _element$listeners = element.listeners,
+            listeners = _element$listeners === void 0 ? {} : _element$listeners;
+
+        _handler = function handler() {
+          delete listeners[event][listener];
+          element.removeEventListener(event, _handler, options);
+
+          for (var _len2 = arguments.length, args = new Array(_len2), _key2 = 0; _key2 < _len2; _key2++) {
+            args[_key2] = arguments[_key2];
+          }
+
+          listener.apply(element, args);
+        };
+
+        if (!listeners[event]) {
+          listeners[event] = {};
+        }
+
+        if (listeners[event][listener]) {
+          element.removeEventListener(event, listeners[event][listener], options);
+        }
+
+        listeners[event][listener] = _handler;
+        element.listeners = listeners;
+      }
+
+      element.addEventListener(event, _handler, options);
+    });
+  }
+  /**
+   * Dispatch event on the target element.
+   * @param {Element} element - The event target.
+   * @param {string} type - The event type(s).
+   * @param {Object} data - The additional event data.
+   * @returns {boolean} Indicate if the event is default prevented or not.
+   */
+
+  function dispatchEvent(element, type, data) {
+    var event; // Event and CustomEvent on IE9-11 are global objects, not constructors
+
+    if (isFunction(Event) && isFunction(CustomEvent)) {
+      event = new CustomEvent(type, {
+        detail: data,
+        bubbles: true,
+        cancelable: true
+      });
+    } else {
+      event = document.createEvent('CustomEvent');
+      event.initCustomEvent(type, true, true, data);
+    }
+
+    return element.dispatchEvent(event);
+  }
+  /**
+   * Get the offset base on the document.
+   * @param {Element} element - The target element.
+   * @returns {Object} The offset data.
+   */
+
+  function getOffset(element) {
+    var box = element.getBoundingClientRect();
+    return {
+      left: box.left + (window.pageXOffset - document.documentElement.clientLeft),
+      top: box.top + (window.pageYOffset - document.documentElement.clientTop)
+    };
+  }
+  var location = WINDOW.location;
+  var REGEXP_ORIGINS = /^(\w+:)\/\/([^:/?#]*):?(\d*)/i;
+  /**
+   * Check if the given URL is a cross origin URL.
+   * @param {string} url - The target URL.
+   * @returns {boolean} Returns `true` if the given URL is a cross origin URL, else `false`.
+   */
+
+  function isCrossOriginURL(url) {
+    var parts = url.match(REGEXP_ORIGINS);
+    return parts !== null && (parts[1] !== location.protocol || parts[2] !== location.hostname || parts[3] !== location.port);
+  }
+  /**
+   * Add timestamp to the given URL.
+   * @param {string} url - The target URL.
+   * @returns {string} The result URL.
+   */
+
+  function addTimestamp(url) {
+    var timestamp = "timestamp=".concat(new Date().getTime());
+    return url + (url.indexOf('?') === -1 ? '?' : '&') + timestamp;
+  }
+  /**
+   * Get transforms base on the given object.
+   * @param {Object} obj - The target object.
+   * @returns {string} A string contains transform values.
+   */
+
+  function getTransforms(_ref) {
+    var rotate = _ref.rotate,
+        scaleX = _ref.scaleX,
+        scaleY = _ref.scaleY,
+        translateX = _ref.translateX,
+        translateY = _ref.translateY;
+    var values = [];
+
+    if (isNumber(translateX) && translateX !== 0) {
+      values.push("translateX(".concat(translateX, "px)"));
+    }
+
+    if (isNumber(translateY) && translateY !== 0) {
+      values.push("translateY(".concat(translateY, "px)"));
+    } // Rotate should come first before scale to match orientation transform
+
+
+    if (isNumber(rotate) && rotate !== 0) {
+      values.push("rotate(".concat(rotate, "deg)"));
+    }
+
+    if (isNumber(scaleX) && scaleX !== 1) {
+      values.push("scaleX(".concat(scaleX, ")"));
+    }
+
+    if (isNumber(scaleY) && scaleY !== 1) {
+      values.push("scaleY(".concat(scaleY, ")"));
+    }
+
+    var transform = values.length ? values.join(' ') : 'none';
+    return {
+      WebkitTransform: transform,
+      msTransform: transform,
+      transform: transform
+    };
+  }
+  /**
+   * Get the max ratio of a group of pointers.
+   * @param {string} pointers - The target pointers.
+   * @returns {number} The result ratio.
+   */
+
+  function getMaxZoomRatio(pointers) {
+    var pointers2 = _objectSpread2({}, pointers);
+
+    var ratios = [];
+    forEach(pointers, function (pointer, pointerId) {
+      delete pointers2[pointerId];
+      forEach(pointers2, function (pointer2) {
+        var x1 = Math.abs(pointer.startX - pointer2.startX);
+        var y1 = Math.abs(pointer.startY - pointer2.startY);
+        var x2 = Math.abs(pointer.endX - pointer2.endX);
+        var y2 = Math.abs(pointer.endY - pointer2.endY);
+        var z1 = Math.sqrt(x1 * x1 + y1 * y1);
+        var z2 = Math.sqrt(x2 * x2 + y2 * y2);
+        var ratio = (z2 - z1) / z1;
+        ratios.push(ratio);
+      });
+    });
+    ratios.sort(function (a, b) {
+      return Math.abs(a) < Math.abs(b);
+    });
+    return ratios[0];
+  }
+  /**
+   * Get a pointer from an event object.
+   * @param {Object} event - The target event object.
+   * @param {boolean} endOnly - Indicates if only returns the end point coordinate or not.
+   * @returns {Object} The result pointer contains start and/or end point coordinates.
+   */
+
+  function getPointer(_ref2, endOnly) {
+    var pageX = _ref2.pageX,
+        pageY = _ref2.pageY;
+    var end = {
+      endX: pageX,
+      endY: pageY
+    };
+    return endOnly ? end : _objectSpread2({
+      startX: pageX,
+      startY: pageY
+    }, end);
+  }
+  /**
+   * Get the center point coordinate of a group of pointers.
+   * @param {Object} pointers - The target pointers.
+   * @returns {Object} The center point coordinate.
+   */
+
+  function getPointersCenter(pointers) {
+    var pageX = 0;
+    var pageY = 0;
+    var count = 0;
+    forEach(pointers, function (_ref3) {
+      var startX = _ref3.startX,
+          startY = _ref3.startY;
+      pageX += startX;
+      pageY += startY;
+      count += 1;
+    });
+    pageX /= count;
+    pageY /= count;
+    return {
+      pageX: pageX,
+      pageY: pageY
+    };
+  }
+  /**
+   * Get the max sizes in a rectangle under the given aspect ratio.
+   * @param {Object} data - The original sizes.
+   * @param {string} [type='contain'] - The adjust type.
+   * @returns {Object} The result sizes.
+   */
+
+  function getAdjustedSizes(_ref4) // or 'cover'
+  {
+    var aspectRatio = _ref4.aspectRatio,
+        height = _ref4.height,
+        width = _ref4.width;
+    var type = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'contain';
+    var isValidWidth = isPositiveNumber(width);
+    var isValidHeight = isPositiveNumber(height);
+
+    if (isValidWidth && isValidHeight) {
+      var adjustedWidth = height * aspectRatio;
+
+      if (type === 'contain' && adjustedWidth > width || type === 'cover' && adjustedWidth < width) {
+        height = width / aspectRatio;
+      } else {
+        width = height * aspectRatio;
+      }
+    } else if (isValidWidth) {
+      height = width / aspectRatio;
+    } else if (isValidHeight) {
+      width = height * aspectRatio;
+    }
+
+    return {
+      width: width,
+      height: height
+    };
+  }
+  /**
+   * Get the new sizes of a rectangle after rotated.
+   * @param {Object} data - The original sizes.
+   * @returns {Object} The result sizes.
+   */
+
+  function getRotatedSizes(_ref5) {
+    var width = _ref5.width,
+        height = _ref5.height,
+        degree = _ref5.degree;
+    degree = Math.abs(degree) % 180;
+
+    if (degree === 90) {
+      return {
+        width: height,
+        height: width
+      };
+    }
+
+    var arc = degree % 90 * Math.PI / 180;
+    var sinArc = Math.sin(arc);
+    var cosArc = Math.cos(arc);
+    var newWidth = width * cosArc + height * sinArc;
+    var newHeight = width * sinArc + height * cosArc;
+    return degree > 90 ? {
+      width: newHeight,
+      height: newWidth
+    } : {
+      width: newWidth,
+      height: newHeight
+    };
+  }
+  /**
+   * Get a canvas which drew the given image.
+   * @param {HTMLImageElement} image - The image for drawing.
+   * @param {Object} imageData - The image data.
+   * @param {Object} canvasData - The canvas data.
+   * @param {Object} options - The options.
+   * @returns {HTMLCanvasElement} The result canvas.
+   */
+
+  function getSourceCanvas(image, _ref6, _ref7, _ref8) {
+    var imageAspectRatio = _ref6.aspectRatio,
+        imageNaturalWidth = _ref6.naturalWidth,
+        imageNaturalHeight = _ref6.naturalHeight,
+        _ref6$rotate = _ref6.rotate,
+        rotate = _ref6$rotate === void 0 ? 0 : _ref6$rotate,
+        _ref6$scaleX = _ref6.scaleX,
+        scaleX = _ref6$scaleX === void 0 ? 1 : _ref6$scaleX,
+        _ref6$scaleY = _ref6.scaleY,
+        scaleY = _ref6$scaleY === void 0 ? 1 : _ref6$scaleY;
+    var aspectRatio = _ref7.aspectRatio,
+        naturalWidth = _ref7.naturalWidth,
+        naturalHeight = _ref7.naturalHeight;
+    var _ref8$fillColor = _ref8.fillColor,
+        fillColor = _ref8$fillColor === void 0 ? 'transparent' : _ref8$fillColor,
+        _ref8$imageSmoothingE = _ref8.imageSmoothingEnabled,
+        imageSmoothingEnabled = _ref8$imageSmoothingE === void 0 ? true : _ref8$imageSmoothingE,
+        _ref8$imageSmoothingQ = _ref8.imageSmoothingQuality,
+        imageSmoothingQuality = _ref8$imageSmoothingQ === void 0 ? 'low' : _ref8$imageSmoothingQ,
+        _ref8$maxWidth = _ref8.maxWidth,
+        maxWidth = _ref8$maxWidth === void 0 ? Infinity : _ref8$maxWidth,
+        _ref8$maxHeight = _ref8.maxHeight,
+        maxHeight = _ref8$maxHeight === void 0 ? Infinity : _ref8$maxHeight,
+        _ref8$minWidth = _ref8.minWidth,
+        minWidth = _ref8$minWidth === void 0 ? 0 : _ref8$minWidth,
+        _ref8$minHeight = _ref8.minHeight,
+        minHeight = _ref8$minHeight === void 0 ? 0 : _ref8$minHeight;
+    var canvas = document.createElement('canvas');
+    var context = canvas.getContext('2d');
+    var maxSizes = getAdjustedSizes({
+      aspectRatio: aspectRatio,
+      width: maxWidth,
+      height: maxHeight
+    });
+    var minSizes = getAdjustedSizes({
+      aspectRatio: aspectRatio,
+      width: minWidth,
+      height: minHeight
+    }, 'cover');
+    var width = Math.min(maxSizes.width, Math.max(minSizes.width, naturalWidth));
+    var height = Math.min(maxSizes.height, Math.max(minSizes.height, naturalHeight)); // Note: should always use image's natural sizes for drawing as
+    // imageData.naturalWidth === canvasData.naturalHeight when rotate % 180 === 90
+
+    var destMaxSizes = getAdjustedSizes({
+      aspectRatio: imageAspectRatio,
+      width: maxWidth,
+      height: maxHeight
+    });
+    var destMinSizes = getAdjustedSizes({
+      aspectRatio: imageAspectRatio,
+      width: minWidth,
+      height: minHeight
+    }, 'cover');
+    var destWidth = Math.min(destMaxSizes.width, Math.max(destMinSizes.width, imageNaturalWidth));
+    var destHeight = Math.min(destMaxSizes.height, Math.max(destMinSizes.height, imageNaturalHeight));
+    var params = [-destWidth / 2, -destHeight / 2, destWidth, destHeight];
+    canvas.width = normalizeDecimalNumber(width);
+    canvas.height = normalizeDecimalNumber(height);
+    context.fillStyle = fillColor;
+    context.fillRect(0, 0, width, height);
+    context.save();
+    context.translate(width / 2, height / 2);
+    context.rotate(rotate * Math.PI / 180);
+    context.scale(scaleX, scaleY);
+    context.imageSmoothingEnabled = imageSmoothingEnabled;
+    context.imageSmoothingQuality = imageSmoothingQuality;
+    context.drawImage.apply(context, [image].concat(_toConsumableArray(params.map(function (param) {
+      return Math.floor(normalizeDecimalNumber(param));
+    }))));
+    context.restore();
+    return canvas;
+  }
+  var fromCharCode = String.fromCharCode;
+  /**
+   * Get string from char code in data view.
+   * @param {DataView} dataView - The data view for read.
+   * @param {number} start - The start index.
+   * @param {number} length - The read length.
+   * @returns {string} The read result.
+   */
+
+  function getStringFromCharCode(dataView, start, length) {
+    var str = '';
+    length += start;
+
+    for (var i = start; i < length; i += 1) {
+      str += fromCharCode(dataView.getUint8(i));
+    }
+
+    return str;
+  }
+  var REGEXP_DATA_URL_HEAD = /^data:.*,/;
+  /**
+   * Transform Data URL to array buffer.
+   * @param {string} dataURL - The Data URL to transform.
+   * @returns {ArrayBuffer} The result array buffer.
+   */
+
+  function dataURLToArrayBuffer(dataURL) {
+    var base64 = dataURL.replace(REGEXP_DATA_URL_HEAD, '');
+    var binary = atob(base64);
+    var arrayBuffer = new ArrayBuffer(binary.length);
+    var uint8 = new Uint8Array(arrayBuffer);
+    forEach(uint8, function (value, i) {
+      uint8[i] = binary.charCodeAt(i);
+    });
+    return arrayBuffer;
+  }
+  /**
+   * Transform array buffer to Data URL.
+   * @param {ArrayBuffer} arrayBuffer - The array buffer to transform.
+   * @param {string} mimeType - The mime type of the Data URL.
+   * @returns {string} The result Data URL.
+   */
+
+  function arrayBufferToDataURL(arrayBuffer, mimeType) {
+    var chunks = []; // Chunk Typed Array for better performance (#435)
+
+    var chunkSize = 8192;
+    var uint8 = new Uint8Array(arrayBuffer);
+
+    while (uint8.length > 0) {
+      // XXX: Babel's `toConsumableArray` helper will throw error in IE or Safari 9
+      // eslint-disable-next-line prefer-spread
+      chunks.push(fromCharCode.apply(null, toArray(uint8.subarray(0, chunkSize))));
+      uint8 = uint8.subarray(chunkSize);
+    }
+
+    return "data:".concat(mimeType, ";base64,").concat(btoa(chunks.join('')));
+  }
+  /**
+   * Get orientation value from given array buffer.
+   * @param {ArrayBuffer} arrayBuffer - The array buffer to read.
+   * @returns {number} The read orientation value.
+   */
+
+  function resetAndGetOrientation(arrayBuffer) {
+    var dataView = new DataView(arrayBuffer);
+    var orientation; // Ignores range error when the image does not have correct Exif information
+
+    try {
+      var littleEndian;
+      var app1Start;
+      var ifdStart; // Only handle JPEG image (start by 0xFFD8)
+
+      if (dataView.getUint8(0) === 0xFF && dataView.getUint8(1) === 0xD8) {
+        var length = dataView.byteLength;
+        var offset = 2;
+
+        while (offset + 1 < length) {
+          if (dataView.getUint8(offset) === 0xFF && dataView.getUint8(offset + 1) === 0xE1) {
+            app1Start = offset;
+            break;
+          }
+
+          offset += 1;
+        }
+      }
+
+      if (app1Start) {
+        var exifIDCode = app1Start + 4;
+        var tiffOffset = app1Start + 10;
+
+        if (getStringFromCharCode(dataView, exifIDCode, 4) === 'Exif') {
+          var endianness = dataView.getUint16(tiffOffset);
+          littleEndian = endianness === 0x4949;
+
+          if (littleEndian || endianness === 0x4D4D
+          /* bigEndian */
+          ) {
+              if (dataView.getUint16(tiffOffset + 2, littleEndian) === 0x002A) {
+                var firstIFDOffset = dataView.getUint32(tiffOffset + 4, littleEndian);
+
+                if (firstIFDOffset >= 0x00000008) {
+                  ifdStart = tiffOffset + firstIFDOffset;
+                }
+              }
+            }
+        }
+      }
+
+      if (ifdStart) {
+        var _length = dataView.getUint16(ifdStart, littleEndian);
+
+        var _offset;
+
+        var i;
+
+        for (i = 0; i < _length; i += 1) {
+          _offset = ifdStart + i * 12 + 2;
+
+          if (dataView.getUint16(_offset, littleEndian) === 0x0112
+          /* Orientation */
+          ) {
+              // 8 is the offset of the current tag's value
+              _offset += 8; // Get the original orientation value
+
+              orientation = dataView.getUint16(_offset, littleEndian); // Override the orientation with its default value
+
+              dataView.setUint16(_offset, 1, littleEndian);
+              break;
+            }
+        }
+      }
+    } catch (error) {
+      orientation = 1;
+    }
+
+    return orientation;
+  }
+  /**
+   * Parse Exif Orientation value.
+   * @param {number} orientation - The orientation to parse.
+   * @returns {Object} The parsed result.
+   */
+
+  function parseOrientation(orientation) {
+    var rotate = 0;
+    var scaleX = 1;
+    var scaleY = 1;
+
+    switch (orientation) {
+      // Flip horizontal
+      case 2:
+        scaleX = -1;
+        break;
+      // Rotate left 180°
+
+      case 3:
+        rotate = -180;
+        break;
+      // Flip vertical
+
+      case 4:
+        scaleY = -1;
+        break;
+      // Flip vertical and rotate right 90°
+
+      case 5:
+        rotate = 90;
+        scaleY = -1;
+        break;
+      // Rotate right 90°
+
+      case 6:
+        rotate = 90;
+        break;
+      // Flip horizontal and rotate right 90°
+
+      case 7:
+        rotate = 90;
+        scaleX = -1;
+        break;
+      // Rotate left 90°
+
+      case 8:
+        rotate = -90;
+        break;
+
+      default:
+    }
+
+    return {
+      rotate: rotate,
+      scaleX: scaleX,
+      scaleY: scaleY
+    };
+  }
+
+  var render = {
+    render: function render() {
+      this.initContainer();
+      this.initCanvas();
+      this.initCropBox();
+      this.renderCanvas();
+
+      if (this.cropped) {
+        this.renderCropBox();
+      }
+    },
+    initContainer: function initContainer() {
+      var element = this.element,
+          options = this.options,
+          container = this.container,
+          cropper = this.cropper;
+      addClass(cropper, CLASS_HIDDEN);
+      removeClass(element, CLASS_HIDDEN);
+      var containerData = {
+        width: Math.max(container.offsetWidth, Number(options.minContainerWidth) || 200),
+        height: Math.max(container.offsetHeight, Number(options.minContainerHeight) || 100)
+      };
+      this.containerData = containerData;
+      setStyle(cropper, {
+        width: containerData.width,
+        height: containerData.height
+      });
+      addClass(element, CLASS_HIDDEN);
+      removeClass(cropper, CLASS_HIDDEN);
+    },
+    // Canvas (image wrapper)
+    initCanvas: function initCanvas() {
+      var containerData = this.containerData,
+          imageData = this.imageData;
+      var viewMode = this.options.viewMode;
+      var rotated = Math.abs(imageData.rotate) % 180 === 90;
+      var naturalWidth = rotated ? imageData.naturalHeight : imageData.naturalWidth;
+      var naturalHeight = rotated ? imageData.naturalWidth : imageData.naturalHeight;
+      var aspectRatio = naturalWidth / naturalHeight;
+      var canvasWidth = containerData.width;
+      var canvasHeight = containerData.height;
+
+      if (containerData.height * aspectRatio > containerData.width) {
+        if (viewMode === 3) {
+          canvasWidth = containerData.height * aspectRatio;
+        } else {
+          canvasHeight = containerData.width / aspectRatio;
+        }
+      } else if (viewMode === 3) {
+        canvasHeight = containerData.width / aspectRatio;
+      } else {
+        canvasWidth = containerData.height * aspectRatio;
+      }
+
+      var canvasData = {
+        aspectRatio: aspectRatio,
+        naturalWidth: naturalWidth,
+        naturalHeight: naturalHeight,
+        width: canvasWidth,
+        height: canvasHeight
+      };
+      canvasData.left = (containerData.width - canvasWidth) / 2;
+      canvasData.top = (containerData.height - canvasHeight) / 2;
+      canvasData.oldLeft = canvasData.left;
+      canvasData.oldTop = canvasData.top;
+      this.canvasData = canvasData;
+      this.limited = viewMode === 1 || viewMode === 2;
+      this.limitCanvas(true, true);
+      this.initialImageData = assign({}, imageData);
+      this.initialCanvasData = assign({}, canvasData);
+    },
+    limitCanvas: function limitCanvas(sizeLimited, positionLimited) {
+      var options = this.options,
+          containerData = this.containerData,
+          canvasData = this.canvasData,
+          cropBoxData = this.cropBoxData;
+      var viewMode = options.viewMode;
+      var aspectRatio = canvasData.aspectRatio;
+      var cropped = this.cropped && cropBoxData;
+
+      if (sizeLimited) {
+        var minCanvasWidth = Number(options.minCanvasWidth) || 0;
+        var minCanvasHeight = Number(options.minCanvasHeight) || 0;
+
+        if (viewMode > 1) {
+          minCanvasWidth = Math.max(minCanvasWidth, containerData.width);
+          minCanvasHeight = Math.max(minCanvasHeight, containerData.height);
+
+          if (viewMode === 3) {
+            if (minCanvasHeight * aspectRatio > minCanvasWidth) {
+              minCanvasWidth = minCanvasHeight * aspectRatio;
+            } else {
+              minCanvasHeight = minCanvasWidth / aspectRatio;
+            }
+          }
+        } else if (viewMode > 0) {
+          if (minCanvasWidth) {
+            minCanvasWidth = Math.max(minCanvasWidth, cropped ? cropBoxData.width : 0);
+          } else if (minCanvasHeight) {
+            minCanvasHeight = Math.max(minCanvasHeight, cropped ? cropBoxData.height : 0);
+          } else if (cropped) {
+            minCanvasWidth = cropBoxData.width;
+            minCanvasHeight = cropBoxData.height;
+
+            if (minCanvasHeight * aspectRatio > minCanvasWidth) {
+              minCanvasWidth = minCanvasHeight * aspectRatio;
+            } else {
+              minCanvasHeight = minCanvasWidth / aspectRatio;
+            }
+          }
+        }
+
+        var _getAdjustedSizes = getAdjustedSizes({
+          aspectRatio: aspectRatio,
+          width: minCanvasWidth,
+          height: minCanvasHeight
+        });
+
+        minCanvasWidth = _getAdjustedSizes.width;
+        minCanvasHeight = _getAdjustedSizes.height;
+        canvasData.minWidth = minCanvasWidth;
+        canvasData.minHeight = minCanvasHeight;
+        canvasData.maxWidth = Infinity;
+        canvasData.maxHeight = Infinity;
+      }
+
+      if (positionLimited) {
+        if (viewMode > (cropped ? 0 : 1)) {
+          var newCanvasLeft = containerData.width - canvasData.width;
+          var newCanvasTop = containerData.height - canvasData.height;
+          canvasData.minLeft = Math.min(0, newCanvasLeft);
+          canvasData.minTop = Math.min(0, newCanvasTop);
+          canvasData.maxLeft = Math.max(0, newCanvasLeft);
+          canvasData.maxTop = Math.max(0, newCanvasTop);
+
+          if (cropped && this.limited) {
+            canvasData.minLeft = Math.min(cropBoxData.left, cropBoxData.left + (cropBoxData.width - canvasData.width));
+            canvasData.minTop = Math.min(cropBoxData.top, cropBoxData.top + (cropBoxData.height - canvasData.height));
+            canvasData.maxLeft = cropBoxData.left;
+            canvasData.maxTop = cropBoxData.top;
+
+            if (viewMode === 2) {
+              if (canvasData.width >= containerData.width) {
+                canvasData.minLeft = Math.min(0, newCanvasLeft);
+                canvasData.maxLeft = Math.max(0, newCanvasLeft);
+              }
+
+              if (canvasData.height >= containerData.height) {
+                canvasData.minTop = Math.min(0, newCanvasTop);
+                canvasData.maxTop = Math.max(0, newCanvasTop);
+              }
+            }
+          }
+        } else {
+          canvasData.minLeft = -canvasData.width;
+          canvasData.minTop = -canvasData.height;
+          canvasData.maxLeft = containerData.width;
+          canvasData.maxTop = containerData.height;
+        }
+      }
+    },
+    renderCanvas: function renderCanvas(changed, transformed) {
+      var canvasData = this.canvasData,
+          imageData = this.imageData;
+
+      if (transformed) {
+        var _getRotatedSizes = getRotatedSizes({
+          width: imageData.naturalWidth * Math.abs(imageData.scaleX || 1),
+          height: imageData.naturalHeight * Math.abs(imageData.scaleY || 1),
+          degree: imageData.rotate || 0
+        }),
+            naturalWidth = _getRotatedSizes.width,
+            naturalHeight = _getRotatedSizes.height;
+
+        var width = canvasData.width * (naturalWidth / canvasData.naturalWidth);
+        var height = canvasData.height * (naturalHeight / canvasData.naturalHeight);
+        canvasData.left -= (width - canvasData.width) / 2;
+        canvasData.top -= (height - canvasData.height) / 2;
+        canvasData.width = width;
+        canvasData.height = height;
+        canvasData.aspectRatio = naturalWidth / naturalHeight;
+        canvasData.naturalWidth = naturalWidth;
+        canvasData.naturalHeight = naturalHeight;
+        this.limitCanvas(true, false);
+      }
+
+      if (canvasData.width > canvasData.maxWidth || canvasData.width < canvasData.minWidth) {
+        canvasData.left = canvasData.oldLeft;
+      }
+
+      if (canvasData.height > canvasData.maxHeight || canvasData.height < canvasData.minHeight) {
+        canvasData.top = canvasData.oldTop;
+      }
+
+      canvasData.width = Math.min(Math.max(canvasData.width, canvasData.minWidth), canvasData.maxWidth);
+      canvasData.height = Math.min(Math.max(canvasData.height, canvasData.minHeight), canvasData.maxHeight);
+      this.limitCanvas(false, true);
+      canvasData.left = Math.min(Math.max(canvasData.left, canvasData.minLeft), canvasData.maxLeft);
+      canvasData.top = Math.min(Math.max(canvasData.top, canvasData.minTop), canvasData.maxTop);
+      canvasData.oldLeft = canvasData.left;
+      canvasData.oldTop = canvasData.top;
+      setStyle(this.canvas, assign({
+        width: canvasData.width,
+        height: canvasData.height
+      }, getTransforms({
+        translateX: canvasData.left,
+        translateY: canvasData.top
+      })));
+      this.renderImage(changed);
+
+      if (this.cropped && this.limited) {
+        this.limitCropBox(true, true);
+      }
+    },
+    renderImage: function renderImage(changed) {
+      var canvasData = this.canvasData,
+          imageData = this.imageData;
+      var width = imageData.naturalWidth * (canvasData.width / canvasData.naturalWidth);
+      var height = imageData.naturalHeight * (canvasData.height / canvasData.naturalHeight);
+      assign(imageData, {
+        width: width,
+        height: height,
+        left: (canvasData.width - width) / 2,
+        top: (canvasData.height - height) / 2
+      });
+      setStyle(this.image, assign({
+        width: imageData.width,
+        height: imageData.height
+      }, getTransforms(assign({
+        translateX: imageData.left,
+        translateY: imageData.top
+      }, imageData))));
+
+      if (changed) {
+        this.output();
+      }
+    },
+    initCropBox: function initCropBox() {
+      var options = this.options,
+          canvasData = this.canvasData;
+      var aspectRatio = options.aspectRatio || options.initialAspectRatio;
+      var autoCropArea = Number(options.autoCropArea) || 0.8;
+      var cropBoxData = {
+        width: canvasData.width,
+        height: canvasData.height
+      };
+
+      if (aspectRatio) {
+        if (canvasData.height * aspectRatio > canvasData.width) {
+          cropBoxData.height = cropBoxData.width / aspectRatio;
+        } else {
+          cropBoxData.width = cropBoxData.height * aspectRatio;
+        }
+      }
+
+      this.cropBoxData = cropBoxData;
+      this.limitCropBox(true, true); // Initialize auto crop area
+
+      cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
+      cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight); // The width/height of auto crop area must large than "minWidth/Height"
+
+      cropBoxData.width = Math.max(cropBoxData.minWidth, cropBoxData.width * autoCropArea);
+      cropBoxData.height = Math.max(cropBoxData.minHeight, cropBoxData.height * autoCropArea);
+      cropBoxData.left = canvasData.left + (canvasData.width - cropBoxData.width) / 2;
+      cropBoxData.top = canvasData.top + (canvasData.height - cropBoxData.height) / 2;
+      cropBoxData.oldLeft = cropBoxData.left;
+      cropBoxData.oldTop = cropBoxData.top;
+      this.initialCropBoxData = assign({}, cropBoxData);
+    },
+    limitCropBox: function limitCropBox(sizeLimited, positionLimited) {
+      var options = this.options,
+          containerData = this.containerData,
+          canvasData = this.canvasData,
+          cropBoxData = this.cropBoxData,
+          limited = this.limited;
+      var aspectRatio = options.aspectRatio;
+
+      if (sizeLimited) {
+        var minCropBoxWidth = Number(options.minCropBoxWidth) || 0;
+        var minCropBoxHeight = Number(options.minCropBoxHeight) || 0;
+        var maxCropBoxWidth = limited ? Math.min(containerData.width, canvasData.width, canvasData.width + canvasData.left, containerData.width - canvasData.left) : containerData.width;
+        var maxCropBoxHeight = limited ? Math.min(containerData.height, canvasData.height, canvasData.height + canvasData.top, containerData.height - canvasData.top) : containerData.height; // The min/maxCropBoxWidth/Height must be less than container's width/height
+
+        minCropBoxWidth = Math.min(minCropBoxWidth, containerData.width);
+        minCropBoxHeight = Math.min(minCropBoxHeight, containerData.height);
+
+        if (aspectRatio) {
+          if (minCropBoxWidth && minCropBoxHeight) {
+            if (minCropBoxHeight * aspectRatio > minCropBoxWidth) {
+              minCropBoxHeight = minCropBoxWidth / aspectRatio;
+            } else {
+              minCropBoxWidth = minCropBoxHeight * aspectRatio;
+            }
+          } else if (minCropBoxWidth) {
+            minCropBoxHeight = minCropBoxWidth / aspectRatio;
+          } else if (minCropBoxHeight) {
+            minCropBoxWidth = minCropBoxHeight * aspectRatio;
+          }
+
+          if (maxCropBoxHeight * aspectRatio > maxCropBoxWidth) {
+            maxCropBoxHeight = maxCropBoxWidth / aspectRatio;
+          } else {
+            maxCropBoxWidth = maxCropBoxHeight * aspectRatio;
+          }
+        } // The minWidth/Height must be less than maxWidth/Height
+
+
+        cropBoxData.minWidth = Math.min(minCropBoxWidth, maxCropBoxWidth);
+        cropBoxData.minHeight = Math.min(minCropBoxHeight, maxCropBoxHeight);
+        cropBoxData.maxWidth = maxCropBoxWidth;
+        cropBoxData.maxHeight = maxCropBoxHeight;
+      }
+
+      if (positionLimited) {
+        if (limited) {
+          cropBoxData.minLeft = Math.max(0, canvasData.left);
+          cropBoxData.minTop = Math.max(0, canvasData.top);
+          cropBoxData.maxLeft = Math.min(containerData.width, canvasData.left + canvasData.width) - cropBoxData.width;
+          cropBoxData.maxTop = Math.min(containerData.height, canvasData.top + canvasData.height) - cropBoxData.height;
+        } else {
+          cropBoxData.minLeft = 0;
+          cropBoxData.minTop = 0;
+          cropBoxData.maxLeft = containerData.width - cropBoxData.width;
+          cropBoxData.maxTop = containerData.height - cropBoxData.height;
+        }
+      }
+    },
+    renderCropBox: function renderCropBox() {
+      var options = this.options,
+          containerData = this.containerData,
+          cropBoxData = this.cropBoxData;
+
+      if (cropBoxData.width > cropBoxData.maxWidth || cropBoxData.width < cropBoxData.minWidth) {
+        cropBoxData.left = cropBoxData.oldLeft;
+      }
+
+      if (cropBoxData.height > cropBoxData.maxHeight || cropBoxData.height < cropBoxData.minHeight) {
+        cropBoxData.top = cropBoxData.oldTop;
+      }
+
+      cropBoxData.width = Math.min(Math.max(cropBoxData.width, cropBoxData.minWidth), cropBoxData.maxWidth);
+      cropBoxData.height = Math.min(Math.max(cropBoxData.height, cropBoxData.minHeight), cropBoxData.maxHeight);
+      this.limitCropBox(false, true);
+      cropBoxData.left = Math.min(Math.max(cropBoxData.left, cropBoxData.minLeft), cropBoxData.maxLeft);
+      cropBoxData.top = Math.min(Math.max(cropBoxData.top, cropBoxData.minTop), cropBoxData.maxTop);
+      cropBoxData.oldLeft = cropBoxData.left;
+      cropBoxData.oldTop = cropBoxData.top;
+
+      if (options.movable && options.cropBoxMovable) {
+        // Turn to move the canvas when the crop box is equal to the container
+        setData(this.face, DATA_ACTION, cropBoxData.width >= containerData.width && cropBoxData.height >= containerData.height ? ACTION_MOVE : ACTION_ALL);
+      }
+
+      setStyle(this.cropBox, assign({
+        width: cropBoxData.width,
+        height: cropBoxData.height
+      }, getTransforms({
+        translateX: cropBoxData.left,
+        translateY: cropBoxData.top
+      })));
+
+      if (this.cropped && this.limited) {
+        this.limitCanvas(true, true);
+      }
+
+      if (!this.disabled) {
+        this.output();
+      }
+    },
+    output: function output() {
+      this.preview();
+      dispatchEvent(this.element, EVENT_CROP, this.getData());
+    }
+  };
+
+  var preview = {
+    initPreview: function initPreview() {
+      var element = this.element,
+          crossOrigin = this.crossOrigin;
+      var preview = this.options.preview;
+      var url = crossOrigin ? this.crossOriginUrl : this.url;
+      var alt = element.alt || 'The image to preview';
+      var image = document.createElement('img');
+
+      if (crossOrigin) {
+        image.crossOrigin = crossOrigin;
+      }
+
+      image.src = url;
+      image.alt = alt;
+      this.viewBox.appendChild(image);
+      this.viewBoxImage = image;
+
+      if (!preview) {
+        return;
+      }
+
+      var previews = preview;
+
+      if (typeof preview === 'string') {
+        previews = element.ownerDocument.querySelectorAll(preview);
+      } else if (preview.querySelector) {
+        previews = [preview];
+      }
+
+      this.previews = previews;
+      forEach(previews, function (el) {
+        var img = document.createElement('img'); // Save the original size for recover
+
+        setData(el, DATA_PREVIEW, {
+          width: el.offsetWidth,
+          height: el.offsetHeight,
+          html: el.innerHTML
+        });
+
+        if (crossOrigin) {
+          img.crossOrigin = crossOrigin;
+        }
+
+        img.src = url;
+        img.alt = alt;
+        /**
+         * Override img element styles
+         * Add `display:block` to avoid margin top issue
+         * Add `height:auto` to override `height` attribute on IE8
+         * (Occur only when margin-top <= -height)
+         */
+
+        img.style.cssText = 'display:block;' + 'width:100%;' + 'height:auto;' + 'min-width:0!important;' + 'min-height:0!important;' + 'max-width:none!important;' + 'max-height:none!important;' + 'image-orientation:0deg!important;"';
+        el.innerHTML = '';
+        el.appendChild(img);
+      });
+    },
+    resetPreview: function resetPreview() {
+      forEach(this.previews, function (element) {
+        var data = getData(element, DATA_PREVIEW);
+        setStyle(element, {
+          width: data.width,
+          height: data.height
+        });
+        element.innerHTML = data.html;
+        removeData(element, DATA_PREVIEW);
+      });
+    },
+    preview: function preview() {
+      var imageData = this.imageData,
+          canvasData = this.canvasData,
+          cropBoxData = this.cropBoxData;
+      var cropBoxWidth = cropBoxData.width,
+          cropBoxHeight = cropBoxData.height;
+      var width = imageData.width,
+          height = imageData.height;
+      var left = cropBoxData.left - canvasData.left - imageData.left;
+      var top = cropBoxData.top - canvasData.top - imageData.top;
+
+      if (!this.cropped || this.disabled) {
+        return;
+      }
+
+      setStyle(this.viewBoxImage, assign({
+        width: width,
+        height: height
+      }, getTransforms(assign({
+        translateX: -left,
+        translateY: -top
+      }, imageData))));
+      forEach(this.previews, function (element) {
+        var data = getData(element, DATA_PREVIEW);
+        var originalWidth = data.width;
+        var originalHeight = data.height;
+        var newWidth = originalWidth;
+        var newHeight = originalHeight;
+        var ratio = 1;
+
+        if (cropBoxWidth) {
+          ratio = originalWidth / cropBoxWidth;
+          newHeight = cropBoxHeight * ratio;
+        }
+
+        if (cropBoxHeight && newHeight > originalHeight) {
+          ratio = originalHeight / cropBoxHeight;
+          newWidth = cropBoxWidth * ratio;
+          newHeight = originalHeight;
+        }
+
+        setStyle(element, {
+          width: newWidth,
+          height: newHeight
+        });
+        setStyle(element.getElementsByTagName('img')[0], assign({
+          width: width * ratio,
+          height: height * ratio
+        }, getTransforms(assign({
+          translateX: -left * ratio,
+          translateY: -top * ratio
+        }, imageData))));
+      });
+    }
+  };
+
+  var events = {
+    bind: function bind() {
+      var element = this.element,
+          options = this.options,
+          cropper = this.cropper;
+
+      if (isFunction(options.cropstart)) {
+        addListener(element, EVENT_CROP_START, options.cropstart);
+      }
+
+      if (isFunction(options.cropmove)) {
+        addListener(element, EVENT_CROP_MOVE, options.cropmove);
+      }
+
+      if (isFunction(options.cropend)) {
+        addListener(element, EVENT_CROP_END, options.cropend);
+      }
+
+      if (isFunction(options.crop)) {
+        addListener(element, EVENT_CROP, options.crop);
+      }
+
+      if (isFunction(options.zoom)) {
+        addListener(element, EVENT_ZOOM, options.zoom);
+      }
+
+      addListener(cropper, EVENT_POINTER_DOWN, this.onCropStart = this.cropStart.bind(this));
+
+      if (options.zoomable && options.zoomOnWheel) {
+        addListener(cropper, EVENT_WHEEL, this.onWheel = this.wheel.bind(this), {
+          passive: false,
+          capture: true
+        });
+      }
+
+      if (options.toggleDragModeOnDblclick) {
+        addListener(cropper, EVENT_DBLCLICK, this.onDblclick = this.dblclick.bind(this));
+      }
+
+      addListener(element.ownerDocument, EVENT_POINTER_MOVE, this.onCropMove = this.cropMove.bind(this));
+      addListener(element.ownerDocument, EVENT_POINTER_UP, this.onCropEnd = this.cropEnd.bind(this));
+
+      if (options.responsive) {
+        addListener(window, EVENT_RESIZE, this.onResize = this.resize.bind(this));
+      }
+    },
+    unbind: function unbind() {
+      var element = this.element,
+          options = this.options,
+          cropper = this.cropper;
+
+      if (isFunction(options.cropstart)) {
+        removeListener(element, EVENT_CROP_START, options.cropstart);
+      }
+
+      if (isFunction(options.cropmove)) {
+        removeListener(element, EVENT_CROP_MOVE, options.cropmove);
+      }
+
+      if (isFunction(options.cropend)) {
+        removeListener(element, EVENT_CROP_END, options.cropend);
+      }
+
+      if (isFunction(options.crop)) {
+        removeListener(element, EVENT_CROP, options.crop);
+      }
+
+      if (isFunction(options.zoom)) {
+        removeListener(element, EVENT_ZOOM, options.zoom);
+      }
+
+      removeListener(cropper, EVENT_POINTER_DOWN, this.onCropStart);
+
+      if (options.zoomable && options.zoomOnWheel) {
+        removeListener(cropper, EVENT_WHEEL, this.onWheel, {
+          passive: false,
+          capture: true
+        });
+      }
+
+      if (options.toggleDragModeOnDblclick) {
+        removeListener(cropper, EVENT_DBLCLICK, this.onDblclick);
+      }
+
+      removeListener(element.ownerDocument, EVENT_POINTER_MOVE, this.onCropMove);
+      removeListener(element.ownerDocument, EVENT_POINTER_UP, this.onCropEnd);
+
+      if (options.responsive) {
+        removeListener(window, EVENT_RESIZE, this.onResize);
+      }
+    }
+  };
+
+  var handlers = {
+    resize: function resize() {
+      var options = this.options,
+          container = this.container,
+          containerData = this.containerData;
+      var minContainerWidth = Number(options.minContainerWidth) || MIN_CONTAINER_WIDTH;
+      var minContainerHeight = Number(options.minContainerHeight) || MIN_CONTAINER_HEIGHT;
+
+      if (this.disabled || containerData.width <= minContainerWidth || containerData.height <= minContainerHeight) {
+        return;
+      }
+
+      var ratio = container.offsetWidth / containerData.width; // Resize when width changed or height changed
+
+      if (ratio !== 1 || container.offsetHeight !== containerData.height) {
+        var canvasData;
+        var cropBoxData;
+
+        if (options.restore) {
+          canvasData = this.getCanvasData();
+          cropBoxData = this.getCropBoxData();
+        }
+
+        this.render();
+
+        if (options.restore) {
+          this.setCanvasData(forEach(canvasData, function (n, i) {
+            canvasData[i] = n * ratio;
+          }));
+          this.setCropBoxData(forEach(cropBoxData, function (n, i) {
+            cropBoxData[i] = n * ratio;
+          }));
+        }
+      }
+    },
+    dblclick: function dblclick() {
+      if (this.disabled || this.options.dragMode === DRAG_MODE_NONE) {
+        return;
+      }
+
+      this.setDragMode(hasClass(this.dragBox, CLASS_CROP) ? DRAG_MODE_MOVE : DRAG_MODE_CROP);
+    },
+    wheel: function wheel(event) {
+      var _this = this;
+
+      var ratio = Number(this.options.wheelZoomRatio) || 0.1;
+      var delta = 1;
+
+      if (this.disabled) {
+        return;
+      }
+
+      event.preventDefault(); // Limit wheel speed to prevent zoom too fast (#21)
+
+      if (this.wheeling) {
+        return;
+      }
+
+      this.wheeling = true;
+      setTimeout(function () {
+        _this.wheeling = false;
+      }, 50);
+
+      if (event.deltaY) {
+        delta = event.deltaY > 0 ? 1 : -1;
+      } else if (event.wheelDelta) {
+        delta = -event.wheelDelta / 120;
+      } else if (event.detail) {
+        delta = event.detail > 0 ? 1 : -1;
+      }
+
+      this.zoom(-delta * ratio, event);
+    },
+    cropStart: function cropStart(event) {
+      var buttons = event.buttons,
+          button = event.button;
+
+      if (this.disabled // Handle mouse event and pointer event and ignore touch event
+      || (event.type === 'mousedown' || event.type === 'pointerdown' && event.pointerType === 'mouse') && ( // No primary button (Usually the left button)
+      isNumber(buttons) && buttons !== 1 || isNumber(button) && button !== 0 // Open context menu
+      || event.ctrlKey)) {
+        return;
+      }
+
+      var options = this.options,
+          pointers = this.pointers;
+      var action;
+
+      if (event.changedTouches) {
+        // Handle touch event
+        forEach(event.changedTouches, function (touch) {
+          pointers[touch.identifier] = getPointer(touch);
+        });
+      } else {
+        // Handle mouse event and pointer event
+        pointers[event.pointerId || 0] = getPointer(event);
+      }
+
+      if (Object.keys(pointers).length > 1 && options.zoomable && options.zoomOnTouch) {
+        action = ACTION_ZOOM;
+      } else {
+        action = getData(event.target, DATA_ACTION);
+      }
+
+      if (!REGEXP_ACTIONS.test(action)) {
+        return;
+      }
+
+      if (dispatchEvent(this.element, EVENT_CROP_START, {
+        originalEvent: event,
+        action: action
+      }) === false) {
+        return;
+      } // This line is required for preventing page zooming in iOS browsers
+
+
+      event.preventDefault();
+      this.action = action;
+      this.cropping = false;
+
+      if (action === ACTION_CROP) {
+        this.cropping = true;
+        addClass(this.dragBox, CLASS_MODAL);
+      }
+    },
+    cropMove: function cropMove(event) {
+      var action = this.action;
+
+      if (this.disabled || !action) {
+        return;
+      }
+
+      var pointers = this.pointers;
+      event.preventDefault();
+
+      if (dispatchEvent(this.element, EVENT_CROP_MOVE, {
+        originalEvent: event,
+        action: action
+      }) === false) {
+        return;
+      }
+
+      if (event.changedTouches) {
+        forEach(event.changedTouches, function (touch) {
+          // The first parameter should not be undefined (#432)
+          assign(pointers[touch.identifier] || {}, getPointer(touch, true));
+        });
+      } else {
+        assign(pointers[event.pointerId || 0] || {}, getPointer(event, true));
+      }
+
+      this.change(event);
+    },
+    cropEnd: function cropEnd(event) {
+      if (this.disabled) {
+        return;
+      }
+
+      var action = this.action,
+          pointers = this.pointers;
+
+      if (event.changedTouches) {
+        forEach(event.changedTouches, function (touch) {
+          delete pointers[touch.identifier];
+        });
+      } else {
+        delete pointers[event.pointerId || 0];
+      }
+
+      if (!action) {
+        return;
+      }
+
+      event.preventDefault();
+
+      if (!Object.keys(pointers).length) {
+        this.action = '';
+      }
+
+      if (this.cropping) {
+        this.cropping = false;
+        toggleClass(this.dragBox, CLASS_MODAL, this.cropped && this.options.modal);
+      }
+
+      dispatchEvent(this.element, EVENT_CROP_END, {
+        originalEvent: event,
+        action: action
+      });
+    }
+  };
+
+  var change = {
+    change: function change(event) {
+      var options = this.options,
+          canvasData = this.canvasData,
+          containerData = this.containerData,
+          cropBoxData = this.cropBoxData,
+          pointers = this.pointers;
+      var action = this.action;
+      var aspectRatio = options.aspectRatio;
+      var left = cropBoxData.left,
+          top = cropBoxData.top,
+          width = cropBoxData.width,
+          height = cropBoxData.height;
+      var right = left + width;
+      var bottom = top + height;
+      var minLeft = 0;
+      var minTop = 0;
+      var maxWidth = containerData.width;
+      var maxHeight = containerData.height;
+      var renderable = true;
+      var offset; // Locking aspect ratio in "free mode" by holding shift key
+
+      if (!aspectRatio && event.shiftKey) {
+        aspectRatio = width && height ? width / height : 1;
+      }
+
+      if (this.limited) {
+        minLeft = cropBoxData.minLeft;
+        minTop = cropBoxData.minTop;
+        maxWidth = minLeft + Math.min(containerData.width, canvasData.width, canvasData.left + canvasData.width);
+        maxHeight = minTop + Math.min(containerData.height, canvasData.height, canvasData.top + canvasData.height);
+      }
+
+      var pointer = pointers[Object.keys(pointers)[0]];
+      var range = {
+        x: pointer.endX - pointer.startX,
+        y: pointer.endY - pointer.startY
+      };
+
+      var check = function check(side) {
+        switch (side) {
+          case ACTION_EAST:
+            if (right + range.x > maxWidth) {
+              range.x = maxWidth - right;
+            }
+
+            break;
+
+          case ACTION_WEST:
+            if (left + range.x < minLeft) {
+              range.x = minLeft - left;
+            }
+
+            break;
+
+          case ACTION_NORTH:
+            if (top + range.y < minTop) {
+              range.y = minTop - top;
+            }
+
+            break;
+
+          case ACTION_SOUTH:
+            if (bottom + range.y > maxHeight) {
+              range.y = maxHeight - bottom;
+            }
+
+            break;
+
+          default:
+        }
+      };
+
+      switch (action) {
+        // Move crop box
+        case ACTION_ALL:
+          left += range.x;
+          top += range.y;
+          break;
+        // Resize crop box
+
+        case ACTION_EAST:
+          if (range.x >= 0 && (right >= maxWidth || aspectRatio && (top <= minTop || bottom >= maxHeight))) {
+            renderable = false;
+            break;
+          }
+
+          check(ACTION_EAST);
+          width += range.x;
+
+          if (width < 0) {
+            action = ACTION_WEST;
+            width = -width;
+            left -= width;
+          }
+
+          if (aspectRatio) {
+            height = width / aspectRatio;
+            top += (cropBoxData.height - height) / 2;
+          }
+
+          break;
+
+        case ACTION_NORTH:
+          if (range.y <= 0 && (top <= minTop || aspectRatio && (left <= minLeft || right >= maxWidth))) {
+            renderable = false;
+            break;
+          }
+
+          check(ACTION_NORTH);
+          height -= range.y;
+          top += range.y;
+
+          if (height < 0) {
+            action = ACTION_SOUTH;
+            height = -height;
+            top -= height;
+          }
+
+          if (aspectRatio) {
+            width = height * aspectRatio;
+            left += (cropBoxData.width - width) / 2;
+          }
+
+          break;
+
+        case ACTION_WEST:
+          if (range.x <= 0 && (left <= minLeft || aspectRatio && (top <= minTop || bottom >= maxHeight))) {
+            renderable = false;
+            break;
+          }
+
+          check(ACTION_WEST);
+          width -= range.x;
+          left += range.x;
+
+          if (width < 0) {
+            action = ACTION_EAST;
+            width = -width;
+            left -= width;
+          }
+
+          if (aspectRatio) {
+            height = width / aspectRatio;
+            top += (cropBoxData.height - height) / 2;
+          }
+
+          break;
+
+        case ACTION_SOUTH:
+          if (range.y >= 0 && (bottom >= maxHeight || aspectRatio && (left <= minLeft || right >= maxWidth))) {
+            renderable = false;
+            break;
+          }
+
+          check(ACTION_SOUTH);
+          height += range.y;
+
+          if (height < 0) {
+            action = ACTION_NORTH;
+            height = -height;
+            top -= height;
+          }
+
+          if (aspectRatio) {
+            width = height * aspectRatio;
+            left += (cropBoxData.width - width) / 2;
+          }
+
+          break;
+
+        case ACTION_NORTH_EAST:
+          if (aspectRatio) {
+            if (range.y <= 0 && (top <= minTop || right >= maxWidth)) {
+              renderable = false;
+              break;
+            }
+
+            check(ACTION_NORTH);
+            height -= range.y;
+            top += range.y;
+            width = height * aspectRatio;
+          } else {
+            check(ACTION_NORTH);
+            check(ACTION_EAST);
+
+            if (range.x >= 0) {
+              if (right < maxWidth) {
+                width += range.x;
+              } else if (range.y <= 0 && top <= minTop) {
+                renderable = false;
+              }
+            } else {
+              width += range.x;
+            }
+
+            if (range.y <= 0) {
+              if (top > minTop) {
+                height -= range.y;
+                top += range.y;
+              }
+            } else {
+              height -= range.y;
+              top += range.y;
+            }
+          }
+
+          if (width < 0 && height < 0) {
+            action = ACTION_SOUTH_WEST;
+            height = -height;
+            width = -width;
+            top -= height;
+            left -= width;
+          } else if (width < 0) {
+            action = ACTION_NORTH_WEST;
+            width = -width;
+            left -= width;
+          } else if (height < 0) {
+            action = ACTION_SOUTH_EAST;
+            height = -height;
+            top -= height;
+          }
+
+          break;
+
+        case ACTION_NORTH_WEST:
+          if (aspectRatio) {
+            if (range.y <= 0 && (top <= minTop || left <= minLeft)) {
+              renderable = false;
+              break;
+            }
+
+            check(ACTION_NORTH);
+            height -= range.y;
+            top += range.y;
+            width = height * aspectRatio;
+            left += cropBoxData.width - width;
+          } else {
+            check(ACTION_NORTH);
+            check(ACTION_WEST);
+
+            if (range.x <= 0) {
+              if (left > minLeft) {
+                width -= range.x;
+                left += range.x;
+              } else if (range.y <= 0 && top <= minTop) {
+                renderable = false;
+              }
+            } else {
+              width -= range.x;
+              left += range.x;
+            }
+
+            if (range.y <= 0) {
+              if (top > minTop) {
+                height -= range.y;
+                top += range.y;
+              }
+            } else {
+              height -= range.y;
+              top += range.y;
+            }
+          }
+
+          if (width < 0 && height < 0) {
+            action = ACTION_SOUTH_EAST;
+            height = -height;
+            width = -width;
+            top -= height;
+            left -= width;
+          } else if (width < 0) {
+            action = ACTION_NORTH_EAST;
+            width = -width;
+            left -= width;
+          } else if (height < 0) {
+            action = ACTION_SOUTH_WEST;
+            height = -height;
+            top -= height;
+          }
+
+          break;
+
+        case ACTION_SOUTH_WEST:
+          if (aspectRatio) {
+            if (range.x <= 0 && (left <= minLeft || bottom >= maxHeight)) {
+              renderable = false;
+              break;
+            }
+
+            check(ACTION_WEST);
+            width -= range.x;
+            left += range.x;
+            height = width / aspectRatio;
+          } else {
+            check(ACTION_SOUTH);
+            check(ACTION_WEST);
+
+            if (range.x <= 0) {
+              if (left > minLeft) {
+                width -= range.x;
+                left += range.x;
+              } else if (range.y >= 0 && bottom >= maxHeight) {
+                renderable = false;
+              }
+            } else {
+              width -= range.x;
+              left += range.x;
+            }
+
+            if (range.y >= 0) {
+              if (bottom < maxHeight) {
+                height += range.y;
+              }
+            } else {
+              height += range.y;
+            }
+          }
+
+          if (width < 0 && height < 0) {
+            action = ACTION_NORTH_EAST;
+            height = -height;
+            width = -width;
+            top -= height;
+            left -= width;
+          } else if (width < 0) {
+            action = ACTION_SOUTH_EAST;
+            width = -width;
+            left -= width;
+          } else if (height < 0) {
+            action = ACTION_NORTH_WEST;
+            height = -height;
+            top -= height;
+          }
+
+          break;
+
+        case ACTION_SOUTH_EAST:
+          if (aspectRatio) {
+            if (range.x >= 0 && (right >= maxWidth || bottom >= maxHeight)) {
+              renderable = false;
+              break;
+            }
+
+            check(ACTION_EAST);
+            width += range.x;
+            height = width / aspectRatio;
+          } else {
+            check(ACTION_SOUTH);
+            check(ACTION_EAST);
+
+            if (range.x >= 0) {
+              if (right < maxWidth) {
+                width += range.x;
+              } else if (range.y >= 0 && bottom >= maxHeight) {
+                renderable = false;
+              }
+            } else {
+              width += range.x;
+            }
+
+            if (range.y >= 0) {
+              if (bottom < maxHeight) {
+                height += range.y;
+              }
+            } else {
+              height += range.y;
+            }
+          }
+
+          if (width < 0 && height < 0) {
+            action = ACTION_NORTH_WEST;
+            height = -height;
+            width = -width;
+            top -= height;
+            left -= width;
+          } else if (width < 0) {
+            action = ACTION_SOUTH_WEST;
+            width = -width;
+            left -= width;
+          } else if (height < 0) {
+            action = ACTION_NORTH_EAST;
+            height = -height;
+            top -= height;
+          }
+
+          break;
+        // Move canvas
+
+        case ACTION_MOVE:
+          this.move(range.x, range.y);
+          renderable = false;
+          break;
+        // Zoom canvas
+
+        case ACTION_ZOOM:
+          this.zoom(getMaxZoomRatio(pointers), event);
+          renderable = false;
+          break;
+        // Create crop box
+
+        case ACTION_CROP:
+          if (!range.x || !range.y) {
+            renderable = false;
+            break;
+          }
+
+          offset = getOffset(this.cropper);
+          left = pointer.startX - offset.left;
+          top = pointer.startY - offset.top;
+          width = cropBoxData.minWidth;
+          height = cropBoxData.minHeight;
+
+          if (range.x > 0) {
+            action = range.y > 0 ? ACTION_SOUTH_EAST : ACTION_NORTH_EAST;
+          } else if (range.x < 0) {
+            left -= width;
+            action = range.y > 0 ? ACTION_SOUTH_WEST : ACTION_NORTH_WEST;
+          }
+
+          if (range.y < 0) {
+            top -= height;
+          } // Show the crop box if is hidden
+
+
+          if (!this.cropped) {
+            removeClass(this.cropBox, CLASS_HIDDEN);
+            this.cropped = true;
+
+            if (this.limited) {
+              this.limitCropBox(true, true);
+            }
+          }
+
+          break;
+
+        default:
+      }
+
+      if (renderable) {
+        cropBoxData.width = width;
+        cropBoxData.height = height;
+        cropBoxData.left = left;
+        cropBoxData.top = top;
+        this.action = action;
+        this.renderCropBox();
+      } // Override
+
+
+      forEach(pointers, function (p) {
+        p.startX = p.endX;
+        p.startY = p.endY;
+      });
+    }
+  };
+
+  var methods = {
+    // Show the crop box manually
+    crop: function crop() {
+      if (this.ready && !this.cropped && !this.disabled) {
+        this.cropped = true;
+        this.limitCropBox(true, true);
+
+        if (this.options.modal) {
+          addClass(this.dragBox, CLASS_MODAL);
+        }
+
+        removeClass(this.cropBox, CLASS_HIDDEN);
+        this.setCropBoxData(this.initialCropBoxData);
+      }
+
+      return this;
+    },
+    // Reset the image and crop box to their initial states
+    reset: function reset() {
+      if (this.ready && !this.disabled) {
+        this.imageData = assign({}, this.initialImageData);
+        this.canvasData = assign({}, this.initialCanvasData);
+        this.cropBoxData = assign({}, this.initialCropBoxData);
+        this.renderCanvas();
+
+        if (this.cropped) {
+          this.renderCropBox();
+        }
+      }
+
+      return this;
+    },
+    // Clear the crop box
+    clear: function clear() {
+      if (this.cropped && !this.disabled) {
+        assign(this.cropBoxData, {
+          left: 0,
+          top: 0,
+          width: 0,
+          height: 0
+        });
+        this.cropped = false;
+        this.renderCropBox();
+        this.limitCanvas(true, true); // Render canvas after crop box rendered
+
+        this.renderCanvas();
+        removeClass(this.dragBox, CLASS_MODAL);
+        addClass(this.cropBox, CLASS_HIDDEN);
+      }
+
+      return this;
+    },
+
+    /**
+     * Replace the image's src and rebuild the cropper
+     * @param {string} url - The new URL.
+     * @param {boolean} [hasSameSize] - Indicate if the new image has the same size as the old one.
+     * @returns {Cropper} this
+     */
+    replace: function replace(url) {
+      var hasSameSize = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+
+      if (!this.disabled && url) {
+        if (this.isImg) {
+          this.element.src = url;
+        }
+
+        if (hasSameSize) {
+          this.url = url;
+          this.image.src = url;
+
+          if (this.ready) {
+            this.viewBoxImage.src = url;
+            forEach(this.previews, function (element) {
+              element.getElementsByTagName('img')[0].src = url;
+            });
+          }
+        } else {
+          if (this.isImg) {
+            this.replaced = true;
+          }
+
+          this.options.data = null;
+          this.uncreate();
+          this.load(url);
+        }
+      }
+
+      return this;
+    },
+    // Enable (unfreeze) the cropper
+    enable: function enable() {
+      if (this.ready && this.disabled) {
+        this.disabled = false;
+        removeClass(this.cropper, CLASS_DISABLED);
+      }
+
+      return this;
+    },
+    // Disable (freeze) the cropper
+    disable: function disable() {
+      if (this.ready && !this.disabled) {
+        this.disabled = true;
+        addClass(this.cropper, CLASS_DISABLED);
+      }
+
+      return this;
+    },
+
+    /**
+     * Destroy the cropper and remove the instance from the image
+     * @returns {Cropper} this
+     */
+    destroy: function destroy() {
+      var element = this.element;
+
+      if (!element[NAMESPACE]) {
+        return this;
+      }
+
+      element[NAMESPACE] = undefined;
+
+      if (this.isImg && this.replaced) {
+        element.src = this.originalUrl;
+      }
+
+      this.uncreate();
+      return this;
+    },
+
+    /**
+     * Move the canvas with relative offsets
+     * @param {number} offsetX - The relative offset distance on the x-axis.
+     * @param {number} [offsetY=offsetX] - The relative offset distance on the y-axis.
+     * @returns {Cropper} this
+     */
+    move: function move(offsetX) {
+      var offsetY = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : offsetX;
+      var _this$canvasData = this.canvasData,
+          left = _this$canvasData.left,
+          top = _this$canvasData.top;
+      return this.moveTo(isUndefined(offsetX) ? offsetX : left + Number(offsetX), isUndefined(offsetY) ? offsetY : top + Number(offsetY));
+    },
+
+    /**
+     * Move the canvas to an absolute point
+     * @param {number} x - The x-axis coordinate.
+     * @param {number} [y=x] - The y-axis coordinate.
+     * @returns {Cropper} this
+     */
+    moveTo: function moveTo(x) {
+      var y = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : x;
+      var canvasData = this.canvasData;
+      var changed = false;
+      x = Number(x);
+      y = Number(y);
+
+      if (this.ready && !this.disabled && this.options.movable) {
+        if (isNumber(x)) {
+          canvasData.left = x;
+          changed = true;
+        }
+
+        if (isNumber(y)) {
+          canvasData.top = y;
+          changed = true;
+        }
+
+        if (changed) {
+          this.renderCanvas(true);
+        }
+      }
+
+      return this;
+    },
+
+    /**
+     * Zoom the canvas with a relative ratio
+     * @param {number} ratio - The target ratio.
+     * @param {Event} _originalEvent - The original event if any.
+     * @returns {Cropper} this
+     */
+    zoom: function zoom(ratio, _originalEvent) {
+      var canvasData = this.canvasData;
+      ratio = Number(ratio);
+
+      if (ratio < 0) {
+        ratio = 1 / (1 - ratio);
+      } else {
+        ratio = 1 + ratio;
+      }
+
+      return this.zoomTo(canvasData.width * ratio / canvasData.naturalWidth, null, _originalEvent);
+    },
+
+    /**
+     * Zoom the canvas to an absolute ratio
+     * @param {number} ratio - The target ratio.
+     * @param {Object} pivot - The zoom pivot point coordinate.
+     * @param {Event} _originalEvent - The original event if any.
+     * @returns {Cropper} this
+     */
+    zoomTo: function zoomTo(ratio, pivot, _originalEvent) {
+      var options = this.options,
+          canvasData = this.canvasData;
+      var width = canvasData.width,
+          height = canvasData.height,
+          naturalWidth = canvasData.naturalWidth,
+          naturalHeight = canvasData.naturalHeight;
+      ratio = Number(ratio);
+
+      if (ratio >= 0 && this.ready && !this.disabled && options.zoomable) {
+        var newWidth = naturalWidth * ratio;
+        var newHeight = naturalHeight * ratio;
+
+        if (dispatchEvent(this.element, EVENT_ZOOM, {
+          ratio: ratio,
+          oldRatio: width / naturalWidth,
+          originalEvent: _originalEvent
+        }) === false) {
+          return this;
+        }
+
+        if (_originalEvent) {
+          var pointers = this.pointers;
+          var offset = getOffset(this.cropper);
+          var center = pointers && Object.keys(pointers).length ? getPointersCenter(pointers) : {
+            pageX: _originalEvent.pageX,
+            pageY: _originalEvent.pageY
+          }; // Zoom from the triggering point of the event
+
+          canvasData.left -= (newWidth - width) * ((center.pageX - offset.left - canvasData.left) / width);
+          canvasData.top -= (newHeight - height) * ((center.pageY - offset.top - canvasData.top) / height);
+        } else if (isPlainObject(pivot) && isNumber(pivot.x) && isNumber(pivot.y)) {
+          canvasData.left -= (newWidth - width) * ((pivot.x - canvasData.left) / width);
+          canvasData.top -= (newHeight - height) * ((pivot.y - canvasData.top) / height);
+        } else {
+          // Zoom from the center of the canvas
+          canvasData.left -= (newWidth - width) / 2;
+          canvasData.top -= (newHeight - height) / 2;
+        }
+
+        canvasData.width = newWidth;
+        canvasData.height = newHeight;
+        this.renderCanvas(true);
+      }
+
+      return this;
+    },
+
+    /**
+     * Rotate the canvas with a relative degree
+     * @param {number} degree - The rotate degree.
+     * @returns {Cropper} this
+     */
+    rotate: function rotate(degree) {
+      return this.rotateTo((this.imageData.rotate || 0) + Number(degree));
+    },
+
+    /**
+     * Rotate the canvas to an absolute degree
+     * @param {number} degree - The rotate degree.
+     * @returns {Cropper} this
+     */
+    rotateTo: function rotateTo(degree) {
+      degree = Number(degree);
+
+      if (isNumber(degree) && this.ready && !this.disabled && this.options.rotatable) {
+        this.imageData.rotate = degree % 360;
+        this.renderCanvas(true, true);
+      }
+
+      return this;
+    },
+
+    /**
+     * Scale the image on the x-axis.
+     * @param {number} scaleX - The scale ratio on the x-axis.
+     * @returns {Cropper} this
+     */
+    scaleX: function scaleX(_scaleX) {
+      var scaleY = this.imageData.scaleY;
+      return this.scale(_scaleX, isNumber(scaleY) ? scaleY : 1);
+    },
+
+    /**
+     * Scale the image on the y-axis.
+     * @param {number} scaleY - The scale ratio on the y-axis.
+     * @returns {Cropper} this
+     */
+    scaleY: function scaleY(_scaleY) {
+      var scaleX = this.imageData.scaleX;
+      return this.scale(isNumber(scaleX) ? scaleX : 1, _scaleY);
+    },
+
+    /**
+     * Scale the image
+     * @param {number} scaleX - The scale ratio on the x-axis.
+     * @param {number} [scaleY=scaleX] - The scale ratio on the y-axis.
+     * @returns {Cropper} this
+     */
+    scale: function scale(scaleX) {
+      var scaleY = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : scaleX;
+      var imageData = this.imageData;
+      var transformed = false;
+      scaleX = Number(scaleX);
+      scaleY = Number(scaleY);
+
+      if (this.ready && !this.disabled && this.options.scalable) {
+        if (isNumber(scaleX)) {
+          imageData.scaleX = scaleX;
+          transformed = true;
+        }
+
+        if (isNumber(scaleY)) {
+          imageData.scaleY = scaleY;
+          transformed = true;
+        }
+
+        if (transformed) {
+          this.renderCanvas(true, true);
+        }
+      }
+
+      return this;
+    },
+
+    /**
+     * Get the cropped area position and size data (base on the original image)
+     * @param {boolean} [rounded=false] - Indicate if round the data values or not.
+     * @returns {Object} The result cropped data.
+     */
+    getData: function getData() {
+      var rounded = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : false;
+      var options = this.options,
+          imageData = this.imageData,
+          canvasData = this.canvasData,
+          cropBoxData = this.cropBoxData;
+      var data;
+
+      if (this.ready && this.cropped) {
+        data = {
+          x: cropBoxData.left - canvasData.left,
+          y: cropBoxData.top - canvasData.top,
+          width: cropBoxData.width,
+          height: cropBoxData.height
+        };
+        var ratio = imageData.width / imageData.naturalWidth;
+        forEach(data, function (n, i) {
+          data[i] = n / ratio;
+        });
+
+        if (rounded) {
+          // In case rounding off leads to extra 1px in right or bottom border
+          // we should round the top-left corner and the dimension (#343).
+          var bottom = Math.round(data.y + data.height);
+          var right = Math.round(data.x + data.width);
+          data.x = Math.round(data.x);
+          data.y = Math.round(data.y);
+          data.width = right - data.x;
+          data.height = bottom - data.y;
+        }
+      } else {
+        data = {
+          x: 0,
+          y: 0,
+          width: 0,
+          height: 0
+        };
+      }
+
+      if (options.rotatable) {
+        data.rotate = imageData.rotate || 0;
+      }
+
+      if (options.scalable) {
+        data.scaleX = imageData.scaleX || 1;
+        data.scaleY = imageData.scaleY || 1;
+      }
+
+      return data;
+    },
+
+    /**
+     * Set the cropped area position and size with new data
+     * @param {Object} data - The new data.
+     * @returns {Cropper} this
+     */
+    setData: function setData(data) {
+      var options = this.options,
+          imageData = this.imageData,
+          canvasData = this.canvasData;
+      var cropBoxData = {};
+
+      if (this.ready && !this.disabled && isPlainObject(data)) {
+        var transformed = false;
+
+        if (options.rotatable) {
+          if (isNumber(data.rotate) && data.rotate !== imageData.rotate) {
+            imageData.rotate = data.rotate;
+            transformed = true;
+          }
+        }
+
+        if (options.scalable) {
+          if (isNumber(data.scaleX) && data.scaleX !== imageData.scaleX) {
+            imageData.scaleX = data.scaleX;
+            transformed = true;
+          }
+
+          if (isNumber(data.scaleY) && data.scaleY !== imageData.scaleY) {
+            imageData.scaleY = data.scaleY;
+            transformed = true;
+          }
+        }
+
+        if (transformed) {
+          this.renderCanvas(true, true);
+        }
+
+        var ratio = imageData.width / imageData.naturalWidth;
+
+        if (isNumber(data.x)) {
+          cropBoxData.left = data.x * ratio + canvasData.left;
+        }
+
+        if (isNumber(data.y)) {
+          cropBoxData.top = data.y * ratio + canvasData.top;
+        }
+
+        if (isNumber(data.width)) {
+          cropBoxData.width = data.width * ratio;
+        }
+
+        if (isNumber(data.height)) {
+          cropBoxData.height = data.height * ratio;
+        }
+
+        this.setCropBoxData(cropBoxData);
+      }
+
+      return this;
+    },
+
+    /**
+     * Get the container size data.
+     * @returns {Object} The result container data.
+     */
+    getContainerData: function getContainerData() {
+      return this.ready ? assign({}, this.containerData) : {};
+    },
+
+    /**
+     * Get the image position and size data.
+     * @returns {Object} The result image data.
+     */
+    getImageData: function getImageData() {
+      return this.sized ? assign({}, this.imageData) : {};
+    },
+
+    /**
+     * Get the canvas position and size data.
+     * @returns {Object} The result canvas data.
+     */
+    getCanvasData: function getCanvasData() {
+      var canvasData = this.canvasData;
+      var data = {};
+
+      if (this.ready) {
+        forEach(['left', 'top', 'width', 'height', 'naturalWidth', 'naturalHeight'], function (n) {
+          data[n] = canvasData[n];
+        });
+      }
+
+      return data;
+    },
+
+    /**
+     * Set the canvas position and size with new data.
+     * @param {Object} data - The new canvas data.
+     * @returns {Cropper} this
+     */
+    setCanvasData: function setCanvasData(data) {
+      var canvasData = this.canvasData;
+      var aspectRatio = canvasData.aspectRatio;
+
+      if (this.ready && !this.disabled && isPlainObject(data)) {
+        if (isNumber(data.left)) {
+          canvasData.left = data.left;
+        }
+
+        if (isNumber(data.top)) {
+          canvasData.top = data.top;
+        }
+
+        if (isNumber(data.width)) {
+          canvasData.width = data.width;
+          canvasData.height = data.width / aspectRatio;
+        } else if (isNumber(data.height)) {
+          canvasData.height = data.height;
+          canvasData.width = data.height * aspectRatio;
+        }
+
+        this.renderCanvas(true);
+      }
+
+      return this;
+    },
+
+    /**
+     * Get the crop box position and size data.
+     * @returns {Object} The result crop box data.
+     */
+    getCropBoxData: function getCropBoxData() {
+      var cropBoxData = this.cropBoxData;
+      var data;
+
+      if (this.ready && this.cropped) {
+        data = {
+          left: cropBoxData.left,
+          top: cropBoxData.top,
+          width: cropBoxData.width,
+          height: cropBoxData.height
+        };
+      }
+
+      return data || {};
+    },
+
+    /**
+     * Set the crop box position and size with new data.
+     * @param {Object} data - The new crop box data.
+     * @returns {Cropper} this
+     */
+    setCropBoxData: function setCropBoxData(data) {
+      var cropBoxData = this.cropBoxData;
+      var aspectRatio = this.options.aspectRatio;
+      var widthChanged;
+      var heightChanged;
+
+      if (this.ready && this.cropped && !this.disabled && isPlainObject(data)) {
+        if (isNumber(data.left)) {
+          cropBoxData.left = data.left;
+        }
+
+        if (isNumber(data.top)) {
+          cropBoxData.top = data.top;
+        }
+
+        if (isNumber(data.width) && data.width !== cropBoxData.width) {
+          widthChanged = true;
+          cropBoxData.width = data.width;
+        }
+
+        if (isNumber(data.height) && data.height !== cropBoxData.height) {
+          heightChanged = true;
+          cropBoxData.height = data.height;
+        }
+
+        if (aspectRatio) {
+          if (widthChanged) {
+            cropBoxData.height = cropBoxData.width / aspectRatio;
+          } else if (heightChanged) {
+            cropBoxData.width = cropBoxData.height * aspectRatio;
+          }
+        }
+
+        this.renderCropBox();
+      }
+
+      return this;
+    },
+
+    /**
+     * Get a canvas drawn the cropped image.
+     * @param {Object} [options={}] - The config options.
+     * @returns {HTMLCanvasElement} - The result canvas.
+     */
+    getCroppedCanvas: function getCroppedCanvas() {
+      var options = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {};
+
+      if (!this.ready || !window.HTMLCanvasElement) {
+        return null;
+      }
+
+      var canvasData = this.canvasData;
+      var source = getSourceCanvas(this.image, this.imageData, canvasData, options); // Returns the source canvas if it is not cropped.
+
+      if (!this.cropped) {
+        return source;
+      }
+
+      var _this$getData = this.getData(),
+          initialX = _this$getData.x,
+          initialY = _this$getData.y,
+          initialWidth = _this$getData.width,
+          initialHeight = _this$getData.height;
+
+      var ratio = source.width / Math.floor(canvasData.naturalWidth);
+
+      if (ratio !== 1) {
+        initialX *= ratio;
+        initialY *= ratio;
+        initialWidth *= ratio;
+        initialHeight *= ratio;
+      }
+
+      var aspectRatio = initialWidth / initialHeight;
+      var maxSizes = getAdjustedSizes({
+        aspectRatio: aspectRatio,
+        width: options.maxWidth || Infinity,
+        height: options.maxHeight || Infinity
+      });
+      var minSizes = getAdjustedSizes({
+        aspectRatio: aspectRatio,
+        width: options.minWidth || 0,
+        height: options.minHeight || 0
+      }, 'cover');
+
+      var _getAdjustedSizes = getAdjustedSizes({
+        aspectRatio: aspectRatio,
+        width: options.width || (ratio !== 1 ? source.width : initialWidth),
+        height: options.height || (ratio !== 1 ? source.height : initialHeight)
+      }),
+          width = _getAdjustedSizes.width,
+          height = _getAdjustedSizes.height;
+
+      width = Math.min(maxSizes.width, Math.max(minSizes.width, width));
+      height = Math.min(maxSizes.height, Math.max(minSizes.height, height));
+      var canvas = document.createElement('canvas');
+      var context = canvas.getContext('2d');
+      canvas.width = normalizeDecimalNumber(width);
+      canvas.height = normalizeDecimalNumber(height);
+      context.fillStyle = options.fillColor || 'transparent';
+      context.fillRect(0, 0, width, height);
+      var _options$imageSmoothi = options.imageSmoothingEnabled,
+          imageSmoothingEnabled = _options$imageSmoothi === void 0 ? true : _options$imageSmoothi,
+          imageSmoothingQuality = options.imageSmoothingQuality;
+      context.imageSmoothingEnabled = imageSmoothingEnabled;
+
+      if (imageSmoothingQuality) {
+        context.imageSmoothingQuality = imageSmoothingQuality;
+      } // https://developer.mozilla.org/en-US/docs/Web/API/CanvasRenderingContext2D.drawImage
+
+
+      var sourceWidth = source.width;
+      var sourceHeight = source.height; // Source canvas parameters
+
+      var srcX = initialX;
+      var srcY = initialY;
+      var srcWidth;
+      var srcHeight; // Destination canvas parameters
+
+      var dstX;
+      var dstY;
+      var dstWidth;
+      var dstHeight;
+
+      if (srcX <= -initialWidth || srcX > sourceWidth) {
+        srcX = 0;
+        srcWidth = 0;
+        dstX = 0;
+        dstWidth = 0;
+      } else if (srcX <= 0) {
+        dstX = -srcX;
+        srcX = 0;
+        srcWidth = Math.min(sourceWidth, initialWidth + srcX);
+        dstWidth = srcWidth;
+      } else if (srcX <= sourceWidth) {
+        dstX = 0;
+        srcWidth = Math.min(initialWidth, sourceWidth - srcX);
+        dstWidth = srcWidth;
+      }
+
+      if (srcWidth <= 0 || srcY <= -initialHeight || srcY > sourceHeight) {
+        srcY = 0;
+        srcHeight = 0;
+        dstY = 0;
+        dstHeight = 0;
+      } else if (srcY <= 0) {
+        dstY = -srcY;
+        srcY = 0;
+        srcHeight = Math.min(sourceHeight, initialHeight + srcY);
+        dstHeight = srcHeight;
+      } else if (srcY <= sourceHeight) {
+        dstY = 0;
+        srcHeight = Math.min(initialHeight, sourceHeight - srcY);
+        dstHeight = srcHeight;
+      }
+
+      var params = [srcX, srcY, srcWidth, srcHeight]; // Avoid "IndexSizeError"
+
+      if (dstWidth > 0 && dstHeight > 0) {
+        var scale = width / initialWidth;
+        params.push(dstX * scale, dstY * scale, dstWidth * scale, dstHeight * scale);
+      } // All the numerical parameters should be integer for `drawImage`
+      // https://github.com/fengyuanchen/cropper/issues/476
+
+
+      context.drawImage.apply(context, [source].concat(_toConsumableArray(params.map(function (param) {
+        return Math.floor(normalizeDecimalNumber(param));
+      }))));
+      return canvas;
+    },
+
+    /**
+     * Change the aspect ratio of the crop box.
+     * @param {number} aspectRatio - The new aspect ratio.
+     * @returns {Cropper} this
+     */
+    setAspectRatio: function setAspectRatio(aspectRatio) {
+      var options = this.options;
+
+      if (!this.disabled && !isUndefined(aspectRatio)) {
+        // 0 -> NaN
+        options.aspectRatio = Math.max(0, aspectRatio) || NaN;
+
+        if (this.ready) {
+          this.initCropBox();
+
+          if (this.cropped) {
+            this.renderCropBox();
+          }
+        }
+      }
+
+      return this;
+    },
+
+    /**
+     * Change the drag mode.
+     * @param {string} mode - The new drag mode.
+     * @returns {Cropper} this
+     */
+    setDragMode: function setDragMode(mode) {
+      var options = this.options,
+          dragBox = this.dragBox,
+          face = this.face;
+
+      if (this.ready && !this.disabled) {
+        var croppable = mode === DRAG_MODE_CROP;
+        var movable = options.movable && mode === DRAG_MODE_MOVE;
+        mode = croppable || movable ? mode : DRAG_MODE_NONE;
+        options.dragMode = mode;
+        setData(dragBox, DATA_ACTION, mode);
+        toggleClass(dragBox, CLASS_CROP, croppable);
+        toggleClass(dragBox, CLASS_MOVE, movable);
+
+        if (!options.cropBoxMovable) {
+          // Sync drag mode to crop box when it is not movable
+          setData(face, DATA_ACTION, mode);
+          toggleClass(face, CLASS_CROP, croppable);
+          toggleClass(face, CLASS_MOVE, movable);
+        }
+      }
+
+      return this;
+    }
+  };
+
+  var AnotherCropper = WINDOW.Cropper;
+
+  var Cropper =
+  /*#__PURE__*/
+  function () {
+    /**
+     * Create a new Cropper.
+     * @param {Element} element - The target element for cropping.
+     * @param {Object} [options={}] - The configuration options.
+     */
+    function Cropper(element) {
+      var options = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : {};
+
+      _classCallCheck(this, Cropper);
+
+      if (!element || !REGEXP_TAG_NAME.test(element.tagName)) {
+        throw new Error('The first argument is required and must be an <img> or <canvas> element.');
+      }
+
+      this.element = element;
+      this.options = assign({}, DEFAULTS, isPlainObject(options) && options);
+      this.cropped = false;
+      this.disabled = false;
+      this.pointers = {};
+      this.ready = false;
+      this.reloading = false;
+      this.replaced = false;
+      this.sized = false;
+      this.sizing = false;
+      this.init();
+    }
+
+    _createClass(Cropper, [{
+      key: "init",
+      value: function init() {
+        var element = this.element;
+        var tagName = element.tagName.toLowerCase();
+        var url;
+
+        if (element[NAMESPACE]) {
+          return;
+        }
+
+        element[NAMESPACE] = this;
+
+        if (tagName === 'img') {
+          this.isImg = true; // e.g.: "img/picture.jpg"
+
+          url = element.getAttribute('src') || '';
+          this.originalUrl = url; // Stop when it's a blank image
+
+          if (!url) {
+            return;
+          } // e.g.: "http://example.com/img/picture.jpg"
+
+
+          url = element.src;
+        } else if (tagName === 'canvas' && window.HTMLCanvasElement) {
+          url = element.toDataURL();
+        }
+
+        this.load(url);
+      }
+    }, {
+      key: "load",
+      value: function load(url) {
+        var _this = this;
+
+        if (!url) {
+          return;
+        }
+
+        this.url = url;
+        this.imageData = {};
+        var element = this.element,
+            options = this.options;
+
+        if (!options.rotatable && !options.scalable) {
+          options.checkOrientation = false;
+        } // Only IE10+ supports Typed Arrays
+
+
+        if (!options.checkOrientation || !window.ArrayBuffer) {
+          this.clone();
+          return;
+        } // Detect the mime type of the image directly if it is a Data URL
+
+
+        if (REGEXP_DATA_URL.test(url)) {
+          // Read ArrayBuffer from Data URL of JPEG images directly for better performance
+          if (REGEXP_DATA_URL_JPEG.test(url)) {
+            this.read(dataURLToArrayBuffer(url));
+          } else {
+            // Only a JPEG image may contains Exif Orientation information,
+            // the rest types of Data URLs are not necessary to check orientation at all.
+            this.clone();
+          }
+
+          return;
+        } // 1. Detect the mime type of the image by a XMLHttpRequest.
+        // 2. Load the image as ArrayBuffer for reading orientation if its a JPEG image.
+
+
+        var xhr = new XMLHttpRequest();
+        var clone = this.clone.bind(this);
+        this.reloading = true;
+        this.xhr = xhr; // 1. Cross origin requests are only supported for protocol schemes:
+        // http, https, data, chrome, chrome-extension.
+        // 2. Access to XMLHttpRequest from a Data URL will be blocked by CORS policy
+        // in some browsers as IE11 and Safari.
+
+        xhr.onabort = clone;
+        xhr.onerror = clone;
+        xhr.ontimeout = clone;
+
+        xhr.onprogress = function () {
+          // Abort the request directly if it not a JPEG image for better performance
+          if (xhr.getResponseHeader('content-type') !== MIME_TYPE_JPEG) {
+            xhr.abort();
+          }
+        };
+
+        xhr.onload = function () {
+          _this.read(xhr.response);
+        };
+
+        xhr.onloadend = function () {
+          _this.reloading = false;
+          _this.xhr = null;
+        }; // Bust cache when there is a "crossOrigin" property to avoid browser cache error
+
+
+        if (options.checkCrossOrigin && isCrossOriginURL(url) && element.crossOrigin) {
+          url = addTimestamp(url);
+        }
+
+        xhr.open('GET', url);
+        xhr.responseType = 'arraybuffer';
+        xhr.withCredentials = element.crossOrigin === 'use-credentials';
+        xhr.send();
+      }
+    }, {
+      key: "read",
+      value: function read(arrayBuffer) {
+        var options = this.options,
+            imageData = this.imageData; // Reset the orientation value to its default value 1
+        // as some iOS browsers will render image with its orientation
+
+        var orientation = resetAndGetOrientation(arrayBuffer);
+        var rotate = 0;
+        var scaleX = 1;
+        var scaleY = 1;
+
+        if (orientation > 1) {
+          // Generate a new URL which has the default orientation value
+          this.url = arrayBufferToDataURL(arrayBuffer, MIME_TYPE_JPEG);
+
+          var _parseOrientation = parseOrientation(orientation);
+
+          rotate = _parseOrientation.rotate;
+          scaleX = _parseOrientation.scaleX;
+          scaleY = _parseOrientation.scaleY;
+        }
+
+        if (options.rotatable) {
+          imageData.rotate = rotate;
+        }
+
+        if (options.scalable) {
+          imageData.scaleX = scaleX;
+          imageData.scaleY = scaleY;
+        }
+
+        this.clone();
+      }
+    }, {
+      key: "clone",
+      value: function clone() {
+        var element = this.element,
+            url = this.url;
+        var crossOrigin = element.crossOrigin;
+        var crossOriginUrl = url;
+
+        if (this.options.checkCrossOrigin && isCrossOriginURL(url)) {
+          if (!crossOrigin) {
+            crossOrigin = 'anonymous';
+          } // Bust cache when there is not a "crossOrigin" property (#519)
+
+
+          crossOriginUrl = addTimestamp(url);
+        }
+
+        this.crossOrigin = crossOrigin;
+        this.crossOriginUrl = crossOriginUrl;
+        var image = document.createElement('img');
+
+        if (crossOrigin) {
+          image.crossOrigin = crossOrigin;
+        }
+
+        image.src = crossOriginUrl || url;
+        image.alt = element.alt || 'The image to crop';
+        this.image = image;
+        image.onload = this.start.bind(this);
+        image.onerror = this.stop.bind(this);
+        addClass(image, CLASS_HIDE);
+        element.parentNode.insertBefore(image, element.nextSibling);
+      }
+    }, {
+      key: "start",
+      value: function start() {
+        var _this2 = this;
+
+        var image = this.image;
+        image.onload = null;
+        image.onerror = null;
+        this.sizing = true; // Match all browsers that use WebKit as the layout engine in iOS devices,
+        // such as Safari for iOS, Chrome for iOS, and in-app browsers.
+
+        var isIOSWebKit = WINDOW.navigator && /(?:iPad|iPhone|iPod).*?AppleWebKit/i.test(WINDOW.navigator.userAgent);
+
+        var done = function done(naturalWidth, naturalHeight) {
+          assign(_this2.imageData, {
+            naturalWidth: naturalWidth,
+            naturalHeight: naturalHeight,
+            aspectRatio: naturalWidth / naturalHeight
+          });
+          _this2.sizing = false;
+          _this2.sized = true;
+
+          _this2.build();
+        }; // Most modern browsers (excepts iOS WebKit)
+
+
+        if (image.naturalWidth && !isIOSWebKit) {
+          done(image.naturalWidth, image.naturalHeight);
+          return;
+        }
+
+        var sizingImage = document.createElement('img');
+        var body = document.body || document.documentElement;
+        this.sizingImage = sizingImage;
+
+        sizingImage.onload = function () {
+          done(sizingImage.width, sizingImage.height);
+
+          if (!isIOSWebKit) {
+            body.removeChild(sizingImage);
+          }
+        };
+
+        sizingImage.src = image.src; // iOS WebKit will convert the image automatically
+        // with its orientation once append it into DOM (#279)
+
+        if (!isIOSWebKit) {
+          sizingImage.style.cssText = 'left:0;' + 'max-height:none!important;' + 'max-width:none!important;' + 'min-height:0!important;' + 'min-width:0!important;' + 'opacity:0;' + 'position:absolute;' + 'top:0;' + 'z-index:-1;';
+          body.appendChild(sizingImage);
+        }
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        var image = this.image;
+        image.onload = null;
+        image.onerror = null;
+        image.parentNode.removeChild(image);
+        this.image = null;
+      }
+    }, {
+      key: "build",
+      value: function build() {
+        if (!this.sized || this.ready) {
+          return;
+        }
+
+        var element = this.element,
+            options = this.options,
+            image = this.image; // Create cropper elements
+
+        var container = element.parentNode;
+        var template = document.createElement('div');
+        template.innerHTML = TEMPLATE;
+        var cropper = template.querySelector(".".concat(NAMESPACE, "-container"));
+        var canvas = cropper.querySelector(".".concat(NAMESPACE, "-canvas"));
+        var dragBox = cropper.querySelector(".".concat(NAMESPACE, "-drag-box"));
+        var cropBox = cropper.querySelector(".".concat(NAMESPACE, "-crop-box"));
+        var face = cropBox.querySelector(".".concat(NAMESPACE, "-face"));
+        this.container = container;
+        this.cropper = cropper;
+        this.canvas = canvas;
+        this.dragBox = dragBox;
+        this.cropBox = cropBox;
+        this.viewBox = cropper.querySelector(".".concat(NAMESPACE, "-view-box"));
+        this.face = face;
+        canvas.appendChild(image); // Hide the original image
+
+        addClass(element, CLASS_HIDDEN); // Inserts the cropper after to the current image
+
+        container.insertBefore(cropper, element.nextSibling); // Show the image if is hidden
+
+        if (!this.isImg) {
+          removeClass(image, CLASS_HIDE);
+        }
+
+        this.initPreview();
+        this.bind();
+        options.initialAspectRatio = Math.max(0, options.initialAspectRatio) || NaN;
+        options.aspectRatio = Math.max(0, options.aspectRatio) || NaN;
+        options.viewMode = Math.max(0, Math.min(3, Math.round(options.viewMode))) || 0;
+        addClass(cropBox, CLASS_HIDDEN);
+
+        if (!options.guides) {
+          addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-dashed")), CLASS_HIDDEN);
+        }
+
+        if (!options.center) {
+          addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-center")), CLASS_HIDDEN);
+        }
+
+        if (options.background) {
+          addClass(cropper, "".concat(NAMESPACE, "-bg"));
+        }
+
+        if (!options.highlight) {
+          addClass(face, CLASS_INVISIBLE);
+        }
+
+        if (options.cropBoxMovable) {
+          addClass(face, CLASS_MOVE);
+          setData(face, DATA_ACTION, ACTION_ALL);
+        }
+
+        if (!options.cropBoxResizable) {
+          addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-line")), CLASS_HIDDEN);
+          addClass(cropBox.getElementsByClassName("".concat(NAMESPACE, "-point")), CLASS_HIDDEN);
+        }
+
+        this.render();
+        this.ready = true;
+        this.setDragMode(options.dragMode);
+
+        if (options.autoCrop) {
+          this.crop();
+        }
+
+        this.setData(options.data);
+
+        if (isFunction(options.ready)) {
+          addListener(element, EVENT_READY, options.ready, {
+            once: true
+          });
+        }
+
+        dispatchEvent(element, EVENT_READY);
+      }
+    }, {
+      key: "unbuild",
+      value: function unbuild() {
+        if (!this.ready) {
+          return;
+        }
+
+        this.ready = false;
+        this.unbind();
+        this.resetPreview();
+        this.cropper.parentNode.removeChild(this.cropper);
+        removeClass(this.element, CLASS_HIDDEN);
+      }
+    }, {
+      key: "uncreate",
+      value: function uncreate() {
+        if (this.ready) {
+          this.unbuild();
+          this.ready = false;
+          this.cropped = false;
+        } else if (this.sizing) {
+          this.sizingImage.onload = null;
+          this.sizing = false;
+          this.sized = false;
+        } else if (this.reloading) {
+          this.xhr.onabort = null;
+          this.xhr.abort();
+        } else if (this.image) {
+          this.stop();
+        }
+      }
+      /**
+       * Get the no conflict cropper class.
+       * @returns {Cropper} The cropper class.
+       */
+
+    }], [{
+      key: "noConflict",
+      value: function noConflict() {
+        window.Cropper = AnotherCropper;
+        return Cropper;
+      }
+      /**
+       * Change the default options.
+       * @param {Object} options - The new default options.
+       */
+
+    }, {
+      key: "setDefaults",
+      value: function setDefaults(options) {
+        assign(DEFAULTS, isPlainObject(options) && options);
+      }
+    }]);
+
+    return Cropper;
+  }();
+
+  assign(Cropper.prototype, render, preview, events, handlers, change, methods);
+
+  return Cropper;
+
+}));
+
+
+/***/ }),
+
+/***/ "./node_modules/jquery-cropper/dist/jquery-cropper.js":
+/*!************************************************************!*\
+  !*** ./node_modules/jquery-cropper/dist/jquery-cropper.js ***!
+  \************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+ * jQuery Cropper v1.0.1
+ * https://fengyuanchen.github.io/jquery-cropper
+ *
+ * Copyright 2018-present Chen Fengyuan
+ * Released under the MIT license
+ *
+ * Date: 2019-10-19T08:48:33.062Z
+ */
+
+(function (global, factory) {
+   true ? factory(__webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js"), __webpack_require__(/*! cropperjs */ "./node_modules/cropperjs/dist/cropper.js")) :
+  undefined;
+}(this, function ($, Cropper) { 'use strict';
+
+  $ = $ && $.hasOwnProperty('default') ? $['default'] : $;
+  Cropper = Cropper && Cropper.hasOwnProperty('default') ? Cropper['default'] : Cropper;
+
+  if ($ && $.fn && Cropper) {
+    var AnotherCropper = $.fn.cropper;
+    var NAMESPACE = 'cropper';
+
+    $.fn.cropper = function jQueryCropper(option) {
+      for (var _len = arguments.length, args = new Array(_len > 1 ? _len - 1 : 0), _key = 1; _key < _len; _key++) {
+        args[_key - 1] = arguments[_key];
+      }
+
+      var result;
+      this.each(function (i, element) {
+        var $element = $(element);
+        var isDestroy = option === 'destroy';
+        var cropper = $element.data(NAMESPACE);
+
+        if (!cropper) {
+          if (isDestroy) {
+            return;
+          }
+
+          var options = $.extend({}, $element.data(), $.isPlainObject(option) && option);
+          cropper = new Cropper(element, options);
+          $element.data(NAMESPACE, cropper);
+        }
+
+        if (typeof option === 'string') {
+          var fn = cropper[option];
+
+          if ($.isFunction(fn)) {
+            result = fn.apply(cropper, args);
+
+            if (result === cropper) {
+              result = undefined;
+            }
+
+            if (isDestroy) {
+              $element.removeData(NAMESPACE);
+            }
+          }
+        }
+      });
+      return result !== undefined ? result : this;
+    };
+
+    $.fn.cropper.Constructor = Cropper;
+    $.fn.cropper.setDefaults = Cropper.setDefaults;
+
+    $.fn.cropper.noConflict = function noConflict() {
+      $.fn.cropper = AnotherCropper;
+      return this;
+    };
+  }
+
+}));
 
 
 /***/ }),
@@ -43085,6 +46812,3128 @@ process.umask = function() { return 0; };
 
 /***/ }),
 
+/***/ "./node_modules/sweetalert2/dist/sweetalert2.all.js":
+/*!**********************************************************!*\
+  !*** ./node_modules/sweetalert2/dist/sweetalert2.all.js ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+/*!
+* sweetalert2 v9.10.13
+* Released under the MIT License.
+*/
+(function (global, factory) {
+   true ? module.exports = factory() :
+  undefined;
+}(this, function () { 'use strict';
+
+  function _typeof(obj) {
+    "@babel/helpers - typeof";
+
+    if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") {
+      _typeof = function (obj) {
+        return typeof obj;
+      };
+    } else {
+      _typeof = function (obj) {
+        return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj;
+      };
+    }
+
+    return _typeof(obj);
+  }
+
+  function _classCallCheck(instance, Constructor) {
+    if (!(instance instanceof Constructor)) {
+      throw new TypeError("Cannot call a class as a function");
+    }
+  }
+
+  function _defineProperties(target, props) {
+    for (var i = 0; i < props.length; i++) {
+      var descriptor = props[i];
+      descriptor.enumerable = descriptor.enumerable || false;
+      descriptor.configurable = true;
+      if ("value" in descriptor) descriptor.writable = true;
+      Object.defineProperty(target, descriptor.key, descriptor);
+    }
+  }
+
+  function _createClass(Constructor, protoProps, staticProps) {
+    if (protoProps) _defineProperties(Constructor.prototype, protoProps);
+    if (staticProps) _defineProperties(Constructor, staticProps);
+    return Constructor;
+  }
+
+  function _extends() {
+    _extends = Object.assign || function (target) {
+      for (var i = 1; i < arguments.length; i++) {
+        var source = arguments[i];
+
+        for (var key in source) {
+          if (Object.prototype.hasOwnProperty.call(source, key)) {
+            target[key] = source[key];
+          }
+        }
+      }
+
+      return target;
+    };
+
+    return _extends.apply(this, arguments);
+  }
+
+  function _inherits(subClass, superClass) {
+    if (typeof superClass !== "function" && superClass !== null) {
+      throw new TypeError("Super expression must either be null or a function");
+    }
+
+    subClass.prototype = Object.create(superClass && superClass.prototype, {
+      constructor: {
+        value: subClass,
+        writable: true,
+        configurable: true
+      }
+    });
+    if (superClass) _setPrototypeOf(subClass, superClass);
+  }
+
+  function _getPrototypeOf(o) {
+    _getPrototypeOf = Object.setPrototypeOf ? Object.getPrototypeOf : function _getPrototypeOf(o) {
+      return o.__proto__ || Object.getPrototypeOf(o);
+    };
+    return _getPrototypeOf(o);
+  }
+
+  function _setPrototypeOf(o, p) {
+    _setPrototypeOf = Object.setPrototypeOf || function _setPrototypeOf(o, p) {
+      o.__proto__ = p;
+      return o;
+    };
+
+    return _setPrototypeOf(o, p);
+  }
+
+  function _isNativeReflectConstruct() {
+    if (typeof Reflect === "undefined" || !Reflect.construct) return false;
+    if (Reflect.construct.sham) return false;
+    if (typeof Proxy === "function") return true;
+
+    try {
+      Date.prototype.toString.call(Reflect.construct(Date, [], function () {}));
+      return true;
+    } catch (e) {
+      return false;
+    }
+  }
+
+  function _construct(Parent, args, Class) {
+    if (_isNativeReflectConstruct()) {
+      _construct = Reflect.construct;
+    } else {
+      _construct = function _construct(Parent, args, Class) {
+        var a = [null];
+        a.push.apply(a, args);
+        var Constructor = Function.bind.apply(Parent, a);
+        var instance = new Constructor();
+        if (Class) _setPrototypeOf(instance, Class.prototype);
+        return instance;
+      };
+    }
+
+    return _construct.apply(null, arguments);
+  }
+
+  function _assertThisInitialized(self) {
+    if (self === void 0) {
+      throw new ReferenceError("this hasn't been initialised - super() hasn't been called");
+    }
+
+    return self;
+  }
+
+  function _possibleConstructorReturn(self, call) {
+    if (call && (typeof call === "object" || typeof call === "function")) {
+      return call;
+    }
+
+    return _assertThisInitialized(self);
+  }
+
+  function _createSuper(Derived) {
+    var hasNativeReflectConstruct = _isNativeReflectConstruct();
+
+    return function () {
+      var Super = _getPrototypeOf(Derived),
+          result;
+
+      if (hasNativeReflectConstruct) {
+        var NewTarget = _getPrototypeOf(this).constructor;
+
+        result = Reflect.construct(Super, arguments, NewTarget);
+      } else {
+        result = Super.apply(this, arguments);
+      }
+
+      return _possibleConstructorReturn(this, result);
+    };
+  }
+
+  function _superPropBase(object, property) {
+    while (!Object.prototype.hasOwnProperty.call(object, property)) {
+      object = _getPrototypeOf(object);
+      if (object === null) break;
+    }
+
+    return object;
+  }
+
+  function _get(target, property, receiver) {
+    if (typeof Reflect !== "undefined" && Reflect.get) {
+      _get = Reflect.get;
+    } else {
+      _get = function _get(target, property, receiver) {
+        var base = _superPropBase(target, property);
+
+        if (!base) return;
+        var desc = Object.getOwnPropertyDescriptor(base, property);
+
+        if (desc.get) {
+          return desc.get.call(receiver);
+        }
+
+        return desc.value;
+      };
+    }
+
+    return _get(target, property, receiver || target);
+  }
+
+  var consolePrefix = 'SweetAlert2:';
+  /**
+   * Filter the unique values into a new array
+   * @param arr
+   */
+
+  var uniqueArray = function uniqueArray(arr) {
+    var result = [];
+
+    for (var i = 0; i < arr.length; i++) {
+      if (result.indexOf(arr[i]) === -1) {
+        result.push(arr[i]);
+      }
+    }
+
+    return result;
+  };
+  /**
+   * Capitalize the first letter of a string
+   * @param str
+   */
+
+  var capitalizeFirstLetter = function capitalizeFirstLetter(str) {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  };
+  /**
+   * Returns the array ob object values (Object.values isn't supported in IE11)
+   * @param obj
+   */
+
+  var objectValues = function objectValues(obj) {
+    return Object.keys(obj).map(function (key) {
+      return obj[key];
+    });
+  };
+  /**
+   * Convert NodeList to Array
+   * @param nodeList
+   */
+
+  var toArray = function toArray(nodeList) {
+    return Array.prototype.slice.call(nodeList);
+  };
+  /**
+   * Standardise console warnings
+   * @param message
+   */
+
+  var warn = function warn(message) {
+    console.warn("".concat(consolePrefix, " ").concat(message));
+  };
+  /**
+   * Standardise console errors
+   * @param message
+   */
+
+  var error = function error(message) {
+    console.error("".concat(consolePrefix, " ").concat(message));
+  };
+  /**
+   * Private global state for `warnOnce`
+   * @type {Array}
+   * @private
+   */
+
+  var previousWarnOnceMessages = [];
+  /**
+   * Show a console warning, but only if it hasn't already been shown
+   * @param message
+   */
+
+  var warnOnce = function warnOnce(message) {
+    if (!(previousWarnOnceMessages.indexOf(message) !== -1)) {
+      previousWarnOnceMessages.push(message);
+      warn(message);
+    }
+  };
+  /**
+   * Show a one-time console warning about deprecated params/methods
+   */
+
+  var warnAboutDepreation = function warnAboutDepreation(deprecatedParam, useInstead) {
+    warnOnce("\"".concat(deprecatedParam, "\" is deprecated and will be removed in the next major release. Please use \"").concat(useInstead, "\" instead."));
+  };
+  /**
+   * If `arg` is a function, call it (with no arguments or context) and return the result.
+   * Otherwise, just pass the value through
+   * @param arg
+   */
+
+  var callIfFunction = function callIfFunction(arg) {
+    return typeof arg === 'function' ? arg() : arg;
+  };
+  var isPromise = function isPromise(arg) {
+    return arg && Promise.resolve(arg) === arg;
+  };
+
+  var DismissReason = Object.freeze({
+    cancel: 'cancel',
+    backdrop: 'backdrop',
+    close: 'close',
+    esc: 'esc',
+    timer: 'timer'
+  });
+
+  var isJqueryElement = function isJqueryElement(elem) {
+    return _typeof(elem) === 'object' && elem.jquery;
+  };
+
+  var isElement = function isElement(elem) {
+    return elem instanceof Element || isJqueryElement(elem);
+  };
+
+  var argsToParams = function argsToParams(args) {
+    var params = {};
+
+    if (_typeof(args[0]) === 'object' && !isElement(args[0])) {
+      _extends(params, args[0]);
+    } else {
+      ['title', 'html', 'icon'].forEach(function (name, index) {
+        var arg = args[index];
+
+        if (typeof arg === 'string' || isElement(arg)) {
+          params[name] = arg;
+        } else if (arg !== undefined) {
+          error("Unexpected type of ".concat(name, "! Expected \"string\" or \"Element\", got ").concat(_typeof(arg)));
+        }
+      });
+    }
+
+    return params;
+  };
+
+  var swalPrefix = 'swal2-';
+  var prefix = function prefix(items) {
+    var result = {};
+
+    for (var i in items) {
+      result[items[i]] = swalPrefix + items[i];
+    }
+
+    return result;
+  };
+  var swalClasses = prefix(['container', 'shown', 'height-auto', 'iosfix', 'popup', 'modal', 'no-backdrop', 'no-transition', 'toast', 'toast-shown', 'toast-column', 'show', 'hide', 'close', 'title', 'header', 'content', 'html-container', 'actions', 'confirm', 'cancel', 'footer', 'icon', 'icon-content', 'image', 'input', 'file', 'range', 'select', 'radio', 'checkbox', 'label', 'textarea', 'inputerror', 'validation-message', 'progress-steps', 'active-progress-step', 'progress-step', 'progress-step-line', 'loading', 'styled', 'top', 'top-start', 'top-end', 'top-left', 'top-right', 'center', 'center-start', 'center-end', 'center-left', 'center-right', 'bottom', 'bottom-start', 'bottom-end', 'bottom-left', 'bottom-right', 'grow-row', 'grow-column', 'grow-fullscreen', 'rtl', 'timer-progress-bar', 'timer-progress-bar-container', 'scrollbar-measure', 'icon-success', 'icon-warning', 'icon-info', 'icon-question', 'icon-error']);
+  var iconTypes = prefix(['success', 'warning', 'info', 'question', 'error']);
+
+  var getContainer = function getContainer() {
+    return document.body.querySelector(".".concat(swalClasses.container));
+  };
+  var elementBySelector = function elementBySelector(selectorString) {
+    var container = getContainer();
+    return container ? container.querySelector(selectorString) : null;
+  };
+
+  var elementByClass = function elementByClass(className) {
+    return elementBySelector(".".concat(className));
+  };
+
+  var getPopup = function getPopup() {
+    return elementByClass(swalClasses.popup);
+  };
+  var getIcons = function getIcons() {
+    var popup = getPopup();
+    return toArray(popup.querySelectorAll(".".concat(swalClasses.icon)));
+  };
+  var getIcon = function getIcon() {
+    var visibleIcon = getIcons().filter(function (icon) {
+      return isVisible(icon);
+    });
+    return visibleIcon.length ? visibleIcon[0] : null;
+  };
+  var getTitle = function getTitle() {
+    return elementByClass(swalClasses.title);
+  };
+  var getContent = function getContent() {
+    return elementByClass(swalClasses.content);
+  };
+  var getHtmlContainer = function getHtmlContainer() {
+    return elementByClass(swalClasses['html-container']);
+  };
+  var getImage = function getImage() {
+    return elementByClass(swalClasses.image);
+  };
+  var getProgressSteps = function getProgressSteps() {
+    return elementByClass(swalClasses['progress-steps']);
+  };
+  var getValidationMessage = function getValidationMessage() {
+    return elementByClass(swalClasses['validation-message']);
+  };
+  var getConfirmButton = function getConfirmButton() {
+    return elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.confirm));
+  };
+  var getCancelButton = function getCancelButton() {
+    return elementBySelector(".".concat(swalClasses.actions, " .").concat(swalClasses.cancel));
+  };
+  var getActions = function getActions() {
+    return elementByClass(swalClasses.actions);
+  };
+  var getHeader = function getHeader() {
+    return elementByClass(swalClasses.header);
+  };
+  var getFooter = function getFooter() {
+    return elementByClass(swalClasses.footer);
+  };
+  var getTimerProgressBar = function getTimerProgressBar() {
+    return elementByClass(swalClasses['timer-progress-bar']);
+  };
+  var getCloseButton = function getCloseButton() {
+    return elementByClass(swalClasses.close);
+  }; // https://github.com/jkup/focusable/blob/master/index.js
+
+  var focusable = "\n  a[href],\n  area[href],\n  input:not([disabled]),\n  select:not([disabled]),\n  textarea:not([disabled]),\n  button:not([disabled]),\n  iframe,\n  object,\n  embed,\n  [tabindex=\"0\"],\n  [contenteditable],\n  audio[controls],\n  video[controls],\n  summary\n";
+  var getFocusableElements = function getFocusableElements() {
+    var focusableElementsWithTabindex = toArray(getPopup().querySelectorAll('[tabindex]:not([tabindex="-1"]):not([tabindex="0"])')) // sort according to tabindex
+    .sort(function (a, b) {
+      a = parseInt(a.getAttribute('tabindex'));
+      b = parseInt(b.getAttribute('tabindex'));
+
+      if (a > b) {
+        return 1;
+      } else if (a < b) {
+        return -1;
+      }
+
+      return 0;
+    });
+    var otherFocusableElements = toArray(getPopup().querySelectorAll(focusable)).filter(function (el) {
+      return el.getAttribute('tabindex') !== '-1';
+    });
+    return uniqueArray(focusableElementsWithTabindex.concat(otherFocusableElements)).filter(function (el) {
+      return isVisible(el);
+    });
+  };
+  var isModal = function isModal() {
+    return !isToast() && !document.body.classList.contains(swalClasses['no-backdrop']);
+  };
+  var isToast = function isToast() {
+    return document.body.classList.contains(swalClasses['toast-shown']);
+  };
+  var isLoading = function isLoading() {
+    return getPopup().hasAttribute('data-loading');
+  };
+
+  var states = {
+    previousBodyPadding: null
+  };
+  var setInnerHtml = function setInnerHtml(elem, html) {
+    // #1926
+    elem.textContent = '';
+
+    if (html) {
+      var parser = new DOMParser();
+      var parsed = parser.parseFromString(html, "text/html");
+      toArray(parsed.querySelector('head').childNodes).forEach(function (child) {
+        elem.appendChild(child);
+      });
+      toArray(parsed.querySelector('body').childNodes).forEach(function (child) {
+        elem.appendChild(child);
+      });
+    }
+  };
+  var hasClass = function hasClass(elem, className) {
+    if (!className) {
+      return false;
+    }
+
+    var classList = className.split(/\s+/);
+
+    for (var i = 0; i < classList.length; i++) {
+      if (!elem.classList.contains(classList[i])) {
+        return false;
+      }
+    }
+
+    return true;
+  };
+
+  var removeCustomClasses = function removeCustomClasses(elem, params) {
+    toArray(elem.classList).forEach(function (className) {
+      if (!(objectValues(swalClasses).indexOf(className) !== -1) && !(objectValues(iconTypes).indexOf(className) !== -1) && !(objectValues(params.showClass).indexOf(className) !== -1)) {
+        elem.classList.remove(className);
+      }
+    });
+  };
+
+  var applyCustomClass = function applyCustomClass(elem, params, className) {
+    removeCustomClasses(elem, params);
+
+    if (params.customClass && params.customClass[className]) {
+      if (typeof params.customClass[className] !== 'string' && !params.customClass[className].forEach) {
+        return warn("Invalid type of customClass.".concat(className, "! Expected string or iterable object, got \"").concat(_typeof(params.customClass[className]), "\""));
+      }
+
+      addClass(elem, params.customClass[className]);
+    }
+  };
+  function getInput(content, inputType) {
+    if (!inputType) {
+      return null;
+    }
+
+    switch (inputType) {
+      case 'select':
+      case 'textarea':
+      case 'file':
+        return getChildByClass(content, swalClasses[inputType]);
+
+      case 'checkbox':
+        return content.querySelector(".".concat(swalClasses.checkbox, " input"));
+
+      case 'radio':
+        return content.querySelector(".".concat(swalClasses.radio, " input:checked")) || content.querySelector(".".concat(swalClasses.radio, " input:first-child"));
+
+      case 'range':
+        return content.querySelector(".".concat(swalClasses.range, " input"));
+
+      default:
+        return getChildByClass(content, swalClasses.input);
+    }
+  }
+  var focusInput = function focusInput(input) {
+    input.focus(); // place cursor at end of text in text input
+
+    if (input.type !== 'file') {
+      // http://stackoverflow.com/a/2345915
+      var val = input.value;
+      input.value = '';
+      input.value = val;
+    }
+  };
+  var toggleClass = function toggleClass(target, classList, condition) {
+    if (!target || !classList) {
+      return;
+    }
+
+    if (typeof classList === 'string') {
+      classList = classList.split(/\s+/).filter(Boolean);
+    }
+
+    classList.forEach(function (className) {
+      if (target.forEach) {
+        target.forEach(function (elem) {
+          condition ? elem.classList.add(className) : elem.classList.remove(className);
+        });
+      } else {
+        condition ? target.classList.add(className) : target.classList.remove(className);
+      }
+    });
+  };
+  var addClass = function addClass(target, classList) {
+    toggleClass(target, classList, true);
+  };
+  var removeClass = function removeClass(target, classList) {
+    toggleClass(target, classList, false);
+  };
+  var getChildByClass = function getChildByClass(elem, className) {
+    for (var i = 0; i < elem.childNodes.length; i++) {
+      if (hasClass(elem.childNodes[i], className)) {
+        return elem.childNodes[i];
+      }
+    }
+  };
+  var applyNumericalStyle = function applyNumericalStyle(elem, property, value) {
+    if (value || parseInt(value) === 0) {
+      elem.style[property] = typeof value === 'number' ? "".concat(value, "px") : value;
+    } else {
+      elem.style.removeProperty(property);
+    }
+  };
+  var show = function show(elem) {
+    var display = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 'flex';
+    elem.style.opacity = '';
+    elem.style.display = display;
+  };
+  var hide = function hide(elem) {
+    elem.style.opacity = '';
+    elem.style.display = 'none';
+  };
+  var toggle = function toggle(elem, condition, display) {
+    condition ? show(elem, display) : hide(elem);
+  }; // borrowed from jquery $(elem).is(':visible') implementation
+
+  var isVisible = function isVisible(elem) {
+    return !!(elem && (elem.offsetWidth || elem.offsetHeight || elem.getClientRects().length));
+  };
+  /* istanbul ignore next */
+
+  var isScrollable = function isScrollable(elem) {
+    return !!(elem.scrollHeight > elem.clientHeight);
+  }; // borrowed from https://stackoverflow.com/a/46352119
+
+  var hasCssAnimation = function hasCssAnimation(elem) {
+    var style = window.getComputedStyle(elem);
+    var animDuration = parseFloat(style.getPropertyValue('animation-duration') || '0');
+    var transDuration = parseFloat(style.getPropertyValue('transition-duration') || '0');
+    return animDuration > 0 || transDuration > 0;
+  };
+  var contains = function contains(haystack, needle) {
+    if (typeof haystack.contains === 'function') {
+      return haystack.contains(needle);
+    }
+  };
+  var animateTimerProgressBar = function animateTimerProgressBar(timer) {
+    var reset = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : false;
+    var timerProgressBar = getTimerProgressBar();
+
+    if (isVisible(timerProgressBar)) {
+      if (reset) {
+        timerProgressBar.style.transition = 'none';
+        timerProgressBar.style.width = '100%';
+      }
+
+      setTimeout(function () {
+        timerProgressBar.style.transition = "width ".concat(timer / 1000, "s linear");
+        timerProgressBar.style.width = '0%';
+      }, 10);
+    }
+  };
+  var stopTimerProgressBar = function stopTimerProgressBar() {
+    var timerProgressBar = getTimerProgressBar();
+    var timerProgressBarWidth = parseInt(window.getComputedStyle(timerProgressBar).width);
+    timerProgressBar.style.removeProperty('transition');
+    timerProgressBar.style.width = '100%';
+    var timerProgressBarFullWidth = parseInt(window.getComputedStyle(timerProgressBar).width);
+    var timerProgressBarPercent = parseInt(timerProgressBarWidth / timerProgressBarFullWidth * 100);
+    timerProgressBar.style.removeProperty('transition');
+    timerProgressBar.style.width = "".concat(timerProgressBarPercent, "%");
+  };
+
+  // Detect Node env
+  var isNodeEnv = function isNodeEnv() {
+    return typeof window === 'undefined' || typeof document === 'undefined';
+  };
+
+  var sweetHTML = "\n <div aria-labelledby=\"".concat(swalClasses.title, "\" aria-describedby=\"").concat(swalClasses.content, "\" class=\"").concat(swalClasses.popup, "\" tabindex=\"-1\">\n   <div class=\"").concat(swalClasses.header, "\">\n     <ul class=\"").concat(swalClasses['progress-steps'], "\"></ul>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.error, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.question, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.warning, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.info, "\"></div>\n     <div class=\"").concat(swalClasses.icon, " ").concat(iconTypes.success, "\"></div>\n     <img class=\"").concat(swalClasses.image, "\" />\n     <h2 class=\"").concat(swalClasses.title, "\" id=\"").concat(swalClasses.title, "\"></h2>\n     <button type=\"button\" class=\"").concat(swalClasses.close, "\"></button>\n   </div>\n   <div class=\"").concat(swalClasses.content, "\">\n     <div id=\"").concat(swalClasses.content, "\" class=\"").concat(swalClasses['html-container'], "\"></div>\n     <input class=\"").concat(swalClasses.input, "\" />\n     <input type=\"file\" class=\"").concat(swalClasses.file, "\" />\n     <div class=\"").concat(swalClasses.range, "\">\n       <input type=\"range\" />\n       <output></output>\n     </div>\n     <select class=\"").concat(swalClasses.select, "\"></select>\n     <div class=\"").concat(swalClasses.radio, "\"></div>\n     <label for=\"").concat(swalClasses.checkbox, "\" class=\"").concat(swalClasses.checkbox, "\">\n       <input type=\"checkbox\" />\n       <span class=\"").concat(swalClasses.label, "\"></span>\n     </label>\n     <textarea class=\"").concat(swalClasses.textarea, "\"></textarea>\n     <div class=\"").concat(swalClasses['validation-message'], "\" id=\"").concat(swalClasses['validation-message'], "\"></div>\n   </div>\n   <div class=\"").concat(swalClasses.actions, "\">\n     <button type=\"button\" class=\"").concat(swalClasses.confirm, "\">OK</button>\n     <button type=\"button\" class=\"").concat(swalClasses.cancel, "\">Cancel</button>\n   </div>\n   <div class=\"").concat(swalClasses.footer, "\"></div>\n   <div class=\"").concat(swalClasses['timer-progress-bar-container'], "\">\n     <div class=\"").concat(swalClasses['timer-progress-bar'], "\"></div>\n   </div>\n </div>\n").replace(/(^|\n)\s*/g, '');
+
+  var resetOldContainer = function resetOldContainer() {
+    var oldContainer = getContainer();
+
+    if (!oldContainer) {
+      return false;
+    }
+
+    oldContainer.parentNode.removeChild(oldContainer);
+    removeClass([document.documentElement, document.body], [swalClasses['no-backdrop'], swalClasses['toast-shown'], swalClasses['has-column']]);
+    return true;
+  };
+
+  var oldInputVal; // IE11 workaround, see #1109 for details
+
+  var resetValidationMessage = function resetValidationMessage(e) {
+    if (Swal.isVisible() && oldInputVal !== e.target.value) {
+      Swal.resetValidationMessage();
+    }
+
+    oldInputVal = e.target.value;
+  };
+
+  var addInputChangeListeners = function addInputChangeListeners() {
+    var content = getContent();
+    var input = getChildByClass(content, swalClasses.input);
+    var file = getChildByClass(content, swalClasses.file);
+    var range = content.querySelector(".".concat(swalClasses.range, " input"));
+    var rangeOutput = content.querySelector(".".concat(swalClasses.range, " output"));
+    var select = getChildByClass(content, swalClasses.select);
+    var checkbox = content.querySelector(".".concat(swalClasses.checkbox, " input"));
+    var textarea = getChildByClass(content, swalClasses.textarea);
+    input.oninput = resetValidationMessage;
+    file.onchange = resetValidationMessage;
+    select.onchange = resetValidationMessage;
+    checkbox.onchange = resetValidationMessage;
+    textarea.oninput = resetValidationMessage;
+
+    range.oninput = function (e) {
+      resetValidationMessage(e);
+      rangeOutput.value = range.value;
+    };
+
+    range.onchange = function (e) {
+      resetValidationMessage(e);
+      range.nextSibling.value = range.value;
+    };
+  };
+
+  var getTarget = function getTarget(target) {
+    return typeof target === 'string' ? document.querySelector(target) : target;
+  };
+
+  var setupAccessibility = function setupAccessibility(params) {
+    var popup = getPopup();
+    popup.setAttribute('role', params.toast ? 'alert' : 'dialog');
+    popup.setAttribute('aria-live', params.toast ? 'polite' : 'assertive');
+
+    if (!params.toast) {
+      popup.setAttribute('aria-modal', 'true');
+    }
+  };
+
+  var setupRTL = function setupRTL(targetElement) {
+    if (window.getComputedStyle(targetElement).direction === 'rtl') {
+      addClass(getContainer(), swalClasses.rtl);
+    }
+  };
+  /*
+   * Add modal + backdrop to DOM
+   */
+
+
+  var init = function init(params) {
+    // Clean up the old popup container if it exists
+    var oldContainerExisted = resetOldContainer();
+    /* istanbul ignore if */
+
+    if (isNodeEnv()) {
+      error('SweetAlert2 requires document to initialize');
+      return;
+    }
+
+    var container = document.createElement('div');
+    container.className = swalClasses.container;
+
+    if (oldContainerExisted) {
+      addClass(container, swalClasses['no-transition']);
+    }
+
+    setInnerHtml(container, sweetHTML);
+    var targetElement = getTarget(params.target);
+    targetElement.appendChild(container);
+    setupAccessibility(params);
+    setupRTL(targetElement);
+    addInputChangeListeners();
+  };
+
+  var parseHtmlToContainer = function parseHtmlToContainer(param, target) {
+    // DOM element
+    if (param instanceof HTMLElement) {
+      target.appendChild(param); // Object
+    } else if (_typeof(param) === 'object') {
+      handleObject(param, target); // Plain string
+    } else if (param) {
+      setInnerHtml(target, param);
+    }
+  };
+
+  var handleObject = function handleObject(param, target) {
+    // JQuery element(s)
+    if (param.jquery) {
+      handleJqueryElem(target, param); // For other objects use their string representation
+    } else {
+      setInnerHtml(target, param.toString());
+    }
+  };
+
+  var handleJqueryElem = function handleJqueryElem(target, elem) {
+    target.textContent = '';
+
+    if (0 in elem) {
+      for (var i = 0; (i in elem); i++) {
+        target.appendChild(elem[i].cloneNode(true));
+      }
+    } else {
+      target.appendChild(elem.cloneNode(true));
+    }
+  };
+
+  var animationEndEvent = function () {
+    // Prevent run in Node env
+
+    /* istanbul ignore if */
+    if (isNodeEnv()) {
+      return false;
+    }
+
+    var testEl = document.createElement('div');
+    var transEndEventNames = {
+      WebkitAnimation: 'webkitAnimationEnd',
+      OAnimation: 'oAnimationEnd oanimationend',
+      animation: 'animationend'
+    };
+
+    for (var i in transEndEventNames) {
+      if (Object.prototype.hasOwnProperty.call(transEndEventNames, i) && typeof testEl.style[i] !== 'undefined') {
+        return transEndEventNames[i];
+      }
+    }
+
+    return false;
+  }();
+
+  // https://github.com/twbs/bootstrap/blob/master/js/src/modal.js
+
+  var measureScrollbar = function measureScrollbar() {
+    var scrollDiv = document.createElement('div');
+    scrollDiv.className = swalClasses['scrollbar-measure'];
+    document.body.appendChild(scrollDiv);
+    var scrollbarWidth = scrollDiv.getBoundingClientRect().width - scrollDiv.clientWidth;
+    document.body.removeChild(scrollDiv);
+    return scrollbarWidth;
+  };
+
+  var renderActions = function renderActions(instance, params) {
+    var actions = getActions();
+    var confirmButton = getConfirmButton();
+    var cancelButton = getCancelButton(); // Actions (buttons) wrapper
+
+    if (!params.showConfirmButton && !params.showCancelButton) {
+      hide(actions);
+    } // Custom class
+
+
+    applyCustomClass(actions, params, 'actions'); // Render confirm button
+
+    renderButton(confirmButton, 'confirm', params); // render Cancel Button
+
+    renderButton(cancelButton, 'cancel', params);
+
+    if (params.buttonsStyling) {
+      handleButtonsStyling(confirmButton, cancelButton, params);
+    } else {
+      removeClass([confirmButton, cancelButton], swalClasses.styled);
+      confirmButton.style.backgroundColor = confirmButton.style.borderLeftColor = confirmButton.style.borderRightColor = '';
+      cancelButton.style.backgroundColor = cancelButton.style.borderLeftColor = cancelButton.style.borderRightColor = '';
+    }
+
+    if (params.reverseButtons) {
+      confirmButton.parentNode.insertBefore(cancelButton, confirmButton);
+    }
+  };
+
+  function handleButtonsStyling(confirmButton, cancelButton, params) {
+    addClass([confirmButton, cancelButton], swalClasses.styled); // Buttons background colors
+
+    if (params.confirmButtonColor) {
+      confirmButton.style.backgroundColor = params.confirmButtonColor;
+    }
+
+    if (params.cancelButtonColor) {
+      cancelButton.style.backgroundColor = params.cancelButtonColor;
+    } // Loading state
+
+
+    if (!isLoading()) {
+      var confirmButtonBackgroundColor = window.getComputedStyle(confirmButton).getPropertyValue('background-color');
+      confirmButton.style.borderLeftColor = confirmButtonBackgroundColor;
+      confirmButton.style.borderRightColor = confirmButtonBackgroundColor;
+    }
+  }
+
+  function renderButton(button, buttonType, params) {
+    toggle(button, params["show".concat(capitalizeFirstLetter(buttonType), "Button")], 'inline-block');
+    setInnerHtml(button, params["".concat(buttonType, "ButtonText")]); // Set caption text
+
+    button.setAttribute('aria-label', params["".concat(buttonType, "ButtonAriaLabel")]); // ARIA label
+    // Add buttons custom classes
+
+    button.className = swalClasses[buttonType];
+    applyCustomClass(button, params, "".concat(buttonType, "Button"));
+    addClass(button, params["".concat(buttonType, "ButtonClass")]);
+  }
+
+  function handleBackdropParam(container, backdrop) {
+    if (typeof backdrop === 'string') {
+      container.style.background = backdrop;
+    } else if (!backdrop) {
+      addClass([document.documentElement, document.body], swalClasses['no-backdrop']);
+    }
+  }
+
+  function handlePositionParam(container, position) {
+    if (position in swalClasses) {
+      addClass(container, swalClasses[position]);
+    } else {
+      warn('The "position" parameter is not valid, defaulting to "center"');
+      addClass(container, swalClasses.center);
+    }
+  }
+
+  function handleGrowParam(container, grow) {
+    if (grow && typeof grow === 'string') {
+      var growClass = "grow-".concat(grow);
+
+      if (growClass in swalClasses) {
+        addClass(container, swalClasses[growClass]);
+      }
+    }
+  }
+
+  var renderContainer = function renderContainer(instance, params) {
+    var container = getContainer();
+
+    if (!container) {
+      return;
+    }
+
+    handleBackdropParam(container, params.backdrop);
+
+    if (!params.backdrop && params.allowOutsideClick) {
+      warn('"allowOutsideClick" parameter requires `backdrop` parameter to be set to `true`');
+    }
+
+    handlePositionParam(container, params.position);
+    handleGrowParam(container, params.grow); // Custom class
+
+    applyCustomClass(container, params, 'container'); // Set queue step attribute for getQueueStep() method
+
+    var queueStep = document.body.getAttribute('data-swal2-queue-step');
+
+    if (queueStep) {
+      container.setAttribute('data-queue-step', queueStep);
+      document.body.removeAttribute('data-swal2-queue-step');
+    }
+  };
+
+  /**
+   * This module containts `WeakMap`s for each effectively-"private  property" that a `Swal` has.
+   * For example, to set the private property "foo" of `this` to "bar", you can `privateProps.foo.set(this, 'bar')`
+   * This is the approach that Babel will probably take to implement private methods/fields
+   *   https://github.com/tc39/proposal-private-methods
+   *   https://github.com/babel/babel/pull/7555
+   * Once we have the changes from that PR in Babel, and our core class fits reasonable in *one module*
+   *   then we can use that language feature.
+   */
+  var privateProps = {
+    promise: new WeakMap(),
+    innerParams: new WeakMap(),
+    domCache: new WeakMap()
+  };
+
+  var inputTypes = ['input', 'file', 'range', 'select', 'radio', 'checkbox', 'textarea'];
+  var renderInput = function renderInput(instance, params) {
+    var content = getContent();
+    var innerParams = privateProps.innerParams.get(instance);
+    var rerender = !innerParams || params.input !== innerParams.input;
+    inputTypes.forEach(function (inputType) {
+      var inputClass = swalClasses[inputType];
+      var inputContainer = getChildByClass(content, inputClass); // set attributes
+
+      setAttributes(inputType, params.inputAttributes); // set class
+
+      inputContainer.className = inputClass;
+
+      if (rerender) {
+        hide(inputContainer);
+      }
+    });
+
+    if (params.input) {
+      if (rerender) {
+        showInput(params);
+      } // set custom class
+
+
+      setCustomClass(params);
+    }
+  };
+
+  var showInput = function showInput(params) {
+    if (!renderInputType[params.input]) {
+      return error("Unexpected type of input! Expected \"text\", \"email\", \"password\", \"number\", \"tel\", \"select\", \"radio\", \"checkbox\", \"textarea\", \"file\" or \"url\", got \"".concat(params.input, "\""));
+    }
+
+    var inputContainer = getInputContainer(params.input);
+    var input = renderInputType[params.input](inputContainer, params);
+    show(input); // input autofocus
+
+    setTimeout(function () {
+      focusInput(input);
+    });
+  };
+
+  var removeAttributes = function removeAttributes(input) {
+    for (var i = 0; i < input.attributes.length; i++) {
+      var attrName = input.attributes[i].name;
+
+      if (!(['type', 'value', 'style'].indexOf(attrName) !== -1)) {
+        input.removeAttribute(attrName);
+      }
+    }
+  };
+
+  var setAttributes = function setAttributes(inputType, inputAttributes) {
+    var input = getInput(getContent(), inputType);
+
+    if (!input) {
+      return;
+    }
+
+    removeAttributes(input);
+
+    for (var attr in inputAttributes) {
+      // Do not set a placeholder for <input type="range">
+      // it'll crash Edge, #1298
+      if (inputType === 'range' && attr === 'placeholder') {
+        continue;
+      }
+
+      input.setAttribute(attr, inputAttributes[attr]);
+    }
+  };
+
+  var setCustomClass = function setCustomClass(params) {
+    var inputContainer = getInputContainer(params.input);
+
+    if (params.customClass) {
+      addClass(inputContainer, params.customClass.input);
+    }
+  };
+
+  var setInputPlaceholder = function setInputPlaceholder(input, params) {
+    if (!input.placeholder || params.inputPlaceholder) {
+      input.placeholder = params.inputPlaceholder;
+    }
+  };
+
+  var getInputContainer = function getInputContainer(inputType) {
+    var inputClass = swalClasses[inputType] ? swalClasses[inputType] : swalClasses.input;
+    return getChildByClass(getContent(), inputClass);
+  };
+
+  var renderInputType = {};
+
+  renderInputType.text = renderInputType.email = renderInputType.password = renderInputType.number = renderInputType.tel = renderInputType.url = function (input, params) {
+    if (typeof params.inputValue === 'string' || typeof params.inputValue === 'number') {
+      input.value = params.inputValue;
+    } else if (!isPromise(params.inputValue)) {
+      warn("Unexpected type of inputValue! Expected \"string\", \"number\" or \"Promise\", got \"".concat(_typeof(params.inputValue), "\""));
+    }
+
+    setInputPlaceholder(input, params);
+    input.type = params.input;
+    return input;
+  };
+
+  renderInputType.file = function (input, params) {
+    setInputPlaceholder(input, params);
+    return input;
+  };
+
+  renderInputType.range = function (range, params) {
+    var rangeInput = range.querySelector('input');
+    var rangeOutput = range.querySelector('output');
+    rangeInput.value = params.inputValue;
+    rangeInput.type = params.input;
+    rangeOutput.value = params.inputValue;
+    return range;
+  };
+
+  renderInputType.select = function (select, params) {
+    select.textContent = '';
+
+    if (params.inputPlaceholder) {
+      var placeholder = document.createElement('option');
+      setInnerHtml(placeholder, params.inputPlaceholder);
+      placeholder.value = '';
+      placeholder.disabled = true;
+      placeholder.selected = true;
+      select.appendChild(placeholder);
+    }
+
+    return select;
+  };
+
+  renderInputType.radio = function (radio) {
+    radio.textContent = '';
+    return radio;
+  };
+
+  renderInputType.checkbox = function (checkboxContainer, params) {
+    var checkbox = getInput(getContent(), 'checkbox');
+    checkbox.value = 1;
+    checkbox.id = swalClasses.checkbox;
+    checkbox.checked = Boolean(params.inputValue);
+    var label = checkboxContainer.querySelector('span');
+    setInnerHtml(label, params.inputPlaceholder);
+    return checkboxContainer;
+  };
+
+  renderInputType.textarea = function (textarea, params) {
+    textarea.value = params.inputValue;
+    setInputPlaceholder(textarea, params);
+
+    if ('MutationObserver' in window) {
+      // #1699
+      var initialPopupWidth = parseInt(window.getComputedStyle(getPopup()).width);
+      var popupPadding = parseInt(window.getComputedStyle(getPopup()).paddingLeft) + parseInt(window.getComputedStyle(getPopup()).paddingRight);
+
+      var outputsize = function outputsize() {
+        var contentWidth = textarea.offsetWidth + popupPadding;
+
+        if (contentWidth > initialPopupWidth) {
+          getPopup().style.width = "".concat(contentWidth, "px");
+        } else {
+          getPopup().style.width = null;
+        }
+      };
+
+      new MutationObserver(outputsize).observe(textarea, {
+        attributes: true,
+        attributeFilter: ['style']
+      });
+    }
+
+    return textarea;
+  };
+
+  var renderContent = function renderContent(instance, params) {
+    var content = getContent().querySelector("#".concat(swalClasses.content)); // Content as HTML
+
+    if (params.html) {
+      parseHtmlToContainer(params.html, content);
+      show(content, 'block'); // Content as plain text
+    } else if (params.text) {
+      content.textContent = params.text;
+      show(content, 'block'); // No content
+    } else {
+      hide(content);
+    }
+
+    renderInput(instance, params); // Custom class
+
+    applyCustomClass(getContent(), params, 'content');
+  };
+
+  var renderFooter = function renderFooter(instance, params) {
+    var footer = getFooter();
+    toggle(footer, params.footer);
+
+    if (params.footer) {
+      parseHtmlToContainer(params.footer, footer);
+    } // Custom class
+
+
+    applyCustomClass(footer, params, 'footer');
+  };
+
+  var renderCloseButton = function renderCloseButton(instance, params) {
+    var closeButton = getCloseButton();
+    setInnerHtml(closeButton, params.closeButtonHtml); // Custom class
+
+    applyCustomClass(closeButton, params, 'closeButton');
+    toggle(closeButton, params.showCloseButton);
+    closeButton.setAttribute('aria-label', params.closeButtonAriaLabel);
+  };
+
+  var renderIcon = function renderIcon(instance, params) {
+    var innerParams = privateProps.innerParams.get(instance); // if the give icon already rendered, apply the custom class without re-rendering the icon
+
+    if (innerParams && params.icon === innerParams.icon && getIcon()) {
+      applyCustomClass(getIcon(), params, 'icon');
+      return;
+    }
+
+    hideAllIcons();
+
+    if (!params.icon) {
+      return;
+    }
+
+    if (Object.keys(iconTypes).indexOf(params.icon) !== -1) {
+      var icon = elementBySelector(".".concat(swalClasses.icon, ".").concat(iconTypes[params.icon]));
+      show(icon); // Custom or default content
+
+      setContent(icon, params);
+      adjustSuccessIconBackgoundColor(); // Custom class
+
+      applyCustomClass(icon, params, 'icon'); // Animate icon
+
+      addClass(icon, params.showClass.icon);
+    } else {
+      error("Unknown icon! Expected \"success\", \"error\", \"warning\", \"info\" or \"question\", got \"".concat(params.icon, "\""));
+    }
+  };
+
+  var hideAllIcons = function hideAllIcons() {
+    var icons = getIcons();
+
+    for (var i = 0; i < icons.length; i++) {
+      hide(icons[i]);
+    }
+  }; // Adjust success icon background color to match the popup background color
+
+
+  var adjustSuccessIconBackgoundColor = function adjustSuccessIconBackgoundColor() {
+    var popup = getPopup();
+    var popupBackgroundColor = window.getComputedStyle(popup).getPropertyValue('background-color');
+    var successIconParts = popup.querySelectorAll('[class^=swal2-success-circular-line], .swal2-success-fix');
+
+    for (var i = 0; i < successIconParts.length; i++) {
+      successIconParts[i].style.backgroundColor = popupBackgroundColor;
+    }
+  };
+
+  var setContent = function setContent(icon, params) {
+    icon.textContent = '';
+
+    if (params.iconHtml) {
+      setInnerHtml(icon, iconContent(params.iconHtml));
+    } else if (params.icon === 'success') {
+      setInnerHtml(icon, "\n      <div class=\"swal2-success-circular-line-left\"></div>\n      <span class=\"swal2-success-line-tip\"></span> <span class=\"swal2-success-line-long\"></span>\n      <div class=\"swal2-success-ring\"></div> <div class=\"swal2-success-fix\"></div>\n      <div class=\"swal2-success-circular-line-right\"></div>\n    ");
+    } else if (params.icon === 'error') {
+      setInnerHtml(icon, "\n      <span class=\"swal2-x-mark\">\n        <span class=\"swal2-x-mark-line-left\"></span>\n        <span class=\"swal2-x-mark-line-right\"></span>\n      </span>\n    ");
+    } else {
+      var defaultIconHtml = {
+        question: '?',
+        warning: '!',
+        info: 'i'
+      };
+      setInnerHtml(icon, iconContent(defaultIconHtml[params.icon]));
+    }
+  };
+
+  var iconContent = function iconContent(content) {
+    return "<div class=\"".concat(swalClasses['icon-content'], "\">").concat(content, "</div>");
+  };
+
+  var renderImage = function renderImage(instance, params) {
+    var image = getImage();
+
+    if (!params.imageUrl) {
+      return hide(image);
+    }
+
+    show(image); // Src, alt
+
+    image.setAttribute('src', params.imageUrl);
+    image.setAttribute('alt', params.imageAlt); // Width, height
+
+    applyNumericalStyle(image, 'width', params.imageWidth);
+    applyNumericalStyle(image, 'height', params.imageHeight); // Class
+
+    image.className = swalClasses.image;
+    applyCustomClass(image, params, 'image');
+  };
+
+  var currentSteps = [];
+  /*
+   * Global function for chaining sweetAlert popups
+   */
+
+  var queue = function queue(steps) {
+    var Swal = this;
+    currentSteps = steps;
+
+    var resetAndResolve = function resetAndResolve(resolve, value) {
+      currentSteps = [];
+      resolve(value);
+    };
+
+    var queueResult = [];
+    return new Promise(function (resolve) {
+      (function step(i, callback) {
+        if (i < currentSteps.length) {
+          document.body.setAttribute('data-swal2-queue-step', i);
+          Swal.fire(currentSteps[i]).then(function (result) {
+            if (typeof result.value !== 'undefined') {
+              queueResult.push(result.value);
+              step(i + 1, callback);
+            } else {
+              resetAndResolve(resolve, {
+                dismiss: result.dismiss
+              });
+            }
+          });
+        } else {
+          resetAndResolve(resolve, {
+            value: queueResult
+          });
+        }
+      })(0);
+    });
+  };
+  /*
+   * Global function for getting the index of current popup in queue
+   */
+
+  var getQueueStep = function getQueueStep() {
+    return getContainer() && getContainer().getAttribute('data-queue-step');
+  };
+  /*
+   * Global function for inserting a popup to the queue
+   */
+
+  var insertQueueStep = function insertQueueStep(step, index) {
+    if (index && index < currentSteps.length) {
+      return currentSteps.splice(index, 0, step);
+    }
+
+    return currentSteps.push(step);
+  };
+  /*
+   * Global function for deleting a popup from the queue
+   */
+
+  var deleteQueueStep = function deleteQueueStep(index) {
+    if (typeof currentSteps[index] !== 'undefined') {
+      currentSteps.splice(index, 1);
+    }
+  };
+
+  var createStepElement = function createStepElement(step) {
+    var stepEl = document.createElement('li');
+    addClass(stepEl, swalClasses['progress-step']);
+    setInnerHtml(stepEl, step);
+    return stepEl;
+  };
+
+  var createLineElement = function createLineElement(params) {
+    var lineEl = document.createElement('li');
+    addClass(lineEl, swalClasses['progress-step-line']);
+
+    if (params.progressStepsDistance) {
+      lineEl.style.width = params.progressStepsDistance;
+    }
+
+    return lineEl;
+  };
+
+  var renderProgressSteps = function renderProgressSteps(instance, params) {
+    var progressStepsContainer = getProgressSteps();
+
+    if (!params.progressSteps || params.progressSteps.length === 0) {
+      return hide(progressStepsContainer);
+    }
+
+    show(progressStepsContainer);
+    progressStepsContainer.textContent = '';
+    var currentProgressStep = parseInt(params.currentProgressStep === undefined ? getQueueStep() : params.currentProgressStep);
+
+    if (currentProgressStep >= params.progressSteps.length) {
+      warn('Invalid currentProgressStep parameter, it should be less than progressSteps.length ' + '(currentProgressStep like JS arrays starts from 0)');
+    }
+
+    params.progressSteps.forEach(function (step, index) {
+      var stepEl = createStepElement(step);
+      progressStepsContainer.appendChild(stepEl);
+
+      if (index === currentProgressStep) {
+        addClass(stepEl, swalClasses['active-progress-step']);
+      }
+
+      if (index !== params.progressSteps.length - 1) {
+        var lineEl = createLineElement(step);
+        progressStepsContainer.appendChild(lineEl);
+      }
+    });
+  };
+
+  var renderTitle = function renderTitle(instance, params) {
+    var title = getTitle();
+    toggle(title, params.title || params.titleText);
+
+    if (params.title) {
+      parseHtmlToContainer(params.title, title);
+    }
+
+    if (params.titleText) {
+      title.innerText = params.titleText;
+    } // Custom class
+
+
+    applyCustomClass(title, params, 'title');
+  };
+
+  var renderHeader = function renderHeader(instance, params) {
+    var header = getHeader(); // Custom class
+
+    applyCustomClass(header, params, 'header'); // Progress steps
+
+    renderProgressSteps(instance, params); // Icon
+
+    renderIcon(instance, params); // Image
+
+    renderImage(instance, params); // Title
+
+    renderTitle(instance, params); // Close button
+
+    renderCloseButton(instance, params);
+  };
+
+  var renderPopup = function renderPopup(instance, params) {
+    var popup = getPopup(); // Width
+
+    applyNumericalStyle(popup, 'width', params.width); // Padding
+
+    applyNumericalStyle(popup, 'padding', params.padding); // Background
+
+    if (params.background) {
+      popup.style.background = params.background;
+    } // Classes
+
+
+    addClasses(popup, params);
+  };
+
+  var addClasses = function addClasses(popup, params) {
+    // Default Class + showClass when updating Swal.update({})
+    popup.className = "".concat(swalClasses.popup, " ").concat(isVisible(popup) ? params.showClass.popup : '');
+
+    if (params.toast) {
+      addClass([document.documentElement, document.body], swalClasses['toast-shown']);
+      addClass(popup, swalClasses.toast);
+    } else {
+      addClass(popup, swalClasses.modal);
+    } // Custom class
+
+
+    applyCustomClass(popup, params, 'popup');
+
+    if (typeof params.customClass === 'string') {
+      addClass(popup, params.customClass);
+    } // Icon class (#1842)
+
+
+    if (params.icon) {
+      addClass(popup, swalClasses["icon-".concat(params.icon)]);
+    }
+  };
+
+  var render = function render(instance, params) {
+    renderPopup(instance, params);
+    renderContainer(instance, params);
+    renderHeader(instance, params);
+    renderContent(instance, params);
+    renderActions(instance, params);
+    renderFooter(instance, params);
+
+    if (typeof params.onRender === 'function') {
+      params.onRender(getPopup());
+    }
+  };
+
+  /*
+   * Global function to determine if SweetAlert2 popup is shown
+   */
+
+  var isVisible$1 = function isVisible$$1() {
+    return isVisible(getPopup());
+  };
+  /*
+   * Global function to click 'Confirm' button
+   */
+
+  var clickConfirm = function clickConfirm() {
+    return getConfirmButton() && getConfirmButton().click();
+  };
+  /*
+   * Global function to click 'Cancel' button
+   */
+
+  var clickCancel = function clickCancel() {
+    return getCancelButton() && getCancelButton().click();
+  };
+
+  function fire() {
+    var Swal = this;
+
+    for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+      args[_key] = arguments[_key];
+    }
+
+    return _construct(Swal, args);
+  }
+
+  /**
+   * Returns an extended version of `Swal` containing `params` as defaults.
+   * Useful for reusing Swal configuration.
+   *
+   * For example:
+   *
+   * Before:
+   * const textPromptOptions = { input: 'text', showCancelButton: true }
+   * const {value: firstName} = await Swal.fire({ ...textPromptOptions, title: 'What is your first name?' })
+   * const {value: lastName} = await Swal.fire({ ...textPromptOptions, title: 'What is your last name?' })
+   *
+   * After:
+   * const TextPrompt = Swal.mixin({ input: 'text', showCancelButton: true })
+   * const {value: firstName} = await TextPrompt('What is your first name?')
+   * const {value: lastName} = await TextPrompt('What is your last name?')
+   *
+   * @param mixinParams
+   */
+  function mixin(mixinParams) {
+    var MixinSwal = /*#__PURE__*/function (_this) {
+      _inherits(MixinSwal, _this);
+
+      var _super = _createSuper(MixinSwal);
+
+      function MixinSwal() {
+        _classCallCheck(this, MixinSwal);
+
+        return _super.apply(this, arguments);
+      }
+
+      _createClass(MixinSwal, [{
+        key: "_main",
+        value: function _main(params) {
+          return _get(_getPrototypeOf(MixinSwal.prototype), "_main", this).call(this, _extends({}, mixinParams, params));
+        }
+      }]);
+
+      return MixinSwal;
+    }(this);
+
+    return MixinSwal;
+  }
+
+  /**
+   * Show spinner instead of Confirm button
+   */
+
+  var showLoading = function showLoading() {
+    var popup = getPopup();
+
+    if (!popup) {
+      Swal.fire();
+    }
+
+    popup = getPopup();
+    var actions = getActions();
+    var confirmButton = getConfirmButton();
+    show(actions);
+    show(confirmButton, 'inline-block');
+    addClass([popup, actions], swalClasses.loading);
+    confirmButton.disabled = true;
+    popup.setAttribute('data-loading', true);
+    popup.setAttribute('aria-busy', true);
+    popup.focus();
+  };
+
+  var RESTORE_FOCUS_TIMEOUT = 100;
+
+  var globalState = {};
+
+  var focusPreviousActiveElement = function focusPreviousActiveElement() {
+    if (globalState.previousActiveElement && globalState.previousActiveElement.focus) {
+      globalState.previousActiveElement.focus();
+      globalState.previousActiveElement = null;
+    } else if (document.body) {
+      document.body.focus();
+    }
+  }; // Restore previous active (focused) element
+
+
+  var restoreActiveElement = function restoreActiveElement() {
+    return new Promise(function (resolve) {
+      var x = window.scrollX;
+      var y = window.scrollY;
+      globalState.restoreFocusTimeout = setTimeout(function () {
+        focusPreviousActiveElement();
+        resolve();
+      }, RESTORE_FOCUS_TIMEOUT); // issues/900
+
+      /* istanbul ignore if */
+
+      if (typeof x !== 'undefined' && typeof y !== 'undefined') {
+        // IE doesn't have scrollX/scrollY support
+        window.scrollTo(x, y);
+      }
+    });
+  };
+
+  /**
+   * If `timer` parameter is set, returns number of milliseconds of timer remained.
+   * Otherwise, returns undefined.
+   */
+
+  var getTimerLeft = function getTimerLeft() {
+    return globalState.timeout && globalState.timeout.getTimerLeft();
+  };
+  /**
+   * Stop timer. Returns number of milliseconds of timer remained.
+   * If `timer` parameter isn't set, returns undefined.
+   */
+
+  var stopTimer = function stopTimer() {
+    if (globalState.timeout) {
+      stopTimerProgressBar();
+      return globalState.timeout.stop();
+    }
+  };
+  /**
+   * Resume timer. Returns number of milliseconds of timer remained.
+   * If `timer` parameter isn't set, returns undefined.
+   */
+
+  var resumeTimer = function resumeTimer() {
+    if (globalState.timeout) {
+      var remaining = globalState.timeout.start();
+      animateTimerProgressBar(remaining);
+      return remaining;
+    }
+  };
+  /**
+   * Resume timer. Returns number of milliseconds of timer remained.
+   * If `timer` parameter isn't set, returns undefined.
+   */
+
+  var toggleTimer = function toggleTimer() {
+    var timer = globalState.timeout;
+    return timer && (timer.running ? stopTimer() : resumeTimer());
+  };
+  /**
+   * Increase timer. Returns number of milliseconds of an updated timer.
+   * If `timer` parameter isn't set, returns undefined.
+   */
+
+  var increaseTimer = function increaseTimer(n) {
+    if (globalState.timeout) {
+      var remaining = globalState.timeout.increase(n);
+      animateTimerProgressBar(remaining, true);
+      return remaining;
+    }
+  };
+  /**
+   * Check if timer is running. Returns true if timer is running
+   * or false if timer is paused or stopped.
+   * If `timer` parameter isn't set, returns undefined
+   */
+
+  var isTimerRunning = function isTimerRunning() {
+    return globalState.timeout && globalState.timeout.isRunning();
+  };
+
+  var defaultParams = {
+    title: '',
+    titleText: '',
+    text: '',
+    html: '',
+    footer: '',
+    icon: undefined,
+    iconHtml: undefined,
+    toast: false,
+    animation: true,
+    showClass: {
+      popup: 'swal2-show',
+      backdrop: 'swal2-backdrop-show',
+      icon: 'swal2-icon-show'
+    },
+    hideClass: {
+      popup: 'swal2-hide',
+      backdrop: 'swal2-backdrop-hide',
+      icon: 'swal2-icon-hide'
+    },
+    customClass: undefined,
+    target: 'body',
+    backdrop: true,
+    heightAuto: true,
+    allowOutsideClick: true,
+    allowEscapeKey: true,
+    allowEnterKey: true,
+    stopKeydownPropagation: true,
+    keydownListenerCapture: false,
+    showConfirmButton: true,
+    showCancelButton: false,
+    preConfirm: undefined,
+    confirmButtonText: 'OK',
+    confirmButtonAriaLabel: '',
+    confirmButtonColor: undefined,
+    cancelButtonText: 'Cancel',
+    cancelButtonAriaLabel: '',
+    cancelButtonColor: undefined,
+    buttonsStyling: true,
+    reverseButtons: false,
+    focusConfirm: true,
+    focusCancel: false,
+    showCloseButton: false,
+    closeButtonHtml: '&times;',
+    closeButtonAriaLabel: 'Close this dialog',
+    showLoaderOnConfirm: false,
+    imageUrl: undefined,
+    imageWidth: undefined,
+    imageHeight: undefined,
+    imageAlt: '',
+    timer: undefined,
+    timerProgressBar: false,
+    width: undefined,
+    padding: undefined,
+    background: undefined,
+    input: undefined,
+    inputPlaceholder: '',
+    inputValue: '',
+    inputOptions: {},
+    inputAutoTrim: true,
+    inputAttributes: {},
+    inputValidator: undefined,
+    validationMessage: undefined,
+    grow: false,
+    position: 'center',
+    progressSteps: [],
+    currentProgressStep: undefined,
+    progressStepsDistance: undefined,
+    onBeforeOpen: undefined,
+    onOpen: undefined,
+    onRender: undefined,
+    onClose: undefined,
+    onAfterClose: undefined,
+    onDestroy: undefined,
+    scrollbarPadding: true
+  };
+  var updatableParams = ['title', 'titleText', 'text', 'html', 'icon', 'hideClass', 'customClass', 'allowOutsideClick', 'allowEscapeKey', 'showConfirmButton', 'showCancelButton', 'confirmButtonText', 'confirmButtonAriaLabel', 'confirmButtonColor', 'cancelButtonText', 'cancelButtonAriaLabel', 'cancelButtonColor', 'buttonsStyling', 'reverseButtons', 'imageUrl', 'imageWidth', 'imageHeight', 'imageAlt', 'progressSteps', 'currentProgressStep'];
+  var deprecatedParams = {
+    animation: 'showClass" and "hideClass'
+  };
+  var toastIncompatibleParams = ['allowOutsideClick', 'allowEnterKey', 'backdrop', 'focusConfirm', 'focusCancel', 'heightAuto', 'keydownListenerCapture'];
+  /**
+   * Is valid parameter
+   * @param {String} paramName
+   */
+
+  var isValidParameter = function isValidParameter(paramName) {
+    return Object.prototype.hasOwnProperty.call(defaultParams, paramName);
+  };
+  /**
+   * Is valid parameter for Swal.update() method
+   * @param {String} paramName
+   */
+
+  var isUpdatableParameter = function isUpdatableParameter(paramName) {
+    return updatableParams.indexOf(paramName) !== -1;
+  };
+  /**
+   * Is deprecated parameter
+   * @param {String} paramName
+   */
+
+  var isDeprecatedParameter = function isDeprecatedParameter(paramName) {
+    return deprecatedParams[paramName];
+  };
+
+  var checkIfParamIsValid = function checkIfParamIsValid(param) {
+    if (!isValidParameter(param)) {
+      warn("Unknown parameter \"".concat(param, "\""));
+    }
+  };
+
+  var checkIfToastParamIsValid = function checkIfToastParamIsValid(param) {
+    if (toastIncompatibleParams.indexOf(param) !== -1) {
+      warn("The parameter \"".concat(param, "\" is incompatible with toasts"));
+    }
+  };
+
+  var checkIfParamIsDeprecated = function checkIfParamIsDeprecated(param) {
+    if (isDeprecatedParameter(param)) {
+      warnAboutDepreation(param, isDeprecatedParameter(param));
+    }
+  };
+  /**
+   * Show relevant warnings for given params
+   *
+   * @param params
+   */
+
+
+  var showWarningsForParams = function showWarningsForParams(params) {
+    for (var param in params) {
+      checkIfParamIsValid(param);
+
+      if (params.toast) {
+        checkIfToastParamIsValid(param);
+      }
+
+      checkIfParamIsDeprecated(param);
+    }
+  };
+
+
+
+  var staticMethods = /*#__PURE__*/Object.freeze({
+    isValidParameter: isValidParameter,
+    isUpdatableParameter: isUpdatableParameter,
+    isDeprecatedParameter: isDeprecatedParameter,
+    argsToParams: argsToParams,
+    isVisible: isVisible$1,
+    clickConfirm: clickConfirm,
+    clickCancel: clickCancel,
+    getContainer: getContainer,
+    getPopup: getPopup,
+    getTitle: getTitle,
+    getContent: getContent,
+    getHtmlContainer: getHtmlContainer,
+    getImage: getImage,
+    getIcon: getIcon,
+    getIcons: getIcons,
+    getCloseButton: getCloseButton,
+    getActions: getActions,
+    getConfirmButton: getConfirmButton,
+    getCancelButton: getCancelButton,
+    getHeader: getHeader,
+    getFooter: getFooter,
+    getTimerProgressBar: getTimerProgressBar,
+    getFocusableElements: getFocusableElements,
+    getValidationMessage: getValidationMessage,
+    isLoading: isLoading,
+    fire: fire,
+    mixin: mixin,
+    queue: queue,
+    getQueueStep: getQueueStep,
+    insertQueueStep: insertQueueStep,
+    deleteQueueStep: deleteQueueStep,
+    showLoading: showLoading,
+    enableLoading: showLoading,
+    getTimerLeft: getTimerLeft,
+    stopTimer: stopTimer,
+    resumeTimer: resumeTimer,
+    toggleTimer: toggleTimer,
+    increaseTimer: increaseTimer,
+    isTimerRunning: isTimerRunning
+  });
+
+  /**
+   * Enables buttons and hide loader.
+   */
+
+  function hideLoading() {
+    // do nothing if popup is closed
+    var innerParams = privateProps.innerParams.get(this);
+
+    if (!innerParams) {
+      return;
+    }
+
+    var domCache = privateProps.domCache.get(this);
+
+    if (!innerParams.showConfirmButton) {
+      hide(domCache.confirmButton);
+
+      if (!innerParams.showCancelButton) {
+        hide(domCache.actions);
+      }
+    }
+
+    removeClass([domCache.popup, domCache.actions], swalClasses.loading);
+    domCache.popup.removeAttribute('aria-busy');
+    domCache.popup.removeAttribute('data-loading');
+    domCache.confirmButton.disabled = false;
+    domCache.cancelButton.disabled = false;
+  }
+
+  function getInput$1(instance) {
+    var innerParams = privateProps.innerParams.get(instance || this);
+    var domCache = privateProps.domCache.get(instance || this);
+
+    if (!domCache) {
+      return null;
+    }
+
+    return getInput(domCache.content, innerParams.input);
+  }
+
+  var fixScrollbar = function fixScrollbar() {
+    // for queues, do not do this more than once
+    if (states.previousBodyPadding !== null) {
+      return;
+    } // if the body has overflow
+
+
+    if (document.body.scrollHeight > window.innerHeight) {
+      // add padding so the content doesn't shift after removal of scrollbar
+      states.previousBodyPadding = parseInt(window.getComputedStyle(document.body).getPropertyValue('padding-right'));
+      document.body.style.paddingRight = "".concat(states.previousBodyPadding + measureScrollbar(), "px");
+    }
+  };
+  var undoScrollbar = function undoScrollbar() {
+    if (states.previousBodyPadding !== null) {
+      document.body.style.paddingRight = "".concat(states.previousBodyPadding, "px");
+      states.previousBodyPadding = null;
+    }
+  };
+
+  /* istanbul ignore file */
+
+  var iOSfix = function iOSfix() {
+    var iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream || navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1;
+
+    if (iOS && !hasClass(document.body, swalClasses.iosfix)) {
+      var offset = document.body.scrollTop;
+      document.body.style.top = "".concat(offset * -1, "px");
+      addClass(document.body, swalClasses.iosfix);
+      lockBodyScroll();
+    }
+  };
+
+  var lockBodyScroll = function lockBodyScroll() {
+    // #1246
+    var container = getContainer();
+    var preventTouchMove;
+
+    container.ontouchstart = function (e) {
+      preventTouchMove = shouldPreventTouchMove(e.target);
+    };
+
+    container.ontouchmove = function (e) {
+      if (preventTouchMove) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
+    };
+  };
+
+  var shouldPreventTouchMove = function shouldPreventTouchMove(target) {
+    var container = getContainer();
+
+    if (target === container) {
+      return true;
+    }
+
+    if (!isScrollable(container) && target.tagName !== 'INPUT' && // #1603
+    !(isScrollable(getContent()) && // #1944
+    getContent().contains(target))) {
+      return true;
+    }
+
+    return false;
+  };
+
+  var undoIOSfix = function undoIOSfix() {
+    if (hasClass(document.body, swalClasses.iosfix)) {
+      var offset = parseInt(document.body.style.top, 10);
+      removeClass(document.body, swalClasses.iosfix);
+      document.body.style.top = '';
+      document.body.scrollTop = offset * -1;
+    }
+  };
+
+  /* istanbul ignore file */
+
+  var isIE11 = function isIE11() {
+    return !!window.MSInputMethodContext && !!document.documentMode;
+  }; // Fix IE11 centering sweetalert2/issues/933
+
+
+  var fixVerticalPositionIE = function fixVerticalPositionIE() {
+    var container = getContainer();
+    var popup = getPopup();
+    container.style.removeProperty('align-items');
+
+    if (popup.offsetTop < 0) {
+      container.style.alignItems = 'flex-start';
+    }
+  };
+
+  var IEfix = function IEfix() {
+    if (typeof window !== 'undefined' && isIE11()) {
+      fixVerticalPositionIE();
+      window.addEventListener('resize', fixVerticalPositionIE);
+    }
+  };
+  var undoIEfix = function undoIEfix() {
+    if (typeof window !== 'undefined' && isIE11()) {
+      window.removeEventListener('resize', fixVerticalPositionIE);
+    }
+  };
+
+  // Adding aria-hidden="true" to elements outside of the active modal dialog ensures that
+  // elements not within the active modal dialog will not be surfaced if a user opens a screen
+  // reader’s list of elements (headings, form controls, landmarks, etc.) in the document.
+
+  var setAriaHidden = function setAriaHidden() {
+    var bodyChildren = toArray(document.body.children);
+    bodyChildren.forEach(function (el) {
+      if (el === getContainer() || contains(el, getContainer())) {
+        return;
+      }
+
+      if (el.hasAttribute('aria-hidden')) {
+        el.setAttribute('data-previous-aria-hidden', el.getAttribute('aria-hidden'));
+      }
+
+      el.setAttribute('aria-hidden', 'true');
+    });
+  };
+  var unsetAriaHidden = function unsetAriaHidden() {
+    var bodyChildren = toArray(document.body.children);
+    bodyChildren.forEach(function (el) {
+      if (el.hasAttribute('data-previous-aria-hidden')) {
+        el.setAttribute('aria-hidden', el.getAttribute('data-previous-aria-hidden'));
+        el.removeAttribute('data-previous-aria-hidden');
+      } else {
+        el.removeAttribute('aria-hidden');
+      }
+    });
+  };
+
+  /**
+   * This module containts `WeakMap`s for each effectively-"private  property" that a `Swal` has.
+   * For example, to set the private property "foo" of `this` to "bar", you can `privateProps.foo.set(this, 'bar')`
+   * This is the approach that Babel will probably take to implement private methods/fields
+   *   https://github.com/tc39/proposal-private-methods
+   *   https://github.com/babel/babel/pull/7555
+   * Once we have the changes from that PR in Babel, and our core class fits reasonable in *one module*
+   *   then we can use that language feature.
+   */
+  var privateMethods = {
+    swalPromiseResolve: new WeakMap()
+  };
+
+  /*
+   * Instance method to close sweetAlert
+   */
+
+  function removePopupAndResetState(instance, container, isToast$$1, onAfterClose) {
+    if (isToast$$1) {
+      triggerOnAfterCloseAndDispose(instance, onAfterClose);
+    } else {
+      restoreActiveElement().then(function () {
+        return triggerOnAfterCloseAndDispose(instance, onAfterClose);
+      });
+      globalState.keydownTarget.removeEventListener('keydown', globalState.keydownHandler, {
+        capture: globalState.keydownListenerCapture
+      });
+      globalState.keydownHandlerAdded = false;
+    }
+
+    if (container.parentNode && !document.body.getAttribute('data-swal2-queue-step')) {
+      container.parentNode.removeChild(container);
+    }
+
+    if (isModal()) {
+      undoScrollbar();
+      undoIOSfix();
+      undoIEfix();
+      unsetAriaHidden();
+    }
+
+    removeBodyClasses();
+  }
+
+  function removeBodyClasses() {
+    removeClass([document.documentElement, document.body], [swalClasses.shown, swalClasses['height-auto'], swalClasses['no-backdrop'], swalClasses['toast-shown'], swalClasses['toast-column']]);
+  }
+
+  function close(resolveValue) {
+    var popup = getPopup();
+
+    if (!popup) {
+      return;
+    }
+
+    var innerParams = privateProps.innerParams.get(this);
+
+    if (!innerParams || hasClass(popup, innerParams.hideClass.popup)) {
+      return;
+    }
+
+    var swalPromiseResolve = privateMethods.swalPromiseResolve.get(this);
+    removeClass(popup, innerParams.showClass.popup);
+    addClass(popup, innerParams.hideClass.popup);
+    var backdrop = getContainer();
+    removeClass(backdrop, innerParams.showClass.backdrop);
+    addClass(backdrop, innerParams.hideClass.backdrop);
+    handlePopupAnimation(this, popup, innerParams); // Resolve Swal promise
+
+    swalPromiseResolve(resolveValue || {});
+  }
+
+  var handlePopupAnimation = function handlePopupAnimation(instance, popup, innerParams) {
+    var container = getContainer(); // If animation is supported, animate
+
+    var animationIsSupported = animationEndEvent && hasCssAnimation(popup);
+    var onClose = innerParams.onClose,
+        onAfterClose = innerParams.onAfterClose;
+
+    if (onClose !== null && typeof onClose === 'function') {
+      onClose(popup);
+    }
+
+    if (animationIsSupported) {
+      animatePopup(instance, popup, container, onAfterClose);
+    } else {
+      // Otherwise, remove immediately
+      removePopupAndResetState(instance, container, isToast(), onAfterClose);
+    }
+  };
+
+  var animatePopup = function animatePopup(instance, popup, container, onAfterClose) {
+    globalState.swalCloseEventFinishedCallback = removePopupAndResetState.bind(null, instance, container, isToast(), onAfterClose);
+    popup.addEventListener(animationEndEvent, function (e) {
+      if (e.target === popup) {
+        globalState.swalCloseEventFinishedCallback();
+        delete globalState.swalCloseEventFinishedCallback;
+      }
+    });
+  };
+
+  var triggerOnAfterCloseAndDispose = function triggerOnAfterCloseAndDispose(instance, onAfterClose) {
+    setTimeout(function () {
+      if (typeof onAfterClose === 'function') {
+        onAfterClose();
+      }
+
+      instance._destroy();
+    });
+  };
+
+  function setButtonsDisabled(instance, buttons, disabled) {
+    var domCache = privateProps.domCache.get(instance);
+    buttons.forEach(function (button) {
+      domCache[button].disabled = disabled;
+    });
+  }
+
+  function setInputDisabled(input, disabled) {
+    if (!input) {
+      return false;
+    }
+
+    if (input.type === 'radio') {
+      var radiosContainer = input.parentNode.parentNode;
+      var radios = radiosContainer.querySelectorAll('input');
+
+      for (var i = 0; i < radios.length; i++) {
+        radios[i].disabled = disabled;
+      }
+    } else {
+      input.disabled = disabled;
+    }
+  }
+
+  function enableButtons() {
+    setButtonsDisabled(this, ['confirmButton', 'cancelButton'], false);
+  }
+  function disableButtons() {
+    setButtonsDisabled(this, ['confirmButton', 'cancelButton'], true);
+  }
+  function enableInput() {
+    return setInputDisabled(this.getInput(), false);
+  }
+  function disableInput() {
+    return setInputDisabled(this.getInput(), true);
+  }
+
+  function showValidationMessage(error) {
+    var domCache = privateProps.domCache.get(this);
+    setInnerHtml(domCache.validationMessage, error);
+    var popupComputedStyle = window.getComputedStyle(domCache.popup);
+    domCache.validationMessage.style.marginLeft = "-".concat(popupComputedStyle.getPropertyValue('padding-left'));
+    domCache.validationMessage.style.marginRight = "-".concat(popupComputedStyle.getPropertyValue('padding-right'));
+    show(domCache.validationMessage);
+    var input = this.getInput();
+
+    if (input) {
+      input.setAttribute('aria-invalid', true);
+      input.setAttribute('aria-describedBy', swalClasses['validation-message']);
+      focusInput(input);
+      addClass(input, swalClasses.inputerror);
+    }
+  } // Hide block with validation message
+
+  function resetValidationMessage$1() {
+    var domCache = privateProps.domCache.get(this);
+
+    if (domCache.validationMessage) {
+      hide(domCache.validationMessage);
+    }
+
+    var input = this.getInput();
+
+    if (input) {
+      input.removeAttribute('aria-invalid');
+      input.removeAttribute('aria-describedBy');
+      removeClass(input, swalClasses.inputerror);
+    }
+  }
+
+  function getProgressSteps$1() {
+    var domCache = privateProps.domCache.get(this);
+    return domCache.progressSteps;
+  }
+
+  var Timer = /*#__PURE__*/function () {
+    function Timer(callback, delay) {
+      _classCallCheck(this, Timer);
+
+      this.callback = callback;
+      this.remaining = delay;
+      this.running = false;
+      this.start();
+    }
+
+    _createClass(Timer, [{
+      key: "start",
+      value: function start() {
+        if (!this.running) {
+          this.running = true;
+          this.started = new Date();
+          this.id = setTimeout(this.callback, this.remaining);
+        }
+
+        return this.remaining;
+      }
+    }, {
+      key: "stop",
+      value: function stop() {
+        if (this.running) {
+          this.running = false;
+          clearTimeout(this.id);
+          this.remaining -= new Date() - this.started;
+        }
+
+        return this.remaining;
+      }
+    }, {
+      key: "increase",
+      value: function increase(n) {
+        var running = this.running;
+
+        if (running) {
+          this.stop();
+        }
+
+        this.remaining += n;
+
+        if (running) {
+          this.start();
+        }
+
+        return this.remaining;
+      }
+    }, {
+      key: "getTimerLeft",
+      value: function getTimerLeft() {
+        if (this.running) {
+          this.stop();
+          this.start();
+        }
+
+        return this.remaining;
+      }
+    }, {
+      key: "isRunning",
+      value: function isRunning() {
+        return this.running;
+      }
+    }]);
+
+    return Timer;
+  }();
+
+  var defaultInputValidators = {
+    email: function email(string, validationMessage) {
+      return /^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z0-9-]{2,24}$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid email address');
+    },
+    url: function url(string, validationMessage) {
+      // taken from https://stackoverflow.com/a/3809435 with a small change from #1306
+      return /^https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{2,256}\.[a-z]{2,63}\b([-a-zA-Z0-9@:%_+.~#?&/=]*)$/.test(string) ? Promise.resolve() : Promise.resolve(validationMessage || 'Invalid URL');
+    }
+  };
+
+  function setDefaultInputValidators(params) {
+    // Use default `inputValidator` for supported input types if not provided
+    if (!params.inputValidator) {
+      Object.keys(defaultInputValidators).forEach(function (key) {
+        if (params.input === key) {
+          params.inputValidator = defaultInputValidators[key];
+        }
+      });
+    }
+  }
+
+  function validateCustomTargetElement(params) {
+    // Determine if the custom target element is valid
+    if (!params.target || typeof params.target === 'string' && !document.querySelector(params.target) || typeof params.target !== 'string' && !params.target.appendChild) {
+      warn('Target parameter is not valid, defaulting to "body"');
+      params.target = 'body';
+    }
+  }
+  /**
+   * Set type, text and actions on popup
+   *
+   * @param params
+   * @returns {boolean}
+   */
+
+
+  function setParameters(params) {
+    setDefaultInputValidators(params); // showLoaderOnConfirm && preConfirm
+
+    if (params.showLoaderOnConfirm && !params.preConfirm) {
+      warn('showLoaderOnConfirm is set to true, but preConfirm is not defined.\n' + 'showLoaderOnConfirm should be used together with preConfirm, see usage example:\n' + 'https://sweetalert2.github.io/#ajax-request');
+    } // params.animation will be actually used in renderPopup.js
+    // but in case when params.animation is a function, we need to call that function
+    // before popup (re)initialization, so it'll be possible to check Swal.isVisible()
+    // inside the params.animation function
+
+
+    params.animation = callIfFunction(params.animation);
+    validateCustomTargetElement(params); // Replace newlines with <br> in title
+
+    if (typeof params.title === 'string') {
+      params.title = params.title.split('\n').join('<br />');
+    }
+
+    init(params);
+  }
+
+  /**
+   * Open popup, add necessary classes and styles, fix scrollbar
+   *
+   * @param {Array} params
+   */
+
+  var openPopup = function openPopup(params) {
+    var container = getContainer();
+    var popup = getPopup();
+
+    if (typeof params.onBeforeOpen === 'function') {
+      params.onBeforeOpen(popup);
+    }
+
+    addClasses$1(container, popup, params); // scrolling is 'hidden' until animation is done, after that 'auto'
+
+    setScrollingVisibility(container, popup);
+
+    if (isModal()) {
+      fixScrollContainer(container, params.scrollbarPadding);
+    }
+
+    if (!isToast() && !globalState.previousActiveElement) {
+      globalState.previousActiveElement = document.activeElement;
+    }
+
+    if (typeof params.onOpen === 'function') {
+      setTimeout(function () {
+        return params.onOpen(popup);
+      });
+    }
+
+    removeClass(container, swalClasses['no-transition']);
+  };
+
+  function swalOpenAnimationFinished(event) {
+    var popup = getPopup();
+
+    if (event.target !== popup) {
+      return;
+    }
+
+    var container = getContainer();
+    popup.removeEventListener(animationEndEvent, swalOpenAnimationFinished);
+    container.style.overflowY = 'auto';
+  }
+
+  var setScrollingVisibility = function setScrollingVisibility(container, popup) {
+    if (animationEndEvent && hasCssAnimation(popup)) {
+      container.style.overflowY = 'hidden';
+      popup.addEventListener(animationEndEvent, swalOpenAnimationFinished);
+    } else {
+      container.style.overflowY = 'auto';
+    }
+  };
+
+  var fixScrollContainer = function fixScrollContainer(container, scrollbarPadding) {
+    iOSfix();
+    IEfix();
+    setAriaHidden();
+
+    if (scrollbarPadding) {
+      fixScrollbar();
+    } // sweetalert2/issues/1247
+
+
+    setTimeout(function () {
+      container.scrollTop = 0;
+    });
+  };
+
+  var addClasses$1 = function addClasses(container, popup, params) {
+    addClass(container, params.showClass.backdrop);
+    show(popup); // Animate popup right after showing it
+
+    addClass(popup, params.showClass.popup);
+    addClass([document.documentElement, document.body], swalClasses.shown);
+
+    if (params.heightAuto && params.backdrop && !params.toast) {
+      addClass([document.documentElement, document.body], swalClasses['height-auto']);
+    }
+  };
+
+  var handleInputOptionsAndValue = function handleInputOptionsAndValue(instance, params) {
+    if (params.input === 'select' || params.input === 'radio') {
+      handleInputOptions(instance, params);
+    } else if (['text', 'email', 'number', 'tel', 'textarea'].indexOf(params.input) !== -1 && isPromise(params.inputValue)) {
+      handleInputValue(instance, params);
+    }
+  };
+  var getInputValue = function getInputValue(instance, innerParams) {
+    var input = instance.getInput();
+
+    if (!input) {
+      return null;
+    }
+
+    switch (innerParams.input) {
+      case 'checkbox':
+        return getCheckboxValue(input);
+
+      case 'radio':
+        return getRadioValue(input);
+
+      case 'file':
+        return getFileValue(input);
+
+      default:
+        return innerParams.inputAutoTrim ? input.value.trim() : input.value;
+    }
+  };
+
+  var getCheckboxValue = function getCheckboxValue(input) {
+    return input.checked ? 1 : 0;
+  };
+
+  var getRadioValue = function getRadioValue(input) {
+    return input.checked ? input.value : null;
+  };
+
+  var getFileValue = function getFileValue(input) {
+    return input.files.length ? input.getAttribute('multiple') !== null ? input.files : input.files[0] : null;
+  };
+
+  var handleInputOptions = function handleInputOptions(instance, params) {
+    var content = getContent();
+
+    var processInputOptions = function processInputOptions(inputOptions) {
+      return populateInputOptions[params.input](content, formatInputOptions(inputOptions), params);
+    };
+
+    if (isPromise(params.inputOptions)) {
+      showLoading();
+      params.inputOptions.then(function (inputOptions) {
+        instance.hideLoading();
+        processInputOptions(inputOptions);
+      });
+    } else if (_typeof(params.inputOptions) === 'object') {
+      processInputOptions(params.inputOptions);
+    } else {
+      error("Unexpected type of inputOptions! Expected object, Map or Promise, got ".concat(_typeof(params.inputOptions)));
+    }
+  };
+
+  var handleInputValue = function handleInputValue(instance, params) {
+    var input = instance.getInput();
+    hide(input);
+    params.inputValue.then(function (inputValue) {
+      input.value = params.input === 'number' ? parseFloat(inputValue) || 0 : "".concat(inputValue);
+      show(input);
+      input.focus();
+      instance.hideLoading();
+    })["catch"](function (err) {
+      error("Error in inputValue promise: ".concat(err));
+      input.value = '';
+      show(input);
+      input.focus();
+      instance.hideLoading();
+    });
+  };
+
+  var populateInputOptions = {
+    select: function select(content, inputOptions, params) {
+      var select = getChildByClass(content, swalClasses.select);
+      inputOptions.forEach(function (inputOption) {
+        var optionValue = inputOption[0];
+        var optionLabel = inputOption[1];
+        var option = document.createElement('option');
+        option.value = optionValue;
+        setInnerHtml(option, optionLabel);
+
+        if (params.inputValue.toString() === optionValue.toString()) {
+          option.selected = true;
+        }
+
+        select.appendChild(option);
+      });
+      select.focus();
+    },
+    radio: function radio(content, inputOptions, params) {
+      var radio = getChildByClass(content, swalClasses.radio);
+      inputOptions.forEach(function (inputOption) {
+        var radioValue = inputOption[0];
+        var radioLabel = inputOption[1];
+        var radioInput = document.createElement('input');
+        var radioLabelElement = document.createElement('label');
+        radioInput.type = 'radio';
+        radioInput.name = swalClasses.radio;
+        radioInput.value = radioValue;
+
+        if (params.inputValue.toString() === radioValue.toString()) {
+          radioInput.checked = true;
+        }
+
+        var label = document.createElement('span');
+        setInnerHtml(label, radioLabel);
+        label.className = swalClasses.label;
+        radioLabelElement.appendChild(radioInput);
+        radioLabelElement.appendChild(label);
+        radio.appendChild(radioLabelElement);
+      });
+      var radios = radio.querySelectorAll('input');
+
+      if (radios.length) {
+        radios[0].focus();
+      }
+    }
+  };
+  /**
+   * Converts `inputOptions` into an array of `[value, label]`s
+   * @param inputOptions
+   */
+
+  var formatInputOptions = function formatInputOptions(inputOptions) {
+    var result = [];
+
+    if (typeof Map !== 'undefined' && inputOptions instanceof Map) {
+      inputOptions.forEach(function (value, key) {
+        result.push([key, value]);
+      });
+    } else {
+      Object.keys(inputOptions).forEach(function (key) {
+        result.push([key, inputOptions[key]]);
+      });
+    }
+
+    return result;
+  };
+
+  var handleConfirmButtonClick = function handleConfirmButtonClick(instance, innerParams) {
+    instance.disableButtons();
+
+    if (innerParams.input) {
+      handleConfirmWithInput(instance, innerParams);
+    } else {
+      confirm(instance, innerParams, true);
+    }
+  };
+  var handleCancelButtonClick = function handleCancelButtonClick(instance, dismissWith) {
+    instance.disableButtons();
+    dismissWith(DismissReason.cancel);
+  };
+
+  var handleConfirmWithInput = function handleConfirmWithInput(instance, innerParams) {
+    var inputValue = getInputValue(instance, innerParams);
+
+    if (innerParams.inputValidator) {
+      instance.disableInput();
+      var validationPromise = Promise.resolve().then(function () {
+        return innerParams.inputValidator(inputValue, innerParams.validationMessage);
+      });
+      validationPromise.then(function (validationMessage) {
+        instance.enableButtons();
+        instance.enableInput();
+
+        if (validationMessage) {
+          instance.showValidationMessage(validationMessage);
+        } else {
+          confirm(instance, innerParams, inputValue);
+        }
+      });
+    } else if (!instance.getInput().checkValidity()) {
+      instance.enableButtons();
+      instance.showValidationMessage(innerParams.validationMessage);
+    } else {
+      confirm(instance, innerParams, inputValue);
+    }
+  };
+
+  var succeedWith = function succeedWith(instance, value) {
+    instance.closePopup({
+      value: value
+    });
+  };
+
+  var confirm = function confirm(instance, innerParams, value) {
+    if (innerParams.showLoaderOnConfirm) {
+      showLoading(); // TODO: make showLoading an *instance* method
+    }
+
+    if (innerParams.preConfirm) {
+      instance.resetValidationMessage();
+      var preConfirmPromise = Promise.resolve().then(function () {
+        return innerParams.preConfirm(value, innerParams.validationMessage);
+      });
+      preConfirmPromise.then(function (preConfirmValue) {
+        if (isVisible(getValidationMessage()) || preConfirmValue === false) {
+          instance.hideLoading();
+        } else {
+          succeedWith(instance, typeof preConfirmValue === 'undefined' ? value : preConfirmValue);
+        }
+      });
+    } else {
+      succeedWith(instance, value);
+    }
+  };
+
+  var addKeydownHandler = function addKeydownHandler(instance, globalState, innerParams, dismissWith) {
+    if (globalState.keydownTarget && globalState.keydownHandlerAdded) {
+      globalState.keydownTarget.removeEventListener('keydown', globalState.keydownHandler, {
+        capture: globalState.keydownListenerCapture
+      });
+      globalState.keydownHandlerAdded = false;
+    }
+
+    if (!innerParams.toast) {
+      globalState.keydownHandler = function (e) {
+        return keydownHandler(instance, e, dismissWith);
+      };
+
+      globalState.keydownTarget = innerParams.keydownListenerCapture ? window : getPopup();
+      globalState.keydownListenerCapture = innerParams.keydownListenerCapture;
+      globalState.keydownTarget.addEventListener('keydown', globalState.keydownHandler, {
+        capture: globalState.keydownListenerCapture
+      });
+      globalState.keydownHandlerAdded = true;
+    }
+  }; // Focus handling
+
+  var setFocus = function setFocus(innerParams, index, increment) {
+    var focusableElements = getFocusableElements(); // search for visible elements and select the next possible match
+
+    for (var i = 0; i < focusableElements.length; i++) {
+      index = index + increment; // rollover to first item
+
+      if (index === focusableElements.length) {
+        index = 0; // go to last item
+      } else if (index === -1) {
+        index = focusableElements.length - 1;
+      }
+
+      return focusableElements[index].focus();
+    } // no visible focusable elements, focus the popup
+
+
+    getPopup().focus();
+  };
+  var arrowKeys = ['ArrowLeft', 'ArrowRight', 'ArrowUp', 'ArrowDown', 'Left', 'Right', 'Up', 'Down' // IE11
+  ];
+  var escKeys = ['Escape', 'Esc' // IE11
+  ];
+
+  var keydownHandler = function keydownHandler(instance, e, dismissWith) {
+    var innerParams = privateProps.innerParams.get(instance);
+
+    if (innerParams.stopKeydownPropagation) {
+      e.stopPropagation();
+    } // ENTER
+
+
+    if (e.key === 'Enter') {
+      handleEnter(instance, e, innerParams); // TAB
+    } else if (e.key === 'Tab') {
+      handleTab(e, innerParams); // ARROWS - switch focus between buttons
+    } else if (arrowKeys.indexOf(e.key) !== -1) {
+      handleArrows(); // ESC
+    } else if (escKeys.indexOf(e.key) !== -1) {
+      handleEsc(e, innerParams, dismissWith);
+    }
+  };
+
+  var handleEnter = function handleEnter(instance, e, innerParams) {
+    // #720 #721
+    if (e.isComposing) {
+      return;
+    }
+
+    if (e.target && instance.getInput() && e.target.outerHTML === instance.getInput().outerHTML) {
+      if (['textarea', 'file'].indexOf(innerParams.input) !== -1) {
+        return; // do not submit
+      }
+
+      clickConfirm();
+      e.preventDefault();
+    }
+  };
+
+  var handleTab = function handleTab(e, innerParams) {
+    var targetElement = e.target;
+    var focusableElements = getFocusableElements();
+    var btnIndex = -1;
+
+    for (var i = 0; i < focusableElements.length; i++) {
+      if (targetElement === focusableElements[i]) {
+        btnIndex = i;
+        break;
+      }
+    }
+
+    if (!e.shiftKey) {
+      // Cycle to the next button
+      setFocus(innerParams, btnIndex, 1);
+    } else {
+      // Cycle to the prev button
+      setFocus(innerParams, btnIndex, -1);
+    }
+
+    e.stopPropagation();
+    e.preventDefault();
+  };
+
+  var handleArrows = function handleArrows() {
+    var confirmButton = getConfirmButton();
+    var cancelButton = getCancelButton(); // focus Cancel button if Confirm button is currently focused
+
+    if (document.activeElement === confirmButton && isVisible(cancelButton)) {
+      cancelButton.focus(); // and vice versa
+    } else if (document.activeElement === cancelButton && isVisible(confirmButton)) {
+      confirmButton.focus();
+    }
+  };
+
+  var handleEsc = function handleEsc(e, innerParams, dismissWith) {
+    if (callIfFunction(innerParams.allowEscapeKey)) {
+      e.preventDefault();
+      dismissWith(DismissReason.esc);
+    }
+  };
+
+  var handlePopupClick = function handlePopupClick(instance, domCache, dismissWith) {
+    var innerParams = privateProps.innerParams.get(instance);
+
+    if (innerParams.toast) {
+      handleToastClick(instance, domCache, dismissWith);
+    } else {
+      // Ignore click events that had mousedown on the popup but mouseup on the container
+      // This can happen when the user drags a slider
+      handleModalMousedown(domCache); // Ignore click events that had mousedown on the container but mouseup on the popup
+
+      handleContainerMousedown(domCache);
+      handleModalClick(instance, domCache, dismissWith);
+    }
+  };
+
+  var handleToastClick = function handleToastClick(instance, domCache, dismissWith) {
+    // Closing toast by internal click
+    domCache.popup.onclick = function () {
+      var innerParams = privateProps.innerParams.get(instance);
+
+      if (innerParams.showConfirmButton || innerParams.showCancelButton || innerParams.showCloseButton || innerParams.input) {
+        return;
+      }
+
+      dismissWith(DismissReason.close);
+    };
+  };
+
+  var ignoreOutsideClick = false;
+
+  var handleModalMousedown = function handleModalMousedown(domCache) {
+    domCache.popup.onmousedown = function () {
+      domCache.container.onmouseup = function (e) {
+        domCache.container.onmouseup = undefined; // We only check if the mouseup target is the container because usually it doesn't
+        // have any other direct children aside of the popup
+
+        if (e.target === domCache.container) {
+          ignoreOutsideClick = true;
+        }
+      };
+    };
+  };
+
+  var handleContainerMousedown = function handleContainerMousedown(domCache) {
+    domCache.container.onmousedown = function () {
+      domCache.popup.onmouseup = function (e) {
+        domCache.popup.onmouseup = undefined; // We also need to check if the mouseup target is a child of the popup
+
+        if (e.target === domCache.popup || domCache.popup.contains(e.target)) {
+          ignoreOutsideClick = true;
+        }
+      };
+    };
+  };
+
+  var handleModalClick = function handleModalClick(instance, domCache, dismissWith) {
+    domCache.container.onclick = function (e) {
+      var innerParams = privateProps.innerParams.get(instance);
+
+      if (ignoreOutsideClick) {
+        ignoreOutsideClick = false;
+        return;
+      }
+
+      if (e.target === domCache.container && callIfFunction(innerParams.allowOutsideClick)) {
+        dismissWith(DismissReason.backdrop);
+      }
+    };
+  };
+
+  function _main(userParams) {
+    showWarningsForParams(userParams);
+
+    if (globalState.currentInstance) {
+      globalState.currentInstance._destroy();
+    }
+
+    globalState.currentInstance = this;
+    var innerParams = prepareParams(userParams);
+    setParameters(innerParams);
+    Object.freeze(innerParams); // clear the previous timer
+
+    if (globalState.timeout) {
+      globalState.timeout.stop();
+      delete globalState.timeout;
+    } // clear the restore focus timeout
+
+
+    clearTimeout(globalState.restoreFocusTimeout);
+    var domCache = populateDomCache(this);
+    render(this, innerParams);
+    privateProps.innerParams.set(this, innerParams);
+    return swalPromise(this, domCache, innerParams);
+  }
+
+  var prepareParams = function prepareParams(userParams) {
+    var showClass = _extends({}, defaultParams.showClass, userParams.showClass);
+
+    var hideClass = _extends({}, defaultParams.hideClass, userParams.hideClass);
+
+    var params = _extends({}, defaultParams, userParams);
+
+    params.showClass = showClass;
+    params.hideClass = hideClass; // @deprecated
+
+    if (userParams.animation === false) {
+      params.showClass = {
+        popup: 'swal2-noanimation',
+        backdrop: 'swal2-noanimation'
+      };
+      params.hideClass = {};
+    }
+
+    return params;
+  };
+
+  var swalPromise = function swalPromise(instance, domCache, innerParams) {
+    return new Promise(function (resolve) {
+      // functions to handle all closings/dismissals
+      var dismissWith = function dismissWith(dismiss) {
+        instance.closePopup({
+          dismiss: dismiss
+        });
+      };
+
+      privateMethods.swalPromiseResolve.set(instance, resolve);
+
+      domCache.confirmButton.onclick = function () {
+        return handleConfirmButtonClick(instance, innerParams);
+      };
+
+      domCache.cancelButton.onclick = function () {
+        return handleCancelButtonClick(instance, dismissWith);
+      };
+
+      domCache.closeButton.onclick = function () {
+        return dismissWith(DismissReason.close);
+      };
+
+      handlePopupClick(instance, domCache, dismissWith);
+      addKeydownHandler(instance, globalState, innerParams, dismissWith);
+
+      if (innerParams.toast && (innerParams.input || innerParams.footer || innerParams.showCloseButton)) {
+        addClass(document.body, swalClasses['toast-column']);
+      } else {
+        removeClass(document.body, swalClasses['toast-column']);
+      }
+
+      handleInputOptionsAndValue(instance, innerParams);
+      openPopup(innerParams);
+      setupTimer(globalState, innerParams, dismissWith);
+      initFocus(domCache, innerParams); // Scroll container to top on open (#1247, #1946)
+
+      setTimeout(function () {
+        domCache.container.scrollTop = 0;
+      });
+    });
+  };
+
+  var populateDomCache = function populateDomCache(instance) {
+    var domCache = {
+      popup: getPopup(),
+      container: getContainer(),
+      content: getContent(),
+      actions: getActions(),
+      confirmButton: getConfirmButton(),
+      cancelButton: getCancelButton(),
+      closeButton: getCloseButton(),
+      validationMessage: getValidationMessage(),
+      progressSteps: getProgressSteps()
+    };
+    privateProps.domCache.set(instance, domCache);
+    return domCache;
+  };
+
+  var setupTimer = function setupTimer(globalState$$1, innerParams, dismissWith) {
+    var timerProgressBar = getTimerProgressBar();
+    hide(timerProgressBar);
+
+    if (innerParams.timer) {
+      globalState$$1.timeout = new Timer(function () {
+        dismissWith('timer');
+        delete globalState$$1.timeout;
+      }, innerParams.timer);
+
+      if (innerParams.timerProgressBar) {
+        show(timerProgressBar);
+        setTimeout(function () {
+          if (globalState$$1.timeout.running) {
+            // timer can be already stopped at this point
+            animateTimerProgressBar(innerParams.timer);
+          }
+        });
+      }
+    }
+  };
+
+  var initFocus = function initFocus(domCache, innerParams) {
+    if (innerParams.toast) {
+      return;
+    }
+
+    if (!callIfFunction(innerParams.allowEnterKey)) {
+      return blurActiveElement();
+    }
+
+    if (innerParams.focusCancel && isVisible(domCache.cancelButton)) {
+      return domCache.cancelButton.focus();
+    }
+
+    if (innerParams.focusConfirm && isVisible(domCache.confirmButton)) {
+      return domCache.confirmButton.focus();
+    }
+
+    setFocus(innerParams, -1, 1);
+  };
+
+  var blurActiveElement = function blurActiveElement() {
+    if (document.activeElement && typeof document.activeElement.blur === 'function') {
+      document.activeElement.blur();
+    }
+  };
+
+  /**
+   * Updates popup parameters.
+   */
+
+  function update(params) {
+    var popup = getPopup();
+    var innerParams = privateProps.innerParams.get(this);
+
+    if (!popup || hasClass(popup, innerParams.hideClass.popup)) {
+      return warn("You're trying to update the closed or closing popup, that won't work. Use the update() method in preConfirm parameter or show a new popup.");
+    }
+
+    var validUpdatableParams = {}; // assign valid params from `params` to `defaults`
+
+    Object.keys(params).forEach(function (param) {
+      if (Swal.isUpdatableParameter(param)) {
+        validUpdatableParams[param] = params[param];
+      } else {
+        warn("Invalid parameter to update: \"".concat(param, "\". Updatable params are listed here: https://github.com/sweetalert2/sweetalert2/blob/master/src/utils/params.js"));
+      }
+    });
+
+    var updatedParams = _extends({}, innerParams, validUpdatableParams);
+
+    render(this, updatedParams);
+    privateProps.innerParams.set(this, updatedParams);
+    Object.defineProperties(this, {
+      params: {
+        value: _extends({}, this.params, params),
+        writable: false,
+        enumerable: true
+      }
+    });
+  }
+
+  function _destroy() {
+    var domCache = privateProps.domCache.get(this);
+    var innerParams = privateProps.innerParams.get(this);
+
+    if (!innerParams) {
+      return; // This instance has already been destroyed
+    } // Check if there is another Swal closing
+
+
+    if (domCache.popup && globalState.swalCloseEventFinishedCallback) {
+      globalState.swalCloseEventFinishedCallback();
+      delete globalState.swalCloseEventFinishedCallback;
+    } // Check if there is a swal disposal defer timer
+
+
+    if (globalState.deferDisposalTimer) {
+      clearTimeout(globalState.deferDisposalTimer);
+      delete globalState.deferDisposalTimer;
+    }
+
+    if (typeof innerParams.onDestroy === 'function') {
+      innerParams.onDestroy();
+    }
+
+    disposeSwal(this);
+  }
+
+  var disposeSwal = function disposeSwal(instance) {
+    // Unset this.params so GC will dispose it (#1569)
+    delete instance.params; // Unset globalState props so GC will dispose globalState (#1569)
+
+    delete globalState.keydownHandler;
+    delete globalState.keydownTarget; // Unset WeakMaps so GC will be able to dispose them (#1569)
+
+    unsetWeakMaps(privateProps);
+    unsetWeakMaps(privateMethods);
+  };
+
+  var unsetWeakMaps = function unsetWeakMaps(obj) {
+    for (var i in obj) {
+      obj[i] = new WeakMap();
+    }
+  };
+
+
+
+  var instanceMethods = /*#__PURE__*/Object.freeze({
+    hideLoading: hideLoading,
+    disableLoading: hideLoading,
+    getInput: getInput$1,
+    close: close,
+    closePopup: close,
+    closeModal: close,
+    closeToast: close,
+    enableButtons: enableButtons,
+    disableButtons: disableButtons,
+    enableInput: enableInput,
+    disableInput: disableInput,
+    showValidationMessage: showValidationMessage,
+    resetValidationMessage: resetValidationMessage$1,
+    getProgressSteps: getProgressSteps$1,
+    _main: _main,
+    update: update,
+    _destroy: _destroy
+  });
+
+  var currentInstance;
+
+  var SweetAlert = /*#__PURE__*/function () {
+    function SweetAlert() {
+      _classCallCheck(this, SweetAlert);
+
+      // Prevent run in Node env
+      if (typeof window === 'undefined') {
+        return;
+      } // Check for the existence of Promise
+
+
+      if (typeof Promise === 'undefined') {
+        error('This package requires a Promise library, please include a shim to enable it in this browser (See: https://github.com/sweetalert2/sweetalert2/wiki/Migration-from-SweetAlert-to-SweetAlert2#1-ie-support)');
+      }
+
+      currentInstance = this;
+
+      for (var _len = arguments.length, args = new Array(_len), _key = 0; _key < _len; _key++) {
+        args[_key] = arguments[_key];
+      }
+
+      var outerParams = Object.freeze(this.constructor.argsToParams(args));
+      Object.defineProperties(this, {
+        params: {
+          value: outerParams,
+          writable: false,
+          enumerable: true,
+          configurable: true
+        }
+      });
+
+      var promise = this._main(this.params);
+
+      privateProps.promise.set(this, promise);
+    } // `catch` cannot be the name of a module export, so we define our thenable methods here instead
+
+
+    _createClass(SweetAlert, [{
+      key: "then",
+      value: function then(onFulfilled) {
+        var promise = privateProps.promise.get(this);
+        return promise.then(onFulfilled);
+      }
+    }, {
+      key: "finally",
+      value: function _finally(onFinally) {
+        var promise = privateProps.promise.get(this);
+        return promise["finally"](onFinally);
+      }
+    }]);
+
+    return SweetAlert;
+  }(); // Assign instance methods from src/instanceMethods/*.js to prototype
+
+
+  _extends(SweetAlert.prototype, instanceMethods); // Assign static methods from src/staticMethods/*.js to constructor
+
+
+  _extends(SweetAlert, staticMethods); // Proxy to instance methods to constructor, for now, for backwards compatibility
+
+
+  Object.keys(instanceMethods).forEach(function (key) {
+    SweetAlert[key] = function () {
+      if (currentInstance) {
+        var _currentInstance;
+
+        return (_currentInstance = currentInstance)[key].apply(_currentInstance, arguments);
+      }
+    };
+  });
+  SweetAlert.DismissReason = DismissReason;
+  SweetAlert.version = '9.10.13';
+
+  var Swal = SweetAlert;
+  Swal["default"] = Swal;
+
+  return Swal;
+
+}));
+if (typeof this !== 'undefined' && this.Sweetalert2){  this.swal = this.sweetAlert = this.Swal = this.SweetAlert = this.Sweetalert2}
+
+"undefined"!=typeof document&&function(e,t){var n=e.createElement("style");if(e.getElementsByTagName("head")[0].appendChild(n),n.styleSheet)n.styleSheet.disabled||(n.styleSheet.cssText=t);else try{n.innerHTML=t}catch(e){n.innerText=t}}(document,".swal2-popup.swal2-toast{flex-direction:row;align-items:center;width:auto;padding:.625em;overflow-y:hidden;background:#fff;box-shadow:0 0 .625em #d9d9d9}.swal2-popup.swal2-toast .swal2-header{flex-direction:row}.swal2-popup.swal2-toast .swal2-title{flex-grow:1;justify-content:flex-start;margin:0 .6em;font-size:1em}.swal2-popup.swal2-toast .swal2-footer{margin:.5em 0 0;padding:.5em 0 0;font-size:.8em}.swal2-popup.swal2-toast .swal2-close{position:static;width:.8em;height:.8em;line-height:.8}.swal2-popup.swal2-toast .swal2-content{justify-content:flex-start;font-size:1em}.swal2-popup.swal2-toast .swal2-icon{width:2em;min-width:2em;height:2em;margin:0}.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:1.8em;font-weight:700}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-popup.swal2-toast .swal2-icon .swal2-icon-content{font-size:.25em}}.swal2-popup.swal2-toast .swal2-icon.swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line]{top:.875em;width:1.375em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:.3125em}.swal2-popup.swal2-toast .swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:.3125em}.swal2-popup.swal2-toast .swal2-actions{flex-basis:auto!important;width:auto;height:auto;margin:0 .3125em}.swal2-popup.swal2-toast .swal2-styled{margin:0 .3125em;padding:.3125em .625em;font-size:1em}.swal2-popup.swal2-toast .swal2-styled:focus{box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(50,100,150,.4)}.swal2-popup.swal2-toast .swal2-success{border-color:#a5dc86}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line]{position:absolute;width:1.6em;height:3em;transform:rotate(45deg);border-radius:50%}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.8em;left:-.5em;transform:rotate(-45deg);transform-origin:2em 2em;border-radius:4em 0 0 4em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.25em;left:.9375em;transform-origin:0 1.5em;border-radius:0 4em 4em 0}.swal2-popup.swal2-toast .swal2-success .swal2-success-ring{width:2em;height:2em}.swal2-popup.swal2-toast .swal2-success .swal2-success-fix{top:0;left:.4375em;width:.4375em;height:2.6875em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line]{height:.3125em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=tip]{top:1.125em;left:.1875em;width:.75em}.swal2-popup.swal2-toast .swal2-success [class^=swal2-success-line][class$=long]{top:.9375em;right:.1875em;width:1.375em}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-toast-animate-success-line-tip .75s;animation:swal2-toast-animate-success-line-tip .75s}.swal2-popup.swal2-toast .swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-toast-animate-success-line-long .75s;animation:swal2-toast-animate-success-line-long .75s}.swal2-popup.swal2-toast.swal2-show{-webkit-animation:swal2-toast-show .5s;animation:swal2-toast-show .5s}.swal2-popup.swal2-toast.swal2-hide{-webkit-animation:swal2-toast-hide .1s forwards;animation:swal2-toast-hide .1s forwards}.swal2-container{display:flex;position:fixed;z-index:1060;top:0;right:0;bottom:0;left:0;flex-direction:row;align-items:center;justify-content:center;padding:.625em;overflow-x:hidden;transition:background-color .1s;-webkit-overflow-scrolling:touch}.swal2-container.swal2-backdrop-show,.swal2-container.swal2-noanimation{background:rgba(0,0,0,.4)}.swal2-container.swal2-backdrop-hide{background:0 0!important}.swal2-container.swal2-top{align-items:flex-start}.swal2-container.swal2-top-left,.swal2-container.swal2-top-start{align-items:flex-start;justify-content:flex-start}.swal2-container.swal2-top-end,.swal2-container.swal2-top-right{align-items:flex-start;justify-content:flex-end}.swal2-container.swal2-center{align-items:center}.swal2-container.swal2-center-left,.swal2-container.swal2-center-start{align-items:center;justify-content:flex-start}.swal2-container.swal2-center-end,.swal2-container.swal2-center-right{align-items:center;justify-content:flex-end}.swal2-container.swal2-bottom{align-items:flex-end}.swal2-container.swal2-bottom-left,.swal2-container.swal2-bottom-start{align-items:flex-end;justify-content:flex-start}.swal2-container.swal2-bottom-end,.swal2-container.swal2-bottom-right{align-items:flex-end;justify-content:flex-end}.swal2-container.swal2-bottom-end>:first-child,.swal2-container.swal2-bottom-left>:first-child,.swal2-container.swal2-bottom-right>:first-child,.swal2-container.swal2-bottom-start>:first-child,.swal2-container.swal2-bottom>:first-child{margin-top:auto}.swal2-container.swal2-grow-fullscreen>.swal2-modal{display:flex!important;flex:1;align-self:stretch;justify-content:center}.swal2-container.swal2-grow-row>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-grow-column{flex:1;flex-direction:column}.swal2-container.swal2-grow-column.swal2-bottom,.swal2-container.swal2-grow-column.swal2-center,.swal2-container.swal2-grow-column.swal2-top{align-items:center}.swal2-container.swal2-grow-column.swal2-bottom-left,.swal2-container.swal2-grow-column.swal2-bottom-start,.swal2-container.swal2-grow-column.swal2-center-left,.swal2-container.swal2-grow-column.swal2-center-start,.swal2-container.swal2-grow-column.swal2-top-left,.swal2-container.swal2-grow-column.swal2-top-start{align-items:flex-start}.swal2-container.swal2-grow-column.swal2-bottom-end,.swal2-container.swal2-grow-column.swal2-bottom-right,.swal2-container.swal2-grow-column.swal2-center-end,.swal2-container.swal2-grow-column.swal2-center-right,.swal2-container.swal2-grow-column.swal2-top-end,.swal2-container.swal2-grow-column.swal2-top-right{align-items:flex-end}.swal2-container.swal2-grow-column>.swal2-modal{display:flex!important;flex:1;align-content:center;justify-content:center}.swal2-container.swal2-no-transition{transition:none!important}.swal2-container:not(.swal2-top):not(.swal2-top-start):not(.swal2-top-end):not(.swal2-top-left):not(.swal2-top-right):not(.swal2-center-start):not(.swal2-center-end):not(.swal2-center-left):not(.swal2-center-right):not(.swal2-bottom):not(.swal2-bottom-start):not(.swal2-bottom-end):not(.swal2-bottom-left):not(.swal2-bottom-right):not(.swal2-grow-fullscreen)>.swal2-modal{margin:auto}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-container .swal2-modal{margin:0!important}}.swal2-popup{display:none;position:relative;box-sizing:border-box;flex-direction:column;justify-content:center;width:32em;max-width:100%;padding:1.25em;border:none;border-radius:.3125em;background:#fff;font-family:inherit;font-size:1rem}.swal2-popup:focus{outline:0}.swal2-popup.swal2-loading{overflow-y:hidden}.swal2-header{display:flex;flex-direction:column;align-items:center}.swal2-title{position:relative;max-width:100%;margin:0 0 .4em;padding:0;color:#595959;font-size:1.875em;font-weight:600;text-align:center;text-transform:none;word-wrap:break-word}.swal2-actions{display:flex;z-index:1;flex-wrap:wrap;align-items:center;justify-content:center;width:100%;margin:1.25em auto 0}.swal2-actions:not(.swal2-loading) .swal2-styled[disabled]{opacity:.4}.swal2-actions:not(.swal2-loading) .swal2-styled:hover{background-image:linear-gradient(rgba(0,0,0,.1),rgba(0,0,0,.1))}.swal2-actions:not(.swal2-loading) .swal2-styled:active{background-image:linear-gradient(rgba(0,0,0,.2),rgba(0,0,0,.2))}.swal2-actions.swal2-loading .swal2-styled.swal2-confirm{box-sizing:border-box;width:2.5em;height:2.5em;margin:.46875em;padding:0;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border:.25em solid transparent;border-radius:100%;border-color:transparent;background-color:transparent!important;color:transparent!important;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-actions.swal2-loading .swal2-styled.swal2-cancel{margin-right:30px;margin-left:30px}.swal2-actions.swal2-loading :not(.swal2-styled).swal2-confirm::after{content:\"\";display:inline-block;width:15px;height:15px;margin-left:5px;-webkit-animation:swal2-rotate-loading 1.5s linear 0s infinite normal;animation:swal2-rotate-loading 1.5s linear 0s infinite normal;border:3px solid #999;border-radius:50%;border-right-color:transparent;box-shadow:1px 1px 1px #fff}.swal2-styled{margin:.3125em;padding:.625em 2em;box-shadow:none;font-weight:500}.swal2-styled:not([disabled]){cursor:pointer}.swal2-styled.swal2-confirm{border:0;border-radius:.25em;background:initial;background-color:#3085d6;color:#fff;font-size:1.0625em}.swal2-styled.swal2-cancel{border:0;border-radius:.25em;background:initial;background-color:#aaa;color:#fff;font-size:1.0625em}.swal2-styled:focus{outline:0;box-shadow:0 0 0 1px #fff,0 0 0 3px rgba(50,100,150,.4)}.swal2-styled::-moz-focus-inner{border:0}.swal2-footer{justify-content:center;margin:1.25em 0 0;padding:1em 0 0;border-top:1px solid #eee;color:#545454;font-size:1em}.swal2-timer-progress-bar-container{position:absolute;right:0;bottom:0;left:0;height:.25em;overflow:hidden;border-bottom-right-radius:.3125em;border-bottom-left-radius:.3125em}.swal2-timer-progress-bar{width:100%;height:.25em;background:rgba(0,0,0,.2)}.swal2-image{max-width:100%;margin:1.25em auto}.swal2-close{position:absolute;z-index:2;top:0;right:0;align-items:center;justify-content:center;width:1.2em;height:1.2em;padding:0;overflow:hidden;transition:color .1s ease-out;border:none;border-radius:0;background:0 0;color:#ccc;font-family:serif;font-size:2.5em;line-height:1.2;cursor:pointer}.swal2-close:hover{transform:none;background:0 0;color:#f27474}.swal2-close::-moz-focus-inner{border:0}.swal2-content{z-index:1;justify-content:center;margin:0;padding:0;color:#545454;font-size:1.125em;font-weight:400;line-height:normal;text-align:center;word-wrap:break-word}.swal2-checkbox,.swal2-file,.swal2-input,.swal2-radio,.swal2-select,.swal2-textarea{margin:1em auto}.swal2-file,.swal2-input,.swal2-textarea{box-sizing:border-box;width:100%;transition:border-color .3s,box-shadow .3s;border:1px solid #d9d9d9;border-radius:.1875em;background:inherit;box-shadow:inset 0 1px 1px rgba(0,0,0,.06);color:inherit;font-size:1.125em}.swal2-file.swal2-inputerror,.swal2-input.swal2-inputerror,.swal2-textarea.swal2-inputerror{border-color:#f27474!important;box-shadow:0 0 2px #f27474!important}.swal2-file:focus,.swal2-input:focus,.swal2-textarea:focus{border:1px solid #b4dbed;outline:0;box-shadow:0 0 3px #c4e6f5}.swal2-file::-webkit-input-placeholder,.swal2-input::-webkit-input-placeholder,.swal2-textarea::-webkit-input-placeholder{color:#ccc}.swal2-file::-moz-placeholder,.swal2-input::-moz-placeholder,.swal2-textarea::-moz-placeholder{color:#ccc}.swal2-file:-ms-input-placeholder,.swal2-input:-ms-input-placeholder,.swal2-textarea:-ms-input-placeholder{color:#ccc}.swal2-file::-ms-input-placeholder,.swal2-input::-ms-input-placeholder,.swal2-textarea::-ms-input-placeholder{color:#ccc}.swal2-file::placeholder,.swal2-input::placeholder,.swal2-textarea::placeholder{color:#ccc}.swal2-range{margin:1em auto;background:#fff}.swal2-range input{width:80%}.swal2-range output{width:20%;color:inherit;font-weight:600;text-align:center}.swal2-range input,.swal2-range output{height:2.625em;padding:0;font-size:1.125em;line-height:2.625em}.swal2-input{height:2.625em;padding:0 .75em}.swal2-input[type=number]{max-width:10em}.swal2-file{background:inherit;font-size:1.125em}.swal2-textarea{height:6.75em;padding:.75em}.swal2-select{min-width:50%;max-width:100%;padding:.375em .625em;background:inherit;color:inherit;font-size:1.125em}.swal2-checkbox,.swal2-radio{align-items:center;justify-content:center;background:#fff;color:inherit}.swal2-checkbox label,.swal2-radio label{margin:0 .6em;font-size:1.125em}.swal2-checkbox input,.swal2-radio input{margin:0 .4em}.swal2-validation-message{display:none;align-items:center;justify-content:center;padding:.625em;overflow:hidden;background:#f0f0f0;color:#666;font-size:1em;font-weight:300}.swal2-validation-message::before{content:\"!\";display:inline-block;width:1.5em;min-width:1.5em;height:1.5em;margin:0 .625em;border-radius:50%;background-color:#f27474;color:#fff;font-weight:600;line-height:1.5em;text-align:center}.swal2-icon{position:relative;box-sizing:content-box;justify-content:center;width:5em;height:5em;margin:1.25em auto 1.875em;border:.25em solid transparent;border-radius:50%;font-family:inherit;line-height:5em;cursor:default;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.swal2-icon .swal2-icon-content{display:flex;align-items:center;font-size:3.75em}.swal2-icon.swal2-error{border-color:#f27474;color:#f27474}.swal2-icon.swal2-error .swal2-x-mark{position:relative;flex-grow:1}.swal2-icon.swal2-error [class^=swal2-x-mark-line]{display:block;position:absolute;top:2.3125em;width:2.9375em;height:.3125em;border-radius:.125em;background-color:#f27474}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=left]{left:1.0625em;transform:rotate(45deg)}.swal2-icon.swal2-error [class^=swal2-x-mark-line][class$=right]{right:1em;transform:rotate(-45deg)}.swal2-icon.swal2-error.swal2-icon-show{-webkit-animation:swal2-animate-error-icon .5s;animation:swal2-animate-error-icon .5s}.swal2-icon.swal2-error.swal2-icon-show .swal2-x-mark{-webkit-animation:swal2-animate-error-x-mark .5s;animation:swal2-animate-error-x-mark .5s}.swal2-icon.swal2-warning{border-color:#facea8;color:#f8bb86}.swal2-icon.swal2-info{border-color:#9de0f6;color:#3fc3ee}.swal2-icon.swal2-question{border-color:#c9dae1;color:#87adbd}.swal2-icon.swal2-success{border-color:#a5dc86;color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-circular-line]{position:absolute;width:3.75em;height:7.5em;transform:rotate(45deg);border-radius:50%}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=left]{top:-.4375em;left:-2.0635em;transform:rotate(-45deg);transform-origin:3.75em 3.75em;border-radius:7.5em 0 0 7.5em}.swal2-icon.swal2-success [class^=swal2-success-circular-line][class$=right]{top:-.6875em;left:1.875em;transform:rotate(-45deg);transform-origin:0 3.75em;border-radius:0 7.5em 7.5em 0}.swal2-icon.swal2-success .swal2-success-ring{position:absolute;z-index:2;top:-.25em;left:-.25em;box-sizing:content-box;width:100%;height:100%;border:.25em solid rgba(165,220,134,.3);border-radius:50%}.swal2-icon.swal2-success .swal2-success-fix{position:absolute;z-index:1;top:.5em;left:1.625em;width:.4375em;height:5.625em;transform:rotate(-45deg)}.swal2-icon.swal2-success [class^=swal2-success-line]{display:block;position:absolute;z-index:2;height:.3125em;border-radius:.125em;background-color:#a5dc86}.swal2-icon.swal2-success [class^=swal2-success-line][class$=tip]{top:2.875em;left:.8125em;width:1.5625em;transform:rotate(45deg)}.swal2-icon.swal2-success [class^=swal2-success-line][class$=long]{top:2.375em;right:.5em;width:2.9375em;transform:rotate(-45deg)}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-tip{-webkit-animation:swal2-animate-success-line-tip .75s;animation:swal2-animate-success-line-tip .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-line-long{-webkit-animation:swal2-animate-success-line-long .75s;animation:swal2-animate-success-line-long .75s}.swal2-icon.swal2-success.swal2-icon-show .swal2-success-circular-line-right{-webkit-animation:swal2-rotate-success-circular-line 4.25s ease-in;animation:swal2-rotate-success-circular-line 4.25s ease-in}.swal2-progress-steps{align-items:center;margin:0 0 1.25em;padding:0;background:inherit;font-weight:600}.swal2-progress-steps li{display:inline-block;position:relative}.swal2-progress-steps .swal2-progress-step{z-index:20;width:2em;height:2em;border-radius:2em;background:#3085d6;color:#fff;line-height:2em;text-align:center}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step{background:#3085d6}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step{background:#add8e6;color:#fff}.swal2-progress-steps .swal2-progress-step.swal2-active-progress-step~.swal2-progress-step-line{background:#add8e6}.swal2-progress-steps .swal2-progress-step-line{z-index:10;width:2.5em;height:.4em;margin:0 -1px;background:#3085d6}[class^=swal2]{-webkit-tap-highlight-color:transparent}.swal2-show{-webkit-animation:swal2-show .3s;animation:swal2-show .3s}.swal2-hide{-webkit-animation:swal2-hide .15s forwards;animation:swal2-hide .15s forwards}.swal2-noanimation{transition:none}.swal2-scrollbar-measure{position:absolute;top:-9999px;width:50px;height:50px;overflow:scroll}.swal2-rtl .swal2-close{right:auto;left:0}.swal2-rtl .swal2-timer-progress-bar{right:0;left:auto}@supports (-ms-accelerator:true){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@media all and (-ms-high-contrast:none),(-ms-high-contrast:active){.swal2-range input{width:100%!important}.swal2-range output{display:none}}@-moz-document url-prefix(){.swal2-close:focus{outline:2px solid rgba(50,100,150,.4)}}@-webkit-keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@keyframes swal2-toast-show{0%{transform:translateY(-.625em) rotateZ(2deg)}33%{transform:translateY(0) rotateZ(-2deg)}66%{transform:translateY(.3125em) rotateZ(2deg)}100%{transform:translateY(0) rotateZ(0)}}@-webkit-keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@keyframes swal2-toast-hide{100%{transform:rotateZ(1deg);opacity:0}}@-webkit-keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@keyframes swal2-toast-animate-success-line-tip{0%{top:.5625em;left:.0625em;width:0}54%{top:.125em;left:.125em;width:0}70%{top:.625em;left:-.25em;width:1.625em}84%{top:1.0625em;left:.75em;width:.5em}100%{top:1.125em;left:.1875em;width:.75em}}@-webkit-keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@keyframes swal2-toast-animate-success-line-long{0%{top:1.625em;right:1.375em;width:0}65%{top:1.25em;right:.9375em;width:0}84%{top:.9375em;right:0;width:1.125em}100%{top:.9375em;right:.1875em;width:1.375em}}@-webkit-keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@keyframes swal2-show{0%{transform:scale(.7)}45%{transform:scale(1.05)}80%{transform:scale(.95)}100%{transform:scale(1)}}@-webkit-keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@keyframes swal2-hide{0%{transform:scale(1);opacity:1}100%{transform:scale(.5);opacity:0}}@-webkit-keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@keyframes swal2-animate-success-line-tip{0%{top:1.1875em;left:.0625em;width:0}54%{top:1.0625em;left:.125em;width:0}70%{top:2.1875em;left:-.375em;width:3.125em}84%{top:3em;left:1.3125em;width:1.0625em}100%{top:2.8125em;left:.8125em;width:1.5625em}}@-webkit-keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@keyframes swal2-animate-success-line-long{0%{top:3.375em;right:2.875em;width:0}65%{top:3.375em;right:2.875em;width:0}84%{top:2.1875em;right:0;width:3.4375em}100%{top:2.375em;right:.5em;width:2.9375em}}@-webkit-keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@keyframes swal2-rotate-success-circular-line{0%{transform:rotate(-45deg)}5%{transform:rotate(-45deg)}12%{transform:rotate(-405deg)}100%{transform:rotate(-405deg)}}@-webkit-keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@keyframes swal2-animate-error-x-mark{0%{margin-top:1.625em;transform:scale(.4);opacity:0}50%{margin-top:1.625em;transform:scale(.4);opacity:0}80%{margin-top:-.375em;transform:scale(1.15)}100%{margin-top:0;transform:scale(1);opacity:1}}@-webkit-keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@keyframes swal2-animate-error-icon{0%{transform:rotateX(100deg);opacity:0}100%{transform:rotateX(0);opacity:1}}@-webkit-keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}@keyframes swal2-rotate-loading{0%{transform:rotate(0)}100%{transform:rotate(360deg)}}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow:hidden}body.swal2-height-auto{height:auto!important}body.swal2-no-backdrop .swal2-container{top:auto;right:auto;bottom:auto;left:auto;max-width:calc(100% - .625em * 2);background-color:transparent!important}body.swal2-no-backdrop .swal2-container>.swal2-modal{box-shadow:0 0 10px rgba(0,0,0,.4)}body.swal2-no-backdrop .swal2-container.swal2-top{top:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-container.swal2-top-left,body.swal2-no-backdrop .swal2-container.swal2-top-start{top:0;left:0}body.swal2-no-backdrop .swal2-container.swal2-top-end,body.swal2-no-backdrop .swal2-container.swal2-top-right{top:0;right:0}body.swal2-no-backdrop .swal2-container.swal2-center{top:50%;left:50%;transform:translate(-50%,-50%)}body.swal2-no-backdrop .swal2-container.swal2-center-left,body.swal2-no-backdrop .swal2-container.swal2-center-start{top:50%;left:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-container.swal2-center-end,body.swal2-no-backdrop .swal2-container.swal2-center-right{top:50%;right:0;transform:translateY(-50%)}body.swal2-no-backdrop .swal2-container.swal2-bottom{bottom:0;left:50%;transform:translateX(-50%)}body.swal2-no-backdrop .swal2-container.swal2-bottom-left,body.swal2-no-backdrop .swal2-container.swal2-bottom-start{bottom:0;left:0}body.swal2-no-backdrop .swal2-container.swal2-bottom-end,body.swal2-no-backdrop .swal2-container.swal2-bottom-right{right:0;bottom:0}@media print{body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown){overflow-y:scroll!important}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown)>[aria-hidden=true]{display:none}body.swal2-shown:not(.swal2-no-backdrop):not(.swal2-toast-shown) .swal2-container{position:static!important}}body.swal2-toast-shown .swal2-container{background-color:transparent}body.swal2-toast-shown .swal2-container.swal2-top{top:0;right:auto;bottom:auto;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-top-end,body.swal2-toast-shown .swal2-container.swal2-top-right{top:0;right:0;bottom:auto;left:auto}body.swal2-toast-shown .swal2-container.swal2-top-left,body.swal2-toast-shown .swal2-container.swal2-top-start{top:0;right:auto;bottom:auto;left:0}body.swal2-toast-shown .swal2-container.swal2-center-left,body.swal2-toast-shown .swal2-container.swal2-center-start{top:50%;right:auto;bottom:auto;left:0;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-center{top:50%;right:auto;bottom:auto;left:50%;transform:translate(-50%,-50%)}body.swal2-toast-shown .swal2-container.swal2-center-end,body.swal2-toast-shown .swal2-container.swal2-center-right{top:50%;right:0;bottom:auto;left:auto;transform:translateY(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-left,body.swal2-toast-shown .swal2-container.swal2-bottom-start{top:auto;right:auto;bottom:0;left:0}body.swal2-toast-shown .swal2-container.swal2-bottom{top:auto;right:auto;bottom:0;left:50%;transform:translateX(-50%)}body.swal2-toast-shown .swal2-container.swal2-bottom-end,body.swal2-toast-shown .swal2-container.swal2-bottom-right{top:auto;right:0;bottom:0;left:auto}body.swal2-toast-column .swal2-toast{flex-direction:column;align-items:stretch}body.swal2-toast-column .swal2-toast .swal2-actions{flex:1;align-self:stretch;height:2.2em;margin-top:.3125em}body.swal2-toast-column .swal2-toast .swal2-loading{justify-content:center}body.swal2-toast-column .swal2-toast .swal2-input{height:2em;margin:.3125em auto;font-size:1em}body.swal2-toast-column .swal2-toast .swal2-validation-message{font-size:1em}");
+
+/***/ }),
+
 /***/ "./node_modules/timers-browserify/main.js":
 /*!************************************************!*\
   !*** ./node_modules/timers-browserify/main.js ***!
@@ -43306,6 +50155,23 @@ var staticRenderFns = [
                                       staticClass: "swal2-x-mark-line-right"
                                     })
                                   ])
+                                ]
+                              ),
+                              _vm._v(" "),
+                              _c(
+                                "div",
+                                {
+                                  staticClass:
+                                    "f-modal-icon f-modal-warning scaleWarning"
+                                },
+                                [
+                                  _c("span", {
+                                    staticClass: "f-modal-body pulseWarningIns"
+                                  }),
+                                  _vm._v(" "),
+                                  _c("span", {
+                                    staticClass: "f-modal-dot pulseWarningIns"
+                                  })
                                 ]
                               )
                             ]
@@ -55585,6 +62451,14 @@ module.exports = function(module) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vuejs_paginate__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vuejs-paginate */ "./node_modules/vuejs-paginate/dist/index.js");
 /* harmony import */ var vuejs_paginate__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(vuejs_paginate__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! sweetalert2 */ "./node_modules/sweetalert2/dist/sweetalert2.all.js");
+/* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var cropperjs__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! cropperjs */ "./node_modules/cropperjs/dist/cropper.js");
+/* harmony import */ var cropperjs__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(cropperjs__WEBPACK_IMPORTED_MODULE_2__);
+function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
+
+
+
 
 /**
  * First we will load all of this project's JavaScript dependencies which
@@ -55598,7 +62472,11 @@ __webpack_require__(/*! ./../../node_modules/bootstrap-select/dist/js/bootstrap-
 
 __webpack_require__(/*! ./../../node_modules/bootstrap-select/dist/js/i18n/defaults-zh_TW */ "./node_modules/bootstrap-select/dist/js/i18n/defaults-zh_TW.js");
 
+__webpack_require__(/*! ./../../node_modules/jquery-cropper/dist/jquery-cropper */ "./node_modules/jquery-cropper/dist/jquery-cropper.js");
+
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a;
+window.Cropper = cropperjs__WEBPACK_IMPORTED_MODULE_2___default.a;
 /**
  * The following block of code may be used to automatically register your
  * Vue components. It will recursively scan this directory for the Vue
@@ -55693,7 +62571,96 @@ $(function () {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
+  }; // ==================== Swal 函式操作 ====================
+
+
+  $.showLoadingModal = function () {
+    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '資料讀取中';
+    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+      title: '請稍後',
+      html: message,
+      allowOutsideClick: false,
+      onBeforeOpen: function onBeforeOpen() {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.showLoading();
+      }
+    });
   };
+
+  $.showErrorModal = function (error) {
+    if (error.response.data.errors != null) {
+      var $key = Object.keys(error.response.data.errors);
+
+      var _$container = $('<span></span>');
+
+      $key.forEach(function (item, index) {
+        _$container.append(error.response.data.errors[item] + '<br />');
+
+        $('#' + item).addClass('is-invalid');
+      });
+    }
+
+    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+      title: 'Oops!發生錯誤',
+      text: '原因：' + error.response.data.message,
+      icon: 'error',
+      allowOutsideClick: false,
+      confirmButtonText: '確認',
+      html: (typeof $container === "undefined" ? "undefined" : _typeof($container)) == undefined ? $container.prop('outerHTML') : ''
+    });
+  };
+
+  $.showErrorModalWithoutError = function () {
+    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '發生不明原因，請稍後再試。';
+    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+      title: 'Oops!發生錯誤',
+      text: message,
+      icon: 'error',
+      allowOutsideClick: false,
+      confirmButtonText: '確認'
+    });
+  };
+
+  $.showWarningModal = function () {
+    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '發生不明原因，此操作具有警告性，請聯絡系統工程師。';
+    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+      title: '注意',
+      text: message,
+      icon: 'warning',
+      allowOutsideClick: false,
+      confirmButtonText: '確認'
+    });
+  };
+
+  $.showSuccessModal = function () {
+    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+    var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+
+    if (url == '') {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+        title: '恭喜成功',
+        text: message,
+        icon: 'success',
+        confirmButtonText: '確認'
+      });
+    } else {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+        title: '恭喜成功',
+        text: message,
+        icon: 'success',
+        allowOutsideClick: false,
+        confirmButtonText: '返回列表'
+      }).then(function (result) {
+        if (result.value) {
+          window.location.href = url;
+        }
+      });
+    }
+  };
+
+  $.closeModal = function () {
+    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.close();
+  }; // ==================== Swal 函式操作 ====================
+
 
   $('#logoutBtn').click(function () {
     $('#logout_form').submit();
@@ -55936,7 +62903,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\backend.js */"./resources/js/backend.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\backend.js */"./resources/js/backend.js");
 
 
 /***/ })

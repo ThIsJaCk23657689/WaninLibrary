@@ -108,9 +108,18 @@ class BorrowerController extends Controller
         ]);
     }
 
-    public function getOne($id)
+    public function getOne(Request $request, $id)
     {
-        $borrower = $this->BorrowerService->getOne($id);
+        if(!is_null($request->with)){
+            $borrower = $this->BorrowerService->getOneWithRelation($id, $request->with);
+        }else{
+            $borrower = $this->BorrowerService->getOne($id);
+        }
+
+        $borrower['showAgencyName'] = $borrower->showAgencyName();
+        $borrower['showStatus'] = $borrower->showStatus();
+        $borrower['showActivated'] = $borrower->showActivated();
+        
         return response()->json([
             'status' => 'OK',
             'borrower' => $borrower

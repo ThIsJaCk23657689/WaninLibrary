@@ -36,6 +36,7 @@ mix.js('resources/js/backend.js', 'public/js')
     .js('resources/js/books/edit.js', 'public/js/books')
 
 .js('resources/js/circulation/index.js', 'public/js/circulation')
+    .js('resources/js/circulation/borrow.js', 'public/js/circulation')
 
 .js('resources/js/loginLogs/index.js', 'public/js/loginLogs')
 

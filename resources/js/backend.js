@@ -1,4 +1,6 @@
 import Paginate from 'vuejs-paginate';
+import Swal from 'sweetalert2';
+import Cropper from 'cropperjs';
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -8,8 +10,11 @@ import Paginate from 'vuejs-paginate';
 require('./bootstrap');
 require('./../../node_modules/bootstrap-select/dist/js/bootstrap-select');
 require('./../../node_modules/bootstrap-select/dist/js/i18n/defaults-zh_TW');
+require('./../../node_modules/jquery-cropper/dist/jquery-cropper')
 
 window.Vue = require('vue');
+window.Swal = Swal;
+window.Cropper = Cropper;
 
 /**
  * The following block of code may be used to automatically register your
@@ -110,6 +115,86 @@ $(function(){
         var parts = value.split("; " + name + "=");
         if (parts.length == 2) return parts.pop().split(";").shift();
     }
+
+    // ==================== Swal 函式操作 ====================
+    $.showLoadingModal = function(message = '資料讀取中'){
+        Swal.fire({
+            title: '請稍後',
+            html: message,
+            allowOutsideClick: false,
+            onBeforeOpen: () => {
+                Swal.showLoading()
+            },
+        });
+    }
+
+    $.showErrorModal = function(error){
+        if(error.response.data.errors != null){
+            let $key = Object.keys(error.response.data.errors);
+            let $container = $('<span></span>');
+            $key.forEach(function(item, index){
+                $container.append(error.response.data.errors[item]+ '<br />');
+                $('#' + item).addClass('is-invalid');
+            });
+        }
+
+        Swal.fire({
+            title: 'Oops!發生錯誤',
+            text: '原因：' + error.response.data.message,
+            icon: 'error',
+            allowOutsideClick: false,
+            confirmButtonText: '確認',
+            html: (typeof $container == undefined) ? $container.prop('outerHTML') :'',
+        });
+    }
+
+    $.showErrorModalWithoutError = function(message = '發生不明原因，請稍後再試。'){
+        Swal.fire({
+            title: 'Oops!發生錯誤',
+            text: message,
+            icon: 'error',
+            allowOutsideClick: false,
+            confirmButtonText: '確認',
+        });
+    }
+
+    $.showWarningModal = function(message = '發生不明原因，此操作具有警告性，請聯絡系統工程師。'){
+        Swal.fire({
+            title: '注意',
+            text: message,
+            icon: 'warning',
+            allowOutsideClick: false,
+            confirmButtonText: '確認',
+        });
+    }
+
+    $.showSuccessModal = function(message = '', url = ''){
+        if(url == ''){
+            Swal.fire({
+                title: '恭喜成功',
+                text: message,
+                icon: 'success',
+                confirmButtonText: '確認',
+            });
+        }else{
+            Swal.fire({
+                title: '恭喜成功',
+                text: message,
+                icon: 'success',
+                allowOutsideClick: false,
+                confirmButtonText: '返回列表',
+            }).then(result => {
+                if(result.value){
+                    window.location.href = url;
+                }
+            });
+        }
+    }
+
+    $.closeModal = function(){
+        Swal.close();
+    }
+    // ==================== Swal 函式操作 ====================
     
     $('#logoutBtn').click(function(){
         $('#logout_form').submit();

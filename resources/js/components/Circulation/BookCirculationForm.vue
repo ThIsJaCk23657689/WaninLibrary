@@ -260,7 +260,7 @@ export default {
                 { 
                     data: 'getOneUrl',
                     render: function(data, type, full){
-                        return '<button type="button" class="btn btn-info btn-select" href="#">選擇</button><span class="d-none">' + data + '<span>';
+                        return '<button type="button" class="btn btn-info btn-select">選擇</button><span class="d-none">' + data + '</span>';
                     }
                 },
             ],

@@ -6,17 +6,19 @@ use Illuminate\Http\Request;
 
 class CKEditorController extends Controller
 {
-    public function upload(Request $request){
-        if($request->hasFile('upload')) {
-            //get filename with extension
+    public function upload(Request $request)
+    {
+        if ($request->hasFile('upload')) {
+            // 取得圖片檔名以及副檔名
             $filenamewithextension = $request->file('upload')->getClientOriginalName();
-      
-            //get filename without extension
+
+            // 取得原本圖片檔名（去除掉副檔名）
             $filename = pathinfo($filenamewithextension, PATHINFO_FILENAME);
-      
-            //get file extension
+
+            // 取得副檔名 並用 strtolower 統一小寫。
             $extension = strtolower($request->file('upload')->getClientOriginalExtension());
-            switch($extension){
+            // 不同的副檔名，對應的 create 也不同。
+            switch ($extension) {
                 case 'jpg':
                     $origin_picture = imagecreatefromjpeg($request->file('upload'));
                     break;
@@ -30,13 +32,13 @@ class CKEditorController extends Controller
                     $origin_picture = imagecreatefromjpeg($request->file('upload'));
                     break;
             }
-      
-            //filename to store
-            $filenametostore = $filename.'_'.time().'.'.$extension;
-      
+
+            // 欲儲存的檔名 => 原圖片檔名 + 時間戳記 + 副檔名 [ time()回傳的是 unix時間格式 ]
+            $filenametostore = $filename . '_' . time() . '.' . $extension;
+
             //Upload File
             $save_path = public_path('images/uploads/');
-            switch($extension){
+            switch ($extension) {
                 case 'jpg':
                     imagejpeg($origin_picture, $save_path . $filenametostore);
                     break;
@@ -55,14 +57,14 @@ class CKEditorController extends Controller
                     break;
             }
             $url = asset('images/uploads/' . $filenametostore);
- 
+
             $CKEditorFuncNum = $request->input('CKEditorFuncNum');
-            $msg = 'Image successfully uploaded'; 
-            $re = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
-             
+            $msg = '圖片上傳成功！';
+            $response = "<script>window.parent.CKEDITOR.tools.callFunction($CKEditorFuncNum, '$url', '$msg')</script>";
+
             // Render HTML output 
-            @header('Content-type: text/html; charset=utf-8'); 
-            echo $re;
+            @header('Content-type: text/html; charset=utf-8');
+            echo $response;
         }
     }
 }

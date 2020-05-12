@@ -2,7 +2,7 @@
 
 @push('CustomJS')
     <script src="{{ asset('js/activities/create.js') }}" defer></script>
-    <script src="{{ asset('ckeditor/ckeditor.js') }}"></script>
+    <script src="{{ asset('vendor/ckeditor/ckeditor.js') }}"></script>
 @endpush   
 
 @section('content')

@@ -26,8 +26,11 @@
     "dependencies": {
         "@alfsnd/vue-bootstrap-select": "^0.4.4",
         "bootstrap-select": "^1.13.14",
+        "cropperjs": "^1.5.6",
+        "jquery-cropper": "^1.0.1",
         "jquery-ui": "^1.12.1",
         "js-cookie": "^2.2.1",
+        "sweetalert2": "^9.10.13",
         "vue-bootstrap-selectpicker": "^1.0.6",
         "vuejs-paginate": "^2.1.0"
     }

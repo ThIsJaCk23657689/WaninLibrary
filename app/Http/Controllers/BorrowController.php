@@ -10,9 +10,10 @@ class BorrowController extends Controller
 {
     public $BorrowService;
 
-    public function __construct(){
+    public function __construct()
+    {
         $this->middleware('auth.web')->only([
-            'index', 'create', 'show', 'edit', 'circulation'
+            'index', 'create', 'show', 'edit', 'circulation', 'borrow'
         ]);
         $this->middleware('auth.jwt')->only([
             'store', 'update', 'destroy',
@@ -21,8 +22,15 @@ class BorrowController extends Controller
     }
 
     // 顯示借還書頁面
-    public function circulation(){
+    public function circulation()
+    {
         return view('circulation.index');
+    }
+
+    // 顯示書籍借出頁面
+    public function borrow()
+    {
+        return view('circulation.borrow');
     }
 
     public function index()

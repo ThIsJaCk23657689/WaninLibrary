@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -449,7 +449,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            確認修改\n                        "
+                          "\r\n                            確認修改\r\n                        "
                         )
                       ]
                     ),
@@ -462,7 +462,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            取消編輯\n                        "
+                          "\r\n                            取消編輯\r\n                        "
                         )
                       ]
                     )
@@ -748,14 +748,14 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 20:
+/***/ 22:
 /*!************************************************!*\
   !*** multi ./resources/js/information/edit.js ***!
   \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\information\edit.js */"./resources/js/information/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\information\edit.js */"./resources/js/information/edit.js");
 
 
 /***/ })
