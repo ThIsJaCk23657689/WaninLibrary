@@ -330,14 +330,25 @@ export default {
             }
 
             let url = $(e.target).attr('action');
-            let data = $(e.target).serializeObject();
+            // let data = $(e.target).serializeObject();
+
+            // formdata 是不可以被console.log的，只會回傳空object。
+            let formdata = new FormData($(e.target)[0]);
+            // Object.keys(data).forEach(
+            //     key => formdata.append(key, data[key])
+            // );
+            // formdata.append('image_file', $('#image_file')[0].files[0]);
             
             $.showLoadingModal();
-            axios.post(url, data).then(response => {
-                this.$refs.uploadBookImages.stopCropper();
+            axios.post(url, formdata, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(response => {
+                // this.$refs.uploadBookImages.stopCropper();
                 $.showSuccessModal('新增成功', response.data.url);
             }).catch(error => {
-                console.error('新增借閱人時發生錯誤，錯誤訊息：' + error);
+                console.error('新增書本時發生錯誤，錯誤訊息：' + error);
                 $.showErrorModal(error);
             });
         }

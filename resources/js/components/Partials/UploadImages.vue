@@ -8,15 +8,15 @@
     </div>
     <!-- 表單傳遞資料區塊 -->
     <div class="form-group">
-        <label for="cover_image" class="mb-2">
+        <label for="image_file" class="mb-2">
             商品圖片
         </label>
         <div class="custom-file">
 			<input type="hidden" id="image_data" name="image_data" :value="cropData">
-            <input type="file" id="cover_image" name="image_file" class="custom-file-input"
+            <input type="file" id="image_file" name="image_file" class="custom-file-input"
                 accept="image/jpeg,image/png,image/bmp" aria-describedby="PictureHelp" @change="spwanPreviewImg">
             <small id="PictureHelp" class="form-text text-muted">僅支援JPG、JPEG、PNG與BMP格式圖片，且檔案大小上限為20MB。</small>
-            <label class="custom-file-label" for="cover_image">請選擇檔案</label>
+            <label class="custom-file-label" for="image_file">請選擇檔案</label>
         </div>
     </div>
 </div>

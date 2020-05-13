@@ -33,34 +33,34 @@ class Book extends Model
 
     public function showStatus(){
         switch ($this->status) {
-            case '1':
+            case config('book.status.LISTED'):
                 $result = '在庫';
                 break;
-            case '2':
+            case config('book.status.BORROWED'):
                 $result = '借出';
                 break;
-            case '3':
+            case config('book.status.EXPIRED'):
                 $result = '逾期';
                 break;
-            case '4':
+            case config('book.status.INSTOCK'):
                 $result = '庫藏待上架';
                 break;
-            case '5':
+            case config('book.status.ELIMINATED'):
                 $result = '已淘汰';
                 break;
-            case '6':
+            case config('book.status.GIFTED'):
                 $result = '已轉贈';
                 break;
-            case '7':
+            case config('book.status.WAITINGFORTAKE'):
                 $result = '待索取';
                 break;
-            case '8':
+            case config('book.status.TAKEN'):
                 $result = '已被索取';
                 break;
-            case '9':
+            case config('book.status.NOBORROW'):
                 $result = '無外借';
                 break;
-            case '10':
+            case config('book.status.NORETURNED'):
                 $result = '無歸還';
                 break;
             default:

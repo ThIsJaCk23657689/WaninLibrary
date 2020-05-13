@@ -29,7 +29,7 @@ class BookRequest extends FormRequest
             // 'barcode' => 'required|integer|unique',
             'callnum' => 'required|string|min:3',
             'category' => 'required|integer',
-            'status' => 'required|integer',
+            'status' => 'nullable|integer',
 
             'title' => 'required|string|max:255',
             'subtitle' => 'nullable|string|max:255',
@@ -44,7 +44,7 @@ class BookRequest extends FormRequest
             'language' => 'nullable|string',
 
             'content' => 'nullable|string|max:255',
-            'count' => 'required|integer',
+            'count' => 'nullable|integer',
         ];
     }
 }

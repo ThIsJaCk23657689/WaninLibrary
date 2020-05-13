@@ -4,117 +4,90 @@ namespace App\Services;
 use URL;
 
 class CropImageService extends BaseService{
-	private $src;
+
+	// object 圖片裁切資料，包含x、y、高、寬和旋轉。
 	private $data;
-	private $dst;
+	
+	// 原始圖檔(切割之前)的路徑。
+	private $src;
+
+	// 圖檔的類型，例如：IMAGETYPE_JPEG。
 	private $type;
+
+	// 圖檔的副檔名，例如：.jpg、.png。
 	private $extension;
+
+	// 切割後圖檔路徑。
+	private $dst;
+	
+	// 回傳訊息。
 	private $msg;
 
-	//private $id;
-
-	// string $path 圖片生成路徑
+	// 圖片生成路徑
 	private $path;
 
-	// string $filename 圖片檔名
+	// 圖片檔名
 	private $filename;
 
-	// integer $dst_img_w, $dst_img_h 圖片最終生成的寬與高
+	// 圖片最終生成的寬與高
 	private $dst_img_w;
 	private $dst_img_h;
 
-	// @param int $id 為圖片對應之編號
-	// @param string $arg 為陣列
-	// $arg['type']只有 'book'
-	public function __construct($src, $data, $file, $arg) {    
-        $this->setPath($arg['type']);
+	/**
+     * generate a image and crop it, retrun a url eventually.
+     *
+     * @param  string  $data
+	 * @param  object  $file => {
+	 *     error, name [原檔案名稱與副檔名], size [檔案大小，單位：byte], tmp_name [暫時上傳路徑], type [格式，例如：image/jpeg]
+	 * }
+	 * @param  string  $model
+     * @return array
+     */
+	public function __construct($data, $file, $model) {    
+		// 設定圖片輸出路徑
+		$this->setPath($model);
 
-		//生成檔名
-		$this->setFilename($arg);
-		$this->setSrc($src);
+		// 生成檔名
+		$this->setFilename();
+		// $this->setSrc($src);
+
+		// 設定切割數據
 		$this->setData($data);
+
+		// 設定上傳檔案
 		$this->setFile($file);
 
-		// 生成檔案最後寬與高
-		$this->setDataSize($arg['type'], $this->data);
+		// 生成裁切後的寬與高
+		$this->setImageSize($model, $this->data);
 
 		$this->crop($this->src, $this->dst, $this->data);
-        if (is_null($this->getMsg()))
-			return $this->dst;
-		else
-			return $this->getMsg();
-        
-		// 生成目錄路徑
-		
 	}
 
-	private function setPath($argType){
-		// switch ($argType) {
-		// 	case 'book':
-		// 		// 書的封面
-		// 		$this->path = 'images/books/cover_images/';
-		// 		break;
-		// 	case 'activity':
-		// 		// 活動封面
-		// 		$this->path = 'images/books/cover_images/';
-		// 		break;
-		// 	default:
-		// 		$this->path = 'images/default/';
-		// 		break;
-		// }
-		if($argType)
-			$this->path = 'images/'.$argType.'/'.'cover_images'.'/';
-		else
+	public function getResult(){
+		if (is_null($this->getMsg())){
+			return [
+				'status' => 'OK',
+				'url' => $this->dst
+			];
+		}else{
+			return [
+				'status' => 'ERROR',
+				'message' => $this->getMsg()
+			];
+		}
+	}
+
+	private function setPath($model){
+		if($model){
+			$this->path = 'images/' . $model . '/' . 'cover_images' . '/';
+		}else{
 			$this->path = 'images/default/';
-
-	}
-
-	private function setFilename($arg){
-		switch ($arg['type']) {
-			default:
-				//預設命名格式 [編號]
-				$this->filename = time();
-				break;
 		}
 	}
 
-	private function setDataSize($argType, $data){
-		$tmp_img_w = $data->width;
-		$tmp_img_h = $data->height;
-
-		switch ($argType) {
-			case 'logingType':
-				// 商品寄類別圖片 固定寬都是450 高則是等比縮放
-				$this->dst_img_w = 450;
-				if ($tmp_img_w == 450) {
-					$this->dst_img_h = $tmp_img_h;
-				}else{
-					// 寬高比率 = 抓取寬 / 450(目的寬)
-					$ratio = $tmp_img_w / 450;
-					// 目的高 = 抓取高 / 寬高比率
-					$this->dst_img_h = $tmp_img_h / $ratio;
-				}
-				break;
-
-			default:
-				$this->dst_img_w = 300;
-				$this->dst_img_h = 400;
-				break;
-		}
-	}
-
-	private function setSrc($src) {
-
-		if (!empty($src)) {
-			$type = exif_imagetype($src);
-
-			if ($type) {
-				$this->src = $src;
-				$this->type = $type;
-				$this->extension = image_type_to_extension($type);
-				$this->setDst();
-			}
-		}
+	private function setFilename(){
+		// 預設命名格式 [時間]
+		$this->filename = time();
 	}
 
 	private function setData($data) {
@@ -124,38 +97,48 @@ class CropImageService extends BaseService{
 	}
 
 	private function setFile($file) {
+		
+		// 從 PHP $_FILES 取得 錯誤代碼。
 		$errorCode = $file['error'];
 
 		if ($errorCode === UPLOAD_ERR_OK) {
-
+			// 代表沒任何錯誤，先判斷上傳的檔案存不存在且是不是圖片
+			// 如果以上條件符合就會回傳 【IMAGETYPE_JPEG、IMAGETYPE_PNG 等】，不是圖片就會回傳 false
+			// 注意：使用 exif_imagetype 函式時，必須開啟 exif extension，不然會報錯 call undefined function。
 			$type = exif_imagetype($file['tmp_name']);
 
 			if ($type) {
 
+				// 取得副檔名，回傳值： .jpg、.png、.bmp 等。
 				$extension = image_type_to_extension($type);
+
+				// 生成原始圖檔路徑
 				$src = $this->path . $this->filename . '.original' . $extension;
 
-				if ($type == IMAGETYPE_GIF || $type == IMAGETYPE_JPEG || $type == IMAGETYPE_PNG) {
-
+				if ($type == IMAGETYPE_JPEG || $type == IMAGETYPE_PNG || $type == IMAGETYPE_BMP) {
+					
+					// 如果發現之前的原始圖檔還在就刪除掉。
 					if (file_exists($src)) {
 						unlink($src);
 					}
 
+					// 把上傳暫存檔案移到原始圖檔路徑
 					$result = move_uploaded_file($file['tmp_name'], $src);
 
 					if ($result) {
+						// 檔案移植成功。
 						$this->src = $src;
 						$this->type = $type;
 						$this->extension = $extension;
 						$this->setDst();
 					} else {
-						$this->msg = '儲存頭像失敗！';
+						$this->msg = '儲存圖檔失敗（無法儲存原圖）。';
 					}
 				} else {
-					$this->msg = '請上傳 JPG, PNG, GIF 此三種圖片格式頭像！';
+					$this->msg = '請上傳 JPG, PNG 或 BMP 此三種圖片格式圖檔！';
 				}
 			} else {
-				$this->msg = '請上傳圖片檔謝謝！';
+				$this->msg = '您上傳的檔案不存在或者不是圖檔。';
 			}
 		} else {
 			$this->msg = $this->codeToMessage($errorCode);
@@ -163,17 +146,21 @@ class CropImageService extends BaseService{
 	}
 
 	private function setDst() {
-		$this->dst = $this->path . $this->filename . '.png';
+		$this->dst = $this->path . $this->filename . $this->extension;
+	}
+
+	private function setImageSize($model, $data){
+		switch ($model) {
+			default:
+				$this->dst_img_w = $data->width;
+				$this->dst_img_h = $data->height;
+				break;
+		}
 	}
 
 	private function crop($src, $dst, $data) {
-
 		if (!empty($src) && !empty($dst) && !empty($data)) {
 			switch ($this->type) {
-				case IMAGETYPE_GIF:
-					$src_img = imagecreatefromgif($src);
-					break;
-
 				case IMAGETYPE_JPEG:
 					$src_img = imagecreatefromjpeg($src);
 					break;
@@ -181,16 +168,20 @@ class CropImageService extends BaseService{
 				case IMAGETYPE_PNG:
 					$src_img = imagecreatefrompng($src);
 					break;
+					
+				case IMAGETYPE_BMP:
+					$src_img = imagecreatefrombmp($src);
+					break;
 			}
 
 			if (!$src_img) {
-				$this->msg = "讀取頭像圖檔失敗";
+				$this->msg = "讀取圖片失敗";
 				return;
 			}
 
 			$size = getimagesize($src);
-			$size_w = $size[0]; // natural width
-			$size_h = $size[1]; // natural height
+			$size_w = $size[0]; // 寬
+			$size_h = $size[1]; // 高
 
 			//原檔圖片的寬與高
 			$src_img_w = $size_w;
@@ -205,8 +196,8 @@ class CropImageService extends BaseService{
 			$dst_img_h = $this->dst_img_h;
 
 			//起始座標
-			$src_x = $data -> x;
-			$src_y = $data -> y;
+			$src_x = $data->x;
+			$src_y = $data->y;
 
 			if ($src_x <= -$tmp_img_w || $src_x > $src_img_w) {
 				$src_x = $src_w = $dst_x = $dst_w = 0;
@@ -237,20 +228,35 @@ class CropImageService extends BaseService{
 			$dst_w /= $ratio;
 			$dst_h /= $ratio;
 
+			// 建立一個 True Color圖片(圖片寬, 圖片高) => 這是最終裁切後的圖片。
 			$dst_img = imagecreatetruecolor($dst_img_w, $dst_img_h);
 
-			// Add transparent background to destination image
+			// 填滿顏色，這是針對png所要做的事情，填滿alpha值並儲存。
 			imagefill($dst_img, 0, 0, imagecolorallocatealpha($dst_img, 0, 0, 0, 127));
 			imagesavealpha($dst_img, true);
-
+			
+			// 將 原圖$src_img 裁切並複製到 新圖檔$dst_img
 			$result = imagecopyresampled($dst_img, $src_img, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
 
 			if ($result) {
-				if (!imagepng($dst_img, $dst)) {
-					$this->msg = "儲存頭像(已裁剪)失敗";
+				switch ($this->type) {
+					case IMAGETYPE_JPEG:
+						$saveResult = imagejpeg($dst_img, $this->dst);
+						break;
+	
+					case IMAGETYPE_PNG:
+						$saveResult = imagepng($dst_img, $this->dst);
+						break;
+						
+					case IMAGETYPE_BMP:
+						$saveResult = imagebmp($dst_img, $this->dst);
+						break;
+				}
+				if (!$saveResult) {
+					$this->msg = "儲存已裁剪的圖片失敗。";
 				}
 			} else {
-				$this->msg = "頭像裁剪失敗";
+				$this->msg = "圖片裁剪失敗。";
 			}
 
 			imagedestroy($src_img);
@@ -278,13 +284,7 @@ class CropImageService extends BaseService{
 		return '上傳發生未知的錯誤';
 	}
 
-	public function getResult() {
-		return !empty($this->data) ? $this->dst : $this->src;
-	}
-
 	public function getMsg() {
 		return $this->msg;
 	}
-
-
 }

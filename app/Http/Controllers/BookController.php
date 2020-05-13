@@ -33,8 +33,8 @@ class BookController extends Controller
     }
 
     public function store(BookRequest $request){
-        $res = $this->BookService->add($request);
-        return response()->json($res, $res['status']);
+        $result = $this->BookService->add($request);
+        return response()->json($result, $result['status']);
     }
 
     public function show($id){
