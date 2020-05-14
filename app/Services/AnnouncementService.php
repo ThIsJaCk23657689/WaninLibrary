@@ -26,6 +26,7 @@ class AnnouncementService extends BaseService
     {
         $announcements = AnnouncementEloquent::get();
         foreach ($announcements as $announcement) {
+            $announcement->change_top = '<a href="'.route('announcements.change_top', [$announcement->id]).'" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
             $announcement['action'] =
                 '<a href="' . route('announcements.show', [$announcement->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
                 <a href="' . route('announcements.edit', [$announcement->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>

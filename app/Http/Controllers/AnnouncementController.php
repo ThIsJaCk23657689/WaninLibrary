@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\service\AnnouncementService;
-use App\http\request\AnnouncementRequest;
+use App\Services\AnnouncementService;
+use App\Http\Requests\AnnouncementRequest;
 
 class AnnouncementController extends Controller
 {
@@ -12,7 +12,7 @@ class AnnouncementController extends Controller
 
     public function __construct(){
         $this->middleware('auth.web')->only([
-            'index', 'create', 'show', 'edit', 
+            'index', 'create', 'show', 'edit',
         ]);
         $this->middleware('auth.jwt')->only([
             'store', 'update', 'destroy', 'change_top'
@@ -47,7 +47,7 @@ class AnnouncementController extends Controller
         return view('announcements.edit', compact('announcement'));
     }
 
-    public function update(AnnouncementRequest $request, $id){
+    public function update(Request $request, $id){
         $announcement_id = $this->AnnouncementService->update($request, $id);
         return response()->json([
             'status' => 'OK',
@@ -64,5 +64,14 @@ class AnnouncementController extends Controller
     public function change_top($id){
         $this->AnnouncementService->change_top($id);
         return redirect()->route('announcements.index');
+    }
+
+
+    public function getOne($id){
+        $announcement = $this->AnnouncementService->getOne($id);
+        return response()->json([
+            'status' => 'OK',
+            'announcement' => $announcement
+        ]);
     }
 }

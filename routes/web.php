@@ -76,4 +76,9 @@ Route::prefix('/backend')->group(function () {
     Route::resource('/activities', 'ActivityController', ['only' => [
         'index', 'show', 'create', 'edit'
     ]]);
+
+    // 公告管理路由
+    Route::resource('/announcements', 'AnnouncementController', ['only' => [
+        'index', 'show', 'create', 'edit'
+    ]]);
 });
