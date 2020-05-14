@@ -4,16 +4,24 @@ const app = new Vue({
     el: '#donor',
     data() {
         return {
-
+            donor: [],
         }
     },
     methods: {
 
     },
-    created(){
-        
+    created() {
+        let DonorsGetOneURL = $('#DonorsGetOneURL').html();
+        axios.get(DonorsGetOneURL).then(response => {
+            this.donor = response.data.donor;
+
+            // 地址
+            $('#address_twzipcode').twzipcode({
+                'zipcodeSel': response.data.donor.address_zipcode
+            });
+        });
     },
-    mounted(){
+    mounted() {
 
     }
 });

@@ -99,9 +99,141 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: ['donor'],
   data: function data() {
-    return {};
+    return {
+      DonorsIndexURL: $('#DonorsIndexURL').html(),
+      DonorsUpdateURL: $('#DonorsUpdateURL').html()
+    };
+  },
+  methods: {
+    donorUpdateForm: function donorUpdateForm(e) {
+      var _this = this;
+
+      var url = this.DonorsUpdateURL;
+      var data = $(e.target).serializeObject();
+      this.$refs.loadingModal.initalModal();
+      axios.patch(url, data).then(function (response) {
+        _this.$refs.loadingModal.successfulResponse('編輯成功', response.data.url);
+      })["catch"](function (error) {
+        console.error('編輯借閱人時發生錯誤，錯誤訊息：' + error);
+
+        _this.$refs.loadingModal.failureResponse(error);
+      });
+    }
+  },
+  created: function created() {},
+  mounted: function mounted() {
+    // 地址
+    $('#address_twzipcode').twzipcode({
+      'readonly': false
+    });
   }
 });
 
@@ -122,9 +254,402 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div")
+  return _c(
+    "div",
+    [
+      _c("div", { staticClass: "row justify-content-center" }, [
+        _c("div", { staticClass: "col-md-8" }, [
+          _c(
+            "form",
+            {
+              attrs: { method: "POST", id: "donor_update_form", action: "#" },
+              on: {
+                submit: function($event) {
+                  $event.preventDefault()
+                  return _vm.donorUpdateForm($event)
+                }
+              }
+            },
+            [
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.donor.name,
+                          expression: "donor.name"
+                        }
+                      ],
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "name",
+                        name: "name",
+                        type: "text",
+                        required: "",
+                        autofocus: ""
+                      },
+                      domProps: { value: _vm.donor.name },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.donor, "name", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.donor.tel,
+                          expression: "donor.tel"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "tel", name: "tel", type: "text" },
+                      domProps: { value: _vm.donor.tel },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.donor, "tel", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "cellphone" } }, [
+                      _vm._v("行動電話")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.donor.cellphone,
+                          expression: "donor.cellphone"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        id: "cellphone",
+                        name: "cellphone",
+                        type: "text"
+                      },
+                      domProps: { value: _vm.donor.cellphone },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.donor, "cellphone", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "birthday" } }, [
+                      _vm._v("生日")
+                    ]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.donor.birthday,
+                          expression: "donor.birthday"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: { id: "birthday", name: "birthday", type: "text" },
+                      domProps: { value: _vm.donor.birthday },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.donor, "birthday", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(1),
+                    _vm._v(" "),
+                    _c(
+                      "select",
+                      {
+                        staticClass: "form-control",
+                        attrs: { name: "exposure", id: "exposure" },
+                        domProps: { value: _vm.donor.exposure }
+                      },
+                      [
+                        _c("option", { attrs: { value: "1" } }, [
+                          _vm._v("完全公開")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "2" } }, [
+                          _vm._v("姓名保護")
+                        ]),
+                        _vm._v(" "),
+                        _c("option", { attrs: { value: "3" } }, [
+                          _vm._v("對外匿名")
+                        ])
+                      ]
+                    )
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "email" } }, [_vm._v("信箱")]),
+                    _vm._v(" "),
+                    _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.donor.email,
+                          expression: "donor.email"
+                        }
+                      ],
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "email",
+                        name: "email",
+                        type: "email",
+                        autocomplete: "off"
+                      },
+                      domProps: { value: _vm.donor.email },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.donor, "email", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _c("label", { attrs: { for: "content" } }, [
+                      _vm._v("備註內容")
+                    ]),
+                    _vm._v(" "),
+                    _c("textarea", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.donor.content,
+                          expression: "donor.content"
+                        }
+                      ],
+                      staticClass: "form-control",
+                      attrs: {
+                        name: "content",
+                        id: "content",
+                        cols: "30",
+                        rows: "3"
+                      },
+                      domProps: { value: _vm.donor.content },
+                      on: {
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.$set(_vm.donor, "content", $event.target.value)
+                        }
+                      }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c(
+                    "div",
+                    {
+                      staticClass: "form-group",
+                      attrs: { id: "address_twzipcode" }
+                    },
+                    [
+                      _c("label", [_vm._v("地址")]),
+                      _vm._v(" "),
+                      _vm._m(2),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "row" }, [
+                        _c("div", { staticClass: "col-md-12" }, [
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.donor.address_others,
+                                expression: "donor.address_others"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: {
+                              id: "address_others",
+                              type: "text",
+                              name: "address_others"
+                            },
+                            domProps: { value: _vm.donor.address_others },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(
+                                  _vm.donor,
+                                  "address_others",
+                                  $event.target.value
+                                )
+                              }
+                            }
+                          })
+                        ])
+                      ])
+                    ]
+                  )
+                ])
+              ]),
+              _vm._v(" "),
+              _c(
+                "div",
+                { staticClass: "form-group row justify-content-center" },
+                [
+                  _c("div", { staticClass: "col-md-8" }, [
+                    _c(
+                      "button",
+                      {
+                        staticClass: "btn btn-block btn-success",
+                        attrs: { type: "submit" }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            確認修改\n                        "
+                        )
+                      ]
+                    ),
+                    _vm._v(" "),
+                    _c(
+                      "a",
+                      {
+                        staticClass: "btn btn-block btn-danger",
+                        attrs: { href: _vm.DonorsIndexURL }
+                      },
+                      [
+                        _vm._v(
+                          "\n                            返回列表\n                        "
+                        )
+                      ]
+                    )
+                  ])
+                ]
+              )
+            ]
+          )
+        ])
+      ]),
+      _vm._v(" "),
+      _c("loading-modal", { ref: "loadingModal" })
+    ],
+    1
+  )
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "name" } }, [
+      _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+      _vm._v("姓名\n                            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "exposure" } }, [
+      _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+      _vm._v("曝光程度\n                            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row mb-2" }, [
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", {
+          attrs: {
+            "data-role": "county",
+            "data-style": "form-control",
+            "data-name": "address_county",
+            "data-value": ""
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", {
+          attrs: {
+            "data-role": "district",
+            "data-style": "form-control",
+            "data-name": "address_district",
+            "data-value": ""
+          }
+        })
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", {
+          attrs: {
+            "data-role": "zipcode",
+            "data-style": "form-control",
+            "data-name": "address_zipcode",
+            "data-value": ""
+          }
+        })
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
@@ -318,10 +843,23 @@ Vue.component('donor-update-form', __webpack_require__(/*! ./../components/Donor
 var app = new Vue({
   el: '#donor',
   data: function data() {
-    return {};
+    return {
+      donor: []
+    };
   },
   methods: {},
-  created: function created() {},
+  created: function created() {
+    var _this = this;
+
+    var DonorsGetOneURL = $('#DonorsGetOneURL').html();
+    axios.get(DonorsGetOneURL).then(function (response) {
+      _this.donor = response.data.donor; // 地址
+
+      $('#address_twzipcode').twzipcode({
+        'zipcodeSel': response.data.donor.address_zipcode
+      });
+    });
+  },
   mounted: function mounted() {}
 });
 
@@ -334,7 +872,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\donors\edit.js */"./resources/js/donors/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\donors\edit.js */"./resources/js/donors/edit.js");
 
 
 /***/ })
