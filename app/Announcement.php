@@ -11,7 +11,13 @@ class Announcement extends Model
         'last_update_user_id', 'title', 'content', 'is_top',
     ];
 
-    public function User(){
-        return $this->belongsTo(UserEloquent::class);
+    public function user(){
+        return $this->belongsTo(UserEloquent::class,'last_update_user_id');
+    }
+
+    // 顯示最後更新人員姓名
+    public function showUserName()
+    {
+        return is_null($this->last_update_user_id) ? '無' : $this->user->name;
     }
 }

@@ -55,7 +55,7 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="agency">隸屬單位</label>
-                        <input id="agency" name="agency" type="text" class="form-control" value="{{ $borrower->showAgencyName ?? '無' }}" readonly>
+                        <input id="agency" name="agency" type="text" class="form-control" value="{{ $borrower->showAgencyName() ?? '無' }}" readonly>
                     </div>
                 </div>
                 <div class="col-md-6">

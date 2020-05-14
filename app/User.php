@@ -71,12 +71,12 @@ class User extends Authenticatable implements JWTSubject
         return $this->hasMany(LoginLogEloquent::class);
     }
 
-    public function Activity(){
-        return $this->hasMany(ActivityEloquent::class);
+    public function activities(){
+        return $this->hasMany(ActivityEloquent::class, 'last_update_user_id');
     }
 
-    public function Announcement(){
-        return $this->hasMany(AnnouncementEloquent::class);
+    public function announcements(){
+        return $this->hasMany(AnnouncementEloquent::class, 'last_update_user_id');
     }
 
     public function showStatus(){

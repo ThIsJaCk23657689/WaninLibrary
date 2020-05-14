@@ -40,6 +40,10 @@ mix.js('resources/js/backend.js', 'public/js')
 
 .js('resources/js/loginLogs/index.js', 'public/js/loginLogs')
 
+.js('resources/js/announcements/index.js', 'public/js/announcements')
+    .js('resources/js/announcements/create.js', 'public/js/announcements')
+    .js('resources/js/announcements/edit.js', 'public/js/announcements')
+
 .js('resources/js/borrowLogs/index.js', 'public/js/borrowLogs')
 
 .js('resources/js/activities/create.js', 'public/js/activities')
