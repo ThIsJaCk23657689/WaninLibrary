@@ -140,8 +140,8 @@ class BookController extends Controller
     // 使用台灣書目查詢系統，透過網址來爬蟲(抓取資料)
     public function getBookDataByURL(Request $request){
         $url = $request->bugurl;
-        $res = $this->BookService->getBookDataByURL($url);
-        return response()->json($res, 200)->header('Content-Type', 'application/json; charset=utf-8');
+        $result = $this->BookService->getBookDataByURL($url);
+        return response()->json($result, $result['status'])->header('Content-Type', 'application/json; charset=utf-8');
     }
 
     // 將Barcode輸出成圖片

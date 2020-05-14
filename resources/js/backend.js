@@ -168,7 +168,7 @@ $(function(){
         });
     }
 
-    $.showSuccessModal = function(message = '', url = ''){
+    $.showSuccessModal = function(message = '', url = '', buttonText = '返回列表'){
         if(url == ''){
             Swal.fire({
                 title: '恭喜成功',
@@ -182,7 +182,7 @@ $(function(){
                 text: message,
                 icon: 'success',
                 allowOutsideClick: false,
-                confirmButtonText: '返回列表',
+                confirmButtonText: buttonText,
             }).then(result => {
                 if(result.value){
                     window.location.href = url;

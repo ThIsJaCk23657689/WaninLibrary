@@ -14,31 +14,26 @@ class BookService extends BaseService
         // 條碼編號生成
         $barcode = $this->barcodeCode($request->category, $request->callnum);
 
-        // 圖片路徑生成與裁切
-        $crop = new CropImageService($request->image_data ?? null, $_FILES['image_file'] ?? null, 'books');
-        $result = $crop->getResult();
-        if($result['status'] == 'ERROR'){
-            return [
-                'status' => '422',
-                'message' => $result['message']
-            ];
+        if(!is_null($request->image_url)){
+            // 代表這次的圖片是外來網址。
+            $url = $request->image_url;
+        }else if(!is_null($request->image_data) && !is_null($_FILES['image_file'])){
+            // 圖片路徑生成與裁切
+            $crop = new CropImageService($request->image_data, $_FILES['image_file'], 'books');
+            $result = $crop->getResult();
+            if($result['status'] == 'ERROR'){
+                return [
+                    'status' => '422',
+                    'message' => $result['message']
+                ];
+            }else{
+                $url = $result['url'];
+            }
+        }else{
+            // 沒有要存圖片
+            $url = null;
         }
 
-        // if(!preg_match("/^[a-zA-Z]+:\/\//", $request->image_file)){
-        //     // 若不是網路網址，代表是本地端上傳。
-
-        //     if(preg_match("/^[a-zA-Z]+:\/\//", $crop)){
-        //         $cover_image = $crop;
-        //     }else{
-        //         $res = ['status' => 422, 
-        //                 'msg' => 'Image insert error : '.$crop, 
-        //                 ];
-        //         return $res;
-        //     }
-        // }else{
-        //     $cover_image = $request->cover_image;
-        // }
-        
         $book = BookEloquent::create([
             'donor_id' => $request->donor_id,
             'barcode' => $barcode,
@@ -52,7 +47,7 @@ class BookService extends BaseService
             'translator' => $request->translator,
             'publisher' => $request->publisher,
             'edition' => $request->edition,
-            'cover_image' => $result['url'],
+            'cover_image' => $url,
             'ISBN' => $request->ISBN,
 
             'published_date' => $request->published_date,
@@ -66,7 +61,7 @@ class BookService extends BaseService
             'status' => '200',
             'book_id' => $book->id, 
             'barcode' => $barcode, 
-            'url' => route('books.index')
+            'url' => route('books.show', [$book->id])
         ];
     }
 
@@ -344,11 +339,20 @@ class BookService extends BaseService
         try{
             $orig_html = file_get_contents($url);
         }catch(Exception $e){
-            return response()->json('url已失效', 200);
+            return [
+                'status' => 404,
+                'message' => '此URL已經失效'
+            ];
         }
 
         @$iframe_doc->loadHTML($orig_html);
         $iframe = $iframe_doc->getElementsByTagName('iframe');
+        if(is_null($iframe[0])){
+            return [
+                'status' => 404,
+                'message' => '無法爬到蟲，請稍後再試。'
+            ];
+        }
         $iframe_src = $iframe[0]->getAttribute('src');
 
         $doc = new \DOMDocument();
@@ -448,6 +452,7 @@ class BookService extends BaseService
 
         $res['all'] = $arr;
         $res['data'] = $info;
+        $res['status'] = 200;
 
         return $res;
     }

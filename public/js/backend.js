@@ -62634,6 +62634,7 @@ $(function () {
   $.showSuccessModal = function () {
     var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
     var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+    var buttonText = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '返回列表';
 
     if (url == '') {
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
@@ -62648,7 +62649,7 @@ $(function () {
         text: message,
         icon: 'success',
         allowOutsideClick: false,
-        confirmButtonText: '返回列表'
+        confirmButtonText: buttonText
       }).then(function (result) {
         if (result.value) {
           window.location.href = url;

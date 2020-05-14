@@ -77,7 +77,7 @@
 
             <div class="row">
                 <div class="col-md-6 text-center">
-                    <upload-images ref="uploadBookImages" :uploadimg="uploadimg"></upload-images>
+                    <upload-images ref="uploadBookImages" :uploadimg="uploadimg" :title="title"></upload-images>
                 </div>
 
                 <div class="col-md-6">
@@ -86,6 +86,7 @@
                         <div class="col-md-12">
                             <div class="form-group">
                                 <label for="bugurl">爬蟲網址</label>
+                                <a href="http://metadata.ncl.edu.tw/blstkmc/blstkm#tudorkmtop" target="_blank">爬蟲網址</a>
                                 <input id="bugurl" name="bugurl" type="text" class="form-control" value="" autocomplete="off" @change="getBookDataFromWeb">
                             </div>
                         </div>
@@ -168,26 +169,20 @@
 
                 <div class="col-md-3">
                     <div class="form-group">
-                        <label for="callnum">索書號</label>
-                        <input id="callnum" name="callnum" type="text" class="form-control" value="" autocomplete="off">
+                        <label for="callnum">
+                            <span class="text-danger mr-2">*</span>索書號
+                        </label>
+                        <input id="callnum" name="callnum" type="text" class="form-control" value="" autocomplete="off" @input="updateCategory">
+                        <span id="callnum_error" class="invalid-feedback" role="alert">
+                            <strong></strong>
+                        </span>
                     </div>
                 </div>
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="category">圖書類別</label>
-                        <select id="category" name="category" class="form-control">
-                            <option value="">請選擇...</option>
-                            <option value="0">000 總類</option>
-                            <option value="1">100 哲學類</option>
-                            <option value="2">200 宗教類</option>
-                            <option value="3">300 科學類</option>
-                            <option value="4">400 應用科學類</option>
-                            <option value="5">500 社會學類</option>
-                            <option value="6">600 史地類</option>
-                            <option value="6">610 中國史地類</option>
-                            <option value="7">710 世界史地類</option>
-                            <option value="8">800 語文文學類</option>
-                            <option value="9">900 藝術類</option>
+                        <select id="category" name="category" class="form-control" disabled>
+                            <option v-for="option in category_options" :key="option.id" :value="option.id">{{ option.text }}</option>
                         </select>
                     </div>
                 </div>
@@ -231,6 +226,26 @@ export default {
             BooksStoreURL: $('#BooksStoreURL').html(),
             FormErrorsMsg: [],
             donors: [],
+            title: '書本圖片',
+            category_options: [
+                {id: null, text: '請選擇...'},
+                {id: 0, text: '000 總類'},
+                {id: 1, text: '100 哲學類'},
+                {id: 2, text: '200 宗教類'},
+                {id: 3, text: '300 科學類'},
+                {id: 4, text: '400 應用科學類'},
+                {id: 5, text: '500 社會學類'},
+                {id: 6, text: '600 史地類'},
+                {id: 7, text: '610 中國史地類'},
+                {id: 8, text: '710 世界史地類'},
+                {id: 9, text: '800 語文文學類'},
+                {id: 10, text: '900 藝術類'},
+                {id: 11, text: '1100 論文類'},
+                {id: 12, text: '1200 雜誌類'},
+                {id: 13, text: '1300 外文圖書'},
+            ],
+
+            bookInfo: [],
         }
     },
     methods: {
@@ -253,86 +268,114 @@ export default {
                 $('#price_required_star').fadeIn();
             }
         },
-        getBookDataFromWeb(e){
-            if(!$.isUrl($(e.target).val())){
-                $.showErrorModalWithoutError('請輸入正確的網頁格式。');
-                $(e.target).val('');
-            }else{
-                let BooksBugURL = $('#BooksBugURL').html();
-                let data = $(e.target).serializeObject();
-
-                $.showLoadingModal();
-                axios.post(BooksBugURL, data).then(response => {
-                    console.log(response.data.data);
-                    let $bookInfo = response.data.data;
-                    if($bookInfo == null){
-                        
-                    }else{
-                        $.closeModal();
-                        $('#title').val($bookInfo.title);
-                        $('#subtitle').val($bookInfo.subtitle);
-                        $('#author').val($bookInfo.author);
-                        $('#isbn').val($bookInfo.ISBN);
-                        $('#publisher').val($bookInfo.publisher);
-                        $('#published_date').val($bookInfo.published_date);
-                        $('#edition').val($bookInfo.edition);
-
-                        if($bookInfo.language != '中文'){
-                            // 此書籍是外文，索書號會抓取【杜威碼】
-                            $('#callnum').val($bookInfo.Dewey_callnum);
-                            
-                            // 種類選項強制鎖定13
-                            $('#category').find('option').remove().end().append($('<option></option>').val('12').text('12 外文圖書'));
-                            $('#category').val(12);
+        updateCategory(e){
+            let $callNum = $('#callnum').val();
+            if($callNum.length >= 3 && Number.isInteger(parseInt($callNum[0] + $callNum[1] + $callNum[2]))){
+                $('#callnum').removeClass('is-invalid');
+                if($callNum[0] < 6){
+                    // 前面6類，可以靠索書號第一碼來判斷。
+                    $('#category').val($callNum[0]);
+                }else{
+                    // 第六類到第七類，必須還要再看第二碼。
+                    if($callNum[0] == 6){
+                        if($callNum[1] == 0){
+                            $('#category').val(6);
                         }else{
-                            let $cate_option = [
-                                {id: null, text: '請選擇...'},
-                                {id: 0, text: '000 總類'},
-                                {id: 1, text: '100 哲學類'},
-                                {id: 2, text: '200 宗教類'},
-                                {id: 3, text: '300 科學類'},
-                                {id: 4, text: '400 應用科學類'},
-                                {id: 5, text: '500 社會學類'},
-                                {id: 6, text: '600 史地類'},
-                                {id: 6, text: '610 中國史地類'},
-                                {id: 7, text: '710 世界史地類'},
-                                {id: 8, text: '800 語文文學類'},
-                                {id: 9, text: '900 藝術類'},
-                            ];
-                            $('#category').find('option').remove();
-                            for(let i = 0; i < $cate_option.length; i++){
-                                $('#category').append($('<option></option>').val($cate_option[i].id).text($cate_option[i].text));
-                            }
-                            $('#language').val($bookInfo.language);
-                            $('#callnum').val($bookInfo.callnum);
-                            $('#category').val($bookInfo.callnum.substr(0, 1));
+                            $('#category').val(7);
                         }
-                        
-                        // 爬蟲抓圖片網址
-                        // let $cover_img_name = $bookInfo.cover_img.split('/').pop();
-                        // if($bookInfo.cover_img != null && $bookInfo.cover_img != '' && $cover_img_name != 'qrcode.png'){
-                        //     $('#previewImg-upload').attr('src', $bookInfo.cover_img);
-                        // }else{
-                        //     console.log('Cover Images URL:' + $bookInfo.cover_img);
-                        // }
+                    }else{
+                        if($callNum[0] == 7){
+                            if($callNum[1] == 0){
+                                $('#category').val(7);
+                            }else{
+                                $('#category').val(8);
+                            }
+                        }else{
+                            $('#category').val(parseInt($callNum[0]) + 1);
+                        }
                     }
-                }).catch((error) => {
-                    console.error('爬蟲時發生錯誤，錯誤訊息：' + error);
-                    $.showErrorModal(error);
-                });
+                }
+            }else{
+                $('#callnum').addClass('is-invalid');
+                $('#callnum_error').html('<strong>索書號至少要三碼以上且為數字。</strong>');
+            }
+        },
+        getBookDataFromWeb(e){
+            let $url = $(e.target).val();
+            if($url){
+                if(!$.isUrl($url)){
+                    $.showErrorModalWithoutError('請輸入正確的網頁格式。');
+                    $(e.target).val('');
+                }else{
+                    let parser = document.createElement('a');
+                    parser.href = $url;
+                    if(parser.hostname == 'metadata.ncl.edu.tw'){
+                        // 代表發送的是 台灣書目整合查詢系統
+                        let BooksBugURL = $('#BooksBugURL').html();
+                        let data = $(e.target).serializeObject();
+
+                        $.showLoadingModal();
+                        axios.post(BooksBugURL, data).then(response => {
+                            console.log(response.data.data);
+                            this.bookInfo = response.data.data;
+                            if(this.bookInfo == null){
+                                
+                            }else{
+                                $.closeModal();
+                                this.keyBookDataInForm();
+                            }
+                        }).catch((error) => {
+                            console.error('爬蟲時發生錯誤，錯誤訊息：' + error);
+                            $.showErrorModal(error);
+                        });
+                    }else{
+                        $.showErrorModalWithoutError('目前爬蟲僅支援台灣書目整合查詢系統網站。');
+                        $(e.target).val('');
+                    }
+                }
+            }
+        },
+        keyBookDataInForm(){
+            $('#title').val(this.bookInfo.title);
+            $('#subtitle').val(this.bookInfo.subtitle);
+            $('#author').val(this.bookInfo.author);
+            $('#isbn').val(this.bookInfo.ISBN);
+            $('#publisher').val(this.bookInfo.publisher);
+            $('#published_date').val(this.bookInfo.published_date);
+            $('#edition').val(this.bookInfo.edition);
+            $('#language').val(this.bookInfo.language);
+
+            if(this.bookInfo.language != '中文'){
+                // 此書籍是外文，索書號會抓取【杜威碼】
+                $('#callnum').val(this.bookInfo.Dewey_callnum);
+                            
+                // 種類選項強制鎖定13
+                $('#category').val(13);
+            }else{
+                $('#callnum').val(this.bookInfo.callnum);
+                this.updateCategory();
+            }
+                        
+            // 爬蟲抓圖片網址
+            let $cover_img_name = this.bookInfo.cover_img.split('/').pop();
+            if(this.bookInfo.cover_img != null && this.bookInfo.cover_img != '' && $cover_img_name != 'qrcode.png'){
+                this.$refs.uploadBookImages.uploadURLImage(this.bookInfo.cover_img);
+            }else{
+                console.log('Cover Images URL:' + this.bookInfo.cover_img);
             }
         },
         bookCreateForm(e){
             // 如果 file 沒有值時，請重新選擇圖片。
-            if(!$('#image_file').val()){
-                $.showErrorModalWithoutError('請重新選擇圖片。');
-                return false;
-            }
+            // if(!$('#image_file').val()){
+            //     $.showErrorModalWithoutError('請重新選擇圖片。');
+            //     return false;
+            // }
 
             let url = $(e.target).attr('action');
             // let data = $(e.target).serializeObject();
 
             // formdata 是不可以被console.log的，只會回傳空object。
+            $('#category').attr('disabled', false);
             let formdata = new FormData($(e.target)[0]);
             // Object.keys(data).forEach(
             //     key => formdata.append(key, data[key])
@@ -346,11 +389,12 @@ export default {
                 }
             }).then(response => {
                 // this.$refs.uploadBookImages.stopCropper();
-                $.showSuccessModal('新增成功', response.data.url);
+                $.showSuccessModal('新增成功', response.data.url, '檢視書籍');
             }).catch(error => {
                 console.error('新增書本時發生錯誤，錯誤訊息：' + error);
                 $.showErrorModal(error);
             });
+            $('#category').attr('disabled', true);
         }
     },
     created(){
@@ -393,11 +437,6 @@ export default {
         // 捐贈人
         $('#donor_id').selectpicker({
             liveSearch: true
-        });
-
-
-        $('#bugurl').change(function(){
-            
         });
     },
 }

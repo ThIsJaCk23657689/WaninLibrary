@@ -9,14 +9,15 @@
     <!-- 表單傳遞資料區塊 -->
     <div class="form-group">
         <label for="image_file" class="mb-2">
-            商品圖片
+            {{ title }}
         </label>
         <div class="custom-file">
+            <input type="hidden" id="image_url" name="image_url" :value="ImageURL">
 			<input type="hidden" id="image_data" name="image_data" :value="cropData">
             <input type="file" id="image_file" name="image_file" class="custom-file-input"
                 accept="image/jpeg,image/png,image/bmp" aria-describedby="PictureHelp" @change="spwanPreviewImg">
             <small id="PictureHelp" class="form-text text-muted">僅支援JPG、JPEG、PNG與BMP格式圖片，且檔案大小上限為20MB。</small>
-            <label class="custom-file-label" for="image_file">請選擇檔案</label>
+            <label id="file_label" class="custom-file-label" for="image_file">請選擇檔案</label>
         </div>
     </div>
 </div>
@@ -24,15 +25,26 @@
 
 <script>
 export default {
-    props: ['uploadimg'],
+    props: ['uploadimg', 'title'],
     data(){
         return {
             url: null,
             isCropActived: false, 
             cropData: null,
+            ImageURL: null,
         }
     },
     methods: {
+        uploadURLImage(url){
+            this.stopCropper();
+            if(!url){
+                // url是空值。
+                this.ImageURL = null;
+            }
+            this.ImageURL = url;
+            $('#preview-image').attr('src', this.ImageURL);
+            $('#file_label').text('從爬蟲抓來的圖片');
+        },
         // 當 input 更動時，所觸發的function。
         spwanPreviewImg(e){
             let $files = $(e.target).prop('files');
@@ -40,6 +52,10 @@ export default {
             if($files.length > 0){
                 $file = $files[0];
                 if(this.isImageFile($file)){
+                    // 確定要上傳本地端圖片，就不要管爬蟲圖片了。
+                    this.ImageURL = null;
+                    $('#file_label').text($('#image_file').prop('files')[0].name);
+
                     if(this.url){
                         URL.revokeObjectURL(this.url);
                     }
@@ -50,6 +66,8 @@ export default {
                 }else{
                     $.showErrorModalWithoutError('只能上傳(png, jpg, jpeg, gif)格式之圖片。');
                 }
+            }else{
+                this.stopCropper();
             }
         },
         // 檢查所上傳的檔案是不是圖片檔案。
@@ -74,7 +92,9 @@ export default {
 					autoCropArea: 0.5,
 					movable: false,
 					zoomable: false,
-					dragMode: 'move',
+                    dragMode: 'move',
+                    checkCrossOrigin: false,
+                    checkOrientation: false,
 					crop: function (e) {
                         let json = [
 							'{"x":' + e.detail.x,
@@ -94,7 +114,9 @@ export default {
         // 結束裁切。
         stopCropper(){
             if (this.isCropActived) {
-				$('#preview-image').cropper('destroy');
+                $('#preview-image').cropper('destroy');
+                $('#preview-image').attr('src', this.uploadimg);
+                $('#file_label').text('請選擇檔案');
 				this.isCropActived = false;
 			}
         }

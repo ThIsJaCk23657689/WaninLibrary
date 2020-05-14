@@ -39,7 +39,7 @@ class BookRequest extends FormRequest
             'edition' => 'nullable|string|max:20',
             'cover_image' => 'nullable|string|max:255',
             'ISBN' => 'nullable|string|max:50',
-            'published_date' => 'nullable|date',
+            'published_date' => 'nullable|string',
             'price' => 'nullable|numeric',
             'language' => 'nullable|string',
 
