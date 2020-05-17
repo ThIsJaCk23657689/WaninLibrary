@@ -28,7 +28,7 @@ class AnnouncementController extends Controller
         return view('announcements.create');
     }
 
-    public function store(Request $request){
+    public function store(AnnouncementRequest $request){
         $announcement_id = $this->AnnouncementService->add($request);
         return response()->json([
             'status' => 'OK',
@@ -47,7 +47,7 @@ class AnnouncementController extends Controller
         return view('announcements.edit', compact('announcement'));
     }
 
-    public function update(Request $request, $id){
+    public function update(AnnouncementRequest $request, $id){
         $announcement_id = $this->AnnouncementService->update($request, $id);
         return response()->json([
             'status' => 'OK',
