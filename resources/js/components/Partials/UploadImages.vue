@@ -25,11 +25,11 @@
 
 <script>
 export default {
-    props: ['uploadimg', 'title'],
+    props: ['uploadimg', 'title', 'aspectRatio'],
     data(){
         return {
             url: null,
-            isCropActived: false, 
+            isCropActived: false,
             cropData: null,
             ImageURL: null,
         }
@@ -88,7 +88,7 @@ export default {
 			} else {
                 $('#preview-image').attr('src', this.url);
 				$('#preview-image').cropper({
-					aspectRatio: 1 / 1,
+					aspectRatio: this.aspectRatio,
 					autoCropArea: 0.5,
 					movable: false,
 					zoomable: false,

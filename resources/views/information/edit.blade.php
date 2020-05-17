@@ -21,6 +21,7 @@
         <span id="InformationIndexURL" class="d-none">{{ route('information.index') }}</span>
         <span id="InformationUpdateURL" class="d-none">{{ route('information.update', [$information->id]) }}</span>
         <span id="InformationGetFirstURL" class="d-none">{{ route('information.getFirst') }}</span>
+        <span id="InformationCoverImageURL" class="d-none">{{ asset($information->cover_image) }}</span>
 
         <information-update-form :information="information"></information-update-form>
         <loading-modal></loading-modal>

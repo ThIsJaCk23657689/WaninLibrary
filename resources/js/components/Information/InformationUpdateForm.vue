@@ -2,7 +2,7 @@
 <div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form method="POST" id="user_update_form" action="#" @submit.prevent="informationUpdateForm">
+            <form method="POST" id="user_update_form" action="#" enctype="multipart/form-data" @submit.prevent="informationUpdateForm">
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -48,6 +48,12 @@
                     </div>
                 </div>
 
+                <div class="row">
+                    <div class="col-md-12 text-center">
+                        <upload-images ref="uploadCoverImages" :uploadimg="InformationCoverImageURL" :title="'上傳封面圖片'" :aspect-ratio="4/2"></upload-images>
+                    </div>
+                </div>
+
 
                 <div class="form-group row justify-content-center">
                     <div class="col-md-8">
@@ -74,19 +80,26 @@ export default {
         return {
             InformationUpdateURL: $('#InformationUpdateURL').html(),
             InformationIndexURL: $('#InformationIndexURL').html(),
+            InformationCoverImageURL: $('#InformationCoverImageURL').html(),
         }
     },
     methods: {
         informationUpdateForm(e) {
             let url = this.InformationUpdateURL;
-            let data = $(e.target).serializeObject();
+            // let data = $(e.target).serializeObject();
+            let formData = new FormData($(e.target)[0]);
+            formData.append('_method', 'patch');
 
-            this.$refs.loadingModal.initalModal();
-            axios.patch(url, data).then(response => {
-                this.$refs.loadingModal.successfulResponse('編輯成功', response.data.url);
+            $.showLoadingModal();
+            axios.post(url, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            }).then(response => {
+                $.showSuccessModal('修改成功', response.data.url, '檢視');
             }).catch((error) => {
-                console.error('編輯使用者時發生錯誤，錯誤訊息：' + error);
-                this.$refs.loadingModal.failureResponse(error);
+                console.error('修改時發生錯誤，錯誤訊息：' + error);
+                $.showErrorModal(error);
             });
         }
     },

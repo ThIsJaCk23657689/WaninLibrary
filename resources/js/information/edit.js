@@ -1,4 +1,5 @@
 Vue.component('information-update-form', require('./../components/Information/InformationUpdateForm.vue').default);
+Vue.component('upload-images', require('./../components/Partials/UploadImages.vue').default);
 
 const app = new Vue({
     el: '#information',

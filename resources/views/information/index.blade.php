@@ -68,6 +68,15 @@
 
             </div>
 
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="cover_image">封面圖片</label>
+                        <img id="cover_image" name="cover_image" src="{{ asset($information->cover_image) }}" alt="封面圖片" class="img-fluid">
+                    </div>
+                </div>
+            </div>
+
             <div class="form-group row justify-content-center">
                 <div class="col-md-8">
                     <a href="{{ route('information.edit', [1]) }}" class="btn btn-block btn-success">

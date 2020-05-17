@@ -77,7 +77,7 @@
 
             <div class="row">
                 <div class="col-md-6 text-center">
-                    <upload-images ref="uploadBookImages" :uploadimg="uploadimg" :title="title"></upload-images>
+                    <upload-images ref="uploadBookImages" :uploadimg="uploadimg" :title="title" :aspect-ratio="1/1"></upload-images>
                 </div>
 
                 <div class="col-md-6">

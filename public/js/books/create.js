@@ -610,7 +610,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['uploadimg', 'title'],
+  props: ['uploadimg', 'title', 'aspectRatio'],
   data: function data() {
     return {
       url: null,
@@ -677,7 +677,7 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         $('#preview-image').attr('src', this.url);
         $('#preview-image').cropper({
-          aspectRatio: 1 / 1,
+          aspectRatio: this.aspectRatio,
           autoCropArea: 0.5,
           movable: false,
           zoomable: false,
@@ -789,7 +789,11 @@ var render = function() {
               [
                 _c("upload-images", {
                   ref: "uploadBookImages",
-                  attrs: { uploadimg: _vm.uploadimg, title: _vm.title }
+                  attrs: {
+                    uploadimg: _vm.uploadimg,
+                    title: _vm.title,
+                    "aspect-ratio": 1 / 1
+                  }
                 })
               ],
               1
@@ -904,7 +908,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        確認新增\r\n                    "
+                    "\n                        確認新增\n                    "
                   )
                 ]
               ),
@@ -917,7 +921,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        返回列表\r\n                    "
+                    "\n                        返回列表\n                    "
                   )
                 ]
               )
@@ -960,7 +964,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "fas fa-user-tie mr-2" }),
               _vm._v(
-                "\r\n                        一般書籍(有ISBN)\r\n                    "
+                "\n                        一般書籍(有ISBN)\n                    "
               )
             ]
           )
@@ -978,7 +982,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "far fa-building mr-2" }),
               _vm._v(
-                "\r\n                        論文、期刊、雜誌等(無ISBN)\r\n                    "
+                "\n                        論文、期刊、雜誌等(無ISBN)\n                    "
               )
             ]
           )
@@ -1009,7 +1013,7 @@ var staticRenderFns = [
               [
                 _c("i", { staticClass: "fas fa-undo-alt mr-2" }),
                 _vm._v(
-                  "\r\n                        重新選擇書本類型\r\n                    "
+                  "\n                        重新選擇書本類型\n                    "
                 )
               ]
             )
@@ -1108,7 +1112,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("書名（主標題）\r\n                                ")
+            _vm._v("書名（主標題）\n                                ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -1317,7 +1321,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("索書號\r\n                        ")
+      _vm._v("索書號\n                        ")
     ])
   },
   function() {
@@ -1388,7 +1392,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("label", { staticClass: "mb-2", attrs: { for: "image_file" } }, [
-        _vm._v("\r\n            " + _vm._s(_vm.title) + "\r\n        ")
+        _vm._v("\n            " + _vm._s(_vm.title) + "\n        ")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "custom-file" }, [
@@ -1712,7 +1716,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\create.js */"./resources/js/books/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\create.js */"./resources/js/books/create.js");
 
 
 /***/ })
