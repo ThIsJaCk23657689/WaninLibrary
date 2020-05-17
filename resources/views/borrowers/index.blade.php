@@ -3,10 +3,10 @@
 @push('CustomJS')
 	<script src="{{ asset('js/admin/demo/datatables-demo.js') }}" defer></script>
 	<script src="{{ asset('js/borrowers/index.js') }}" defer></script>
-@endpush 
+@endpush
 
 @section('content')
-				
+
     @component('components.breadcrumbs')
         <li class="breadcrumb-item">
             <a href="#">{{ __('People Management') }}</a>
@@ -25,11 +25,13 @@
 			</a>
 		</div>
 	</div>
-	
+
 	<div id="borrower">
 		<span id="BorrowersGetList" class="d-none">{{ route('borrowers.getList') }}</span>
 
-		<borrowers-table :borrowers="borrowers" :rows-per-page="rowsPerPage" :page-num="pageNum" :total-page="totalPage" v-on:update-borrowers="updateBorrowers"></borrowers-table>
+        <borrowers-table :borrowers="borrowers" :rows-per-page="rowsPerPage" :page-num="pageNum" :total-page="totalPage"
+        v-on:update-borrowers="updateBorrowers" v-on:change-status="changeStatus" v-on:change-activated="changeActivated"
+        v-on:change-keywords-type="changeKeywordsType"></borrowers-table>
 	</div>
-	
+
 @endsection

@@ -125,6 +125,54 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['borrowers', 'rowsPerPage', 'pageNum', 'totalPage'],
   data: function data() {
@@ -133,6 +181,22 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     getBorrowerList: function getBorrowerList(pageNum) {
       this.$emit('update-borrowers', pageNum);
+    },
+    changeStatus: function changeStatus(e) {
+      var status = e.target.value;
+      this.$emit('change-status', status);
+    },
+    changeKeywordsType: function changeKeywordsType(e) {
+      var data = $(e.target).serializeObject();
+      var keywords = data.keywords;
+      var type = data.type;
+      var activated = data.activated;
+      var status = data.status;
+      this.$emit('change-keywords-type', keywords, type, status, activated);
+    },
+    changeActivated: function changeActivated(e) {
+      var activated = e.target.value;
+      this.$emit('change-activated', activated);
     }
   },
   created: function created() {},
@@ -216,7 +280,90 @@ var render = function() {
     _c("div", { staticClass: "card mb-3" }, [
       _vm._m(0),
       _vm._v(" "),
-      _vm._m(1),
+      _c("div", { staticClass: "card-body" }, [
+        _c("div", { staticClass: "row justify-content-center" }, [
+          _c(
+            "div",
+            {
+              staticClass: "col-md-12 justify-content-center",
+              attrs: { id: "" }
+            },
+            [
+              _c(
+                "form",
+                {
+                  attrs: { method: "GET", id: "search-by-keywords-form" },
+                  on: {
+                    submit: function($event) {
+                      $event.preventDefault()
+                      return _vm.changeKeywordsType($event)
+                    }
+                  }
+                },
+                [
+                  _c(
+                    "div",
+                    { staticClass: "row mb-3 justify-content-center" },
+                    [
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c(
+                          "select",
+                          {
+                            staticClass: "form-control",
+                            attrs: { name: "status", id: "status" },
+                            on: { change: _vm.changeStatus }
+                          },
+                          [
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("全部")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "0" } }, [
+                              _vm._v("一般民眾")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("符合社福資格")
+                            ])
+                          ]
+                        )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c(
+                          "select",
+                          {
+                            staticClass: "form-control",
+                            attrs: { name: "activated", id: "activated" },
+                            on: { change: _vm.changeActivated }
+                          },
+                          [
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("全部")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "0" } }, [
+                              _vm._v("停權")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("未停權")
+                            ])
+                          ]
+                        )
+                      ])
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _vm._m(1)
+                ]
+              )
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _vm._m(2)
+      ]),
       _vm._v(" "),
       _c(
         "div",
@@ -239,42 +386,97 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table" }),
-      _vm._v("借閱人列表\r\n        ")
+      _vm._v("借閱人列表\n        ")
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "table-responsive" }, [
+    return _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-3" }, [
         _c(
-          "table",
+          "select",
+          { staticClass: "form-control", attrs: { name: "type", id: "type" } },
+          [
+            _c("option", { attrs: { value: "0" } }, [_vm._v("依欄位進行搜尋")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "0" } }, [_vm._v("不分類")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "1" } }, [_vm._v("隸屬單位名稱")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "2" } }, [_vm._v("姓名")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "3" } }, [_vm._v("信箱")]),
+            _vm._v(" "),
+            _c("option", { attrs: { value: "4" } }, [_vm._v("電話")])
+          ]
+        )
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-4" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            staticClass: "form-control mb-2",
+            attrs: {
+              id: "keywords",
+              name: "keywords",
+              type: "text",
+              value: "",
+              autocomplete: "off",
+              placeholder: "關鍵字搜尋..."
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c(
+          "button",
           {
-            staticClass: "table table-bordered",
-            attrs: { id: "BorrowersDataTable", width: "100%", cellspacing: "0" }
+            staticClass: "btn btn-block btn-primary",
+            attrs: { type: "submit" }
           },
           [
-            _c("thead", [
-              _c("tr", [
-                _c("th", [_vm._v("編號")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("名稱")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("電話")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("隸屬單位")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("借閱數量")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("逾期數量")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("操作")])
-              ])
-            ])
+            _vm._v(
+              "\n                                    確認\n                                "
+            )
           ]
         )
       ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "table-responsive" }, [
+      _c(
+        "table",
+        {
+          staticClass: "table table-bordered",
+          attrs: { id: "BorrowersDataTable", width: "100%", cellspacing: "0" }
+        },
+        [
+          _c("thead", [
+            _c("tr", [
+              _c("th", [_vm._v("編號")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("名稱")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("電話")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("隸屬單位")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("借閱數量")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("逾期數量")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("操作")])
+            ])
+          ])
+        ]
+      )
     ])
   }
 ]
@@ -449,13 +651,43 @@ var app = new Vue({
       rowsPerPage: 10,
       pageNum: 1,
       totalPage: 0,
-      borrowers: []
+      borrowers: [],
+      DataTotalCount: 0,
+      status: 2,
+      activated: 2,
+      type: 0,
+      keywords: ''
     };
   },
   methods: {
-    updateBorrowers: function updateBorrowers(pageNum) {
+    changeStatus: function changeStatus(status) {
+      this.status = status;
+      this.updateBorrowers(this.pageNum, true);
+    },
+    changeKeywordsType: function changeKeywordsType(keywords, type, status, activated) {
+      this.activated = activated;
+      this.keywords = keywords;
+      this.type = type;
+      this.status = status;
+      this.updateBorrowers(this.pageNum, true);
+    },
+    changeActivated: function changeActivated(activated) {
+      this.activated = activated;
+      this.updateBorrowers(this.pageNum, true);
+    },
+    updateBorrowers: function updateBorrowers(pageNum, first_page) {
       var _this = this;
 
+      if (first_page) {
+        this.pageNum = 1;
+      } else {
+        this.pageNum = pageNum;
+      }
+
+      var status = this.status;
+      var keywords = this.keywords;
+      var type = this.type;
+      var activated = this.activated;
       var skip = (pageNum - 1) * this.rowsPerPage;
       var take = this.rowsPerPage;
       var BorrowersGetList = $('#BorrowersGetList').html();
@@ -463,10 +695,16 @@ var app = new Vue({
       axios.get(BorrowersGetList, {
         params: {
           skip: skip,
-          take: take
+          take: take,
+          status: status,
+          keywords: keywords,
+          type: type,
+          activated: activated
         }
       }).then(function (response) {
         _this.borrowers = response.data.borrowers;
+        _this.DataTotalCount = response.data.DataTotalCount;
+        _this.totalPage = Math.ceil(_this.DataTotalCount / _this.rowsPerPage);
         $('.dataTables_processing', $('#BorrowersDataTable').closest('.dataTables_wrapper')).fadeOut();
         $('#BorrowersDataTable').dataTable().fnClearTable();
 
@@ -483,6 +721,8 @@ var app = new Vue({
 
     var BorrowersGetList = $('#BorrowersGetList').html();
     axios.get(BorrowersGetList).then(function (response) {
+      _this2.DataTotalCount = response.data.DataTotalCount;
+      _this2.totalPage = Math.ceil(_this2.DataTotalCount / _this2.rowsPerPage);
       _this2.borrowers = response.data.borrowers;
       $('#BorrowersDataTable').on('draw.dt', function () {
         console.log('drawing a table');
@@ -514,8 +754,7 @@ var app = new Vue({
       });
     });
   },
-  mounted: function mounted() {
-    this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
+  mounted: function mounted() {// this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
   }
 });
 
