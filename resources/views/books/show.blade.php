@@ -1,10 +1,10 @@
 @extends('layouts.backend.master')
 
 @push('CustomJS')
-@endpush   
+@endpush
 
 @section('content')
-				
+
 	@component('components.breadcrumbs')
 		<li class="breadcrumb-item">
 			<a href="#">{{ __('Books Management') }}</a>
@@ -44,7 +44,7 @@
                         </select>
                     </div>
                 </div>
-            
+
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="donor_id"><span id="donor_id_required_star" class="text-danger mr-2">*</span>捐贈人</label>
@@ -53,14 +53,14 @@
                         </select>
                     </div>
                 </div>
-            
+
                 <div class="col-md-2">
                     <div class="form-group">
                         <label for="price"><span id="price_required_star" class="text-danger mr-2" style="display:none;">*</span>價格</label>
                         <input id="price" name="price" type="text" class="form-control" value="0" autocomplete="off" disabled>
                     </div>
                 </div>
-            
+
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="status">狀態</label>
@@ -70,14 +70,14 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-6 text-center">
                     {{-- <upload-images ref="uploadBookImages" :uploadimg="uploadimg" :title="title"></upload-images> --}}
                 </div>
-            
+
                 <div class="col-md-6">
-            
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -89,7 +89,7 @@
                             </div>
                         </div>
                     </div>
-            
+
                     <div class="row">
                         <div class="col-md-12">
                             <div class="form-group">
@@ -99,16 +99,22 @@
                             </div>
                         </div>
                     </div>
-            
+
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-9">
                             <div class="form-group">
                                 <label for="author">作者</label>
                                 <input id="author" name="author" type="text" class="form-control" value="" autocomplete="off">
                             </div>
                         </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="position"">位置</label>
+                                <input id="position"" name="position"" type="text" class="form-control" value="" autocomplete="off">
+                            </div>
+                        </div>
                     </div>
-            
+
                     <div class="row">
                         <div class="col-md-9">
                             <div class="form-group">
@@ -125,7 +131,7 @@
                             </div>
                         </div>
                     </div>
-            
+
                     <div class="row">
                         <div class="col-md-8">
                             <div class="form-group">
@@ -143,7 +149,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row">
                 <div class="col-md-3">
                     <div class="form-group">
@@ -158,7 +164,7 @@
                         <input id="isbn" name="isbn" type="text" class="form-control" value="" autocomplete="off">
                     </div>
                 </div>
-            
+
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="callnum">
@@ -180,7 +186,7 @@
                     </div>
                 </div>
             </div>
-            
+
             <div class="row mb-2">
                 <div class="col-md-12">
                     <div class="form-group">

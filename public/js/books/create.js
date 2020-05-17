@@ -314,6 +314,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['uploadimg'],
   data: function data() {
@@ -898,7 +904,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        確認新增\r\n                    "
+                    "\n                        確認新增\n                    "
                   )
                 ]
               ),
@@ -911,7 +917,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        返回列表\r\n                    "
+                    "\n                        返回列表\n                    "
                   )
                 ]
               )
@@ -954,7 +960,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "fas fa-user-tie mr-2" }),
               _vm._v(
-                "\r\n                        一般書籍(有ISBN)\r\n                    "
+                "\n                        一般書籍(有ISBN)\n                    "
               )
             ]
           )
@@ -972,7 +978,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "far fa-building mr-2" }),
               _vm._v(
-                "\r\n                        論文、期刊、雜誌等(無ISBN)\r\n                    "
+                "\n                        論文、期刊、雜誌等(無ISBN)\n                    "
               )
             ]
           )
@@ -1003,7 +1009,7 @@ var staticRenderFns = [
               [
                 _c("i", { staticClass: "fas fa-undo-alt mr-2" }),
                 _vm._v(
-                  "\r\n                        重新選擇書本類型\r\n                    "
+                  "\n                        重新選擇書本類型\n                    "
                 )
               ]
             )
@@ -1102,7 +1108,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("書名（主標題）\r\n                                ")
+            _vm._v("書名（主標題）\n                                ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -1148,7 +1154,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "col-md-9" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "author" } }, [_vm._v("作者")]),
           _vm._v(" "),
@@ -1157,6 +1163,23 @@ var staticRenderFns = [
             attrs: {
               id: "author",
               name: "author",
+              type: "text",
+              value: "",
+              autocomplete: "off"
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "position" } }, [_vm._v("位置")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "position",
+              name: "position",
               type: "text",
               value: "",
               autocomplete: "off"
@@ -1294,7 +1317,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("索書號\r\n                        ")
+      _vm._v("索書號\n                        ")
     ])
   },
   function() {

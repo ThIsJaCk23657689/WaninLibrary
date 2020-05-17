@@ -35,7 +35,7 @@ class CreateBooksTable extends Migration
             $table->float('price')->default(0)->comment('價格');
             $table->string('language')->nullable()->comment('語言別');
             $table->string('position')->nullable()->comment('位置');
-            $table->boolean('is_recommended')->default('false')->comment('是否為推薦十本好書');
+            $table->boolean('is_recommended')->default(false)->comment('是否為推薦十本好書');
 
             $table->string('content')->nullable()->comment('備註');
             $table->integer('count')->default(0)->comment('借閱次數');

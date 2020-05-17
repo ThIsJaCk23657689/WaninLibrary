@@ -35,7 +35,7 @@
                 </div>
             </div>
         </div>
-        
+
         <form id="book_create_form" method="POST" :action="BooksStoreURL" enctype="multipart/form-data" style="display:none;" @submit.prevent="bookCreateForm">
 
             <div class="row">
@@ -113,10 +113,16 @@
                     </div>
 
                     <div class="row">
-                        <div class="col-md-12">
+                        <div class="col-md-9">
                             <div class="form-group">
                                 <label for="author">作者</label>
                                 <input id="author" name="author" type="text" class="form-control" value="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="position">位置</label>
+                                <input id="position" name="position" type="text" class="form-control" value="" autocomplete="off">
                             </div>
                         </div>
                     </div>
@@ -319,7 +325,7 @@ export default {
                             console.log(response.data.data);
                             this.bookInfo = response.data.data;
                             if(this.bookInfo == null){
-                                
+
                             }else{
                                 $.closeModal();
                                 this.keyBookDataInForm();
@@ -348,14 +354,14 @@ export default {
             if(this.bookInfo.language != '中文'){
                 // 此書籍是外文，索書號會抓取【杜威碼】
                 $('#callnum').val(this.bookInfo.Dewey_callnum);
-                            
+
                 // 種類選項強制鎖定13
                 $('#category').val(13);
             }else{
                 $('#callnum').val(this.bookInfo.callnum);
                 this.updateCategory();
             }
-                        
+
             // 爬蟲抓圖片網址
             let $cover_img_name = this.bookInfo.cover_img.split('/').pop();
             if(this.bookInfo.cover_img != null && this.bookInfo.cover_img != '' && $cover_img_name != 'qrcode.png'){
@@ -381,7 +387,7 @@ export default {
             //     key => formdata.append(key, data[key])
             // );
             // formdata.append('image_file', $('#image_file')[0].files[0]);
-            
+
             $.showLoadingModal();
             axios.post(url, formdata, {
                 headers: {
