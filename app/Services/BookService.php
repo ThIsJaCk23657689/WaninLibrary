@@ -49,6 +49,7 @@ class BookService extends BaseService
             'edition' => $request->edition,
             'cover_image' => $url,
             'ISBN' => $request->ISBN,
+            'position' => $request->position,
 
             'published_date' => $request->published_date,
             'price' => $request->price ?? 0,
@@ -208,6 +209,7 @@ class BookService extends BaseService
             'publisher' => $request->publisher,
             'edition' => $request->edition,
             'ISBN' => $request->ISBN,
+            'position' => $request->position,
 
             'published_date' => $request->published_date,
             'price' => $request->price,

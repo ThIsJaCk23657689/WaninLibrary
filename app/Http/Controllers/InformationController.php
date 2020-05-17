@@ -2,8 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\RecommendationRequest;
 use App\Http\Requests\InformationRequest;
 use App\Services\InformationService;
+
 
 class InformationController extends Controller
 {
@@ -11,10 +13,11 @@ class InformationController extends Controller
 
     public function __construct(){
         $this->middleware('auth.web')->only([
-            'index', 'edit',
+            'index', 'edit', 
+            'recommendation_index', 'recommendation_edit',
         ]);
         $this->middleware('auth.jwt')->only([
-            'update'
+            'getFirst', 'update', 'recommendation_update'
         ]);
         $this->InformationService = new InformationService();
     }
@@ -35,6 +38,25 @@ class InformationController extends Controller
             'status' => 'OK',
             // 'added_id' => $information_id,
             'url' => route('information.index')
+        ], 200);
+    }
+
+    public function recommendation_index(){
+        $information = $this->InformationService->recommendation_getFirst();
+        return view('recommendation.index', compact('information'));
+    }
+
+    public function recommendation_edit(){
+        $information = $this->InformationService->recommendation_getFirst();
+        return view('recommendation.edit', compact('information'));
+    }
+
+    public function recommendation_update(InformationRequest $request){
+        $information_id = $this->InformationService->update($request);
+        return response()->json([
+            'status' => 'OK',
+            // 'added_id' => $information_id,
+            'url' => route('recommendation.index')
         ], 200);
     }
 
