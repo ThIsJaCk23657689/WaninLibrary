@@ -232,8 +232,10 @@ class BookService extends BaseService
 
     public function getBookDataByBarcode($barcode) {
         $book = BookEloquent::where('barcode', $barcode)->first();
-        $book['showStatus'] = $book->showStatus();
-        $book['donorName'] = $book->donor->name;
+        if(!is_null($book)){
+            $book['showStatus'] = $book->showStatus();
+            $book['donorName'] = $book->donor->name;
+        }
         return $book;
     }
 

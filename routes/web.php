@@ -50,7 +50,7 @@ Route::prefix('/backend')->group(function () {
 
     // 借閱管理相關
     Route::get('/circulation', 'BorrowController@circulation')->name('circulation');
-    Route::get('/circulation/borrow', 'BorrowController@borrow')->name('circulation.borrow');
+    Route::get('/circulation/borrow', 'BorrowController@showBorrowPage')->name('circulation.showBorrowPage');
     Route::resource('/borrows', 'BorrowController', ['only' => [
         'index', 'show', 'create'
     ]]);

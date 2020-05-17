@@ -12,6 +12,17 @@ class Borrow extends Model
         'borrower_id', 'book_id', 'borrow_date', 'return_date', 'status', 'noticed',
     ];
 
+    protected $casts = [
+        'return_date' => 'datetime:Y-m-d',
+        'created_at' => 'datetime:Y-m-d',
+        'updated_at' => 'datetime:Y-m-d',
+    ];
+
+    protected function serializeDate(\DateTimeInterface $date)
+    {
+        return $date->format($this->dataFormat? : 'Y-m-d H:i:s');
+    }
+
     public function book(){
         return $this->belongsTo(BookEloquent::class);
     }

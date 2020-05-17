@@ -24,7 +24,7 @@ class CreateBorrowersTable extends Migration
             $table->string('tel')->comment('電話');
             $table->string('job_title')->nullable()->comment('職稱');
             $table->integer('status')->comment('身分別'); //0.一般民眾 1.符合社福資格
-            $table->boolean('activated')->default(1)->comment('是否停權'); //0.停權 1.未停權
+            $table->boolean('activated')->default(1)->comment('是否激活'); //0.停權 1.未停權
             
             $table->string('address_zipcode', 6)->nullable()->comment('郵遞區號');
             $table->string('address_county', 10)->nullable()->comment('縣市別');

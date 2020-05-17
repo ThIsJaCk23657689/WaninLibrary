@@ -117,5 +117,7 @@
     "Notification": "通知",
     "Log File": "日誌檔",
     "Statistics": "統計",
-    "Information": "基本資料維護"
+    "Information": "基本資料維護",
+
+    "The given data was invalid.": "輸入資料格式錯誤"
 }

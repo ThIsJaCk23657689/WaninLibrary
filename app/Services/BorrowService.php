@@ -10,37 +10,45 @@ use Carbon\Carbon;
 class BorrowService extends BaseService
 {
     // kernel 時間到變逾期；逾期時停權該借閱人；
-
-    // 判斷借閱人是否停權
     public function add($request){
+        $borrower = BorrowerEloquent::find($request->borrowerID);
+        // 判斷借閱人是否停權
+        if(!$borrower->activated){
+            return [
+                'status' => 422,
+                'message' => "該借閱人已遭系統停權，無法進行借閱。",
+            ];
+        }
 
-        $borrower = BorrowerEloquent::find($request->borrower_id);
-        $book = BookEloquent::where('barcode', $request->barcode)->first();
-        if($borrower->activated !=0){
-            $borrow = BorrowEloquent::create([
-                'borrower_id' => $request->borrower_id,
+        $books = $request->books;
+        foreach($books as $bookRecord){
+            $book = BookEloquent::findOrFail($bookRecord['id']);
+            BorrowEloquent::create([
+                'borrower_id' => $borrower->id,
                 'book_id' => $book->id,
                 'borrow_date' => Carbon::now(),
-                'return_date' => Carbon::now()->addMonth(),
+                'return_date' => Carbon::now()->addDay(30),
             ]);
 
             // 增加該書的借閱次數
             $book->count += 1;
+            $book->status = 2;
             $book->save();
 
+            // 新增借閱紀錄
             BorrowLogEloquent::create([
-                'borrower_id' => $borrow->borrower_id,
-                'borrower_name' => $borrow->book->name,
-                'book_id' => $borrow->book_id,
-                'book_title' => $borrow->book->title,
-                'callnum' => $borrow->book->callnum,
+                'borrower_id' => $borrower->id,
+                'borrower_name' => $borrower->name,
+                'book_id' => $book->id,
+                'book_title' => $book->title,
+                'callnum' => $book->callnum,
             ]);
-
-            return $borrow->id;
-        }else{
-            return "該借閱人已遭系統停權，無法進行借閱";
         }
-
+        return [
+            'status' => 200,
+            'message' => "新增成功！",
+            'url' => route('circulation.showBorrowPage')
+        ];
     }
 
     public function getList(){

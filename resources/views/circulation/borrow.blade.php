@@ -17,8 +17,10 @@
     @endcomponent
     
     <div id="circulation">
-        <span id="BorrowersFilterURL" class="d-none">{{ route('borrowers.filter') }}</span>
-        
+		<span id="BorrowersFilterURL" class="d-none">{{ route('borrowers.filter') }}</span>
+		<span id="getBookDataByBarcode" class="d-none">{{ route('books.barcode.json') }}</span>
+		<span id="borrowBookURL" class="d-none">{{ route('circulation.borrow') }}</span>
+
         <borrow-book-form></borrow-book-form>
     </div>
 

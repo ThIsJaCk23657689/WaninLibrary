@@ -71,8 +71,8 @@ Route::prefix('/backend')->group(function(){
         'store', 'update', 'destroy'
     ]]);
 
-    // Image Upload
-    Route::post('ckeditor/upload', 'CKEditorController@upload')->name('ckeditor.upload');
+    // CKEditor 圖片上傳路由
+    Route::post('/ckeditor/upload', 'CKEditorController@upload')->name('ckeditor.upload');
 
     // 公告管理相關
     Route::get('/announcements/change_top/{id}','AnnouncementController@change_top')->name('announcements.change_top');
@@ -80,6 +80,18 @@ Route::prefix('/backend')->group(function(){
     Route::resource('/announcements', 'AnnouncementController', ['only' => [
         'store', 'update', 'destroy'
     ]]);
+
+    // 借閱管理
+    Route::get('getBookListByStatus','BorrowController@getBookListByStatus');
+    Route::get('getBookListByNoticed','BorrowController@getBookListByNoticed');
+    
+    // 借書
+    Route::post('circulation/borrow','BorrowController@borrow')->name('circulation.borrow');
+    Route::post('circulation/bookExpired','BorrowController@bookExpired');
+    Route::post('circulation/Notified','BorrowController@Notified');
+
+    // 還書
+    Route::post('returnBookByBarcode','BorrowController@returnBookByBarcode');
 });
 
 Route::group(['middleware' => 'auth.jwt'], function () {
@@ -103,16 +115,6 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getLoginLogsByMonth', 'LoginLogController@getLoginLogsByMonth')->name('loginLogs.getLoginLogsByMonth');
     Route::get('getLoginLogsByYear', 'LoginLogController@getLoginLogsByYear')->name('loginLogs.getLoginLogsByYear');
     Route::get('getLoginLogsByTimeRange', 'LoginLogController@getLoginLogsByTimeRange')->name('loginLogs.getLoginLogsByTimeRange');
-
-    // 借閱管理相關
-    Route::get('getBookListByStatus','BorrowController@getBookListByStatus');
-    Route::get('getBookListByNoticed','BorrowController@getBookListByNoticed');
-        // 還書
-    Route::post('returnBookByBarcode','BorrowController@returnBookByBarcode');
-        // 借書
-    Route::post('borrowBookByBarcode','BorrowController@borrowBookByBarcode');
-    Route::post('bookExpired','BorrowController@bookExpired');
-    Route::post('Notified','BorrowController@Notified');
 
     // 借閱日誌(logs)相關
     Route::get('getBorrowLogs','BorrowLogController@getList')->name('borrowLogs.getList');

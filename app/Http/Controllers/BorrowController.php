@@ -13,10 +13,10 @@ class BorrowController extends Controller
     public function __construct()
     {
         $this->middleware('auth.web')->only([
-            'index', 'create', 'show', 'edit', 'circulation', 'borrow'
+            'index', 'create', 'show', 'edit', 'circulation', 'showBorrowPage'
         ]);
         $this->middleware('auth.jwt')->only([
-            'store', 'update', 'destroy',
+            'borrow'
         ]);
         $this->BorrowService = new BorrowService();
     }
@@ -28,7 +28,7 @@ class BorrowController extends Controller
     }
 
     // 顯示書籍借出頁面
-    public function borrow()
+    public function showBorrowPage()
     {
         return view('circulation.borrow');
     }
@@ -50,15 +50,12 @@ class BorrowController extends Controller
         return view('borrows.show', compact('borrow'));
     }
 
-    //APIs
-    public function borrowBookByBarcode(BorrowRequest $request)
+    // ==================== APIs ====================
+    // 借閱書籍儲存
+    public function borrow(Request $request)
     {
-        $msg = $this->BorrowService->add($request);
-        return response()->json([
-            'status' => 'OK',
-            'msg' => $msg,
-            'url' => route('borrows.index')
-        ], 200);
+        $result = $this->BorrowService->add($request);
+        return response()->json($result, $result['status']);
     }
 
     public function getBorrowListByBorrowerID(Request $request)
