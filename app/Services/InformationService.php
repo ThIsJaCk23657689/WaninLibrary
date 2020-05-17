@@ -58,6 +58,20 @@ class InformationService extends BaseService
 
 
     public function recommendation_update($request){
+        BookEloquent::where('is_recommended', true)->update(['is_top' => false]);
+        BookEloquent::find($request->book_id_1)->update(['is_recommended' => true]);
+        BookEloquent::find($request->book_id_2)->update(['is_recommended' => true]);
+        BookEloquent::find($request->book_id_3)->update(['is_recommended' => true]);
+        BookEloquent::find($request->book_id_4)->update(['is_recommended' => true]);
+        BookEloquent::find($request->book_id_5)->update(['is_recommended' => true]);
+        BookEloquent::find($request->book_id_6)->update(['is_recommended' => true]);
+        BookEloquent::find($request->book_id_7)->update(['is_recommended' => true]);
+        BookEloquent::find($request->book_id_8)->update(['is_recommended' => true]);
+        BookEloquent::find($request->book_id_9)->update(['is_recommended' => true]);
+        BookEloquent::find($request->book_id_10)->update(['is_recommended' => true]);
+
+        $information = $this->getFirst();
+        $information->update(['recommendation_title' => $request->recommendation_title]);
 
     }
 

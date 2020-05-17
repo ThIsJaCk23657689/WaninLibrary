@@ -17,11 +17,7 @@ class InformationController extends Controller
             'recommendation_index', 'recommendation_edit',
         ]);
         $this->middleware('auth.jwt')->only([
-<<<<<<< HEAD
             'getFirst', 'update', 'recommendation_update'
-=======
-            'update','getFirst'
->>>>>>> f6777937b0a94823e0f844680cffe2d017b11fd7
         ]);
         $this->InformationService = new InformationService();
     }
@@ -45,6 +41,14 @@ class InformationController extends Controller
         ], 200);
     }
 
+    public function getFirst(){
+        $information = $this->InformationService->getFirst();
+        return response()->json([
+            'status' => 'OK',
+            'information' => $information
+        ]);
+    }
+
     public function recommendation_index(){
         $information = $this->InformationService->recommendation_getFirst();
         return view('recommendation.index', compact('information'));
@@ -55,8 +59,8 @@ class InformationController extends Controller
         return view('recommendation.edit', compact('information'));
     }
 
-    public function recommendation_update(InformationRequest $request){
-        $information_id = $this->InformationService->update($request);
+    public function recommendation_update(RecommendationRequest $request){
+        $this->InformationService->recommendation_update($request);
         return response()->json([
             'status' => 'OK',
             // 'added_id' => $information_id,
@@ -64,11 +68,5 @@ class InformationController extends Controller
         ], 200);
     }
 
-    public function getFirst(){
-        $information = $this->InformationService->getFirst();
-        return response()->json([
-            'status' => 'OK',
-            'information' => $information
-        ]);
-    }
+    
 }
