@@ -35,9 +35,66 @@ class BorrowerService extends BaseService
         return BorrowerEloquent::count();
     }
 
-    public function getList($skip, $take)
+    public function getList($request)
     {
-        $borrowers = BorrowerEloquent::skip($skip)->take($take)->get();
+
+        $skip = $request->skip ?? 0;
+        $take = $request->take ?? 10;
+        $status = $request->status ?? 2;
+        $activated = $request->activated ?? 2;
+        $type = $request->type ?? 0;
+        $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
+
+         // 0. default 1.'agency_id', 2.'name', 3. 'email', 4. 'tel'
+        $type_arr = ['','', 'name', 'email', 'tel'];
+
+        if($keywords == [] && $status== 2 && $activated == 2 && $type == 2){
+            $borrowers_tmp = new BorrowerEloquent();
+            $borrowers = $borrowers_tmp->skip($skip)->take($take)->get();
+            $count = $borrowers->count();
+
+        }else{
+            $borrowers_tmp = BorrowerEloquent::query()->where(function ($query) use ($keywords, $status, $activated, $type, $type_arr) {
+
+                // type = 2-4
+                if($type != 0 && $keywords != [] && $type != 1){
+                    foreach ($keywords as $keyword) {
+                        $keyword = '%'.$keyword.'%';
+                        $query->orWhere($type_arr[$type], 'like', $keyword);
+                    }
+                // type = 1
+                }elseif($type == 1 && $keywords != []){
+                    foreach ($keywords as $keyword) {
+                        $keyword = '%'.$keyword.'%';
+                        $query->agency()->orWhere('name', 'like', $keyword);
+                    }
+                // type = 0; 不分類
+                }elseif($keywords != []){
+                    foreach ($keywords as $keyword) {
+                        $keyword = '%'.$keyword.'%';
+                        for($i = 1; $i<=4; $i++){
+                            if($i != 1){
+                                $query->orWhere($type_arr[$i], 'like', $keyword);
+                            }else{
+                                $query->agency()->orWhere('name', 'like', $keyword);
+                            }
+                        }
+                    }
+                }
+
+                if($status != 2){
+                    $query->where('status', $status);
+                }
+                if($activated != 2){
+                    $query->where('activated', $activated);
+                }
+
+            });
+            $count = $borrowers_tmp->count();
+            $borrowers = $borrowers_tmp->skip($skip)->take($take)->get();
+
+        }
+
         foreach ($borrowers as $borrower) {
             $borrower['showAgencyName'] = $borrower->showAgencyName();
             $borrower['borrowCounts'] = 0;
@@ -47,7 +104,8 @@ class BorrowerService extends BaseService
                 <a href="' . route('borrowers.edit', [$borrower->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
                 <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';
         }
-        return $borrowers;
+        $res = ['borrowers' => $borrowers, 'count' => $count];
+        return $res;
     }
 
     public function getOne($id)
@@ -119,11 +177,11 @@ class BorrowerService extends BaseService
         if(!is_null($request->name)){
             $borrowers = $borrowers->where('name', 'like', '%' . $request->name . '%');
         }
-        
+
         if(!is_null($request->tel)){
             $borrowers = $borrowers->where('tel', 'like', '%' . $request->tel . '%');
         }
-        
+
         if(!is_null($request->birthday)){
             $borrowers = $borrowers->where('birthday', 'like', '%' . $request->birthday . '%');
         }

@@ -78,11 +78,21 @@ class CropImageService extends BaseService{
 	}
 
 	private function setPath($model){
-		if($model){
-			$this->path = 'images/' . $model . '/' . 'cover_images' . '/';
-		}else{
-			$this->path = 'images/default/';
+
+		$file_path = 'images/' . $model;
+
+		if(!file_exists($file_path)){
+			mkdir($file_path);
+			mkdir($file_path . '/' . 'cover_images' . '/');
 		}
+			
+
+		$this->path = 'images/' . $model . '/' . 'cover_images' . '/';
+		// if($model){
+		// 	$this->path = 'images/' . $model . '/' . 'cover_images' . '/';
+		// }else{
+		// 	$this->path = 'images/default/';
+		// }
 	}
 
 	private function setFilename(){

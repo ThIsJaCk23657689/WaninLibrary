@@ -8,11 +8,42 @@ const app = new Vue({
             rowsPerPage: 10,
             pageNum: 1,
             totalPage: 0,
-            borrowers: []
+            borrowers: [],
+            DataTotalCount: 0,
+            status: 2,
+            activated: 2,
+            type: 0,
+            keywords: '',
         }
     },
     methods: {
-        updateBorrowers(pageNum) {
+        changeStatus(status) {
+            this.status = status;
+            this.updateBorrowers(this.pageNum, true)
+        },
+        changeKeywordsType(keywords, type, status, activated) {
+            this.activated = activated;
+            this.keywords = keywords;
+            this.type = type;
+            this.status = status;
+            this.updateBorrowers(this.pageNum, true)
+        },
+        changeActivated: function(activated) {
+            this.activated = activated;
+            this.updateBorrowers(this.pageNum, true)
+
+        },
+        updateBorrowers(pageNum, first_page) {
+            if (first_page) {
+                this.pageNum = 1;
+            } else {
+                this.pageNum = pageNum;
+            }
+            let status = this.status;
+            let keywords = this.keywords;
+            let type = this.type;
+            let activated = this.activated;
+
             let skip = (pageNum - 1) * this.rowsPerPage;
             let take = this.rowsPerPage;
 
@@ -21,10 +52,16 @@ const app = new Vue({
             axios.get(BorrowersGetList, {
                 params: {
                     skip: skip,
-                    take: take
+                    take: take,
+                    status: status,
+                    keywords: keywords,
+                    type: type,
+                    activated: activated,
                 }
             }).then(response => {
                 this.borrowers = response.data.borrowers;
+                this.DataTotalCount = response.data.DataTotalCount;
+                this.totalPage = Math.ceil(this.DataTotalCount / this.rowsPerPage);
                 $('.dataTables_processing', $('#BorrowersDataTable').closest('.dataTables_wrapper')).fadeOut();
                 $('#BorrowersDataTable').dataTable().fnClearTable();
                 if (this.borrowers.length != 0) {
@@ -35,14 +72,16 @@ const app = new Vue({
             });
         }
     },
-    created(){
+    created() {
         let BorrowersGetList = $('#BorrowersGetList').html();
         axios.get(BorrowersGetList).then(response => {
+            this.DataTotalCount = response.data.DataTotalCount;
+            this.totalPage = Math.ceil(this.DataTotalCount / this.rowsPerPage);
             this.borrowers = response.data.borrowers;
 
-            $('#BorrowersDataTable').on('draw.dt', function () {
+            $('#BorrowersDataTable').on('draw.dt', function() {
                 console.log('drawing a table');
-            }).on('init.dt', function () {
+            }).on('init.dt', function() {
                 console.log('intial a table');
             }).dataTable({
                 data: this.borrowers,
@@ -64,7 +103,7 @@ const app = new Vue({
             });
         });
     },
-    mounted(){
-        this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
+    mounted() {
+        // this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);
     }
 });
