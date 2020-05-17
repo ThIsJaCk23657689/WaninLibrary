@@ -13,5 +13,7 @@ $factory->define(Information::class, function (Faker $faker) {
         'address' => '412028台中市大里區泉水路86號1樓',
         'open_at' => '11:00',
         'close_at' => '18:00',
+        'recommendation_title' => '五月推薦好書',
+        'cover_image' => 'images\informations\0_nkMHIYllnotYcos_.jpg',
     ];
 });

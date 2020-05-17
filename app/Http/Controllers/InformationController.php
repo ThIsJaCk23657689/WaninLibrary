@@ -14,7 +14,7 @@ class InformationController extends Controller
             'index', 'edit',
         ]);
         $this->middleware('auth.jwt')->only([
-            'update'
+            'update','getFirst'
         ]);
         $this->InformationService = new InformationService();
     }
