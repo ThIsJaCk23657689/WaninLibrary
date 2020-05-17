@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BorrowerRequest;
 use App\Services\BorrowerService;
+use Illuminate\Validation\Rule;
 
 class BorrowerController extends Controller
 {
@@ -93,18 +94,28 @@ class BorrowerController extends Controller
     {
         $this->validate($request, [
             'skip' => 'nullable|integer|',
-            'take' => 'nullable|integer|max:100'
+            'take' => 'nullable|integer|max:100',
+            'type' => [
+                'nullable',
+                Rule::in([1, 2, 3, 4, 0]), // 0. default 1.'agency_id', 2.'name', 3. 'email', 4. 'tel'
+            ],
+            'status' => [
+                'nullable',
+                Rule::in([1, 2, 0]), // 0.一般民眾 1.符合社福資格 2.全部
+            ],
+            'activated' => [
+                'nullable',
+                Rule::in([1, 2, 0]), // 0.停權 1.未停權 2.全部
+            ],
+            'keywords' => 'nullable',
         ]);
 
-        $skip = $request->skip ?? 0;
-        $take = $request->take ?? 10;
-
-        $borrowers = $this->BorrowerService->getList($skip, $take);
+        $res = $this->BorrowerService->getList($request);
 
         return response()->json([
             'status' => 'OK',
-            'count' => $take,
-            'borrowers' => $borrowers
+            'DataTotalCount' => $res['count'],
+            'borrowers' => $res['borrowers']
         ]);
     }
 
@@ -119,7 +130,7 @@ class BorrowerController extends Controller
         $borrower['showAgencyName'] = $borrower->showAgencyName();
         $borrower['showStatus'] = $borrower->showStatus();
         $borrower['showActivated'] = $borrower->showActivated();
-        
+
         return response()->json([
             'status' => 'OK',
             'borrower' => $borrower
@@ -127,7 +138,7 @@ class BorrowerController extends Controller
     }
 
     public function filter(Request $request)
-    { 
+    {
         $this->validate($request, [
             'name' => 'nullable|string|max:100',
             'tel' => 'nullable|string|max:30',

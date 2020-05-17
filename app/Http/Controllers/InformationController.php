@@ -17,7 +17,11 @@ class InformationController extends Controller
             'recommendation_index', 'recommendation_edit',
         ]);
         $this->middleware('auth.jwt')->only([
+<<<<<<< HEAD
             'getFirst', 'update', 'recommendation_update'
+=======
+            'update','getFirst'
+>>>>>>> f6777937b0a94823e0f844680cffe2d017b11fd7
         ]);
         $this->InformationService = new InformationService();
     }
