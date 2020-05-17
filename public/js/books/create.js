@@ -314,6 +314,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['uploadimg'],
   data: function data() {
@@ -1148,7 +1154,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
+      _c("div", { staticClass: "col-md-9" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "author" } }, [_vm._v("作者")]),
           _vm._v(" "),
@@ -1157,6 +1163,23 @@ var staticRenderFns = [
             attrs: {
               id: "author",
               name: "author",
+              type: "text",
+              value: "",
+              autocomplete: "off"
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-3" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "position" } }, [_vm._v("位置")]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "position",
+              name: "position",
               type: "text",
               value: "",
               autocomplete: "off"
