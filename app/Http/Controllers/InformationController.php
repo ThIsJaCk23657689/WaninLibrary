@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\RecommendationRequest;
 use App\Http\Requests\InformationRequest;
 use App\Services\InformationService;
+use Illuminate\Http\Request;
 
 
 class InformationController extends Controller
@@ -50,13 +51,27 @@ class InformationController extends Controller
     }
 
     public function recommendation_index(){
-        $information = $this->InformationService->recommendation_getFirst();
-        return view('recommendation.index', compact('information'));
+        $recommendation = $this->InformationService->recommendation_getFirst();
+        $recommendation_title = $recommendation['recommendation_title'];
+        $books = $recommendation['books'];
+        return view('recommendation.index', compact('recommendation_title', 'books'));
     }
 
     public function recommendation_edit(){
-        $information = $this->InformationService->recommendation_getFirst();
-        return view('recommendation.edit', compact('information'));
+        $recommendation = $this->InformationService->recommendation_getFirst();
+        return view('recommendation.edit', compact('recommendation'));
+    }
+
+    public function recommendation_getFirst(){
+        $recommendation = $this->InformationService->recommendation_getFirst();
+        $recommendation_title = $recommendation['recommendation_title'];
+        $books = $recommendation['books'];
+        return response()->json([
+            'status' => 'OK',
+            'recommendation_title' => $recommendation_title,
+            'books' => $books,
+
+        ]);
     }
 
     public function recommendation_update(RecommendationRequest $request){
@@ -65,6 +80,14 @@ class InformationController extends Controller
             'status' => 'OK',
             // 'added_id' => $information_id,
             'url' => route('recommendation.index')
+        ], 200);
+    }
+
+    public function recommendation_getBooksByName(Request $request){
+        $book_list= $this->InformationService->recommendation_getBooksByName($request);
+        return response()->json([
+            'status' => 'OK',
+            'book_list' => $book_list
         ], 200);
     }
 

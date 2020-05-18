@@ -147,7 +147,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -233,7 +232,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            確認新增\r\n                        "
+                          "\n                            確認新增\n                        "
                         )
                       ]
                     ),
@@ -246,7 +245,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            返回列表\r\n                        "
+                          "\n                            返回列表\n                        "
                         )
                       ]
                     )
@@ -273,7 +272,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("標題\r\n                            ")
+            _vm._v("標題\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -545,7 +544,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\announcements\create.js */"./resources/js/announcements/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\announcements\create.js */"./resources/js/announcements/create.js");
 
 
 /***/ })

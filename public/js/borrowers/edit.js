@@ -238,21 +238,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     }
   },
-  created: function created() {
-    var _this2 = this;
-
-    // 生成 機構 下拉式選單
-    var AgenciesListURL = $('#AgenciesListURL').html();
-    axios.get(AgenciesListURL).then(function (response) {
-      _this2.agencies = response.data.agencies;
-
-      for (var i = 0; i < _this2.agencies.length; i++) {
-        $("#agency_id").append($("<option></option>").attr("value", _this2.agencies[i].id).text(_this2.agencies[i].name));
-      }
-
-      $('#agency_id').selectpicker('refresh');
-    });
-  },
+  created: function created() {},
   mounted: function mounted() {
     // 地址
     $('#address_twzipcode').twzipcode({
@@ -868,6 +854,20 @@ var app = new Vue({
       $('#address_twzipcode').twzipcode({
         'zipcodeSel': response.data.borrower.address_zipcode
       });
+    }); // 生成 機構 下拉式選單
+
+    var AgenciesListURL = $('#AgenciesListURL').html();
+    axios.get(AgenciesListURL).then(function (response) {
+      _this.agencies = response.data.agencies;
+
+      for (var i = 0; i < _this.agencies.length; i++) {
+        $("#agency_id").append($("<option></option>").attr("value", _this.agencies[i].id).text(_this.agencies[i].name));
+      }
+
+      $('#agency_id').selectpicker('refresh');
+      console.log(_this.borrower.agency_id);
+      $('#agency_id').val(_this.borrower.agency_id);
+      $('#agency_id').selectpicker('refresh');
     });
   },
   mounted: function mounted() {}

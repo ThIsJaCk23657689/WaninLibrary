@@ -46,7 +46,11 @@ mix.js('resources/js/backend.js', 'public/js')
 
 .js('resources/js/borrowLogs/index.js', 'public/js/borrowLogs')
 
+.js('resources/js/recommendation/edit.js', 'public/js/recommendation')
+
 .js('resources/js/activities/create.js', 'public/js/activities')
+    .js('resources/js/activities/index.js', 'public/js/activities')
+    .js('resources/js/activities/edit.js', 'public/js/activities')
 
 .js('resources/js/information/edit.js', 'public/js/information')
 

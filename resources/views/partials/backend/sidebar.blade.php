@@ -62,8 +62,8 @@
 		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
 			<a class="dropdown-item" href="{{ route('announcements.index') }}">{{ __('News') }}</a>
-			<a class="dropdown-item" href="#">{{ __('Events') }}</a>
-			<a class="dropdown-item" href="#">{{ __('Recommend') }}</a>
+        <a class="dropdown-item" href="{{ route('activities.index' )}}">{{ __('Events') }}</a>
+			<a class="dropdown-item" href="{{ route('recommendation.index') }}">{{ __('Recommend') }}</a>
 			<a class="dropdown-item" href="{{ route('information.index') }}">{{ __('Information') }}</a>
 		</div>
     </li>

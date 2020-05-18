@@ -81,4 +81,14 @@ Route::prefix('/backend')->group(function () {
     Route::resource('/announcements', 'AnnouncementController', ['only' => [
         'index', 'show', 'create', 'edit'
     ]]);
+
+    // 活動管理路由
+    Route::resource('/activities', 'ActivityController', ['only' => [
+        'index', 'show', 'create', 'edit'
+    ]]);
+
+    // 推薦十本書相關路由
+    Route::get('/recommendation','InformationController@recommendation_index')->name('recommendation.index');
+    Route::get('/recommendation/edit','InformationController@recommendation_edit')->name('recommendation.edit');
+
 });

@@ -30,7 +30,7 @@
 	<div class="card mb-3">
 		<div class="card-header">
 			<i class="fas fa-table"></i>
-			單位列表
+			最新消息列表
 		</div>
 		<div class="card-body">
 			<div class="table-responsive">

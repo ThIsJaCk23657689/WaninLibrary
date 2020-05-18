@@ -4,7 +4,6 @@
         <div class="col-md-8">
             <form method="POST" id="announcement_create_form" action="" @submit.prevent="announcementCreateForm">
                 <div class="row">
-
                     <div class="col-md-10">
                         <div class="form-group">
                             <label for="title">

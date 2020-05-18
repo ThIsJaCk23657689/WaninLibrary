@@ -14,11 +14,23 @@ const app = new Vue({
         let BorrowersGetOneURL = $('#BorrowersGetOneURL').html();
         axios.get(BorrowersGetOneURL).then(response => {
             this.borrower = response.data.borrower;
-
             // 地址
             $('#address_twzipcode').twzipcode({
                 'zipcodeSel': response.data.borrower.address_zipcode
             });
+        });
+
+        // 生成 機構 下拉式選單
+        let AgenciesListURL = $('#AgenciesListURL').html();
+        axios.get(AgenciesListURL).then(response => {
+            this.agencies = response.data.agencies;
+            for (let i = 0; i < this.agencies.length; i++) {
+                $("#agency_id").append($("<option></option>").attr("value", this.agencies[i].id).text(this.agencies[i].name));
+            }
+            $('#agency_id').selectpicker('refresh');
+            console.log(this.borrower.agency_id);
+            $('#agency_id').val(this.borrower.agency_id);
+            $('#agency_id').selectpicker('refresh');
         });
     },
     mounted() {

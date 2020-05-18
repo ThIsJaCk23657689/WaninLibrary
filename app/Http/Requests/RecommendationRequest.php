@@ -24,7 +24,7 @@ class RecommendationRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|max:100',
+            'recommendation_title' => 'required|string|max:100',
             'book_id_1' => 'required|integer',
             'book_id_2' => 'required|integer',
             'book_id_3' => 'required|integer',

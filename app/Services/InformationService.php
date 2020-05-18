@@ -7,7 +7,7 @@ use App\Book as BookEloquent;
 
 class InformationService extends BaseService
 {
-    
+
 
     public function getFirst()
     {
@@ -38,8 +38,6 @@ class InformationService extends BaseService
             'tel' => $request->tel,
             'fax' => $request->fax,
             'address' => $request->address,
-
-            'recommendation_title' => $request->recommendation_title,
             'cover_image' => $url,
 
             'open_at' => $request->open_at,
@@ -50,29 +48,44 @@ class InformationService extends BaseService
     }
 
     public function recommendation_getFirst(){
-        $books = BookEloquent::class()->where("is_recommended", true)->get();
+        $books = BookEloquent::where("is_recommended", '>', 0)->orderBy('is_recommended')->get();
         $information = $this->getFirst();
+        foreach($books as $book){
+            $book['showTitle'] = $book->showTitle();
+            $book['action'] =
+                '<a href="' . route('books.show', [$book->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
+        }
         $msg = ['books' => $books, 'recommendation_title' => $information->recommendation_title];
         return $msg;
     }
 
 
     public function recommendation_update($request){
-        BookEloquent::where('is_recommended', true)->update(['is_top' => false]);
-        BookEloquent::find($request->book_id_1)->update(['is_recommended' => true]);
-        BookEloquent::find($request->book_id_2)->update(['is_recommended' => true]);
-        BookEloquent::find($request->book_id_3)->update(['is_recommended' => true]);
-        BookEloquent::find($request->book_id_4)->update(['is_recommended' => true]);
-        BookEloquent::find($request->book_id_5)->update(['is_recommended' => true]);
-        BookEloquent::find($request->book_id_6)->update(['is_recommended' => true]);
-        BookEloquent::find($request->book_id_7)->update(['is_recommended' => true]);
-        BookEloquent::find($request->book_id_8)->update(['is_recommended' => true]);
-        BookEloquent::find($request->book_id_9)->update(['is_recommended' => true]);
-        BookEloquent::find($request->book_id_10)->update(['is_recommended' => true]);
+        BookEloquent::where('is_recommended', '!=', 0)->update(['is_recommended' => 0]);
+        BookEloquent::find($request->book_id_1)->update(['is_recommended' => 1]);
+        BookEloquent::find($request->book_id_2)->update(['is_recommended' => 2]);
+        BookEloquent::find($request->book_id_3)->update(['is_recommended' => 3]);
+        BookEloquent::find($request->book_id_4)->update(['is_recommended' => 4]);
+        BookEloquent::find($request->book_id_5)->update(['is_recommended' => 5]);
+        BookEloquent::find($request->book_id_6)->update(['is_recommended' => 6]);
+        BookEloquent::find($request->book_id_7)->update(['is_recommended' => 7]);
+        BookEloquent::find($request->book_id_8)->update(['is_recommended' => 8]);
+        BookEloquent::find($request->book_id_9)->update(['is_recommended' => 9]);
+        BookEloquent::find($request->book_id_10)->update(['is_recommended' => 10]);
 
         $information = $this->getFirst();
         $information->update(['recommendation_title' => $request->recommendation_title]);
 
+    }
+
+    public function recommendation_getBooksByName($request){
+        $keyword = '%'.$request->keyword."%";
+        $book_list = BookEloquent::where('title', 'like', $keyword)->get();
+        foreach($book_list as $book){
+            $book['showTitle'] = $book->showTitle();
+
+        }
+        return $book_list;
     }
 
 }

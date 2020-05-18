@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 25);
+/******/ 	return __webpack_require__(__webpack_require__.s = 28);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -363,7 +363,7 @@ var render = function() {
             {
               attrs: {
                 method: "POST",
-                id: "user_update_form",
+                id: "information_update_form",
                 action: "#",
                 enctype: "multipart/form-data"
               },
@@ -376,46 +376,9 @@ var render = function() {
             },
             [
               _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
                     _vm._m(0),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.information.email,
-                          expression: "information.email"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "email",
-                        name: "email",
-                        type: "email",
-                        required: ""
-                      },
-                      domProps: { value: _vm.information.email },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.information,
-                            "email",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _vm._m(1),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -441,9 +404,9 @@ var render = function() {
                   ])
                 ]),
                 _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _vm._m(2),
+                    _vm._m(1),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -473,7 +436,7 @@ var render = function() {
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-md-12" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _vm._m(3),
+                    _vm._m(2),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -512,7 +475,7 @@ var render = function() {
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _vm._m(4),
+                    _vm._m(3),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -549,7 +512,7 @@ var render = function() {
                 _vm._v(" "),
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
-                    _vm._m(5),
+                    _vm._m(4),
                     _vm._v(" "),
                     _c("input", {
                       directives: [
@@ -647,15 +610,6 @@ var render = function() {
   )
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "email" } }, [
-      _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("信箱")
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -1065,7 +1019,7 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 25:
+/***/ 28:
 /*!************************************************!*\
   !*** multi ./resources/js/information/edit.js ***!
   \************************************************/

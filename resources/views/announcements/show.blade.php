@@ -26,6 +26,9 @@
                 <div class="col-md-12">
                     <div class="form-group">
                         <label for="title">標題</label>
+                        @if ($announcement->is_top)
+                            <i class="fas fa-star"></i>
+                        @endif
                         <input id="title" name="title" type="text" class="form-control" value="{{ $announcement->title }}" readonly>
                     </div>
                 </div>

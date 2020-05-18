@@ -21,7 +21,7 @@ class ActivityService extends BaseService
                 $url = $result['url'];
             }
         }
-        
+
         $user = auth('api')->user();
 
         $activity = ActivityEloquent::create([
@@ -65,6 +65,8 @@ class ActivityService extends BaseService
             }else{
                 $url = $result['url'];
             }
+        }else{
+            $url = $activity->cover_image;
         }
 
         $user = auth('api')->user();
@@ -75,7 +77,7 @@ class ActivityService extends BaseService
             'title' => $request->title,
             'content' => $request->content,
         ]);
-        
+
         if($request->is_top == true)
             $this->change_top($activity->id);
 

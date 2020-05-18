@@ -53,6 +53,11 @@ Route::prefix('/backend')->group(function(){
     ]]);
     Route::get('/information/getFirst','InformationController@getFirst')->name('information.getFirst');
 
+    // 推薦十本好書相關路由
+    Route::patch('/recommendation/update','InformationController@recommendation_update')->name('recommendation.update');
+    Route::get('/recommendation/getFirst','InformationController@recommendation_getFirst')->name('recommendation.getFirst');
+    Route::get('/recommendation/getBooksByName','InformationController@recommendation_getBooksByName')->name('recommendation.getBooksByName');
+
     // 捐書人管理路由
     Route::get('/donors/json', 'DonorController@getList')->name('donors.getList');
     Route::get('/donors/{id}/json', 'DonorController@getOne')->name('donors.getOne');
@@ -80,6 +85,15 @@ Route::prefix('/backend')->group(function(){
     Route::resource('/announcements', 'AnnouncementController', ['only' => [
         'store', 'update', 'destroy'
     ]]);
+
+    // 活動管理相關
+    Route::get('/activities/change_top/{id}','ActivityController@change_top')->name('activities.change_top');
+    Route::get('/activities/{id}/json', 'ActivityController@getOne')->name('activities.getOne');
+    Route::get('/activities/json', 'ActivityController@getList')->name('activities.getList');
+    Route::resource('/activities', 'ActivityController', ['only' => [
+        'store', 'update', 'destroy'
+    ]]);
+
 });
 
 Route::group(['middleware' => 'auth.jwt'], function () {

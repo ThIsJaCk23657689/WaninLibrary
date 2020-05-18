@@ -2,21 +2,21 @@
 <div>
     <div class="row justify-content-center">
         <div class="col-md-8">
-            <form method="POST" id="user_update_form" action="#" enctype="multipart/form-data" @submit.prevent="informationUpdateForm">
+            <form method="POST" id="information_update_form" action="#" enctype="multipart/form-data" @submit.prevent="informationUpdateForm">
                 <div class="row">
-                    <div class="col-md-4">
+                    <!-- <div class="col-md-4">
                         <div class="form-group">
-                            <label for="email"><span class="text-danger mr-2">*</span>信箱</label>
-                            <input id="email" name="email" type="email" class="form-control" v-model="information.email" required>
+                            <label for="recommendation_title"><span class="text-danger mr-2">*</span>標題</label>
+                            <input id="recommendation_title" name="recommendation_title" type="text" class="form-control" v-model="information.recommendation_title" required>
                         </div>
-                    </div>
-                    <div class="col-md-4">
+                    </div> -->
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="tel"><span class="text-danger mr-2">*</span>電話</label>
                             <input id="tel" name="tel" type="text" class="form-control mb-2" v-model="information.tel">
                         </div>
                     </div>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <div class="form-group">
                             <label for="fax"><span class="text-danger mr-2">*</span>傳真</label>
                             <input id="fax" name="fax" type="text" class="form-control mb-2" v-model="information.fax">

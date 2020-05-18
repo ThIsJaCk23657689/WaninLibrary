@@ -12,6 +12,12 @@ class Activity extends Model
     ];
 
     public function User(){
-        return $this->belongsTo(UserEloquent::class);
+        return $this->belongsTo(UserEloquent::class, 'last_update_user_id');
+    }
+
+    // 顯示最後更新人員姓名
+    public function showUserName()
+    {
+        return is_null($this->last_update_user_id) ? '無' : $this->user->name;
     }
 }

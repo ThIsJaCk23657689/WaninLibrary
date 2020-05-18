@@ -141,15 +141,7 @@ export default {
         }
     },
     created(){
-        // 生成 機構 下拉式選單
-        let AgenciesListURL = $('#AgenciesListURL').html();
-        axios.get(AgenciesListURL).then(response => {
-            this.agencies = response.data.agencies;
-            for(let i = 0; i < this.agencies.length; i++){
-                $("#agency_id").append($("<option></option>").attr("value", this.agencies[i].id).text(this.agencies[i].name));
-            }
-            $('#agency_id').selectpicker('refresh');
-        });
+
     },
     mounted(){
         // 地址

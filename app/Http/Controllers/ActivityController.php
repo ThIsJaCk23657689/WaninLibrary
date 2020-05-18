@@ -13,7 +13,7 @@ class ActivityController extends Controller
 
     public function __construct(){
         $this->middleware('auth.web')->only([
-            'index', 'create', 'show', 'edit', 
+            'index', 'create', 'show', 'edit',
         ]);
         $this->middleware('auth.jwt')->only([
             'store', 'update', 'destroy', 'getList', 'getOne', 'change_top'
@@ -59,7 +59,7 @@ class ActivityController extends Controller
     }
 
     public function destroy($id){
-        //日後注意是否有人在該群組底下，若有無法刪除
+
         $this->ActivityService->delete($id);
         // return response()->json(['status'=>'OK','url'=>route('activities.index')],200);
         return redirect()->route('activities.index');

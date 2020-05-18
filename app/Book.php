@@ -11,7 +11,7 @@ class Book extends Model
     protected $fillable = [
         'donor_id', 'barcode', 'callnum', 'category', 'status', 'title', 'subtitle',
         'author', 'translator', 'publisher', 'edition', 'cover_image', 'ISBN',
-        'published_date', 'price', 'content', 'count', 'language','position'
+        'published_date', 'price', 'content', 'count', 'language','position', 'is_recommended'
     ];
 
     public function donor(){
