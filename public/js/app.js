@@ -52248,9 +52248,9 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\app.scss */"./resources/sass/app.scss");
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\backend\backend.scss */"./resources/sass/backend/backend.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\app.scss */"./resources/sass/app.scss");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\backend\backend.scss */"./resources/sass/backend/backend.scss");
 
 
 /***/ })

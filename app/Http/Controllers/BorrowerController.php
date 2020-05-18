@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BorrowerRequest;
 use App\Services\BorrowerService;
+use App\Services\BookService as BookService;
 use Illuminate\Validation\Rule;
 
 class BorrowerController extends Controller
 {
     public $BorrowerService;
+    public $BookService;
 
     public function __construct()
     {
@@ -20,6 +22,7 @@ class BorrowerController extends Controller
             'store', 'update', 'destroy', 'getList', 'getOne', 'activate', 'filter'
         ]);
         $this->BorrowerService = new BorrowerService();
+        $this->BookService = new BookService();
     }
 
     public function index(Request $request)
@@ -121,10 +124,16 @@ class BorrowerController extends Controller
 
     public function getOne(Request $request, $id)
     {
+        $borrower = $this->BorrowerService->getOne($id);
         if(!is_null($request->with)){
-            $borrower = $this->BorrowerService->getOneWithRelation($id, $request->with);
-        }else{
-            $borrower = $this->BorrowerService->getOne($id);
+            $borrows = $borrower->borrows;
+            // $borrower = $this->BorrowerService->getOneWithRelation($id, $request->with);
+            foreach($borrows as $borrow){
+                $book = $this->BookService->getOne($borrow->book_id);
+                $borrow['book_barcode'] = $book->barcode;
+                $borrow['book_title'] = $book->title;
+                $borrow['showStatus'] = $borrow->showStatus();
+            }
         }
 
         $borrower['showAgencyName'] = $borrower->showAgencyName();

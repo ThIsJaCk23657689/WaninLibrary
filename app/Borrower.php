@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use App\Agency as AgencyEloquent;
 use App\Borrow as BorrowEloquent;
 use App\BorrowLog as BorrowLogEloquent;
+use App\Book as BookEloquent;
 use DateTimeInterface;
 
 class Borrower extends Model
@@ -38,6 +39,13 @@ class Borrower extends Model
     public function borrows()
     {
         return $this->hasMany(BorrowEloquent::class);
+    }
+
+    public function books()
+    {
+        return $this->belongsToMany(BookEloquent::class, 'borrows')
+            ->withPivot('id', 'return_date', 'status', 'noticed')
+            ->withTimestamps();
     }
 
     public function borrowLogs()
@@ -74,14 +82,6 @@ class Borrower extends Model
     //0.停權 1.未停權
     public function showActivated()
     {
-        switch ($this->status) {
-            case 0:
-                $result = '停權';
-                break;
-            case 1:
-                $result = '未停權';
-                break;
-        }
-        return $result;
+        return ($this->activated) ? '未停權' : '停權' ;
     }
 }

@@ -116,8 +116,17 @@ $(function(){
         if (parts.length == 2) return parts.pop().split(";").shift();
     }
 
+    $.formatDate = function(datetime){
+        let fulldate = new Date(datetime);
+        let year = fulldate.getFullYear();
+        let month = (fulldate.getMonth() + 1) >= 10 ? (fulldate.getMonth() + 1) : ("0" + (fulldate.getMonth() + 1));
+        let date = fulldate.getDate() < 10 ? ("0" + fulldate.getDate()) : fulldate.getDate();
+        return year + '-' + month + '-' + date;
+    }
+
     // ==================== Swal 函式操作 ====================
     $.showLoadingModal = function(message = '資料讀取中'){
+        $('input').removeClass('is-invalid')
         Swal.fire({
             title: '請稍後',
             html: message,

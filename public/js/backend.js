@@ -62571,11 +62571,20 @@ $(function () {
     var value = "; " + document.cookie;
     var parts = value.split("; " + name + "=");
     if (parts.length == 2) return parts.pop().split(";").shift();
+  };
+
+  $.formatDate = function (datetime) {
+    var fulldate = new Date(datetime);
+    var year = fulldate.getFullYear();
+    var month = fulldate.getMonth() + 1 >= 10 ? fulldate.getMonth() + 1 : "0" + (fulldate.getMonth() + 1);
+    var date = fulldate.getDate() < 10 ? "0" + fulldate.getDate() : fulldate.getDate();
+    return year + '-' + month + '-' + date;
   }; // ==================== Swal 函式操作 ====================
 
 
   $.showLoadingModal = function () {
     var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '資料讀取中';
+    $('input').removeClass('is-invalid');
     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
       title: '請稍後',
       html: message,
