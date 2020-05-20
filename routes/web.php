@@ -25,6 +25,9 @@ Route::get('/home', 'HomeController@index')->name('home');
 
 // 後臺管理路由
 Route::prefix('/backend')->group(function () {
+    // 重置密碼
+    Route::get('showResetPasswordForm', 'JWTAuthController@showResetPasswordForm')->name('auth.showResetPasswordForm');
+
     Route::get('/', 'HomeController@backend')->name('backend');
 
     // 機構管理路由

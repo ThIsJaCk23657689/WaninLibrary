@@ -48,7 +48,7 @@ class JWTAuthService extends BaseService
 
     public function login($request){
         $token = JWTAuth::attempt([
-            'account' => $request->account, 
+            'account' => $request->account,
             'password' => $request->password
         ]);
 
@@ -65,7 +65,7 @@ class JWTAuthService extends BaseService
         $this->LoginLogService->add();
 
         return [
-            'token' => $token, 
+            'token' => $token,
             'cookie' => $cookie_token,
             'expires_in' => JWTAuth::factory()->getTTL() * 60,
             'redirect_url' => redirect()->intended($this->redirectPath())->getTargetUrl()
@@ -96,8 +96,9 @@ class JWTAuthService extends BaseService
 
     public function resetPassword($new_password){
         // get user by jwt token
-        $token = JWTAuth::getToken();
-        $user = JWTAuth::toUser($token);
+        // $token = JWTAuth::getToken();
+        // $user = JWTAuth::toUser($token);
+        $user = auth('api')->user();
 
         $user->password = bcrypt($new_password);
         $user->save();

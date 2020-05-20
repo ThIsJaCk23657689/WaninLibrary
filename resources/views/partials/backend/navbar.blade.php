@@ -40,7 +40,7 @@
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
                 <a class="dropdown-item" href="#">{{ __('Profile') }}</a>
-                <a class="dropdown-item" href="#">{{ __('Change Password') }}</a>
+                <a class="dropdown-item" href="{{ route('auth.showResetPasswordForm') }}">{{ __('Change Password') }}</a>
                 <div class="dropdown-divider"></div>
                 <a id="logoutBtn" class="dropdown-item" href="#">{{ __('Logout') }}</a>
                 <form id="logout_form" action="{{ route('api.logout') }}" method="POST" style="displat: none;">

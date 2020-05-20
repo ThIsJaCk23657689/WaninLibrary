@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 8);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -617,7 +617,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            確認修改\r\n                        "
+                          "\n                            確認修改\n                        "
                         )
                       ]
                     ),
@@ -630,7 +630,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            返回列表\r\n                        "
+                          "\n                            返回列表\n                        "
                         )
                       ]
                     )
@@ -654,7 +654,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "name" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("姓名\r\n                            ")
+      _vm._v("姓名\n                            ")
     ])
   },
   function() {
@@ -672,7 +672,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "status" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("身分別\r\n                            ")
+      _vm._v("身分別\n                            ")
     ])
   },
   function() {
@@ -944,14 +944,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 8:
+/***/ 9:
 /*!**********************************************!*\
   !*** multi ./resources/js/borrowers/edit.js ***!
   \**********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\borrowers\edit.js */"./resources/js/borrowers/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\borrowers\edit.js */"./resources/js/borrowers/edit.js");
 
 
 /***/ })

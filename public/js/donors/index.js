@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 11);
+/******/ 	return __webpack_require__(__webpack_require__.s = 12);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -356,7 +356,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table" }),
-      _vm._v("借閱人列表\r\n        ")
+      _vm._v("借閱人列表\n        ")
     ])
   },
   function() {
@@ -413,7 +413,7 @@ var staticRenderFns = [
         { staticClass: "btn btn-block btn-primary", attrs: { type: "submit" } },
         [
           _vm._v(
-            "\r\n                                    確認\r\n                                "
+            "\n                                    確認\n                                "
           )
         ]
       )
@@ -858,14 +858,14 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 11:
+/***/ 12:
 /*!********************************************!*\
   !*** multi ./resources/js/donors/index.js ***!
   \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\donors\index.js */"./resources/js/donors/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\donors\index.js */"./resources/js/donors/index.js");
 
 
 /***/ })

@@ -27,9 +27,11 @@ Route::get('me', 'JWTAuthController@me');
 Route::post('logout', 'JWTAuthController@logout')->name('api.logout');
 Route::post('forgetPassword', 'JWTAuthController@forgetPassword');
 Route::post('refreshToken', 'JWTAuthController@refreshToken');
-Route::post('resetPassword', 'JWTAuthController@resetPassword');
 
 Route::prefix('/backend')->group(function(){
+    //JWT
+    Route::post('resetPassword', 'JWTAuthController@resetPassword')->name('auth.resetPassword');
+
 
     // 單位管理路由
     Route::get('/agencies/json', 'AgencyController@getList')->name('agencies.getList');

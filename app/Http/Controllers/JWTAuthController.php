@@ -20,11 +20,11 @@ class JWTAuthController extends Controller
 
     public function __construct(){
         $this->middleware('auth.jwt')->only([
-            'me', 'logout', 'refreshToken'
+            'me', 'logout', 'refreshToken','resetPassword','showResetPasswordForm'
         ]);
 
         $this->middleware('guest:api')->only([
-            'register', 'showLoginForm', 'login', 'forgetPassword', 'resetPassword'
+            'register', 'showLoginForm', 'login', 'forgetPassword',
         ]);
 
         $this->JWTAuthService = new JWTAuthService();
@@ -44,6 +44,10 @@ class JWTAuthController extends Controller
 
     public function showLoginForm(){
         return view('auth.login');
+    }
+
+    public function showResetPasswordForm(){
+        return view('auth.resetPassword');
     }
 
     public function login(LoginRequest $request){
@@ -68,7 +72,7 @@ class JWTAuthController extends Controller
 
         // 從cookie中抓token
         // $rawtoken = JWTAuth::getToken()->get();
-        // $token = new Token($rawtoken);  
+        // $token = new Token($rawtoken);
         return response()->json(auth('api')->user());
     }
 

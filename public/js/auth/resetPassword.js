@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ 	return __webpack_require__(__webpack_require__.s = 2);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=script&lang=js&":
-/*!***********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=script&lang=js& ***!
-  \***********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -147,42 +147,42 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
-      AnnouncementsIndexURL: $('#AnnouncementsIndexURL').html(),
-      AnnouncementsStoreURL: $('#AnnouncementsStoreURL').html()
+      IndexURL: $('#IndexURL').html(),
+      ResetPasswordURL: $('#ResetPasswordURL').html()
     };
   },
   methods: {
-    announcementCreateForm: function announcementCreateForm(e) {
+    resetPasswordForm: function resetPasswordForm(e) {
       var _this = this;
 
-      var url = this.AnnouncementsStoreURL;
-      var formData = new FormData($(e.target)[0]);
-      var content = CKEDITOR.instances.content.getData();
-      formData.append('content', content);
+      var url = this.ResetPasswordURL;
+      var data = $(e.target).serializeObject();
       this.$refs.loadingModal.initalModal();
-      axios.post(url, formData).then(function (response) {
-        _this.$refs.loadingModal.successfulResponse('新增成功', response.data.url);
+      axios.post(url, data).then(function (response) {
+        _this.$refs.loadingModal.successfulResponse('修改成功', _this.IndexURL);
       })["catch"](function (error) {
-        console.error('新增最新消息時發生錯誤，錯誤訊息：' + error);
+        console.error('修改密碼時發生錯誤，錯誤訊息：' + error);
 
         _this.$refs.loadingModal.failureResponse(error);
       });
     }
   },
-  mounted: function mounted() {
-    CKEDITOR.replace('content');
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816&":
-/*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816& ***!
-  \***************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=template&id=62eaacd2&":
+/*!*************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=template&id=62eaacd2& ***!
+  \*************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -198,19 +198,15 @@ var render = function() {
     "div",
     [
       _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
+        _c("div", { staticClass: "col-md-5" }, [
           _c(
             "form",
             {
-              attrs: {
-                method: "POST",
-                id: "announcement_create_form",
-                action: ""
-              },
+              attrs: { method: "POST", id: "reset_password_form", action: "#" },
               on: {
                 submit: function($event) {
                   $event.preventDefault()
-                  return _vm.announcementCreateForm($event)
+                  return _vm.resetPasswordForm($event)
                 }
               }
             },
@@ -218,6 +214,8 @@ var render = function() {
               _vm._m(0),
               _vm._v(" "),
               _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2),
               _vm._v(" "),
               _c(
                 "div",
@@ -232,7 +230,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            確認新增\n                        "
+                          "\n                            確認修改\n                        "
                         )
                       ]
                     ),
@@ -241,11 +239,11 @@ var render = function() {
                       "a",
                       {
                         staticClass: "btn btn-block btn-danger",
-                        attrs: { href: _vm.AgenciesIndexURL }
+                        attrs: { href: _vm.IndexURL }
                       },
                       [
                         _vm._v(
-                          "\n                            返回列表\n                        "
+                          "\n                            返回首頁\n                        "
                         )
                       ]
                     )
@@ -268,44 +266,25 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-10" }, [
+      _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "title" } }, [
+          _c("label", { attrs: { for: "old_password" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("標題\n                            ")
+            _vm._v("請輸入舊密碼\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
             staticClass: "form-control mb-2",
             attrs: {
-              id: "title",
-              name: "title",
-              type: "text",
+              id: "old_password",
+              name: "old_password",
+              type: "password",
               value: "",
               required: "",
               autocomplete: "off",
               autofocus: ""
             }
           })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-2" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "is_top" } }, [_vm._v("是否置頂")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              staticClass: "form-control",
-              attrs: { name: "is_top", id: "is_top" }
-            },
-            [
-              _c("option", { attrs: { value: "1" } }, [_vm._v("置頂")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "0" } }, [_vm._v("不置頂")])
-            ]
-          )
         ])
       ])
     ])
@@ -317,17 +296,49 @@ var staticRenderFns = [
     return _c("div", { staticClass: "row" }, [
       _c("div", { staticClass: "col-md-12" }, [
         _c("div", { staticClass: "form-group" }, [
-          _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-          _c("label", { attrs: { for: "content" } }, [_vm._v("內容")]),
+          _c("label", { attrs: { for: "new_password" } }, [
+            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+            _vm._v("請輸入新密碼\n                            ")
+          ]),
           _vm._v(" "),
-          _c("textarea", {
-            staticClass: "form-control",
+          _c("input", {
+            staticClass: "form-control mb-2",
             attrs: {
-              name: "content",
-              id: "content",
-              cols: "30",
-              rows: "5",
-              required: ""
+              id: "new_password",
+              name: "new_password",
+              type: "password",
+              value: "",
+              required: "",
+              autocomplete: "off",
+              autofocus: ""
+            }
+          })
+        ])
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "row" }, [
+      _c("div", { staticClass: "col-md-12" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "new_password_confirmation" } }, [
+            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+            _vm._v("請再輸入一次新密碼\n                            ")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control mb-2",
+            attrs: {
+              id: "new_password_confirmation",
+              name: "new_password_confirmation",
+              type: "password",
+              value: "",
+              required: "",
+              autocomplete: "off",
+              autofocus: ""
             }
           })
         ])
@@ -448,16 +459,16 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/announcements/create.js":
-/*!**********************************************!*\
-  !*** ./resources/js/announcements/create.js ***!
-  \**********************************************/
+/***/ "./resources/js/auth/resetPassword.js":
+/*!********************************************!*\
+  !*** ./resources/js/auth/resetPassword.js ***!
+  \********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-Vue.component('announcement-create-form', __webpack_require__(/*! ./../components/Announcements/AnnouncementCreateForm.vue */ "./resources/js/components/Announcements/AnnouncementCreateForm.vue")["default"]);
+Vue.component('reset-password-form', __webpack_require__(/*! ./../components/Auth/ResetPasswordForm.vue */ "./resources/js/components/Auth/ResetPasswordForm.vue")["default"]);
 var app = new Vue({
-  el: '#announcement',
+  el: '#user',
   data: function data() {
     return {};
   },
@@ -468,17 +479,17 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ "./resources/js/components/Announcements/AnnouncementCreateForm.vue":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/Announcements/AnnouncementCreateForm.vue ***!
-  \**************************************************************************/
+/***/ "./resources/js/components/Auth/ResetPasswordForm.vue":
+/*!************************************************************!*\
+  !*** ./resources/js/components/Auth/ResetPasswordForm.vue ***!
+  \************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AnnouncementCreateForm_vue_vue_type_template_id_8dfa8816___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816& */ "./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816&");
-/* harmony import */ var _AnnouncementCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnnouncementCreateForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=script&lang=js&");
+/* harmony import */ var _ResetPasswordForm_vue_vue_type_template_id_62eaacd2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ResetPasswordForm.vue?vue&type=template&id=62eaacd2& */ "./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=template&id=62eaacd2&");
+/* harmony import */ var _ResetPasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ResetPasswordForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -488,9 +499,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _AnnouncementCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AnnouncementCreateForm_vue_vue_type_template_id_8dfa8816___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AnnouncementCreateForm_vue_vue_type_template_id_8dfa8816___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _ResetPasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _ResetPasswordForm_vue_vue_type_template_id_62eaacd2___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _ResetPasswordForm_vue_vue_type_template_id_62eaacd2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -500,51 +511,51 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Announcements/AnnouncementCreateForm.vue"
+component.options.__file = "resources/js/components/Auth/ResetPasswordForm.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************/
+/***/ "./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=script&lang=js&":
+/*!*************************************************************************************!*\
+  !*** ./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=script&lang=js& ***!
+  \*************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnnouncementCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AnnouncementCreateForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnnouncementCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPasswordForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816&":
-/*!*********************************************************************************************************!*\
-  !*** ./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816& ***!
-  \*********************************************************************************************************/
+/***/ "./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=template&id=62eaacd2&":
+/*!*******************************************************************************************!*\
+  !*** ./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=template&id=62eaacd2& ***!
+  \*******************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnnouncementCreateForm_vue_vue_type_template_id_8dfa8816___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnnouncementCreateForm_vue_vue_type_template_id_8dfa8816___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordForm_vue_vue_type_template_id_62eaacd2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ResetPasswordForm.vue?vue&type=template&id=62eaacd2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ResetPasswordForm.vue?vue&type=template&id=62eaacd2&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordForm_vue_vue_type_template_id_62eaacd2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnnouncementCreateForm_vue_vue_type_template_id_8dfa8816___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ResetPasswordForm_vue_vue_type_template_id_62eaacd2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ 22:
-/*!****************************************************!*\
-  !*** multi ./resources/js/announcements/create.js ***!
-  \****************************************************/
+/***/ 2:
+/*!**************************************************!*\
+  !*** multi ./resources/js/auth/resetPassword.js ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\announcements\create.js */"./resources/js/announcements/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\auth\resetPassword.js */"./resources/js/auth/resetPassword.js");
 
 
 /***/ })
