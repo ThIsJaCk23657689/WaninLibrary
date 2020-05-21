@@ -39,7 +39,7 @@
                 <i class="fas fa-user-circle fa-fw"></i>
             </a>
             <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-                <a class="dropdown-item" href="#">{{ __('Profile') }}</a>
+                <a class="dropdown-item" href="{{ route('users.edit', [auth('api')->id()]) }}">{{ __('Profile') }}</a>
                 <a class="dropdown-item" href="{{ route('auth.showResetPasswordForm') }}">{{ __('Change Password') }}</a>
                 <div class="dropdown-divider"></div>
                 <a id="logoutBtn" class="dropdown-item" href="#">{{ __('Logout') }}</a>

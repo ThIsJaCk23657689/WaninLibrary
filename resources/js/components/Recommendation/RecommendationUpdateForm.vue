@@ -12,97 +12,24 @@
                     </div>
                 </div>
 
-                <div class="row">
+                <div class="row" v-for="(book, index) in books" :key="index">
                     <div class="col-md-12">
                         <div class="form-group">
-                            <label for="book_id_1"><span class="text-danger mr-2">*</span>第一本</label>
-                            <select id="book_id_1" name="book_id_1" class="form-control book_ids">
-                                <!-- <option :value="books[0].id">{{ books[0].title }}</option> -->
-                            </select>
+                            <label><span class="text-danger mr-2">*</span>第{{ index+1 }}本</label>
+                            <div :id="'book_input_' + index" class="input-group mb-3">
+                                <input type="text" class="form-control" :value="book.showTitle" readonly>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-dark" @click="startUpdate(index)">編輯</button>
+                                </div>
+                            </div>
+                            <div :id="'book_select_' + index" style="display: none;">
+                                <select-book-custom ref="BookOption" :select-index="index" :placeholder="'請輸入書本名稱'" @search="onSearch" @update-value="updateValue"></select-book-custom>
+                            </div>
                         </div>
                     </div>
                 </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="book_id_2"><span class="text-danger mr-2">*</span>第二本</label>
-                            <select id="book_id_2" name="book_id_2" class="form-control book_ids">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="book_id_3"><span class="text-danger mr-2">*</span>第三本</label>
-                            <select id="book_id_3" name="book_id_3" class="form-control book_ids">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="book_id_4"><span class="text-danger mr-2">*</span>第四本</label>
-                            <select id="book_id_4" name="book_id_4" class="form-control book_ids">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="book_id_5"><span class="text-danger mr-2">*</span>第五本</label>
-                            <select id="book_id_5" name="book_id_5" class="form-control book_ids">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="book_id_6"><span class="text-danger mr-2">*</span>第六本</label>
-                            <select id="book_id_6" name="book_id_6" class="form-control book_ids">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="book_id_7"><span class="text-danger mr-2">*</span>第七本</label>
-                            <select id="book_id_7" name="book_id_7" class="form-control book_ids">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="book_id_8"><span class="text-danger mr-2">*</span>第八本</label>
-                            <select id="book_id_8" name="book_id_8" class="form-control book_ids">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="book_id_9"><span class="text-danger mr-2">*</span>第九本</label>
-                            <select id="book_id_9" name="book_id_9" class="form-control book_ids">
-                            </select>
-                        </div>
-                    </div>
-                </div>
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="form-group">
-                            <label for="book_id_10"><span class="text-danger mr-2">*</span>第十本</label>
-                            <select id="book_id_10" name="book_id_10" class="form-control book_ids">
-                            </select>
-                        </div>
-                    </div>
-                </div>
+
+
 
 
                 <div class="form-group row justify-content-center">
@@ -131,16 +58,53 @@ export default {
                 RecommendationUpdateURL: $('#RecommendationUpdateURL').html(),
                 RecommendationIndexURL: $('#RecommendationIndexURL').html(),
                 RecommendationGetBookListURL: $('#RecommendationGetBookListURL').html(),
-                book_list: []
+                book_list: [],
+
+                options: [],
+                bookValues: [null, null, null, null, null, null, null, null, null, null],
             }
     },
     methods: {
+        onSearch(search, loading, index) {
+            loading(true);
+            this.search(loading, search, this, index);
+        },
+        search: _.debounce((loading, search, vm, index) => {
+            axios.get(vm.RecommendationGetBookListURL, {
+                params:{
+                    keyword: escape(search)
+                }
+            }).then(response => {
+                    // console.log(response.data.book_list);
+                    vm.options[index] = response.data.book_list;
+                    vm.$refs.BookOption[index].changeOptions(vm.options[index]);
+                    console.log(vm);
+
+                    console.log(vm.options[index]);
+                    loading(false);
+                });
+        }, 350),
+        updateValue(value, index){
+            this.bookValues[index] = value;
+            // console.log({value, index});
+        },
+        startUpdate(index){
+            $('#book_input_' + index).slideUp();
+            $('#book_select_' + index).slideDown();
+        },
+
         recommendationUpdateForm(e) {
             let url = this.RecommendationUpdateURL;
             let data = $(e.target).serializeObject();
             let formData = new FormData($(e.target)[0]);
             formData.append('_method', 'patch');
-            console.log(formData);
+            for(let i = 0; i < 10; i++){
+                if(this.bookValues[i] != null){
+                    formData.append('book_ids[' + i +']', this.bookValues[i]);
+                }
+            }
+
+            // console.log(formData);
             $.showLoadingModal();
             axios.post(url, formData).then(response => {
                 $.showSuccessModal('修改成功', response.data.url, '檢視');
@@ -203,5 +167,41 @@ export default {
 </script>
 
 <style>
+img {
+  height: auto;
+  max-width: 2.5rem;
+  margin-right: 1rem;
+}
+
+.d-center {
+  display: flex;
+  align-items: center;
+}
+
+.selected img {
+  width: auto;
+  max-height: 23px;
+  margin-right: 0.5rem;
+}
+
+.v-select .dropdown li {
+  border-bottom: 1px solid rgba(112, 128, 144, 0.1);
+}
+
+.v-select .dropdown li:last-child {
+  border-bottom: none;
+}
+
+.v-select .dropdown li a {
+  padding: 10px 20px;
+  width: 100%;
+  font-size: 1.25em;
+  color: #3c3c3c;
+}
+
+.v-select .dropdown-menu .active > a {
+  color: #fff;
+}
+
 
 </style>

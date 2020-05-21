@@ -25,16 +25,7 @@ class RecommendationRequest extends FormRequest
     {
         return [
             'recommendation_title' => 'required|string|max:100',
-            'book_id_1' => 'required|integer',
-            'book_id_2' => 'required|integer',
-            'book_id_3' => 'required|integer',
-            'book_id_4' => 'required|integer',
-            'book_id_5' => 'required|integer',
-            'book_id_6' => 'required|integer',
-            'book_id_7' => 'required|integer',
-            'book_id_8' => 'required|integer',
-            'book_id_9' => 'required|integer',
-            'book_id_10' => 'required|integer',
+            'book_ids.*' => 'nullable|alpha_num',
         ];
     }
 }

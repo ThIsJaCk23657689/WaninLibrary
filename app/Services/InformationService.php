@@ -61,17 +61,12 @@ class InformationService extends BaseService
 
 
     public function recommendation_update($request){
-        BookEloquent::where('is_recommended', '!=', 0)->update(['is_recommended' => 0]);
-        BookEloquent::find($request->book_id_1)->update(['is_recommended' => 1]);
-        BookEloquent::find($request->book_id_2)->update(['is_recommended' => 2]);
-        BookEloquent::find($request->book_id_3)->update(['is_recommended' => 3]);
-        BookEloquent::find($request->book_id_4)->update(['is_recommended' => 4]);
-        BookEloquent::find($request->book_id_5)->update(['is_recommended' => 5]);
-        BookEloquent::find($request->book_id_6)->update(['is_recommended' => 6]);
-        BookEloquent::find($request->book_id_7)->update(['is_recommended' => 7]);
-        BookEloquent::find($request->book_id_8)->update(['is_recommended' => 8]);
-        BookEloquent::find($request->book_id_9)->update(['is_recommended' => 9]);
-        BookEloquent::find($request->book_id_10)->update(['is_recommended' => 10]);
+        foreach($request->book_ids as $key => $book_id){
+            if($book_id){
+                BookEloquent::where('is_recommended', $key+1)->update(['is_recommended' => 0]);
+                BookEloquent::find((int)$book_id)->update(['is_recommended' => $key+1]);
+            }
+        }
 
         $information = $this->getFirst();
         $information->update(['recommendation_title' => $request->recommendation_title]);
@@ -80,9 +75,10 @@ class InformationService extends BaseService
 
     public function recommendation_getBooksByName($request){
         $keyword = '%'.$request->keyword."%";
-        $book_list = BookEloquent::where('title', 'like', $keyword)->get();
+        $book_list = BookEloquent::where('title', 'like', $keyword)->take(30)->get();
         foreach($book_list as $book){
             $book['showTitle'] = $book->showTitle();
+            $book['showCoverImage'] = $book->showCoverImage();
 
         }
         return $book_list;

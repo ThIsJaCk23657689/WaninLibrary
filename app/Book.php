@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Donor as DonorEloquent;
 use App\BorrowLog as BorrowLogEloquent;
+use URL;
 
 class Book extends Model
 {
@@ -68,6 +69,18 @@ class Book extends Model
                 break;
         }
         return $result;
+    }
+
+    public function showCoverImage(){
+        if(empty($this->cover_image)){
+            return URL::asset('images/books/default.png');
+        }else{
+            if(!preg_match("/^[a-zA-Z]+:\/\//", $this->cover_image)){
+                return URL::asset($this->cover_image);
+            }else{
+                return $this->cover_image;
+            }
+        }
     }
 
     public function scopeNormalCh($query){

@@ -1,6 +1,7 @@
 import Paginate from 'vuejs-paginate';
 import Swal from 'sweetalert2';
 import Cropper from 'cropperjs';
+import vSelect from "vue-select";
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -31,6 +32,7 @@ window.Cropper = Cropper;
 Vue.component('option-item', require('./components/Partials/OptionItem.vue').default);
 Vue.component('loading-modal', require('./components/Modals/LoadingModal.vue').default);
 Vue.component('paginate', Paginate);
+Vue.component("v-select", vSelect);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to
@@ -46,10 +48,9 @@ Vue.component('paginate', Paginate);
 // });
 
 // backend 通用JS函式
-$(function(){
+$(function() {
     // 表單Object 格式化
-    $.fn.serializeObject = function()
-    {
+    $.fn.serializeObject = function() {
         var o = {};
         var a = this.serializeArray();
         $.each(a, function() {
@@ -67,45 +68,45 @@ $(function(){
 
     // input為$()所指向的input element。
     // 檢查value是否為小數點或數字，value可以是字串、整數、浮點數。
-    $.isFloatOrInt = function(input){
+    $.isFloatOrInt = function(input) {
         let value = input.val();
         var float = /^\s*(\+|-)?((\d+(\.\d+)?)|(\.\d+))\s*$/;
         if (float.test(value)) {
             return true;
-        }else {
+        } else {
             alert("請輸入有效的整數或浮點數。");
             input.val(0);
             return false;
         }
     }
 
-    $.datepicker.setDefaults( $.datepicker.regional[ "zh-TW" ] );
+    $.datepicker.setDefaults($.datepicker.regional["zh-TW"]);
 
     $.extend(true, $.fn.dataTable.defaults, {
-		"language": {
-			"processing":   	"處理中...",
-			"loadingRecords": 	"載入中...",
-			"lengthMenu":   	"顯示 _MENU_ 項結果",
-			"zeroRecords":  	"沒有符合的結果",
-			"info":         	"顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
-			"infoEmpty":    	"顯示第 0 至 0 項結果，共 0 項",
-			"infoFiltered": 	"(從 _MAX_ 項結果中過濾)",
-			"infoPostFix":  	"",
-			"search":       	"搜尋:",
-			"paginate": {
-				"first":    	"第一頁",
-				"previous": 	"上一頁",
-				"next":     	"下一頁",
-				"last":     	"最後一頁"
-			},
-			"aria": {
-				"sortAscending":  ": 升冪排列",
-				"sortDescending": ": 降冪排列"
-			}
-		}
+        "language": {
+            "processing": "處理中...",
+            "loadingRecords": "載入中...",
+            "lengthMenu": "顯示 _MENU_ 項結果",
+            "zeroRecords": "沒有符合的結果",
+            "info": "顯示第 _START_ 至 _END_ 項結果，共 _TOTAL_ 項",
+            "infoEmpty": "顯示第 0 至 0 項結果，共 0 項",
+            "infoFiltered": "(從 _MAX_ 項結果中過濾)",
+            "infoPostFix": "",
+            "search": "搜尋:",
+            "paginate": {
+                "first": "第一頁",
+                "previous": "上一頁",
+                "next": "下一頁",
+                "last": "最後一頁"
+            },
+            "aria": {
+                "sortAscending": ": 升冪排列",
+                "sortDescending": ": 降冪排列"
+            }
+        }
     });
 
-    $.isUrl = function (url) {
+    $.isUrl = function(url) {
         var regexp = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/
         return regexp.test(url);
     }
@@ -116,7 +117,7 @@ $(function(){
         if (parts.length == 2) return parts.pop().split(";").shift();
     }
 
-    $.formatDate = function(datetime){
+    $.formatDate = function(datetime) {
         let fulldate = new Date(datetime);
         let year = fulldate.getFullYear();
         let month = (fulldate.getMonth() + 1) >= 10 ? (fulldate.getMonth() + 1) : ("0" + (fulldate.getMonth() + 1));
@@ -125,7 +126,7 @@ $(function(){
     }
 
     // ==================== Swal 函式操作 ====================
-    $.showLoadingModal = function(message = '資料讀取中'){
+    $.showLoadingModal = function(message = '資料讀取中') {
         $('input').removeClass('is-invalid')
         Swal.fire({
             title: '請稍後',
@@ -137,12 +138,12 @@ $(function(){
         });
     }
 
-    $.showErrorModal = function(error){
-        if(error.response.data.errors != null){
+    $.showErrorModal = function(error) {
+        if (error.response.data.errors != null) {
             let $key = Object.keys(error.response.data.errors);
             let $container = $('<span></span>');
-            $key.forEach(function(item, index){
-                $container.append(error.response.data.errors[item]+ '<br />');
+            $key.forEach(function(item, index) {
+                $container.append(error.response.data.errors[item] + '<br />');
                 $('#' + item).addClass('is-invalid');
             });
         }
@@ -153,11 +154,11 @@ $(function(){
             icon: 'error',
             allowOutsideClick: false,
             confirmButtonText: '確認',
-            html: (typeof $container == undefined) ? $container.prop('outerHTML') :'',
+            html: (typeof $container == undefined) ? $container.prop('outerHTML') : '',
         });
     }
 
-    $.showErrorModalWithoutError = function(message = '發生不明原因，請稍後再試。'){
+    $.showErrorModalWithoutError = function(message = '發生不明原因，請稍後再試。') {
         Swal.fire({
             title: 'Oops!發生錯誤',
             text: message,
@@ -167,7 +168,7 @@ $(function(){
         });
     }
 
-    $.showWarningModal = function(message = '發生不明原因，此操作具有警告性，請聯絡系統工程師。'){
+    $.showWarningModal = function(message = '發生不明原因，此操作具有警告性，請聯絡系統工程師。') {
         Swal.fire({
             title: '注意',
             text: message,
@@ -177,15 +178,15 @@ $(function(){
         });
     }
 
-    $.showSuccessModal = function(message = '', url = '', buttonText = '返回列表'){
-        if(url == ''){
+    $.showSuccessModal = function(message = '', url = '', buttonText = '返回列表') {
+        if (url == '') {
             Swal.fire({
                 title: '恭喜成功',
                 text: message,
                 icon: 'success',
                 confirmButtonText: '確認',
             });
-        }else{
+        } else {
             Swal.fire({
                 title: '恭喜成功',
                 text: message,
@@ -193,45 +194,45 @@ $(function(){
                 allowOutsideClick: false,
                 confirmButtonText: buttonText,
             }).then(result => {
-                if(result.value){
+                if (result.value) {
                     window.location.href = url;
                 }
             });
         }
     }
 
-    $.closeModal = function(){
-        Swal.close();
-    }
-    // ==================== Swal 函式操作 ====================
-    
-    $('#logoutBtn').click(function(){
+    $.closeModal = function() {
+            Swal.close();
+        }
+        // ==================== Swal 函式操作 ====================
+
+    $('#logoutBtn').click(function() {
         $('#logout_form').submit();
     });
 
-    $('#logout_form').submit(function(e){
+    $('#logout_form').submit(function(e) {
         e.preventDefault();
 
         let url = $(this).attr('action');
 
-        $('#LogoutMsgModal_good').css({'display':'none'});
-        $('#LogoutMsgModal_error').css({'display':'none'});
+        $('#LogoutMsgModal_good').css({ 'display': 'none' });
+        $('#LogoutMsgModal_error').css({ 'display': 'none' });
         $('#LogoutMsgModal_spinner').slideDown();
         $('#LogoutMsgModal_msg').html('請稍等...');
         $('#LogoutMsgModal_link').slideUp();
         $('#LogoutMsgModal_close').slideUp();
         $('#LogoutMsgModal').modal('show');
         axios.post(url).then(response => {
-            $('#LogoutMsgModal_good').css({'display':'flex'});
-            $('#LogoutMsgModal_spinner').css({'display':'none'});
+            $('#LogoutMsgModal_good').css({ 'display': 'flex' });
+            $('#LogoutMsgModal_spinner').css({ 'display': 'none' });
             $('#LogoutMsgModal_msg').html('登出成功');
             $('#LogoutMsgModal_link').attr('href', response.data.url);
             $('#LogoutMsgModal_link').slideDown();
             // console.log(response.data);
         }).catch((error) => {
             console.error('登出時發生錯誤，錯誤訊息：' + error);
-            $('#LogoutMsgModal_error').css({'display':'flex'});
-            $('#LogoutMsgModal_spinner').css({'display':'none'});
+            $('#LogoutMsgModal_error').css({ 'display': 'flex' });
+            $('#LogoutMsgModal_spinner').css({ 'display': 'none' });
             $('#LogoutMsgModal_msg').html('登出時發生錯誤<br>錯誤訊息：' + error + '<br>');
             $('#LogoutMsgModal_close').slideDown();
         });
