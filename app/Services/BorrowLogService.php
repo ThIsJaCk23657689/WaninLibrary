@@ -92,4 +92,32 @@ class BorrowLogService extends BaseService
         return $logs;
     }
 
+    public function borrowLogsChartByMonth(){
+        $firstDay = date("Y-m-01");
+        $lastDay = date("Y-m-t");
+        for($i=0; $i<12; $i++){
+            $counter = BorrowLogEloquent::where('created_at', '>=', $firstDay)->where('created_at', '<=', $lastDay)->where('status', 1)->count();
+            $count[i] = $counter;
+            $date[i] = $firstDay;
+            $firstDay = date('Y-m-d',strtotime(str_replace('-', '/', $firstDay) . "-1 month"));
+            $lastDay = date('Y-m-d',strtotime(str_replace('-', '/', $lastDay) . "-1 month"));
+        }
+        $res = ['count' => $count, 'date' => $date];
+        return $res;
+    }
+
+    public function borrowLogsChartByYear(){
+        $firstDay = date("Y-01-01");
+        $lastDay = date("Y-12-t");
+        for($i=0; $i<10; $i++){
+            $counter = BorrowLogEloquent::where('created_at', '>=', $firstDay)->where('created_at', '<=', $lastDay)->where('status', 1)->count();
+            $count[i] = $counter;
+            $date[i] = $firstDay;
+            $firstDay = date('Y-m-d',strtotime(str_replace('-', '/', $firstDay) . "-1 year"));
+            $lastDay = date('Y-m-d',strtotime(str_replace('-', '/', $lastDay) . "-1 year"));
+        }
+        $res = ['count' => $count, 'date' => $date];
+        return $res;
+    }
+
 }
