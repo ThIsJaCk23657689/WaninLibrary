@@ -5,6 +5,8 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Donor as DonorEloquent;
 use App\BorrowLog as BorrowLogEloquent;
+use App\Borrow as BorrowEloquent;
+use App\Borrower as BorrowerEloquent;
 use URL;
 use DateTimeInterface;
 
@@ -26,6 +28,18 @@ class Book extends Model
 
     public function donor(){
         return $this->belongsTo(DonorEloquent::class);
+    }
+
+    public function borrows()
+    {
+        return $this->hasMany(BorrowEloquent::class);
+    }
+
+    public function borrowers()
+    {
+        return $this->belongsToMany(BorrowerEloquent::class, 'borrows')
+            ->withPivot('id', 'return_date', 'status', 'noticed')
+            ->withTimestamps();
     }
 
     public function borrowLogs(){

@@ -18,7 +18,7 @@ class BorrowerService extends BaseService
             'tel' => $request->tel,
             'job_title' => $request->job_title,
             'status' => $request->status,
-            'activated' => $request->activated ?? 0,
+            'activated' => 1,
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,

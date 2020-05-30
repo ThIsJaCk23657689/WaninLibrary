@@ -56,7 +56,6 @@
             </form>
         </div>
     </div>
-    <loading-modal ref="loadingModal"></loading-modal>
 </div>
 </template>
 
@@ -73,15 +72,16 @@ export default {
         activityCreateForm(e) {
             let url = this.ActivitiesStoreURL;
             let formData = new FormData($(e.target)[0]);
-            var content = CKEDITOR.instances.content.getData();
-
+            
+            let content = CKEDITOR.instances.content.getData();
             formData.append('content', content);
-            this.$refs.loadingModal.initalModal();
+            
+            $.showLoadingModal();
             axios.post(url, formData).then(response => {
-                this.$refs.loadingModal.successfulResponse('新增成功', response.data.url);
+                $.showSuccessModal('新增成功', response.data.url);
             }).catch((error) => {
                 console.error('新增活動時發生錯誤，錯誤訊息：' + error);
-                this.$refs.loadingModal.failureResponse(error);
+                $.showErrorModal(error);
             });
         }
     },
