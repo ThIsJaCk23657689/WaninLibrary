@@ -8,6 +8,7 @@ use App\BorrowLog as BorrowLogEloquent;
 use App\Borrow as BorrowEloquent;
 use App\Borrower as BorrowerEloquent;
 use URL;
+use DateTimeInterface;
 
 class Book extends Model
 {
@@ -16,6 +17,14 @@ class Book extends Model
         'author', 'translator', 'publisher', 'edition', 'cover_image', 'ISBN',
         'published_date', 'price', 'content', 'count', 'language','position', 'is_recommended'
     ];
+
+    // Laravel 7 只要是回傳 json 格式，時間資料就會自動被轉換成 UTC 時間(ISO 8601)，
+    // 如果要修改此模型的時間格式，就要覆寫 serializeDate 方法。
+    // DateTimeInterface 是原生PHP提供的，直接 use 即可。
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format($this->dateFormat ?: 'Y-m-d H:i:s');
+    }
 
     public function donor(){
         return $this->belongsTo(DonorEloquent::class);

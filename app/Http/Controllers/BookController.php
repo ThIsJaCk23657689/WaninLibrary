@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use App\Services\BookService;
+
 use App;
 use SnappyImage;
 
@@ -14,7 +15,7 @@ class BookController extends Controller
 
     public function __construct(){
         $this->middleware('auth.web')->only([
-            'index', 'create', 'show', 'edit', 'printBarcode'
+            'index', 'create', 'show', 'edit', 'printBarcode', 'testExport'
         ]);
         $this->middleware('auth.jwt')->only([
             'store', 'update', 'destroy', 'getList', 'getOne',
@@ -186,4 +187,6 @@ class BookController extends Controller
 
         return view('books.barcode', compact('book'));
     }
+
+    
 }
