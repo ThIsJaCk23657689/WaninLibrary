@@ -17,7 +17,11 @@ const app = new Vue({
         axios.get(ActivitiesGetOneURL).then(response => {
             this.activity = response.data.activity;
             this.content = response.data.activity.content;
-
+            // console.log('sss:' + this.content);
+            CKEDITOR.replace('content', {
+                filebrowserUploadUrl: this.CKEditorUploadURL,
+                filebrowserUploadMethod: 'form'
+            });
         });
     },
     mounted() {

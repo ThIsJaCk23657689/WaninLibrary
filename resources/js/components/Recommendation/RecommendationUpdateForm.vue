@@ -72,7 +72,7 @@ export default {
         search: _.debounce((loading, search, vm, index) => {
             axios.get(vm.RecommendationGetBookListURL, {
                 params:{
-                    keyword: escape(search)
+                    keyword: search
                 }
             }).then(response => {
                     // console.log(response.data.book_list);

@@ -24,7 +24,7 @@
 
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <upload-images ref="uploadCoverImages" :uploadimg="ActivitiesCoverImageURL" :title="'上傳封面圖片'" :aspect-ratio="1/1"></upload-images>
+                        <upload-images ref="uploadCoverImages" :uploadimg="ActivitiesCoverImageURL" :title="'上傳封面圖片'" :aspect-ratio="1/1" :prefix="'activity'"></upload-images>
                     </div>
                 </div>
 
@@ -32,7 +32,7 @@
                     <div class="col-md-12">
                         <div class="form-group">
                             <label for="content">內容</label>
-                            <textarea name="content" id="content" class="form-control" cols="30" rows="5" v-model="activity.content"></textarea>
+                            <textarea name="content" id="content" class="form-control" cols="30" rows="5" v-model="content"></textarea>
                         </div>
                     </div>
                 </div>
@@ -71,7 +71,7 @@ export default {
             let url = this.ActivitiesUpdateURL;
             let formData = new FormData($(e.target)[0]);
             var content = CKEDITOR.instances.content.getData();
-            console.log($(e.target)[0]);
+            // console.log($(e.target)[0]);
             formData.append('_method', 'patch');
             formData.append('content', content);
 
@@ -92,11 +92,7 @@ export default {
 
     },
     mounted(){
-        // CKEDITOR.replace('content');
-        CKEDITOR.replace('content', {
-            filebrowserUploadUrl: this.CKEditorUploadURL,
-            filebrowserUploadMethod: 'form'
-        });
+
     }
 }
 </script>

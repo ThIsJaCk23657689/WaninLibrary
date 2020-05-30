@@ -12,6 +12,7 @@ class BookService extends BaseService
     public function add(Request $request){
 
         // 條碼編號生成
+        $request->callnum = $request->callnum ?? '000';
         $barcode = $this->barcodeCode($request->category, $request->callnum);
 
         if(!is_null($request->image_url)){
@@ -60,8 +61,8 @@ class BookService extends BaseService
 
         return [
             'status' => '200',
-            'book_id' => $book->id, 
-            'barcode' => $barcode, 
+            'book_id' => $book->id,
+            'barcode' => $barcode,
             'url' => route('books.show', [$book->id])
         ];
     }
@@ -79,13 +80,13 @@ class BookService extends BaseService
 
         if($cate == 11){
             $cate = 2;
-            $callnum = 000;
+            $callnum = '000';
         }elseif($cate == 12){
             $cate = 3;
-            $callnum = 000;
+            $callnum = '000';
         }elseif($cate == 13){
             $cate = 4;              //非中文
-            $callnum = 000;
+            $callnum = '000';
         }elseif($cate >= 0 and $cate <= 10){
             $cate = 1;
             $callnum = substr($callnum, 0, 3);
@@ -102,7 +103,7 @@ class BookService extends BaseService
         $code = $cate.$callnum.$book_id;
 
         if(strlen($code) != 13){
-            return "Some undefined errors happened.";
+            return $code." Some undefined errors happened.";
         }else{
             return $code;
         }
@@ -174,7 +175,8 @@ class BookService extends BaseService
     }
 
     public function getOne($id){
-        $book = BookEloquent::findOrFail($id);
+        $book = BookEloquent::with('donor')->findOrFail($id);
+        // $book['donor_name'] = $book->donor->name;
         return $book;
     }
 
@@ -182,7 +184,7 @@ class BookService extends BaseService
         $book = $this->getOne($id);
 
         // 若書封面未做更動，不執行圖片裁切。
-        if($book->image_cover != $request->image_cover){
+        if(!is_null($request->image_data) && !is_null($_FILES['image_file'])){
             // 圖片路徑生成與裁切
             $crop = new CropImageService($request->image_data ?? null, $_FILES['image_file'] ?? null, 'books');
             $result = $crop->getResult();
@@ -192,12 +194,23 @@ class BookService extends BaseService
                     'message' => $result['message']
                 ];
             }
+        }else{
+            $result['url'] = $book->cover_image;
         }
+        if($request->addType == 2){
+            $request->donor_id = null;
+        }else{
+            if($request->donor_id == "null"){
+                $request->donor_id = $book->donor_id;
+            }
+            $request->price = 0;
+        }
+
 
         $book->update([
             'donor_id' => $request->donor_id,
-            'barcode' => $request->barcode,
-            'callnum' => $request->callnum,
+            // 'barcode' => $request->barcode,
+            'callnum' => $request->callnum ?? '000',
             'category' => $request->category,
             'status' => $request->status,
             'title' => $request->title,
@@ -212,17 +225,17 @@ class BookService extends BaseService
             'position' => $request->position,
 
             'published_date' => $request->published_date,
-            'price' => $request->price,
+            'price' => $request->price ?? 0,
             'language' => $request->language,
             'content' => $request->content,
-            'count' => $request->count,
+            // 'count' => $request->count,
         ]);
 
         return [
-            'status' => 200, 
-            'book_id' => $book->id, 
+            'status' => 200,
+            'book_id' => $book->id,
             'barcode' => $book->barcode ,
-            'cover_image' => $result['result'], 
+            // 'cover_image' => $result['result'],
             'url' => route('books.index')
         ];
     }
@@ -361,8 +374,15 @@ class BookService extends BaseService
 
         $doc = new \DOMDocument();
         $doc_img = new \DOMDocument();
-
-        $html = file_get_contents($iframe_src);
+        $context = stream_context_create(array(
+            'http' => array(
+            'ignore_errors'=>true,
+            'method'=>'GET'
+            // for more options check http://www.php.net/manual/en/context.http.php
+            )
+            ));
+        $new_url = str_replace(' ','%20', 'http://metadata.ncl.edu.tw'.$iframe_src);
+        $html = file_get_contents($new_url, false, $context);
         @$doc_img->loadHTML($html);
         $img = $doc_img->getElementsByTagName('img');
         $len = count($img);

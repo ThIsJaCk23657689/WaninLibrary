@@ -175,8 +175,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {},
-  mounted: function mounted() {
-    CKEDITOR.replace('content');
+  mounted: function mounted() {// CKEDITOR.replace('content');
   }
 });
 
@@ -295,8 +294,8 @@ var render = function() {
                         {
                           name: "model",
                           rawName: "v-model",
-                          value: _vm.announcement.content,
-                          expression: "announcement.content"
+                          value: _vm.content,
+                          expression: "content"
                         }
                       ],
                       staticClass: "form-control",
@@ -306,17 +305,13 @@ var render = function() {
                         cols: "30",
                         rows: "5"
                       },
-                      domProps: { value: _vm.announcement.content },
+                      domProps: { value: _vm.content },
                       on: {
                         input: function($event) {
                           if ($event.target.composing) {
                             return
                           }
-                          _vm.$set(
-                            _vm.announcement,
-                            "content",
-                            $event.target.value
-                          )
+                          _vm.content = $event.target.value
                         }
                       }
                     })
@@ -505,6 +500,7 @@ var app = new Vue({
     axios.get(AnnouncementsGetOneURL).then(function (response) {
       _this.announcement = response.data.announcement;
       _this.content = response.data.announcement.content;
+      CKEDITOR.replace('content');
     });
   },
   mounted: function mounted() {}

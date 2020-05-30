@@ -27,7 +27,7 @@ class BookRequest extends FormRequest
             'donor_id' => "nullable",
 
             // 'barcode' => 'required|integer|unique',
-            'callnum' => 'required|string|min:3',
+            'callnum' => 'nullable|string|min:3',
             'category' => 'required|integer',
             'status' => 'nullable|integer',
 

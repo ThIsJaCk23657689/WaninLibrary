@@ -18,17 +18,24 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="row">
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="email">信箱</label>
                         <input id="email" name="email" type="text" class="form-control mb-2" value="{{ $information->email ?? '無' }}" readonly>
                     </div>
                 </div>
 
-                <div class="col-md-6">
+                <div class="col-md-4">
                     <div class="form-group">
                         <label for="tel">電話</label>
                         <input id="tel" name="tel" type="text" class="form-control mb-2" value="{{ $information->tel ?? '無' }}" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="fax">傳真</label>
+                        <input id="fax" name="fax" type="text" class="form-control mb-2" value="{{ $information->fax ?? '無' }}" readonly>
                     </div>
                 </div>
 

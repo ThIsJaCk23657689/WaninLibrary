@@ -49,14 +49,31 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <!-- <div class="col-md-3">
                     <div class="form-group">
                         <label for="donor_id"><span id="donor_id_required_star" class="text-danger mr-2">*</span>捐贈人</label>
                         <select id="donor_id" name="donor_id" class="form-control">
                             <option value="0">請選擇...</option>
                         </select>
                     </div>
+                </div> -->
+
+
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label><span class="text-danger mr-2">*</span>捐贈人</label>
+                        <!-- <div id="donor_id" class="input-group mb-3">
+                            <input type="text" class="form-control" :value="book.showTitle" readonly>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-dark" @click="startUpdate(index)">編輯</button>
+                            </div>
+                        </div> -->
+                        <div id="donor_id">
+                            <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                        </div>
+                    </div>
                 </div>
+
 
                 <div class="col-md-2">
                     <div class="form-group">
@@ -77,7 +94,7 @@
 
             <div class="row">
                 <div class="col-md-6 text-center">
-                    <upload-images ref="uploadBookImages" :uploadimg="uploadimg" :title="title" :aspect-ratio="1/1"></upload-images>
+                    <upload-images ref="uploadBookImages" :uploadimg="uploadimg" :title="title" :aspect-ratio="1/1" :prefix="'book'"></upload-images>
                 </div>
 
                 <div class="col-md-6">
@@ -216,8 +233,163 @@
 
         </form>
 
-        <form id="papper_create_form" method="POST" :action="BooksStoreURL" style="display:none;">
+        <form id="papper_create_form" method="POST" :action="BooksStoreURL" enctype="multipart/form-data" style="display:none;" @submit.prevent="bookCreateForm">
+            <div class="row">
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label for="p_add_type">入庫方式</label>
+                        <select id="p_add_type" name="add_type" class="form-control" @change="changeAddType">
+                            <option value="1" selected>捐贈入庫</option>
+                            <option value="2">購買入庫</option>
+                        </select>
+                    </div>
+                </div>
 
+                <div class="col-md-3">
+                    <div class="form-group">
+                        <label><span class="text-danger mr-2">*</span>捐贈人</label>
+                        <!-- <div id="donor_id" class="input-group mb-3">
+                            <input type="text" class="form-control" :value="book.showTitle" readonly>
+                            <div class="input-group-append">
+                                <button type="button" class="btn btn-dark" @click="startUpdate(index)">編輯</button>
+                            </div>
+                        </div> -->
+                        <div id="p_donor_id">
+                            <select-donor-custom ref="PaperDonorsOption" :placeholder="'請輸入捐贈人名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-2">
+                    <div class="form-group">
+                        <label for="p_price"><span id="p_price_required_star" class="text-danger mr-2" style="display:none;">*</span>價格</label>
+                        <input id="p_price" name="price" type="text" class="form-control" value="0" autocomplete="off" disabled>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="p_status">狀態</label>
+                        <select id="p_status" name="status" class="form-control" disabled>
+                            <option value="4">庫藏待上架</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6 text-center">
+                    <upload-images ref="uploadPapperImages" :uploadimg="uploadimg" :title="title" :aspect-ratio="1/1" :prefix="'papper'"></upload-images>
+                </div>
+
+                <div class="col-md-6">
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="p_title">
+                                    <span class="text-danger mr-2">*</span>主標題
+                                </label>
+                                <input id="p_title" name="title" type="text" class="form-control" value="" required autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="p_subtitle">副標題</label>
+                                <input id="p_subtitle" name="subtitle" type="text" class="form-control" value="" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label for="p_author">作者</label>
+                                <input id="p_author" name="author" type="text" class="form-control" value="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="p_position">位置</label>
+                                <input id="p_position" name="position" type="text" class="form-control" value="" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-9">
+                            <div class="form-group">
+                                <label for="p_translator">譯者</label>
+                                <input id="p_translator" name="translator" type="text" class="form-control" value="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-3">
+                            <div class="form-group">
+                                <label for="p_language">語言</label>
+                                <input id="p_language" name="language" type="text" class="form-control" value="" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-8">
+                            <div class="form-group">
+                                <label for="p_publisher">出版商</label>
+                                <input id="p_publisher" name="publisher" type="text" class="form-control" value="" autocomplete="off">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="p_edition">版次</label>
+                                <input id="p_edition" name="edition" type="text" class="form-control" value="" autocomplete="off">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="p_published_date">出版日期</label>
+                        <input id="p_published_date" name="published_date" type="text" class="form-control" value="" autocomplete="off">
+                    </div>
+                </div>
+
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="p_category">圖書類別</label>
+                        <select id="p_category" name="category" class="form-control">
+                            <option value="11">論文</option>
+                            <option value="12">期刊雜誌</option>
+                            <!-- <option v-for="option in category_options" :key="option.id" :value="option.id">{{ option.text }}</option> -->
+                        </select>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row mb-2">
+                <div class="col-md-12">
+                    <div class="form-group">
+                        <label for="p_content">備註內容</label>
+                        <textarea name="content" id="p_content" class="form-control" cols="30" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-group row justify-content-center">
+                <div class="col-md-8">
+                    <button type="submit" class="btn btn-block btn-primary">
+                        確認新增
+                    </button>
+                    <a :href="BooksIndexURL" class="btn btn-block btn-danger">
+                        返回列表
+                    </a>
+                </div>
+            </div>
         </form>
     </div>
 </div>
@@ -230,6 +402,7 @@ export default {
         return {
             BooksIndexURL: $('#BooksIndexURL').html(),
             BooksStoreURL: $('#BooksStoreURL').html(),
+            DonorsNameURL: $('#DonorsNameURL').html(),
             FormErrorsMsg: [],
             donors: [],
             title: '書本圖片',
@@ -250,28 +423,61 @@ export default {
                 {id: 12, text: '1200 雜誌類'},
                 {id: 13, text: '1300 外文圖書'},
             ],
-
+            donorValue: null,
             bookInfo: [],
         }
     },
     methods: {
+        onSearch(search, loading, index) {
+            loading(true);
+            this.search(loading, search, this, index);
+        },
+        search: _.debounce((loading, search, vm, index) => {
+            axios.get(vm.DonorsNameURL, {
+                params:{
+                    keyword: search
+                }
+            }).then(response => {
+                    // console.log(response.data.book_list);
+                    vm.options = response.data.donors;
+                    vm.$refs.DonorsOption.changeOptions(vm.options);
+                    vm.$refs.PaperDonorsOption.changeOptions(vm.options);
+
+                    loading(false);
+                });
+        }, 350),
+        updateValue(value){
+            this.donorValue = value;
+        },
         changeAddType(e){
             // 更動入庫方式
             let x = $(e.target).val();
             if(x == '1'){
-                // 捐贈入庫
+                // 捐贈入庫 - 一般圖書
                 $('#donor_id').prop('disabled', false).selectpicker('refresh');
                 $('#donor_id_required_star').fadeIn();
 
                 $('#price').val('0').prop('disabled', true).attr('required', false);
                 $('#price_required_star').fadeOut();
+                // 捐贈入庫 - 論文雜誌
+                $('#p_donor_id').prop('disabled', false).selectpicker('refresh');
+                $('#p_donor_id_required_star').fadeIn();
+
+                $('#p_price').val('0').prop('disabled', true).attr('required', false);
+                $('#p_price_required_star').fadeOut();
             }else{
-                // 購滿入庫
+                // 購買入庫 - 一般圖書
                 $('#donor_id').prop('disabled', true).selectpicker('refresh');
                 $('#donor_id_required_star').fadeOut();
 
                 $('#price').val('0').prop('disabled', false).attr('required', true);
                 $('#price_required_star').fadeIn();
+                // 購買入庫 - 論文雜誌
+                $('#p_donor_id').prop('disabled', true).selectpicker('refresh');
+                $('#p_donor_id_required_star').fadeOut();
+
+                $('#p_price').val('0').prop('disabled', false).attr('required', true);
+                $('#p_price_required_star').fadeIn();
             }
         },
         updateCategory(e){
@@ -387,7 +593,7 @@ export default {
             //     key => formdata.append(key, data[key])
             // );
             // formdata.append('image_file', $('#image_file')[0].files[0]);
-
+            formdata.append('donor_id',this.donorValue);
             $.showLoadingModal();
             axios.post(url, formdata, {
                 headers: {
@@ -404,14 +610,7 @@ export default {
         }
     },
     created(){
-        let DonorsListURL = $('#DonorsListURL').html();
-        axios.get(DonorsListURL).then(response => {
-            this.donors = response.data.donors;
-            for(let i = 0; i < this.donors.length; i++){
-                $("#donor_id").append($("<option></option>").attr("value", this.donors[i].id).text(this.donors[i].name));
-            }
-            $('#donor_id').selectpicker('refresh');
-        });
+
     },
     mounted(){
         $('#book_btn').click(function(e){
@@ -441,13 +640,53 @@ export default {
         });
 
         // 捐贈人
-        $('#donor_id').selectpicker({
-            liveSearch: true
-        });
+        // $('#donor_id').selectpicker({
+        //     liveSearch: true
+        // });
+        // $('#p_donor_id').selectpicker({
+        //     liveSearch: true
+        // });
     },
 }
 </script>
 
+
 <style>
+img {
+  height: auto;
+  max-width: 2.5rem;
+  margin-right: 1rem;
+}
+
+.d-center {
+  display: flex;
+  align-items: center;
+}
+
+.selected img {
+  width: auto;
+  max-height: 23px;
+  margin-right: 0.5rem;
+}
+
+.v-select .dropdown li {
+  border-bottom: 1px solid rgba(112, 128, 144, 0.1);
+}
+
+.v-select .dropdown li:last-child {
+  border-bottom: none;
+}
+
+.v-select .dropdown li a {
+  padding: 10px 20px;
+  width: 100%;
+  font-size: 1.25em;
+  color: #3c3c3c;
+}
+
+.v-select .dropdown-menu .active > a {
+  color: #fff;
+}
+
 
 </style>

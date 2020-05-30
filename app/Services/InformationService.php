@@ -31,6 +31,8 @@ class InformationService extends BaseService
             }else{
                 $url = $result['url'];
             }
+        }else{
+            $url = $information->cover_image;
         }
 
         $information->update([
