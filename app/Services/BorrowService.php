@@ -136,6 +136,9 @@ class BorrowService extends BaseService
 
         $borrow->delete();
 
+        $book->status = config('book.status.LISTED');
+        $book->save();
+
         return [
             'status' => 200,
             'message' => '書本ID：' . $book->id . '，歸還成功！',
