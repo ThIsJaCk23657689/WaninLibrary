@@ -69,7 +69,6 @@
             </form>
         </div>
     </div>
-    <loading-modal ref="loadingModal"></loading-modal>
 </div>
 </template>
 

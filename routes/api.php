@@ -67,7 +67,7 @@ Route::prefix('/backend')->group(function(){
         'store', 'update', 'destroy'
     ]]);
 
-    //書籍管理相關
+    // 書籍管理相關
     Route::post('/books/getBookDataByURL','BookController@getBookDataByURL')->name('books.bugurl');
     Route::get('/books/isbn/{isbn}/google', 'BookController@getDataByISBNFromGoogle')->name('books.isbn.google');
     Route::get('/books/getBookByKeyword', 'BookController@getBookByKeyword')->name('books.getBookByKeyword');
@@ -106,7 +106,7 @@ Route::prefix('/backend')->group(function(){
     Route::post('circulation/Notified','BorrowController@Notified');
 
     // 還書
-    Route::post('returnBookByBarcode','BorrowController@returnBookByBarcode');
+    Route::post('circulation/return','BorrowController@returnBook')->name('circulation.return');
 });
 
 Route::group(['middleware' => 'auth.jwt'], function () {

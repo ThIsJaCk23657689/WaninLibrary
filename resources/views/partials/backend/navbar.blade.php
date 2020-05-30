@@ -1,21 +1,13 @@
-<nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+<nav id="navbar" class="navbar navbar-expand navbar-dark bg-dark static-top">
     <a class="navbar-brand mr-1" href="{{ route('backend') }}">{{ __('Backend') }}</a>
 
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
         <i class="fas fa-bars"></i>
     </button>
 
-    <!-- Navbar Search -->
-    <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
-        <div class="input-group">
-            <input type="text" name="keyword" class="form-control" placeholder="{{ __('Search for...') }}" aria-label="Search" aria-describedby="basic-addon2">
-            <div class="input-group-append">
-                <button class="btn btn-primary" type="button">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-        </div>
-    </form>
+    <!-- 還書 -->
+    <span id="ReturnBookURL" class="d-none">{{ route('circulation.return') }}</span>
+    <book-redemption></book-redemption>
 
     <!-- Navbar -->
     <ul class="navbar-nav ml-auto ml-md-0">

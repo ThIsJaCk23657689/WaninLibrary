@@ -908,7 +908,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                        確認新增\n                    "
+                    "\r\n                        確認新增\r\n                    "
                   )
                 ]
               ),
@@ -921,7 +921,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                        返回列表\n                    "
+                    "\r\n                        返回列表\r\n                    "
                   )
                 ]
               )
@@ -964,7 +964,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "fas fa-user-tie mr-2" }),
               _vm._v(
-                "\n                        一般書籍(有ISBN)\n                    "
+                "\r\n                        一般書籍(有ISBN)\r\n                    "
               )
             ]
           )
@@ -982,7 +982,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "far fa-building mr-2" }),
               _vm._v(
-                "\n                        論文、期刊、雜誌等(無ISBN)\n                    "
+                "\r\n                        論文、期刊、雜誌等(無ISBN)\r\n                    "
               )
             ]
           )
@@ -1013,7 +1013,7 @@ var staticRenderFns = [
               [
                 _c("i", { staticClass: "fas fa-undo-alt mr-2" }),
                 _vm._v(
-                  "\n                        重新選擇書本類型\n                    "
+                  "\r\n                        重新選擇書本類型\r\n                    "
                 )
               ]
             )
@@ -1112,7 +1112,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("書名（主標題）\n                                ")
+            _vm._v("書名（主標題）\r\n                                ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -1321,7 +1321,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("索書號\n                        ")
+      _vm._v("索書號\r\n                        ")
     ])
   },
   function() {
@@ -1392,7 +1392,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("label", { staticClass: "mb-2", attrs: { for: "image_file" } }, [
-        _vm._v("\n            " + _vm._s(_vm.title) + "\n        ")
+        _vm._v("\r\n            " + _vm._s(_vm.title) + "\r\n        ")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "custom-file" }, [
@@ -1716,7 +1716,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\create.js */"./resources/js/books/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\create.js */"./resources/js/books/create.js");
 
 
 /***/ })

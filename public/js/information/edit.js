@@ -169,7 +169,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['information'],
   data: function data() {
@@ -353,261 +352,255 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c(
-            "form",
-            {
-              attrs: {
-                method: "POST",
-                id: "information_update_form",
-                action: "#",
-                enctype: "multipart/form-data"
-              },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.informationUpdateForm($event)
-                }
-              }
+  return _c("div", [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "form",
+          {
+            attrs: {
+              method: "POST",
+              id: "information_update_form",
+              action: "#",
+              enctype: "multipart/form-data"
             },
-            [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _vm._m(0),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.information.tel,
-                          expression: "information.tel"
-                        }
-                      ],
-                      staticClass: "form-control mb-2",
-                      attrs: { id: "tel", name: "tel", type: "text" },
-                      domProps: { value: _vm.information.tel },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.information, "tel", $event.target.value)
-                        }
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.informationUpdateForm($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.information.tel,
+                        expression: "information.tel"
                       }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.information.fax,
-                          expression: "information.fax"
+                    ],
+                    staticClass: "form-control mb-2",
+                    attrs: { id: "tel", name: "tel", type: "text" },
+                    domProps: { value: _vm.information.tel },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
                         }
-                      ],
-                      staticClass: "form-control mb-2",
-                      attrs: { id: "fax", name: "fax", type: "text" },
-                      domProps: { value: _vm.information.fax },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.information, "fax", $event.target.value)
-                        }
+                        _vm.$set(_vm.information, "tel", $event.target.value)
                       }
-                    })
-                  ])
+                    }
+                  })
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _vm._m(2),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.information.address,
-                          expression: "information.address"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "address",
-                        name: "address",
-                        type: "text",
-                        required: ""
-                      },
-                      domProps: { value: _vm.information.address },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.information,
-                            "address",
-                            $event.target.value
-                          )
-                        }
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.information.fax,
+                        expression: "information.fax"
                       }
-                    })
-                  ])
+                    ],
+                    staticClass: "form-control mb-2",
+                    attrs: { id: "fax", name: "fax", type: "text" },
+                    domProps: { value: _vm.information.fax },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.information, "fax", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(2),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.information.address,
+                        expression: "information.address"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "address",
+                      name: "address",
+                      type: "text",
+                      required: ""
+                    },
+                    domProps: { value: _vm.information.address },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.information,
+                          "address",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(3),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.information.open_at,
+                        expression: "information.open_at"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "open_at",
+                      name: "open_at",
+                      type: "text",
+                      required: ""
+                    },
+                    domProps: { value: _vm.information.open_at },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(
+                          _vm.information,
+                          "open_at",
+                          $event.target.value
+                        )
+                      }
+                    }
+                  })
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _vm._m(3),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.information.open_at,
-                          expression: "information.open_at"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "open_at",
-                        name: "open_at",
-                        type: "text",
-                        required: ""
-                      },
-                      domProps: { value: _vm.information.open_at },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.information,
-                            "open_at",
-                            $event.target.value
-                          )
-                        }
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(4),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.information.close_at,
+                        expression: "information.close_at"
                       }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _vm._m(4),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.information.close_at,
-                          expression: "information.close_at"
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "close_at",
+                      name: "close_at",
+                      type: "text",
+                      required: ""
+                    },
+                    domProps: { value: _vm.information.close_at },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
                         }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "close_at",
-                        name: "close_at",
-                        type: "text",
-                        required: ""
-                      },
-                      domProps: { value: _vm.information.close_at },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.information,
-                            "close_at",
-                            $event.target.value
-                          )
-                        }
+                        _vm.$set(
+                          _vm.information,
+                          "close_at",
+                          $event.target.value
+                        )
                       }
-                    })
-                  ])
+                    }
+                  })
                 ])
-              ]),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c(
-                  "div",
-                  { staticClass: "col-md-12 text-center" },
-                  [
-                    _c("upload-images", {
-                      ref: "uploadCoverImages",
-                      attrs: {
-                        uploadimg: _vm.InformationCoverImageURL,
-                        title: "上傳封面圖片",
-                        "aspect-ratio": 4 / 2
-                      }
-                    })
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
               _c(
                 "div",
-                { staticClass: "form-group row justify-content-center" },
+                { staticClass: "col-md-12 text-center" },
                 [
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-block btn-success",
-                        attrs: { type: "submit" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            確認修改\n                        "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-block btn-danger",
-                        attrs: { href: _vm.InformationIndexURL }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            取消編輯\n                        "
-                        )
-                      ]
-                    )
-                  ])
-                ]
+                  _c("upload-images", {
+                    ref: "uploadCoverImages",
+                    attrs: {
+                      uploadimg: _vm.InformationCoverImageURL,
+                      title: "上傳封面圖片",
+                      "aspect-ratio": 4 / 2
+                    }
+                  })
+                ],
+                1
               )
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("loading-modal", { ref: "loadingModal" })
-    ],
-    1
-  )
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group row justify-content-center" },
+              [
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block btn-success",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                            確認修改\r\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-block btn-danger",
+                      attrs: { href: _vm.InformationIndexURL }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                            取消編輯\r\n                        "
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -693,7 +686,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("label", { staticClass: "mb-2", attrs: { for: "image_file" } }, [
-        _vm._v("\n            " + _vm._s(_vm.title) + "\n        ")
+        _vm._v("\r\n            " + _vm._s(_vm.title) + "\r\n        ")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "custom-file" }, [
@@ -1026,7 +1019,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\information\edit.js */"./resources/js/information/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\information\edit.js */"./resources/js/information/edit.js");
 
 
 /***/ })

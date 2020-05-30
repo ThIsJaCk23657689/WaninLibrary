@@ -113,19 +113,33 @@ class BorrowService extends BaseService
     }
 
     // 條碼還書
-    public function returnBookByBarcode($barcode){
-        $book_id = BookEloquent::where('barcode', $barcode)->first()->id;
-        $borrow = BorrowEloquent::where('book_id', $book_id)->latest()->first();
+    public function returnBook($barcode){
+        $book = BookEloquent::where('barcode', $barcode)->first();
+        $book_id = $book->id;
+
+        $borrow = $book->borrows()->first();
+        if(!$borrow){
+            return [
+                'status' => 404,
+                'message' => '此書沒有被借出，無法歸還。',
+            ];
+        }
+
         BorrowLogEloquent::create([
-            'borrower_id' => $borrow->borrower_id,
-            'borrower_name' => $borrow->book->name,
-            'book_id' => $borrow->book_id,
-            'book_title' => $borrow->book->title,
-            'callnum' => $borrow->book->callnum,
+            'borrower_id' => $borrow->borrower->id,
+            'borrower_name' => $borrow->borrower->name,
+            'book_id' => $book_id,
+            'book_title' => $book->title,
+            'callnum' => $book->callnum,
             'status' => 2
         ]);
+
         $borrow->delete();
-        return '還書成功';
+
+        return [
+            'status' => 200,
+            'message' => '書本ID：' . $book->id . '，歸還成功！',
+        ];
     }
 
     // 管理者電話通知完畢可點擊已通知按紐

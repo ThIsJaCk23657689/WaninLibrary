@@ -29,9 +29,6 @@
                     </div>
                 </div>
 
-
-
-
                 <div class="form-group row justify-content-center">
                     <div class="col-md-8">
                         <button type="submit" class="btn btn-block btn-success">
@@ -46,7 +43,6 @@
             </form>
         </div>
     </div>
-    <loading-modal ref="loadingModal"></loading-modal>
 </div>
 </template>
 

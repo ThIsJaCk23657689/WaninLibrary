@@ -156,7 +156,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -167,19 +166,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     activityCreateForm: function activityCreateForm(e) {
-      var _this = this;
-
       var url = this.ActivitiesStoreURL;
       var formData = new FormData($(e.target)[0]);
       var content = CKEDITOR.instances.content.getData();
       formData.append('content', content);
-      this.$refs.loadingModal.initalModal();
+      $.showLoadingModal();
       axios.post(url, formData).then(function (response) {
-        _this.$refs.loadingModal.successfulResponse('新增成功', response.data.url);
+        $.showSuccessModal('新增成功', response.data.url);
       })["catch"](function (error) {
         console.error('新增活動時發生錯誤，錯誤訊息：' + error);
-
-        _this.$refs.loadingModal.failureResponse(error);
+        $.showErrorModal(error);
       });
     }
   },
@@ -343,51 +339,45 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c(
-            "form",
-            {
-              attrs: { method: "POST", id: "activity_create_form", action: "" },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.activityCreateForm($event)
-                }
+  return _c("div", [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "form",
+          {
+            attrs: { method: "POST", id: "activity_create_form", action: "" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.activityCreateForm($event)
               }
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c(
-                  "div",
-                  { staticClass: "col-md-12 text-center" },
-                  [
-                    _c("upload-images", {
-                      ref: "uploadCoverImages",
-                      attrs: { title: "上傳封面圖片", "aspect-ratio": 1 / 1 }
-                    })
-                  ],
-                  1
-                )
-              ]),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _vm._m(2)
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("loading-modal", { ref: "loadingModal" })
-    ],
-    1
-  )
+            }
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c(
+                "div",
+                { staticClass: "col-md-12 text-center" },
+                [
+                  _c("upload-images", {
+                    ref: "uploadCoverImages",
+                    attrs: { title: "上傳封面圖片", "aspect-ratio": 1 / 1 }
+                  })
+                ],
+                1
+              )
+            ]),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2)
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -399,7 +389,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("活動標題\n                            ")
+            _vm._v("活動標題\r\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -446,7 +436,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "content" } }, [
             _vm._v(
-              "\n                                活動內容\n                            "
+              "\r\n                                活動內容\r\n                            "
             )
           ]),
           _vm._v(" "),
@@ -472,7 +462,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                            確認新增\n                        "
+              "\r\n                            確認新增\r\n                        "
             )
           ]
         ),
@@ -482,7 +472,7 @@ var staticRenderFns = [
           { staticClass: "btn btn-block btn-danger", attrs: { href: "#" } },
           [
             _vm._v(
-              "\n                            返回列表\n                        "
+              "\r\n                            返回列表\r\n                        "
             )
           ]
         )
@@ -527,7 +517,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("label", { staticClass: "mb-2", attrs: { for: "image_file" } }, [
-        _vm._v("\n            " + _vm._s(_vm.title) + "\n        ")
+        _vm._v("\r\n            " + _vm._s(_vm.title) + "\r\n        ")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "custom-file" }, [
@@ -851,7 +841,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\activities\create.js */"./resources/js/activities/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\activities\create.js */"./resources/js/activities/create.js");
 
 
 /***/ })

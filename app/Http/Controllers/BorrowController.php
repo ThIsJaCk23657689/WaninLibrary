@@ -13,10 +13,10 @@ class BorrowController extends Controller
     public function __construct()
     {
         $this->middleware('auth.web')->only([
-            'index', 'create', 'show', 'edit', 'circulation', 'showBorrowPage'
+            'index', 'create', 'show', 'edit', 'circulation', 'showBorrowPage',
         ]);
         $this->middleware('auth.jwt')->only([
-            'borrow'
+            'borrow', 'returnBook'
         ]);
         $this->BorrowService = new BorrowService();
     }
@@ -77,10 +77,16 @@ class BorrowController extends Controller
         return response()->json($msg, 200);
     }
 
-    public function returnBookByBarcode(Request $request)
+    // 還書
+    public function returnBook(Request $request)
     {
-        $msg = $this->BorrowService->returnBookByBarcode($request->barcode);
-        return response()->json(['msg' => $msg], 200);
+        $this->validate($request, [
+            'barcode' => 'required|string|size:13|exists:books,barcode'
+        ]);
+
+        $result = $this->BorrowService->returnBook($request->barcode);
+
+        return response()->json($result, $result['status']);
     }
 
     public function bookExpired(Request $request)
