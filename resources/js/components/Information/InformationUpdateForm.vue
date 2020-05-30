@@ -10,13 +10,19 @@
                             <input id="recommendation_title" name="recommendation_title" type="text" class="form-control" v-model="information.recommendation_title" required>
                         </div>
                     </div> -->
-                    <div class="col-md-6">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="email"><span class="text-danger mr-2">*</span>信箱</label>
+                            <input id="email" name="email" type="email" class="form-control mb-2" v-model="information.email">
+                        </div>
+                    </div>
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="tel"><span class="text-danger mr-2">*</span>電話</label>
                             <input id="tel" name="tel" type="text" class="form-control mb-2" v-model="information.tel">
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-4">
                         <div class="form-group">
                             <label for="fax"><span class="text-danger mr-2">*</span>傳真</label>
                             <input id="fax" name="fax" type="text" class="form-control mb-2" v-model="information.fax">
@@ -50,7 +56,7 @@
 
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <upload-images ref="uploadCoverImages" :uploadimg="InformationCoverImageURL" :title="'上傳封面圖片'" :aspect-ratio="4/2"></upload-images>
+                        <upload-images ref="uploadCoverImages" :uploadimg="InformationCoverImageURL" :title="'上傳封面圖片'" :aspect-ratio="4/2" :prefix="'info'"></upload-images>
                     </div>
                 </div>
 

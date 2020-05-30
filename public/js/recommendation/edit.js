@@ -224,7 +224,7 @@ __webpack_require__.r(__webpack_exports__);
     search: _.debounce(function (loading, search, vm, index) {
       axios.get(vm.RecommendationGetBookListURL, {
         params: {
-          keyword: escape(search)
+          keyword: search
         }
       }).then(function (response) {
         // console.log(response.data.book_list);

@@ -50,7 +50,7 @@ class BookController extends Controller
 
     public function update(BookRequest $request, $id){
         $res = $this->BookService->update($request, $id);
-        return response()->json($res, $res['status']);
+        return response()->json($res);
     }
 
     public function destroy($id){

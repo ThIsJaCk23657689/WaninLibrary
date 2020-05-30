@@ -169,6 +169,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['information'],
   data: function data() {
@@ -238,7 +244,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['uploadimg', 'title', 'aspectRatio'],
+  props: ['uploadimg', 'title', 'aspectRatio', 'prefix'],
   data: function data() {
     return {
       url: null,
@@ -257,8 +263,8 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       this.ImageURL = url;
-      $('#preview-image').attr('src', this.ImageURL);
-      $('#file_label').text('從爬蟲抓來的圖片');
+      $('#' + this.prefix + '_preview-image').attr('src', this.ImageURL);
+      $('#' + this.prefix + '_file_label').text('從爬蟲抓來的圖片');
     },
     // 當 input 更動時，所觸發的function。
     spwanPreviewImg: function spwanPreviewImg(e) {
@@ -271,7 +277,7 @@ __webpack_require__.r(__webpack_exports__);
         if (this.isImageFile($file)) {
           // 確定要上傳本地端圖片，就不要管爬蟲圖片了。
           this.ImageURL = null;
-          $('#file_label').text($('#image_file').prop('files')[0].name);
+          $('#' + this.prefix + '_file_label').text($('#' + this.prefix + '_image_file').prop('files')[0].name);
 
           if (this.url) {
             URL.revokeObjectURL(this.url);
@@ -301,10 +307,10 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.isCropActived) {
         // 如果已經開啟了 crop 取代原本的url即可。
-        $('#preview-image').cropper('replace', this.url);
+        $('#' + this.prefix + '_preview-image').cropper('replace', this.url);
       } else {
-        $('#preview-image').attr('src', this.url);
-        $('#preview-image').cropper({
+        $('#' + this.prefix + '_preview-image').attr('src', this.url);
+        $('#' + this.prefix + '_preview-image').cropper({
           aspectRatio: this.aspectRatio,
           autoCropArea: 0.5,
           movable: false,
@@ -324,9 +330,9 @@ __webpack_require__.r(__webpack_exports__);
     // 結束裁切。
     stopCropper: function stopCropper() {
       if (this.isCropActived) {
-        $('#preview-image').cropper('destroy');
-        $('#preview-image').attr('src', this.uploadimg);
-        $('#file_label').text('請選擇檔案');
+        $('#' + this.prefix + '_preview-image').cropper('destroy');
+        $('#' + this.prefix + '_preview-image').attr('src', this.uploadimg);
+        $('#' + this.prefix + '_file_label').text('請選擇檔案');
         this.isCropActived = false;
       }
     }
@@ -373,9 +379,37 @@ var render = function() {
           },
           [
             _c("div", { staticClass: "row" }, [
-              _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "col-md-4" }, [
                 _c("div", { staticClass: "form-group" }, [
                   _vm._m(0),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.information.email,
+                        expression: "information.email"
+                      }
+                    ],
+                    staticClass: "form-control mb-2",
+                    attrs: { id: "email", name: "email", type: "email" },
+                    domProps: { value: _vm.information.email },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.information, "email", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(1),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -401,9 +435,9 @@ var render = function() {
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-md-6" }, [
+              _c("div", { staticClass: "col-md-4" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(1),
+                  _vm._m(2),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -433,7 +467,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-md-12" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(2),
+                  _vm._m(3),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -472,7 +506,7 @@ var render = function() {
             _c("div", { staticClass: "row" }, [
               _c("div", { staticClass: "col-md-6" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(3),
+                  _vm._m(4),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -509,7 +543,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(4),
+                  _vm._m(5),
                   _vm._v(" "),
                   _c("input", {
                     directives: [
@@ -555,7 +589,8 @@ var render = function() {
                     attrs: {
                       uploadimg: _vm.InformationCoverImageURL,
                       title: "上傳封面圖片",
-                      "aspect-ratio": 4 / 2
+                      "aspect-ratio": 4 / 2,
+                      prefix: "info"
                     }
                   })
                 ],
@@ -603,6 +638,15 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("label", { attrs: { for: "email" } }, [
+      _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+      _vm._v("信箱")
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement
@@ -674,29 +718,42 @@ var render = function() {
     _c("div", { staticClass: "form-group" }, [
       _c(
         "div",
-        { staticClass: "col-md-12 px-0", attrs: { id: "preview-image-div" } },
+        {
+          staticClass: "col-md-12 px-0",
+          attrs: { id: _vm.prefix + "_preview-image-div" }
+        },
         [
           _c("img", {
             staticClass: "img-fluid rounded",
-            attrs: { id: "preview-image", src: _vm.uploadimg }
+            attrs: { id: _vm.prefix + "_preview-image", src: _vm.uploadimg }
           })
         ]
       )
     ]),
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
-      _c("label", { staticClass: "mb-2", attrs: { for: "image_file" } }, [
-        _vm._v("\r\n            " + _vm._s(_vm.title) + "\r\n        ")
-      ]),
+      _c(
+        "label",
+        { staticClass: "mb-2", attrs: { for: _vm.prefix + "_image_file" } },
+        [_vm._v("\r\n            " + _vm._s(_vm.title) + "\r\n        ")]
+      ),
       _vm._v(" "),
       _c("div", { staticClass: "custom-file" }, [
         _c("input", {
-          attrs: { type: "hidden", id: "image_url", name: "image_url" },
+          attrs: {
+            type: "hidden",
+            id: _vm.prefix + "_image_url",
+            name: "image_url"
+          },
           domProps: { value: _vm.ImageURL }
         }),
         _vm._v(" "),
         _c("input", {
-          attrs: { type: "hidden", id: "image_data", name: "image_data" },
+          attrs: {
+            type: "hidden",
+            id: _vm.prefix + "_image_data",
+            name: "image_data"
+          },
           domProps: { value: _vm.cropData }
         }),
         _vm._v(" "),
@@ -704,7 +761,7 @@ var render = function() {
           staticClass: "custom-file-input",
           attrs: {
             type: "file",
-            id: "image_file",
+            id: _vm.prefix + "_image_file",
             name: "image_file",
             accept: "image/jpeg,image/png,image/bmp",
             "aria-describedby": "PictureHelp"
@@ -714,7 +771,10 @@ var render = function() {
         _vm._v(" "),
         _c(
           "small",
-          { staticClass: "form-text text-muted", attrs: { id: "PictureHelp" } },
+          {
+            staticClass: "form-text text-muted",
+            attrs: { id: _vm.prefix + "_PictureHelp" }
+          },
           [_vm._v("僅支援JPG、JPEG、PNG與BMP格式圖片，且檔案大小上限為20MB。")]
         ),
         _vm._v(" "),
@@ -722,7 +782,10 @@ var render = function() {
           "label",
           {
             staticClass: "custom-file-label",
-            attrs: { id: "file_label", for: "image_file" }
+            attrs: {
+              id: _vm.prefix + "_file_label",
+              for: _vm.prefix + "_image_file"
+            }
           },
           [_vm._v("請選擇檔案")]
         )

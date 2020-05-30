@@ -120,4 +120,11 @@ class DonorService extends BaseService
         $donor = $this->getOne($id);
         $donor->delete();
     }
+
+    public function getDonorsByName($request){
+        $keyword = '%'.$request->keyword."%";
+        $donors = DonorEloquent::where('name', 'like', $keyword)->take(30)->get();
+
+        return $donors;
+    }
 }
