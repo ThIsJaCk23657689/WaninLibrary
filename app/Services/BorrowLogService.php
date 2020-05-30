@@ -98,7 +98,7 @@ class BorrowLogService extends BaseService
         for($i=0; $i<12; $i++){
             $counter = BorrowLogEloquent::where('created_at', '>=', $firstDay)->where('created_at', '<=', $lastDay)->where('status', 1)->count();
             $count[i] = $counter;
-            $date[i] = $firstDay;
+            $date[i] = substr($firstDay, 0, 7);
             $firstDay = date('Y-m-d',strtotime(str_replace('-', '/', $firstDay) . "-1 month"));
             $lastDay = date('Y-m-d',strtotime(str_replace('-', '/', $lastDay) . "-1 month"));
         }
@@ -112,7 +112,7 @@ class BorrowLogService extends BaseService
         for($i=0; $i<10; $i++){
             $counter = BorrowLogEloquent::where('created_at', '>=', $firstDay)->where('created_at', '<=', $lastDay)->where('status', 1)->count();
             $count[i] = $counter;
-            $date[i] = $firstDay;
+            $date[i] = substr($firstDay, 0, 4);
             $firstDay = date('Y-m-d',strtotime(str_replace('-', '/', $firstDay) . "-1 year"));
             $lastDay = date('Y-m-d',strtotime(str_replace('-', '/', $lastDay) . "-1 year"));
         }
