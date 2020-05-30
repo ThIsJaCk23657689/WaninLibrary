@@ -97,12 +97,12 @@ class BorrowLogService extends BaseService
         $lastDay = date("Y-m-t");
         for($i=0; $i<12; $i++){
             $counter = BorrowLogEloquent::where('created_at', '>=', $firstDay)->where('created_at', '<=', $lastDay)->where('status', 1)->count();
-            $count[i] = $counter;
-            $date[i] = substr($firstDay, 0, 7);
+            $count[$i] = $counter;
+            $date[$i] = substr($firstDay, 0, 7);
             $firstDay = date('Y-m-d',strtotime(str_replace('-', '/', $firstDay) . "-1 month"));
             $lastDay = date('Y-m-d',strtotime(str_replace('-', '/', $lastDay) . "-1 month"));
         }
-        $res = ['count' => $count, 'date' => $date];
+        $res = ['count' => array_reverse($count), 'date' => array_reverse($date)];
         return $res;
     }
 
@@ -111,12 +111,12 @@ class BorrowLogService extends BaseService
         $lastDay = date("Y-12-t");
         for($i=0; $i<10; $i++){
             $counter = BorrowLogEloquent::where('created_at', '>=', $firstDay)->where('created_at', '<=', $lastDay)->where('status', 1)->count();
-            $count[i] = $counter;
-            $date[i] = substr($firstDay, 0, 4);
+            $count[$i] = $counter;
+            $date[$i] = substr($firstDay, 0, 4);
             $firstDay = date('Y-m-d',strtotime(str_replace('-', '/', $firstDay) . "-1 year"));
             $lastDay = date('Y-m-d',strtotime(str_replace('-', '/', $lastDay) . "-1 year"));
         }
-        $res = ['count' => $count, 'date' => $date];
+        $res = ['count' => array_reverse($count), 'date' => array_reverse($date)];
         return $res;
     }
 

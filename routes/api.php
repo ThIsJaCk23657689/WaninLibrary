@@ -138,6 +138,10 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     // Route::get('getBorrowLogsByBookId','BorrowLogController@getBorrowLogsByBookId');
     // Route::get('getBorrowLogsByStatus','BorrowLogController@getBorrowLogsByStatus');
 
+    // 統計圖表相關
+    Route::get('borrowLogsChartByMonth','StatisticController@borrowLogsChartByMonth')->name('statistics.getBorrowLogsChartByMonth');
+    Route::get('borrowLogsChartByYear','StatisticController@borrowLogsChartByYear')->name('statistics.getBorrowLogsChartByYear');
+
 });
 
 // 爬蟲
