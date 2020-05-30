@@ -23,7 +23,7 @@ class CreateBorrowLogsTable extends Migration
             $table->string('book_title')->comment('書名或雜誌名');
             $table->string('callnum', 10)->comment('索書號');
 
-            $table->integer('status')->default(1)->comment('借閱狀態');//1.未逾期 2.已歸還  3逾期過久無法討回
+            $table->integer('status')->default(1)->comment('借閱狀態');//1.借出 2.歸還 3逾期過久無法討回 4.逾期
             $table->timestamps();
         });
     }

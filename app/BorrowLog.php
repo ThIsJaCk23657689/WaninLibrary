@@ -36,10 +36,13 @@ class BorrowLog extends Model
                 $result = '出借';
                 break;
             case 2:
-                $result = '已歸還';
+                $result = '歸還';
                 break;
             case 3:
                 $result = '逾期過久無法討回';
+                break;
+            case 4:
+                $result = '逾期';
                 break;
         }
         return $result;

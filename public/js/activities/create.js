@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 26);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -399,7 +399,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("活動標題\n                            ")
+            _vm._v("活動標題\r\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -446,7 +446,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "content" } }, [
             _vm._v(
-              "\n                                活動內容\n                            "
+              "\r\n                                活動內容\r\n                            "
             )
           ]),
           _vm._v(" "),
@@ -472,7 +472,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                            確認新增\n                        "
+              "\r\n                            確認新增\r\n                        "
             )
           ]
         ),
@@ -482,7 +482,7 @@ var staticRenderFns = [
           { staticClass: "btn btn-block btn-danger", attrs: { href: "#" } },
           [
             _vm._v(
-              "\n                            返回列表\n                        "
+              "\r\n                            返回列表\r\n                        "
             )
           ]
         )
@@ -527,7 +527,7 @@ var render = function() {
     _vm._v(" "),
     _c("div", { staticClass: "form-group" }, [
       _c("label", { staticClass: "mb-2", attrs: { for: "image_file" } }, [
-        _vm._v("\n            " + _vm._s(_vm.title) + "\n        ")
+        _vm._v("\r\n            " + _vm._s(_vm.title) + "\r\n        ")
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "custom-file" }, [
@@ -844,14 +844,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 26:
+/***/ 20:
 /*!*************************************************!*\
   !*** multi ./resources/js/activities/create.js ***!
   \*************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\activities\create.js */"./resources/js/activities/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\activities\create.js */"./resources/js/activities/create.js");
 
 
 /***/ })
