@@ -230,7 +230,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            確認修改\n                        "
+                          "\r\n                            確認修改\r\n                        "
                         )
                       ]
                     ),
@@ -243,7 +243,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            返回首頁\n                        "
+                          "\r\n                            返回首頁\r\n                        "
                         )
                       ]
                     )
@@ -270,7 +270,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "old_password" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("請輸入舊密碼\n                            ")
+            _vm._v("請輸入舊密碼\r\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -298,7 +298,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "new_password" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("請輸入新密碼\n                            ")
+            _vm._v("請輸入新密碼\r\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -326,7 +326,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "new_password_confirmation" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("請再輸入一次新密碼\n                            ")
+            _vm._v("請再輸入一次新密碼\r\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -555,7 +555,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\auth\resetPassword.js */"./resources/js/auth/resetPassword.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\auth\resetPassword.js */"./resources/js/auth/resetPassword.js");
 
 
 /***/ })
