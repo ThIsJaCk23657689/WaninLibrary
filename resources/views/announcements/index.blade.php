@@ -62,7 +62,7 @@
 								<td>
                                     @if (!$announcement->is_top)
                                         <a href="{{ route('announcements.change_top', [$announcement->id])}}" class="btn btn-md btn-warning">
-                                            <i class="fas fa-thumbtack"></i>
+                                            <i class="far fa-star"></i>
                                         </a>
                                     @endif
 

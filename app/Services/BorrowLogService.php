@@ -21,7 +21,7 @@ class BorrowLogService extends BaseService
         $end_date = ($request->end_date != "") ? $request->end_date : null;
         $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
 
-        if($keywords == [] && $status== 4 && $start_date == null && $end_date== null){
+        if($keywords == [] && $status== 5 && $start_date == null && $end_date== null){
             $logs_tmp = new BorrowLogEloquent();
             $logs = $logs_tmp->skip($skip)->take($take)->get();
             $count = $logs->count();
@@ -32,7 +32,7 @@ class BorrowLogService extends BaseService
                     $query->ofColumns($keyword);
                 }
 
-                if($status != 4){
+                if($status != 5){
                     $query->where('status', $status);
                 }
                 if($start_date != null &&  $end_date != null){
