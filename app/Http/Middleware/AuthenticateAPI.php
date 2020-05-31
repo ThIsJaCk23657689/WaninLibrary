@@ -6,6 +6,7 @@ use Closure;
 use Tymon\JWTAuth\Http\Middleware\BaseMiddleware;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Tymon\JWTAuth\Token;
+use Cookie;
 
 class AuthenticateAPI extends BaseMiddleware
 {

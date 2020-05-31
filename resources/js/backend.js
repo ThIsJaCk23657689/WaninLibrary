@@ -45,7 +45,87 @@ Vue.component("book-redemption", require('./components/Navbar/BookRedemption.vue
 const navbar = new Vue({
     el: '#navbar',
     created(){
+        
+        // ==================== Swal 函式操作 ====================
+        $.showLoadingModal = function(message = '資料讀取中') {
+            $('input').removeClass('is-invalid')
+            Swal.fire({
+                title: '請稍後',
+                html: message,
+                allowOutsideClick: false,
+                onBeforeOpen: () => {
+                    Swal.showLoading()
+                },
+            });
+        }
 
+        $.showErrorModal = function(error) {
+            if (error.response.data.errors != null) {
+                let $key = Object.keys(error.response.data.errors);
+                let $container = $('<span></span>');
+                $key.forEach(function(item, index) {
+                    $container.append(error.response.data.errors[item] + '<br />');
+                    $('#' + item).addClass('is-invalid');
+                });
+            }
+
+            Swal.fire({
+                title: 'Oops!發生錯誤',
+                text: '原因：' + error.response.data.message,
+                icon: 'error',
+                allowOutsideClick: false,
+                confirmButtonText: '確認',
+                html: (typeof $container == undefined) ? $container.prop('outerHTML') : '',
+            });
+        }
+
+        $.showErrorModalWithoutError = function(message = '發生不明原因，請稍後再試。') {
+            Swal.fire({
+                title: 'Oops!發生錯誤',
+                text: message,
+                icon: 'error',
+                allowOutsideClick: false,
+                confirmButtonText: '確認',
+            });
+        }
+
+        $.showWarningModal = function(message = '發生不明原因，此操作具有警告性，請聯絡系統工程師。') {
+            Swal.fire({
+                title: '注意',
+                text: message,
+                icon: 'warning',
+                allowOutsideClick: false,
+                confirmButtonText: '確認',
+            });
+        }
+
+        $.showSuccessModal = function(message = '', url = '', buttonText = '返回列表') {
+            if (url == '') {
+                Swal.fire({
+                    title: '恭喜成功',
+                    text: message,
+                    icon: 'success',
+                    confirmButtonText: '確認',
+                });
+            } else {
+                Swal.fire({
+                    title: '恭喜成功',
+                    text: message,
+                    icon: 'success',
+                    allowOutsideClick: false,
+                    confirmButtonText: buttonText,
+                }).then(result => {
+                    if (result.value) {
+                        window.location.href = url;
+                    }
+                });
+            }
+        }
+
+        $.closeModal = function() {
+            Swal.close();
+        }
+        // ==================== Swal 函式操作 ====================
     }
 });
 
@@ -126,87 +206,6 @@ $(function() {
         let date = fulldate.getDate() < 10 ? ("0" + fulldate.getDate()) : fulldate.getDate();
         return year + '-' + month + '-' + date;
     }
-
-    // ==================== Swal 函式操作 ====================
-    $.showLoadingModal = function(message = '資料讀取中') {
-        $('input').removeClass('is-invalid')
-        Swal.fire({
-            title: '請稍後',
-            html: message,
-            allowOutsideClick: false,
-            onBeforeOpen: () => {
-                Swal.showLoading()
-            },
-        });
-    }
-
-    $.showErrorModal = function(error) {
-        if (error.response.data.errors != null) {
-            let $key = Object.keys(error.response.data.errors);
-            let $container = $('<span></span>');
-            $key.forEach(function(item, index) {
-                $container.append(error.response.data.errors[item] + '<br />');
-                $('#' + item).addClass('is-invalid');
-            });
-        }
-
-        Swal.fire({
-            title: 'Oops!發生錯誤',
-            text: '原因：' + error.response.data.message,
-            icon: 'error',
-            allowOutsideClick: false,
-            confirmButtonText: '確認',
-            html: (typeof $container == undefined) ? $container.prop('outerHTML') : '',
-        });
-    }
-
-    $.showErrorModalWithoutError = function(message = '發生不明原因，請稍後再試。') {
-        Swal.fire({
-            title: 'Oops!發生錯誤',
-            text: message,
-            icon: 'error',
-            allowOutsideClick: false,
-            confirmButtonText: '確認',
-        });
-    }
-
-    $.showWarningModal = function(message = '發生不明原因，此操作具有警告性，請聯絡系統工程師。') {
-        Swal.fire({
-            title: '注意',
-            text: message,
-            icon: 'warning',
-            allowOutsideClick: false,
-            confirmButtonText: '確認',
-        });
-    }
-
-    $.showSuccessModal = function(message = '', url = '', buttonText = '返回列表') {
-        if (url == '') {
-            Swal.fire({
-                title: '恭喜成功',
-                text: message,
-                icon: 'success',
-                confirmButtonText: '確認',
-            });
-        } else {
-            Swal.fire({
-                title: '恭喜成功',
-                text: message,
-                icon: 'success',
-                allowOutsideClick: false,
-                confirmButtonText: buttonText,
-            }).then(result => {
-                if (result.value) {
-                    window.location.href = url;
-                }
-            });
-        }
-    }
-
-    $.closeModal = function() {
-            Swal.close();
-        }
-        // ==================== Swal 函式操作 ====================
 
     $('#logoutBtn').click(function() {
         $('#logout_form').submit();

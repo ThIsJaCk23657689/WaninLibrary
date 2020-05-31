@@ -81,15 +81,15 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 25);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=script&lang=js&":
-/*!*************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=script&lang=js& ***!
-  \*************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=script&lang=js&":
+/*!**********************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=script&lang=js& ***!
+  \**********************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -123,90 +123,18 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['borrowLogs', 'rowsPerPage', 'pageNum', 'totalPage'],
+  props: ['unreturns', 'totalPage'],
   data: function data() {
-    return {};
+    return {
+      pageNum: 1
+    };
   },
   methods: {
-    getBorrowLogList: function getBorrowLogList(pageNum) {
-      this.$emit('update-borrow-log', pageNum);
-    },
-    changeStatus: function changeStatus(e) {
-      var status = e.target.value;
-      this.$emit('change-status', status);
-    },
-    changeKeywords: function changeKeywords(e) {
-      var keywords = e.target.value;
-      this.$emit('change-keywords', keywords);
-    },
-    changeRange: function changeRange(e) {
-      var data = $(e.target).serializeObject();
-      var start_date = data.start_date;
-      var end_date = data.end_date;
-      this.$emit('change-range', start_date, end_date);
-    }
+    getUnreturnsList: function getUnreturnsList(value) {}
   },
   created: function created() {},
-  mounted: function mounted() {
-    $("#start_date").datepicker({
-      dateFormat: 'yy-mm-dd',
-      changeYear: true,
-      changeMonth: true,
-      yearRange: "-80:+0"
-    });
-    $("#end_date").datepicker({
-      dateFormat: 'yy-mm-dd',
-      changeYear: true,
-      changeMonth: true,
-      yearRange: "-80:+0"
-    });
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -267,10 +195,10 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=template&id=c0961dac&":
-/*!*****************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=template&id=c0961dac& ***!
-  \*****************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=template&id=32fada46&":
+/*!**************************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=template&id=32fada46& ***!
+  \**************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -286,97 +214,7 @@ var render = function() {
     _c("div", { staticClass: "card mb-3" }, [
       _vm._m(0),
       _vm._v(" "),
-      _c("div", { staticClass: "card-body" }, [
-        _c("div", { staticClass: "row justify-content-center" }, [
-          _c(
-            "div",
-            {
-              staticClass: "col-md-12 justify-content-center",
-              attrs: { id: "" }
-            },
-            [
-              _c(
-                "form",
-                {
-                  attrs: { method: "GET", id: "time-range-form" },
-                  on: {
-                    submit: function($event) {
-                      $event.preventDefault()
-                      return _vm.changeRange($event)
-                    }
-                  }
-                },
-                [
-                  _c(
-                    "div",
-                    { staticClass: "row mb-3 justify-content-center" },
-                    [
-                      _c("div", { staticClass: "col-md-2" }, [
-                        _c(
-                          "select",
-                          {
-                            staticClass: "form-control",
-                            attrs: { name: "status", id: "status" },
-                            on: { change: _vm.changeStatus }
-                          },
-                          [
-                            _c("option", { attrs: { value: "4" } }, [
-                              _vm._v("全部書籍")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "1" } }, [
-                              _vm._v("出借")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "2" } }, [
-                              _vm._v("已歸還")
-                            ]),
-                            _vm._v(" "),
-                            _c("option", { attrs: { value: "3" } }, [
-                              _vm._v("逾期過久")
-                            ])
-                          ]
-                        )
-                      ]),
-                      _vm._v(" "),
-                      _vm._m(1),
-                      _vm._v(" "),
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _vm._m(3),
-                      _vm._v(" "),
-                      _vm._m(4),
-                      _vm._v(" "),
-                      _vm._m(5)
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "row justify-content-center" }, [
-                    _c("div", { staticClass: "col-md-6" }, [
-                      _c("div", { staticClass: "form-group" }, [
-                        _c("input", {
-                          staticClass: "form-control mb-2",
-                          attrs: {
-                            id: "keywords",
-                            name: "keywords",
-                            type: "text",
-                            value: "",
-                            autocomplete: "off",
-                            placeholder: "關鍵字搜尋..."
-                          },
-                          on: { change: _vm.changeKeywords }
-                        })
-                      ])
-                    ])
-                  ])
-                ]
-              )
-            ]
-          )
-        ]),
-        _vm._v(" "),
-        _vm._m(6)
-      ]),
+      _vm._m(1),
       _vm._v(" "),
       _c(
         "div",
@@ -384,7 +222,7 @@ var render = function() {
         [
           _c("paginate-custom", {
             attrs: { pageNum: _vm.pageNum, totalPage: _vm.totalPage },
-            on: { updatePage: _vm.getBorrowLogList }
+            on: { updatePage: _vm.getUnreturnsList }
           })
         ],
         1
@@ -399,110 +237,38 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table mr-2" }),
-      _vm._v("借還書紀錄\r\n        ")
+      _vm._v("目前已出借和逾期列表\r\n        ")
     ])
   },
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-0 text-center py-1" }, [
-      _c("label", { attrs: { for: "" } }, [_vm._v("從")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3" }, [
-      _c("input", {
-        staticClass: "form-control mb-2",
-        attrs: {
-          id: "start_date",
-          name: "start_date",
-          type: "text",
-          value: "",
-          autocomplete: "off",
-          required: "",
-          placeholder: "例：2020-01-01"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-0 text-center py-1" }, [
-      _c("label", { attrs: { for: "" } }, [_vm._v("到")])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-3" }, [
-      _c("input", {
-        staticClass: "form-control mb-2",
-        attrs: {
-          id: "end_date",
-          name: "end_date",
-          type: "text",
-          value: "",
-          autocomplete: "off",
-          required: "",
-          placeholder: "例：2020-02-01"
-        }
-      })
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-block btn-primary", attrs: { type: "submit" } },
-        [
-          _vm._v(
-            "\r\n                                    確認\r\n                                "
-          )
-        ]
-      )
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "table-responsive" }, [
-      _c(
-        "table",
-        {
-          staticClass: "table table-bordered",
-          attrs: { id: "BorrowLogsDataTable", width: "100%", cellspacing: "0" }
-        },
-        [
-          _c("thead", [
-            _c("tr", [
-              _c("th", [_vm._v("編號")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("借閱人姓名")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("書名")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("索書號")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("狀態")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("日期")]),
-              _vm._v(" "),
-              _c("th", [_vm._v("操作")])
+    return _c("div", { staticClass: "card-body" }, [
+      _c("div", { staticClass: "table-responsive" }, [
+        _c(
+          "table",
+          {
+            staticClass: "table table-bordered",
+            attrs: { id: "BooksDataTable", width: "100%", cellspacing: "0" }
+          },
+          [
+            _c("thead", [
+              _c("tr", [
+                _c("th", [_vm._v("編號")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("標題")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("借閱次數")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("狀態")]),
+                _vm._v(" "),
+                _c("th", [_vm._v("操作")])
+              ])
             ])
-          ])
-        ]
-      )
+          ]
+        )
+      ])
     ])
   }
 ]
@@ -661,141 +427,61 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/borrowLogs/index.js":
-/*!******************************************!*\
-  !*** ./resources/js/borrowLogs/index.js ***!
-  \******************************************/
+/***/ "./resources/js/circulation/unreturns/index.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/circulation/unreturns/index.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-Vue.component('borrow-logs-table', __webpack_require__(/*! ./../components/BorrowLogs/BorrowLogsTable.vue */ "./resources/js/components/BorrowLogs/BorrowLogsTable.vue")["default"]);
-Vue.component('paginate-custom', __webpack_require__(/*! ./../components/Partials/PaginateCustom.vue */ "./resources/js/components/Partials/PaginateCustom.vue")["default"]);
+Vue.component('unreturn-table', __webpack_require__(/*! ./../../components/Circulation/Unreturns/UnreturnTable.vue */ "./resources/js/components/Circulation/Unreturns/UnreturnTable.vue")["default"]);
+Vue.component('paginate-custom', __webpack_require__(/*! ./../../components/Partials/PaginateCustom.vue */ "./resources/js/components/Partials/PaginateCustom.vue")["default"]);
 var app = new Vue({
-  el: '#borrowLog',
+  el: '#unreturn',
   data: function data() {
     return {
-      rowsPerPage: 10,
-      pageNum: 1,
-      totalPage: 0,
-      borrowLogs: [],
-      DataTotalCount: 0,
-      status: 4,
-      keywords: '',
-      start_date: '',
-      end_date: ''
+      UnreturnsGetList: $('#UnreturnsGetList').text(),
+      unreturns: []
     };
   },
   methods: {
-    changeStatus: function changeStatus(status) {
-      this.status = status;
-      this.updateBorrowLog(this.pageNum, true);
-    },
-    changeKeywords: function changeKeywords(keywords) {
-      this.keywords = keywords;
-      this.updateBorrowLog(this.pageNum, true);
-    },
-    changeRange: function changeRange(start_date, end_date) {
-      this.start_date = start_date;
-      this.end_date = end_date;
-      this.updateBorrowLog(this.pageNum, true);
-    },
-    updateBorrowLog: function updateBorrowLog(pageNum, first_page) {
+    refreshUnreturns: function refreshUnreturns($skip, $take) {
       var _this = this;
 
-      if (first_page) {
-        this.pageNum = 1;
-      } else {
-        this.pageNum = pageNum;
-      }
-
-      var skip = (pageNum - 1) * this.rowsPerPage;
-      var take = this.rowsPerPage;
-      var status = this.status;
-      var keywords = this.keywords;
-      var start_date = this.start_date;
-      var end_date = this.end_date;
-      var BorrowLogsGetList = $('#BorrowLogsGetList').html();
-      $('.dataTables_processing', $('#BorrowLogsDataTable').closest('.dataTables_wrapper')).fadeIn();
-      axios.get(BorrowLogsGetList, {
+      $.showLoadingModal();
+      axios.get(this.UnreturnsGetList, {
         params: {
-          skip: skip,
-          take: take,
-          status: status,
-          keywords: keywords,
-          start_date: start_date,
-          end_date: end_date
+          skip: $skip,
+          take: $take
         }
       }).then(function (response) {
-        console.log(response);
-        _this.DataTotalCount = response.data.DataTotalCount;
-        _this.totalPage = Math.ceil(_this.DataTotalCount / _this.rowsPerPage);
-        _this.borrowLogs = response.data.logs;
-        $('.dataTables_processing', $('#BorrowLogsDataTable').closest('.dataTables_wrapper')).fadeOut();
-        $('#BorrowLogsDataTable').dataTable().fnClearTable();
-
-        if (_this.borrowLogs.length != 0) {
-          $('#BorrowLogsDataTable').dataTable().fnAddData(_this.borrowLogs);
-        }
+        _this.unreturns = response.data.unreturns;
+        $.closeModal();
       })["catch"](function (error) {
-        console.log(error);
+        $.showErrorModal(error);
       });
     }
   },
   created: function created() {
-    var _this2 = this;
-
-    var BorrowLogsGetList = $('#BorrowLogsGetList').html();
-    axios.get(BorrowLogsGetList).then(function (response) {
-      _this2.DataTotalCount = response.data.DataTotalCount;
-      _this2.totalPage = Math.ceil(_this2.DataTotalCount / _this2.rowsPerPage);
-      _this2.borrowLogs = response.data.logs;
-      $('#BorrowLogsDataTable').on('draw.dt', function () {
-        console.log('drawing a table');
-      }).on('init.dt', function () {
-        console.log('intial a table');
-      }).dataTable({
-        data: _this2.borrowLogs,
-        columns: [{
-          data: 'id'
-        }, {
-          data: 'borrower_name'
-        }, {
-          data: 'showTitle'
-        }, {
-          data: 'callnum'
-        }, {
-          data: 'showStatus'
-        }, {
-          data: 'created_at'
-        }, {
-          data: 'action'
-        }],
-        lengthChange: false,
-        searching: false,
-        pageLength: _this2.rowsPerPage,
-        info: false,
-        paging: false,
-        processing: true
-      });
-    });
+    this.refreshUnreturns(0, 10);
   },
   mounted: function mounted() {}
 });
 
 /***/ }),
 
-/***/ "./resources/js/components/BorrowLogs/BorrowLogsTable.vue":
-/*!****************************************************************!*\
-  !*** ./resources/js/components/BorrowLogs/BorrowLogsTable.vue ***!
-  \****************************************************************/
+/***/ "./resources/js/components/Circulation/Unreturns/UnreturnTable.vue":
+/*!*************************************************************************!*\
+  !*** ./resources/js/components/Circulation/Unreturns/UnreturnTable.vue ***!
+  \*************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _BorrowLogsTable_vue_vue_type_template_id_c0961dac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BorrowLogsTable.vue?vue&type=template&id=c0961dac& */ "./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=template&id=c0961dac&");
-/* harmony import */ var _BorrowLogsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BorrowLogsTable.vue?vue&type=script&lang=js& */ "./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _UnreturnTable_vue_vue_type_template_id_32fada46___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UnreturnTable.vue?vue&type=template&id=32fada46& */ "./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=template&id=32fada46&");
+/* harmony import */ var _UnreturnTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UnreturnTable.vue?vue&type=script&lang=js& */ "./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -804,9 +490,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _BorrowLogsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _BorrowLogsTable_vue_vue_type_template_id_c0961dac___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _BorrowLogsTable_vue_vue_type_template_id_c0961dac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _UnreturnTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _UnreturnTable_vue_vue_type_template_id_32fada46___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _UnreturnTable_vue_vue_type_template_id_32fada46___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -816,38 +502,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/BorrowLogs/BorrowLogsTable.vue"
+component.options.__file = "resources/js/components/Circulation/Unreturns/UnreturnTable.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=script&lang=js&":
-/*!*****************************************************************************************!*\
-  !*** ./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=script&lang=js& ***!
-  \*****************************************************************************************/
+/***/ "./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=script&lang=js&":
+/*!**************************************************************************************************!*\
+  !*** ./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=script&lang=js& ***!
+  \**************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowLogsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./BorrowLogsTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowLogsTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UnreturnTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./UnreturnTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UnreturnTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=template&id=c0961dac&":
-/*!***********************************************************************************************!*\
-  !*** ./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=template&id=c0961dac& ***!
-  \***********************************************************************************************/
+/***/ "./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=template&id=32fada46&":
+/*!********************************************************************************************************!*\
+  !*** ./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=template&id=32fada46& ***!
+  \********************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowLogsTable_vue_vue_type_template_id_c0961dac___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./BorrowLogsTable.vue?vue&type=template&id=c0961dac& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/BorrowLogs/BorrowLogsTable.vue?vue&type=template&id=c0961dac&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowLogsTable_vue_vue_type_template_id_c0961dac___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UnreturnTable_vue_vue_type_template_id_32fada46___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./UnreturnTable.vue?vue&type=template&id=32fada46& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=template&id=32fada46&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UnreturnTable_vue_vue_type_template_id_32fada46___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BorrowLogsTable_vue_vue_type_template_id_c0961dac___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UnreturnTable_vue_vue_type_template_id_32fada46___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
@@ -922,14 +608,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 25:
-/*!************************************************!*\
-  !*** multi ./resources/js/borrowLogs/index.js ***!
-  \************************************************/
+/***/ 20:
+/*!***********************************************************!*\
+  !*** multi ./resources/js/circulation/unreturns/index.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\borrowLogs\index.js */"./resources/js/borrowLogs/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\circulation\unreturns\index.js */"./resources/js/circulation/unreturns/index.js");
 
 
 /***/ })
