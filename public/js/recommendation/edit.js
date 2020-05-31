@@ -995,7 +995,7 @@ var render = function() {
               _c("div", { staticClass: "d-center" }, [
                 _c("img", { attrs: { src: option.showCoverImage } }),
                 _vm._v(
-                  "\r\n            " + _vm._s(option.showTitle) + "\r\n        "
+                  "\n            " + _vm._s(option.showTitle) + "\n        "
                 )
               ])
             ]
@@ -1008,9 +1008,9 @@ var render = function() {
               _c("div", { staticClass: "selected d-center" }, [
                 _c("img", { attrs: { src: option.showCoverImage } }),
                 _vm._v(
-                  "\r\n                " +
+                  "\n                " +
                     _vm._s(option.showTitle) +
-                    "\r\n            "
+                    "\n            "
                 )
               ])
             ]
@@ -1027,7 +1027,7 @@ var render = function() {
     },
     [
       _c("template", { slot: "no-options" }, [
-        _vm._v("\r\n        " + _vm._s(_vm.placeholder) + "\r\n    ")
+        _vm._v("\n        " + _vm._s(_vm.placeholder) + "\n    ")
       ])
     ],
     2
@@ -1547,7 +1547,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\recommendation\edit.js */"./resources/js/recommendation/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\recommendation\edit.js */"./resources/js/recommendation/edit.js");
 
 
 /***/ })

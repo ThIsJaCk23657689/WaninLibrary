@@ -118,6 +118,8 @@
     "Log File": "日誌檔",
     "Statistics": "統計",
     "Information": "基本資料維護",
+    "Export": "報表輸出",
+    "Chart": "統計圖表",
 
     "The given data was invalid.": "輸入資料格式錯誤"
 }

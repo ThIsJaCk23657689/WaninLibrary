@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User as UserEloquent;
+use DateTimeInterface;
 
 class LoginLog extends Model
 {
@@ -15,6 +16,11 @@ class LoginLog extends Model
     ];
 
     protected $dates = ['deleted_at'];
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format($this->dateFormat ?: 'Y-m-d H:i:s');
+    }
 
     public function user(){
         return $this->belongsTo(UserEloquent::class);

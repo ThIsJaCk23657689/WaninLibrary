@@ -37,7 +37,7 @@
                         <button type="submit" class="btn btn-block btn-primary">
                             確認新增
                         </button>
-                        <a :href="AgenciesIndexURL" class="btn btn-block btn-danger">
+                        <a :href="AnnouncementsIndexURL" class="btn btn-block btn-danger">
                             返回列表
                         </a>
                     </div>
@@ -54,8 +54,8 @@
 export default {
     data(){
         return {
-            AnnouncementsIndexURL: $('#AnnouncementsIndexURL').html(),
-            AnnouncementsStoreURL: $('#AnnouncementsStoreURL').html(),
+            AnnouncementsIndexURL: $('#AnnouncementsIndexURL').text(),
+            AnnouncementsStoreURL: $('#AnnouncementsStoreURL').text(),
         }
     },
     methods: {

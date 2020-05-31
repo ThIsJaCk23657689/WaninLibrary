@@ -21,7 +21,7 @@ class BorrowLogService extends BaseService
         $end_date = ($request->end_date != "") ? $request->end_date : null;
         $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
 
-        if($keywords == [] && $status== 4 && $start_date == null && $end_date== null){
+        if($keywords == [] && $status== 5 && $start_date == null && $end_date== null){
             $logs_tmp = new BorrowLogEloquent();
             $logs = $logs_tmp->skip($skip)->take($take)->get();
             $count = $logs->count();
@@ -32,7 +32,7 @@ class BorrowLogService extends BaseService
                     $query->ofColumns($keyword);
                 }
 
-                if($status != 4){
+                if($status != 5){
                     $query->where('status', $status);
                 }
                 if($start_date != null &&  $end_date != null){
@@ -97,12 +97,12 @@ class BorrowLogService extends BaseService
         $lastDay = date("Y-m-t");
         for($i=0; $i<12; $i++){
             $counter = BorrowLogEloquent::where('created_at', '>=', $firstDay)->where('created_at', '<=', $lastDay)->where('status', 1)->count();
-            $count[i] = $counter;
-            $date[i] = substr($firstDay, 0, 7);
+            $count[$i] = $counter;
+            $date[$i] = substr($firstDay, 0, 7);
             $firstDay = date('Y-m-d',strtotime(str_replace('-', '/', $firstDay) . "-1 month"));
             $lastDay = date('Y-m-d',strtotime(str_replace('-', '/', $lastDay) . "-1 month"));
         }
-        $res = ['count' => $count, 'date' => $date];
+        $res = ['count' => array_reverse($count), 'date' => array_reverse($date)];
         return $res;
     }
 
@@ -111,12 +111,12 @@ class BorrowLogService extends BaseService
         $lastDay = date("Y-12-t");
         for($i=0; $i<10; $i++){
             $counter = BorrowLogEloquent::where('created_at', '>=', $firstDay)->where('created_at', '<=', $lastDay)->where('status', 1)->count();
-            $count[i] = $counter;
-            $date[i] = substr($firstDay, 0, 4);
+            $count[$i] = $counter;
+            $date[$i] = substr($firstDay, 0, 4);
             $firstDay = date('Y-m-d',strtotime(str_replace('-', '/', $firstDay) . "-1 year"));
             $lastDay = date('Y-m-d',strtotime(str_replace('-', '/', $lastDay) . "-1 year"));
         }
-        $res = ['count' => $count, 'date' => $date];
+        $res = ['count' => array_reverse($count), 'date' => array_reverse($date)];
         return $res;
     }
 

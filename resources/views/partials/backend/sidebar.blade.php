@@ -74,16 +74,21 @@
 		</a>
 		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
 			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
-        <a class="dropdown-item" href="{{ route('loginLogs.index') }}">{{ __('Login') }}</a>
+            <a class="dropdown-item" href="{{ route('loginLogs.index') }}">{{ __('Login') }}</a>
 			<a class="dropdown-item" href="{{ route('borrowLogs.index') }}">借還書</a>
 		</div>
 	</li>
 
 	<li class="nav-item dropdown">
-		<a class="nav-link" href="#" role="button">
+		<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<i class="far fa-chart-bar"></i>
 			<span>{{ __('Statistics') }}</span>
-		</a>
+        </a>
+        <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
+            <a class="dropdown-item" href="{{ route('statistic.chart.index') }}">{{ __('Chart') }}</a>
+			<a class="dropdown-item" href="{{ route('statistic.export.index') }}">{{ __('Export') }}</a>
+		</div>
 	</li>
 
 </ul>

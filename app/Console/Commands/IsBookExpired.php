@@ -4,7 +4,7 @@ namespace App\Console\Commands;
 
 use Illuminate\Console\Command;
 use App\Borrow as BorrowEloquent;
-use App\Borrower as BorrowerEloquent;
+use App\BorrowLog as BorrowLogEloquent;
 use Carbon\Carbon;
 use App\Jobs\SendBookExpireNotificationMail;
 
@@ -52,6 +52,15 @@ class IsBookExpired extends Command
                 $borrow->save();
                 $borrow->borrower->activated = 0;
                 $borrow->borrower->save();
+
+                // 新增借閱紀錄
+                BorrowLogEloquent::create([
+                    'borrower_id' => $borrow->borrower->id,
+                    'borrower_name' => $borrow->borrower->name,
+                    'book_id' => $borrow->book_id,
+                    'book_title' => $borrow->book->title,
+                    'callnum' => $borrow->book->callnum,
+                ]);
             }
 
             $re_date = Carbon::parse($borrow->return_date);

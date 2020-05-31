@@ -99,4 +99,6 @@ Route::prefix('/backend')->group(function () {
     Route::get('/statistic/topbooks/export', 'StatisticController@topBooksExport')->name('statistic.topbooks.export');
     Route::get('/statistic/borrowlogs/export', 'StatisticController@borrowLogsExport')->name('statistic.borrowlogs.export');
     Route::get('/statistic/donated/export', 'StatisticController@DonatedExport')->name('statistic.donated.export');
+    Route::get('/statistic/export/index', 'StatisticController@exportIndex')->name('statistic.export.index');
+    Route::get('/statistic/chart/index', 'StatisticController@chartIndex')->name('statistic.chart.index');
 });

@@ -17,7 +17,7 @@ class LoginLogService extends BaseService
         LoginLogEloquent::create([
             'user_id' => $user->id,
             'logout_date' => null,
-            'content' => '系統於2小時後自動登出',
+            'content' => '系統於24小時後自動登出',
         ]);
     }
 
