@@ -309,11 +309,11 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "2" } }, [
-                              _vm._v("半公開")
+                              _vm._v("姓名保護")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "3" } }, [
-                              _vm._v("前台不曝光")
+                              _vm._v("對外匿名")
                             ])
                           ]
                         )
@@ -356,7 +356,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table" }),
-      _vm._v("借閱人列表\r\n        ")
+      _vm._v("借閱人列表\n        ")
     ])
   },
   function() {
@@ -413,7 +413,7 @@ var staticRenderFns = [
         { staticClass: "btn btn-block btn-primary", attrs: { type: "submit" } },
         [
           _vm._v(
-            "\r\n                                    確認\r\n                                "
+            "\n                                    確認\n                                "
           )
         ]
       )
@@ -865,7 +865,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\donors\index.js */"./resources/js/donors/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\donors\index.js */"./resources/js/donors/index.js");
 
 
 /***/ })

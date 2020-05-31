@@ -48,7 +48,7 @@ class BorrowerService extends BaseService
          // 0. default 1.'agency_id', 2.'name', 3. 'email', 4. 'tel'
         $type_arr = ['','', 'name', 'email', 'tel'];
 
-        if($keywords == [] && $status== 2 && $activated == 2 && $type == 2){
+        if($keywords == [] && $status== 2 && $activated == 2 && $type == 0){
             $borrowers_tmp = new BorrowerEloquent();
             $borrowers = $borrowers_tmp->skip($skip)->take($take)->get();
             $count = $borrowers->count();

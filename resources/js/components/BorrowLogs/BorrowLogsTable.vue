@@ -12,10 +12,11 @@
                         <div class="row mb-3 justify-content-center">
                             <div class="col-md-2">
                                 <select name="status" id="status" class="form-control" @change="changeStatus">
-                                    <option value="4">全部書籍</option>
+                                    <option value="5">全部書籍</option>
                                     <option value="1">出借</option>
                                     <option value="2">已歸還</option>
                                     <option value="3">逾期過久</option>
+                                    <option value="4">逾期</option>
                                 </select>
                             </div>
                             <div class="col-md-0 text-center py-1">

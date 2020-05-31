@@ -63,7 +63,8 @@ class AnnouncementService extends BaseService
     }
 
     public function change_top($id){
-        AnnouncementEloquent::where('is_top', true)->update(['is_top' => false]);
+        $item = AnnouncementEloquent::where('is_top', true)->first();
+        $item->update(['is_top' => false]);
         AnnouncementEloquent::find($id)->update(['is_top' => true]);
     }
 }

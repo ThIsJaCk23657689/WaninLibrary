@@ -168,6 +168,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['borrowLogs', 'rowsPerPage', 'pageNum', 'totalPage'],
   data: function data() {
@@ -320,7 +321,7 @@ var render = function() {
                             on: { change: _vm.changeStatus }
                           },
                           [
-                            _c("option", { attrs: { value: "4" } }, [
+                            _c("option", { attrs: { value: "5" } }, [
                               _vm._v("全部書籍")
                             ]),
                             _vm._v(" "),
@@ -334,6 +335,10 @@ var render = function() {
                             _vm._v(" "),
                             _c("option", { attrs: { value: "3" } }, [
                               _vm._v("逾期過久")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "4" } }, [
+                              _vm._v("逾期")
                             ])
                           ]
                         )
@@ -399,7 +404,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table mr-2" }),
-      _vm._v("借還書紀錄\r\n        ")
+      _vm._v("借還書紀錄\n        ")
     ])
   },
   function() {
@@ -466,7 +471,7 @@ var staticRenderFns = [
         { staticClass: "btn btn-block btn-primary", attrs: { type: "submit" } },
         [
           _vm._v(
-            "\r\n                                    確認\r\n                                "
+            "\n                                    確認\n                                "
           )
         ]
       )
@@ -929,7 +934,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\borrowLogs\index.js */"./resources/js/borrowLogs/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\borrowLogs\index.js */"./resources/js/borrowLogs/index.js");
 
 
 /***/ })
