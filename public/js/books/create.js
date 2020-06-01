@@ -575,30 +575,46 @@ __webpack_require__.r(__webpack_exports__);
     },
     changeAddType: function changeAddType(e) {
       // 更動入庫方式
-      var x = $(e.target).val();
+      var x = $(e.target).val(); // if(x == '1'){
+      //     // 捐贈入庫 - 一般圖書
+      //     $('#donor_id').prop('disabled', false).selectpicker('refresh');
+      //     $('#donor_id_required_star').fadeIn();
+      //     $('#price').val('0').prop('disabled', true).attr('required', false);
+      //     $('#price_required_star').fadeOut();
+      //     // 捐贈入庫 - 論文雜誌
+      //     $('#p_donor_id').prop('disabled', false).selectpicker('refresh');
+      //     $('#p_donor_id_required_star').fadeIn();
+      //     $('#p_price').val('0').prop('disabled', true).attr('required', false);
+      //     $('#p_price_required_star').fadeOut();
+      // }else{
+      //     // 購買入庫 - 一般圖書
+      //     $('#donor_id').prop('disabled', true).selectpicker('refresh');
+      //     $('#donor_id_required_star').fadeOut();
+      //     $('#price').val('0').prop('disabled', false).attr('required', true);
+      //     $('#price_required_star').fadeIn();
+      //     // 購買入庫 - 論文雜誌
+      //     $('#p_donor_id').prop('disabled', true).selectpicker('refresh');
+      //     $('#p_donor_id_required_star').fadeOut();
+      //     $('#p_price').val('0').prop('disabled', false).attr('required', true);
+      //     $('#p_price_required_star').fadeIn();
+      // }
 
       if (x == '1') {
-        // 捐贈入庫 - 一般圖書
-        $('#donor_id').prop('disabled', false).selectpicker('refresh');
-        $('#donor_id_required_star').fadeIn();
-        $('#price').val('0').prop('disabled', true).attr('required', false);
-        $('#price_required_star').fadeOut(); // 捐贈入庫 - 論文雜誌
+        console.log('bbb');
+        this.$emit('update-add-type', 1); // this.addType = 1;
+        // 捐贈入庫
 
-        $('#p_donor_id').prop('disabled', false).selectpicker('refresh');
-        $('#p_donor_id_required_star').fadeIn();
-        $('#p_price').val('0').prop('disabled', true).attr('required', false);
-        $('#p_price_required_star').fadeOut();
+        $('.donor_div').fadeIn();
+        $('.price_div').fadeOut();
+        $('#price').val(0);
       } else {
-        // 購買入庫 - 一般圖書
-        $('#donor_id').prop('disabled', true).selectpicker('refresh');
-        $('#donor_id_required_star').fadeOut();
-        $('#price').val('0').prop('disabled', false).attr('required', true);
-        $('#price_required_star').fadeIn(); // 購買入庫 - 論文雜誌
+        console.log('ccc');
+        this.$emit('update-add-type', 2); // this.addType = 2;
+        // 購買入庫
 
-        $('#p_donor_id').prop('disabled', true).selectpicker('refresh');
-        $('#p_donor_id_required_star').fadeOut();
-        $('#p_price').val('0').prop('disabled', false).attr('required', true);
-        $('#p_price_required_star').fadeIn();
+        $('.donor_div').fadeOut();
+        $('.price_div').fadeIn();
+        $('#price').val(0);
       }
     },
     updateCategory: function updateCategory(e) {
@@ -973,7 +989,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nimg {\r\n  height: auto;\r\n  max-width: 2.5rem;\r\n  margin-right: 1rem;\n}\n.d-center {\r\n  display: flex;\r\n  align-items: center;\n}\n.selected img {\r\n  width: auto;\r\n  max-height: 23px;\r\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\r\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\r\n  border-bottom: none;\n}\n.v-select .dropdown li a {\r\n  padding: 10px 20px;\r\n  width: 100%;\r\n  font-size: 1.25em;\r\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\r\n  color: #fff;\n}\r\n\r\n\r\n", ""]);
+exports.push([module.i, "\nimg {\n  height: auto;\n  max-width: 2.5rem;\n  margin-right: 1rem;\n}\n.d-center {\n  display: flex;\n  align-items: center;\n}\n.selected img {\n  width: auto;\n  max-height: 23px;\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\n  border-bottom: none;\n}\n.v-select .dropdown li a {\n  padding: 10px 20px;\n  width: 100%;\n  font-size: 1.25em;\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\n  color: #fff;\n}\n\n\n", ""]);
 
 // exports
 
@@ -1673,7 +1689,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-3" }, [
-              _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "form-group donor_div" }, [
                 _vm._m(2),
                 _vm._v(" "),
                 _c(
@@ -1826,7 +1842,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        確認新增\r\n                    "
+                    "\n                        確認新增\n                    "
                   )
                 ]
               ),
@@ -1839,7 +1855,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        返回列表\r\n                    "
+                    "\n                        返回列表\n                    "
                   )
                 ]
               )
@@ -1894,7 +1910,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-3" }, [
-              _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "form-group donor_div" }, [
                 _vm._m(15),
                 _vm._v(" "),
                 _c(
@@ -1955,7 +1971,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        確認新增\r\n                    "
+                    "\n                        確認新增\n                    "
                   )
                 ]
               ),
@@ -1968,7 +1984,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        返回列表\r\n                    "
+                    "\n                        返回列表\n                    "
                   )
                 ]
               )
@@ -2002,7 +2018,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "fas fa-user-tie mr-2" }),
               _vm._v(
-                "\r\n                        一般書籍(有ISBN)\r\n                    "
+                "\n                        一般書籍(有ISBN)\n                    "
               )
             ]
           )
@@ -2020,7 +2036,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "far fa-building mr-2" }),
               _vm._v(
-                "\r\n                        論文、期刊、雜誌等(無ISBN)\r\n                    "
+                "\n                        論文、期刊、雜誌等(無ISBN)\n                    "
               )
             ]
           )
@@ -2051,7 +2067,7 @@ var staticRenderFns = [
               [
                 _c("i", { staticClass: "fas fa-undo-alt mr-2" }),
                 _vm._v(
-                  "\r\n                        重新選擇書本類型\r\n                    "
+                  "\n                        重新選擇書本類型\n                    "
                 )
               ]
             )
@@ -2074,32 +2090,37 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-2" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "price" } }, [
-          _c(
-            "span",
-            {
-              staticClass: "text-danger mr-2",
-              staticStyle: { display: "none" },
-              attrs: { id: "price_required_star" }
-            },
-            [_vm._v("*")]
-          ),
-          _vm._v("價格")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "price",
-            name: "price",
-            type: "text",
-            value: "0",
-            autocomplete: "off",
-            disabled: ""
-          }
-        })
-      ])
+      _c(
+        "div",
+        {
+          staticClass: "form-group price_div",
+          staticStyle: { display: "none" }
+        },
+        [
+          _c("label", { attrs: { for: "price" } }, [
+            _c(
+              "span",
+              {
+                staticClass: "text-danger mr-2",
+                attrs: { id: "price_required_star" }
+              },
+              [_vm._v("*")]
+            ),
+            _vm._v("價格")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "price",
+              name: "price",
+              type: "text",
+              value: "0",
+              autocomplete: "off"
+            }
+          })
+        ]
+      )
     ])
   },
   function() {
@@ -2130,7 +2151,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("書名（主標題）\r\n                                ")
+            _vm._v("書名（主標題）\n                                ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -2339,7 +2360,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("索書號\r\n                        ")
+      _vm._v("索書號\n                        ")
     ])
   },
   function() {
@@ -2386,32 +2407,37 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-2" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "p_price" } }, [
-          _c(
-            "span",
-            {
-              staticClass: "text-danger mr-2",
-              staticStyle: { display: "none" },
-              attrs: { id: "p_price_required_star" }
-            },
-            [_vm._v("*")]
-          ),
-          _vm._v("價格")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "p_price",
-            name: "price",
-            type: "text",
-            value: "0",
-            autocomplete: "off",
-            disabled: ""
-          }
-        })
-      ])
+      _c(
+        "div",
+        {
+          staticClass: "form-group price_div",
+          staticStyle: { display: "none" }
+        },
+        [
+          _c("label", { attrs: { for: "p_price" } }, [
+            _c(
+              "span",
+              {
+                staticClass: "text-danger mr-2",
+                attrs: { id: "p_price_required_star" }
+              },
+              [_vm._v("*")]
+            ),
+            _vm._v("價格")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "p_price",
+              name: "price",
+              type: "text",
+              value: "0",
+              autocomplete: "off"
+            }
+          })
+        ]
+      )
     ])
   },
   function() {
@@ -2443,7 +2469,7 @@ var staticRenderFns = [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "p_title" } }, [
               _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-              _vm._v("主標題\r\n                                ")
+              _vm._v("主標題\n                                ")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -3195,7 +3221,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\create.js */"./resources/js/books/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\create.js */"./resources/js/books/create.js");
 
 
 /***/ })

@@ -2,7 +2,7 @@
 
 namespace App\Services;
 use App\Activity as ActivityEloquent;
-
+use URL;
 
 class ActivityService extends BaseService
 {
@@ -20,6 +20,8 @@ class ActivityService extends BaseService
             }else{
                 $url = $result['url'];
             }
+        }else{
+            $url = URL::asset('images/books/default.png');
         }
 
         $user = auth('api')->user();
