@@ -66,7 +66,11 @@ class BorrowerService extends BaseService
                 }elseif($type == 1 && $keywords != []){
                     foreach ($keywords as $keyword) {
                         $keyword = '%'.$keyword.'%';
-                        $query->agency()->orWhere('name', 'like', $keyword);
+                        $query->where('agency_id','<>', null)->join('agencies', function ($join) use ($keyword) {
+                            $join->on('borrowers.agency_id', '=', 'agencies.id')
+                                 ->where('agencies.name', 'like', $keyword);
+                        });
+                        // $query->join('agencies', 'borrowers.agency_id', '=', 'agencies.id')->orOn('agencies.name', 'like', $keyword);
                     }
                 // type = 0; 不分類
                 }elseif($keywords != []){
@@ -76,7 +80,11 @@ class BorrowerService extends BaseService
                             if($i != 1){
                                 $query->orWhere($type_arr[$i], 'like', $keyword);
                             }else{
-                                $query->agency()->orWhere('name', 'like', $keyword);
+                                $query->where('agency_id','<>', null)->join('agencies', function ($join) use ($keyword) {
+                                    $join->on('borrowers.agency_id', '=', 'agencies.id')
+                                         ->where('agencies.name', 'like', $keyword);
+                                });
+                                // $query->join('agencies', 'borrowers.agency_id', '=', 'agencies.id')->orOn('agencies.name', 'like', $keyword);
                             }
                         }
                     }
