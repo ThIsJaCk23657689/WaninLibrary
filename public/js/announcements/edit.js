@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 23);
+/******/ 	return __webpack_require__(__webpack_require__.s = 24);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -332,7 +332,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            確認編輯\n                        "
+                          "\r\n                            確認編輯\r\n                        "
                         )
                       ]
                     ),
@@ -345,7 +345,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            返回列表\n                        "
+                          "\r\n                            返回列表\r\n                        "
                         )
                       ]
                     )
@@ -577,14 +577,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 23:
+/***/ 24:
 /*!**************************************************!*\
   !*** multi ./resources/js/announcements/edit.js ***!
   \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\announcements\edit.js */"./resources/js/announcements/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\announcements\edit.js */"./resources/js/announcements/edit.js");
 
 
 /***/ })

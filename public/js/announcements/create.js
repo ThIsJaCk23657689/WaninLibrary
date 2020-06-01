@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -232,7 +232,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            確認新增\n                        "
+                          "\r\n                            確認新增\r\n                        "
                         )
                       ]
                     ),
@@ -245,7 +245,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            返回列表\n                        "
+                          "\r\n                            返回列表\r\n                        "
                         )
                       ]
                     )
@@ -272,7 +272,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("標題\n                            ")
+            _vm._v("標題\r\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -537,14 +537,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 22:
+/***/ 23:
 /*!****************************************************!*\
   !*** multi ./resources/js/announcements/create.js ***!
   \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\announcements\create.js */"./resources/js/announcements/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\announcements\create.js */"./resources/js/announcements/create.js");
 
 
 /***/ })

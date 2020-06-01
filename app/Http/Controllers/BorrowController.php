@@ -33,11 +33,11 @@ class BorrowController extends Controller
         return view('circulation.borrow');
     }
 
-    public function index()
-    {
-        $borrows = $this->BorrowService->getList();
-        return view('borrows.index', compact('borrows'));
-    }
+    // public function index()
+    // {
+    //     $borrows = $this->BorrowService->getList();
+    //     return view('borrows.index', compact('borrows'));
+    // }
 
     public function create()
     {

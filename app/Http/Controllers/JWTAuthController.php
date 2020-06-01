@@ -61,7 +61,7 @@ class JWTAuthController extends Controller
                 'account' => '發生錯誤，無法創建token',
             ]);
         }else{
-            return response()->json($msg, 200)->cookie('authorization', $msg['cookie'], 200);
+            return response()->json($msg, 200)->cookie('authorization', $msg['cookie'], 1440);
         }
     }
 

@@ -108,6 +108,9 @@ Route::prefix('/backend')->group(function(){
 
     // 還書
     Route::post('circulation/return','BorrowController@returnBook')->name('circulation.return');
+
+    // 顯示已借出和逾期之書本
+    Route::get('circulation/unreturns','UnreturnController@getList')->name('unreturns.getList');
 });
 
 Route::group(['middleware' => 'auth.jwt'], function () {

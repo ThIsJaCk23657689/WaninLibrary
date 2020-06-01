@@ -62681,7 +62681,98 @@ Vue.component("book-redemption", __webpack_require__(/*! ./components/Navbar/Boo
 
 var navbar = new Vue({
   el: '#navbar',
-  created: function created() {}
+  created: function created() {
+    // ==================== Swal 函式操作 ====================
+    $.showLoadingModal = function () {
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '資料讀取中';
+      $('input').removeClass('is-invalid');
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+        title: '請稍後',
+        html: message,
+        allowOutsideClick: false,
+        onBeforeOpen: function onBeforeOpen() {
+          sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.showLoading();
+        }
+      });
+    };
+
+    $.showErrorModal = function (error) {
+      if (error.response.data.errors != null) {
+        var $key = Object.keys(error.response.data.errors);
+
+        var _$container = $('<span></span>');
+
+        $key.forEach(function (item, index) {
+          _$container.append(error.response.data.errors[item] + '<br />');
+
+          $('#' + item).addClass('is-invalid');
+        });
+      }
+
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+        title: 'Oops!發生錯誤',
+        text: '原因：' + error.response.data.message,
+        icon: 'error',
+        allowOutsideClick: false,
+        confirmButtonText: '確認',
+        html: (typeof $container === "undefined" ? "undefined" : _typeof($container)) == undefined ? $container.prop('outerHTML') : ''
+      });
+    };
+
+    $.showErrorModalWithoutError = function () {
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '發生不明原因，請稍後再試。';
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+        title: 'Oops!發生錯誤',
+        text: message,
+        icon: 'error',
+        allowOutsideClick: false,
+        confirmButtonText: '確認'
+      });
+    };
+
+    $.showWarningModal = function () {
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '發生不明原因，此操作具有警告性，請聯絡系統工程師。';
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+        title: '注意',
+        text: message,
+        icon: 'warning',
+        allowOutsideClick: false,
+        confirmButtonText: '確認'
+      });
+    };
+
+    $.showSuccessModal = function () {
+      var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+      var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
+      var buttonText = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '返回列表';
+
+      if (url == '') {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+          title: '恭喜成功',
+          text: message,
+          icon: 'success',
+          confirmButtonText: '確認'
+        });
+      } else {
+        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
+          title: '恭喜成功',
+          text: message,
+          icon: 'success',
+          allowOutsideClick: false,
+          confirmButtonText: buttonText
+        }).then(function (result) {
+          if (result.value) {
+            window.location.href = url;
+          }
+        });
+      }
+    };
+
+    $.closeModal = function () {
+      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.close();
+    }; // ==================== Swal 函式操作 ====================
+
+  }
 }); // backend 通用JS函式
 
 $(function () {
@@ -62760,98 +62851,7 @@ $(function () {
     var month = fulldate.getMonth() + 1 >= 10 ? fulldate.getMonth() + 1 : "0" + (fulldate.getMonth() + 1);
     var date = fulldate.getDate() < 10 ? "0" + fulldate.getDate() : fulldate.getDate();
     return year + '-' + month + '-' + date;
-  }; // ==================== Swal 函式操作 ====================
-
-
-  $.showLoadingModal = function () {
-    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '資料讀取中';
-    $('input').removeClass('is-invalid');
-    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
-      title: '請稍後',
-      html: message,
-      allowOutsideClick: false,
-      onBeforeOpen: function onBeforeOpen() {
-        sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.showLoading();
-      }
-    });
   };
-
-  $.showErrorModal = function (error) {
-    if (error.response.data.errors != null) {
-      var $key = Object.keys(error.response.data.errors);
-
-      var _$container = $('<span></span>');
-
-      $key.forEach(function (item, index) {
-        _$container.append(error.response.data.errors[item] + '<br />');
-
-        $('#' + item).addClass('is-invalid');
-      });
-    }
-
-    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
-      title: 'Oops!發生錯誤',
-      text: '原因：' + error.response.data.message,
-      icon: 'error',
-      allowOutsideClick: false,
-      confirmButtonText: '確認',
-      html: (typeof $container === "undefined" ? "undefined" : _typeof($container)) == undefined ? $container.prop('outerHTML') : ''
-    });
-  };
-
-  $.showErrorModalWithoutError = function () {
-    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '發生不明原因，請稍後再試。';
-    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
-      title: 'Oops!發生錯誤',
-      text: message,
-      icon: 'error',
-      allowOutsideClick: false,
-      confirmButtonText: '確認'
-    });
-  };
-
-  $.showWarningModal = function () {
-    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '發生不明原因，此操作具有警告性，請聯絡系統工程師。';
-    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
-      title: '注意',
-      text: message,
-      icon: 'warning',
-      allowOutsideClick: false,
-      confirmButtonText: '確認'
-    });
-  };
-
-  $.showSuccessModal = function () {
-    var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
-    var url = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : '';
-    var buttonText = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '返回列表';
-
-    if (url == '') {
-      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
-        title: '恭喜成功',
-        text: message,
-        icon: 'success',
-        confirmButtonText: '確認'
-      });
-    } else {
-      sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
-        title: '恭喜成功',
-        text: message,
-        icon: 'success',
-        allowOutsideClick: false,
-        confirmButtonText: buttonText
-      }).then(function (result) {
-        if (result.value) {
-          window.location.href = url;
-        }
-      });
-    }
-  };
-
-  $.closeModal = function () {
-    sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.close();
-  }; // ==================== Swal 函式操作 ====================
-
 
   $('#logoutBtn').click(function () {
     $('#logout_form').submit();
@@ -63163,7 +63163,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\backend.js */"./resources/js/backend.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\backend.js */"./resources/js/backend.js");
 
 
 /***/ })
