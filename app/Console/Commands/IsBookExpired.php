@@ -72,7 +72,9 @@ class IsBookExpired extends Command
             $re_date = Carbon::parse($borrow->return_date);
             // 逾期前三天 且該借閱者有信箱 發送郵件提醒
 
-            if($today->eq($re_date->subDays(3)) && $borrow->borrower->email){
+            if($today->eq($re_date->subDays(3)) && $borrow->borrower->email && $borrow->noticed == 4){
+                $borrow->noticed = 2;
+                $borrow->save();
                 // Log::debug($borrow->borrower_id.':'.$today->eq($re_date->subDays(3)));
                 $details = ['email'=> $borrow->borrower->email, 'name' => $borrow->borrower->name,
                             'book_title' => $borrow->book->title,'return_date' => $borrow->return_date,
