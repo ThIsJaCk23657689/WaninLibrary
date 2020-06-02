@@ -9,6 +9,7 @@ use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
 use App\Mail\BookExpireNotificationMail;
 use Mail;
+use Illuminate\Support\Facades\Log;
 
 class SendBookExpireNotificationMail implements ShouldQueue
 {

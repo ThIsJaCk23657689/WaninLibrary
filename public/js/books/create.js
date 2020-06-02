@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 16);
+/******/ 	return __webpack_require__(__webpack_require__.s = 17);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -575,30 +575,46 @@ __webpack_require__.r(__webpack_exports__);
     },
     changeAddType: function changeAddType(e) {
       // 更動入庫方式
-      var x = $(e.target).val();
+      var x = $(e.target).val(); // if(x == '1'){
+      //     // 捐贈入庫 - 一般圖書
+      //     $('#donor_id').prop('disabled', false).selectpicker('refresh');
+      //     $('#donor_id_required_star').fadeIn();
+      //     $('#price').val('0').prop('disabled', true).attr('required', false);
+      //     $('#price_required_star').fadeOut();
+      //     // 捐贈入庫 - 論文雜誌
+      //     $('#p_donor_id').prop('disabled', false).selectpicker('refresh');
+      //     $('#p_donor_id_required_star').fadeIn();
+      //     $('#p_price').val('0').prop('disabled', true).attr('required', false);
+      //     $('#p_price_required_star').fadeOut();
+      // }else{
+      //     // 購買入庫 - 一般圖書
+      //     $('#donor_id').prop('disabled', true).selectpicker('refresh');
+      //     $('#donor_id_required_star').fadeOut();
+      //     $('#price').val('0').prop('disabled', false).attr('required', true);
+      //     $('#price_required_star').fadeIn();
+      //     // 購買入庫 - 論文雜誌
+      //     $('#p_donor_id').prop('disabled', true).selectpicker('refresh');
+      //     $('#p_donor_id_required_star').fadeOut();
+      //     $('#p_price').val('0').prop('disabled', false).attr('required', true);
+      //     $('#p_price_required_star').fadeIn();
+      // }
 
       if (x == '1') {
-        // 捐贈入庫 - 一般圖書
-        $('#donor_id').prop('disabled', false).selectpicker('refresh');
-        $('#donor_id_required_star').fadeIn();
-        $('#price').val('0').prop('disabled', true).attr('required', false);
-        $('#price_required_star').fadeOut(); // 捐贈入庫 - 論文雜誌
+        console.log('bbb');
+        this.$emit('update-add-type', 1); // this.addType = 1;
+        // 捐贈入庫
 
-        $('#p_donor_id').prop('disabled', false).selectpicker('refresh');
-        $('#p_donor_id_required_star').fadeIn();
-        $('#p_price').val('0').prop('disabled', true).attr('required', false);
-        $('#p_price_required_star').fadeOut();
+        $('.donor_div').fadeIn();
+        $('.price_div').fadeOut();
+        $('#price').val(0);
       } else {
-        // 購買入庫 - 一般圖書
-        $('#donor_id').prop('disabled', true).selectpicker('refresh');
-        $('#donor_id_required_star').fadeOut();
-        $('#price').val('0').prop('disabled', false).attr('required', true);
-        $('#price_required_star').fadeIn(); // 購買入庫 - 論文雜誌
+        console.log('ccc');
+        this.$emit('update-add-type', 2); // this.addType = 2;
+        // 購買入庫
 
-        $('#p_donor_id').prop('disabled', true).selectpicker('refresh');
-        $('#p_donor_id_required_star').fadeOut();
-        $('#p_price').val('0').prop('disabled', false).attr('required', true);
-        $('#p_price_required_star').fadeIn();
+        $('.donor_div').fadeOut();
+        $('.price_div').fadeIn();
+        $('#price').val(0);
       }
     },
     updateCategory: function updateCategory(e) {
@@ -1673,7 +1689,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-3" }, [
-              _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "form-group donor_div" }, [
                 _vm._m(2),
                 _vm._v(" "),
                 _c(
@@ -1894,7 +1910,7 @@ var render = function() {
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "col-md-3" }, [
-              _c("div", { staticClass: "form-group" }, [
+              _c("div", { staticClass: "form-group donor_div" }, [
                 _vm._m(15),
                 _vm._v(" "),
                 _c(
@@ -2074,32 +2090,37 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-2" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "price" } }, [
-          _c(
-            "span",
-            {
-              staticClass: "text-danger mr-2",
-              staticStyle: { display: "none" },
-              attrs: { id: "price_required_star" }
-            },
-            [_vm._v("*")]
-          ),
-          _vm._v("價格")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "price",
-            name: "price",
-            type: "text",
-            value: "0",
-            autocomplete: "off",
-            disabled: ""
-          }
-        })
-      ])
+      _c(
+        "div",
+        {
+          staticClass: "form-group price_div",
+          staticStyle: { display: "none" }
+        },
+        [
+          _c("label", { attrs: { for: "price" } }, [
+            _c(
+              "span",
+              {
+                staticClass: "text-danger mr-2",
+                attrs: { id: "price_required_star" }
+              },
+              [_vm._v("*")]
+            ),
+            _vm._v("價格")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "price",
+              name: "price",
+              type: "text",
+              value: "0",
+              autocomplete: "off"
+            }
+          })
+        ]
+      )
     ])
   },
   function() {
@@ -2386,32 +2407,37 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-2" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("label", { attrs: { for: "p_price" } }, [
-          _c(
-            "span",
-            {
-              staticClass: "text-danger mr-2",
-              staticStyle: { display: "none" },
-              attrs: { id: "p_price_required_star" }
-            },
-            [_vm._v("*")]
-          ),
-          _vm._v("價格")
-        ]),
-        _vm._v(" "),
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "p_price",
-            name: "price",
-            type: "text",
-            value: "0",
-            autocomplete: "off",
-            disabled: ""
-          }
-        })
-      ])
+      _c(
+        "div",
+        {
+          staticClass: "form-group price_div",
+          staticStyle: { display: "none" }
+        },
+        [
+          _c("label", { attrs: { for: "p_price" } }, [
+            _c(
+              "span",
+              {
+                staticClass: "text-danger mr-2",
+                attrs: { id: "p_price_required_star" }
+              },
+              [_vm._v("*")]
+            ),
+            _vm._v("價格")
+          ]),
+          _vm._v(" "),
+          _c("input", {
+            staticClass: "form-control",
+            attrs: {
+              id: "p_price",
+              name: "price",
+              type: "text",
+              value: "0",
+              autocomplete: "off"
+            }
+          })
+        ]
+      )
     ])
   },
   function() {
@@ -3188,7 +3214,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 16:
+/***/ 17:
 /*!********************************************!*\
   !*** multi ./resources/js/books/create.js ***!
   \********************************************/

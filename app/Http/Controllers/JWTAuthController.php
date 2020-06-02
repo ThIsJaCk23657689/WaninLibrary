@@ -50,6 +50,10 @@ class JWTAuthController extends Controller
         return view('auth.resetPassword');
     }
 
+    public function showForgetPasswordForm(){
+        return view('auth.forgetPassword');
+    }
+
     public function login(LoginRequest $request){
         $msg = $this->JWTAuthService->login($request);
         if($msg == 'invalid_credentials'){

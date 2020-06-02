@@ -7,6 +7,7 @@ use App\Borrow as BorrowEloquent;
 use App\BorrowLog as BorrowLogEloquent;
 use Carbon\Carbon;
 use App\Jobs\SendBookExpireNotificationMail;
+use Illuminate\Support\Facades\Log;
 
 class IsBookExpired extends Command
 {
@@ -41,14 +42,18 @@ class IsBookExpired extends Command
      */
     public function handle()
     {
+
+
         // 判斷是否逾期
         $today = Carbon::today();
-        $borrows = BorrowEloquent::getAll();
+        $borrows = BorrowEloquent::all();
         foreach($borrows as $borrow){
             // 書本已到期，將借閱人停權，更改狀態
-            if($today->lte($borrow->return_date)){
+            if($today->gte($borrow->return_date) && $borrow->status == 1){
+
                 // 更改為逾期中
                 $borrow->status = 2;
+                $borrow->noticed = 2;
                 $borrow->save();
                 $borrow->borrower->activated = 0;
                 $borrow->borrower->save();
@@ -60,23 +65,29 @@ class IsBookExpired extends Command
                     'book_id' => $borrow->book_id,
                     'book_title' => $borrow->book->title,
                     'callnum' => $borrow->book->callnum,
+                    'status' => 4,
                 ]);
             }
 
             $re_date = Carbon::parse($borrow->return_date);
             // 逾期前三天 且該借閱者有信箱 發送郵件提醒
+
             if($today->eq($re_date->subDays(3)) && $borrow->borrower->email){
+                // Log::debug($borrow->borrower_id.':'.$today->eq($re_date->subDays(3)));
                 $details = ['email'=> $borrow->borrower->email, 'name' => $borrow->borrower->name,
                             'book_title' => $borrow->book->title,'return_date' => $borrow->return_date,
                             'book_barcode' => $borrow->book->barcode
                             ];
                 SendBookExpireNotificationMail::dispatch($details);
             }
+            //1.郵件電話皆已通知 2.郵件已通知、電話未通知
+            //3.郵件未通知、電話已通知 4.郵件電話皆未通知。
+
             //所有借閱人每逾期超過7的倍數天時，需重新電話通知。 diffInDays
             $dt = $re_date->diffInDays($today, false);
             if(($dt > 0) && ($dt % 7 == 0)){
                 $orig_noticed = $borrow->noticed;
-                if($orig_noticed == 1){
+                if($orig_noticed == 1 || $orig_noticed == 2){
                    $borrow->noticed = 2;
                    $borrow->save();
                 }elseif($orig_noticed == 3){

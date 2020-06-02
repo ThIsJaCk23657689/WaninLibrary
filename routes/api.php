@@ -25,7 +25,7 @@ Route::post('register', 'JWTAuthController@register');
 Route::post('login', 'JWTAuthController@login')->name('api.login');
 Route::get('me', 'JWTAuthController@me');
 Route::post('logout', 'JWTAuthController@logout')->name('api.logout');
-Route::post('forgetPassword', 'JWTAuthController@forgetPassword');
+Route::post('forgetPassword', 'JWTAuthController@forgetPassword')->name('api.forgetPassword');
 Route::post('refreshToken', 'JWTAuthController@refreshToken');
 
 Route::prefix('/backend')->group(function(){

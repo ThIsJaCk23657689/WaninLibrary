@@ -43,7 +43,7 @@
                                 登入
                             </button>
 
-                            <a class="btn btn-link" href="#">
+                            <a class="btn btn-link" :href="forgetPasswordURL">
                                 忘記密碼？
                             </a>
                         </div>
@@ -59,7 +59,7 @@
 export default {
     data(){
         return {
-
+            forgetPasswordURL :$('#forgetPasswordURL').text()
         }
     },
     mounted(){
@@ -68,7 +68,7 @@ export default {
 
             let url = $('#LoginAPI').html();
             let data = $(this).serializeObject();
-            
+
             $('#login_form input.is-invalid').removeClass('is-invalid')
             axios.post(url, data).then(response => {
                 console.log(response.data);
@@ -91,7 +91,7 @@ export default {
                     });
                 }
             });
-        }); 
+        });
     }
 }
 </script>

@@ -60,7 +60,7 @@
 
 
                 <div class="col-md-3">
-                    <div class="form-group">
+                    <div class="form-group donor_div">
                         <label><span class="text-danger mr-2">*</span>捐贈人</label>
                         <!-- <div id="donor_id" class="input-group mb-3">
                             <input type="text" class="form-control" :value="book.showTitle" readonly>
@@ -76,9 +76,9 @@
 
 
                 <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="price"><span id="price_required_star" class="text-danger mr-2" style="display:none;">*</span>價格</label>
-                        <input id="price" name="price" type="text" class="form-control" value="0" autocomplete="off" disabled>
+                    <div class="form-group price_div" style="display:none;">
+                        <label for="price"><span id="price_required_star" class="text-danger mr-2">*</span>價格</label>
+                        <input id="price" name="price" type="text" class="form-control" value="0" autocomplete="off">
                     </div>
                 </div>
 
@@ -246,7 +246,7 @@
                 </div>
 
                 <div class="col-md-3">
-                    <div class="form-group">
+                    <div class="form-group donor_div">
                         <label><span class="text-danger mr-2">*</span>捐贈人</label>
                         <!-- <div id="donor_id" class="input-group mb-3">
                             <input type="text" class="form-control" :value="book.showTitle" readonly>
@@ -261,9 +261,9 @@
                 </div>
 
                 <div class="col-md-2">
-                    <div class="form-group">
-                        <label for="p_price"><span id="p_price_required_star" class="text-danger mr-2" style="display:none;">*</span>價格</label>
-                        <input id="p_price" name="price" type="text" class="form-control" value="0" autocomplete="off" disabled>
+                    <div class="form-group price_div"  style="display:none;">
+                        <label for="p_price"><span id="p_price_required_star" class="text-danger mr-2">*</span>價格</label>
+                        <input id="p_price" name="price" type="text" class="form-control" value="0" autocomplete="off">
                     </div>
                 </div>
 
@@ -452,32 +452,52 @@ export default {
         changeAddType(e){
             // 更動入庫方式
             let x = $(e.target).val();
+            // if(x == '1'){
+            //     // 捐贈入庫 - 一般圖書
+            //     $('#donor_id').prop('disabled', false).selectpicker('refresh');
+            //     $('#donor_id_required_star').fadeIn();
+
+            //     $('#price').val('0').prop('disabled', true).attr('required', false);
+            //     $('#price_required_star').fadeOut();
+            //     // 捐贈入庫 - 論文雜誌
+            //     $('#p_donor_id').prop('disabled', false).selectpicker('refresh');
+            //     $('#p_donor_id_required_star').fadeIn();
+
+            //     $('#p_price').val('0').prop('disabled', true).attr('required', false);
+            //     $('#p_price_required_star').fadeOut();
+            // }else{
+            //     // 購買入庫 - 一般圖書
+            //     $('#donor_id').prop('disabled', true).selectpicker('refresh');
+            //     $('#donor_id_required_star').fadeOut();
+
+            //     $('#price').val('0').prop('disabled', false).attr('required', true);
+            //     $('#price_required_star').fadeIn();
+            //     // 購買入庫 - 論文雜誌
+            //     $('#p_donor_id').prop('disabled', true).selectpicker('refresh');
+            //     $('#p_donor_id_required_star').fadeOut();
+
+            //     $('#p_price').val('0').prop('disabled', false).attr('required', true);
+            //     $('#p_price_required_star').fadeIn();
+            // }
+
             if(x == '1'){
-                // 捐贈入庫 - 一般圖書
-                $('#donor_id').prop('disabled', false).selectpicker('refresh');
-                $('#donor_id_required_star').fadeIn();
+                console.log('bbb');
+                this.$emit('update-add-type', 1);
+                // this.addType = 1;
+                // 捐贈入庫
+                $('.donor_div').fadeIn();
+                $('.price_div').fadeOut();
+                $('#price').val(0);
 
-                $('#price').val('0').prop('disabled', true).attr('required', false);
-                $('#price_required_star').fadeOut();
-                // 捐贈入庫 - 論文雜誌
-                $('#p_donor_id').prop('disabled', false).selectpicker('refresh');
-                $('#p_donor_id_required_star').fadeIn();
-
-                $('#p_price').val('0').prop('disabled', true).attr('required', false);
-                $('#p_price_required_star').fadeOut();
             }else{
-                // 購買入庫 - 一般圖書
-                $('#donor_id').prop('disabled', true).selectpicker('refresh');
-                $('#donor_id_required_star').fadeOut();
+                console.log('ccc');
+                this.$emit('update-add-type', 2);
+                // this.addType = 2;
+                // 購買入庫
+                $('.donor_div').fadeOut();
+                $('.price_div').fadeIn();
+                $('#price').val(0);
 
-                $('#price').val('0').prop('disabled', false).attr('required', true);
-                $('#price_required_star').fadeIn();
-                // 購買入庫 - 論文雜誌
-                $('#p_donor_id').prop('disabled', true).selectpicker('refresh');
-                $('#p_donor_id_required_star').fadeOut();
-
-                $('#p_price').val('0').prop('disabled', false).attr('required', true);
-                $('#p_price_required_star').fadeIn();
             }
         },
         updateCategory(e){

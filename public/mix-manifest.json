@@ -11,6 +11,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/backend.css": "/css/backend.css",
+    "/js/auth/forgetPassword.js": "/js/auth/forgetPassword.js",
     "/js/auth/login.js": "/js/auth/login.js",
     "/js/auth/resetPassword.js": "/js/auth/resetPassword.js",
     "/js/backend.js": "/js/backend.js",

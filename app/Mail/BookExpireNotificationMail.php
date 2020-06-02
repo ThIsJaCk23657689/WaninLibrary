@@ -6,6 +6,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
+use Illuminate\Support\Facades\Log;
 
 class BookExpireNotificationMail extends Mailable
 {
@@ -27,6 +28,7 @@ class BookExpireNotificationMail extends Mailable
      */
     public function build()
     {
+        Log::debug('aaaa');
         return $this->view('mail.bookExpireNotification')
                 ->with(['details'=>$this->details]);
     }
