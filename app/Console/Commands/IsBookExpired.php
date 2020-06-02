@@ -47,7 +47,7 @@ class IsBookExpired extends Command
         $borrows = BorrowEloquent::all();
         foreach($borrows as $borrow){
             // 書本已到期，將借閱人停權，更改狀態
-            if($today->gte($borrow->return_date)){
+            if($today->gte($borrow->return_date) && $borrow->status == 1){
 
                 // 更改為逾期中
                 $borrow->status = 2;
