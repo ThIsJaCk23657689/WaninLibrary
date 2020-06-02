@@ -249,7 +249,12 @@ class BookService extends BaseService
         $book = BookEloquent::where('barcode', $barcode)->first();
         if(!is_null($book)){
             $book['showStatus'] = $book->showStatus();
-            $book['donorName'] = $book->donor->name;
+            if($book->donor){
+                $book['donorName'] = $book->donor->name;
+            }else{
+                $book['donorName'] = '此為採購書籍';
+            }
+
         }
         return $book;
     }

@@ -50,7 +50,7 @@
                         </div>
                     </div>
                 </div>
-                
+
                 <borrower-info :borrower="currentBorrower" :borrows-records="historyBorrowRecords"></borrower-info>
 
                 <hr>
@@ -211,7 +211,7 @@ export default {
                 $.showErrorModal(error);
             });
         },
-        
+
         // 發送借書表單
         borrowBookForm(){
             let url = $('#borrowBookURL').html();
@@ -268,12 +268,12 @@ export default {
 
                     // 再判斷此書狀態是否可以出借。
                     if($book.status != 1){
-                        $.showWarningModal('此書本狀態為：' + $book.showStatus + '，所以無法進行借閱！。');
+                        $.showWarningModal('此書本狀態為：' + $book.showStatus + '，所以無法進行借閱！');
                         return false;
                     }
 
                     if(isRepeated){
-                        $.showWarningModal('此書本已經加入借閱清單中了！。');
+                        $.showWarningModal('此書本已經加入借閱清單中了！');
                     }else{
                         let $today = new Date();
                         this.currentBooks.push({

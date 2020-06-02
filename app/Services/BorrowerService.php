@@ -50,8 +50,9 @@ class BorrowerService extends BaseService
 
         if($keywords == [] && $status== 2 && $activated == 2 && $type == 0){
             $borrowers_tmp = new BorrowerEloquent();
+            $count = $borrowers_tmp->count();
             $borrowers = $borrowers_tmp->skip($skip)->take($take)->get();
-            $count = $borrowers->count();
+
 
         }else{
             $borrowers_tmp = BorrowerEloquent::query()->where(function ($query) use ($keywords, $status, $activated, $type, $type_arr) {
