@@ -71,7 +71,6 @@ class BorrowerService extends BaseService
                             $join->on('borrowers.agency_id', '=', 'agencies.id')
                                  ->where('agencies.name', 'like', $keyword);
                         });
-                        // $query->join('agencies', 'borrowers.agency_id', '=', 'agencies.id')->orOn('agencies.name', 'like', $keyword);
                     }
                 // type = 0; 不分類
                 }elseif($keywords != []){
@@ -85,7 +84,6 @@ class BorrowerService extends BaseService
                                     $join->on('borrowers.agency_id', '=', 'agencies.id')
                                          ->where('agencies.name', 'like', $keyword);
                                 });
-                                // $query->join('agencies', 'borrowers.agency_id', '=', 'agencies.id')->orOn('agencies.name', 'like', $keyword);
                             }
                         }
                     }

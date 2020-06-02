@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 19);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -364,12 +364,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
           if ($book.status != 1) {
-            $.showWarningModal('此書本狀態為：' + $book.showStatus + '，所以無法進行借閱！。');
+            $.showWarningModal('此書本狀態為：' + $book.showStatus + '，所以無法進行借閱！');
             return false;
           }
 
           if (isRepeated) {
-            $.showWarningModal('此書本已經加入借閱清單中了！。');
+            $.showWarningModal('此書本已經加入借閱清單中了！');
           } else {
             var $today = new Date();
 
@@ -657,7 +657,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#borrowList tbody tr:nth-child(even){\r\n    background-color: #eee;\n}\r\n", ""]);
+exports.push([module.i, "\n#borrowList tbody tr:nth-child(even){\n    background-color: #eee;\n}\n", ""]);
 
 // exports
 
@@ -1469,7 +1469,7 @@ var render = function() {
                       [
                         _c("i", { staticClass: "fas fa-undo-alt mr-2" }),
                         _vm._v(
-                          "\r\n                                重新選擇借閱人\r\n                            "
+                          "\n                                重新選擇借閱人\n                            "
                         )
                       ]
                     )
@@ -1641,7 +1641,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-block btn-primary", attrs: { type: "submit" } },
-        [_vm._v("\r\n                        確認\r\n                    ")]
+        [_vm._v("\n                        確認\n                    ")]
       )
     ])
   }
@@ -2407,7 +2407,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 19:
+/***/ 20:
 /*!**************************************************!*\
   !*** multi ./resources/js/circulation/borrow.js ***!
   \**************************************************/

@@ -49,21 +49,21 @@ class IsBookExpired extends Command
             // 書本已到期，將借閱人停權，更改狀態
             if($today->gte($borrow->return_date)){
 
-                // // 更改為逾期中
-                // $borrow->status = 2;
-                // $borrow->save();
-                // $borrow->borrower->activated = 0;
-                // $borrow->borrower->save();
+                // 更改為逾期中
+                $borrow->status = 2;
+                $borrow->save();
+                $borrow->borrower->activated = 0;
+                $borrow->borrower->save();
 
-                // // 新增借閱紀錄
-                // BorrowLogEloquent::create([
-                //     'borrower_id' => $borrow->borrower->id,
-                //     'borrower_name' => $borrow->borrower->name,
-                //     'book_id' => $borrow->book_id,
-                //     'book_title' => $borrow->book->title,
-                //     'callnum' => $borrow->book->callnum,
-                //     'status' => 4,
-                // ]);
+                // 新增借閱紀錄
+                BorrowLogEloquent::create([
+                    'borrower_id' => $borrow->borrower->id,
+                    'borrower_name' => $borrow->borrower->name,
+                    'book_id' => $borrow->book_id,
+                    'book_title' => $borrow->book->title,
+                    'callnum' => $borrow->book->callnum,
+                    'status' => 4,
+                ]);
             }
 
             $re_date = Carbon::parse($borrow->return_date);
