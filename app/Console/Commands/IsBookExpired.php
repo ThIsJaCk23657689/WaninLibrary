@@ -42,6 +42,8 @@ class IsBookExpired extends Command
      */
     public function handle()
     {
+
+
         // 判斷是否逾期
         $today = Carbon::today();
         $borrows = BorrowEloquent::all();
@@ -51,6 +53,7 @@ class IsBookExpired extends Command
 
                 // 更改為逾期中
                 $borrow->status = 2;
+                $borrow->noticed = 2;
                 $borrow->save();
                 $borrow->borrower->activated = 0;
                 $borrow->borrower->save();
@@ -77,11 +80,14 @@ class IsBookExpired extends Command
                             ];
                 SendBookExpireNotificationMail::dispatch($details);
             }
+            //1.郵件電話皆已通知 2.郵件已通知、電話未通知
+            //3.郵件未通知、電話已通知 4.郵件電話皆未通知。
+
             //所有借閱人每逾期超過7的倍數天時，需重新電話通知。 diffInDays
             $dt = $re_date->diffInDays($today, false);
             if(($dt > 0) && ($dt % 7 == 0)){
                 $orig_noticed = $borrow->noticed;
-                if($orig_noticed == 1){
+                if($orig_noticed == 1 || $orig_noticed == 2){
                    $borrow->noticed = 2;
                    $borrow->save();
                 }elseif($orig_noticed == 3){
