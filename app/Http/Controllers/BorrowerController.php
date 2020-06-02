@@ -25,10 +25,9 @@ class BorrowerController extends Controller
         $this->BookService = new BookService();
     }
 
-    public function index(Request $request)
+    public function index()
     {
-        $DataTotalCount = $this->BorrowerService->count();
-        return view('borrowers.index', compact('DataTotalCount'));
+        return view('borrowers.index');
     }
 
     public function create()

@@ -33,9 +33,9 @@
 			<a class="dropdown-item" href="{{ route('books.index') }}">{{ __('Books') }}</a>
 			{{-- <a class="dropdown-item" href="#">{{ __('Purchase') }}</a>
 			<a class="dropdown-item" href="#">{{ __('Donate') }}</a> --}}
-			<div class="dropdown-divider"></div>
-			<h6 class="dropdown-header">{{ __('Related:') }}</h6>
-			<a class="dropdown-item" href="#">{{ __('Barcode') }}</a>
+			{{-- <div class="dropdown-divider"></div> --}}
+			{{-- <h6 class="dropdown-header">{{ __('Related:') }}</h6>
+			<a class="dropdown-item" href="#">{{ __('Barcode') }}</a> --}}
 		</div>
 	</li>
 
@@ -49,7 +49,6 @@
 			{{-- <a class="dropdown-item" href="{{ route('circulation') }}">借書與還書</a> --}}
 			<a class="dropdown-item" href="{{ route('circulation.showBorrowPage') }}">書籍出借</a>
 			<a class="dropdown-item" href="{{ route('unreturns.index') }}">借出與逾期</a>
-			<a class="dropdown-item" href="#">{{ __('Overdue') }}</a>
 		</div>
 	</li>
 

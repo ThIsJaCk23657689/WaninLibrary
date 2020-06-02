@@ -30,6 +30,7 @@
         "jquery-cropper": "^1.0.1",
         "jquery-ui": "^1.12.1",
         "js-cookie": "^2.2.1",
+        "laravel-vue-datatable": "^0.5.12",
         "sweetalert2": "^9.10.13",
         "vue-bootstrap-selectpicker": "^1.0.6",
         "vue-select": "^3.10.3",
