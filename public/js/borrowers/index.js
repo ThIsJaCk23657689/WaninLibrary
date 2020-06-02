@@ -711,25 +711,59 @@ var app = new Vue({
         if (_this.borrowers.length != 0) {
           $('#BorrowersDataTable').dataTable().fnAddData(_this.borrowers);
         }
+
+        _this.refreshDeleteBtn();
       })["catch"](function (error) {
         console.log(error);
+      });
+    },
+    refreshDeleteBtn: function refreshDeleteBtn() {
+      var $vm = this;
+      $('.delete-btn').click(function (e) {
+        var _this2 = this;
+
+        e.preventDefault();
+        Swal.fire({
+          title: '注意！',
+          text: "你確定要刪除此借閱人嗎？",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '確認',
+          cancelButtonText: '取消'
+        }).then(function (result) {
+          if (result.value) {
+            $.showLoadingModal();
+            var $url = $(_this2).next().html();
+            axios.post($url, {
+              _method: 'DELETE'
+            }).then(function (response) {
+              console.log(response);
+              $.showSuccessModal('刪除成功！');
+              $vm.updateBorrowers($vm.pageNum, true);
+            })["catch"](function (error) {
+              $.showErrorModal(error);
+            });
+          }
+        });
       });
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     var BorrowersGetList = $('#BorrowersGetList').html();
     axios.get(BorrowersGetList).then(function (response) {
-      _this2.DataTotalCount = response.data.DataTotalCount;
-      _this2.totalPage = Math.ceil(_this2.DataTotalCount / _this2.rowsPerPage);
-      _this2.borrowers = response.data.borrowers;
+      _this3.DataTotalCount = response.data.DataTotalCount;
+      _this3.totalPage = Math.ceil(_this3.DataTotalCount / _this3.rowsPerPage);
+      _this3.borrowers = response.data.borrowers;
       $('#BorrowersDataTable').on('draw.dt', function () {
         console.log('drawing a table');
       }).on('init.dt', function () {
         console.log('intial a table');
       }).dataTable({
-        data: _this2.borrowers,
+        data: _this3.borrowers,
         columns: [{
           data: 'id'
         }, {
@@ -747,11 +781,13 @@ var app = new Vue({
         }],
         lengthChange: false,
         searching: false,
-        pageLength: _this2.rowsPerPage,
+        pageLength: _this3.rowsPerPage,
         info: false,
         paging: false,
         processing: true
       });
+
+      _this3.refreshDeleteBtn();
     });
   },
   mounted: function mounted() {// this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);

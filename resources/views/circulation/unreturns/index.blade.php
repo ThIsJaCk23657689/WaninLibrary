@@ -19,7 +19,12 @@
 	<div id="unreturn">
         <span id="UnreturnsGetList" class="d-none">{{ route('unreturns.getList') }}</span>
         
-        <unreturn-table :unreturns="unreturns" :total-page="{{ $totalPage }}"></unreturn-table>
+        <data-table 
+            url="{{ route('unreturns.getList') }}" 
+            :per-page="perPage" 
+            :columns="columns"
+            :translate="translate">
+        </data-table>
 	</div>
 
 @endsection

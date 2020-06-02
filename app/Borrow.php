@@ -5,9 +5,27 @@ namespace App;
 use Illuminate\Database\Eloquent\Model;
 use App\Book as BookEloquent;
 use App\Borrower as BorrowerEloquent;
+use JamesDordoy\LaravelVueDatatable\Traits\LaravelVueDatatableTrait;
 
 class Borrow extends Model
 {
+    use LaravelVueDatatableTrait;
+
+    protected $dataTableColumns = [
+        'borrow_date' => [
+            'searchable' => true,
+        ],
+        'return_date' => [
+            'searchable' => true,
+        ],
+        'status' => [
+            'searchable' => true,
+        ],
+        'noticed' => [
+            'searchable' => true,
+        ]
+    ];
+
     protected $fillable = [
         'borrower_id', 'book_id', 'borrow_date', 'return_date', 'status', 'noticed',
     ];

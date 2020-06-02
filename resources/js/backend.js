@@ -2,6 +2,7 @@ import Paginate from 'vuejs-paginate';
 import Swal from 'sweetalert2';
 import Cropper from 'cropperjs';
 import vSelect from "vue-select";
+import DataTable from 'laravel-vue-datatable';
 /**
  * First we will load all of this project's JavaScript dependencies which
  * includes Vue and other libraries. It is a great starting point when
@@ -31,10 +32,10 @@ window.Cropper = Cropper;
 // Vue.component('example-component', require('./components/ExampleComponent.vue').default);
 Vue.component('option-item', require('./components/Partials/OptionItem.vue').default);
 Vue.component('loading-modal', require('./components/Modals/LoadingModal.vue').default);
+Vue.component("book-redemption", require('./components/Navbar/BookRedemption.vue').default);
 Vue.component('paginate', Paginate);
 Vue.component("v-select", vSelect);
-
-Vue.component("book-redemption", require('./components/Navbar/BookRedemption.vue').default);
+Vue.use(DataTable);
 
 /**
  * Next, we will create a fresh Vue application instance and attach it to

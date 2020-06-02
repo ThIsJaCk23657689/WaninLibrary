@@ -27,10 +27,7 @@ class UnreturnController extends Controller
     public function getList(Request $request)
     {
         $unreturns = $this->UnreturnService->getList($request);
-        return response()->json([
-            'status' => 'OK',
-            'unreturns' => $unreturns
-        ]);
+        return response()->json($unreturns);
     }
 
     public function create()

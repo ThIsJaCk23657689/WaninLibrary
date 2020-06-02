@@ -179,6 +179,9 @@ return [
         // Barryvdh\DomPDF\ServiceProvider::class,
         Barryvdh\Snappy\ServiceProvider::class,
 
+        // Jamesdordoy\Laravelvuedatatable 套件
+        JamesDordoy\LaravelVueDatatable\Providers\LaravelVueDatatableServiceProvider::class,
+
     ],
 
     /*

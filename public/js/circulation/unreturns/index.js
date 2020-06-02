@@ -86,79 +86,15 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************************/
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/DataTable/TableButton.vue?vue&type=script&lang=js&":
+/*!*****************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Partials/DataTable/TableButton.vue?vue&type=script&lang=js& ***!
+  \*****************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['unreturns', 'totalPage'],
-  data: function data() {
-    return {
-      pageNum: 1
-    };
-  },
-  methods: {
-    getUnreturnsList: function getUnreturnsList(value) {}
-  },
-  created: function created() {},
-  mounted: function mounted() {}
-});
-
-/***/ }),
-
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/PaginateCustom.vue?vue&type=script&lang=js&":
-/*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Partials/PaginateCustom.vue?vue&type=script&lang=js& ***!
-  \**********************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 //
 //
 //
@@ -170,35 +106,25 @@ __webpack_require__.r(__webpack_exports__);
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: {
-    pageNum: {
-      type: Number,
-      "default": 1
-    },
-    totalPage: {
-      type: Number
-    }
+    data: {},
+    name: {},
+    click: {},
+    classes: {}
   },
   data: function data() {
-    return {
-      currentPageNum: this.pageNum
-    };
+    return {};
   },
-  methods: {
-    chagePage: function chagePage(num) {
-      this.currentPageNum = num;
-      this.$emit('updatePage', num);
-    }
-  },
+  methods: {},
   created: function created() {},
   mounted: function mounted() {}
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=template&id=32fada46&":
-/*!**************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=template&id=32fada46& ***!
-  \**************************************************************************************************************************************************************************************************************************************/
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/DataTable/TableButton.vue?vue&type=template&id=1b20cb03&":
+/*!*********************************************************************************************************************************************************************************************************************************!*\
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Partials/DataTable/TableButton.vue?vue&type=template&id=1b20cb03& ***!
+  \*********************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -210,108 +136,27 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "card mb-3" }, [
-      _vm._m(0),
-      _vm._v(" "),
-      _vm._m(1),
-      _vm._v(" "),
-      _c(
-        "div",
-        { staticClass: "card-footer" },
-        [
-          _c("paginate-custom", {
-            attrs: { pageNum: _vm.pageNum, totalPage: _vm.totalPage },
-            on: { updatePage: _vm.getUnreturnsList }
-          })
-        ],
-        1
-      )
-    ])
-  ])
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-table mr-2" }),
-      _vm._v("目前已出借和逾期列表\r\n        ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "card-body" }, [
-      _c("div", { staticClass: "table-responsive" }, [
-        _c(
-          "table",
-          {
-            staticClass: "table table-bordered",
-            attrs: { id: "BooksDataTable", width: "100%", cellspacing: "0" }
-          },
-          [
-            _c("thead", [
-              _c("tr", [
-                _c("th", [_vm._v("編號")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("標題")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("借閱次數")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("狀態")]),
-                _vm._v(" "),
-                _c("th", [_vm._v("操作")])
-              ])
-            ])
-          ]
-        )
+  return _c(
+    "button",
+    {
+      class: _vm.classes,
+      attrs: { title: "    " },
+      on: {
+        click: function($event) {
+          return _vm.click(_vm.data)
+        }
+      }
+    },
+    [
+      _c("span", [
+        _c("i", {
+          staticClass: "fa fa-eye mr-2",
+          attrs: { "aria-hidden": "true" }
+        }),
+        _vm._v("\r\n        " + _vm._s(_vm.name) + "\r\n    ")
       ])
-    ])
-  }
-]
-render._withStripped = true
-
-
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/PaginateCustom.vue?vue&type=template&id=d182b72c&":
-/*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Partials/PaginateCustom.vue?vue&type=template&id=d182b72c& ***!
-  \**************************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _c("paginate", {
-    attrs: {
-      value: _vm.currentPageNum,
-      "page-count": _vm.totalPage,
-      "click-handler": _vm.chagePage,
-      "page-range": 5,
-      "margin-pages": 2,
-      "prev-text": "上一頁",
-      "next-text": "下一頁",
-      "container-class": "pagination justify-content-center",
-      "page-class": "page-item",
-      "page-link-class": "page-link",
-      "prev-class": "page-item",
-      "next-class": "page-item",
-      "prev-link-class": "page-link",
-      "next-link-class": "page-link",
-      "active-class": "active"
-    }
-  })
+    ]
+  )
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -431,56 +276,114 @@ function normalizeComponent (
 /*!*****************************************************!*\
   !*** ./resources/js/circulation/unreturns/index.js ***!
   \*****************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
+/*! no exports provided */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
 
-Vue.component('unreturn-table', __webpack_require__(/*! ./../../components/Circulation/Unreturns/UnreturnTable.vue */ "./resources/js/components/Circulation/Unreturns/UnreturnTable.vue")["default"]);
-Vue.component('paginate-custom', __webpack_require__(/*! ./../../components/Partials/PaginateCustom.vue */ "./resources/js/components/Partials/PaginateCustom.vue")["default"]);
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _components_Partials_DataTable_TableButton_vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./../../components/Partials/DataTable/TableButton.vue */ "./resources/js/components/Partials/DataTable/TableButton.vue");
+// Vue.component('unreturn-table', require('./../../components/Circulation/Unreturns/UnreturnTable.vue').default);
+// Vue.component('paginate-custom', require('./../../components/Partials/PaginateCustom.vue').default);
+// Vue.component('table-button', required('./../../components/Partials/DataTable/TableButton.vue').default);
+
 var app = new Vue({
   el: '#unreturn',
   data: function data() {
     return {
-      UnreturnsGetList: $('#UnreturnsGetList').text(),
-      unreturns: []
+      perPage: ['10', '25', '50'],
+      columns: [{
+        label: '借閱人名稱',
+        name: 'borrower_name',
+        filterable: true,
+        orderable: true
+      }, {
+        label: '書籍名稱',
+        name: 'book_title',
+        filterable: true,
+        orderable: true
+      }, {
+        label: '狀態',
+        name: 'showStatus',
+        filterable: true,
+        orderable: false
+      }, {
+        label: '借閱日期',
+        name: 'borrow_date',
+        filterable: true,
+        orderable: true
+      }, {
+        label: '期限日期',
+        name: 'return_date',
+        filterable: true,
+        orderable: true
+      }, {
+        label: '通知狀態',
+        name: 'showNoticed',
+        filterable: true,
+        orderable: false
+      } // {
+      //     label: '操作',
+      //     name: '檢視',
+      //     filterable: false,
+      //     component: TableButton,
+      //     event: 'click',
+      //     handler: this.alertMe,
+      //     classes: {
+      //         'btn': true,
+      //         'btn-md': true,
+      //         'btn-primary': true,
+      //     }
+      // },
+      ],
+      translate: {
+        nextButton: '下一頁',
+        previousButton: '上一頁',
+        placeholderSearch: '搜尋...'
+      }
     };
   },
-  methods: {
-    refreshUnreturns: function refreshUnreturns($skip, $take) {
-      var _this = this;
-
-      $.showLoadingModal();
-      axios.get(this.UnreturnsGetList, {
-        params: {
-          skip: $skip,
-          take: $take
-        }
-      }).then(function (response) {
-        _this.unreturns = response.data.unreturns;
-        $.closeModal();
-      })["catch"](function (error) {
-        $.showErrorModal(error);
-      });
-    }
+  components: {
+    TableButton: _components_Partials_DataTable_TableButton_vue__WEBPACK_IMPORTED_MODULE_0__["default"]
   },
-  created: function created() {
-    this.refreshUnreturns(0, 10);
+  methods: {
+    alertMe: function alertMe(data) {
+      console.log(data);
+      alert("hey");
+    } // refreshUnreturns($skip, $take){
+    //     $.showLoadingModal();
+    //     axios.get(this.UnreturnsGetList, {
+    //         params: {
+    //             skip: $skip,
+    //             take: $take
+    //         }
+    //     })
+    //     .then(response => {
+    //         this.unreturns = response.data.unreturns;
+    //         $.closeModal();
+    //     }).catch(error => {
+    //         $.showErrorModal(error);
+    //     });
+    // }
+
+  },
+  created: function created() {// this.refreshUnreturns(0, 10);
   },
   mounted: function mounted() {}
 });
 
 /***/ }),
 
-/***/ "./resources/js/components/Circulation/Unreturns/UnreturnTable.vue":
-/*!*************************************************************************!*\
-  !*** ./resources/js/components/Circulation/Unreturns/UnreturnTable.vue ***!
-  \*************************************************************************/
+/***/ "./resources/js/components/Partials/DataTable/TableButton.vue":
+/*!********************************************************************!*\
+  !*** ./resources/js/components/Partials/DataTable/TableButton.vue ***!
+  \********************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _UnreturnTable_vue_vue_type_template_id_32fada46___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./UnreturnTable.vue?vue&type=template&id=32fada46& */ "./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=template&id=32fada46&");
-/* harmony import */ var _UnreturnTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./UnreturnTable.vue?vue&type=script&lang=js& */ "./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=script&lang=js&");
+/* harmony import */ var _TableButton_vue_vue_type_template_id_1b20cb03___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./TableButton.vue?vue&type=template&id=1b20cb03& */ "./resources/js/components/Partials/DataTable/TableButton.vue?vue&type=template&id=1b20cb03&");
+/* harmony import */ var _TableButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TableButton.vue?vue&type=script&lang=js& */ "./resources/js/components/Partials/DataTable/TableButton.vue?vue&type=script&lang=js&");
 /* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
@@ -490,9 +393,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _UnreturnTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _UnreturnTable_vue_vue_type_template_id_32fada46___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _UnreturnTable_vue_vue_type_template_id_32fada46___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _TableButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _TableButton_vue_vue_type_template_id_1b20cb03___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _TableButton_vue_vue_type_template_id_1b20cb03___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -502,107 +405,38 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Circulation/Unreturns/UnreturnTable.vue"
+component.options.__file = "resources/js/components/Partials/DataTable/TableButton.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************!*\
-  !*** ./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************/
+/***/ "./resources/js/components/Partials/DataTable/TableButton.vue?vue&type=script&lang=js&":
+/*!*********************************************************************************************!*\
+  !*** ./resources/js/components/Partials/DataTable/TableButton.vue?vue&type=script&lang=js& ***!
+  \*********************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UnreturnTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./UnreturnTable.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_UnreturnTable_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TableButton.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/DataTable/TableButton.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_TableButton_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=template&id=32fada46&":
-/*!********************************************************************************************************!*\
-  !*** ./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=template&id=32fada46& ***!
-  \********************************************************************************************************/
+/***/ "./resources/js/components/Partials/DataTable/TableButton.vue?vue&type=template&id=1b20cb03&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/Partials/DataTable/TableButton.vue?vue&type=template&id=1b20cb03& ***!
+  \***************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UnreturnTable_vue_vue_type_template_id_32fada46___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./UnreturnTable.vue?vue&type=template&id=32fada46& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Circulation/Unreturns/UnreturnTable.vue?vue&type=template&id=32fada46&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UnreturnTable_vue_vue_type_template_id_32fada46___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableButton_vue_vue_type_template_id_1b20cb03___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./TableButton.vue?vue&type=template&id=1b20cb03& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/DataTable/TableButton.vue?vue&type=template&id=1b20cb03&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableButton_vue_vue_type_template_id_1b20cb03___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_UnreturnTable_vue_vue_type_template_id_32fada46___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ "./resources/js/components/Partials/PaginateCustom.vue":
-/*!*************************************************************!*\
-  !*** ./resources/js/components/Partials/PaginateCustom.vue ***!
-  \*************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _PaginateCustom_vue_vue_type_template_id_d182b72c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./PaginateCustom.vue?vue&type=template&id=d182b72c& */ "./resources/js/components/Partials/PaginateCustom.vue?vue&type=template&id=d182b72c&");
-/* harmony import */ var _PaginateCustom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./PaginateCustom.vue?vue&type=script&lang=js& */ "./resources/js/components/Partials/PaginateCustom.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _PaginateCustom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _PaginateCustom_vue_vue_type_template_id_d182b72c___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _PaginateCustom_vue_vue_type_template_id_d182b72c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Partials/PaginateCustom.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Partials/PaginateCustom.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************!*\
-  !*** ./resources/js/components/Partials/PaginateCustom.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginateCustom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./PaginateCustom.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/PaginateCustom.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginateCustom_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Partials/PaginateCustom.vue?vue&type=template&id=d182b72c&":
-/*!********************************************************************************************!*\
-  !*** ./resources/js/components/Partials/PaginateCustom.vue?vue&type=template&id=d182b72c& ***!
-  \********************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginateCustom_vue_vue_type_template_id_d182b72c___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./PaginateCustom.vue?vue&type=template&id=d182b72c& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/PaginateCustom.vue?vue&type=template&id=d182b72c&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginateCustom_vue_vue_type_template_id_d182b72c___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_PaginateCustom_vue_vue_type_template_id_d182b72c___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_TableButton_vue_vue_type_template_id_1b20cb03___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 

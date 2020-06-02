@@ -37,7 +37,6 @@ class BorrowerService extends BaseService
 
     public function getList($request)
     {
-
         $skip = $request->skip ?? 0;
         $take = $request->take ?? 10;
         $status = $request->status ?? 2;
@@ -46,13 +45,12 @@ class BorrowerService extends BaseService
         $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
 
          // 0. default 1.'agency_id', 2.'name', 3. 'email', 4. 'tel'
-        $type_arr = ['','', 'name', 'email', 'tel'];
+        $type_arr = ['', '', 'name', 'email', 'tel'];
 
         if($keywords == [] && $status== 2 && $activated == 2 && $type == 0){
             $borrowers_tmp = new BorrowerEloquent();
             $borrowers = $borrowers_tmp->skip($skip)->take($take)->get();
             $count = $borrowers->count();
-
         }else{
             $borrowers_tmp = BorrowerEloquent::query()->where(function ($query) use ($keywords, $status, $activated, $type, $type_arr) {
 
@@ -102,7 +100,8 @@ class BorrowerService extends BaseService
             $borrower['action'] =
                 '<a href="' . route('borrowers.show', [$borrower->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
                 <a href="' . route('borrowers.edit', [$borrower->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
-                <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';
+                <button type="button" class="btn btn-md btn-danger delete-btn"><i class="far fa-trash-alt"></i></button type="button">
+                <span class="d-none">' . route('borrowers.destroy', [$borrower->id]) . '</span>';
         }
         $res = ['borrowers' => $borrowers, 'count' => $count];
         return $res;
