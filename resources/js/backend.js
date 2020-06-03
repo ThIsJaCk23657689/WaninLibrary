@@ -61,9 +61,10 @@ const navbar = new Vue({
         }
 
         $.showErrorModal = function(error) {
+            let $container = $('<span></span>');
+            
             if (error.response.data.errors != null) {
                 let $key = Object.keys(error.response.data.errors);
-                let $container = $('<span></span>');
                 $key.forEach(function(item, index) {
                     $container.append(error.response.data.errors[item] + '<br />');
                     $('#' + item).addClass('is-invalid');
@@ -76,7 +77,7 @@ const navbar = new Vue({
                 icon: 'error',
                 allowOutsideClick: false,
                 confirmButtonText: '確認',
-                html: (typeof $container == undefined) ? $container.prop('outerHTML') : '',
+                html: $container,
             });
         }
 

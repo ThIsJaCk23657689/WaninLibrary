@@ -812,25 +812,59 @@ var app = new Vue({
         if (_this.donors.length != 0) {
           $('#DonorsDataTable').dataTable().fnAddData(_this.donors);
         }
+
+        _this.refreshDeleteBtn();
       })["catch"](function (error) {
         console.log(error);
+      });
+    },
+    refreshDeleteBtn: function refreshDeleteBtn() {
+      var $vm = this;
+      $('.delete-btn').click(function (e) {
+        var _this2 = this;
+
+        e.preventDefault();
+        Swal.fire({
+          title: '注意！',
+          text: "你確定要刪除此捐贈人嗎？",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '確認',
+          cancelButtonText: '取消'
+        }).then(function (result) {
+          if (result.value) {
+            $.showLoadingModal();
+            var $url = $(_this2).next().html();
+            axios.post($url, {
+              _method: 'DELETE'
+            }).then(function (response) {
+              console.log(response);
+              $.showSuccessModal('刪除成功！');
+              $vm.updateDonors($vm.pageNum, true);
+            })["catch"](function (error) {
+              $.showErrorModal(error);
+            });
+          }
+        });
       });
     }
   },
   created: function created() {
-    var _this2 = this;
+    var _this3 = this;
 
     var DonorsGetList = $('#DonorsGetList').html();
     axios.get(DonorsGetList).then(function (response) {
-      _this2.donors = response.data.donors;
-      _this2.DataTotalCount = response.data.DataTotalCount;
-      _this2.totalPage = Math.ceil(_this2.DataTotalCount / _this2.rowsPerPage);
+      _this3.donors = response.data.donors;
+      _this3.DataTotalCount = response.data.DataTotalCount;
+      _this3.totalPage = Math.ceil(_this3.DataTotalCount / _this3.rowsPerPage);
       $('#DonorsDataTable').on('draw.dt', function () {
         console.log('drawing a table');
       }).on('init.dt', function () {
         console.log('intial a table');
       }).dataTable({
-        data: _this2.donors,
+        data: _this3.donors,
         columns: [{
           data: 'id'
         }, {
@@ -846,11 +880,13 @@ var app = new Vue({
         }],
         lengthChange: false,
         searching: false,
-        pageLength: _this2.rowsPerPage,
+        pageLength: _this3.rowsPerPage,
         info: false,
         paging: false,
         processing: true
       });
+
+      _this3.refreshDeleteBtn();
     });
   },
   mounted: function mounted() {}

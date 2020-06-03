@@ -77,10 +77,17 @@ class DonorService extends BaseService
             $donor['showContact'] = $donor->showContact();
             $donor['showExposure'] = $donor->showExposure();
             $donor['donateAmount'] = $donor->books()->count();
-            $donor['action'] =
+            if($donor->id == 1){
+                $donor['action'] =
+                '<a href="' . route('donors.show', [$donor->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
+                <a href="' . route('donors.edit', [$donor->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>';
+            }else{
+                $donor['action'] =
                 '<a href="' . route('donors.show', [$donor->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
                 <a href="' . route('donors.edit', [$donor->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
-                <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';
+                <button type="button" class="btn btn-md btn-danger delete-btn"><i class="far fa-trash-alt"></i></button type="button">
+                <span class="d-none">' . route('donors.destroy', [$donor->id]) . '</span>';
+            }
         }
         return [
             'donors' => $donors,

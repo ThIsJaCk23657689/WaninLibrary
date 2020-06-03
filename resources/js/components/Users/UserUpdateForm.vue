@@ -103,12 +103,11 @@ export default {
             let url = this.UsersUpdateURL;
             let data = $(e.target).serializeObject();
 
-            this.$refs.loadingModal.initalModal();
             axios.patch(url, data).then(response => {
-                this.$refs.loadingModal.successfulResponse('編輯成功', response.data.url);
+                $.showSuccessModal('編輯成功', response.data.url);
             }).catch((error) => {
-                console.error('編輯使用者時發生錯誤，錯誤訊息：' + error);
-                this.$refs.loadingModal.failureResponse(error);
+                console.error('編輯管理者時發生錯誤，錯誤訊息：' + error);
+                $.showErrorModal(error);
             });
         }
     },

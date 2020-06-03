@@ -168,7 +168,8 @@ class BookService extends BaseService
             $book['action'] =
                 '<a href="' . route('books.show', [$book->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
                 <a href="' . route('books.edit', [$book->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
-                <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';
+                <button type="button" class="btn btn-md btn-danger delete-btn"><i class="far fa-trash-alt"></i></button type="button">
+                <span class="d-none">' . route('books.destroy', [$book->id]) . '</span>';
         }
         $res = ['books'=>$books, 'count' => $count];
         return $res;

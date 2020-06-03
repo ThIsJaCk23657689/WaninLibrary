@@ -30,10 +30,9 @@ const app = new Vue({
             this.status = status;
             this.updateBook(this.pageNum, true)
         },
-        changeCategory: function(category) {
+        changeCategory(category) {
             this.category = category;
             this.updateBook(this.pageNum, true)
-
         },
         updateBook(pageNum, first_page) {
             if (first_page) {
@@ -69,8 +68,40 @@ const app = new Vue({
                 if (this.books.length != 0) {
                     $('#BooksDataTable').dataTable().fnAddData(this.books);
                 }
+                this.refreshDeleteBtn();
             }).catch(error => {
                 console.log(error);
+            });
+        },
+        refreshDeleteBtn(){
+            let $vm = this;
+            $('.delete-btn').click(function(e){
+                e.preventDefault();
+
+                Swal.fire({
+                    title: '注意！',
+                    text: "你確定要刪除此捐贈人嗎？",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '確認',
+                    cancelButtonText: '取消',
+                }).then((result) => {
+                    if (result.value) {
+                        $.showLoadingModal();
+                        let $url = $(this).next().html();
+                        axios.post($url, {
+                            _method: 'DELETE'
+                        }).then(response => {
+                            console.log(response);
+                            $.showSuccessModal('刪除成功！');
+                            $vm.updateBook($vm.pageNum, true);
+                        }).catch(error => {
+                            $.showErrorModal(error);
+                        });
+                    }
+                });
             });
         }
     },
@@ -101,6 +132,7 @@ const app = new Vue({
                 paging: false,
                 processing: true
             });
+            this.refreshDeleteBtn();
         });
     },
     mounted() {

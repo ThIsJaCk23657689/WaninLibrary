@@ -71367,8 +71367,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var vue_select__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(vue_select__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var laravel_vue_datatable__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! laravel-vue-datatable */ "./node_modules/laravel-vue-datatable/dist/laravel-vue-datatable.common.js");
 /* harmony import */ var laravel_vue_datatable__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(laravel_vue_datatable__WEBPACK_IMPORTED_MODULE_4__);
-function _typeof(obj) { "@babel/helpers - typeof"; if (typeof Symbol === "function" && typeof Symbol.iterator === "symbol") { _typeof = function _typeof(obj) { return typeof obj; }; } else { _typeof = function _typeof(obj) { return obj && typeof Symbol === "function" && obj.constructor === Symbol && obj !== Symbol.prototype ? "symbol" : typeof obj; }; } return _typeof(obj); }
-
 
 
 
@@ -71432,14 +71430,12 @@ var navbar = new Vue({
     };
 
     $.showErrorModal = function (error) {
+      var $container = $('<span></span>');
+
       if (error.response.data.errors != null) {
         var $key = Object.keys(error.response.data.errors);
-
-        var _$container = $('<span></span>');
-
         $key.forEach(function (item, index) {
-          _$container.append(error.response.data.errors[item] + '<br />');
-
+          $container.append(error.response.data.errors[item] + '<br />');
           $('#' + item).addClass('is-invalid');
         });
       }
@@ -71450,7 +71446,7 @@ var navbar = new Vue({
         icon: 'error',
         allowOutsideClick: false,
         confirmButtonText: '確認',
-        html: (typeof $container === "undefined" ? "undefined" : _typeof($container)) == undefined ? $container.prop('outerHTML') : ''
+        html: $container
       });
     };
 

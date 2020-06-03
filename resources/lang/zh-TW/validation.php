@@ -180,5 +180,7 @@ return [
         'address_county'        => '縣市',
         'address_district'      => '鄉鎮市區',
         'address_others'        => '巷弄路段',
+
+        'account'               => '帳號',
     ],
 ];
