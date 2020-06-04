@@ -81,14 +81,14 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ForgetPasswordForm.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/Charts/BarChat.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/ForgetPasswordForm.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Partials/Charts/BarChat.vue?vue&type=script&lang=js& ***!
   \**********************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -107,70 +107,74 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  data: function data() {
-    return {
-      forgetPasswordAPIURL: $('#forgetPasswordAPIURL').text(),
-      LoginURL: $('#LoginURL').text()
-    };
+  props: {
+    canvasId: {
+      type: String
+    },
+    data: {
+      type: Object
+    }
   },
-  mounted: function mounted() {
-    $('#forget_password_form').submit(function (e) {
-      $('#forget_pwd_btn').attr('disabled', true);
-      e.preventDefault();
-      var url = $('#forgetPasswordAPIURL').text();
-      var data = $(this).serializeObject();
-      console.log(url); // $('#forget_password_form input.is-invalid').removeClass('is-invalid')
-
-      $.showLoadingModal('寄信中，請稍後');
-      axios.post(url, data).then(function (response) {
-        console.log(response.data);
-        $('.btn').attr('disabled', false);
-        $.showSuccessModal('請至信箱收信', $('#LoginURL').text()); // location.href = $('#LoginURL').text();
-      })["catch"](function (error) {
-        console.error('失敗，錯誤訊息：' + error); // console.error(error.response);
-
-        if (error.response.data.errors == null) {
-          alert('失敗，錯誤訊息：' + error.response.data.message + '\n請聯絡系統設計師處理。');
-        } else {
-          console.error(error.response.data.errors);
-          var $key = Object.keys(error.response.data.errors);
-          $key.forEach(function (item, index) {
-            $('#' + item).addClass('is-invalid');
-            $('#' + item + '_error').html('<strong>' + error.response.data.errors[item] + '</strong>');
-          });
+  data: function data() {
+    return {};
+  },
+  methods: {
+    init: function init() {
+      var ctx = document.getElementById(this.canvasId);
+      var myChart = new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ["January", "February", "March", "April", "May", "June"],
+          datasets: [{
+            label: "Revenue",
+            backgroundColor: "rgba(2,117,216,1)",
+            borderColor: "rgba(2,117,216,1)",
+            data: [4215, 5312, 6251, 7841, 9821, 14984]
+          }]
+        },
+        options: {
+          scales: {
+            xAxes: [{
+              time: {
+                unit: 'month'
+              },
+              gridLines: {
+                display: false
+              },
+              ticks: {
+                maxTicksLimit: 6
+              }
+            }],
+            yAxes: [{
+              ticks: {
+                min: 0,
+                max: 15000,
+                maxTicksLimit: 5
+              },
+              gridLines: {
+                display: true
+              }
+            }]
+          },
+          legend: {
+            display: false
+          }
         }
       });
-    });
+    }
+  },
+  created: function created() {},
+  mounted: function mounted() {
+    this.init();
   }
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ForgetPasswordForm.vue?vue&type=template&id=9ff5e350&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/Charts/BarChat.vue?vue&type=template&id=29537f53&":
 /*!**************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Auth/ForgetPasswordForm.vue?vue&type=template&id=9ff5e350& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Partials/Charts/BarChat.vue?vue&type=template&id=29537f53& ***!
   \**************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -183,85 +187,22 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _vm._m(0)
+  return _c("div", { staticClass: "card mb-3" }, [
+    _vm._m(0),
+    _vm._v(" "),
+    _c("div", { staticClass: "card-body" }, [
+      _c("canvas", { attrs: { id: _vm.canvasId, width: "100%", height: "30" } })
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "card" }, [
-          _c("div", { staticClass: "card-header" }, [_vm._v("忘記密碼")]),
-          _vm._v(" "),
-          _c("div", { staticClass: "card-body" }, [
-            _c(
-              "form",
-              {
-                attrs: {
-                  id: "forget_password_form",
-                  method: "POST",
-                  action: "#"
-                }
-              },
-              [
-                _c("div", { staticClass: "form-group row" }, [
-                  _c(
-                    "label",
-                    {
-                      staticClass: "col-md-4 col-form-label text-md-right",
-                      attrs: { for: "account" }
-                    },
-                    [_vm._v("請輸入您的信箱")]
-                  ),
-                  _vm._v(" "),
-                  _c("div", { staticClass: "col-md-6" }, [
-                    _c("input", {
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "email",
-                        type: "email",
-                        name: "email",
-                        value: "",
-                        required: "",
-                        autocomplete: "email",
-                        autofocus: ""
-                      }
-                    }),
-                    _vm._v(" "),
-                    _c(
-                      "span",
-                      {
-                        staticClass: "invalid-feedback",
-                        attrs: { id: "email_error", role: "alert" }
-                      },
-                      [_c("strong")]
-                    )
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "form-group row mb-0" }, [
-                  _c("div", { staticClass: "col-md-8 offset-md-4" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-primary",
-                        attrs: { type: "submit", id: "forget_pwd_btn" }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                                送出\r\n                            "
-                        )
-                      ]
-                    )
-                  ])
-                ])
-              ]
-            )
-          ])
-        ])
-      ])
+    return _c("div", { staticClass: "card-header" }, [
+      _c("i", { staticClass: "fas fa-chart-area mr-2" }),
+      _vm._v("\r\n\t\t書籍分類比例\r\n\t")
     ])
   }
 ]
@@ -378,38 +319,52 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/auth/forgetPassword.js":
-/*!*********************************************!*\
-  !*** ./resources/js/auth/forgetPassword.js ***!
-  \*********************************************/
+/***/ "./resources/js/backend/index.js":
+/*!***************************************!*\
+  !*** ./resources/js/backend/index.js ***!
+  \***************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-Vue.component('forget-password-form', __webpack_require__(/*! ./../components/Auth/ForgetPasswordForm.vue */ "./resources/js/components/Auth/ForgetPasswordForm.vue")["default"]);
-var app = new Vue({
-  el: '#forgetPassword',
+Vue.component('bar-chart', __webpack_require__(/*! ./../components/Partials/Charts/BarChat.vue */ "./resources/js/components/Partials/Charts/BarChat.vue")["default"]);
+var backend = new Vue({
+  el: '#backend',
   data: function data() {
-    return {};
+    return {
+      BarChartByCategoryData: {}
+    };
   },
-  methods: {},
-  created: function created() {},
+  methods: {
+    getBarChartByCategoryData: function getBarChartByCategoryData() {
+      var $url = axios.get($url).then(function (response) {
+        console.log(response.data);
+      })["catch"](function (error) {
+        console.error('抓取書籍分類比例時發生錯誤，訊息：' + error);
+        $.showErrorModal(error);
+      });
+    }
+  },
+  created: function created() {
+    Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
+    Chart.defaults.global.defaultFontColor = '#292b2c';
+  },
   mounted: function mounted() {}
 });
 
 /***/ }),
 
-/***/ "./resources/js/components/Auth/ForgetPasswordForm.vue":
+/***/ "./resources/js/components/Partials/Charts/BarChat.vue":
 /*!*************************************************************!*\
-  !*** ./resources/js/components/Auth/ForgetPasswordForm.vue ***!
+  !*** ./resources/js/components/Partials/Charts/BarChat.vue ***!
   \*************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ForgetPasswordForm_vue_vue_type_template_id_9ff5e350___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ForgetPasswordForm.vue?vue&type=template&id=9ff5e350& */ "./resources/js/components/Auth/ForgetPasswordForm.vue?vue&type=template&id=9ff5e350&");
-/* harmony import */ var _ForgetPasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ForgetPasswordForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Auth/ForgetPasswordForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+/* harmony import */ var _BarChat_vue_vue_type_template_id_29537f53___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./BarChat.vue?vue&type=template&id=29537f53& */ "./resources/js/components/Partials/Charts/BarChat.vue?vue&type=template&id=29537f53&");
+/* harmony import */ var _BarChat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./BarChat.vue?vue&type=script&lang=js& */ "./resources/js/components/Partials/Charts/BarChat.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
 
 
 
@@ -418,9 +373,9 @@ __webpack_require__.r(__webpack_exports__);
 /* normalize component */
 
 var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ForgetPasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ForgetPasswordForm_vue_vue_type_template_id_9ff5e350___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ForgetPasswordForm_vue_vue_type_template_id_9ff5e350___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  _BarChat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _BarChat_vue_vue_type_template_id_29537f53___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _BarChat_vue_vue_type_template_id_29537f53___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
   false,
   null,
   null,
@@ -430,51 +385,51 @@ var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_
 
 /* hot reload */
 if (false) { var api; }
-component.options.__file = "resources/js/components/Auth/ForgetPasswordForm.vue"
+component.options.__file = "resources/js/components/Partials/Charts/BarChat.vue"
 /* harmony default export */ __webpack_exports__["default"] = (component.exports);
 
 /***/ }),
 
-/***/ "./resources/js/components/Auth/ForgetPasswordForm.vue?vue&type=script&lang=js&":
+/***/ "./resources/js/components/Partials/Charts/BarChat.vue?vue&type=script&lang=js&":
 /*!**************************************************************************************!*\
-  !*** ./resources/js/components/Auth/ForgetPasswordForm.vue?vue&type=script&lang=js& ***!
+  !*** ./resources/js/components/Partials/Charts/BarChat.vue?vue&type=script&lang=js& ***!
   \**************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgetPasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ForgetPasswordForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ForgetPasswordForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgetPasswordForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BarChat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BarChat.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/Charts/BarChat.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_BarChat_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
 
 /***/ }),
 
-/***/ "./resources/js/components/Auth/ForgetPasswordForm.vue?vue&type=template&id=9ff5e350&":
+/***/ "./resources/js/components/Partials/Charts/BarChat.vue?vue&type=template&id=29537f53&":
 /*!********************************************************************************************!*\
-  !*** ./resources/js/components/Auth/ForgetPasswordForm.vue?vue&type=template&id=9ff5e350& ***!
+  !*** ./resources/js/components/Partials/Charts/BarChat.vue?vue&type=template&id=29537f53& ***!
   \********************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgetPasswordForm_vue_vue_type_template_id_9ff5e350___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ForgetPasswordForm.vue?vue&type=template&id=9ff5e350& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Auth/ForgetPasswordForm.vue?vue&type=template&id=9ff5e350&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgetPasswordForm_vue_vue_type_template_id_9ff5e350___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BarChat_vue_vue_type_template_id_29537f53___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./BarChat.vue?vue&type=template&id=29537f53& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/Charts/BarChat.vue?vue&type=template&id=29537f53&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BarChat_vue_vue_type_template_id_29537f53___WEBPACK_IMPORTED_MODULE_0__["render"]; });
 
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ForgetPasswordForm_vue_vue_type_template_id_9ff5e350___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_BarChat_vue_vue_type_template_id_29537f53___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
 
 
 
 /***/ }),
 
-/***/ 3:
-/*!***************************************************!*\
-  !*** multi ./resources/js/auth/forgetPassword.js ***!
-  \***************************************************/
+/***/ 5:
+/*!*********************************************!*\
+  !*** multi ./resources/js/backend/index.js ***!
+  \*********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\auth\forgetPassword.js */"./resources/js/auth/forgetPassword.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\backend\index.js */"./resources/js/backend/index.js");
 
 
 /***/ })

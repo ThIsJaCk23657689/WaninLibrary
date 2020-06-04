@@ -10,7 +10,7 @@
         class="form-control"
         placeholder="快速還書..."
         v-model="barcodeText"
-        @input="startRedemption"
+        @input="false"
         @keyup.enter="startRedemption"
       />
       <div class="input-group-append">

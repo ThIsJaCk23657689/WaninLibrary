@@ -59106,7 +59106,7 @@ var render = function() {
                 }
                 _vm.barcodeText = $event.target.value
               },
-              _vm.startRedemption
+              false
             ],
             keyup: function($event) {
               if (
@@ -71869,7 +71869,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\backend.js */"./resources/js/backend.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\backend.js */"./resources/js/backend.js");
 
 
 /***/ })

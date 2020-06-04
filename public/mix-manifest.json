@@ -15,6 +15,7 @@
     "/js/auth/login.js": "/js/auth/login.js",
     "/js/auth/resetPassword.js": "/js/auth/resetPassword.js",
     "/js/backend.js": "/js/backend.js",
+    "/js/backend/index.js": "/js/backend/index.js",
     "/js/books/create.js": "/js/books/create.js",
     "/js/books/edit.js": "/js/books/edit.js",
     "/js/books/index.js": "/js/books/index.js",

@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ 	return __webpack_require__(__webpack_require__.s = 23);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1123,14 +1123,14 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 22:
+/***/ 23:
 /*!***********************************************!*\
   !*** multi ./resources/js/loginLogs/index.js ***!
   \***********************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\loginLogs\index.js */"./resources/js/loginLogs/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\loginLogs\index.js */"./resources/js/loginLogs/index.js");
 
 
 /***/ })
