@@ -219,6 +219,9 @@
 
             <div class="form-group row justify-content-center">
                 <div class="col-md-8">
+                    <a href="{{ route('books.create') }}" class="btn btn-block btn-primary">
+                        新增書本
+                    </a>
                     <a href="{{ route('books.edit', [$book->id]) }}" class="btn btn-block btn-success">
                         編輯修改
                     </a>

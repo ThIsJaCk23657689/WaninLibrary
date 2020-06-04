@@ -218,26 +218,13 @@ $(function() {
 
         let url = $(this).attr('action');
 
-        $('#LogoutMsgModal_good').css({ 'display': 'none' });
-        $('#LogoutMsgModal_error').css({ 'display': 'none' });
-        $('#LogoutMsgModal_spinner').slideDown();
-        $('#LogoutMsgModal_msg').html('請稍等...');
-        $('#LogoutMsgModal_link').slideUp();
-        $('#LogoutMsgModal_close').slideUp();
-        $('#LogoutMsgModal').modal('show');
+        $.showLoadingModal();
         axios.post(url).then(response => {
-            $('#LogoutMsgModal_good').css({ 'display': 'flex' });
-            $('#LogoutMsgModal_spinner').css({ 'display': 'none' });
-            $('#LogoutMsgModal_msg').html('登出成功');
-            $('#LogoutMsgModal_link').attr('href', response.data.url);
-            $('#LogoutMsgModal_link').slideDown();
+            $.showSuccessModal('登出成功', response.data.url);
             // console.log(response.data);
         }).catch((error) => {
+            $.showErrorModal(error);
             console.error('登出時發生錯誤，錯誤訊息：' + error);
-            $('#LogoutMsgModal_error').css({ 'display': 'flex' });
-            $('#LogoutMsgModal_spinner').css({ 'display': 'none' });
-            $('#LogoutMsgModal_msg').html('登出時發生錯誤<br>錯誤訊息：' + error + '<br>');
-            $('#LogoutMsgModal_close').slideDown();
         });
     });
 });
