@@ -20,7 +20,7 @@ class StatisticController extends Controller
         ]);
 
         $this->middleware('auth.web')->only([
-            'buyedBooksExport', 'topBooksExport', 'borrowLogsExport', 'DonatedExport', 'chartIndex','exportIndex'
+            'boughtBooksExport', 'topBooksExport', 'borrowLogsExport', 'DonatedExport', 'chartIndex','exportIndex'
         ]);
         $this->BorrowLogService = new BorrowLogService();
     }

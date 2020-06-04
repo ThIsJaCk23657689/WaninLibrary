@@ -75,6 +75,7 @@ Route::prefix('/backend')->group(function(){
     Route::get('/books/getBookDataByBarcode', 'BookController@getBookDataByBarcode')->name('books.barcode.json');
     Route::get('/books/json', 'BookController@getList')->name('books.getList');
     Route::get('/books/{id}/json', 'BookController@getOne')->name('books.getOne');
+    Route::get('/books/getBookCountByCategory', 'BookController@getBookCountByCategory')->name('books.getBookCountByCategory');
     Route::resource('/books', 'BookController', ['only' => [
         'store', 'update', 'destroy'
     ]]);

@@ -506,4 +506,69 @@ class BookService extends BaseService
 
         return $res;
     }
+
+    public function getBookCountByCategory(){
+
+        $data = [];
+        $labels = [];
+        for($i=0; $i<14; $i++){
+            $counter = BookEloquent::where('category', '=', $i)->count();
+            $data[$i] = $counter;
+            $labels[$i] = $this->showCategory($i);
+        }
+        $res = ['label' => $labels, 'count' => $data, 'maxValue' => max($data)];
+        return $res;
+    }
+
+    protected function showCategory($category){
+        switch ($category) {
+            case 0:
+                $result = '總類';
+                break;
+            case 1:
+                $result = '哲學類';
+                break;
+            case 2:
+                $result = '宗教類';
+                break;
+            case 3:
+                $result = '科學類';
+                break;
+            case 4:
+                $result = '應用科學類';
+                break;
+            case 5:
+                $result = '社會學類';
+                break;
+            case 6:
+                $result = '史地類';
+                break;
+            case 7:
+                $result = '中國史地類';
+                break;
+            case 8:
+                $result = '世界史地類';
+                break;
+            case 9:
+                $result = '語文文學類';
+                break;
+            case 10:
+                $result = '藝術類';
+                break;
+            case 11:
+                $result = '論文類';
+                break;
+            case 12:
+                $result = '期刊雜誌類';
+                break;
+            case 13:
+                $result = '外文圖書';
+                break;
+
+            default:
+                $result = '未分類';
+                break;
+        }
+        return $result;
+    }
 }

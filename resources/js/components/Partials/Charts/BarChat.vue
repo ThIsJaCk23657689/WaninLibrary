@@ -17,62 +17,82 @@ export default {
             type: String,
         },
         data: {
-            type: Object
+            type: Array
+        },
+        label:{
+            type: Array
         }
+
     },
     data(){
         return {
-
+            BarChartByCategoryLabel:[],
+            BarChartByCategoryData:[],
+            maxValue: null
         }
     },
     methods: {
         init(){
-            let ctx = document.getElementById(this.canvasId);
 
-            let myChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ["January", "February", "March", "April", "May", "June"],
-                    datasets: [{
-                        label: "Revenue",
-                        backgroundColor: "rgba(2,117,216,1)",
-                        borderColor: "rgba(2,117,216,1)",
-                        data: [4215, 5312, 6251, 7841, 9821, 14984],
-                    }],
-                },
-                options: {
-                    scales: {
-                        xAxes: [{
-                            time: {
-                                unit: 'month'
-                            },
-                            gridLines: {
-                                display: false
-                            },
-                            ticks: {
-                                maxTicksLimit: 6
-                            }
-                        }],
-                        yAxes: [{
-                            ticks: {
-                                min: 0,
-                                max: 15000,
-                                maxTicksLimit: 5
-                            },
-                            gridLines: {
-                                display: true
-                            }
+            let $url = $('#getBookCountByCategoryURL').text();
+            let ctx = document.getElementById(this.canvasId);
+            axios.get($url).then(response => {
+                this.BarChartByCategoryData = response.data.res.count;
+                this.BarChartByCategoryLabel = response.data.res.label;
+                this.maxValue = response.data.res.maxValue;
+                console.log('aa '+this.maxValue);
+                 let myChart = new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: this.BarChartByCategoryLabel,
+                        datasets: [{
+                            label: "本數",
+                            backgroundColor: "rgba(2,117,216,1)",
+                            borderColor: "rgba(2,117,216,1)",
+                            data: this.BarChartByCategoryData,
                         }],
                     },
-                    legend: {
-                        display: false
+                    options: {
+                        scales: {
+                            xAxes: [{
+                                time: {
+                                    unit: '總類'
+                                },
+                                gridLines: {
+                                    display: false
+                                },
+                                ticks: {
+                                    maxTicksLimit: 13
+                                }
+                            }],
+                            yAxes: [{
+                                ticks: {
+                                    min: 0,
+                                    max: this.maxValue,
+                                    maxTicksLimit: 5
+                                },
+                                gridLines: {
+                                    display: true
+                                }
+                            }],
+                        },
+                        legend: {
+                            display: false
+                        }
                     }
-                }
+                });
+                console.log(response.data);
+            }).catch(error => {
+                console.error('抓取書籍分類比例時發生錯誤，訊息：' + error);
+                $.showErrorModal(error);
             });
+
+
+
         }
     },
     created(){
-        
+
     },
     mounted(){
         this.init();
