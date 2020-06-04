@@ -268,7 +268,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     chagePage: function chagePage(num) {
-      this.currentPageNum = num;
+      // this.pageNum = num;
       this.$emit('updatePage', num);
     }
   },
@@ -596,7 +596,7 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("paginate", {
     attrs: {
-      value: _vm.currentPageNum,
+      value: _vm.pageNum,
       "page-count": _vm.totalPage,
       "click-handler": _vm.chagePage,
       "page-range": 5,
@@ -777,6 +777,7 @@ var app = new Vue({
         this.pageNum = pageNum;
       }
 
+      console.log(first_page);
       var skip = (pageNum - 1) * this.rowsPerPage;
       var take = this.rowsPerPage;
       var status = this.status;
@@ -792,7 +793,8 @@ var app = new Vue({
           status: status,
           keywords: keywords,
           type: type,
-          category: category
+          category: category,
+          first_page: first_page
         }
       }).then(function (response) {
         _this.books = response.data.books;

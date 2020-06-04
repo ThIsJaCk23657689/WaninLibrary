@@ -37,7 +37,11 @@ class BorrowerService extends BaseService
 
     public function getList($request)
     {
-        $skip = $request->skip ?? 0;
+        if($request->first_page){
+            $skip = 0;
+        }else{
+            $skip = $request->skip ?? 0 ;
+        }
         $take = $request->take ?? 10;
         $status = $request->status ?? 2;
         $activated = $request->activated ?? 2;
@@ -52,7 +56,7 @@ class BorrowerService extends BaseService
             $count = $borrowers_tmp->count();
             $borrowers = $borrowers_tmp->skip($skip)->take($take)->get();
         }else{
-            $borrowers_tmp = BorrowerEloquent::query()->where(function ($query) use ($keywords, $status, $activated, $type, $type_arr) {
+            $borrowers_tmp = BorrowerEloquent::query()->where(function ($query) use ($keywords, $type, $type_arr) {
 
                 // type = 2-4
                 if($type != 0 && $keywords != [] && $type != 1){
@@ -64,7 +68,7 @@ class BorrowerService extends BaseService
                 }elseif($type == 1 && $keywords != []){
                     foreach ($keywords as $keyword) {
                         $keyword = '%'.$keyword.'%';
-                        $query->where('agency_id','<>', null)->join('agencies', function ($join) use ($keyword) {
+                        $query->orWhere('agency_id','<>', null)->join('agencies', function ($join) use ($keyword) {
                             $join->on('borrowers.agency_id', '=', 'agencies.id')
                                  ->where('agencies.name', 'like', $keyword);
                         });
@@ -77,7 +81,7 @@ class BorrowerService extends BaseService
                             if($i != 1){
                                 $query->orWhere($type_arr[$i], 'like', $keyword);
                             }else{
-                                $query->where('agency_id','<>', null)->join('agencies', function ($join) use ($keyword) {
+                                $query->orWhere('agency_id','<>', null)->join('agencies', function ($join) use ($keyword) {
                                     $join->on('borrowers.agency_id', '=', 'agencies.id')
                                          ->where('agencies.name', 'like', $keyword);
                                 });
@@ -86,14 +90,15 @@ class BorrowerService extends BaseService
                     }
                 }
 
-                if($status != 2){
-                    $query->where('status', $status);
-                }
-                if($activated != 2){
-                    $query->where('activated', $activated);
-                }
+
 
             });
+            if($status != 2){
+                $borrowers_tmp->where('status', $status);
+            }
+            if($activated != 2){
+                $borrowers_tmp->where('activated', $activated);
+            }
             $count = $borrowers_tmp->count();
             $borrowers = $borrowers_tmp->skip($skip)->take($take)->get();
 

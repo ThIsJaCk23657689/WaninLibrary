@@ -48,6 +48,7 @@ const app = new Vue({
                     keywords: keywords,
                     type: type,
                     exposure: exposure,
+                    first_page: first_page,
                 }
             }).then(response => {
                 this.donors = response.data.donors;
@@ -63,9 +64,9 @@ const app = new Vue({
                 console.log(error);
             });
         },
-        refreshDeleteBtn(){
+        refreshDeleteBtn() {
             let $vm = this;
-            $('.delete-btn').click(function(e){
+            $('.delete-btn').click(function(e) {
                 e.preventDefault();
 
                 Swal.fire({
