@@ -36,7 +36,7 @@ class BookService extends BaseService
         }
 
         $book = BookEloquent::create([
-            'donor_id' => $request->donor_id,
+            'donor_id' => $request->donor_id ?? 0,
             'barcode' => $barcode,
             'callnum' => $request->callnum,
             'category' => $request->category,
