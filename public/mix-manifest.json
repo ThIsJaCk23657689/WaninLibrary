@@ -19,6 +19,7 @@
     "/js/books/create.js": "/js/books/create.js",
     "/js/books/edit.js": "/js/books/edit.js",
     "/js/books/index.js": "/js/books/index.js",
+    "/js/books/print.js": "/js/books/print.js",
     "/js/borrowLogs/index.js": "/js/borrowLogs/index.js",
     "/js/borrowers/create.js": "/js/borrowers/create.js",
     "/js/borrowers/edit.js": "/js/borrowers/edit.js",

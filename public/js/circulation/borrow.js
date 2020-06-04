@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -231,7 +231,8 @@ __webpack_require__.r(__webpack_exports__);
       historyBorrowRecords: [],
       currentBooks: [],
       borrowCounts: 5,
-      notReturnCounts: 0
+      notReturnCounts: 0,
+      barcodeText: ''
     };
   },
   methods: {
@@ -274,6 +275,7 @@ __webpack_require__.r(__webpack_exports__);
     updateCurrentBorrower: function updateCurrentBorrower(url) {
       var _this2 = this;
 
+      this.notReturnCounts = 0;
       $.showLoadingModal('抓取借閱人資料中');
       axios.get(url, {
         params: {
@@ -336,7 +338,7 @@ __webpack_require__.r(__webpack_exports__);
       }
 
       var url = $('#getBookDataByBarcode').text();
-      var $barcode = e.target.value;
+      var $barcode = this.barcodeText;
 
       if (!$barcode) {
         return false;
@@ -407,6 +409,11 @@ __webpack_require__.r(__webpack_exports__);
       changeYear: true,
       changeMonth: true,
       yearRange: "-80:+0"
+    });
+    $(document).on("keydown", ":input:not(textarea)", function (event) {
+      if (event.key == "Enter") {
+        event.preventDefault();
+      }
     });
   }
 });
@@ -1508,6 +1515,14 @@ var render = function() {
                     ]),
                     _vm._v(" "),
                     _c("input", {
+                      directives: [
+                        {
+                          name: "model",
+                          rawName: "v-model",
+                          value: _vm.barcodeText,
+                          expression: "barcodeText"
+                        }
+                      ],
                       staticClass: "form-control",
                       attrs: {
                         id: "barcode",
@@ -1517,7 +1532,30 @@ var render = function() {
                         required: "",
                         autocomplete: "off"
                       },
-                      on: { change: _vm.addBook }
+                      domProps: { value: _vm.barcodeText },
+                      on: {
+                        keyup: function($event) {
+                          if (
+                            !$event.type.indexOf("key") &&
+                            _vm._k(
+                              $event.keyCode,
+                              "enter",
+                              13,
+                              $event.key,
+                              "Enter"
+                            )
+                          ) {
+                            return null
+                          }
+                          return _vm.addBook($event)
+                        },
+                        input: function($event) {
+                          if ($event.target.composing) {
+                            return
+                          }
+                          _vm.barcodeText = $event.target.value
+                        }
+                      }
                     }),
                     _vm._v(" "),
                     _vm._m(1)
@@ -2407,7 +2445,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /*!**************************************************!*\
   !*** multi ./resources/js/circulation/borrow.js ***!
   \**************************************************/

@@ -62,13 +62,14 @@ const navbar = new Vue({
 
         $.showErrorModal = function(error) {
             let $container = $('<span></span>');
-            
+            let $type = false;
             if (error.response.data.errors != null) {
                 let $key = Object.keys(error.response.data.errors);
                 $key.forEach(function(item, index) {
                     $container.append(error.response.data.errors[item] + '<br />');
                     $('#' + item).addClass('is-invalid');
                 });
+                $type = true;
             }
 
             Swal.fire({
@@ -77,7 +78,7 @@ const navbar = new Vue({
                 icon: 'error',
                 allowOutsideClick: false,
                 confirmButtonText: '確認',
-                html: $container,
+                html: ($type) ? $container : null,
             });
         }
 

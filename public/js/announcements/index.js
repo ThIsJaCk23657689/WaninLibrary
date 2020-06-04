@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 24);
+/******/ 	return __webpack_require__(__webpack_require__.s = 25);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -101,7 +101,7 @@ $(document).ready(function () {
 
 /***/ }),
 
-/***/ 24:
+/***/ 25:
 /*!***************************************************!*\
   !*** multi ./resources/js/announcements/index.js ***!
   \***************************************************/

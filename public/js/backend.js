@@ -2067,15 +2067,11 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   data: function data() {
     return {
-      barcodeText: "",
+      barcodeText: '',
       ReturnBookURL: $("#ReturnBookURL").text()
     };
   },
@@ -2094,6 +2090,7 @@ __webpack_require__.r(__webpack_exports__);
       var barcode = this.barcodeText;
 
       if (!barcode || barcode.length < 13) {
+        $.showWarningModal("條碼格式輸入不正確。");
         return false;
       }
 
@@ -2104,11 +2101,12 @@ __webpack_require__.r(__webpack_exports__);
       axios.post(vm.ReturnBookURL, {
         barcode: escape(barcode)
       }).then(function (response) {
-        console.log(response.data);
+        // console.log(response.data);
         $.showSuccessModal("歸還成功", response.data.url);
       })["catch"](function (error) {
         console.error("歸還書籍時發生錯誤，錯誤訊息：" + error);
         $.showErrorModal(error);
+        console.log(error.response.data.message);
       });
     }, 350)
   },
@@ -59099,15 +59097,6 @@ var render = function() {
           attrs: { type: "text", name: "barcode", placeholder: "快速還書..." },
           domProps: { value: _vm.barcodeText },
           on: {
-            input: [
-              function($event) {
-                if ($event.target.composing) {
-                  return
-                }
-                _vm.barcodeText = $event.target.value
-              },
-              false
-            ],
             keyup: function($event) {
               if (
                 !$event.type.indexOf("key") &&
@@ -59116,6 +59105,12 @@ var render = function() {
                 return null
               }
               return _vm.startRedemption($event)
+            },
+            input: function($event) {
+              if ($event.target.composing) {
+                return
+              }
+              _vm.barcodeText = $event.target.value
             }
           }
         }),
@@ -71431,6 +71426,7 @@ var navbar = new Vue({
 
     $.showErrorModal = function (error) {
       var $container = $('<span></span>');
+      var $type = false;
 
       if (error.response.data.errors != null) {
         var $key = Object.keys(error.response.data.errors);
@@ -71438,6 +71434,7 @@ var navbar = new Vue({
           $container.append(error.response.data.errors[item] + '<br />');
           $('#' + item).addClass('is-invalid');
         });
+        $type = true;
       }
 
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
@@ -71446,7 +71443,7 @@ var navbar = new Vue({
         icon: 'error',
         allowOutsideClick: false,
         confirmButtonText: '確認',
-        html: $container
+        html: $type ? $container : null
       });
     };
 

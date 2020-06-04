@@ -66,7 +66,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="barcode">書本條碼</label>
-                            <input id="barcode" name="barcode" type="text" class="form-control" value="" required autocomplete="off" @change="addBook">
+                            <input id="barcode" name="barcode" type="text" class="form-control" value="" required autocomplete="off" v-model="barcodeText" @keyup.enter="addBook">
                             <span id="barcode_error" class="invalid-feedback" role="alert">
                                 <strong></strong>
                             </span>
@@ -139,6 +139,8 @@ export default {
             currentBooks: [],
             borrowCounts: 5,
             notReturnCounts: 0,
+
+            barcodeText: '',
         }
     },
     methods: {
@@ -164,6 +166,7 @@ export default {
                 this.borrowers = response.data.borrowers;
                 this.totalCount = response.data.count;
                 this.totalPage = Math.ceil(this.totalCount / this.countPerPage);
+                
                 $.closeModal();
             }).catch(error => {
                 console.error('抓取借閱人列表時發生錯誤，錯誤訊息：' + error);
@@ -180,6 +183,7 @@ export default {
 
         // 選擇借閱人並抓取資料
         updateCurrentBorrower(url){
+            this.notReturnCounts = 0;
             $.showLoadingModal('抓取借閱人資料中');
             axios.get(url, {
                 params: {
@@ -242,7 +246,7 @@ export default {
             }
 
             let url = $('#getBookDataByBarcode').text();
-            let $barcode = e.target.value;
+            let $barcode = this.barcodeText;
 
             if(!$barcode){
                 return false;
@@ -298,7 +302,7 @@ export default {
             this.currentBooks = this.currentBooks.filter(function(el, $i, $arr){
                 return el.id != id;
             });
-        }
+        },
     },
     created(){
 
@@ -311,6 +315,12 @@ export default {
             changeMonth: true,
             yearRange: "-80:+0",
         });
+
+        $(document).on("keydown", ":input:not(textarea)", function(event) {
+            if (event.key == "Enter") {
+                event.preventDefault();
+            }
+        })
     }
 }
 </script>

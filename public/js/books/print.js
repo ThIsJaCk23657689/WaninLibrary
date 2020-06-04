@@ -81,34 +81,42 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 31);
+/******/ 	return __webpack_require__(__webpack_require__.s = 20);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/activities/index.js":
-/*!******************************************!*\
-  !*** ./resources/js/activities/index.js ***!
-  \******************************************/
+/***/ "./resources/js/books/print.js":
+/*!*************************************!*\
+  !*** ./resources/js/books/print.js ***!
+  \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(document).ready(function () {
-  $('#Activities-dataTable').DataTable({
-    "order": [[0, "desc"]]
+$(function () {
+  $('#printBtn').click(function () {
+    var divContents = $('#barcode_area').html();
+    var barcodeURL = $('#PrintURL').text();
+    var a = window.open(barcodeURL, '列印條碼', 'height=500, width=800, left=350, top=100'); // a.document.write('<html>');
+    // a.document.write('<body>');
+    // a.document.write(divContents);
+    // a.document.write('</body></html>');
+    // a.document.close();
+
+    a.print();
   });
 });
 
 /***/ }),
 
-/***/ 31:
-/*!************************************************!*\
-  !*** multi ./resources/js/activities/index.js ***!
-  \************************************************/
+/***/ 20:
+/*!*******************************************!*\
+  !*** multi ./resources/js/books/print.js ***!
+  \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\activities\index.js */"./resources/js/activities/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\print.js */"./resources/js/books/print.js");
 
 
 /***/ })

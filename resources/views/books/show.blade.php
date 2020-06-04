@@ -1,6 +1,7 @@
 @extends('layouts.backend.master')
 
 @push('CustomJS')
+<script src="{{ asset('js/books/print.js') }}" defer></script>
 @endpush
 
 @section('content')
@@ -45,8 +46,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="price"">價格</label>
-                            <input id="price"" name="price"" type="text" class="form-control" value="{{ $book->price }}"  readonly>
+                            <label for="price">價格</label>
+                            <input id="price" name="price" type="text" class="form-control" value="{{ $book->price }}"  readonly>
                         </div>
                     </div>
                 @endif
@@ -54,7 +55,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="status">狀態</label>
-                        <input id="status"" name="status"" type="text" class="form-control" value="{{ $book->showStatus() }}"  readonly>
+                        <input id="status" name="status" type="text" class="form-control" value="{{ $book->showStatus() }}"  readonly>
                     </div>
                 </div>
             </div>
@@ -195,23 +196,35 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="content">備註內容</label>
-                        <textarea name="content" id="content" class="form-control" cols="30" rows="3" readonly>{{ $book->content }}</textarea>
+                        <textarea name="content" id="content" class="form-control" cols="30" rows="5" readonly>{{ $book->content }}</textarea>
                     </div>
                 </div>
                 <div class="col-md-6">
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            網銀基金會 / 拾本書堂
+                    <div class="form-group">
+                        <label style="color: white">__</label>
+                        <div id="barcode_area" class="col-md-12">
+                            <div class="row">
+                                <div class="col-md-12 text-center">
+                                    網銀基金會 / 拾本書堂
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12  text-center">
+                                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($book->barcode, 'C128') }}" alt="barcode"   />
+                                </div>
+                            </div>
+                            <div class="row mb-2">
+                                <div class="col-md-12 text-center">
+                                    {{ $book->barcode }}
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12  text-center">
-                            <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($book->barcode, 'C128') }}" alt="barcode"   />
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            {{ $book->barcode }}
+                        <div class="row">
+                            <button id="printBtn" type="button" class="btn btn-block btn-dark">
+                                <i class="fas fa-print"></i>
+                                列印
+                            </button>
+                            <span id="PrintURL" class="d-none">{{ route('books.barcode', [$book->id]) }}</span>
                         </div>
                     </div>
                 </div>

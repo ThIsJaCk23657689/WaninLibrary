@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 20);
+/******/ 	return __webpack_require__(__webpack_require__.s = 21);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -95,7 +95,6 @@
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-//
 //
 //
 //
@@ -516,392 +515,378 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c(
-            "form",
-            {
-              attrs: {
-                method: "POST",
-                id: "circulation_index_form",
-                action: "#"
-              },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.circulationIndexForm($event)
-                }
-              }
+  return _c("div", [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "form",
+          {
+            attrs: {
+              method: "POST",
+              id: "circulation_index_form",
+              action: "#"
             },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _vm._m(1),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "barcode",
-                        name: "barcode",
-                        type: "text",
-                        value: "",
-                        required: "",
-                        autocomplete: "off",
-                        autofocus: ""
-                      },
-                      on: { change: _vm.getBookDataByBarcode }
-                    }),
-                    _vm._v(" "),
-                    _c("span", {
-                      staticClass: "invalid-feedback",
-                      attrs: { id: "barcode_error", role: "alert" }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-6" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "title" } }, [_vm._v("書名")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "title",
-                        name: "title",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.title }
-                    })
-                  ])
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.circulationIndexForm($event)
+              }
+            }
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(1),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control mb-2",
+                    attrs: {
+                      id: "barcode",
+                      name: "barcode",
+                      type: "text",
+                      value: "",
+                      required: "",
+                      autocomplete: "off",
+                      autofocus: ""
+                    },
+                    on: { change: _vm.getBookDataByBarcode }
+                  }),
+                  _vm._v(" "),
+                  _c("span", {
+                    staticClass: "invalid-feedback",
+                    attrs: { id: "barcode_error", role: "alert" }
+                  })
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-5" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "author" } }, [_vm._v("作者")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "author",
-                        name: "author",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.author }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "publisher" } }, [
-                      _vm._v("出版商")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "publisher",
-                        name: "publisher",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.publisher }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-3" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "callnum" } }, [
-                      _vm._v("索書號")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "callnum",
-                        name: "callnum",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.callnum }
-                    })
-                  ])
+              _c("div", { staticClass: "col-md-6" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "title" } }, [_vm._v("書名")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control mb-2",
+                    attrs: {
+                      id: "title",
+                      name: "title",
+                      type: "text",
+                      readonly: ""
+                    },
+                    domProps: { value: this.book.title }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-5" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "author" } }, [_vm._v("作者")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control mb-2",
+                    attrs: {
+                      id: "author",
+                      name: "author",
+                      type: "text",
+                      readonly: ""
+                    },
+                    domProps: { value: this.book.author }
+                  })
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "count" } }, [
-                      _vm._v("借閱次數")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "count",
-                        name: "count",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.count }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "donor" } }, [
-                      _vm._v("捐贈人")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "donor",
-                        name: "donor",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.donorName }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "status" } }, [_vm._v("狀態")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "status",
-                        name: "status",
-                        type: "text",
-                        readonly: ""
-                      },
-                      domProps: { value: this.book.showStatus }
-                    })
-                  ])
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "publisher" } }, [
+                    _vm._v("出版商")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control mb-2",
+                    attrs: {
+                      id: "publisher",
+                      name: "publisher",
+                      type: "text",
+                      readonly: ""
+                    },
+                    domProps: { value: this.book.publisher }
+                  })
                 ])
               ]),
               _vm._v(" "),
-              _c("hr"),
+              _c("div", { staticClass: "col-md-3" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "callnum" } }, [
+                    _vm._v("索書號")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control mb-2",
+                    attrs: {
+                      id: "callnum",
+                      name: "callnum",
+                      type: "text",
+                      readonly: ""
+                    },
+                    domProps: { value: this.book.callnum }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "count" } }, [
+                    _vm._v("借閱次數")
+                  ]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control mb-2",
+                    attrs: {
+                      id: "count",
+                      name: "count",
+                      type: "text",
+                      readonly: ""
+                    },
+                    domProps: { value: this.book.count }
+                  })
+                ])
+              ]),
               _vm._v(" "),
-              _vm._m(2),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "donor" } }, [_vm._v("捐贈人")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control mb-2",
+                    attrs: {
+                      id: "donor",
+                      name: "donor",
+                      type: "text",
+                      readonly: ""
+                    },
+                    domProps: { value: this.book.donorName }
+                  })
+                ])
+              ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "name" } }, [_vm._v("姓名")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.keywords.name,
-                          expression: "keywords.name"
-                        }
-                      ],
-                      staticClass: "form-control mb-2",
-                      attrs: { id: "name", name: "name", type: "text" },
-                      domProps: { value: _vm.keywords.name },
-                      on: {
-                        change: _vm.searchBorrower,
-                        keyup: function($event) {
-                          if (
-                            !$event.type.indexOf("key") &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.searchBorrower($event)
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.keywords, "name", $event.target.value)
-                        }
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "status" } }, [_vm._v("狀態")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control mb-2",
+                    attrs: {
+                      id: "status",
+                      name: "status",
+                      type: "text",
+                      readonly: ""
+                    },
+                    domProps: { value: this.book.showStatus }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "name" } }, [_vm._v("姓名")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
+                      {
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.keywords.name,
+                        expression: "keywords.name"
                       }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.keywords.tel,
-                          expression: "keywords.tel"
-                        }
-                      ],
-                      staticClass: "form-control mb-2",
-                      attrs: { id: "tel", name: "tel", type: "text" },
-                      domProps: { value: _vm.keywords.tel },
-                      on: {
-                        change: _vm.searchBorrower,
-                        keyup: function($event) {
-                          if (
-                            !$event.type.indexOf("key") &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.searchBorrower($event)
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.keywords, "tel", $event.target.value)
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-4" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "birthday" } }, [
-                      _vm._v("生日")
-                    ]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.keywords.birthday,
-                          expression: "keywords.birthday"
-                        }
-                      ],
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "birthday",
-                        name: "birthday",
-                        type: "text",
-                        autocomplete: "off"
-                      },
-                      domProps: { value: _vm.keywords.birthday },
-                      on: {
-                        change: _vm.searchBorrower,
-                        keyup: function($event) {
-                          if (
-                            !$event.type.indexOf("key") &&
-                            _vm._k(
-                              $event.keyCode,
-                              "enter",
-                              13,
-                              $event.key,
-                              "Enter"
-                            )
-                          ) {
-                            return null
-                          }
-                          return _vm.searchBorrower($event)
-                        },
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.keywords,
-                            "birthday",
-                            $event.target.value
+                    ],
+                    staticClass: "form-control mb-2",
+                    attrs: { id: "name", name: "name", type: "text" },
+                    domProps: { value: _vm.keywords.name },
+                    on: {
+                      change: _vm.searchBorrower,
+                      keyup: function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
                           )
+                        ) {
+                          return null
                         }
+                        return _vm.searchBorrower($event)
+                      },
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.keywords, "name", $event.target.value)
                       }
-                    })
-                  ])
+                    }
+                  })
                 ])
               ]),
               _vm._v(" "),
-              _c("filter-table", {
-                attrs: {
-                  borrowers: _vm.borrowers,
-                  pageNum: _vm.pageNum,
-                  totalPage: _vm.totalPage
-                },
-                on: { "update-page-num": _vm.updatePageNum }
-              }),
-              _vm._v(" "),
-              _c("hr"),
-              _vm._v(" "),
-              _vm._m(3),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "form-group row justify-content-center" },
-                [
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c(
-                      "button",
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
                       {
-                        staticClass: "btn btn-block btn-primary",
-                        attrs: { type: "submit" }
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.keywords.tel,
+                        expression: "keywords.tel"
+                      }
+                    ],
+                    staticClass: "form-control mb-2",
+                    attrs: { id: "tel", name: "tel", type: "text" },
+                    domProps: { value: _vm.keywords.tel },
+                    on: {
+                      change: _vm.searchBorrower,
+                      keyup: function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.searchBorrower($event)
                       },
-                      [
-                        _vm._v(
-                          "\r\n                            確認\r\n                        "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.keywords, "tel", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "birthday" } }, [_vm._v("生日")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
                       {
-                        staticClass: "btn btn-block btn-danger",
-                        attrs: { href: _vm.CirculationIndexURL }
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.keywords.birthday,
+                        expression: "keywords.birthday"
+                      }
+                    ],
+                    staticClass: "form-control mb-2",
+                    attrs: {
+                      id: "birthday",
+                      name: "birthday",
+                      type: "text",
+                      autocomplete: "off"
+                    },
+                    domProps: { value: _vm.keywords.birthday },
+                    on: {
+                      change: _vm.searchBorrower,
+                      keyup: function($event) {
+                        if (
+                          !$event.type.indexOf("key") &&
+                          _vm._k(
+                            $event.keyCode,
+                            "enter",
+                            13,
+                            $event.key,
+                            "Enter"
+                          )
+                        ) {
+                          return null
+                        }
+                        return _vm.searchBorrower($event)
                       },
-                      [
-                        _vm._v(
-                          "\r\n                            取消\r\n                        "
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ],
-            1
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("loading-modal", { ref: "loadingModal" })
-    ],
-    1
-  )
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.keywords, "birthday", $event.target.value)
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("filter-table", {
+              attrs: {
+                borrowers: _vm.borrowers,
+                pageNum: _vm.pageNum,
+                totalPage: _vm.totalPage
+              },
+              on: { "update-page-num": _vm.updatePageNum }
+            }),
+            _vm._v(" "),
+            _c("hr"),
+            _vm._v(" "),
+            _vm._m(3),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group row justify-content-center" },
+              [
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                            確認\r\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-block btn-danger",
+                      attrs: { href: _vm.CirculationIndexURL }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                            取消\r\n                        "
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ],
+          1
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -1443,7 +1428,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 20:
+/***/ 21:
 /*!*************************************************!*\
   !*** multi ./resources/js/circulation/index.js ***!
   \*************************************************/
