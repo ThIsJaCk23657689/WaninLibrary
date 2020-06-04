@@ -96,7 +96,7 @@ Route::prefix('/backend')->group(function () {
     Route::get('/recommendation/edit','InformationController@recommendation_edit')->name('recommendation.edit');
 
     //匯出資料
-    Route::get('/statistic/buyedbooks/export', 'StatisticController@buyedBooksExport')->name('statistic.buyedbooks.export');
+    Route::get('/statistic/boughtbooks/export', 'StatisticController@boughtBooksExport')->name('statistic.boughtbooks.export');
     Route::get('/statistic/topbooks/export', 'StatisticController@topBooksExport')->name('statistic.topbooks.export');
     Route::get('/statistic/borrowlogs/export', 'StatisticController@borrowLogsExport')->name('statistic.borrowlogs.export');
     Route::get('/statistic/donated/export', 'StatisticController@DonatedExport')->name('statistic.donated.export');

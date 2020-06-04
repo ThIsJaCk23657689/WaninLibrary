@@ -33,9 +33,9 @@ class StatisticController extends Controller
         return view('statistics.export.index');
     }
 
-    public function buyedBooksExport()
+    public function boughtBooksExport()
     {
-        return Excel::download(new BuyedBooksExport, 'buyed_books.xlsx');
+        return Excel::download(new BoughtBooksExport, 'bought_books.xlsx');
     }
 
     public function topBooksExport()

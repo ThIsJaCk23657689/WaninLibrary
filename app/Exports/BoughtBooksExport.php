@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Events\BeforeWriting;
 use Maatwebsite\Excel\Events\BeforeSheet;
 use Illuminate\Support\Collection;
 
-class BuyedBooksExport implements FromCollection, WithHeadings, WithColumnFormatting, ShouldAutoSize
+class BoughtBooksExport implements FromCollection, WithHeadings, WithColumnFormatting, ShouldAutoSize
 {
     /**
     * @return \Illuminate\Support\Collection
