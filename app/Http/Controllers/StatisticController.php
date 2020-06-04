@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
-use App\Exports\BuyedBooksExport;
+use App\Exports\BoughtBooksExport;
 use App\Exports\TopBooksExport;
 use App\Exports\BorrowLogsExport;
 use App\Exports\DonatedExport;
@@ -33,9 +33,9 @@ class StatisticController extends Controller
         return view('statistics.export.index');
     }
 
-    public function buyedBooksExport()
+    public function boughtBooksExport()
     {
-        return Excel::download(new BuyedBooksExport, 'buyed_books.xlsx');
+        return Excel::download(new BoughtBooksExport, 'bought_books.xlsx');
     }
 
     public function topBooksExport()

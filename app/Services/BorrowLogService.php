@@ -14,7 +14,11 @@ class BorrowLogService extends BaseService
     }
 
     public function getList($request){
-        $skip = $request->skip;
+        if($request->first_page){
+            $skip = 0;
+        }else{
+            $skip = $request->skip ?? 0 ;
+        }
         $take = $request->take;
         $status = $request->status;
         $start_date = ($request->start_date != "") ? $request->start_date : null;
@@ -31,16 +35,13 @@ class BorrowLogService extends BaseService
                 foreach ($keywords as $keyword) {
                     $query->ofColumns($keyword);
                 }
-
-                if($status != 5){
-                    $query->where('status', $status);
-                }
-                if($start_date != null &&  $end_date != null){
-                    $query->whereBetween('created_at', [$start_date, $end_date]);
-                }
-
-
             });
+            if($status != 5){
+                $logs_tmp->where('status', $status);
+            }
+            if($start_date != null &&  $end_date != null){
+                $logs_tmp->whereBetween('created_at', [$start_date, $end_date]);
+            }
             $count = $logs_tmp->count();
             $logs = $logs_tmp->skip($skip)->take($take)->get();
 

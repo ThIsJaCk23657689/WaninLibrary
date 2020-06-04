@@ -40,6 +40,7 @@ const app = new Vue({
             } else {
                 this.pageNum = pageNum;
             }
+            console.log(first_page);
 
             let skip = (pageNum - 1) * this.rowsPerPage;
             let take = this.rowsPerPage;
@@ -58,6 +59,7 @@ const app = new Vue({
                     keywords: keywords,
                     type: type,
                     category: category,
+                    first_page: first_page
                 }
             }).then(response => {
                 this.books = response.data.books;
@@ -73,9 +75,9 @@ const app = new Vue({
                 console.log(error);
             });
         },
-        refreshDeleteBtn(){
+        refreshDeleteBtn() {
             let $vm = this;
-            $('.delete-btn').click(function(e){
+            $('.delete-btn').click(function(e) {
                 e.preventDefault();
 
                 Swal.fire({

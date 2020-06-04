@@ -1,6 +1,6 @@
 <template>
     <paginate
-        :value="currentPageNum"
+        :value="pageNum"
         :page-count="totalPage"
         :click-handler="chagePage"
         :page-range="5"
@@ -36,7 +36,7 @@ export default {
     },
     methods: {
         chagePage(num) {
-            this.currentPageNum = num;
+            // this.pageNum = num;
             this.$emit('updatePage', num);
         }
     },

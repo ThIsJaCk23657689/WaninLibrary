@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Book as BookEloquent;
 use App\Services\CropImageService;
 use Exception;
+use Illuminate\Support\Facades\Log;
 
 class BookService extends BaseService
 {
@@ -117,7 +118,12 @@ class BookService extends BaseService
     // type:(default) 0.全部 1.書名 2.作者 3.ISBN 4.出版商
     // status: (default) 0.全部 1.在庫、2.借出 3.逾期 4.庫藏待上架 5.已淘汰 6.已轉贈、7.待索取 8.已被索取、9.無外借、10.無歸還
     public function getList($request){
-        $skip = $request->skip ?? 0 ;
+        if($request->first_page){
+            $skip = 0;
+        }else{
+            $skip = $request->skip ?? 0 ;
+        }
+
         $take = $request->take ?? 10;
         $status = $request->status ?? 0; //default 0
         $category = $request->category ?? 13; //default 13
@@ -135,28 +141,42 @@ class BookService extends BaseService
         }else{
             $books_tmp = BookEloquent::query()->where(function ($query) use ($keywords, $status, $category, $type, $type_arr) {
 
+
+                $c = 0;
                 if($type != 0 && $keywords != []){
                     foreach ($keywords as $keyword) {
                         $keyword = '%'.$keyword.'%';
-                        $query->orWhere($type_arr[$type], 'like',$keyword);
+                        if($c == 0){
+                            $query->where($type_arr[$type], 'like',$keyword);
+                            $c++;
+                        }else{
+                            $query->orWhere($type_arr[$type], 'like',$keyword);
+                        }
+
                     }
                 }elseif($keywords != []){
                     foreach ($keywords as $keyword) {
                         $keyword = '%'.$keyword.'%';
                         for($i = 1; $i<=4; $i++){
-                            $query->orWhere($type_arr[$i], 'like',$keyword);
+                            if($c == 0){
+                                $query->where($type_arr[$i], 'like',$keyword);
+                                $c++;
+                            }else{
+                                $query->orWhere($type_arr[$i], 'like',$keyword);
+                            }
                         }
                     }
                 }
 
-                if($status != 0){
-                    $query->where('status', $status);
-                }
-                if($category != 13){
-                    $query->where('category', $category);
-                }
+
 
             });
+            if($status != 0){
+                $books_tmp->where('status', $status);
+            }
+            if($category != 13){
+                $books_tmp->where('category', $category);
+            }
             $count = $books_tmp->count();
             $books = $books_tmp->skip($skip)->take($take)->get();
         }

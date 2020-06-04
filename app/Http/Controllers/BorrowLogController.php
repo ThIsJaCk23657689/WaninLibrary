@@ -41,7 +41,7 @@ class BorrowLogController extends Controller
             'take' => 'nullable|integer|max:100',
             'status' => [
                 'nullable',
-                Rule::in([1, 2, 3, 4]),
+                Rule::in([1, 2, 3, 4, 5]),
             ],
             'keywords' => 'nullable',
             'start_date' => 'nullable|date',
@@ -51,7 +51,7 @@ class BorrowLogController extends Controller
 
         $request->skip = $request->skip ?? 0;
         $request->take = $request->take ?? 10;
-        $request->status = $request->status ?? 4;
+        $request->status = $request->status ?? 5;
 
         $res = $this->BorrowLogService->getList($request);
 
@@ -77,7 +77,7 @@ class BorrowLogController extends Controller
         $this->validate($request, [
             'status' => [
                 'required',
-                Rule::in([1, 2, 3, 4]),
+                Rule::in([1, 2, 3, 4, 5]),
             ],
             'keyword' => 'nullable',
         ]);

@@ -31,7 +31,11 @@ class DonorService extends BaseService
 
     public function getList($request)
     {
-        $skip = $request->skip ?? 0;
+        if($request->first_page){
+            $skip = 0;
+        }else{
+            $skip = $request->skip ?? 0 ;
+        }
         $take = $request->take ?? 10;
         $type = $request->type ?? 0;
         $exposure = $request->exposure ?? 0;
@@ -63,11 +67,10 @@ class DonorService extends BaseService
                     }
                 }
 
-                if($exposure != 0){
-                    $query->where('exposure', $exposure);
-                }
-
             });
+            if($exposure != 0){
+                $donorsModel->where('exposure', $exposure);
+            }
             $count = $donorsModel->count();
             $donors = $donorsModel->skip($skip)->take($take)->get();
 

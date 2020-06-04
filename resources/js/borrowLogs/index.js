@@ -53,7 +53,8 @@ const app = new Vue({
                     status: status,
                     keywords: keywords,
                     start_date: start_date,
-                    end_date: end_date
+                    end_date: end_date,
+                    first_page: first_page,
                 }
             }).then(response => {
                 console.log(response);
