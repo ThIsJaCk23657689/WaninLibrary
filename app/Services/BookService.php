@@ -135,28 +135,42 @@ class BookService extends BaseService
         }else{
             $books_tmp = BookEloquent::query()->where(function ($query) use ($keywords, $status, $category, $type, $type_arr) {
 
+                
+                $c = 0;
                 if($type != 0 && $keywords != []){
                     foreach ($keywords as $keyword) {
                         $keyword = '%'.$keyword.'%';
-                        $query->orWhere($type_arr[$type], 'like',$keyword);
+                        if($c == 0){
+                            $query->where($type_arr[$type], 'like',$keyword);
+                            $c++;
+                        }else{
+                            $query->orWhere($type_arr[$type], 'like',$keyword);
+                        }
+                        
                     }
                 }elseif($keywords != []){
                     foreach ($keywords as $keyword) {
                         $keyword = '%'.$keyword.'%';
                         for($i = 1; $i<=4; $i++){
-                            $query->orWhere($type_arr[$i], 'like',$keyword);
+                            if($c == 0){
+                                $query->where($type_arr[$i], 'like',$keyword);
+                                $c++;
+                            }else{
+                                $query->orWhere($type_arr[$i], 'like',$keyword);
+                            }
                         }
                     }
                 }
 
-                if($status != 0){
-                    $query->where('status', $status);
-                }
-                if($category != 13){
-                    $query->where('category', $category);
-                }
+               
 
             });
+            if($status != 0){
+                $books_tmp->where('status', $status);
+            }
+            if($category != 13){
+                $books_tmp->where('category', $category);
+            }
             $count = $books_tmp->count();
             $books = $books_tmp->skip($skip)->take($take)->get();
         }
