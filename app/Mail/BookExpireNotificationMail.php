@@ -28,7 +28,7 @@ class BookExpireNotificationMail extends Mailable
      */
     public function build()
     {
-        Log::debug('aaaa');
+        Log::debug($this->details);
         return $this->view('mail.bookExpireNotification')
                 ->with(['details'=>$this->details]);
     }

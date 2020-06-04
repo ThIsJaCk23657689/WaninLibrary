@@ -233,7 +233,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                                登入\r\n                            "
+                        "\n                                登入\n                            "
                       )
                     ]
                   ),
@@ -246,7 +246,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                                忘記密碼？\r\n                            "
+                        "\n                                忘記密碼？\n                            "
                       )
                     ]
                   )
@@ -567,7 +567,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\auth\login.js */"./resources/js/auth/login.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\auth\login.js */"./resources/js/auth/login.js");
 
 
 /***/ })

@@ -23,7 +23,7 @@ class BuyedBooksExport implements FromCollection, WithHeadings, WithColumnFormat
     //注入資料
     public function collection()
     {
-        return Book::select('created_at', 'title', 'price')->where('donor_id', '=', null)->get();
+        return Book::select('created_at', 'title', 'price')->where('donor_id', '=', 0)->get();
     }
 
     // public function collection()
