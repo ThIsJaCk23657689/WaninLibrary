@@ -26,7 +26,7 @@
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
-                        <a href="{{ route('statistic.buyedbooks.export') }}" class="btn btn-block btn-dark btn-lg">書籍採購報表</a>
+                        <a href="{{ route('statistic.boughtbooks.export') }}" class="btn btn-block btn-dark btn-lg">書籍採購報表</a>
                     </div>
                 </div>
             </div>
