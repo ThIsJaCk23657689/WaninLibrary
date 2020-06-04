@@ -188,5 +188,15 @@ class BookController extends Controller
         return view('books.barcode', compact('book'));
     }
 
-    
+    public function getBookCountByCategory()
+    {
+        $res = $this->BookService->getBookCountByCategory();
+
+        return response()->json([
+            'status' => 'OK',
+            'res' => $res,
+        ]);
+    }
+
+
 }
