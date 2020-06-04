@@ -137,13 +137,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   mounted: function mounted() {
     $('#forget_password_form').submit(function (e) {
+      $('#forget_pwd_btn').attr('disabled', true);
       e.preventDefault();
       var url = $('#forgetPasswordAPIURL').text();
       var data = $(this).serializeObject();
       console.log(url); // $('#forget_password_form input.is-invalid').removeClass('is-invalid')
 
+      $.showLoadingModal('寄信中，請稍後');
       axios.post(url, data).then(function (response) {
         console.log(response.data);
+        $('.btn').attr('disabled', false);
         $.showSuccessModal('請至信箱收信', $('#LoginURL').text()); // location.href = $('#LoginURL').text();
       })["catch"](function (error) {
         console.error('失敗，錯誤訊息：' + error); // console.error(error.response);
@@ -244,11 +247,11 @@ var staticRenderFns = [
                       "button",
                       {
                         staticClass: "btn btn-primary",
-                        attrs: { type: "submit" }
+                        attrs: { type: "submit", id: "forget_pwd_btn" }
                       },
                       [
                         _vm._v(
-                          "\r\n                                送出\r\n                            "
+                          "\n                                送出\n                            "
                         )
                       ]
                     )
@@ -471,7 +474,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\auth\forgetPassword.js */"./resources/js/auth/forgetPassword.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\auth\forgetPassword.js */"./resources/js/auth/forgetPassword.js");
 
 
 /***/ })

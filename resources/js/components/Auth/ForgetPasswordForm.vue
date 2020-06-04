@@ -19,7 +19,7 @@
 
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
+                            <button type="submit" class="btn btn-primary" id="forget_pwd_btn">
                                 送出
                             </button>
                         </div>
@@ -41,14 +41,17 @@ export default {
     },
     mounted(){
         $('#forget_password_form').submit(function(e){
+            $('#forget_pwd_btn').attr('disabled', true);
             e.preventDefault();
 
             let url = $('#forgetPasswordAPIURL').text();
             let data = $(this).serializeObject();
             console.log(url);
             // $('#forget_password_form input.is-invalid').removeClass('is-invalid')
+            $.showLoadingModal('寄信中，請稍後');
             axios.post(url, data).then(response => {
                 console.log(response.data);
+                $('.btn').attr('disabled', false);
                 $.showSuccessModal('請至信箱收信',$('#LoginURL').text());
                 // location.href = $('#LoginURL').text();
             }).catch((error) => {
