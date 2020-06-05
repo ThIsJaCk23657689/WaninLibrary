@@ -103,7 +103,7 @@ class BorrowLogService extends BaseService
             $firstDay = date('Y-m-d',strtotime(str_replace('-', '/', $firstDay) . "-1 month"));
             $lastDay = date('Y-m-d',strtotime(str_replace('-', '/', $lastDay) . "-1 month"));
         }
-        $res = ['count' => array_reverse($count), 'date' => array_reverse($date)];
+        $res = ['count' => array_reverse($count), 'date' => array_reverse($date), 'maxValue' => max($count)];
         return $res;
     }
 
@@ -117,7 +117,7 @@ class BorrowLogService extends BaseService
             $firstDay = date('Y-m-d',strtotime(str_replace('-', '/', $firstDay) . "-1 year"));
             $lastDay = date('Y-m-d',strtotime(str_replace('-', '/', $lastDay) . "-1 year"));
         }
-        $res = ['count' => array_reverse($count), 'date' => array_reverse($date)];
+        $res = ['count' => array_reverse($count), 'date' => array_reverse($date), 'maxValue' => max($count)];
         return $res;
     }
 

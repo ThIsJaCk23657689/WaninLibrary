@@ -78,7 +78,7 @@
 		</div>
 	</li>
 
-	<li class="nav-item dropdown">
+	{{-- <li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 			<i class="far fa-chart-bar"></i>
 			<span>{{ __('Statistics') }}</span>
@@ -88,6 +88,6 @@
             <a class="dropdown-item" href="{{ route('statistic.chart.index') }}">{{ __('Chart') }}</a>
 			<a class="dropdown-item" href="{{ route('statistic.export.index') }}">{{ __('Export') }}</a>
 		</div>
-	</li>
+	</li> --}}
 
 </ul>

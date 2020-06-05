@@ -31,8 +31,6 @@
             <span id="BorrowLogsGetListByMonthURL" class="d-none">{{ route('statistics.getBorrowLogsChartByMonth') }}</span>
             <span id="BorrowLogsGetListByYearURL" class="d-none">{{ route('statistics.getBorrowLogsChartByYear') }}</span>
 
-            <chart-card></chart-card>
-
         </div>
 
 		{{-- @include('partials.backend.examplechart') --}}

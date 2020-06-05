@@ -86,194 +86,6 @@
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Chart/ChartCard.vue?vue&type=script&lang=js&":
-/*!**************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Chart/ChartCard.vue?vue&type=script&lang=js& ***!
-  \**************************************************************************************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-/* harmony default export */ __webpack_exports__["default"] = ({
-  props: [''],
-  data: function data() {
-    return {
-      BorrowLogsGetListByMonthURL: $('#BorrowLogsGetListByMonthURL').text(),
-      BorrowLogsGetListByYearURL: $('#BorrowLogsGetListByYearURL').text(),
-      label_month: [],
-      data_month: [],
-      label_year: [],
-      data_year: []
-    };
-  },
-  methods: {},
-  created: function created() {
-    var _this = this;
-
-    // Set new default font family and font color to mimic Bootstrap's default styling
-    Chart.defaults.global.defaultFontFamily = '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
-    Chart.defaults.global.defaultFontColor = '#292b2c';
-    axios.get(this.BorrowLogsGetListByMonthURL).then(function (response) {
-      _this.label_month = response.data.res.date;
-      _this.data_month = response.data.res.count;
-      console.log(response.data.res); // Area Chart Example
-
-      var ctx = document.getElementById("BorrowLogsByMonth");
-      var myLineChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: _this.label_month,
-          datasets: [{
-            label: "Sessions",
-            lineTension: 0.3,
-            backgroundColor: "rgba(2,117,216,0.2)",
-            borderColor: "rgba(2,117,216,1)",
-            pointRadius: 5,
-            pointBackgroundColor: "rgba(2,117,216,1)",
-            pointBorderColor: "rgba(255,255,255,0.8)",
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(2,117,216,1)",
-            pointHitRadius: 50,
-            pointBorderWidth: 2,
-            data: _this.data_month
-          }]
-        },
-        options: {
-          scales: {
-            xAxes: [{
-              time: {
-                unit: 'date'
-              },
-              gridLines: {
-                display: false
-              },
-              ticks: {
-                maxTicksLimit: 7
-              }
-            }],
-            yAxes: [{
-              ticks: {
-                min: 0,
-                max: 40000,
-                maxTicksLimit: 5
-              },
-              gridLines: {
-                color: "rgba(0, 0, 0, .125)"
-              }
-            }]
-          },
-          legend: {
-            display: false
-          }
-        }
-      });
-    });
-    axios.get(this.BorrowLogsGetListByYearURL).then(function (response) {
-      _this.label_year = response.data.res.date;
-      _this.data_year = response.data.res.count;
-      console.log(response.data.res); // Area Chart Example
-
-      var ctx = document.getElementById("BorrowLogsByYear");
-      var myLineChart = new Chart(ctx, {
-        type: 'line',
-        data: {
-          labels: _this.label_year,
-          datasets: [{
-            label: "Sessions",
-            lineTension: 0.3,
-            backgroundColor: "rgba(2,117,216,0.2)",
-            borderColor: "rgba(2,117,216,1)",
-            pointRadius: 5,
-            pointBackgroundColor: "rgba(2,117,216,1)",
-            pointBorderColor: "rgba(255,255,255,0.8)",
-            pointHoverRadius: 5,
-            pointHoverBackgroundColor: "rgba(2,117,216,1)",
-            pointHitRadius: 50,
-            pointBorderWidth: 2,
-            data: _this.data_year
-          }]
-        },
-        options: {
-          scales: {
-            xAxes: [{
-              time: {
-                unit: 'date'
-              },
-              gridLines: {
-                display: false
-              },
-              ticks: {
-                maxTicksLimit: 7
-              }
-            }],
-            yAxes: [{
-              ticks: {
-                min: 0,
-                max: 40000,
-                maxTicksLimit: 5
-              },
-              gridLines: {
-                color: "rgba(0, 0, 0, .125)"
-              }
-            }]
-          },
-          legend: {
-            display: false
-          }
-        }
-      });
-    });
-  },
-  mounted: function mounted() {
-    $('#nav_month').click(function (e) {
-      $('#a_month').addClass('active');
-      $('#a_year').removeClass('active');
-      $('#div_Year').hide();
-      $('#div_Month').fadeIn();
-      $('#i_year').hide();
-      $('#i_month').fadeIn();
-    });
-    $('#nav_year').click(function (e) {
-      $('#a_month').removeClass('active');
-      $('#a_year').addClass('active');
-      $('#div_Month').hide();
-      $('#div_Year').fadeIn();
-      $('#i_year').fadeIn();
-      $('#i_month').hide();
-    });
-  }
-});
-
-/***/ }),
-
 /***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Partials/Charts/BarChat.vue?vue&type=script&lang=js&":
 /*!**********************************************************************************************************************************************************************************!*\
   !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Partials/Charts/BarChat.vue?vue&type=script&lang=js& ***!
@@ -283,6 +95,23 @@ __webpack_require__.r(__webpack_exports__);
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -311,7 +140,15 @@ __webpack_require__.r(__webpack_exports__);
     return {
       BarChartByCategoryLabel: [],
       BarChartByCategoryData: [],
-      maxValue: null
+      maxValue: null,
+      maxValueYear: null,
+      maxValueMonth: null,
+      BorrowLogsGetListByMonthURL: $('#BorrowLogsGetListByMonthURL').text(),
+      BorrowLogsGetListByYearURL: $('#BorrowLogsGetListByYearURL').text(),
+      label_month: [],
+      data_month: [],
+      label_year: [],
+      data_year: []
     };
   },
   methods: {
@@ -363,106 +200,163 @@ __webpack_require__.r(__webpack_exports__);
               display: false
             }
           }
-        });
-        console.log(response.data);
+        }); // console.log(response.data);
       })["catch"](function (error) {
         console.error('抓取書籍分類比例時發生錯誤，訊息：' + error);
         $.showErrorModal(error);
+      });
+      axios.get(this.BorrowLogsGetListByMonthURL).then(function (response) {
+        _this.label_month = response.data.res.date;
+        _this.data_month = response.data.res.count;
+        _this.maxValueMonth = response.data.res.maxValue; // console.log(response.data.res);
+        // Area Chart Example
+
+        var BorrowLogsByMonthCtx = document.getElementById("BorrowLogsByMonth");
+        var BorrowLogsByMonthChart = new Chart(BorrowLogsByMonthCtx, {
+          type: 'line',
+          data: {
+            labels: _this.label_month,
+            datasets: [{
+              label: "Sessions",
+              lineTension: 0.3,
+              backgroundColor: "rgba(2,117,216,0.2)",
+              borderColor: "rgba(2,117,216,1)",
+              pointRadius: 5,
+              pointBackgroundColor: "rgba(2,117,216,1)",
+              pointBorderColor: "rgba(255,255,255,0.8)",
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "rgba(2,117,216,1)",
+              pointHitRadius: 50,
+              pointBorderWidth: 2,
+              data: _this.data_month
+            }]
+          },
+          options: {
+            scales: {
+              xAxes: [{
+                time: {
+                  unit: 'date'
+                },
+                gridLines: {
+                  display: false
+                },
+                ticks: {
+                  maxTicksLimit: 7
+                }
+              }],
+              yAxes: [{
+                ticks: {
+                  min: 0,
+                  max: Math.ceil(_this.maxValueMonth / 10) * 10,
+                  maxTicksLimit: 5
+                },
+                gridLines: {
+                  color: "rgba(0, 0, 0, .125)"
+                }
+              }]
+            },
+            legend: {
+              display: false
+            }
+          }
+        });
+      });
+      axios.get(this.BorrowLogsGetListByYearURL).then(function (response) {
+        _this.label_year = response.data.res.date;
+        _this.data_year = response.data.res.count;
+        _this.maxValueYear = response.data.res.maxValue; // console.log(response.data.res);
+        // Area Chart Example
+
+        var BorrowLogsByYearCtx = document.getElementById("BorrowLogsByYear");
+        var BorrowLogsByYearChart = new Chart(BorrowLogsByYearCtx, {
+          type: 'line',
+          data: {
+            labels: _this.label_year,
+            datasets: [{
+              label: "Sessions",
+              lineTension: 0.3,
+              backgroundColor: "rgba(2,117,216,0.2)",
+              borderColor: "rgba(2,117,216,1)",
+              pointRadius: 5,
+              pointBackgroundColor: "rgba(2,117,216,1)",
+              pointBorderColor: "rgba(255,255,255,0.8)",
+              pointHoverRadius: 5,
+              pointHoverBackgroundColor: "rgba(2,117,216,1)",
+              pointHitRadius: 50,
+              pointBorderWidth: 2,
+              data: _this.data_year
+            }]
+          },
+          options: {
+            scales: {
+              xAxes: [{
+                time: {
+                  unit: 'date'
+                },
+                gridLines: {
+                  display: false
+                },
+                ticks: {
+                  maxTicksLimit: 7
+                }
+              }],
+              yAxes: [{
+                ticks: {
+                  min: 0,
+                  max: Math.ceil(_this.maxValueYear / 10) * 10,
+                  maxTicksLimit: 5
+                },
+                gridLines: {
+                  color: "rgba(0, 0, 0, .125)"
+                }
+              }]
+            },
+            legend: {
+              display: false
+            }
+          }
+        });
       });
     }
   },
   created: function created() {},
   mounted: function mounted() {
     this.init();
+    $('#nav_month').click(function (e) {
+      $('#a_month').addClass('active');
+      $('#a_year').removeClass('active');
+      $('#a_book').removeClass('active');
+      $('#div_Year').hide();
+      $('#div_Book').hide();
+      $('#div_Month').fadeIn();
+      $('#i_year').hide();
+      $('#i_book').hide();
+      $('#i_month').fadeIn();
+    });
+    $('#nav_year').click(function (e) {
+      $('#a_month').removeClass('active');
+      $('#a_book').removeClass('active');
+      $('#a_year').addClass('active');
+      $('#div_Book').hide();
+      $('#div_Month').hide();
+      $('#div_Year').fadeIn();
+      $('#i_year').fadeIn();
+      $('#i_book').hide();
+      $('#i_month').hide();
+    });
+    $('#nav_book').click(function (e) {
+      $('#a_book').addClass('active');
+      $('#a_month').removeClass('active');
+      $('#a_year').removeClass('active');
+      $('#div_Year').hide();
+      $('#div_Month').hide();
+      $('#div_Book').fadeIn();
+      $('#i_book').fadeIn();
+      $('#i_year').hide();
+      $('#i_month').hide();
+    });
   }
 });
-
-/***/ }),
-
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Chart/ChartCard.vue?vue&type=template&id=3842ece2&":
-/*!******************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Chart/ChartCard.vue?vue&type=template&id=3842ece2& ***!
-  \******************************************************************************************************************************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "render", function() { return render; });
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return staticRenderFns; });
-var render = function() {
-  var _vm = this
-  var _h = _vm.$createElement
-  var _c = _vm._self._c || _h
-  return _vm._m(0)
-}
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", [
-      _c("div", { staticClass: "card text-center mb-3" }, [
-        _c("div", { staticClass: "card-header" }, [
-          _c("ul", { staticClass: "nav nav-tabs card-header-tabs" }, [
-            _c("li", { staticClass: "nav-item", attrs: { id: "nav_month" } }, [
-              _c(
-                "a",
-                {
-                  staticClass: "nav-link active",
-                  attrs: { id: "a_month", href: "#" }
-                },
-                [
-                  _c("i", {
-                    staticClass: "fas fa-chart-area mr-2",
-                    attrs: { id: "i_month" }
-                  }),
-                  _vm._v("月別借閱紀錄")
-                ]
-              )
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item", attrs: { id: "nav_year" } }, [
-              _c(
-                "a",
-                { staticClass: "nav-link", attrs: { href: "#", id: "a_year" } },
-                [
-                  _c("i", {
-                    staticClass: "fas fa-chart-area mr-2",
-                    staticStyle: { display: "none" },
-                    attrs: { id: "i_year" }
-                  }),
-                  _vm._v("年別借閱紀錄")
-                ]
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("div", { staticClass: "card-body" }, [
-          _c("div", { attrs: { id: "div_Month" } }, [
-            _c("canvas", {
-              attrs: { id: "BorrowLogsByMonth", width: "100%", height: "30" }
-            })
-          ]),
-          _vm._v(" "),
-          _c(
-            "div",
-            { staticStyle: { display: "none" }, attrs: { id: "div_Year" } },
-            [
-              _c("canvas", {
-                attrs: { id: "BorrowLogsByYear", width: "100%", height: "30" }
-              })
-            ]
-          )
-        ])
-      ])
-    ])
-  }
-]
-render._withStripped = true
-
-
 
 /***/ }),
 
@@ -485,7 +379,15 @@ var render = function() {
     _vm._m(0),
     _vm._v(" "),
     _c("div", { staticClass: "card-body" }, [
-      _c("canvas", { attrs: { id: _vm.canvasId, width: "100%", height: "30" } })
+      _c("div", { attrs: { id: "div_Book" } }, [
+        _c("canvas", {
+          attrs: { id: _vm.canvasId, width: "85%", height: "18" }
+        })
+      ]),
+      _vm._v(" "),
+      _vm._m(1),
+      _vm._v(" "),
+      _vm._m(2)
     ])
   ])
 }
@@ -495,9 +397,83 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
-      _c("i", { staticClass: "fas fa-chart-area mr-2" }),
-      _vm._v("\r\n\t\t書籍分類比例\r\n\t")
+      _c("ul", { staticClass: "nav nav-tabs card-header-tabs" }, [
+        _c("li", { staticClass: "nav-item", attrs: { id: "nav_book" } }, [
+          _c(
+            "a",
+            {
+              staticClass: "nav-link active",
+              attrs: { id: "a_book", href: "#" }
+            },
+            [
+              _c("i", {
+                staticClass: "fas fa-chart-area mr-2",
+                attrs: { id: "i_book" }
+              }),
+              _vm._v("書籍分類比例")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item", attrs: { id: "nav_month" } }, [
+          _c(
+            "a",
+            { staticClass: "nav-link", attrs: { id: "a_month", href: "#" } },
+            [
+              _c("i", {
+                staticClass: "fas fa-chart-area mr-2",
+                staticStyle: { display: "none" },
+                attrs: { id: "i_month" }
+              }),
+              _vm._v("月別借閱紀錄")
+            ]
+          )
+        ]),
+        _vm._v(" "),
+        _c("li", { staticClass: "nav-item", attrs: { id: "nav_year" } }, [
+          _c(
+            "a",
+            { staticClass: "nav-link", attrs: { href: "#", id: "a_year" } },
+            [
+              _c("i", {
+                staticClass: "fas fa-chart-area mr-2",
+                staticStyle: { display: "none" },
+                attrs: { id: "i_year" }
+              }),
+              _vm._v("年別借閱紀錄")
+            ]
+          )
+        ])
+      ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { display: "none" }, attrs: { id: "div_Month" } },
+      [
+        _c("canvas", {
+          attrs: { id: "BorrowLogsByMonth", width: "85%", height: "18" }
+        })
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticStyle: { display: "none" }, attrs: { id: "div_Year" } },
+      [
+        _c("canvas", {
+          attrs: { id: "BorrowLogsByYear", width: "85%", height: "18" }
+        })
+      ]
+    )
   }
 ]
 render._withStripped = true
@@ -621,7 +597,6 @@ function normalizeComponent (
 /***/ (function(module, exports, __webpack_require__) {
 
 Vue.component('bar-chart', __webpack_require__(/*! ./../components/Partials/Charts/BarChat.vue */ "./resources/js/components/Partials/Charts/BarChat.vue")["default"]);
-Vue.component('chart-card', __webpack_require__(/*! ./../components/Chart/ChartCard.vue */ "./resources/js/components/Chart/ChartCard.vue")["default"]);
 var backend = new Vue({
   el: '#backend',
   data: function data() {
@@ -652,84 +627,6 @@ var backend = new Vue({
   },
   mounted: function mounted() {}
 });
-var app = new Vue({
-  el: '#chart_card',
-  data: function data() {
-    return {};
-  },
-  methods: {},
-  created: function created() {},
-  mounted: function mounted() {}
-});
-
-/***/ }),
-
-/***/ "./resources/js/components/Chart/ChartCard.vue":
-/*!*****************************************************!*\
-  !*** ./resources/js/components/Chart/ChartCard.vue ***!
-  \*****************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _ChartCard_vue_vue_type_template_id_3842ece2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./ChartCard.vue?vue&type=template&id=3842ece2& */ "./resources/js/components/Chart/ChartCard.vue?vue&type=template&id=3842ece2&");
-/* harmony import */ var _ChartCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./ChartCard.vue?vue&type=script&lang=js& */ "./resources/js/components/Chart/ChartCard.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _ChartCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _ChartCard_vue_vue_type_template_id_3842ece2___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _ChartCard_vue_vue_type_template_id_3842ece2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Chart/ChartCard.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Chart/ChartCard.vue?vue&type=script&lang=js&":
-/*!******************************************************************************!*\
-  !*** ./resources/js/components/Chart/ChartCard.vue?vue&type=script&lang=js& ***!
-  \******************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./ChartCard.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Chart/ChartCard.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartCard_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Chart/ChartCard.vue?vue&type=template&id=3842ece2&":
-/*!************************************************************************************!*\
-  !*** ./resources/js/components/Chart/ChartCard.vue?vue&type=template&id=3842ece2& ***!
-  \************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartCard_vue_vue_type_template_id_3842ece2___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./ChartCard.vue?vue&type=template&id=3842ece2& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Chart/ChartCard.vue?vue&type=template&id=3842ece2&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartCard_vue_vue_type_template_id_3842ece2___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_ChartCard_vue_vue_type_template_id_3842ece2___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
 
 /***/ }),
 
@@ -809,7 +706,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\backend\index.js */"./resources/js/backend/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\backend\index.js */"./resources/js/backend/index.js");
 
 
 /***/ })
