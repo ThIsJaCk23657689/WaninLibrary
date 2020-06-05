@@ -23,10 +23,12 @@
                 <td style="text-align:center;">網銀基金會 / 拾本書堂</td>
             </tr>
             <tr>
-                <td><img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($book->barcode, 'C128') }}" alt="barcode"   /></td>
-            </tr>
-            <tr>
-                <td style="text-align:center;">{{ $book->barcode }}</td>
+                <td>
+                    <img src="data:image/png;base64,{{ DNS1D::getBarcodePNG($book->barcode, 'C128') }}" alt="barcode" style="width: 100%; height:50px;" /><br>
+                    <div style="text-align:center;">
+                        <span>{{ $book->barcode }}</span>
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>

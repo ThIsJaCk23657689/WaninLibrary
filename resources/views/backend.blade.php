@@ -19,14 +19,13 @@
         <span id="" class="d-none"></span>
         <span id="getBookCountByCategoryURL" class="d-none">{{ route('books.getBookCountByCategory') }}</span>
 
+		@include('partials.backend.iconcards')
+
 		<div class="row">
 			<div class="col-md-12">
 				<bar-chart canvas-id="BarChartByCategory"></bar-chart>
 			</div>
-
 		</div>
-
-        @include('partials.backend.iconcards')
 
         <div id="chart_card">
             <span id="BorrowLogsGetListByMonthURL" class="d-none">{{ route('statistics.getBorrowLogsChartByMonth') }}</span>

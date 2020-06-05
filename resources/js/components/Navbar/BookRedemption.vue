@@ -6,6 +6,7 @@
         		name="barcode"
         		class="form-control"
         		placeholder="快速還書..."
+				autocomplete="off"
         		v-model="barcodeText"
         		@keyup.enter="startRedemption"
       		/>

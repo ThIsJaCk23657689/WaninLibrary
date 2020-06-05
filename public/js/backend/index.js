@@ -324,7 +324,6 @@ __webpack_require__.r(__webpack_exports__);
         _this.BarChartByCategoryData = response.data.res.count;
         _this.BarChartByCategoryLabel = response.data.res.label;
         _this.maxValue = response.data.res.maxValue;
-        console.log('aa ' + _this.maxValue);
         var myChart = new Chart(ctx, {
           type: 'bar',
           data: {
@@ -352,7 +351,7 @@ __webpack_require__.r(__webpack_exports__);
               yAxes: [{
                 ticks: {
                   min: 0,
-                  max: _this.maxValue,
+                  max: Math.ceil(_this.maxValue / 10) * 10,
                   maxTicksLimit: 5
                 },
                 gridLines: {
@@ -497,7 +496,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-chart-area mr-2" }),
-      _vm._v("\n\t\t書籍分類比例\n\t")
+      _vm._v("\r\n\t\t書籍分類比例\r\n\t")
     ])
   }
 ]
@@ -810,7 +809,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\backend\index.js */"./resources/js/backend/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\backend\index.js */"./resources/js/backend/index.js");
 
 
 /***/ })

@@ -40,8 +40,7 @@ export default {
                 this.BarChartByCategoryData = response.data.res.count;
                 this.BarChartByCategoryLabel = response.data.res.label;
                 this.maxValue = response.data.res.maxValue;
-                console.log('aa '+this.maxValue);
-                 let myChart = new Chart(ctx, {
+                let myChart = new Chart(ctx, {
                     type: 'bar',
                     data: {
                         labels: this.BarChartByCategoryLabel,
@@ -68,7 +67,7 @@ export default {
                             yAxes: [{
                                 ticks: {
                                     min: 0,
-                                    max: this.maxValue,
+                                    max: Math.ceil(this.maxValue / 10) * 10,
                                     maxTicksLimit: 5
                                 },
                                 gridLines: {
