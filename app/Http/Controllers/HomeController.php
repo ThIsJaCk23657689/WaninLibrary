@@ -7,11 +7,11 @@ use Illuminate\Http\Request;
 class HomeController extends Controller
 {
     public function __construct(){
-        $this->middleware('auth.web');
+        $this->middleware('auth.web')->only('backend');
     }
 
     public function index(){
-        return view('home');
+        return view('frontend.index');
     }
 
     public function backend(){

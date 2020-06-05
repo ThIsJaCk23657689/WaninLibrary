@@ -14,7 +14,7 @@ const backend = new Vue({
             axios.get($url).then(response => {
                 this.BarChartByCategoryData = response.data.res.count;
                 this.BarChartByCategoryLabel = response.data.res.label;
-                console.log(response.data);
+                // console.log(response.data);
             }).catch(error => {
                 console.error('抓取書籍分類比例時發生錯誤，訊息：' + error);
                 $.showErrorModal(error);

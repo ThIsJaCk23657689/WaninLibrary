@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 6);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -612,8 +612,7 @@ var backend = new Vue({
       var $url = $('#getBookCountByCategoryURL').text();
       axios.get($url).then(function (response) {
         _this.BarChartByCategoryData = response.data.res.count;
-        _this.BarChartByCategoryLabel = response.data.res.label;
-        console.log(response.data);
+        _this.BarChartByCategoryLabel = response.data.res.label; // console.log(response.data);
       })["catch"](function (error) {
         console.error('抓取書籍分類比例時發生錯誤，訊息：' + error);
         $.showErrorModal(error);
@@ -699,7 +698,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 5:
+/***/ 6:
 /*!*********************************************!*\
   !*** multi ./resources/js/backend/index.js ***!
   \*********************************************/

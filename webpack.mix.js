@@ -12,16 +12,18 @@ const mix = require('laravel-mix');
  */
 
 mix.js('resources/js/app.js', 'public/js')
+    .js('resources/js/frontend.js', 'public/js')
     .js('resources/js/auth/login.js', 'public/js/auth')
     .js('resources/js/auth/resetPassword.js', 'public/js/auth')
     .js('resources/js/auth/forgetPassword.js', 'public/js/auth')
 
-.sass('resources/sass/app.scss', 'public/css');
+.sass('resources/sass/app.scss', 'public/css')
+    .sass('resources/sass/frontend/frontend.scss', 'public/css/frontend');
 
 mix.js('resources/js/backend.js', 'public/js')
     .js('resources/js/backend/index.js', 'public/js/backend')
 
-    .js('resources/js/agencies/index.js', 'public/js/agencies')
+.js('resources/js/agencies/index.js', 'public/js/agencies')
     .js('resources/js/agencies/create.js', 'public/js/agencies')
     .js('resources/js/agencies/edit.js', 'public/js/agencies')
 
