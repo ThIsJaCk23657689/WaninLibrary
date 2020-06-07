@@ -8697,7 +8697,7 @@ return $.datepicker;
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.5.0
+ * jQuery JavaScript Library v3.5.1
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -8707,7 +8707,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2020-04-10T15:07Z
+ * Date: 2020-05-04T22:49Z
  */
 ( function( global, factory ) {
 
@@ -8845,7 +8845,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.5.0",
+	version = "3.5.1",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -12942,7 +12942,7 @@ Data.prototype = {
 
 		// If not, create one
 		if ( !value ) {
-			value = Object.create( null );
+			value = {};
 
 			// We can accept data for non-element nodes in modern browsers,
 			// but we should not, see #8335.
@@ -54994,7 +54994,7 @@ window._ = __webpack_require__(/*! lodash */ "./node_modules/lodash/lodash.js");
 
 try {
   window.Popper = __webpack_require__(/*! popper.js */ "./node_modules/popper.js/dist/esm/popper.js")["default"];
-  window.$ = window.jQuery = __webpack_require__(/*! jquery */ "./node_modules/jquery/dist/jquery.js");
+  window.$ = window.jQuery = __webpack_require__(/*! ../../node_modules/jquery/dist/jquery.js */ "./node_modules/jquery/dist/jquery.js");
 
   __webpack_require__(/*! bootstrap */ "./node_modules/bootstrap/dist/js/bootstrap.js");
 } catch (e) {}
@@ -55217,6 +55217,20 @@ $(function () {
     sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.close();
   }; // ==================== Swal 函式操作 ====================
 
+
+  $('#searchbox .btn').click(function () {
+    $("#searchbox").toggleClass('open');
+  });
+  $('#barbox').click(function () {
+    $("#navSidebar").animate({
+      right: '0'
+    }, 300);
+  });
+  $('#closeBtn').click(function () {
+    $("#navSidebar").animate({
+      right: '-25%'
+    }, 300);
+  });
 });
 
 /***/ }),

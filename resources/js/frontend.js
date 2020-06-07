@@ -176,4 +176,20 @@ $(function() {
             Swal.close();
         }
         // ==================== Swal 函式操作 ====================
+
+    $('#searchbox .btn').click(function() {
+        $("#searchbox").toggleClass('open');
+    });
+
+    $('#barbox').click(function() {
+        $("#navSidebar").animate({
+            right: '0',
+        }, 300);
+    });
+
+    $('#closeBtn').click(function() {
+        $("#navSidebar").animate({
+            right: '-25%',
+        }, 300);
+    });
 });

@@ -3,33 +3,77 @@
     color: $blue;
     height: $navbar-base-height;
     #sidebarToggle {
-        width: 80px;
-        height: 40px;
+        width: 84px;
+        height: 44px;
         border: 2px solid $blue;
         position: absolute;
         right: 4%;
         bottom: 20%;
-        div {
-            width: 47%;
-            height: 100%;
-            margin: 0px;
-            padding: 0px;
-            display: inline-block;
-            text-align: center;
-            cursor: pointer;
-            &#searchbox {
-                padding: 5px;
-                position: relative;
-                img {
-                    width: 100%;
+        #sidebarContent {
+            position: relative;
+            #searchbox {
+                width: 40px;
+                height: 40px;
+                margin: 0px;
+                padding: 0px;
+                text-align: center;
+                overflow: hidden;
+                background-color: rgba(255, 255, 255, 0);
+                position: absolute;
+                top: 0;
+                right: 50%;
+                transition: all 0.5s ease;
+                .btn {
+                    width: 40px;
+                    height: 100%;
+                    padding: 5px;
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    cursor: pointer;
+                    img {
+                        width: 100%;
+                    }
+                }
+                input {
+                    width: 260px;
+                    height: calc(100% - 10px);
+                    position: relative;
+                    padding: 0;
+                    margin: 5px 0px 5px 40px;
+                    color: $blue;
+                    border: 0;
+                    visibility: hidden;
+                    pointer-events: none;
+                    transition: all 0.5 ease;
+                    outline: none;
+                }
+                &.open {
+                    width: 300px;
+                    background-color: rgba(255, 255, 255, 1);
+                    border: 1px solid $blue;
+                    input {
+                        padding-left: 10px;
+                        border-left: 1px solid $blue;
+                        visibility: initial;
+                        pointer-events: initial;
+                    }
                 }
             }
-            &#barbox {
+            #barbox {
+                width: 40px;
+                height: 40px;
+                margin: 0px;
+                padding: 5px;
+                text-align: center;
+                cursor: pointer;
                 background-color: $blue;
                 color: $darkwhite;
                 position: relative;
-                left: 1px;
-                padding: 5px;
+                line-height: 30px;
+                position: absolute;
+                top: 0;
+                right: 0;
             }
         }
     }
@@ -38,6 +82,7 @@
 .navbar-nav {
     width: 60%;
     padding-top: 2%;
+    margin-left: auto;
     .form-inline .input-group {
         width: 100%;
     }
@@ -98,56 +143,140 @@
     }
 }
 
-.sidebar {
-    width: $sidebar-collapsed-width !important;
-    background-color: $gray-900;
-    min-height: calc(100vh - #{$navbar-base-height});
-    @include sidebar-icons;
-    .nav-item {
-        .nav-link {
-            color: fade-out($white, 0.5);
-            &:active,
-            &:focus,
-            &:hover {
-                color: fade-out($white, 0.25);
+#navSidebar {
+    position: absolute;
+    background-color: $white;
+    top: 0;
+    right: -25%;
+    width: 25%;
+    height: 100vh;
+    .navbar-nav {
+        width: 70%;
+        display: block;
+        margin-left: 10%;
+        margin-top: 8%;
+        .nav-item {
+            margin-bottom: 8%;
+            .nav-link {
+                border: none;
+                letter-spacing: 5px;
+                .underline {
+                    width: 0%;
+                    height: 2px;
+                    background-color: $blue;
+                    transition: width 0.2s ease-in;
+                }
+                &:hover {
+                    .underline {
+                        width: 90%;
+                    }
+                }
             }
         }
     }
-    &.toggled {
-        width: 0 !important;
-        overflow: hidden;
+    #closeBtn {
+        margin-top: 2%;
+        margin-right: 4%;
+        font-size: 2rem;
+        color: $green;
+        &:hover {
+            color: $blue;
+        }
+    }
+    #bottomSidebar {
+        display: flex;
+        padding: 0;
+        margin-left: 5%;
+        width: 100%;
+        .nav-item {
+            margin-right: 0;
+            margin-bottom: 0;
+            .nav-link {
+                &.search {
+                    img {
+                        width: 150px;
+                    }
+                }
+                img {
+                    width: 40px;
+                }
+            }
+        }
     }
 }
 
-@media (min-width: 768px) {
-    .sidebar {
-        width: $sidebar-base-width !important;
+// .sidebar {
+//     width: $sidebar-collapsed-width !important;
+//     background-color: $gray-900;
+//     min-height: calc(100vh - #{$navbar-base-height});
+//     @include sidebar-icons;
+//     .nav-item {
+//         .nav-link {
+//             color: fade-out($white, 0.5);
+//             &:active,
+//             &:focus,
+//             &:hover {
+//                 color: fade-out($white, 0.25);
+//             }
+//         }
+//     }
+//     &.toggled {
+//         width: 0 !important;
+//         overflow: hidden;
+//     }
+// }
+@media (max-width: 1290px) {
+    .navbar-nav {
+        margin-left: 22%;
         .nav-item {
             .nav-link {
-                display: block;
-                width: 100%;
-                text-align: left;
-                padding: 1rem;
-                width: $sidebar-base-width;
-                span {
-                    font-size: 1rem;
-                    display: inline;
-                }
+                font-size: 1rem;
             }
-            .dropdown-menu {
-                position: static !important;
-                margin: 0 1rem;
-                // Position fix for Firefox
-                top: 0;
-            }
-            &.dropdown .dropdown-toggle::after {
-                display: block;
-            }
-        }
-        &.toggled {
-            overflow: visible;
-            width: $sidebar-collapsed-width !important;
-            @include sidebar-icons;
         }
     }
 }
+
+@media (max-width: 1170px) {
+    .navbar-nav {
+        margin-left: 11%;
+        width: 70%;
+        .nav-item {
+            .nav-link {
+                font-size: 0.9rem;
+            }
+        }
+    }
+}
+
+// @media (min-width: 768px) {
+//     .sidebar {
+//         width: $sidebar-base-width !important;
+//         .nav-item {
+//             .nav-link {
+//                 display: block;
+//                 width: 100%;
+//                 text-align: left;
+//                 padding: 1rem;
+//                 width: $sidebar-base-width;
+//                 span {
+//                     font-size: 1rem;
+//                     display: inline;
+//                 }
+//             }
+//             .dropdown-menu {
+//                 position: static !important;
+//                 margin: 0 1rem;
+//                 // Position fix for Firefox
+//                 top: 0;
+//             }
+//             &.dropdown .dropdown-toggle::after {
+//                 display: block;
+//             }
+//         }
+//         &.toggled {
+//             overflow: visible;
+//             width: $sidebar-collapsed-width !important;
+//             @include sidebar-icons;
+//         }
+//     }
+// }
