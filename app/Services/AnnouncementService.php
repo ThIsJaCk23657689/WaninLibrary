@@ -67,4 +67,9 @@ class AnnouncementService extends BaseService
         $item->update(['is_top' => false]);
         AnnouncementEloquent::find($id)->update(['is_top' => true]);
     }
+
+    public function getListForIndex(){
+        $news = AnnouncementEloquent::orderBy('is_top', 'desc')->orderBy('updated_at', 'desc')->take(3)->get();
+        return $news;
+    }
 }

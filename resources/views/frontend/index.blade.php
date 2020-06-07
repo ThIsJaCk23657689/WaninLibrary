@@ -23,11 +23,45 @@
         </header>
     </section>
 
-    {{-- <section>
-
+    <section id="news">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1>
+                        <div id="newsIcon" class="mr-2">
+                            <img src="{{ asset('images/frontend/icons/announcement.png') }}" alt="announcement">
+                        </div>
+                        即時公告/重要訊息
+                    </h1>
+                </div>
+            </div>
+            <div class="row">
+                <div class="newsTable">
+                    <div class="row">
+                        @foreach($newsList as $news)
+                            <div class="col-md-11">
+                                <div class="row newsRow">
+                                    <div class="col-md-3 newsDate">{{ $news->showDate() }}</div>
+                                    <div class="col-md-7 newsTitle">{{ $news->title }}</div>
+                                    <div class="col-md-2 readMore">
+                                        <a href="#">閱讀更多</a>
+                                    </div>
+                                </div>
+                            </div>
+                        @endforeach
+                        <div class="col-md-12 newsFooter">
+                            <a href="#">
+                                查看更多公告及訊息
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </section>
 
-    <section>
+    {{--  <section>
 
     </section> --}}
 @endsection

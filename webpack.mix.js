@@ -18,7 +18,10 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/auth/forgetPassword.js', 'public/js/auth')
 
 .sass('resources/sass/app.scss', 'public/css')
-    .sass('resources/sass/frontend/frontend.scss', 'public/css/frontend');
+    .sass('resources/sass/frontend/frontend.scss', 'public/css/frontend')
+    .options({
+        processCssUrls: false,
+    });
 
 mix.js('resources/js/backend.js', 'public/js')
     .js('resources/js/backend/index.js', 'public/js/backend')

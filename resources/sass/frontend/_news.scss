@@ -1,0 +1,60 @@
+#news {
+    width: 100%;
+    height: 100vh;
+    color: $brown;
+    background-color: $darkwhite;
+    .container {
+        padding-top: 5%;
+        h1 {
+            letter-spacing: 20px;
+            font-weight: bold;
+        }
+        .newsTable {
+            margin-left: 9%;
+            width: calc(100%-9%);
+            .newsRow {
+                background-image: url('../../images/frontend/icons/news_underline.png');
+                background-repeat: no-repeat;
+                background-position: bottom;
+                padding-bottom: 10px;
+                margin-bottom: 30px;
+                .newsDate {
+                    font-weight: bold;
+                    font-size: 1.5rem;
+                    letter-spacing: 4px;
+                }
+                .newsTitle {
+                    font-size: 1.5rem;
+                    letter-spacing: 4px;
+                }
+                .readMore {
+                    font-size: 0.8rem;
+                    padding-top: 15px;
+                    text-align: right;
+                    a {
+                        color: $pink;
+                    }
+                }
+            }
+            .newsFooter {
+                text-align: right;
+                font-size: 1.4rem;
+                letter-spacing: 3px;
+                padding-right: 5%;
+                a {
+                    color: $brown;
+                }
+            }
+        }
+    }
+}
+
+#newsIcon {
+    background-color: $green;
+    border-radius: 100px;
+    width: 60px;
+    display: inline-block;
+    img {
+        width: 100%;
+    }
+}

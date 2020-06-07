@@ -20,4 +20,9 @@ class Announcement extends Model
     {
         return is_null($this->last_update_user_id) ? '無' : $this->user->name;
     }
+
+    public function showDate()
+    {
+        return $this->updated_at->isoFormat('YYYY.MM.DD');
+    }
 }
