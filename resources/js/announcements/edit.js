@@ -17,7 +17,6 @@ const app = new Vue({
             this.announcement = response.data.announcement;
             this.content = response.data.announcement.content;
             CKEDITOR.replace('content');
-
         });
     },
     mounted() {

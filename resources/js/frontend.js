@@ -183,13 +183,13 @@ $(function() {
 
     $('#barbox').click(function() {
         $("#navSidebar").animate({
-            right: '0',
+            right: '-5%',
         }, 300);
     });
 
     $('#closeBtn').click(function() {
         $("#navSidebar").animate({
-            right: '-25%',
+            right: '-30%',
         }, 300);
     });
 });

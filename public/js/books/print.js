@@ -116,7 +116,7 @@ $(function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\print.js */"./resources/js/books/print.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\print.js */"./resources/js/books/print.js");
 
 
 /***/ })

@@ -146,7 +146,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -156,19 +155,16 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     announcementCreateForm: function announcementCreateForm(e) {
-      var _this = this;
-
       var url = this.AnnouncementsStoreURL;
       var formData = new FormData($(e.target)[0]);
       var content = CKEDITOR.instances.content.getData();
       formData.append('content', content);
-      this.$refs.loadingModal.initalModal();
+      $.showLoadingModal();
       axios.post(url, formData).then(function (response) {
-        _this.$refs.loadingModal.successfulResponse('新增成功', response.data.url);
+        $.showSuccessModal('新增成功', response.data.url);
       })["catch"](function (error) {
         console.error('新增最新消息時發生錯誤，錯誤訊息：' + error);
-
-        _this.$refs.loadingModal.failureResponse(error);
+        $.showErrorModal(error);
       });
     }
   },
@@ -194,73 +190,67 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c(
-            "form",
-            {
-              attrs: {
-                method: "POST",
-                id: "announcement_create_form",
-                action: ""
-              },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.announcementCreateForm($event)
-                }
-              }
+  return _c("div", [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "form",
+          {
+            attrs: {
+              method: "POST",
+              id: "announcement_create_form",
+              action: ""
             },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "form-group row justify-content-center" },
-                [
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-block btn-primary",
-                        attrs: { type: "submit" }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                            確認新增\r\n                        "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-block btn-danger",
-                        attrs: { href: _vm.AnnouncementsIndexURL }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                            返回列表\r\n                        "
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("loading-modal", { ref: "loadingModal" })
-    ],
-    1
-  )
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.announcementCreateForm($event)
+              }
+            }
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group row justify-content-center" },
+              [
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                            確認新增\r\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-block btn-danger",
+                      attrs: { href: _vm.AnnouncementsIndexURL }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                            返回列表\r\n                        "
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -544,7 +534,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\announcements\create.js */"./resources/js/announcements/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\announcements\create.js */"./resources/js/announcements/create.js");
 
 
 /***/ })

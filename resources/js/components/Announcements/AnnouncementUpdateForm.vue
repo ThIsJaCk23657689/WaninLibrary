@@ -45,7 +45,6 @@
             </form>
         </div>
     </div>
-    <loading-modal ref="loadingModal"></loading-modal>
 </div>
 </template>
 
@@ -67,12 +66,12 @@ export default {
             formData.append('_method', 'patch');
             formData.append('content', content);
 
-            this.$refs.loadingModal.initalModal();
+            $.showLoadingModal();
             axios.post(url, formData).then(response => {
-                this.$refs.loadingModal.successfulResponse('編輯成功', response.data.url);
+                $.showSuccessModal('編輯成功', response.data.url);
             }).catch((error) => {
                 console.error('編輯單位時發生錯誤，錯誤訊息：' + error);
-                this.$refs.loadingModal.failureResponse(error);
+                $.showErrorModal(error);
             });
         }
     },

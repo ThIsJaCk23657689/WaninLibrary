@@ -11660,9 +11660,10 @@ body {
   position: absolute;
   background-color: #ffffff;
   top: 0;
-  right: -25%;
-  width: 25%;
+  right: -30%;
+  width: 30%;
   height: 100vh;
+  padding-right: 6%;
 }
 #navSidebar .navbar-nav {
   width: 70%;
@@ -11688,7 +11689,7 @@ body {
 }
 #navSidebar #closeBtn {
   margin-top: 2%;
-  margin-right: 4%;
+  margin-right: 1%;
   font-size: 2rem;
   color: #93e5b4;
 }
@@ -11739,13 +11740,32 @@ header {
   position: relative;
   height: 100%;
 }
-header img.background-image {
+header .bg_cover {
+  height: calc(100% - 120px);
+  position: relative;
+}
+header .bg_cover img.background-image {
+  position: absolute;
+  top: 0;
   width: 100%;
+  left: calc(50% + 0px);
+  transform: translateX(-50%);
+  transition: all 1s ease;
+}
+header .bg_cover .coverText {
+  position: absolute;
+  bottom: 15%;
+  left: 8%;
+  color: #ffffff;
+  letter-spacing: 10px;
+  z-index: 1;
+  text-shadow: 2px 2px 2px black;
 }
 
 @media (max-width: 1000px) {
   header img.background-image {
-    height: 81%;
+    width: auto !important;
+    height: 100%;
   }
 }
 div#headerbox {
@@ -11866,7 +11886,7 @@ div#headerbox .row h3 {
 }
 #activity .content {
   width: 90%;
-  height: 125%;
+  height: 910px;
   border-radius: 40px;
   position: absolute;
   top: -35%;

@@ -7,15 +7,35 @@ section#header {
 header {
     position: relative;
     height: 100%;
-    img.background-image {
-        width: 100%;
+    .bg_cover{
+        height: calc(100% - 120px);
+        position: relative;
+        img.background-image {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            left: calc(50% + 0px);
+            transform: translateX(-50%);
+            transition: all 1s ease;
+        }
+        .coverText{
+            position: absolute;
+            bottom: 15%;
+            left: 8%;
+            color: $white;
+            letter-spacing: 10px;
+            z-index: 1;
+            text-shadow: 2px 2px 2px black
+        }
     }
 }
 
 @media (max-width: 1000px) {
     header {
         img.background-image {
-            height: 81%;
+            width: auto !important;
+            height: 100%;
+            // transform: translateX(-50%) scale(2) !important;
         }
     }
 }

@@ -145,7 +145,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['announcement', 'content'],
   data: function data() {
@@ -156,21 +155,18 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     announcementEditForm: function announcementEditForm(e) {
-      var _this = this;
-
       var url = this.AnnouncementsUpdateURL;
       var formData = new FormData($(e.target)[0]);
       var content = CKEDITOR.instances.content.getData();
       console.log($(e.target)[0]);
       formData.append('_method', 'patch');
       formData.append('content', content);
-      this.$refs.loadingModal.initalModal();
+      $.showLoadingModal();
       axios.post(url, formData).then(function (response) {
-        _this.$refs.loadingModal.successfulResponse('編輯成功', response.data.url);
+        $.showSuccessModal('編輯成功', response.data.url);
       })["catch"](function (error) {
         console.error('編輯單位時發生錯誤，錯誤訊息：' + error);
-
-        _this.$refs.loadingModal.failureResponse(error);
+        $.showErrorModal(error);
       });
     }
   },
@@ -196,171 +192,157 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c(
-            "form",
-            {
-              attrs: {
-                method: "POST",
-                id: "announcement_edit_form",
-                action: "#"
-              },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.announcementEditForm($event)
-                }
-              }
+  return _c("div", [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "form",
+          {
+            attrs: {
+              method: "POST",
+              id: "announcement_edit_form",
+              action: "#"
             },
-            [
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-10" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "title" } }, [_vm._v("標題")]),
-                    _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.announcement.title,
-                          expression: "announcement.title"
-                        }
-                      ],
-                      staticClass: "form-control",
-                      attrs: {
-                        id: "title",
-                        name: "title",
-                        type: "text",
-                        autocomplete: "off"
-                      },
-                      domProps: { value: _vm.announcement.title },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.announcement,
-                            "title",
-                            $event.target.value
-                          )
-                        }
-                      }
-                    })
-                  ])
-                ]),
-                _vm._v(" "),
-                _c("div", { staticClass: "col-md-2" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "is_top" } }, [
-                      _vm._v("是否置頂")
-                    ]),
-                    _vm._v(" "),
-                    _c(
-                      "select",
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.announcementEditForm($event)
+              }
+            }
+          },
+          [
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-10" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "title" } }, [_vm._v("標題")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    directives: [
                       {
-                        staticClass: "form-control",
-                        attrs: { name: "is_top", id: "is_top" },
-                        domProps: { value: _vm.announcement.is_top }
-                      },
-                      [
-                        _c("option", { attrs: { value: "1" } }, [
-                          _vm._v("置頂")
-                        ]),
-                        _vm._v(" "),
-                        _c("option", { attrs: { value: "0" } }, [
-                          _vm._v("不置頂")
-                        ])
-                      ]
-                    )
-                  ])
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.announcement.title,
+                        expression: "announcement.title"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      id: "title",
+                      name: "title",
+                      type: "text",
+                      autocomplete: "off"
+                    },
+                    domProps: { value: _vm.announcement.title },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.$set(_vm.announcement, "title", $event.target.value)
+                      }
+                    }
+                  })
                 ])
               ]),
               _vm._v(" "),
-              _c("div", { staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", { attrs: { for: "content" } }, [
-                      _vm._v("內容")
-                    ]),
-                    _vm._v(" "),
-                    _c("textarea", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.content,
-                          expression: "content"
-                        }
-                      ],
+              _c("div", { staticClass: "col-md-2" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "is_top" } }, [
+                    _vm._v("是否置頂")
+                  ]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
                       staticClass: "form-control",
-                      attrs: {
-                        name: "content",
-                        id: "content",
-                        cols: "30",
-                        rows: "5"
-                      },
-                      domProps: { value: _vm.content },
-                      on: {
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.content = $event.target.value
-                        }
-                      }
-                    })
-                  ])
+                      attrs: { name: "is_top", id: "is_top" },
+                      domProps: { value: _vm.announcement.is_top }
+                    },
+                    [
+                      _c("option", { attrs: { value: "1" } }, [_vm._v("置頂")]),
+                      _vm._v(" "),
+                      _c("option", { attrs: { value: "0" } }, [
+                        _vm._v("不置頂")
+                      ])
+                    ]
+                  )
                 ])
-              ]),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "form-group row justify-content-center" },
-                [
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c(
-                      "button",
+              ])
+            ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-12" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "content" } }, [_vm._v("內容")]),
+                  _vm._v(" "),
+                  _c("textarea", {
+                    directives: [
                       {
-                        staticClass: "btn btn-block btn-success",
-                        attrs: { type: "submit" }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                            確認編輯\r\n                        "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-block btn-danger",
-                        attrs: { href: _vm.AnnouncementsIndexURL }
-                      },
-                      [
-                        _vm._v(
-                          "\r\n                            返回列表\r\n                        "
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("loading-modal", { ref: "loadingModal" })
-    ],
-    1
-  )
+                        name: "model",
+                        rawName: "v-model",
+                        value: _vm.content,
+                        expression: "content"
+                      }
+                    ],
+                    staticClass: "form-control",
+                    attrs: {
+                      name: "content",
+                      id: "content",
+                      cols: "30",
+                      rows: "5"
+                    },
+                    domProps: { value: _vm.content },
+                    on: {
+                      input: function($event) {
+                        if ($event.target.composing) {
+                          return
+                        }
+                        _vm.content = $event.target.value
+                      }
+                    }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group row justify-content-center" },
+              [
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block btn-success",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                            確認編輯\r\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-block btn-danger",
+                      attrs: { href: _vm.AnnouncementsIndexURL }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                            返回列表\r\n                        "
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = []
 render._withStripped = true
@@ -584,7 +566,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\announcements\edit.js */"./resources/js/announcements/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\announcements\edit.js */"./resources/js/announcements/edit.js");
 
 
 /***/ })
