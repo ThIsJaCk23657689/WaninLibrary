@@ -26,7 +26,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('check-book-isExpired')->everyFiveMinutes(); //->daily();
-        $schedule->command('queue:listen --timeout=0')->everyMinute(); //->daily();
+        // $schedule->command('queue:work --daemon --tries=3')->everyMinute(); //->daily();
     }
 
     /**
