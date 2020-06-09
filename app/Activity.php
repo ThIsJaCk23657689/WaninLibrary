@@ -28,7 +28,7 @@ class Activity extends Model
 
     public function showTitle(){
         $maxString = 35;
-        if(strlen($this->title) >= $maxString){
+        if(strlen($this->title) >= $maxString*2 ){
             return mb_substr($this->title, 0, $maxString) . '...';
         }else{
             return $this->title;

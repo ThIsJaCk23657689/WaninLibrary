@@ -24,7 +24,7 @@ class HomeController extends Controller
         $newsList = $this->AnnouncementService->getListForIndex();
         $activities = $this->ActivityService->getListForIndex();
         $activities_top = $this->ActivityService->getListForIndex_top();
-        $information = $this->InformationService->getListForIndex_top();
+        $information = $this->InformationService->getListForIndex();
         $recommendation = $this->InformationService->recommendation_getFirst();
         $recommendation_books = $recommendation['books'];
         $recommendation_title = $recommendation['recommendation_title'];
