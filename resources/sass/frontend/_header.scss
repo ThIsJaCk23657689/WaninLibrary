@@ -7,14 +7,14 @@ section#header {
 header {
     position: relative;
     height: 100%;
-    img {
+    img.background-image {
         width: 100%;
     }
 }
 
 @media (max-width: 1000px) {
     header {
-        img {
+        img.background-image {
             height: 81%;
         }
     }
@@ -38,6 +38,24 @@ div#headerbox {
             }
             &.right {
                 background-color: $green;
+            }
+            .checkBtn {
+                width: 10%;
+                display: inline-block;
+                position: absolute;
+                top: 20%;
+                right: 10%;
+                padding: 0;
+                a {
+                    img {
+                        width: 100%;
+                    }
+                }
+            }
+            @media (max-width: 1000px) {
+                .checkBtn {
+                    top: 30%;
+                }
             }
         }
         span {
