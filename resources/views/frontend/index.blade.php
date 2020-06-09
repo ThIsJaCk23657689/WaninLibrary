@@ -52,7 +52,7 @@
                             <div class="col-md-11">
                                 <div class="row newsRow">
                                     <div class="col-md-3 newsDate">{{ $news->showDate() }}</div>
-                                    <div class="col-md-7 newsTitle">{{ $news->title }}</div>
+                                    <div class="col-md-7 newsTitle">{{ $news->showTitle() }}</div>
                                     <div class="col-md-2 readMore">
                                         <a href="#">閱讀更多</a>
                                     </div>
@@ -88,10 +88,10 @@
                     <div class="col-md-6">
                         <a href="#" class="activity_unit_top">
                             <div class="cover_image">
-                                <img src="{{ asset('images/activities/cover_images/1589811603.jpeg') }}" alt="">
+                                <img src="{{ asset($activities_top->cover_image) }}" alt="">
                                 <div class="activity_text">
-                                    <span class="datetime">2020.05.20</span>
-                                    <h3 class="title">拾本書堂親子劇場世界閱讀日，為配合防疫，將在台中科技大學資訊樓演出</h3>
+                                    <span class="datetime">{{ $activities_top->showDate() }}</span>
+                                    <h3 class="title">{{ $activities_top->showTitle() }}</h3>
                                     <div class="readmore">
                                         <span>了解更多 >></span>
                                     </div>
@@ -105,13 +105,13 @@
                             <div class="row" style="height: 50%; padding-bottom:12px;">
                                 <div class="col-md-6">
                                     <div class="cover_image">
-                                        <img src="{{ asset('images/activities/cover_images/1589811603.jpeg') }}" alt="">
+                                        <img src="{{ asset($activities[0]->cover_image) }}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="activity_text">
-                                        <span class="datetime">2020.05.20</span>
-                                        <h4 class="title">拾本書堂親子劇場世界閱讀日，為配合防疫，將在台中科技大學資訊樓演出</h4>
+                                        <span class="datetime">{{ $activities[0]->showDate() }}</span>
+                                        <h4 class="title">{{ $activities[0]->showTitle() }}</h4>
                                         <div class="readmore">
                                             <span>了解更多 >></span>
                                         </div>
@@ -123,13 +123,13 @@
                             <div class="row" style="height: 50%; padding-top:12px;">
                                 <div class="col-md-6">
                                     <div class="cover_image">
-                                        <img src="{{ asset('images/activities/cover_images/1589811603.jpeg') }}" alt="">
+                                        <img src="{{ asset($activities[1]->cover_image) }}" alt="">
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="activity_text">
-                                        <span class="datetime">2020.05.20</span>
-                                        <h4 class="title">拾本書堂親子劇場世界閱讀日，為配合防疫，將在台中科技大學資訊樓演出</h4>
+                                        <span class="datetime">{{ $activities[1]->showDate() }}</span>
+                                        <h4 class="title">{{ $activities[1]->showTitle() }}</h4>
                                         <div class="readmore">
                                             <span>了解更多 >></span>
                                         </div>

@@ -25,4 +25,13 @@ class Announcement extends Model
     {
         return $this->updated_at->isoFormat('YYYY.MM.DD');
     }
+
+    public function showTitle(){
+        $maxString = 15;
+        if(strlen($this->title) >= $maxString){
+            return mb_substr($this->title, 0, $maxString) . '...';
+        }else{
+            return $this->title;
+        }
+    }
 }

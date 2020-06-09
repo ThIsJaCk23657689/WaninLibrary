@@ -20,4 +20,18 @@ class Activity extends Model
     {
         return is_null($this->last_update_user_id) ? '無' : $this->user->name;
     }
+
+    public function showDate()
+    {
+        return $this->updated_at->isoFormat('YYYY.MM.DD');
+    }
+
+    public function showTitle(){
+        $maxString = 35;
+        if(strlen($this->title) >= $maxString){
+            return mb_substr($this->title, 0, $maxString) . '...';
+        }else{
+            return $this->title;
+        }
+    }
 }

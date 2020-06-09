@@ -86,4 +86,9 @@ class InformationService extends BaseService
         return $book_list;
     }
 
+    public function getListForIndex(){
+        $information = $this->getFirst();
+        return $information;
+    }
+
 }

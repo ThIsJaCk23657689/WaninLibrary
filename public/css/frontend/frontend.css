@@ -11897,6 +11897,7 @@ div#headerbox .row h3 {
   transform: translateX(-50%);
 }
 #activity .content .container .activityRow .activity_unit_top .cover_image .activity_text {
+  width: 100%;
   position: absolute;
   left: 0;
   bottom: 0;

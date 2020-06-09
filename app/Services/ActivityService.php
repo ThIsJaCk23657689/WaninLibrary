@@ -96,4 +96,15 @@ class ActivityService extends BaseService
         ActivityEloquent::where('is_top', true)->update(['is_top' => false]);
         ActivityEloquent::find($id)->update(['is_top' => true]);
     }
+
+    public function getListForIndex()
+    {
+        $activities = ActivityEloquent::where('is_top', 0)->orderBy('updated_at', 'desc')->take(2)->get();
+        return $activities;
+    }
+    public function getListForIndex_top()
+    {
+        $activity_top = ActivityEloquent::where('is_top', 1)->first();
+        return $activity_top;
+    }
 }
