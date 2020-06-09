@@ -10,7 +10,6 @@
     "/js/announcements/index.js": "/js/announcements/index.js",
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
-    "/css/frontend/frontend.css": "/css/frontend/frontend.css",
     "/css/backend.css": "/css/backend.css",
     "/js/auth/forgetPassword.js": "/js/auth/forgetPassword.js",
     "/js/auth/login.js": "/js/auth/login.js",
@@ -37,5 +36,6 @@
     "/js/loginLogs/index.js": "/js/loginLogs/index.js",
     "/js/recommendation/edit.js": "/js/recommendation/edit.js",
     "/js/users/create.js": "/js/users/create.js",
-    "/js/users/edit.js": "/js/users/edit.js"
+    "/js/users/edit.js": "/js/users/edit.js",
+    "/css/frontend/frontend.css": "/css/frontend/frontend.css"
 }

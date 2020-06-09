@@ -55222,14 +55222,10 @@ $(function () {
     $("#searchbox").toggleClass('open');
   });
   $('#barbox').click(function () {
-    $("#navSidebar").animate({
-      right: '-5%'
-    }, 300);
+    $("#navSidebar").toggleClass('open');
   });
   $('#closeBtn').click(function () {
-    $("#navSidebar").animate({
-      right: '-30%'
-    }, 300);
+    $("#navSidebar").toggleClass('open');
   });
 });
 

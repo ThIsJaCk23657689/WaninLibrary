@@ -1,18 +1,28 @@
-// Spacing Variables
-// Change below variable if the height of the navbar changes
+// navbar 基本高度
 $navbar-base-height: 100px;
-// Change below variable to change the width of the sidenav
-$sidebar-base-width: 225px;
-// Change below variable to change the width of the sidenav when collapsed
-$sidebar-collapsed-width: 90px;
-// Change below variable to change the height of the sticky footer
-$sticky-footer-height: 80px;
+
+// sidebar 寬度
+$navbar-lg-width: 460px;
+
+// footer 高度
+$footer-height: 200px;
+
+// 封面圖寬高，比例為1:2。
+$cover-width: 1920px;
+$cover-height: 960px;
+$cover-raito: $cover-width / $cover-height;
+
+// // Change below variable to change the width of the sidenav
+// $sidebar-base-width: 225px;
+// // Change below variable to change the width of the sidenav when collapsed
+// $sidebar-collapsed-width: 90px;
+
 // Typography
-$font-family-sans-serif: 'Nunito',
-sans-serif;
+$font-family-sans-serif: 'Nunito', sans-serif;
 $font-size-base: 0.9rem;
 $line-height-base: 1.6;
-// Colors
+
+// 顏色
 $white: #ffffff;
 $darkwhite: #f3f3f3;
 $gray: #eaeaea;

@@ -158,10 +158,4 @@
             </div>
         </div>
     </section>
-
-    <section id="footer">
-        <footer>
-
-        </footer>
-    </section>
 @endsection

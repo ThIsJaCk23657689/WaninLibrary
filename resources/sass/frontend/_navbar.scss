@@ -1,3 +1,4 @@
+// Navbar 樣式
 #navbar {
     background-color: $darkwhite;
     color: $blue;
@@ -120,6 +121,7 @@
         }
         .nav-link {
             font-size: 1.2rem;
+            padding-bottom: 2px;
             &:hover {
                 border-bottom: 3px solid $blue;
             }
@@ -143,67 +145,41 @@
     }
 }
 
-#navSidebar {
-    position: absolute;
-    background-color: $white;
-    top: 0;
-    right: -30%;
-    width: 30%;
-    height: 100vh;
-    padding-right: 6%;
-    .navbar-nav {
-        width: 70%;
-        display: block;
-        margin-left: 10%;
-        margin-top: 8%;
+#navbarResponsive .navbar-nav {
+    @media (max-width: 1399px) {
+        margin-left: 22%;
+    }
+    @media (max-width: 1199px) {
+        margin-left: 18%;
         .nav-item {
-            margin-bottom: 8%;
+            margin-right: 3%;
             .nav-link {
-                border: none;
-                letter-spacing: 5px;
-                .underline {
-                    width: 0%;
-                    height: 2px;
-                    background-color: $blue;
-                    transition: width 0.2s ease-in;
-                }
-                &:hover {
-                    .underline {
-                        width: 90%;
-                    }
-                }
+                font-size: 1rem;
             }
         }
     }
-    #closeBtn {
-        margin-top: 2%;
-        margin-right: 1%;
-        font-size: 2rem;
-        color: $green;
-        &:hover {
-            color: $blue;
-        }
-    }
-    #bottomSidebar {
-        display: flex;
-        padding: 0;
-        margin-left: 5%;
-        width: 100%;
+    @media (max-width: 999px) {
         .nav-item {
-            margin-right: 0;
-            margin-bottom: 0;
-            .nav-link {
-                &.search {
-                    img {
-                        width: 150px;
-                    }
-                }
-                img {
-                    width: 40px;
-                }
-            }
+            margin-right: 2%;
         }
     }
+    // @media (max-width: 1290px) {
+    //     margin-left: 22%;
+    //     .nav-item {
+    //         .nav-link {
+    //             font-size: 1rem;
+    //         }
+    //     }
+    // }
+    // @media (max-width: 1170px) {
+    //     margin-left: 11%;
+    //     width: 70%;
+    //     .nav-item {
+    //         .nav-link {
+    //             font-size: 0.9rem;
+    //         }
+    //     }
+    // }
 }
 
 // .sidebar {
@@ -226,28 +202,6 @@
 //         overflow: hidden;
 //     }
 // }
-@media (max-width: 1290px) {
-    .navbar-nav {
-        margin-left: 22%;
-        .nav-item {
-            .nav-link {
-                font-size: 1rem;
-            }
-        }
-    }
-}
-
-@media (max-width: 1170px) {
-    .navbar-nav {
-        margin-left: 11%;
-        width: 70%;
-        .nav-item {
-            .nav-link {
-                font-size: 0.9rem;
-            }
-        }
-    }
-}
 
 // @media (min-width: 768px) {
 //     .sidebar {
