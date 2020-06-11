@@ -11525,6 +11525,7 @@ body {
   background-color: #f3f3f3;
   color: #5f6b82;
   height: 100px;
+  box-shadow: 0px 2px 15px 1px rgba(0, 0, 0, 0.2);
 }
 #navbar #sidebarToggle {
   width: 84px;

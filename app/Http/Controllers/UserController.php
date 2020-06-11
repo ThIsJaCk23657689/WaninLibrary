@@ -90,6 +90,13 @@ class UserController extends Controller
         // return  response()->json($msg, 200);
     }
 
+    public function forceDestroy($id)
+    {
+        $msg = $this->UserService->forceDestroy($id);
+        return redirect()->route('users.index');
+        // return  response()->json($msg, 200);
+    }
+
     public function getOne($id){
         $user = $this->UserService->getOne($id);
         return response()->json([

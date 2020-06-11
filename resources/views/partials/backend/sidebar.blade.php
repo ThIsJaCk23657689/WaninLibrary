@@ -13,8 +13,10 @@
 			<span>{{ __('People Management') }}</span>
 		</a>
 		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
-			<a class="dropdown-item" href="{{ route('users.index') }}">{{ __('Admins') }}</a>
+            <h6 class="dropdown-header">{{ __('Basic:') }}</h6>
+            @if (auth('api')->user()->status == 0)
+                <a class="dropdown-item" href="{{ route('users.index') }}">{{ __('Admins') }}</a>
+            @endif
 			<a class="dropdown-item" href="{{ route('borrowers.index') }}">{{ __('Borrowers') }}</a>
 			<a class="dropdown-item" href="{{ route('donors.index') }}">{{ __('Donors') }}</a>
 			<div class="dropdown-divider"></div>
@@ -50,21 +52,24 @@
 			<a class="dropdown-item" href="{{ route('circulation.showBorrowPage') }}">書籍出借</a>
 			<a class="dropdown-item" href="{{ route('unreturns.index') }}">借出與逾期</a>
 		</div>
-	</li>
-
-	<li class="nav-item dropdown">
-		<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-			<i class="fas fa-cog"></i>
-			<span>{{ __('General Settings') }}</span>
-		</a>
-		<div class="dropdown-menu" aria-labelledby="pagesDropdown">
-			<h6 class="dropdown-header">{{ __('Basic:') }}</h6>
-			<a class="dropdown-item" href="{{ route('announcements.index') }}">{{ __('News') }}</a>
-        <a class="dropdown-item" href="{{ route('activities.index' )}}">{{ __('Events') }}</a>
-			<a class="dropdown-item" href="{{ route('recommendation.index') }}">{{ __('Recommend') }}</a>
-			<a class="dropdown-item" href="{{ route('information.index') }}">{{ __('Information') }}</a>
-		</div>
     </li>
+
+    @if (auth('api')->user()->status == 0)
+        <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                <i class="fas fa-cog"></i>
+                <span>{{ __('General Settings') }}</span>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="pagesDropdown">
+                <h6 class="dropdown-header">{{ __('Basic:') }}</h6>
+                <a class="dropdown-item" href="{{ route('announcements.index') }}">{{ __('News') }}</a>
+            <a class="dropdown-item" href="{{ route('activities.index' )}}">{{ __('Events') }}</a>
+                <a class="dropdown-item" href="{{ route('recommendation.index') }}">{{ __('Recommend') }}</a>
+                <a class="dropdown-item" href="{{ route('information.index') }}">{{ __('Information') }}</a>
+            </div>
+        </li>
+    @endif
+
 
     <li class="nav-item dropdown">
 		<a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
