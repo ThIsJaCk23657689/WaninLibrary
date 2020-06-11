@@ -93,13 +93,13 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="counts">借閱數量</label>
-                        <input id="counts" name="counts" type="text" class="form-control" value="{{ $borrower->counts ?? '0' }}" readonly>                    </div>
+                        <label for="counts">總借閱數量</label>
+                        <input id="counts" name="counts" type="text" class="form-control" value="{{ $borrower->borrowCounts() ?? '0' }}" readonly>                    </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="expiredCounts">逾期數量</label>
-                        <input id="expiredCounts" name="expiredCounts" type="text" class="form-control" value="{{ $borrower->expiredCounts ?? '0' }}" readonly>                    </div>
+                        <input id="expiredCounts" name="expiredCounts" type="text" class="form-control" value="{{ $borrower->expiredCounts() ?? '0' }}" readonly>                    </div>
                 </div>
             </div>
 

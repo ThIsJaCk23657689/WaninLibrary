@@ -158,7 +158,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="callnum">
-                                索書號
+                                分類號
                             </label>
                             <input id="callnum" name="callnum" type="text" class="form-control" value="{{ $book->callnum }}" readonly>
                         </div>

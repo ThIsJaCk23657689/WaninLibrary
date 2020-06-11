@@ -106,8 +106,8 @@ class BorrowerService extends BaseService
 
         foreach ($borrowers as $borrower) {
             $borrower['showAgencyName'] = $borrower->showAgencyName();
-            $borrower['borrowCounts'] = 0;
-            $borrower['expiredCounts'] = 0;
+            $borrower['borrowCounts'] = $borrower->borrowCounts();
+            $borrower['expiredCounts'] = $borrower->expiredCounts();
             $borrower['action'] =
                 '<a href="' . route('borrowers.show', [$borrower->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>
                 <a href="' . route('borrowers.edit', [$borrower->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>

@@ -12,10 +12,10 @@ class ActivityController extends Controller
     public $ActivityService;
 
     public function __construct(){
-        $this->middleware('auth.web')->only([
+        $this->middleware('admin.auth.web')->only([
             'index', 'create', 'show', 'edit',
         ]);
-        $this->middleware('auth.jwt')->only([
+        $this->middleware('admin.auth.jwt')->only([
             'store', 'update', 'destroy', 'getList', 'getOne', 'change_top'
         ]);
         $this->ActivityService = new ActivityService();

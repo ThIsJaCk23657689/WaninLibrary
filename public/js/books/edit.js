@@ -684,7 +684,7 @@ __webpack_require__.r(__webpack_exports__);
         $('#callnum').removeClass('is-invalid');
 
         if ($callNum[0] < 6) {
-          // 前面6類，可以靠索書號第一碼來判斷。
+          // 前面6類，可以靠分類號第一碼來判斷。
           this.book.category = $callNum[0];
         } else {
           // 第六類到第七類，必須還要再看第二碼。
@@ -708,7 +708,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       } else {
         $('#callnum').addClass('is-invalid');
-        $('#callnum_error').html('<strong>索書號至少要三碼以上且為數字。</strong>');
+        $('#callnum_error').html('<strong>分類號至少要三碼以上且為數字。</strong>');
       }
     },
     bookUpdateForm: function bookUpdateForm(e) {
@@ -2657,7 +2657,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("索書號\r\n                            ")
+      _vm._v("分類號\r\n                            ")
     ])
   },
   function() {

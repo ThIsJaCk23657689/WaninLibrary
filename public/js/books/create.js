@@ -1673,7 +1673,7 @@ var render = function() {
                   "select",
                   {
                     staticClass: "form-control",
-                    attrs: { id: "add_type", name: "add_type" },
+                    attrs: { id: "add_type", name: "addType" },
                     on: { change: _vm.changeAddType }
                   },
                   [
@@ -1894,7 +1894,7 @@ var render = function() {
                   "select",
                   {
                     staticClass: "form-control",
-                    attrs: { id: "p_add_type", name: "add_type" },
+                    attrs: { id: "p_add_type", name: "addType" },
                     on: { change: _vm.changeAddType }
                   },
                   [

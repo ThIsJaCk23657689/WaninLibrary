@@ -13,11 +13,11 @@ class InformationController extends Controller
     public $InformationService;
 
     public function __construct(){
-        $this->middleware('auth.web')->only([
+        $this->middleware('admin.auth.web')->only([
             'index', 'edit',
             'recommendation_index', 'recommendation_edit',
         ]);
-        $this->middleware('auth.jwt')->only([
+        $this->middleware('admin.auth.jwt')->only([
             'getFirst', 'update', 'recommendation_update'
         ]);
         $this->InformationService = new InformationService();

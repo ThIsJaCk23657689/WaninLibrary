@@ -82,7 +82,7 @@ const app = new Vue({
 
                 Swal.fire({
                     title: '注意！',
-                    text: "你確定要刪除此捐贈人嗎？",
+                    text: "你確定要刪除此書籍嗎？",
                     icon: 'warning',
                     showCancelButton: true,
                     confirmButtonColor: '#3085d6',

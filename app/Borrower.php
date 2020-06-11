@@ -84,4 +84,12 @@ class Borrower extends Model
     {
         return ($this->activated) ? '未停權' : '停權' ;
     }
+
+    public function borrowCounts(){
+        return $this->borrows()->count();
+    }
+
+    public function expiredCounts(){
+        return $this->borrows()->where('status', '!=', 1)->count();
+    }
 }

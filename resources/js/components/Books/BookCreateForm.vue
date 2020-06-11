@@ -42,7 +42,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="add_type">入庫方式</label>
-                        <select id="add_type" name="add_type" class="form-control" @change="changeAddType">
+                        <select id="add_type" name="addType" class="form-control" @change="changeAddType">
                             <option value="1" selected>捐贈入庫</option>
                             <option value="2">購買入庫</option>
                         </select>
@@ -238,7 +238,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="p_add_type">入庫方式</label>
-                        <select id="p_add_type" name="add_type" class="form-control" @change="changeAddType">
+                        <select id="p_add_type" name="addType" class="form-control" @change="changeAddType">
                             <option value="1" selected>捐贈入庫</option>
                             <option value="2">購買入庫</option>
                         </select>

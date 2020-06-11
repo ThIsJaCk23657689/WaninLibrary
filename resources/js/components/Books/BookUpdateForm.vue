@@ -186,7 +186,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="callnum">
-                                <span class="text-danger mr-2">*</span>索書號
+                                <span class="text-danger mr-2">*</span>分類號
                             </label>
                             <input id="callnum" name="callnum" type="text" class="form-control" v-model="book.callnum" autocomplete="off" @input="updateCategory">
                             <span id="callnum_error" class="invalid-feedback" role="alert">
@@ -541,7 +541,7 @@ export default {
             if($callNum.length >= 3 && Number.isInteger(parseInt($callNum[0] + $callNum[1] + $callNum[2]))){
                 $('#callnum').removeClass('is-invalid');
                 if($callNum[0] < 6){
-                    // 前面6類，可以靠索書號第一碼來判斷。
+                    // 前面6類，可以靠分類號第一碼來判斷。
                     this.book.category = $callNum[0];
                 }else{
                     // 第六類到第七類，必須還要再看第二碼。
@@ -565,7 +565,7 @@ export default {
                 }
             }else{
                 $('#callnum').addClass('is-invalid');
-                $('#callnum_error').html('<strong>索書號至少要三碼以上且為數字。</strong>');
+                $('#callnum_error').html('<strong>分類號至少要三碼以上且為數字。</strong>');
             }
         },
 

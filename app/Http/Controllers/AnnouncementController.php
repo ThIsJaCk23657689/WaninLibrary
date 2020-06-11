@@ -11,12 +11,13 @@ class AnnouncementController extends Controller
     public $AnnouncementService;
 
     public function __construct(){
-        $this->middleware('auth.web')->only([
+        $this->middleware('admin.auth.web')->only([
             'index', 'create', 'show', 'edit',
         ]);
-        $this->middleware('auth.jwt')->only([
+        $this->middleware('admin.auth.jwt')->only([
             'store', 'update', 'destroy', 'change_top'
         ]);
+        
         $this->AnnouncementService = new AnnouncementService();
     }
     public function index(){
