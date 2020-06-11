@@ -83,8 +83,8 @@ class UserService extends BaseService
 
     public function delete($id)
     {
-        $token = JWTAuth::getToken();
-        $act_user = JWTAuth::toUser($token);
+        $act_user = auth('api')->user();
+
 
         $user = $this->getOne($id);
 
@@ -95,6 +95,21 @@ class UserService extends BaseService
             }else{
                 $user->delete();
             }
+        }
+
+        return ['status'=>'OK','url'=>route('users.index')];
+    }
+
+    public function forceDestroy($id)
+    {
+        $act_user = auth('api')->user();
+
+
+        $user = $this->getOne($id);
+
+        // 本人不能刪除, 最高管理者不能刪
+        if($act_user->id != $id && $id !=1){
+            $user->forceDelete();
         }
 
         return ['status'=>'OK','url'=>route('users.index')];

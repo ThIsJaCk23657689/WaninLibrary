@@ -119,6 +119,8 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('getUsersByName', 'UserController@getUsersByName');
     Route::get('getUserByToken', 'UserController@getUserByToken');
     Route::get('/users/{id}/json', 'UserController@getOne')->name('users.getOne');
+    // 硬刪除
+    Route::delete('/users/{id}/forceDelete', 'UserController@forceDestroy')->name('users.forceDestroy');
         // POST api/users   PATCH api/users/{user}  DELETE api/users/{user}
         // postman 測試的話用post 然後 多一個 _method = PATCH
     Route::resource('users', 'UserController')->only(['store', 'update', 'destroy']);
