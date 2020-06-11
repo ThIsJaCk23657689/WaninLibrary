@@ -34,6 +34,15 @@ class BookController extends Controller
     }
 
     public function store(BookRequest $request){
+        if($request->addType == 2){
+            $request->donor_id = null;
+        }else{
+            if($request->donor_id == "null"){
+                return response()->json(['message'=>'請選擇捐贈人'], 400);
+                // $request->donor_id = 1;
+            }
+            $request->price = 0;
+        }
         $result = $this->BookService->add($request);
         return response()->json($result, $result['status']);
     }
