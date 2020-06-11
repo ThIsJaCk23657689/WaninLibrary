@@ -12,6 +12,7 @@
     "/css/app.css": "/css/app.css",
     "/css/frontend/frontend.css": "/css/frontend/frontend.css",
     "/css/backend.css": "/css/backend.css",
+    "/css/errors.css": "/css/errors.css",
     "/js/auth/forgetPassword.js": "/js/auth/forgetPassword.js",
     "/js/auth/login.js": "/js/auth/login.js",
     "/js/auth/resetPassword.js": "/js/auth/resetPassword.js",

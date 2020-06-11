@@ -67,4 +67,5 @@ mix.js('resources/js/backend.js', 'public/js')
 .js('resources/js/information/edit.js', 'public/js/information')
     .js('resources/js/chart/index.js', 'public/js/chart')
 
-.sass('resources/sass/backend/backend.scss', 'public/css');
+.sass('resources/sass/backend/backend.scss', 'public/css')
+.sass('resources/sass/errors.scss', 'public/css');
