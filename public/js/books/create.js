@@ -624,7 +624,7 @@ __webpack_require__.r(__webpack_exports__);
         $('#callnum').removeClass('is-invalid');
 
         if ($callNum[0] < 6) {
-          // 前面6類，可以靠索書號第一碼來判斷。
+          // 前面6類，可以靠分類號第一碼來判斷。
           $('#category').val($callNum[0]);
         } else {
           // 第六類到第七類，必須還要再看第二碼。
@@ -648,7 +648,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       } else {
         $('#callnum').addClass('is-invalid');
-        $('#callnum_error').html('<strong>索書號至少要三碼以上且為數字。</strong>');
+        $('#callnum_error').html('<strong>分類號至少要三碼以上且為數字。</strong>');
       }
     },
     getBookDataFromWeb: function getBookDataFromWeb(e) {
@@ -700,7 +700,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#language').val(this.bookInfo.language);
 
       if (this.bookInfo.language != '中文') {
-        // 此書籍是外文，索書號會抓取【杜威碼】
+        // 此書籍是外文，分類號會抓取【杜威碼】
         $('#callnum').val(this.bookInfo.Dewey_callnum.substring(0, 3)); // 種類選項強制鎖定13
 
         $('#category').val(13);
@@ -741,6 +741,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }).then(function (response) {
         // this.$refs.uploadBookImages.stopCropper();
+        // console.log('aaa');
         $.showSuccessModal('新增成功', response.data.url, '檢視書籍');
       })["catch"](function (error) {
         console.error('新增書本時發生錯誤，錯誤訊息：' + error);
@@ -2360,7 +2361,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("索書號\r\n                        ")
+      _vm._v("分類號\r\n                        ")
     ])
   },
   function() {

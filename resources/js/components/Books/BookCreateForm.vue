@@ -193,7 +193,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="callnum">
-                            <span class="text-danger mr-2">*</span>索書號
+                            <span class="text-danger mr-2">*</span>分類號
                         </label>
                         <input id="callnum" name="callnum" type="text" class="form-control" value="" autocomplete="off" @input="updateCategory">
                         <span id="callnum_error" class="invalid-feedback" role="alert">
@@ -505,7 +505,7 @@ export default {
             if($callNum.length >= 3 && Number.isInteger(parseInt($callNum[0] + $callNum[1] + $callNum[2]))){
                 $('#callnum').removeClass('is-invalid');
                 if($callNum[0] < 6){
-                    // 前面6類，可以靠索書號第一碼來判斷。
+                    // 前面6類，可以靠分類號第一碼來判斷。
                     $('#category').val($callNum[0]);
                 }else{
                     // 第六類到第七類，必須還要再看第二碼。
@@ -529,7 +529,7 @@ export default {
                 }
             }else{
                 $('#callnum').addClass('is-invalid');
-                $('#callnum_error').html('<strong>索書號至少要三碼以上且為數字。</strong>');
+                $('#callnum_error').html('<strong>分類號至少要三碼以上且為數字。</strong>');
             }
         },
         getBookDataFromWeb(e){
@@ -578,7 +578,7 @@ export default {
             $('#language').val(this.bookInfo.language);
 
             if(this.bookInfo.language != '中文'){
-                // 此書籍是外文，索書號會抓取【杜威碼】
+                // 此書籍是外文，分類號會抓取【杜威碼】
                 $('#callnum').val(this.bookInfo.Dewey_callnum.substring(0,3));
 
                 // 種類選項強制鎖定13
@@ -622,6 +622,7 @@ export default {
                 }
             }).then(response => {
                 // this.$refs.uploadBookImages.stopCropper();
+                // console.log('aaa');
                 $.showSuccessModal('新增成功', response.data.url, '檢視書籍');
             }).catch(error => {
                 console.error('新增書本時發生錯誤，錯誤訊息：' + error);

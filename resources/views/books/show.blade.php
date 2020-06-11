@@ -151,7 +151,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="isbn">ISBN</label>
-                            <input id="isbn" name="isbn" type="text" class="form-control" value="{{ $book->isbn }}" readonly>
+                            <input id="isbn" name="isbn" type="text" class="form-control" value="{{ $book->ISBN }}" readonly>
                         </div>
                     </div>
 

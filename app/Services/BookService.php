@@ -59,7 +59,7 @@ class BookService extends BaseService
             'publisher' => $request->publisher,
             'edition' => $request->edition,
             'cover_image' => $url,
-            'ISBN' => $request->ISBN,
+            'ISBN' => $request->isbn,
             'position' => $request->position,
 
             'published_date' => $request->published_date,
@@ -251,7 +251,7 @@ class BookService extends BaseService
             'translator' => $request->translator,
             'publisher' => $request->publisher,
             'edition' => $request->edition,
-            'ISBN' => $request->ISBN,
+            'ISBN' => $request->isbn,
             'position' => $request->position,
 
             'published_date' => $request->published_date,
