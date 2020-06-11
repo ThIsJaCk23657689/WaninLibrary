@@ -36,8 +36,17 @@ class BookService extends BaseService
             $url = null;
         }
 
+        if($request->addType == 2){
+            $request->donor_id = null;
+        }else{
+            if($request->donor_id == "null"){
+                $request->donor_id = 1;
+            }
+            $request->price = 0;
+        }
+
         $book = BookEloquent::create([
-            'donor_id' => $request->donor_id ?? 0,
+            'donor_id' => $request->donor_id,
             'barcode' => $barcode,
             'callnum' => $request->callnum,
             'category' => $request->category,
@@ -457,7 +466,8 @@ class BookService extends BaseService
                     $str = str_replace("\n","",$td->nextSibling->nodeValue);
                     $str = str_replace('-', '',$str);
                     $str = str_replace(';', '',$str);
-                    $info['ISBN'] = strstr($str,' ',true);
+                    // $info['ISBN'] = strstr($str,' ',true);
+                    $info['ISBN'] = $str;
                     break;
                 case "出版項Publication":
                     $str = str_replace("\n","",$td->nextSibling->nodeValue);

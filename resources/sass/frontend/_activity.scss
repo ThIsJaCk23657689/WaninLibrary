@@ -14,104 +14,118 @@
         background-color: $green;
         .container {
             padding-top: 5%;
-            h1 {
-                letter-spacing: 20px;
-                font-weight: bold;
-            }
-            .activityRow {
-                height: 610px;
-                padding-top: 3%;
-                .activity_unit_top {
-                    .cover_image {
-                        overflow: hidden;
-                        height: 100%;
-                        position: relative;
+            overflow-x: hidden;
+            .slider{
+                display: flex;
+                width: 200%;
+                .activities-area{
+                    display: flex;
+                    width: 50%;
+                    h1 {
+                        letter-spacing: 20px;
+                        font-weight: bold;
+                    }
+                    .activityRow {
+                        height: 610px;
+                        padding-top: 3%;
+                        .activity_unit_top {
+                            .cover_image {
+                                overflow: hidden;
+                                height: 100%;
+                                position: relative;
+                                img {
+                                    height: 100%;
+                                    position: absolute;
+                                    top: 0;
+                                    left: calc(50% + 0px);
+                                    transform: translateX(-50%);
+                                }
+                                .activity_text {
+                                    width: 100%;
+                                    position: absolute;
+                                    left: 0;
+                                    bottom: 0;
+                                    padding: 20px;
+                                    color: $white;
+                                    z-index: 1;
+                                    .datetime {
+                                        font-size: 1.2rem;
+                                        letter-spacing: 3px;
+                                    }
+                                    .title {
+                                        letter-spacing: 3px;
+                                        line-height: 2.5rem;
+                                        font-weight: bold;
+                                    }
+                                    .readmore {
+                                        text-align: right;
+                                        letter-spacing: 3px;
+                                    }
+                                }
+                                .gray {
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    width: 100%;
+                                    height: 100%;
+                                    background: linear-gradient(#fff0, 80%, $darkgray);
+                                }
+                            }
+                        }
+                        .activity_unit {
+                            .cover_image {
+                                overflow: hidden;
+                                height: 100%;
+                                position: relative;
+                                img {
+                                    height: 100%;
+                                    position: absolute;
+                                    top: 0;
+                                    left: calc(50% + 0px);
+                                    transform: translateX(-50%);
+                                }
+                            }
+                            .activity_text {
+                                color: $brown;
+                                .datetime {
+                                    font-size: 1rem;
+                                    letter-spacing: 3px;
+                                }
+                                .title {
+                                    letter-spacing: 3px;
+                                    line-height: 2rem;
+                                    font-weight: bold;
+                                }
+                                .readmore {
+                                    color: $white;
+                                    text-align: right;
+                                    letter-spacing: 3px;
+                                }
+                            }
+                        }
+                    }
+                    .checkRecommendationBtn {
+                        border: 1px solid $white;
+                        border-radius: 25px;
+                        margin-left: auto;
+                        width: 48%;
+                        text-align: center;
+                        font-size: 1.5rem;
+                        letter-spacing: 3px;
+                        margin-top: 5%;
+                        padding: 17px;
                         img {
-                            height: 100%;
-                            position: absolute;
-                            top: 0;
-                            left: calc(50% + 0px);
-                            transform: translateX(-50%);
-                        }
-                        .activity_text {
-                            width: 100%;
-                            position: absolute;
-                            left: 0;
-                            bottom: 0;
-                            padding: 20px;
-                            color: $white;
-                            z-index: 1;
-                            .datetime {
-                                font-size: 1.2rem;
-                                letter-spacing: 3px;
-                            }
-                            .title {
-                                letter-spacing: 3px;
-                                line-height: 2.5rem;
-                                font-weight: bold;
-                            }
-                            .readmore {
-                                text-align: right;
-                                letter-spacing: 3px;
-                            }
-                        }
-                        .gray {
-                            position: absolute;
-                            top: 0;
-                            left: 0;
-                            width: 100%;
-                            height: 100%;
-                            background: linear-gradient(#fff0, 80%, $darkgray);
+                            width: 6%;
+                            margin-top: -2%;
                         }
                     }
                 }
-                .activity_unit {
-                    .cover_image {
-                        overflow: hidden;
-                        height: 100%;
-                        position: relative;
-                        img {
-                            height: 100%;
-                            position: absolute;
-                            top: 0;
-                            left: calc(50% + 0px);
-                            transform: translateX(-50%);
-                        }
-                    }
-                    .activity_text {
-                        color: $brown;
-                        .datetime {
-                            font-size: 1rem;
-                            letter-spacing: 3px;
-                        }
-                        .title {
-                            letter-spacing: 3px;
-                            line-height: 2rem;
-                            font-weight: bold;
-                        }
-                        .readmore {
-                            color: $white;
-                            text-align: right;
-                            letter-spacing: 3px;
-                        }
-                    }
+                .recommandation-area{
+                    display: flex;
+                    width: 50%;
                 }
             }
-            .checkRecommendationBtn {
-                border: 1px solid $white;
-                border-radius: 25px;
-                margin-left: auto;
-                width: 48%;
-                text-align: center;
-                font-size: 1.5rem;
-                letter-spacing: 3px;
-                margin-top: 5%;
-                padding: 17px;
-                img {
-                    width: 6%;
-                    margin-top: -2%;
-                }
-            }
+            
         }
     }
 }

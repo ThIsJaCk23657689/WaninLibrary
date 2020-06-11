@@ -49,6 +49,25 @@
                 </div>
             </div>
             <div class="footerText">
+                <div>
+                    <ul class="navbar-nav button-area">
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <img src="{{ asset('images/frontend/icons/facebook.png') }}" alt="facebook">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <img src="{{ asset('images/frontend/icons/web.png') }}" alt="web">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a href="#" class="nav-link">
+                                <img src="{{ asset('images/frontend/icons/instagram.png') }}" alt="instagram">
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 <div class="footerLink">
                     <a href="#">隱私政策</a>
                     <span class="mx-1">|</span>
@@ -58,6 +77,10 @@
                     <span>網銀基金會版權所有 &copy; 2020 All rights reserved</span>
                 </div>
             </div>
+        </div>
+        <div class="top">
+            <img src="{{ asset('images/frontend/icons/top.png') }}" alt="top">
+            <span>TOP</span>
         </div>
     </footer>
 </section>

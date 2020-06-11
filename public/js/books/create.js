@@ -701,11 +701,11 @@ __webpack_require__.r(__webpack_exports__);
 
       if (this.bookInfo.language != '中文') {
         // 此書籍是外文，索書號會抓取【杜威碼】
-        $('#callnum').val(this.bookInfo.Dewey_callnum); // 種類選項強制鎖定13
+        $('#callnum').val(this.bookInfo.Dewey_callnum.substring(0, 3)); // 種類選項強制鎖定13
 
         $('#category').val(13);
       } else {
-        $('#callnum').val(this.bookInfo.callnum);
+        $('#callnum').val(this.bookInfo.callnum.substring(0, 3));
         this.updateCategory();
       } // 爬蟲抓圖片網址
 

@@ -26,10 +26,34 @@ footer{
 			bottom: 20px;
 			font-size: 0.8rem;
 			text-align: right;
+			.button-area{
+				width: 150px;
+				height: 50px;
+				display: block;
+				margin-bottom: 0px;
+				padding: 0;
+				li{
+					float: left;
+				}
+				.nav-item {
+					width: 50px;
+					margin: 0px;
+					.nav-link {
+						img {
+							width: 30px;
+						}
+						&:hover{
+							border: none;
+						}
+					}
+					&:hover{
+						border: none;
+					}
+				}
+			}
 			.footerLink{
-				color: $pink;
 				a{
-					color: $pink;
+					color: $darkwhite;
 					letter-spacing: 2px;
 				}
 			}
@@ -39,6 +63,56 @@ footer{
 			@media (max-width: 768px) {
 				text-align: left;
 				right: -15px;
+				.button-area{
+					margin: 0;
+				}
+			}
+		}
+	}
+	.top{
+		float: right;
+		width: 40px;
+		border-left: 1px solid $white;
+		padding: 10px 5px;
+		position: relative;
+		text-align: center;
+		cursor: pointer;
+		img{
+			width: 6px;
+			margin: 10px 10px 5px 10px;
+		}
+		span{
+			font-weight: bold;
+			letter-spacing: 5px;
+			transform: rotate(90deg);
+			position: absolute;
+			bottom: 15px;
+			left: -4px;
+			transition: all 0.5s ease;
+		}
+		&:hover{
+			span{
+				color: $green;
+			}
+		}
+		@media (max-width: 992px) {
+			width: 50px;
+			img{
+				width: 9px;
+			}
+			span{
+				bottom: 24px;
+				left: 3%;
+			}
+		}
+		@media (max-width: 768px) {
+			width: 70px;
+			img{
+				width: 14px;
+			}
+			span{
+				bottom: 24px;
+				left: 15%;
 			}
 		}
 	}
@@ -46,6 +120,6 @@ footer{
 		height: calc(#{$footer-height} + 61px);
 	}
 	@media (max-width: 768px) {
-		height: calc(#{$footer-height} + 126px);
+		height: calc(#{$footer-height} + 160px);
 	}
 }

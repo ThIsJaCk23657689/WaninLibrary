@@ -188,4 +188,10 @@ $(function() {
     $('#closeBtn').click(function() {
         $("#navSidebar").toggleClass('open');
     });
+
+    $('footer .top').click(function() {
+        $('html, body').animate({
+            scrollTop:0
+        }, 500);
+    });
 });

@@ -34,31 +34,33 @@
             </a>
         </li>
     </ul>
-    <div id="search">
-        <form action="#" method="GET">
-            <div class="inputBox">
-                <input type="text" placeholder="Search">
-                <button type="submit">
-                    <img src="{{ asset('images/frontend/icons/search.png') }}" alt="搜尋">
-                </button>
-            </div>
-        </form>
+    <div class="bottom">
+        <ul id="bottomSidebar" class="navbar-nav">
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <img src="{{ asset('images/frontend/icons/facebook.png') }}" alt="facebook">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <img src="{{ asset('images/frontend/icons/web.png') }}" alt="web">
+                </a>
+            </li>
+            <li class="nav-item">
+                <a href="#" class="nav-link">
+                    <img src="{{ asset('images/frontend/icons/instagram.png') }}" alt="instagram">
+                </a>
+            </li>
+        </ul>
+        <div id="search">
+            <form action="#" method="GET">
+                <div class="inputBox">
+                    <input type="text" placeholder="Search">
+                    <button type="submit">
+                        <img src="{{ asset('images/frontend/icons/search.png') }}" alt="搜尋">
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
-    <ul id="bottomSidebar" class="navbar-nav">
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <img src="{{ asset('images/frontend/icons/facebook_blue.png') }}" alt="facebook">
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <img src="{{ asset('images/frontend/icons/web_blue.png') }}" alt="web">
-            </a>
-        </li>
-        <li class="nav-item">
-            <a href="#" class="nav-link">
-                <img src="{{ asset('images/frontend/icons/instagram_blue.png') }}" alt="instagram">
-            </a>
-        </li>
-    </ul>
 </div>

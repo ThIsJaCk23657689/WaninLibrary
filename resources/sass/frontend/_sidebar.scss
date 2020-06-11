@@ -45,68 +45,76 @@
             color: $blue;
         }
     }
-    div#search{
-        margin: 0px 10%;
-        padding: 2% 0px;
-        .inputBox{
-            border: 2px solid $blue;
-            border-radius: 20px;
-            padding: 1px 0px;
-            margin: 0px;
-            height: 40px;
-            position: relative;
-            input{
-                outline: none;
-                padding: 3px 0px 3px 3px;
-                width: calc(100% - 58px);
-                height: 33px;
-                color: $blue;
-                position: relative;
-                border: none;
-                border-radius: 20px;
-                top: -2px;
-                left: 15px;
-                margin-right: 8px;
-                font-size: 0.9rem;
-            }
-            button{
-                outline: none;
-                width: 40px;
-                height: 40px;
-                margin: 0;
-                padding: 5px;
-                text-align: center;
+    .bottom{
+        width: calc(100% - 90px);
+        position: absolute;
+        left: 0;
+        bottom: 30px;
+        div#search{
+            margin: 0px 10%;
+            padding: 2% 0px;
+            .inputBox{
                 border: 2px solid $blue;
                 border-radius: 20px;
-                background-color: rgba(255, 255, 255, 0);
+                padding: 1px 0px;
+                margin: 0px;
+                height: 40px;
                 position: relative;
-                top: -3px;
-                left: 8px;
-                img{
-                    width: 90%;
-                    transition: width 0.5s ease;
+                input{
+                    outline: none;
+                    padding: 3px 0px 3px 3px;
+                    width: calc(100% - 58px);
+                    height: 33px;
+                    color: $blue;
+                    position: relative;
+                    border: none;
+                    border-radius: 20px;
+                    top: -2px;
+                    left: 15px;
+                    margin-right: 8px;
+                    font-size: 0.9rem;
                 }
-                &:hover{
+                button{
+                    outline: none;
+                    width: 40px;
+                    height: 40px;
+                    margin: 0;
+                    padding: 5px;
+                    text-align: center;
+                    border: 2px solid $blue;
+                    border-radius: 20px;
+                    background-color: rgba(255, 255, 255, 0);
+                    position: relative;
+                    top: -3px;
+                    left: 8px;
                     img{
-                        width: 100%;
+                        width: 90%;
+                        transition: width 0.5s ease;
+                    }
+                    &:hover{
+                        img{
+                            width: 100%;
+                        }
                     }
                 }
             }
         }
-    }
-    #bottomSidebar {
-        padding: 0;
-        margin-top: 10px;
-        margin-left: 10%;
-        li{
-            float: left;
-        }
-        .nav-item {
-            width: 60px;
-            margin: 0px;
-            .nav-link {
-                img {
-                    width: 40px;
+        #bottomSidebar {
+            padding: 0;
+            margin-top: 10px;
+            margin-left: 10%;
+            margin-bottom: 5px;
+            height: 50px;
+            li{
+                float: left;
+            }
+            .nav-item {
+                width: 60px;
+                margin: 0px;
+                .nav-link {
+                    img {
+                        width: 40px;
+                    }
                 }
             }
         }

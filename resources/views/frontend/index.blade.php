@@ -88,70 +88,99 @@
     <section id="activity">
         <div class="content">
             <div class="container">
-                <div class="row">
-                    <div class="col-md-12">
-                        <h1>
-                            <div id="activityIcon" class="mr-2">
-                                <img src="{{ asset('images/frontend/icons/activity.png') }}" alt="activity">
-                            </div>
-                            近期活動
-                        </h1>
-                    </div>
-                </div>
-                @if(!is_null($activities_top))
-                    <div class="row activityRow">
-                        <div class="col-md-6">
-                            <a href="#" class="activity_unit_top">
-                                <div class="cover_image">
-                                    <img src="{{ asset($activities_top->cover_image) }}" alt="">
-                                    <div class="activity_text">
-                                        <span class="datetime">{{ $activities_top->showDate() }}</span>
-                                        <h3 class="title">{{ $activities_top->showTitle() }}</h3>
-                                        <div class="readmore">
-                                            <span>了解更多 >></span>
+                <div class="slider">
+                    <div class="activities-area" style="display: none;">
+                        <div class="container" style="padding-top: 0px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>
+                                        <div id="activityIcon" class="mr-2">
+                                            <img src="{{ asset('images/frontend/icons/activity.png') }}" alt="activity">
                                         </div>
-                                    </div>
-                                    <div class="gray"></div>
+                                        近期活動
+                                    </h1>
                                 </div>
-                            </a>
-                        </div>
-                        @if($activities->isNotEmpty())
-                            <div class="col-md-6">
-                                @foreach($activities as $activity)
-                                    <a href="#" class="activity_unit">
-                                        <div class="row" style="height: 50%; {{ ($loop->iteration == 1)?'padding-bottom:12px;':'padding-top:12px;' }}">
-                                            <div class="col-md-6">
-                                                <div class="cover_image">
-                                                    <img src="{{ asset($activity->cover_image) }}" alt="">
-                                                </div>
-                                            </div>
-                                            <div class="col-md-6">
+                            </div>
+                            @if(!is_null($activities_top))
+                                <div class="row activityRow">
+                                    <div class="col-md-6">
+                                        <a href="#" class="activity_unit_top">
+                                            <div class="cover_image">
+                                                <img src="{{ asset($activities_top->cover_image) }}" alt="">
                                                 <div class="activity_text">
-                                                    <span class="datetime">{{ $activity->showDate() }}</span>
-                                                    <h4 class="title">{{ $activity->showTitle() }}</h4>
+                                                    <span class="datetime">{{ $activities_top->showDate() }}</span>
+                                                    <h3 class="title">{{ $activities_top->showTitle() }}</h3>
                                                     <div class="readmore">
                                                         <span>了解更多 >></span>
                                                     </div>
                                                 </div>
+                                                <div class="gray"></div>
                                             </div>
+                                        </a>
+                                    </div>
+                                    @if($activities->isNotEmpty())
+                                        <div class="col-md-6">
+                                            @foreach($activities as $activity)
+                                                <a href="#" class="activity_unit">
+                                                    <div class="row" style="height: 50%; {{ ($loop->iteration == 1)?'padding-bottom:12px;':'padding-top:12px;' }}">
+                                                        <div class="col-md-6">
+                                                            <div class="cover_image">
+                                                                <img src="{{ asset($activity->cover_image) }}" alt="">
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-md-6">
+                                                            <div class="activity_text">
+                                                                <span class="datetime">{{ $activity->showDate() }}</span>
+                                                                <h4 class="title">{{ $activity->showTitle() }}</h4>
+                                                                <div class="readmore">
+                                                                    <span>了解更多 >></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </a>
+                                            @endforeach
                                         </div>
-                                    </a>
-                                @endforeach
+                                    @endif
+                                </div>
+                            @else
+                                <div class="row">
+                                    <div class="col-md-12 text-center">
+                                        <h2>近期沒有活動</h2>
+                                    </div>
+                                </div>
+                            @endif
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="checkRecommendationBtn">
+                                        <span>查看老饕最愛拾本書單</span>
+                                        <img src="{{ asset('images/frontend/icons/click_hand.png') }}" alt="">
+                                    </div>
+                                </div>
                             </div>
-                        @endif
-                    </div>
-                @else
-                    <div class="row">
-                        <div class="col-md-12 text-center">
-                            <h2>近期沒有活動</h2>
                         </div>
                     </div>
-                @endif
-                <div class="row">
-                    <div class="col-md-12">
-                        <div class="checkRecommendationBtn">
-                            <span>查看老饕最愛拾本書單</span>
-                            <img src="{{ asset('images/frontend/icons/click_hand.png') }}" alt="">
+                    <div class="recommandation-area">
+                        <div class="container" style="padding-top: 0px;">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <h1>
+                                        <div id="activityIcon" class="mr-2">
+                                            <img src="{{ asset('images/frontend/icons/activity.png') }}" alt="activity">
+                                        </div>
+                                        近期活動
+                                    </h1>
+                                </div>
+                            </div>
+                            <div class="row"></div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="checkRecommendationBtn">
+                                        <span>查看老饕最愛拾本書單</span>
+                                        <img src="{{ asset('images/frontend/icons/click_hand.png') }}" alt="">
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
