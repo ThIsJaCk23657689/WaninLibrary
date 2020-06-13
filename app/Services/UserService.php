@@ -29,8 +29,9 @@ class UserService extends BaseService
 
     public function getList()
     {
-        $users = UserEloquent::withTrashed()->get();
-        return $users;
+        $users = UserEloquent::get();
+        $users_block = UserEloquent::onlyTrashed()->get();
+        return ['users' => $users, 'users_block' => $users_block];
     }
 
     public function getOne($id)
@@ -109,6 +110,7 @@ class UserService extends BaseService
 
         // 本人不能刪除, 最高管理者不能刪
         if($act_user->id != $id && $id !=1){
+            $user->loginLogs()->delete();
             $user->forceDelete();
         }
 

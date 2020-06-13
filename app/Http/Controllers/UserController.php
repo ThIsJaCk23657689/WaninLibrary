@@ -29,8 +29,10 @@ class UserController extends Controller
     /*---回傳view---*/
     public function index()
     {
-        $users = $this->UserService->getList();
-        return view('users.index', compact('users'));
+        $users_arr = $this->UserService->getList();
+        $users = $users_arr['users'];
+        $users_block = $users_arr['users_block'];
+        return view('users.index', compact('users', 'users_block'));
     }
 
     // public function usersByName(Request $request){
