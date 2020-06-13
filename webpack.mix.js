@@ -36,6 +36,7 @@ mix.js('resources/js/backend.js', 'public/js')
 
 .js('resources/js/users/create.js', 'public/js/users')
     .js('resources/js/users/edit.js', 'public/js/users')
+    .js('resources/js/users/index.js', 'public/js/users')
 
 .js('resources/js/donors/index.js', 'public/js/donors')
     .js('resources/js/donors/create.js', 'public/js/donors')
@@ -68,4 +69,4 @@ mix.js('resources/js/backend.js', 'public/js')
     .js('resources/js/chart/index.js', 'public/js/chart')
 
 .sass('resources/sass/backend/backend.scss', 'public/css')
-.sass('resources/sass/errors.scss', 'public/css');
+    .sass('resources/sass/errors.scss', 'public/css');

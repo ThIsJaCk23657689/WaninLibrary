@@ -29,8 +29,9 @@ class UserService extends BaseService
 
     public function getList()
     {
-        $users = UserEloquent::withTrashed()->get();
-        return $users;
+        $users = UserEloquent::get();
+        $users_block = UserEloquent::onlyTrashed()->get();
+        return ['users' => $users, 'users_block' => $users_block];
     }
 
     public function getOne($id)

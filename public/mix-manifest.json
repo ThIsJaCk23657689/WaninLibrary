@@ -38,5 +38,6 @@
     "/js/loginLogs/index.js": "/js/loginLogs/index.js",
     "/js/recommendation/edit.js": "/js/recommendation/edit.js",
     "/js/users/create.js": "/js/users/create.js",
-    "/js/users/edit.js": "/js/users/edit.js"
+    "/js/users/edit.js": "/js/users/edit.js",
+    "/js/users/index.js": "/js/users/index.js"
 }

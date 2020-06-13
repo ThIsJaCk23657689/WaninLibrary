@@ -81,42 +81,45 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 22);
+/******/ 	return __webpack_require__(__webpack_require__.s = 15);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/books/print.js":
+/***/ "./resources/js/users/index.js":
 /*!*************************************!*\
-  !*** ./resources/js/books/print.js ***!
+  !*** ./resources/js/users/index.js ***!
   \*************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$(function () {
-  $('#printBtn').click(function () {
-    var divContents = $('#barcode_area').html();
-    var barcodeURL = $('#PrintURL').text();
-    var a = window.open(barcodeURL, '列印條碼', 'height=500, width=800, left=350, top=100'); // a.document.write('<html>');
-    // a.document.write('<body>');
-    // a.document.write(divContents);
-    // a.document.write('</body></html>');
-    // a.document.close();
-
-    a.print();
-  });
+$('#nav_actived').click(function (e) {
+  $('#a_actived').addClass('active');
+  $('#a_block').removeClass('active');
+  $('#div_block').hide();
+  $('#div_act').fadeIn();
+  $('#i_block').hide();
+  $('#i_actived').fadeIn();
+});
+$('#nav_block').click(function (e) {
+  $('#a_actived').removeClass('active');
+  $('#a_block').addClass('active');
+  $('#div_act').hide();
+  $('#div_block').fadeIn();
+  $('#i_block').fadeIn();
+  $('#i_actived').hide();
 });
 
 /***/ }),
 
-/***/ 22:
+/***/ 15:
 /*!*******************************************!*\
-  !*** multi ./resources/js/books/print.js ***!
+  !*** multi ./resources/js/users/index.js ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\print.js */"./resources/js/books/print.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\users\index.js */"./resources/js/users/index.js");
 
 
 /***/ })

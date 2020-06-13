@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ 	return __webpack_require__(__webpack_require__.s = 36);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -557,14 +557,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 35:
+/***/ 36:
 /*!*******************************************!*\
   !*** multi ./resources/js/chart/index.js ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\chart\index.js */"./resources/js/chart/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\chart\index.js */"./resources/js/chart/index.js");
 
 
 /***/ })
