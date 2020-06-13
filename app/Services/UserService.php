@@ -110,6 +110,7 @@ class UserService extends BaseService
 
         // 本人不能刪除, 最高管理者不能刪
         if($act_user->id != $id && $id !=1){
+            $user->loginLogs()->delete();
             $user->forceDelete();
         }
 
