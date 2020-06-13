@@ -49,45 +49,33 @@
                     </div>
                 </div>
 
-                <!-- <div class="col-md-3">
-                    <div class="form-group">
-                        <label for="donor_id"><span id="donor_id_required_star" class="text-danger mr-2">*</span>捐贈人</label>
-                        <select id="donor_id" name="donor_id" class="form-control">
-                            <option value="0">請選擇...</option>
-                        </select>
-                    </div>
-                </div> -->
-
-
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="form-group donor_div">
-                        <label><span class="text-danger mr-2">*</span>捐贈人</label>
-                        <!-- <div id="donor_id" class="input-group mb-3">
-                            <input type="text" class="form-control" :value="book.showTitle" readonly>
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-dark" @click="startUpdate(index)">編輯</button>
+                        <label>
+                            <span class="text-danger mr-2">*</span>捐贈人
+                        </label>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div id="donor_id">
+                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                                </div>
                             </div>
-                        </div> -->
-                        <div id="donor_id">
-                            <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#CreateDonorModal">
+                                    <i class="fas fa-plus mr-2"></i>
+                                    新增捐贈人
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-
-                <div class="col-md-2">
+                <div class="col-md-3">
                     <div class="form-group price_div" style="display:none;">
-                        <label for="price"><span id="price_required_star" class="text-danger mr-2">*</span>價格</label>
+                        <label for="price">
+                            <span id="price_required_star" class="text-danger mr-2">*</span>價格
+                        </label>
                         <input id="price" name="price" type="text" class="form-control" value="0" autocomplete="off">
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="status">狀態</label>
-                        <select id="status" name="status" class="form-control" disabled>
-                            <option value="4">庫藏待上架</option>
-                        </select>
                     </div>
                 </div>
             </div>
@@ -212,10 +200,18 @@
             </div>
 
             <div class="row mb-2">
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <div class="form-group">
                         <label for="content">備註內容</label>
                         <textarea name="content" id="content" class="form-control" cols="30" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="status">狀態</label>
+                        <select id="status" name="status" class="form-control" disabled>
+                            <option value="4">庫藏待上架</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -245,34 +241,33 @@
                     </div>
                 </div>
 
-                <div class="col-md-3">
+                <div class="col-md-6">
                     <div class="form-group donor_div">
-                        <label><span class="text-danger mr-2">*</span>捐贈人</label>
-                        <!-- <div id="donor_id" class="input-group mb-3">
-                            <input type="text" class="form-control" :value="book.showTitle" readonly>
-                            <div class="input-group-append">
-                                <button type="button" class="btn btn-dark" @click="startUpdate(index)">編輯</button>
+                        <label>
+                            <span class="text-danger mr-2">*</span>捐贈人
+                        </label>
+                        <div class="row">
+                            <div class="col-md-7">
+                                <div id="p_donor_id">
+                                    <select-donor-custom ref="PaperDonorsOption" :placeholder="'請輸入捐贈人名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                                </div>
                             </div>
-                        </div> -->
-                        <div id="p_donor_id">
-                            <select-donor-custom ref="PaperDonorsOption" :placeholder="'請輸入捐贈人名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                            <div class="col-md-5">
+                                <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#CreateDonorModal">
+                                    <i class="fas fa-plus mr-2"></i>
+                                    新增捐贈人
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <div class="col-md-2">
-                    <div class="form-group price_div"  style="display:none;">
-                        <label for="p_price"><span id="p_price_required_star" class="text-danger mr-2">*</span>價格</label>
+                <div class="col-md-3">
+                    <div class="form-group price_div" style="display:none;">
+                        <label for="p_price">
+                            <span id="p_price_required_star" class="text-danger mr-2">*</span>價格
+                        </label>
                         <input id="p_price" name="price" type="text" class="form-control" value="0" autocomplete="off">
-                    </div>
-                </div>
-
-                <div class="col-md-4">
-                    <div class="form-group">
-                        <label for="p_status">狀態</label>
-                        <select id="p_status" name="status" class="form-control" disabled>
-                            <option value="4">庫藏待上架</option>
-                        </select>
                     </div>
                 </div>
             </div>
@@ -372,10 +367,18 @@
             </div>
 
             <div class="row mb-2">
-                <div class="col-md-12">
+                <div class="col-md-8">
                     <div class="form-group">
                         <label for="p_content">備註內容</label>
                         <textarea name="content" id="p_content" class="form-control" cols="30" rows="3"></textarea>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label for="p_status">狀態</label>
+                        <select id="p_status" name="status" class="form-control" disabled>
+                            <option value="4">庫藏待上架</option>
+                        </select>
                     </div>
                 </div>
             </div>
@@ -392,6 +395,7 @@
             </div>
         </form>
     </div>
+    <create-donor-modal></create-donor-modal>
 </div>
 </template>
 
@@ -429,6 +433,8 @@ export default {
     },
     methods: {
         onSearch(search, loading, index) {
+            console.log(search, index);
+            $('#DonorSearchMsg').html('');
             loading(true);
             this.search(loading, search, this, index);
         },
@@ -438,13 +444,12 @@ export default {
                     keyword: search
                 }
             }).then(response => {
-                    // console.log(response.data.book_list);
-                    vm.options = response.data.donors;
-                    vm.$refs.DonorsOption.changeOptions(vm.options);
-                    vm.$refs.PaperDonorsOption.changeOptions(vm.options);
+                vm.options = response.data.donors;
+                vm.$refs.DonorsOption.changeOptions(vm.options);
+                vm.$refs.PaperDonorsOption.changeOptions(vm.options);
 
-                    loading(false);
-                });
+                loading(false);
+            });
         }, 350),
         updateValue(value){
             this.donorValue = value;
@@ -452,47 +457,15 @@ export default {
         changeAddType(e){
             // 更動入庫方式
             let x = $(e.target).val();
-            // if(x == '1'){
-            //     // 捐贈入庫 - 一般圖書
-            //     $('#donor_id').prop('disabled', false).selectpicker('refresh');
-            //     $('#donor_id_required_star').fadeIn();
-
-            //     $('#price').val('0').prop('disabled', true).attr('required', false);
-            //     $('#price_required_star').fadeOut();
-            //     // 捐贈入庫 - 論文雜誌
-            //     $('#p_donor_id').prop('disabled', false).selectpicker('refresh');
-            //     $('#p_donor_id_required_star').fadeIn();
-
-            //     $('#p_price').val('0').prop('disabled', true).attr('required', false);
-            //     $('#p_price_required_star').fadeOut();
-            // }else{
-            //     // 購買入庫 - 一般圖書
-            //     $('#donor_id').prop('disabled', true).selectpicker('refresh');
-            //     $('#donor_id_required_star').fadeOut();
-
-            //     $('#price').val('0').prop('disabled', false).attr('required', true);
-            //     $('#price_required_star').fadeIn();
-            //     // 購買入庫 - 論文雜誌
-            //     $('#p_donor_id').prop('disabled', true).selectpicker('refresh');
-            //     $('#p_donor_id_required_star').fadeOut();
-
-            //     $('#p_price').val('0').prop('disabled', false).attr('required', true);
-            //     $('#p_price_required_star').fadeIn();
-            // }
-
             if(x == '1'){
-                console.log('bbb');
                 this.$emit('update-add-type', 1);
-                // this.addType = 1;
                 // 捐贈入庫
                 $('.donor_div').fadeIn();
                 $('.price_div').fadeOut();
                 $('#price').val(0);
 
             }else{
-                console.log('ccc');
                 this.$emit('update-add-type', 2);
-                // this.addType = 2;
                 // 購買入庫
                 $('.donor_div').fadeOut();
                 $('.price_div').fadeIn();
@@ -629,7 +602,7 @@ export default {
                 $.showErrorModal(error);
             });
             $('#category').attr('disabled', true);
-        }
+        },
     },
     created(){
 

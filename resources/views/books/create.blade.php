@@ -22,6 +22,7 @@
         <span id="BooksStoreURL" class="d-none">{{ route('books.store') }}</span>
         <span id="DonorsListURL" class="d-none">{{ route('donors.getList') }}</span>
         <span id="DonorsNameURL" class="d-none">{{ route('donors.getDonorsByName') }}</span>
+        <span id="DonorsStoreURL" class="d-none">{{ route('donors.store') }}</span>
         <span id="backendURL" class="d-none">{{ route('backend') }}</span>
         <span id="BooksBugURL" class="d-none">{{ route('books.bugurl') }}</span>
 
