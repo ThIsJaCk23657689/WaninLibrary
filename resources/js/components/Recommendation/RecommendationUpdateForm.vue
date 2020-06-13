@@ -63,12 +63,13 @@ export default {
     methods: {
         onSearch(search, loading, index) {
             loading(true);
-            this.search(loading, search, this, index);
+            this.search(loading, search, this, index, this.bookValues);
         },
-        search: _.debounce((loading, search, vm, index) => {
+        search: _.debounce((loading, search, vm, index, selectID) => {
             axios.get(vm.RecommendationGetBookListURL, {
                 params:{
-                    keyword: search
+                    keyword: search,
+                    selectID: selectID[index]
                 }
             }).then(response => {
                     // console.log(response.data.book_list);

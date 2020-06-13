@@ -132,8 +132,17 @@ class DonorService extends BaseService
     }
 
     public function getDonorsByName($request){
-        $keyword = '%'.$request->keyword."%";
-        $donors = DonorEloquent::where('name', 'like', $keyword)->take(30)->get();
+        if(is_null($request->selectID)){
+            $keyword = '%'.$request->keyword."%";
+            $donors = DonorEloquent::where('name', 'like', $keyword)->take(30)->get();
+        }else{
+            if(is_null($request->keyword)){
+                $donors = DonorEloquent::where('id', $request->selectID)->take(30)->get();
+            }else{
+                $keyword = '%'.$request->keyword."%";
+                $donors = DonorEloquent::where('name', 'like', $keyword)->take(30)->get();
+            }
+        }
 
         return $donors;
     }

@@ -87,9 +87,9 @@
 
     <section id="activity">
         <div class="content">
-            <div class="container">
+            <div id="activity_container" class="container">
                 <div class="slider">
-                    <div class="activities-area" style="display: none;">
+                    <div class="activities-area">
                         <div class="container" style="padding-top: 0px;">
                             <div class="row">
                                 <div class="col-md-12">
@@ -153,7 +153,7 @@
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="checkRecommendationBtn">
-                                        <span>查看老饕最愛拾本書單</span>
+                                        <span>查看{{ $recommendation_title }}</span>
                                         <img src="{{ asset('images/frontend/icons/click_hand.png') }}" alt="">
                                     </div>
                                 </div>
@@ -161,23 +161,41 @@
                         </div>
                     </div>
                     <div class="recommandation-area">
-                        <div class="container" style="padding-top: 0px;">
+                        <div class="container">
                             <div class="row">
                                 <div class="col-md-12">
                                     <h1>
                                         <div id="activityIcon" class="mr-2">
-                                            <img src="{{ asset('images/frontend/icons/activity.png') }}" alt="activity">
+                                            <img src="{{ asset('images/frontend/icons/book.png') }}" alt="activity">
                                         </div>
-                                        近期活動
+                                        {{ $recommendation_title }}
                                     </h1>
                                 </div>
                             </div>
-                            <div class="row"></div>
+                            <div class="row bookTable">
+                                <div class="col-md-12">
+                                    @for($i = 0; $i < 10; $i ++)
+                                        @if($i == 0 || $i == 5)
+                                            <div class="row">
+                                        @endif
+
+                                            <div class="col-md bookCol">
+                                                <a href="#">
+                                                    <img src="{{ $recommendation_books[$i]->showCoverImage() }}" alt="{{ $recommendation_books[$i]->title }}">
+                                                </a>
+                                            </div>
+
+                                        @if($i == 4 || $i == 9)
+                                            </div>
+                                        @endif
+                                    @endfor
+                                </div>
+                            </div>
                             <div class="row">
                                 <div class="col-md-12">
                                     <div class="checkRecommendationBtn">
-                                        <span>查看老饕最愛拾本書單</span>
-                                        <img src="{{ asset('images/frontend/icons/click_hand.png') }}" alt="">
+                                        <img src="{{ asset('images/frontend/icons/check_it_out.png') }}" alt="">
+                                        <span>查看近期活動</span>
                                     </div>
                                 </div>
                             </div>

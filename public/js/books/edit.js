@@ -2772,9 +2772,7 @@ var render = function() {
           fn: function(option) {
             return [
               _c("div", { staticClass: "d-center" }, [
-                _vm._v(
-                  "\r\n            " + _vm._s(option.name) + "\r\n        "
-                )
+                _vm._v("\n            " + _vm._s(option.name) + "\n        ")
               ])
             ]
           }
@@ -2784,9 +2782,7 @@ var render = function() {
           fn: function(option) {
             return [
               _c("div", { staticClass: "selected d-center" }, [
-                _vm._v(
-                  "\r\n            " + _vm._s(option.name) + "\r\n        "
-                )
+                _vm._v("\n            " + _vm._s(option.name) + "\n        ")
               ])
             ]
           }
@@ -2802,7 +2798,7 @@ var render = function() {
     },
     [
       _c("template", { slot: "no-options" }, [
-        _vm._v("\r\n        " + _vm._s(_vm.placeholder) + "\r\n    ")
+        _vm._v("\n        " + _vm._s(_vm.placeholder) + "\n    ")
       ])
     ],
     2

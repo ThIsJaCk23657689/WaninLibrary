@@ -11971,39 +11971,47 @@ div#headerbox .row h3 {
   left: 5%;
   background-color: #93e5b4;
 }
-#activity .content .container {
-  padding-top: 5%;
-  overflow-x: hidden;
+#activity .content #activity_container {
+  height: 875px;
+  padding-top: 70px;
+  overflow: hidden;
+  position: relative;
 }
-#activity .content .container .slider {
+#activity .content #activity_container .slider {
   display: flex;
-  width: 200%;
+  width: calc(200% + 15px);
+  height: 805px;
+  position: absolute;
+  left: 0;
+  transition: all 0.5s ease;
 }
-#activity .content .container .slider .activities-area {
+#activity .content #activity_container .slider .activities-area {
   display: flex;
+  margin-right: 15px;
   width: 50%;
+  height: 100%;
 }
-#activity .content .container .slider .activities-area h1 {
+#activity .content #activity_container .slider .activities-area h1 {
   letter-spacing: 20px;
   font-weight: bold;
 }
-#activity .content .container .slider .activities-area .activityRow {
+#activity .content #activity_container .slider .activities-area .activityRow {
   height: 610px;
   padding-top: 3%;
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit_top .cover_image {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit_top .cover_image {
   overflow: hidden;
   height: 100%;
   position: relative;
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit_top .cover_image img {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit_top .cover_image img {
   height: 100%;
   position: absolute;
   top: 0;
   left: calc(50% + 0px);
   transform: translateX(-50%);
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit_top .cover_image .activity_text {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit_top .cover_image .activity_text {
   width: 100%;
   position: absolute;
   left: 0;
@@ -12012,20 +12020,20 @@ div#headerbox .row h3 {
   color: #ffffff;
   z-index: 1;
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit_top .cover_image .activity_text .datetime {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit_top .cover_image .activity_text .datetime {
   font-size: 1.2rem;
   letter-spacing: 3px;
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit_top .cover_image .activity_text .title {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit_top .cover_image .activity_text .title {
   letter-spacing: 3px;
   line-height: 2.5rem;
   font-weight: bold;
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit_top .cover_image .activity_text .readmore {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit_top .cover_image .activity_text .readmore {
   text-align: right;
   letter-spacing: 3px;
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit_top .cover_image .gray {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit_top .cover_image .gray {
   position: absolute;
   top: 0;
   left: 0;
@@ -12033,36 +12041,36 @@ div#headerbox .row h3 {
   height: 100%;
   background: linear-gradient(#fff0, 80%, #929292);
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit .cover_image {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit .cover_image {
   overflow: hidden;
   height: 100%;
   position: relative;
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit .cover_image img {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit .cover_image img {
   height: 100%;
   position: absolute;
   top: 0;
   left: calc(50% + 0px);
   transform: translateX(-50%);
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit .activity_text {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit .activity_text {
   color: #55473f;
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit .activity_text .datetime {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit .activity_text .datetime {
   font-size: 1rem;
   letter-spacing: 3px;
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit .activity_text .title {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit .activity_text .title {
   letter-spacing: 3px;
   line-height: 2rem;
   font-weight: bold;
 }
-#activity .content .container .slider .activities-area .activityRow .activity_unit .activity_text .readmore {
+#activity .content #activity_container .slider .activities-area .activityRow .activity_unit .activity_text .readmore {
   color: #ffffff;
   text-align: right;
   letter-spacing: 3px;
 }
-#activity .content .container .slider .activities-area .checkRecommendationBtn {
+#activity .content #activity_container .slider .activities-area .checkRecommendationBtn {
   border: 1px solid #ffffff;
   border-radius: 25px;
   margin-left: auto;
@@ -12070,16 +12078,52 @@ div#headerbox .row h3 {
   text-align: center;
   font-size: 1.5rem;
   letter-spacing: 3px;
-  margin-top: 5%;
+  margin-top: 4%;
   padding: 17px;
+  cursor: pointer;
 }
-#activity .content .container .slider .activities-area .checkRecommendationBtn img {
+#activity .content #activity_container .slider .activities-area .checkRecommendationBtn img {
   width: 6%;
   margin-top: -2%;
 }
-#activity .content .container .slider .recommandation-area {
+#activity .content #activity_container .slider .recommandation-area {
   display: flex;
   width: 50%;
+  background-image: url(../../images/frontend/icons/book_bg.png);
+  background-size: 100% 80%;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+#activity .content #activity_container .slider .recommandation-area .container {
+  padding-top: 0px !important;
+}
+#activity .content #activity_container .slider .recommandation-area .container .bookTable {
+  padding: 8% 5% 5% 8%;
+}
+#activity .content #activity_container .slider .recommandation-area .container .bookTable .row {
+  background-image: url("../../images/frontend/icons/news_underline.png");
+  background-repeat: no-repeat;
+  background-position: bottom;
+  padding-bottom: 10px;
+  margin-bottom: 30px;
+}
+#activity .content #activity_container .slider .recommandation-area .container .bookTable .bookCol {
+  height: 225px;
+}
+#activity .content #activity_container .slider .recommandation-area .container .bookTable img {
+  width: 100%;
+}
+#activity .content #activity_container .slider .recommandation-area .container .checkRecommendationBtn {
+  font-size: 1.5rem;
+  letter-spacing: 3px;
+  margin-top: 10px;
+  cursor: pointer;
+}
+#activity .content #activity_container .slider .recommandation-area .container .checkRecommendationBtn img {
+  width: 40px;
+}
+#activity .content #activity_container .slider.activated {
+  left: calc(-100% - 15px);
 }
 
 #activityIcon {

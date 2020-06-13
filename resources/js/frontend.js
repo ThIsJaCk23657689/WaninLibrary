@@ -191,7 +191,11 @@ $(function() {
 
     $('footer .top').click(function() {
         $('html, body').animate({
-            scrollTop:0
+            scrollTop: 0
         }, 500);
+    });
+
+    $('.checkRecommendationBtn').click(function() {
+        $('#activity .slider').toggleClass('activated');
     });
 });

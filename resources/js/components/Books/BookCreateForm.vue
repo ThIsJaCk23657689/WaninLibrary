@@ -432,16 +432,16 @@ export default {
         }
     },
     methods: {
-        onSearch(search, loading, index) {
-            console.log(search, index);
+        onSearch(search, loading) {
             $('#DonorSearchMsg').html('');
             loading(true);
-            this.search(loading, search, this, index);
+            this.search(loading, search, this, this.donorValue);
         },
-        search: _.debounce((loading, search, vm, index) => {
+        search: _.debounce((loading, search, vm, selectID) => {
             axios.get(vm.DonorsNameURL, {
                 params:{
-                    keyword: search
+                    keyword: search,
+                    selectID: selectID
                 }
             }).then(response => {
                 vm.options = response.data.donors;
@@ -586,7 +586,7 @@ export default {
             //     key => formdata.append(key, data[key])
             // );
             // formdata.append('image_file', $('#image_file')[0].files[0]);
-            
+
             formdata.append('donor_id',this.donorValue);
             $.showLoadingModal();
             axios.post(url, formdata, {

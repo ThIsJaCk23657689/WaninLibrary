@@ -219,12 +219,13 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     onSearch: function onSearch(search, loading, index) {
       loading(true);
-      this.search(loading, search, this, index);
+      this.search(loading, search, this, index, this.bookValues);
     },
-    search: _.debounce(function (loading, search, vm, index) {
+    search: _.debounce(function (loading, search, vm, index, selectID) {
       axios.get(vm.RecommendationGetBookListURL, {
         params: {
-          keyword: search
+          keyword: search,
+          selectID: selectID[index]
         }
       }).then(function (response) {
         // console.log(response.data.book_list);
@@ -326,7 +327,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nimg {\r\n  height: auto;\r\n  max-width: 2.5rem;\r\n  margin-right: 1rem;\n}\n.d-center {\r\n  display: flex;\r\n  align-items: center;\n}\n.selected img {\r\n  width: auto;\r\n  max-height: 23px;\r\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\r\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\r\n  border-bottom: none;\n}\n.v-select .dropdown li a {\r\n  padding: 10px 20px;\r\n  width: 100%;\r\n  font-size: 1.25em;\r\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\r\n  color: #fff;\n}\r\n\r\n\r\n", ""]);
+exports.push([module.i, "\nimg {\n  height: auto;\n  max-width: 2.5rem;\n  margin-right: 1rem;\n}\n.d-center {\n  display: flex;\n  align-items: center;\n}\n.selected img {\n  width: auto;\n  max-height: 23px;\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\n  border-bottom: none;\n}\n.v-select .dropdown li a {\n  padding: 10px 20px;\n  width: 100%;\n  font-size: 1.25em;\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\n  color: #fff;\n}\n\n\n", ""]);
 
 // exports
 
@@ -1191,7 +1192,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                            確認修改\r\n                        "
+                        "\n                            確認修改\n                        "
                       )
                     ]
                   ),
@@ -1204,7 +1205,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                            取消編輯\r\n                        "
+                        "\n                            取消編輯\n                        "
                       )
                     ]
                   )

@@ -76,8 +76,18 @@ class InformationService extends BaseService
     }
 
     public function recommendation_getBooksByName($request){
-        $keyword = '%'.$request->keyword."%";
-        $book_list = BookEloquent::where('title', 'like', $keyword)->take(30)->get();
+        if(is_null($request->selectID)){
+            $keyword = '%'.$request->keyword."%";
+            $book_list = BookEloquent::where('title', 'like', $keyword)->take(30)->get();
+        }else{
+            if(is_null($request->keyword)){
+                $book_list = BookEloquent::where('id', $request->selectID)->take(30)->get();
+            }else{
+                $keyword = '%'.$request->keyword."%";
+                $book_list = BookEloquent::where('title', 'like', $keyword)->take(30)->get();
+            }
+        }
+
         foreach($book_list as $book){
             $book['showTitle'] = $book->showTitle();
             $book['showCoverImage'] = $book->showCoverImage();
