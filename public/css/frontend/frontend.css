@@ -11525,7 +11525,13 @@ body {
   background-color: #f3f3f3;
   color: #5f6b82;
   height: 100px;
+  min-width: 300px;
   box-shadow: 0px 2px 15px 1px rgba(0, 0, 0, 0.2);
+}
+#navbar .navbar-brand {
+  position: absolute;
+  top: 15px;
+  left: 40px;
 }
 #navbar #sidebarToggle {
   width: 84px;
@@ -11854,44 +11860,64 @@ div#headerbox {
   left: 0px;
   z-index: 1;
 }
-div#headerbox .row {
+div#headerbox .headerRow {
   height: 100%;
 }
-div#headerbox .row div {
+div#headerbox .headerRow div.left {
   height: 100%;
   padding-top: 2%;
   padding-left: 12%;
-}
-div#headerbox .row div.left {
   background-color: #eaeaea;
 }
-div#headerbox .row div.right {
+@media (max-width: 992px) {
+  div#headerbox .headerRow div.left {
+    padding-top: 3%;
+    padding-left: 9%;
+  }
+}
+div#headerbox .headerRow div.right {
+  height: 100%;
+  padding-top: 2%;
+  padding-left: 12%;
   background-color: #93e5b4;
 }
-div#headerbox .row div .checkBtn {
-  width: 10%;
+@media (max-width: 992px) {
+  div#headerbox .headerRow div.right {
+    padding-top: 3%;
+    padding-left: 9%;
+  }
+}
+div#headerbox .headerRow .checkBtn {
+  width: 75px;
+  min-width: 50px;
   display: inline-block;
   position: absolute;
-  top: 20%;
+  top: 24px;
   right: 10%;
   padding: 0;
 }
-div#headerbox .row div .checkBtn a img {
+div#headerbox .headerRow .checkBtn a img {
   width: 100%;
 }
-@media (max-width: 1000px) {
-  div#headerbox .row div .checkBtn {
-    top: 30%;
+@media (max-width: 992px) {
+  div#headerbox .headerRow .checkBtn {
+    width: 60px;
+    top: 30px;
   }
 }
-div#headerbox .row span {
+div#headerbox .headerRow span {
   color: #929292;
   letter-spacing: 5px;
 }
-div#headerbox .row h3 {
+div#headerbox .headerRow h3 {
   color: #55473f;
   margin-top: 1%;
   letter-spacing: 15px;
+}
+@media (max-width: 992px) {
+  div#headerbox .headerRow h3 {
+    letter-spacing: 7px;
+  }
 }
 
 #news {
@@ -12078,7 +12104,7 @@ div#headerbox .row h3 {
   text-align: center;
   font-size: 1.5rem;
   letter-spacing: 3px;
-  margin-top: 4%;
+  margin-top: 48px;
   padding: 17px;
   cursor: pointer;
 }
@@ -12090,7 +12116,7 @@ div#headerbox .row h3 {
   display: flex;
   width: 50%;
   background-image: url(../../images/frontend/icons/book_bg.png);
-  background-size: 100% 80%;
+  background-size: 96% 75%;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -12099,6 +12125,7 @@ div#headerbox .row h3 {
 }
 #activity .content #activity_container .slider .recommandation-area .container .bookTable {
   padding: 8% 5% 5% 8%;
+  height: 610px;
 }
 #activity .content #activity_container .slider .recommandation-area .container .bookTable .row {
   background-image: url("../../images/frontend/icons/news_underline.png");
@@ -12116,7 +12143,8 @@ div#headerbox .row h3 {
 #activity .content #activity_container .slider .recommandation-area .container .checkRecommendationBtn {
   font-size: 1.5rem;
   letter-spacing: 3px;
-  margin-top: 10px;
+  margin-top: 66px;
+  width: 230px;
   cursor: pointer;
 }
 #activity .content #activity_container .slider .recommandation-area .container .checkRecommendationBtn img {
@@ -12140,6 +12168,7 @@ div#headerbox .row h3 {
 
 footer {
   width: 100%;
+  min-width: 300px;
   height: 200px;
   display: flex;
   background-color: #55473f;
@@ -12165,13 +12194,13 @@ footer .container .footerText {
   width: 100%;
   position: absolute;
   right: 0;
-  bottom: 20px;
+  bottom: 30px;
   font-size: 0.8rem;
   text-align: right;
 }
 footer .container .footerText .button-area {
-  width: 150px;
-  height: 50px;
+  width: 120px;
+  height: 45px;
   display: block;
   margin-bottom: 0px;
   padding: 0;
@@ -12180,11 +12209,11 @@ footer .container .footerText .button-area li {
   float: left;
 }
 footer .container .footerText .button-area .nav-item {
-  width: 50px;
+  width: 40px;
   margin: 0px;
 }
 footer .container .footerText .button-area .nav-item .nav-link img {
-  width: 30px;
+  width: 25px;
 }
 footer .container .footerText .button-area .nav-item .nav-link:hover {
   border: none;
@@ -12199,6 +12228,16 @@ footer .container .footerText .footerLink a {
 footer .container .footerText .copyright {
   line-height: 2rem;
 }
+@media (max-width: 1300px) {
+  footer .container .footerText {
+    right: 3%;
+  }
+}
+@media (max-width: 992px) {
+  footer .container .footerText {
+    bottom: 20px;
+  }
+}
 @media (max-width: 768px) {
   footer .container .footerText {
     text-align: left;
@@ -12210,7 +12249,7 @@ footer .container .footerText .copyright {
 }
 footer .top {
   float: right;
-  width: 40px;
+  width: 90px;
   border-left: 1px solid #ffffff;
   padding: 10px 5px;
   position: relative;
@@ -12219,42 +12258,61 @@ footer .top {
 }
 footer .top img {
   width: 6px;
+  height: 100px;
   margin: 10px 10px 5px 10px;
 }
 footer .top span {
   font-weight: bold;
+  font-size: 1.2rem;
   letter-spacing: 5px;
   transform: rotate(90deg);
   position: absolute;
-  bottom: 15px;
-  left: -4px;
+  bottom: 21px;
+  left: 18px;
   transition: all 0.5s ease;
 }
 footer .top:hover span {
   color: #93e5b4;
 }
+@media (max-width: 1300px) {
+  footer .top {
+    margin-left: 10px;
+  }
+}
+@media (max-width: 1100px) {
+  footer .top span {
+    left: 14px;
+  }
+}
 @media (max-width: 992px) {
   footer .top {
-    width: 50px;
+    width: 100px;
   }
   footer .top img {
-    width: 9px;
+    width: 10px;
+    height: 145px;
   }
   footer .top span {
-    bottom: 24px;
-    left: 3%;
+    bottom: 33px;
+    left: 19%;
   }
 }
 @media (max-width: 768px) {
   footer .top {
-    width: 70px;
+    width: 150px;
   }
   footer .top img {
-    width: 14px;
+    width: 15px;
+    height: 240px;
   }
   footer .top span {
-    bottom: 24px;
-    left: 15%;
+    bottom: 31px;
+    left: 31%;
+  }
+}
+@media (max-width: 680px) {
+  footer .top span {
+    left: 26%;
   }
 }
 @media (max-width: 992px) {

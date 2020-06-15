@@ -23,8 +23,7 @@
         <span id="RecommendationGetFirstURL" class="d-none">{{ route('recommendation.getFirst') }}</span>
         <span id="RecommendationGetBookListURL" class="d-none">{{ route('recommendation.getBooksByName') }}</span>
 
-        <recommendation-update-form :recommendation_title="recommendation_title" :books="books"></recommendation-update-form>
-        <loading-modal></loading-modal>
+        <recommendation-update-form></recommendation-update-form>
     </div>
 
 @endsection

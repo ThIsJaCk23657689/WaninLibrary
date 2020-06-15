@@ -37,7 +37,7 @@ const app = new Vue({
                     { data: 'created_at' },
                     { data: 'logout_date' },
                     { data: 'url' },
-                ]
+                ],
             });
         });
     },

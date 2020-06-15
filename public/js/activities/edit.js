@@ -920,7 +920,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\activities\edit.js */"./resources/js/activities/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\activities\edit.js */"./resources/js/activities/edit.js");
 
 
 /***/ })

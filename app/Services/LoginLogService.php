@@ -10,8 +10,6 @@ class LoginLogService extends BaseService
 {
     // 'user_id', 'logout_date', 'content'
     public function add(){
-        // $token = JWTAuth::getToken()->get();
-        // $user = JWTAuth::toUser($token);
         $user = auth('api')->user();
 
         LoginLogEloquent::create([
@@ -22,8 +20,6 @@ class LoginLogService extends BaseService
     }
 
     public function update(){
-        // $token = JWTAuth::getToken()->get();
-        // $user = JWTAuth::toUser($token);
         $user = auth('api')->user();
 
         // 抓最新的那筆資料
@@ -34,7 +30,7 @@ class LoginLogService extends BaseService
     }
 
     public function getList(){
-        $logs = LoginLogEloquent::withTrashed()->orderBy('id','desc')->with('user:id,name')->get();
+        $logs = LoginLogEloquent::withTrashed()->orderBy('created_at','desc')->with('user:id,name')->get();
         foreach($logs as $log){
             $url =  route('loginLogs.show', [$log->id]);
             $href = '<a href="' .$url. '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';

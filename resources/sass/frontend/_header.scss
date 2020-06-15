@@ -50,35 +50,44 @@ div#headerbox {
     bottom: 0px;
     left: 0px;
     z-index: 1;
-    .row {
+    .headerRow {
         height: 100%;
-        div {
+        div.left {
             height: 100%;
             padding-top: 2%;
             padding-left: 12%;
-            &.left {
-                background-color: $gray;
+            background-color: $gray;
+            @media (max-width: 992px) {
+                padding-top: 3%;
+                padding-left: 9%;
             }
-            &.right {
-                background-color: $green;
+        }
+        div.right {
+            height: 100%;
+            padding-top: 2%;
+            padding-left: 12%;
+            background-color: $green;
+            @media (max-width: 992px) {
+                padding-top: 3%;
+                padding-left: 9%;
             }
-            .checkBtn {
-                width: 10%;
-                display: inline-block;
-                position: absolute;
-                top: 20%;
-                right: 10%;
-                padding: 0;
-                a {
-                    img {
-                        width: 100%;
-                    }
+        }
+        .checkBtn {
+            width: 75px;
+            min-width: 50px;
+            display: inline-block;
+            position: absolute;
+            top: 24px;
+            right: 10%;
+            padding: 0;
+            a {
+                img {
+                    width: 100%;
                 }
             }
-            @media (max-width: 1000px) {
-                .checkBtn {
-                    top: 30%;
-                }
+            @media (max-width: 992px) {
+                width: 60px;
+                top: 30px;
             }
         }
         span {
@@ -89,6 +98,9 @@ div#headerbox {
             color: $brown;
             margin-top: 1%;
             letter-spacing: 15px;
+            @media (max-width: 992px) {
+                letter-spacing: 7px;
+            }
         }
     }
 }

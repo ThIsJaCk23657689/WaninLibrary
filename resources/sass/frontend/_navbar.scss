@@ -3,7 +3,13 @@
     background-color: $darkwhite;
     color: $blue;
     height: $navbar-base-height;
+    min-width: $web-min-width;
     box-shadow: 0px 2px 15px 1px rgba(0, 0, 0, 0.2);
+    .navbar-brand{
+        position: absolute;
+        top: 15px;
+        left: 40px;
+    }
     #sidebarToggle {
         width: 84px;
         height: 44px;

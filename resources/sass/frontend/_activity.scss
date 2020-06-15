@@ -120,7 +120,7 @@
                         text-align: center;
                         font-size: 1.5rem;
                         letter-spacing: 3px;
-                        margin-top: 4%;
+                        margin-top: 48px;
                         padding: 17px;
                         cursor: pointer;
                         img {
@@ -133,13 +133,14 @@
                     display: flex;
                     width: 50%;
                     background-image: url(../../images/frontend/icons/book_bg.png);
-                    background-size: 100% 80%;
+                    background-size: 96% 75%;
                     background-repeat: no-repeat;
                     background-position: center;
                     .container {
                         padding-top: 0px !important;
                         .bookTable {
                             padding: 8% 5% 5% 8%;
+                            height: 610px;
                             .row {
                                 background-image: url('../../images/frontend/icons/news_underline.png');
                                 background-repeat: no-repeat;
@@ -157,7 +158,8 @@
                         .checkRecommendationBtn {
                             font-size: 1.5rem;
                             letter-spacing: 3px;
-                            margin-top: 10px;
+                            margin-top: 66px;
+                            width: 230px;
                             cursor: pointer;
                             img {
                                 width: 40px;

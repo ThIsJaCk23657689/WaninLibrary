@@ -15,7 +15,7 @@
                 <img class="background-image" src="{{ $information->showCoverImage() }}" alt="封面圖片">
             </div>
             <div id="headerbox" class="container-fluid">
-                <div class="row">
+                <div class="row headerRow">
                     <div class="left col-md-6">
                         <span>有不要的二手書嗎？</span>
                         <h3>好書捐贈！</h3>
@@ -101,6 +101,7 @@
                                     </h1>
                                 </div>
                             </div>
+
                             @if(!is_null($activities_top))
                                 <div class="row activityRow">
                                     <div class="col-md-6">
@@ -150,57 +151,65 @@
                                     </div>
                                 </div>
                             @endif
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="checkRecommendationBtn">
-                                        <span>查看{{ $recommendation_title }}</span>
-                                        <img src="{{ asset('images/frontend/icons/click_hand.png') }}" alt="">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="recommandation-area">
-                        <div class="container">
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <h1>
-                                        <div id="activityIcon" class="mr-2">
-                                            <img src="{{ asset('images/frontend/icons/book.png') }}" alt="activity">
+
+                            @if($recommendation_books->isNotEmpty())
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="checkRecommendationBtn">
+                                            <span>查看{{ $recommendation_title }}</span>
+                                            <img src="{{ asset('images/frontend/icons/click_hand.png') }}" alt="">
                                         </div>
-                                        {{ $recommendation_title }}
-                                    </h1>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row bookTable">
-                                <div class="col-md-12">
-                                    @for($i = 0; $i < 10; $i ++)
-                                        @if($i == 0 || $i == 5)
-                                            <div class="row">
-                                        @endif
+                            @endif
 
-                                            <div class="col-md bookCol">
-                                                <a href="#">
-                                                    <img src="{{ $recommendation_books[$i]->showCoverImage() }}" alt="{{ $recommendation_books[$i]->title }}">
-                                                </a>
-                                            </div>
+                        </div>
+                    </div>
 
-                                        @if($i == 4 || $i == 9)
+                    @if($recommendation_books->isNotEmpty())
+                        <div class="recommandation-area">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <h1>
+                                            <div id="activityIcon" class="mr-2">
+                                                <img src="{{ asset('images/frontend/icons/book.png') }}" alt="activity">
                                             </div>
-                                        @endif
-                                    @endfor
+                                            {{ $recommendation_title }}
+                                        </h1>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <div class="checkRecommendationBtn">
-                                        <img src="{{ asset('images/frontend/icons/check_it_out.png') }}" alt="">
-                                        <span>查看近期活動</span>
+                                <div class="row bookTable">
+                                    <div class="col-md-12">
+                                        @for($i = 0; $i < 10; $i ++)
+                                            @if($i == 0 || $i == 5)
+                                                <div class="row">
+                                            @endif
+
+                                                <div class="col-md bookCol">
+                                                    <a href="#">
+                                                        <img src="{{ $recommendation_books[$i]->showCoverImage() }}" alt="{{ $recommendation_books[$i]->title }}">
+                                                    </a>
+                                                </div>
+
+                                            @if($i == 4 || $i == 9)
+                                                </div>
+                                            @endif
+                                        @endfor
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <div class="checkRecommendationBtn">
+                                            <img src="{{ asset('images/frontend/icons/check_it_out.png') }}" alt="">
+                                            <span>查看近期活動</span>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    @endif
+                    
                 </div>
             </div>
         </div>

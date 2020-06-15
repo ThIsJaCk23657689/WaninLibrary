@@ -7,8 +7,6 @@ use App\Book as BookEloquent;
 
 class InformationService extends BaseService
 {
-
-
     public function getFirst()
     {
         $information = InformationEloquent::first();
@@ -61,18 +59,18 @@ class InformationService extends BaseService
         return $msg;
     }
 
-
     public function recommendation_update($request){
-        foreach($request->book_ids as $key => $book_id){
-            if($book_id){
-                BookEloquent::where('is_recommended', $key+1)->update(['is_recommended' => 0]);
-                BookEloquent::find((int)$book_id)->update(['is_recommended' => $key+1]);
+        if(!is_null($request->book_ids)){
+            // book_ids 不為null時才去修改書單，不然可能只是要單純修改書單標題。
+            foreach($request->book_ids as $key => $book_id){
+                if($book_id){
+                    BookEloquent::where('is_recommended', $key+1)->update(['is_recommended' => 0]);
+                    BookEloquent::find((int)$book_id)->update(['is_recommended' => $key+1]);
+                }
             }
         }
-
         $information = $this->getFirst();
         $information->update(['recommendation_title' => $request->recommendation_title]);
-
     }
 
     public function recommendation_getBooksByName($request){

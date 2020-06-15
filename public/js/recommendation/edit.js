@@ -204,113 +204,139 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['recommendation_title', 'books'],
   data: function data() {
     return {
       RecommendationUpdateURL: $('#RecommendationUpdateURL').html(),
       RecommendationIndexURL: $('#RecommendationIndexURL').html(),
       RecommendationGetBookListURL: $('#RecommendationGetBookListURL').html(),
-      book_list: [],
+      recommendation_title: null,
+      books: [],
       options: [],
-      bookValues: [null, null, null, null, null, null, null, null, null, null]
+      bookValues: [null, null, null, null, null, null, null, null, null, null],
+      bookValues_old: [null, null, null, null, null, null, null, null, null, null]
     };
   },
   methods: {
+    // 及時搜尋書本
     onSearch: function onSearch(search, loading, index) {
       loading(true);
-      this.search(loading, search, this, index, this.bookValues);
+      this.search(loading, search, this, index);
     },
-    search: _.debounce(function (loading, search, vm, index, selectID) {
+    search: _.debounce(function (loading, search, vm, index) {
       axios.get(vm.RecommendationGetBookListURL, {
         params: {
           keyword: search,
-          selectID: selectID[index]
+          selectID: vm.bookValues[index - 1]
         }
       }).then(function (response) {
-        // console.log(response.data.book_list);
-        vm.options[index] = response.data.book_list;
-        vm.$refs.BookOption[index].changeOptions(vm.options[index]);
-        console.log(vm);
-        console.log(vm.options[index]);
-        loading(false);
+        vm.options[index - 1] = response.data.book_list;
+        vm.$refs.BookOption[index - 1].changeOptions(vm.options[index - 1]);
+        loading(false); // vm 代表vue的this
+        // console.log(vm);
+        // vm.options 代表的是vue中的options變數，它是一個二維陣列，列有10個(0~9)，個別儲存每個下拉式選單的選單。
+        // console.log(vm.options[index - 1]);
+        // 注意index數值是1到10，所以這邊記得要減1。
       });
     }, 350),
+    // 更新所選好的book IDs。
     updateValue: function updateValue(value, index) {
-      this.bookValues[index] = value; // console.log({value, index});
+      // 注意index數值是1到10，所以這邊記得要減1。
+      this.bookValues[index - 1] = value;
     },
+    // 顯示下拉式搜尋單。
     startUpdate: function startUpdate(index) {
       $('#book_input_' + index).slideUp();
       $('#book_select_' + index).slideDown();
     },
+    // 計算 bookValues 中有多少的null值。
+    countingNull: function countingNull(array) {
+      var result = 0;
+
+      for (var i = 0; i < array.length; i++) {
+        if (array[i] === null) {
+          result++;
+        }
+      }
+
+      return result;
+    },
+    // 查看是否有書本被重複選擇到
+    isRepeat: function isRepeat(array) {
+      var result = false;
+
+      for (var i = 0; i < array.length; i++) {
+        for (var j = 0; j < array.length; j++) {
+          if (i == j) {
+            continue;
+          } else if (array[i] == array[j] && array[i] != null) {
+            result = true;
+            break;
+          } else {
+            continue;
+          }
+        }
+      }
+
+      return result;
+    },
+    // 發送修改拾本好書request
     recommendationUpdateForm: function recommendationUpdateForm(e) {
+      // 如果 this.books 是空的，代表一筆資料都沒有，所以必須要一口氣新增所有的書本書單(10本)。
+      if (this.books.length == 0 && this.countingNull(this.bookValues) != 0) {
+        $.showErrorModalWithoutError('10本好書都必須要填寫好哦！');
+        return false;
+      } // 不可以選擇到重複的書本。
+
+
+      if (this.isRepeat(this.bookValues)) {
+        $.showErrorModalWithoutError('請不要重複選擇書本。');
+        return false;
+      }
+
       var url = this.RecommendationUpdateURL;
       var data = $(e.target).serializeObject();
       var formData = new FormData($(e.target)[0]);
-      formData.append('_method', 'patch');
+      formData.append('_method', 'patch'); // 如果 this.bookValues_old 都沒有空值，代表每本書都已經被選擇好了。
+      // 此時如果你的 this.bookValues 全為空的也沒關係(因為你可能只單純要修改書單標題)
 
-      for (var i = 0; i < 10; i++) {
-        if (this.bookValues[i] != null) {
-          formData.append('book_ids[' + i + ']', this.bookValues[i]);
+      if (this.countingNull(this.bookValues) != 10) {
+        for (var i = 0; i < 10; i++) {
+          if (this.bookValues[i] != null) {
+            formData.append('book_ids[' + i + ']', this.bookValues[i]);
+          }
         }
-      } // console.log(formData);
-
+      }
 
       $.showLoadingModal();
       axios.post(url, formData).then(function (response) {
         $.showSuccessModal('修改成功', response.data.url, '檢視');
       })["catch"](function (error) {
-        console.error('修改時發生錯誤，錯誤訊息：' + error);
+        console.error('修改推薦好書時發生錯誤，錯誤訊息：' + error);
         $.showErrorModal(error);
       });
     }
   },
   created: function created() {
-    $('.book_ids').selectpicker('refresh'); // 生成 機構 下拉式選單
-    // let AgenciesListURL = $('#AgenciesListURL').html();
-    // axios.get(AgenciesListURL).then(response => {
-    //     this.agencies = response.data.agencies;
-    //     for(let i = 0; i < this.agencies.length; i++){
-    //         $("#agency_id").append($("<option></option>").attr("value", this.agencies[i].id).text(this.agencies[i].name));
-    //     }
-    //     $('#agency_id').selectpicker('refresh');
-    // });
-  },
-  mounted: function mounted() {
-    // console.log($('.book_ids'));
-    $('.book_ids').selectpicker({
-      liveSearch: true
-    });
-    var timer;
-
     var _this = this;
 
-    $(document).on('keyup', '.book_ids .bs-searchbox input', function (e) {
-      clearTimeout(timer);
-      timer = setTimeout(function () {
-        var RecommendationGetBookListURL = $('#RecommendationGetBookListURL').text();
-        var keyword = e.target.value; // console.log(e.target);
-        // console.log(keyword);
-        // console.log(RecommendationGetBookListURL);
+    // 抓取推薦書單標題文字與推薦中的10本書。
+    var RecommendationGetFirstURL = $('#RecommendationGetFirstURL').html();
+    $.showLoadingModal();
+    axios.get(RecommendationGetFirstURL).then(function (response) {
+      $.closeModal();
+      _this.recommendation_title = response.data.recommendation_title;
+      _this.books = response.data.books;
 
-        axios.get(RecommendationGetBookListURL, {
-          params: {
-            keyword: keyword
-          }
-        }).then(function (response) {
-          console.log(response.data.book_list);
-          _this.book_list = response.data.book_list;
-          var select = $($(e.target).parents()[1]).prev().prev();
-          select.find('option').remove();
-
-          for (var i = 0; i < _this.book_list.length; i++) {
-            select.append($("<option></option>").attr("value", _this.book_list[i].id).text(_this.book_list[i].title));
-            select.selectpicker('refresh');
-          }
-        });
-      }, 100);
+      for (var i = 0; i < _this.books.length; i++) {
+        _this.bookValues_old[i] = _this.books[i].id;
+      }
     });
-  }
+  },
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -327,7 +353,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nimg {\n  height: auto;\n  max-width: 2.5rem;\n  margin-right: 1rem;\n}\n.d-center {\n  display: flex;\n  align-items: center;\n}\n.selected img {\n  width: auto;\n  max-height: 23px;\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\n  border-bottom: none;\n}\n.v-select .dropdown li a {\n  padding: 10px 20px;\n  width: 100%;\n  font-size: 1.25em;\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\n  color: #fff;\n}\n\n\n", ""]);
+exports.push([module.i, "\nimg {\r\n    height: auto;\r\n    max-width: 2.5rem;\r\n    margin-right: 1rem;\n}\n.d-center {\r\n  \tdisplay: flex;\r\n  \talign-items: center;\n}\n.selected img {\r\n\twidth: auto;\r\n\tmax-height: 23px;\r\n\tmargin-right: 0.5rem;\n}\n.v-select .dropdown li {\r\n  \tborder-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\r\n  \tborder-bottom: none;\n}\n.v-select .dropdown li a {\r\n\tpadding: 10px 20px;\r\n\twidth: 100%;\r\n\tfont-size: 1.25em;\r\n\tcolor: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\r\n  \tcolor: #fff;\n}\r\n", ""]);
 
 // exports
 
@@ -1056,166 +1082,170 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c(
-          "form",
-          {
-            attrs: {
-              method: "POST",
-              id: "recommendation_update_form",
-              action: "#"
-            },
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.recommendationUpdateForm($event)
-              }
-            }
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-md-8" }, [
+      _c(
+        "form",
+        {
+          attrs: {
+            method: "POST",
+            id: "recommendation_update_form",
+            action: "#"
           },
-          [
-            _c("div", { staticClass: "row" }, [
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.recommendationUpdateForm($event)
+            }
+          }
+        },
+        [
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-12" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("input", {
+                  directives: [
+                    {
+                      name: "model",
+                      rawName: "v-model",
+                      value: _vm.recommendation_title,
+                      expression: "recommendation_title"
+                    }
+                  ],
+                  staticClass: "form-control",
+                  attrs: {
+                    id: "recommendation_title",
+                    name: "recommendation_title",
+                    type: "text",
+                    required: ""
+                  },
+                  domProps: { value: _vm.recommendation_title },
+                  on: {
+                    input: function($event) {
+                      if ($event.target.composing) {
+                        return
+                      }
+                      _vm.recommendation_title = $event.target.value
+                    }
+                  }
+                })
+              ])
+            ])
+          ]),
+          _vm._v(" "),
+          _vm._l(10, function(index) {
+            return _c("div", { key: index, staticClass: "row" }, [
               _c("div", { staticClass: "col-md-12" }, [
                 _c("div", { staticClass: "form-group" }, [
-                  _vm._m(0),
-                  _vm._v(" "),
-                  _c("input", {
-                    directives: [
-                      {
-                        name: "model",
-                        rawName: "v-model",
-                        value: _vm.recommendation_title,
-                        expression: "recommendation_title"
-                      }
-                    ],
-                    staticClass: "form-control",
-                    attrs: {
-                      id: "recommendation_title",
-                      name: "recommendation_title",
-                      type: "text",
-                      required: ""
-                    },
-                    domProps: { value: _vm.recommendation_title },
-                    on: {
-                      input: function($event) {
-                        if ($event.target.composing) {
-                          return
-                        }
-                        _vm.recommendation_title = $event.target.value
-                      }
-                    }
-                  })
-                ])
-              ])
-            ]),
-            _vm._v(" "),
-            _vm._l(_vm.books, function(book, index) {
-              return _c("div", { key: index, staticClass: "row" }, [
-                _c("div", { staticClass: "col-md-12" }, [
-                  _c("div", { staticClass: "form-group" }, [
-                    _c("label", [
-                      _c("span", { staticClass: "text-danger mr-2" }, [
-                        _vm._v("*")
-                      ]),
-                      _vm._v("第" + _vm._s(index + 1) + "本")
+                  _c("label", [
+                    _c("span", { staticClass: "text-danger mr-2" }, [
+                      _vm._v("*")
                     ]),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticClass: "input-group mb-3",
-                        attrs: { id: "book_input_" + index }
-                      },
-                      [
-                        _c("input", {
-                          staticClass: "form-control",
-                          attrs: { type: "text", readonly: "" },
-                          domProps: { value: book.showTitle }
-                        }),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "input-group-append" }, [
-                          _c(
-                            "button",
-                            {
-                              staticClass: "btn btn-dark",
-                              attrs: { type: "button" },
-                              on: {
-                                click: function($event) {
-                                  return _vm.startUpdate(index)
-                                }
-                              }
-                            },
-                            [_vm._v("編輯")]
-                          )
-                        ])
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "div",
-                      {
-                        staticStyle: { display: "none" },
-                        attrs: { id: "book_select_" + index }
-                      },
-                      [
-                        _c("select-book-custom", {
-                          ref: "BookOption",
-                          refInFor: true,
-                          attrs: {
-                            "select-index": index,
-                            placeholder: "請輸入書本名稱"
-                          },
-                          on: {
-                            search: _vm.onSearch,
-                            "update-value": _vm.updateValue
-                          }
-                        })
-                      ],
-                      1
+                    _vm._v(
+                      "第" + _vm._s(index) + "本\r\n                        "
                     )
-                  ])
-                ])
-              ])
-            }),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "form-group row justify-content-center" },
-              [
-                _c("div", { staticClass: "col-md-8" }, [
+                  ]),
+                  _vm._v(" "),
                   _c(
-                    "button",
+                    "div",
                     {
-                      staticClass: "btn btn-block btn-success",
-                      attrs: { type: "submit" }
+                      staticClass: "input-group mb-3",
+                      attrs: { id: "book_input_" + index }
                     },
                     [
-                      _vm._v(
-                        "\n                            確認修改\n                        "
-                      )
+                      _c("input", {
+                        staticClass: "form-control",
+                        attrs: { type: "text", readonly: "" },
+                        domProps: {
+                          value: _vm.books[index - 1]
+                            ? _vm.books[index - 1].showTitle
+                            : "無"
+                        }
+                      }),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "input-group-append" }, [
+                        _c(
+                          "button",
+                          {
+                            staticClass: "btn btn-dark",
+                            attrs: { type: "button" },
+                            on: {
+                              click: function($event) {
+                                return _vm.startUpdate(index)
+                              }
+                            }
+                          },
+                          [_vm._v("編輯")]
+                        )
+                      ])
                     ]
                   ),
                   _vm._v(" "),
                   _c(
-                    "a",
+                    "div",
                     {
-                      staticClass: "btn btn-block btn-danger",
-                      attrs: { href: _vm.RecommendationIndexURL }
+                      staticStyle: { display: "none" },
+                      attrs: { id: "book_select_" + index }
                     },
                     [
-                      _vm._v(
-                        "\n                            取消編輯\n                        "
-                      )
-                    ]
+                      _c("select-book-custom", {
+                        ref: "BookOption",
+                        refInFor: true,
+                        attrs: {
+                          "select-index": index,
+                          placeholder: "請輸入書本名稱"
+                        },
+                        on: {
+                          search: _vm.onSearch,
+                          "update-value": _vm.updateValue
+                        }
+                      })
+                    ],
+                    1
                   )
                 ])
-              ]
-            )
-          ],
-          2
-        )
-      ])
+              ])
+            ])
+          }),
+          _vm._v(" "),
+          _c(
+            "div",
+            { staticClass: "form-group row justify-content-center mt-2" },
+            [
+              _c("div", { staticClass: "col-md-8" }, [
+                _c(
+                  "button",
+                  {
+                    staticClass: "btn btn-block btn-success",
+                    attrs: { type: "submit" }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n                        確認修改\r\n                    "
+                    )
+                  ]
+                ),
+                _vm._v(" "),
+                _c(
+                  "a",
+                  {
+                    staticClass: "btn btn-block btn-danger",
+                    attrs: { href: _vm.RecommendationIndexURL }
+                  },
+                  [
+                    _vm._v(
+                      "\r\n                        取消編輯\r\n                    "
+                    )
+                  ]
+                )
+              ])
+            ]
+          )
+        ],
+        2
+      )
     ])
   ])
 }
@@ -1511,31 +1541,10 @@ Vue.component('select-book-custom', __webpack_require__(/*! ./../components/Part
 var app = new Vue({
   el: '#recommendation',
   data: function data() {
-    return {
-      books: [{
-        id: null,
-        title: null
-      }],
-      recommendation_title: []
-    };
+    return {};
   },
   methods: {},
-  created: function created() {
-    var _this = this;
-
-    var RecommendationGetFirstURL = $('#RecommendationGetFirstURL').html();
-    axios.get(RecommendationGetFirstURL).then(function (response) {
-      _this.recommendation_title = response.data.recommendation_title;
-      _this.books = response.data.books;
-
-      for (var i = 0; i < 10; i++) {
-        $('#book_id_' + (i + 1)).append($("<option></option>").attr("value", _this.books[i].id).text(_this.books[i].title));
-        $('.book_ids').selectpicker('refresh');
-        $('#book_id_' + (i + 1)).val(_this.books[i].id);
-        $('.book_ids').selectpicker('refresh');
-      }
-    });
-  },
+  created: function created() {},
   mounted: function mounted() {}
 });
 
@@ -1548,7 +1557,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\recommendation\edit.js */"./resources/js/recommendation/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\recommendation\edit.js */"./resources/js/recommendation/edit.js");
 
 
 /***/ })
