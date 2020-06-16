@@ -26,7 +26,7 @@
                             </div>
                             <div class="col-md-3">
                                 <select name="category" id="category" class="form-control" @change="changeCategory">
-                                    <option value="13">全部書籍</option>
+                                    <option value="14">全部書籍</option>
                                     <option value="0">000 總類</option>
                                     <option value="1">100 哲學類</option>
                                     <option value="2">200 宗教類</option>
@@ -38,9 +38,9 @@
                                     <option value="7">710 世界史地類</option>
                                     <option value="8">800 語文文學類</option>
                                     <option value="9">900 藝術類</option>
-                                    <option value="10">論文</option>
-                                    <option value="11">期刊雜誌</option>
-                                    <option value="12">非中文圖書</option>
+                                    <option value="11">論文</option>
+                                    <option value="12">期刊雜誌</option>
+                                    <option value="13">非中文圖書</option>
                                 </select>
                             </div>
                         </div>

@@ -241,12 +241,18 @@ __webpack_require__.r(__webpack_exports__);
   created: function created() {},
   mounted: function mounted() {
     // 地址
-    $('#address_twzipcode').twzipcode({
-      'readonly': false
-    }); // select agency
-
+    // $('#address_twzipcode').twzipcode({
+    //     'readonly': false,
+    // });
+    // select agency
     $('#agency_id').selectpicker({
       liveSearch: true
+    });
+    $("#birthday").datepicker({
+      dateFormat: 'yy-mm-dd',
+      changeYear: true,
+      changeMonth: true,
+      yearRange: "-80:+0"
     });
   }
 });
@@ -414,7 +420,7 @@ var render = function() {
                         ]),
                         _vm._v(" "),
                         _c("option", { attrs: { value: "1" } }, [
-                          _vm._v("具有社輔資格")
+                          _vm._v("符合社福資格")
                         ])
                       ]
                     )
@@ -494,7 +500,40 @@ var render = function() {
                     [
                       _c("label", [_vm._v("地址")]),
                       _vm._v(" "),
-                      _vm._m(3),
+                      _c("div", { staticClass: "row mb-2" }, [
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _c("div", {
+                            attrs: {
+                              "data-role": "county",
+                              "data-style": "form-control",
+                              "data-name": "address_county",
+                              "data-value": _vm.borrower.address_county
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _c("div", {
+                            attrs: {
+                              "data-role": "district",
+                              "data-style": "form-control",
+                              "data-name": "address_district",
+                              "data-value": _vm.borrower.address_district
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _c("div", {
+                            attrs: {
+                              "data-role": "zipcode",
+                              "data-style": "form-control",
+                              "data-name": "address_zipcode",
+                              "data-value": _vm.borrower.address_zipcode
+                            }
+                          })
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-md-12" }, [
@@ -617,7 +656,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            確認修改\r\n                        "
+                          "\n                            確認修改\n                        "
                         )
                       ]
                     ),
@@ -630,7 +669,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            返回列表\r\n                        "
+                          "\n                            返回列表\n                        "
                         )
                       ]
                     )
@@ -654,7 +693,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "name" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("姓名\r\n                            ")
+      _vm._v("姓名\n                            ")
     ])
   },
   function() {
@@ -672,46 +711,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "status" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("身分別\r\n                            ")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mb-2" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", {
-          attrs: {
-            "data-role": "county",
-            "data-style": "form-control",
-            "data-name": "address_county",
-            "data-value": ""
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", {
-          attrs: {
-            "data-role": "district",
-            "data-style": "form-control",
-            "data-name": "address_district",
-            "data-value": ""
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", {
-          attrs: {
-            "data-role": "zipcode",
-            "data-style": "form-control",
-            "data-name": "address_zipcode",
-            "data-value": ""
-          }
-        })
-      ])
+      _vm._v("身分別\n                            ")
     ])
   }
 ]
@@ -850,9 +850,14 @@ var app = new Vue({
     var BorrowersGetOneURL = $('#BorrowersGetOneURL').html();
     axios.get(BorrowersGetOneURL).then(function (response) {
       _this.borrower = response.data.borrower; // 地址
+      // console.log((response.data.borrower));
 
       $('#address_twzipcode').twzipcode({
-        'zipcodeSel': response.data.borrower.address_zipcode
+        'readonly': false,
+        'zipcodeSel': response.data.borrower.address_zipcode,
+        'county': response.data.borrower.address_county,
+        'district': response.data.borrower.address_district,
+        'zipcode': response.data.borrower.address_zipcode
       });
     }); // 生成 機構 下拉式選單
 

@@ -319,7 +319,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                            確認新增\r\n                        "
+                        "\n                            確認新增\n                        "
                       )
                     ]
                   ),
@@ -332,7 +332,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                            返回列表\r\n                        "
+                        "\n                            返回列表\n                        "
                       )
                     ]
                   )
@@ -355,7 +355,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "name" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("名稱\r\n                            ")
+            _vm._v("名稱\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -422,7 +422,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "status" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("身分別\r\n                            ")
+            _vm._v("身分別\n                            ")
           ]),
           _vm._v(" "),
           _c(
@@ -436,7 +436,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("option", { attrs: { value: "0" } }, [_vm._v("一般民眾")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "1" } }, [_vm._v("具有社輔資格")])
+              _c("option", { attrs: { value: "1" } }, [_vm._v("符合社福資格")])
             ]
           )
         ])

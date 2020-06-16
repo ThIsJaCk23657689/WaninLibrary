@@ -323,7 +323,7 @@ var render = function() {
                 _c("div", { staticClass: "col-md-4" }, [
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "principal" } }, [
-                      _vm._v("負責人")
+                      _vm._v("負責人/單位聯絡窗口")
                     ]),
                     _vm._v(" "),
                     _c("input", {
@@ -458,7 +458,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            確認編輯\r\n                        "
+                          "\n                            確認編輯\n                        "
                         )
                       ]
                     ),
@@ -471,7 +471,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            返回列表\r\n                        "
+                          "\n                            返回列表\n                        "
                         )
                       ]
                     )
@@ -495,7 +495,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "name" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("機構名稱\r\n                            ")
+      _vm._v("單位名稱\n                            ")
     ])
   },
   function() {

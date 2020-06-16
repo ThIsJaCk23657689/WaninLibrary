@@ -314,7 +314,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        確認新增\r\n                    "
+                    "\n                        確認新增\n                    "
                   )
                 ]
               ),
@@ -327,7 +327,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        返回列表\r\n                    "
+                    "\n                        返回列表\n                    "
                   )
                 ]
               )
@@ -348,7 +348,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "name" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("名稱\r\n                        ")
+            _vm._v("名稱\n                        ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -428,7 +428,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "exposure" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("曝光程度\r\n                        ")
+            _vm._v("曝光程度\n                        ")
           ]),
           _vm._v(" "),
           _c(
@@ -440,7 +440,7 @@ var staticRenderFns = [
             [
               _c("option", { attrs: { value: "1" } }, [_vm._v("完全公開")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "2" } }, [_vm._v("姓名保護")]),
+              _c("option", { attrs: { value: "2" } }, [_vm._v("半公開")]),
               _vm._v(" "),
               _c("option", { attrs: { value: "3" } }, [_vm._v("對外匿名")])
             ]

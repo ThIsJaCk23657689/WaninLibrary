@@ -32,7 +32,7 @@ class Donor extends Model
         $result = '';
         switch($this->exposure){
             case '2':
-                $result = '姓名保護';
+                $result = '半公開';
                 break;
             case '3':
                 $result = '對外匿名';
@@ -52,7 +52,7 @@ class Donor extends Model
         $result = '';
         switch($this->exposure){
             case '2':
-                $length = strlen($this->name);
+                $length = mb_strlen($this->name);
                 if($length == 1){
                     $result = '〇';
                 }else if($length == 2){

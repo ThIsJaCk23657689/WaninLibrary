@@ -36,7 +36,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="birthday">生日</label>
-                        <input id="birthday" name="birthday" type="text" class="form-control mb-2" value="{{ $borrower->birthday ?? '無' }}" readonly>
+                        <input id="birthday" name="birthday" type="text" class="form-control mb-2" value="{{ $borrower->showBirthday() ?? '無' }}" readonly>
                     </div>
                 </div>
             </div>

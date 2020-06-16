@@ -3,7 +3,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form method="POST" id="borrower_create_form" action="#" @submit.prevent="borrowerCreateForm">
-                
+
                 <div class="row">
                     <div class="col-md-4">
                         <div class="form-group">
@@ -38,7 +38,7 @@
                             <select name="status" id="status" class="form-control">
                                 <option value="">請選擇...</option>
                                 <option value="0">一般民眾</option>
-                                <option value="1">具有社輔資格</option>
+                                <option value="1">符合社福資格</option>
                             </select>
                         </div>
                     </div>
@@ -57,7 +57,7 @@
                             <label for="job_title">職稱</label>
                             <input id="job_title" name="job_title" type="text" class="form-control mb-2" value="" autocomplete="off">
                         </div>
-                    </div>                
+                    </div>
                 </div>
 
                 <div class="row">

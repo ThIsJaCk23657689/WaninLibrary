@@ -123,7 +123,7 @@ class BookService extends BaseService
         return BookEloquent::count();
     }
 
-    // category: 0~9.中文圖書 10.論文 11.雜誌期刊 12.非中文圖書 13.全部(default)
+    // category: 0~9.中文圖書 11.論文 12.雜誌期刊 13.非中文圖書 14.全部(default)
     // type:(default) 0.全部 1.書名 2.作者 3.ISBN 4.出版商
     // status: (default) 0.全部 1.在庫、2.借出 3.逾期 4.庫藏待上架 5.已淘汰 6.已轉贈、7.待索取 8.已被索取、9.無外借、10.無歸還
     public function getList($request){
@@ -135,7 +135,7 @@ class BookService extends BaseService
 
         $take = $request->take ?? 10;
         $status = $request->status ?? 0; //default 0
-        $category = $request->category ?? 13; //default 13
+        $category = $request->category ?? 14; //default 13
         $type = $request->type ?? 0; //default 0
         $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
 
@@ -183,7 +183,7 @@ class BookService extends BaseService
             if($status != 0){
                 $books_tmp->where('status', $status);
             }
-            if($category != 13){
+            if($category != 14){
                 $books_tmp->where('category', $category);
             }
             $count = $books_tmp->count();

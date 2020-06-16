@@ -17,6 +17,7 @@ class Borrower extends Model
     ];
 
     protected $dates = ['birthday'];
+    protected $dateFormat = 'Y-m-d';
 
     protected $casts = [
         'birthday' => 'datetime:Y-m-d',
@@ -27,7 +28,7 @@ class Borrower extends Model
     // DateTimeInterface 是原生PHP提供的，直接 use 即可。
     protected function serializeDate(DateTimeInterface $date)
     {
-        return $date->format($this->dateFormat ?: 'Y-m-d H:i:s');
+        return $date->format($this->dateFormat ?: 'Y-m-d');
     }
 
     // ========== 資料庫關聯 ==========
@@ -54,6 +55,11 @@ class Borrower extends Model
     }
 
     // ========== 顯示資料 ==========
+    public function showBirthday()
+    {
+        return is_null($this->birthday) ? '無' : $this->birthday->format($this->dateFormat ?: 'Y-m-d');
+    }
+
     public function showAgencyName()
     {
         return is_null($this->agency) ? '無' : $this->agency->name;

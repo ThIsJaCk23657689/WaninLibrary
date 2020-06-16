@@ -23,7 +23,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="principal">聯絡窗口</label>
+                            <label for="principal">負責人/單位聯絡窗口</label>
                             <input id="principal" name="principal" type="text" class="form-control" value="" autocomplete="off">
                         </div>
                     </div>
@@ -107,7 +107,7 @@ export default {
         // 地址
         $('#address_twzipcode').twzipcode({
             'readonly': false
-        }); 
+        });
     }
 }
 </script>

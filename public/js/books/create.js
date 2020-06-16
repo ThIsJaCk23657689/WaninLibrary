@@ -2824,7 +2824,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "col-md-6" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "p_published_date" } }, [
-            _vm._v("出版日期")
+            _vm._v("期數/出版日期")
           ]),
           _vm._v(" "),
           _c("input", {

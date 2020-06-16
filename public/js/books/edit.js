@@ -1788,7 +1788,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            確認修改\r\n                        "
+                            "\n                            確認修改\n                        "
                           )
                         ]
                       ),
@@ -1801,7 +1801,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            返回列表\r\n                        "
+                            "\n                            返回列表\n                        "
                           )
                         ]
                       )
@@ -2453,7 +2453,7 @@ var render = function() {
                   _c("div", { staticClass: "col-md-6" }, [
                     _c("div", { staticClass: "form-group" }, [
                       _c("label", { attrs: { for: "published_date" } }, [
-                        _vm._v("出版日期")
+                        _vm._v("期數/出版日期")
                       ]),
                       _vm._v(" "),
                       _c("input", {
@@ -2565,7 +2565,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            確認修改\r\n                        "
+                            "\n                            確認修改\n                        "
                           )
                         ]
                       ),
@@ -2578,7 +2578,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            返回列表\r\n                        "
+                            "\n                            返回列表\n                        "
                           )
                         ]
                       )
@@ -2648,7 +2648,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "title" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("書名（主標題）\r\n                                    ")
+      _vm._v("書名（主標題）\n                                    ")
     ])
   },
   function() {
@@ -2657,7 +2657,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("分類號\r\n                            ")
+      _vm._v("分類號\n                            ")
     ])
   },
   function() {
@@ -2729,7 +2729,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "title" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("書名（主標題）\r\n                                    ")
+      _vm._v("書名（主標題）\n                                    ")
     ])
   }
 ]

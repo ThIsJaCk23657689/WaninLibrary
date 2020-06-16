@@ -1,10 +1,10 @@
 @extends('layouts.backend.master')
 
 @push('CustomJS')
-@endpush   
+@endpush
 
 @section('content')
-				
+
 	@component('components.breadcrumbs')
 		<li class="breadcrumb-item">
 			<a href="#">{{ __('People Management') }}</a>
@@ -18,10 +18,10 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="row">
-    
+
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="name">機構名稱</label>
+                        <label for="name">單位名稱</label>
                         <input id="name" name="name" type="text" class="form-control mb-2" value="{{ $agency->name ?? '無' }}" readonly>
                     </div>
                 </div>
@@ -35,7 +35,7 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="principal">負責人</label>
+                        <label for="principal">負責人/單位聯絡窗口</label>
                         <input id="principal" name="principal" type="text" class="form-control" value="{{ $agency->principal ?? '無' }}" readonly>
                     </div>
                 </div>

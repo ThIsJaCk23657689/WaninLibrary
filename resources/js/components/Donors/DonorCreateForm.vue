@@ -2,7 +2,7 @@
 <div class="row justify-content-center">
     <div class="col-md-8">
         <form method="POST" id="donor_create_form" :action="DonorsStoreURL">
-            
+
             <div class="row">
                 <div class="col-md-4">
                     <div class="form-group">
@@ -43,12 +43,12 @@
                         </label>
                         <select name="exposure" id="exposure" class="form-control">
                             <option value="1">完全公開</option>
-                            <option value="2">姓名保護</option>
+                            <option value="2">半公開</option>
                             <option value="3">對外匿名</option>
                         </select>
                     </div>
                 </div>
-               
+
                <div class="col-md-4">
                     <div class="form-group">
                         <label for="email">信箱</label>
@@ -113,10 +113,10 @@ export default {
         }
     },
     methods: {
-        
+
     },
     created(){
-        
+
     },
     mounted(){
         // 地址
@@ -140,7 +140,7 @@ export default {
 
             let url = $(this).attr('action');
             let data = $(this).serializeObject();
-            
+
             $('#modal_good').css({'display':'none'});
             $('#modal_error').css({'display':'none'});
             $('#modal_spinner').slideDown();

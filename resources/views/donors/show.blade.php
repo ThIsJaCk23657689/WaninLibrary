@@ -22,7 +22,7 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="name">捐贈人名稱</label>
+                        <label for="name">捐贈人(單位)名稱</label>
                         <input id="name" name="name" type="text" class="form-control mb-2" value="{{ $donor->name ?? '無' }}" readonly>
                     </div>
                 </div>
@@ -36,7 +36,7 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label for="principal">負責人</label>
+                        <label for="principal">負責人/單位聯絡窗口</label>
                         <input id="principal" name="principal" type="text" class="form-control" value="{{ $donor->principal ?? '無' }}" readonly>
                     </div>
                 </div>

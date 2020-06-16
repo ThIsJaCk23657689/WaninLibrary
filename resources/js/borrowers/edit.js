@@ -15,8 +15,13 @@ const app = new Vue({
         axios.get(BorrowersGetOneURL).then(response => {
             this.borrower = response.data.borrower;
             // 地址
+            // console.log((response.data.borrower));
             $('#address_twzipcode').twzipcode({
-                'zipcodeSel': response.data.borrower.address_zipcode
+                'readonly': false,
+                'zipcodeSel': response.data.borrower.address_zipcode,
+                'county': response.data.borrower.address_county,
+                'district': response.data.borrower.address_district,
+                'zipcode': response.data.borrower.address_zipcode
             });
         });
 

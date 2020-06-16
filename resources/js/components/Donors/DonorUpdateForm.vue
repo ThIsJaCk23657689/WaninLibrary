@@ -44,7 +44,7 @@
                             </label>
                             <select name="exposure" id="exposure" class="form-control" v-bind:value = "donor.exposure">
                                 <option value="1">完全公開</option>
-                                <option value="2">姓名保護</option>
+                                <option value="2">半公開</option>
                                 <option value="3">對外匿名</option>
                             </select>
                         </div>
@@ -71,13 +71,13 @@
                             <label>地址</label>
                             <div class="row mb-2">
                                 <div class="col-md-4">
-                                    <div data-role="county" data-style="form-control" data-name="address_county" data-value=""></div>
+                                    <div data-role="county" data-style="form-control" data-name="address_county" :data-value="donor.address_county"></div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div data-role="district" data-style="form-control" data-name="address_district" data-value=""></div>
+                                    <div data-role="district" data-style="form-control" data-name="address_district" :data-value="donor.address_district"></div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div data-role="zipcode" data-style="form-control" data-name="address_zipcode" data-value=""></div>
+                                    <div data-role="zipcode" data-style="form-control" data-name="address_zipcode" :data-value="donor.address_zipcode"></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -135,9 +135,9 @@ export default {
     },
     mounted(){
         // 地址
-        $('#address_twzipcode').twzipcode({
-            'readonly': false
-        });
+        // $('#address_twzipcode').twzipcode({
+        //     'readonly': false
+        // });
 
     }
 }

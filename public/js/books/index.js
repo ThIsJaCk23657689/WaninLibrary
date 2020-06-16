@@ -387,7 +387,7 @@ var render = function() {
                             on: { change: _vm.changeCategory }
                           },
                           [
-                            _c("option", { attrs: { value: "13" } }, [
+                            _c("option", { attrs: { value: "14" } }, [
                               _vm._v("全部書籍")
                             ]),
                             _vm._v(" "),
@@ -435,15 +435,15 @@ var render = function() {
                               _vm._v("900 藝術類")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "10" } }, [
+                            _c("option", { attrs: { value: "11" } }, [
                               _vm._v("論文")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "11" } }, [
+                            _c("option", { attrs: { value: "12" } }, [
                               _vm._v("期刊雜誌")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "12" } }, [
+                            _c("option", { attrs: { value: "13" } }, [
                               _vm._v("非中文圖書")
                             ])
                           ]
@@ -483,7 +483,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table mr-2" }),
-      _vm._v("書本列表\r\n        ")
+      _vm._v("書本列表\n        ")
     ])
   },
   function() {
@@ -536,7 +536,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                                    確認\r\n                                "
+              "\n                                    確認\n                                "
             )
           ]
         )

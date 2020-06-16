@@ -8,7 +8,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="name">
-                                <span class="text-danger mr-2">*</span>機構名稱
+                                <span class="text-danger mr-2">*</span>單位名稱
                             </label>
                             <input id="name" name="name" type="text" class="form-control mb-2" v-model="agency.name" required autocomplete="off" autofocus>
                         </div>
@@ -23,7 +23,7 @@
 
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="principal">負責人</label>
+                            <label for="principal">負責人/單位聯絡窗口</label>
                             <input id="principal" name="principal" type="text" class="form-control" v-model="agency.principal" autocomplete="off">
                         </div>
                     </div>
@@ -61,7 +61,7 @@
                             <textarea name="content" id="content" class="form-control" cols="30" rows="5" v-model="agency.content"></textarea>
                         </div>
                     </div>
-                </div> 
+                </div>
 
                 <div class="form-group row justify-content-center">
                     <div class="col-md-8">
@@ -90,7 +90,7 @@ export default {
             AgenciesUpdateURL: $('#AgenciesUpdateURL').html(),
         }
     },
-    methods: {    
+    methods: {
         agencyEditForm(e) {
             let url = this.AgenciesUpdateURL;
             let data = $(e.target).serializeObject();
@@ -104,7 +104,7 @@ export default {
             });
         }
     },
-    created(){  
+    created(){
         let AgenciesGetOneURL = $('#AgenciesGetOneURL').html();
         axios.get(AgenciesGetOneURL).then(response => {
             this.agency = response.data.agency;
@@ -112,7 +112,7 @@ export default {
             // 地址
             $('#address_twzipcode').twzipcode({
                 'zipcodeSel': response.data.agency.address_zipcode
-            }); 
+            });
         });
     },
     mounted(){

@@ -397,7 +397,7 @@
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="published_date">出版日期</label>
+                            <label for="published_date">期數/出版日期</label>
                             <input id="published_date" name="published_date" type="text" class="form-control" v-model="book.published_date" autocomplete="off">
                         </div>
                     </div>

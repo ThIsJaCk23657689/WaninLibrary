@@ -349,7 +349,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="p_published_date">出版日期</label>
+                        <label for="p_published_date">期數/出版日期</label>
                         <input id="p_published_date" name="published_date" type="text" class="form-control" value="" autocomplete="off">
                     </div>
                 </div>
