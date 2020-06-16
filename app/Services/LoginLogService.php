@@ -30,38 +30,43 @@ class LoginLogService extends BaseService
     }
 
     public function getList(){
-        $logs = LoginLogEloquent::withTrashed()->orderBy('created_at','desc')->with('user:id,name')->get();
+        $logs = LoginLogEloquent::orderBy('created_at','desc')->get();
+
         foreach($logs as $log){
+
             $url =  route('loginLogs.show', [$log->id]);
             $href = '<a href="' .$url. '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
             $log->url = $href;
+            $log->user_name = UserEloquent::withTrashed()->find($log->user_id)->name;
+
             $log->logout_date = $log->logout_date ? $log->logout_date : $log->content;
         }
         return $logs;
     }
 
     public function getListOrderByASC(){
-        $logs = LoginLogEloquent::withTrashed()->orderBy('id','asc')->with('user:id,name')->get();
+        $logs = LoginLogEloquent::withTrashed()->orderBy('id','asc')->get();
         return $logs;
     }
 
     public function getListOrderByUserId(){
-        $logs = LoginLogEloquent::withTrashed()->orderBy('user_id','desc')->with('user:id,name')->get();
+        $logs = LoginLogEloquent::withTrashed()->orderBy('user_id','desc')->get();
         return $logs;
     }
 
     public function getListOrderByUserIdASC(){
-        $logs = LoginLogEloquent::withTrashed()->orderBy('user_id','asc')->with('user:id,name')->get();
+        $logs = LoginLogEloquent::withTrashed()->orderBy('user_id','asc')->get();
         return $logs;
     }
 
     public function getOne($id){
-        $log = LoginLogEloquent::withTrashed()->with('user:id,name')->findOrFail($id);
+        $log = LoginLogEloquent::withTrashed()->findOrFail($id);
+        $log->user_name = UserEloquent::withTrashed()->find($log->user_id)->name;
         return $log;
     }
 
     public function getLoginLogsByUserId($user_id){
-        $logs = LoginLogEloquent::where('user_id', $user_id)->orderBy('id')->with('user:id,name')->get();
+        $logs = LoginLogEloquent::where('user_id', $user_id)->orderBy('id')->get();
         return $logs;
     }
 
@@ -75,13 +80,14 @@ class LoginLogService extends BaseService
         $date = $request->date;
         // $sort_by =$request->sort_by;
         // if($sort_by == 1){
-        //     $logs = LoginLogEloquent::ofDate($type, $date)->sortByDate_DESC($type)->with('user:id,name')->get();
+        //     $logs = LoginLogEloquent::ofDate($type, $date)->sortByDate_DESC($type)->get();
         // }else{
-        //     $logs = LoginLogEloquent::ofDate($type, $date)->sortByDate_ASC($type)->with('user:id,name')->get();
+        //     $logs = LoginLogEloquent::ofDate($type, $date)->sortByDate_ASC($type)->get();
         // }
 
-        $logs = LoginLogEloquent::ofDate($type, $date)->sortByDate_DESC($type)->with('user:id,name')->get();
+        $logs = LoginLogEloquent::ofDate($type, $date)->sortByDate_DESC($type)->get();
         foreach($logs as $log){
+            $log->user_name = UserEloquent::withTrashed()->find($log->user_id)->name;
             $url =  route('loginLogs.show', [$log->id]);
             $href = '<a href="' .$url. '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
             $log->url = $href;
@@ -99,16 +105,17 @@ class LoginLogService extends BaseService
         // $sort_by =$request->sort_by;
         // if($sort_by == 1){
         //     $logs = LoginLogEloquent::ofYear($type, $year)
-        //     ->ofMonth ($type, $month)->sortByDate_DESC($type)->with('user:id,name')->get();
+        //     ->ofMonth ($type, $month)->sortByDate_DESC($type)->get();
         // }else{
         //     $logs = LoginLogEloquent::ofYear($type, $year)
-        //     ->ofMonth ($type, $month)->sortByDate_ASC($type)->with('user:id,name')->get();
+        //     ->ofMonth ($type, $month)->sortByDate_ASC($type)->get();
         // }
 
         $logs = LoginLogEloquent::ofYear($type, $year)
-            ->ofMonth ($type, $month)->sortByDate_DESC($type)->with('user:id,name')->get();
+            ->ofMonth ($type, $month)->sortByDate_DESC($type)->get();
 
         foreach($logs as $log){
+            $log->user_name = UserEloquent::withTrashed()->find($log->user_id)->name;
             $url =  route('loginLogs.show', [$log->id]);
             $href = '<a href="' .$url. '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
             $log->url = $href;
@@ -123,14 +130,15 @@ class LoginLogService extends BaseService
         $year = $request->year;
         // $sort_by =$request->sort_by;
         // if($sort_by == 1){
-        //     $logs = LoginLogEloquent::ofYear($type, $year)->sortByDate_DESC($type)->with('user:id,name')->get();
+        //     $logs = LoginLogEloquent::ofYear($type, $year)->sortByDate_DESC($type)->get();
         // }else{
-        //     $logs = LoginLogEloquent::ofYear($type, $year)->sortByDate_ASC($type)->with('user:id,name')->get();
+        //     $logs = LoginLogEloquent::ofYear($type, $year)->sortByDate_ASC($type)->get();
         // }
 
-        $logs = LoginLogEloquent::ofYear($type, $year)->sortByDate_DESC($type)->with('user:id,name')->get();
+        $logs = LoginLogEloquent::ofYear($type, $year)->sortByDate_DESC($type)->get();
 
         foreach($logs as $log){
+            $log->user_name = UserEloquent::withTrashed()->find($log->user_id)->name;
             $url =  route('loginLogs.show', [$log->id]);
             $href = '<a href="' .$url. '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
             $log->url = $href;
@@ -146,9 +154,10 @@ class LoginLogService extends BaseService
         $start_date = $request->start_date;
         $end_date = $request->end_date;
 
-        $logs = LoginLogEloquent::ofRange($type, $start_date, $end_date)->sortByDate_DESC(1)->with('user:id,name')->get();
+        $logs = LoginLogEloquent::ofRange($type, $start_date, $end_date)->sortByDate_DESC(1)->get();
 
         foreach($logs as $log){
+            $log->user_name = UserEloquent::withTrashed()->find($log->user_id)->name;
             $url =  route('loginLogs.show', [$log->id]);
             $href = '<a href="' .$url. '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
             $log->url = $href;

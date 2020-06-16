@@ -121,7 +121,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['loginlogs', 'loginlogsjson'],
   data: function data() {
@@ -409,8 +408,6 @@ var staticRenderFns = [
               _c("thead", [
                 _c("tr", [
                   _c("th", [_vm._v("編號")]),
-                  _vm._v(" "),
-                  _c("th", [_vm._v("使用者編號")]),
                   _vm._v(" "),
                   _c("th", [_vm._v("使用者姓名")]),
                   _vm._v(" "),
@@ -1105,16 +1102,15 @@ var app = new Vue({
         columns: [{
           data: 'id'
         }, {
-          data: 'user_id'
-        }, {
-          data: 'user.name'
+          data: 'user_name'
         }, {
           data: 'created_at'
         }, {
           data: 'logout_date'
         }, {
           data: 'url'
-        }]
+        }],
+        "order": [[2, "desc"]]
       });
     });
   },
@@ -1130,7 +1126,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\loginLogs\index.js */"./resources/js/loginLogs/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\loginLogs\index.js */"./resources/js/loginLogs/index.js");
 
 
 /***/ })

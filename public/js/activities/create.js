@@ -156,6 +156,15 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -389,11 +398,11 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-10" }, [
+      _c("div", { staticClass: "col-md-8" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("活動標題\r\n                            ")
+            _vm._v("活動標題\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -408,6 +417,25 @@ var staticRenderFns = [
               autofocus: ""
             }
           })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-2" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("label", { attrs: { for: "type" } }, [_vm._v("類型")]),
+          _vm._v(" "),
+          _c(
+            "select",
+            {
+              staticClass: "form-control",
+              attrs: { name: "type", id: "type" }
+            },
+            [
+              _c("option", { attrs: { value: "1" } }, [_vm._v("近期活動")]),
+              _vm._v(" "),
+              _c("option", { attrs: { value: "2" } }, [_vm._v("主題書單")])
+            ]
+          )
         ])
       ]),
       _vm._v(" "),
@@ -440,7 +468,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "content" } }, [
             _vm._v(
-              "\r\n                                活動內容\r\n                            "
+              "\n                                活動內容\n                            "
             )
           ]),
           _vm._v(" "),
@@ -466,7 +494,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                            確認新增\r\n                        "
+              "\n                            確認新增\n                        "
             )
           ]
         ),
@@ -476,7 +504,7 @@ var staticRenderFns = [
           { staticClass: "btn btn-block btn-danger", attrs: { href: "#" } },
           [
             _vm._v(
-              "\r\n                            返回列表\r\n                        "
+              "\n                            返回列表\n                        "
             )
           ]
         )
@@ -864,7 +892,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\activities\create.js */"./resources/js/activities/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\activities\create.js */"./resources/js/activities/create.js");
 
 
 /***/ })

@@ -5,12 +5,21 @@
             <form method="POST" id="activity_create_form" action="" @submit.prevent="activityCreateForm">
 
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <div class="form-group">
                             <label for="title">
                                 <span class="text-danger mr-2">*</span>活動標題
                             </label>
                             <input id="title" name="title" type="text" class="form-control mb-2" value="" required autocomplete="off" autofocus>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="type">類型</label>
+                            <select name="type" id="type" class="form-control">
+                                <option value="1">近期活動</option>
+                                <option value="2">主題書單</option>
+                            </select>
                         </div>
                     </div>
                     <div class="col-md-2">
@@ -72,10 +81,10 @@ export default {
         activityCreateForm(e) {
             let url = this.ActivitiesStoreURL;
             let formData = new FormData($(e.target)[0]);
-            
+
             let content = CKEDITOR.instances.content.getData();
             formData.append('content', content);
-            
+
             $.showLoadingModal();
             axios.post(url, formData).then(response => {
                 $.showSuccessModal('新增成功', response.data.url);

@@ -32,12 +32,14 @@ const app = new Vue({
                 data: this.loginlogs,
                 columns: [
                     { data: 'id' },
-                    { data: 'user_id' },
-                    { data: 'user.name' },
+                    { data: 'user_name' },
                     { data: 'created_at' },
                     { data: 'logout_date' },
                     { data: 'url' },
                 ],
+                "order": [
+                    [2, "desc"]
+                ]
             });
         });
     },

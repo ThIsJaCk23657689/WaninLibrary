@@ -31,6 +31,7 @@ class ActivityService extends BaseService
             'last_update_user_id' => $user->id,
             'title' => $request->title,
             'content' => $request->content,
+            'type' => $request->type,
         ]);
 
         if($request->is_top == true)
@@ -78,6 +79,7 @@ class ActivityService extends BaseService
             'last_update_user_id' => $user->id,
             'title' => $request->title,
             'content' => $request->content,
+            'type' => $request->type,
         ]);
 
         if($request->is_top == true)

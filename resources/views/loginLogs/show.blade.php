@@ -31,7 +31,7 @@
                         <label for="tel">使用者姓名</label>
                         <div class="row">
                             <div class="col-md-9">
-                                <input id="tel" name="tel" type="text" class="form-control mb-2" value="{{ $log->user->name ?? '無' }}" readonly>
+                                <input id="tel" name="tel" type="text" class="form-control mb-2" value="{{ $log->user_name ?? '無' }}" readonly>
                             </div>
                             <div class="col-md-3">
                                 <a href="{{ route('users.show', [$log->user_id]) }}" class="btn btn-md btn-info">

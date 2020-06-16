@@ -19,7 +19,8 @@ class CreateActivitiesTable extends Migration
             $table->string('title')->comment('標題');
             $table->text('content')->comment('內文');
             $table->string('cover_image')->comment('封面圖片');
-            $table->boolean('is_top')->default(false)->comment('至頂');
+            $table->boolean('is_top')->default(false)->comment('置頂');
+            $table->integer('type')->default(1)->comment('類型 1:活動；2:主題書單');
 
             $table->timestamps();
         });

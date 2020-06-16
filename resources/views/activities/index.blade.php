@@ -38,6 +38,7 @@
 					<thead>
 						<tr>
                             <th>置頂</th>
+                            <th>類型</th>
                             <th>編號</th>
 							<th>標題</th>
 							<th>創建日期</th>
@@ -54,6 +55,7 @@
                                         <i class="fas fa-star"></i>
                                     @endif
                                 </td>
+                                <td>{{ $activity->showType() }}</td>
                                 <td>{{ $activity->id }}</td>
 								<td>{{ $activity->title }}</td>
 								<td>{{ $activity->created_at }}</td>

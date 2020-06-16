@@ -45,8 +45,8 @@
                     <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                         <thead>
                             <tr>
-                                <th>編號</th>
-                                <th>名稱</th>
+                                <th>序號</th>
+                                <th>姓名</th>
                                 <th>帳號</th>
                                 <th>電話</th>
                                 <th>類型</th>
@@ -54,9 +54,9 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach($users as $user)
+                            @foreach($users as $key => $user)
                                 <tr class="">
-                                    <td>{{ $user->id }}</td>
+                                    <td>{{ $key+1 }}</td>
                                     <td>{{ $user->name }}</td>
                                     <td>{{ $user->account }}</td>
                                     <td>{{ $user->tel ?? '無' }}</td>
@@ -102,8 +102,8 @@
                         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                             <thead>
                                 <tr>
-                                    <th>編號</th>
-                                    <th>名稱</th>
+                                    <th>序號</th>
+                                    <th>姓名</th>
                                     <th>帳號</th>
                                     <th>電話</th>
                                     <th>類型</th>
@@ -111,9 +111,9 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                @foreach($users_block as $user)
+                                @foreach($users_block as $key => $user)
                                     <tr class="">
-                                        <td>{{ $user->id }}</td>
+                                        <td>{{ $key+1 }}</td>
                                         <td>{{ $user->name }}</td>
                                         <td>{{ $user->account }}</td>
                                         <td>{{ $user->tel ?? '無' }}</td>

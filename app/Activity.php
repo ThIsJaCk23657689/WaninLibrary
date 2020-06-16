@@ -8,7 +8,7 @@ use App\User as UserEloquent;
 class Activity extends Model
 {
     protected $fillable = [
-        'last_update_user_id', 'title', 'content', 'cover_image', 'is_top',
+        'last_update_user_id', 'title', 'content', 'cover_image', 'is_top', 'type'
     ];
 
     public function User(){
@@ -24,6 +24,20 @@ class Activity extends Model
     public function showDate()
     {
         return $this->updated_at->isoFormat('YYYY.MM.DD');
+    }
+
+    public function showType()
+    {
+        switch ($this->type) {
+            case 1:
+                $result = '近期活動';
+                break;
+            case 2:
+                $result = '主題活動';
+                break;
+        }
+
+        return $result;
     }
 
     public function showTitle(){

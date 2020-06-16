@@ -4,13 +4,21 @@
         <div class="col-md-8">
             <form method="POST" id="activity_edit_form" enctype="multipart/form-data" action="#" @submit.prevent="activityEditForm">
                 <div class="row">
-                    <div class="col-md-10">
+                    <div class="col-md-8">
                         <div class="form-group">
                             <label for="title">標題</label>
                             <input id="title" name="title" type="text" class="form-control" v-model="activity.title" autocomplete="off">
                         </div>
                     </div>
-
+                    <div class="col-md-2">
+                        <div class="form-group">
+                            <label for="type">類型</label>
+                            <select name="type" id="type" class="form-control" v-bind:value = "activity.type">
+                                <option value="1">近期活動</option>
+                                <option value="2">主題書單</option>
+                            </select>
+                        </div>
+                    </div>
                     <div class="col-md-2">
                         <div class="form-group">
                             <label for="is_top">是否置頂</label>

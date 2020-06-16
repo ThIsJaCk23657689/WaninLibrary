@@ -27,6 +27,7 @@ class ActivityRequest extends FormRequest
             'title' => 'required|string|max:255',
             'content' => 'required|string',
             'is_top' => 'required|boolean',
+            'type' => 'required|integer',
         ];
     }
 }
