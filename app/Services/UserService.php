@@ -94,13 +94,12 @@ class UserService extends BaseService
         if($act_user->id != $id && $id !=1){
             if($user->trashed()){
                 $user->restore();
-                Log::debug($act_user->name.'解鎖'.$user->name);
+                Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 解除了 編號：' . $user->id . '，姓名：' . $user->name . ' 的停權限制。');
             }else{
                 $user->delete();
-                Log::debug($act_user->name.'封鎖'.$user->name);
+                Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 停權了 編號：' . $user->id . '，姓名：' . $user->name . '。');
             }
         }
-
 
         return ['status'=>'OK','url'=>route('users.index')];
     }
@@ -116,9 +115,14 @@ class UserService extends BaseService
         if($act_user->id != $id && $id !=1){
             $user->loginLogs()->delete();
             $user->forceDelete();
+
+            Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 刪除了 編號：' . $user->id . '，姓名：' . $user->name . '。');
         }
 
-        return ['status'=>'OK','url'=>route('users.index')];
+        return [
+            'status' => 'OK', 
+            'url' => route('users.index')
+        ];
     }
 
     public function getlastupdate()

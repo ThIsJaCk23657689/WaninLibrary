@@ -5,6 +5,7 @@ use App\User as UserEloquent;
 use App\LoginLog as LoginLogEloquent;
 use JWTAuth;
 use Carbon\Carbon;
+use Log;
 
 class LoginLogService extends BaseService
 {
@@ -17,6 +18,8 @@ class LoginLogService extends BaseService
             'logout_date' => null,
             'content' => '系統於24小時後自動登出',
         ]);
+
+        Log::info('編號：' . $user->id . '，姓名：' . $user->name . '登入了後台。', ['IP' => $this->getLoggingIP()]);
     }
 
     public function update(){
@@ -27,6 +30,8 @@ class LoginLogService extends BaseService
         $log->update([
             'logout_date' => Carbon::now(),
         ]);
+
+        Log::info('編號：' . $user->id . '，姓名：' . $user->name . '登出了後台。', ['IP' => $this->getLoggingIP()]);
     }
 
     public function getList(){
@@ -165,7 +170,21 @@ class LoginLogService extends BaseService
         }
 
         return $logs;
+    }
 
-
+    private function getLoggingIP(){
+        if (!empty($_SERVER['HTTP_CLIENT_IP']))   //check ip from share internet
+        {
+        $ip=$_SERVER['HTTP_CLIENT_IP'];
+        }
+        elseif (!empty($_SERVER['HTTP_X_FORWARDED_FOR']))   //to check ip is pass from proxy
+        {
+        $ip=$_SERVER['HTTP_X_FORWARDED_FOR'];
+        }
+        else
+        {
+        $ip=$_SERVER['REMOTE_ADDR'];
+        }
+        return $ip;
     }
 }
