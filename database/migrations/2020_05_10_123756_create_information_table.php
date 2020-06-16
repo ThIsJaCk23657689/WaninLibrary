@@ -20,6 +20,7 @@ class CreateInformationTable extends Migration
             $table->string('fax')->comment('傳真');
             $table->string('recommendation_title')->comment('十本好書標題');
             $table->string('cover_image')->comment('首頁圖片');
+            $table->string('donate_image')->comment('好書捐贈方法圖片');
             $table->string('address')->comment('地址');
             $table->time('open_at')->comment('開館時間');
             $table->time('close_at')->comment('閉館時間');
