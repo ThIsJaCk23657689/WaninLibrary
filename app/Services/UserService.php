@@ -4,6 +4,7 @@ namespace App\Services;
 use App\User as UserEloquent;
 use Auth;
 use JWTAuth;
+use Log;
 
 class UserService extends BaseService
 {
@@ -93,10 +94,13 @@ class UserService extends BaseService
         if($act_user->id != $id && $id !=1){
             if($user->trashed()){
                 $user->restore();
+                Log::debug($act_user->name.'解鎖'.$user->name);
             }else{
                 $user->delete();
+                Log::debug($act_user->name.'封鎖'.$user->name);
             }
         }
+
 
         return ['status'=>'OK','url'=>route('users.index')];
     }
