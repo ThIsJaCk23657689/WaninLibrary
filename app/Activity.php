@@ -33,11 +33,13 @@ class Activity extends Model
                 $result = '近期活動';
                 break;
             case 2:
-                $result = '主題活動';
+                $result = '主題書單';
                 break;
+            default:
+                $result = '不明類型';
         }
 
-        return $result;
+        return $this->type;
     }
 
     public function showTitle(){

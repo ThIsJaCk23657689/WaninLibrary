@@ -25,14 +25,21 @@ class UserService extends BaseService
             'content' => $request->content,
         ]);
 
-        return ['status'=>'OK','added_id'=>$user->id,'url'=>route('users.index')];
+        return [
+            'status' => 'OK',
+            'added_id' => $user->id,
+            'url' => route('users.index')
+        ];
     }
 
     public function getList()
     {
         $users = UserEloquent::get();
         $users_block = UserEloquent::onlyTrashed()->get();
-        return ['users' => $users, 'users_block' => $users_block];
+        return [
+            'users' => $users, 
+            'users_block' => $users_block
+        ];
     }
 
     public function getOne($id)
@@ -76,6 +83,9 @@ class UserService extends BaseService
             'content' => $request->content,
         ]);
 
+        $act_user = auth('api')->user();
+        Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 後台修改了 編號：' . $user->id . '，姓名：' . $user->name . '。');
+
         return [
             'status' => 'OK',
             'updated_id' => $user->id,
@@ -86,7 +96,6 @@ class UserService extends BaseService
     public function delete($id)
     {
         $act_user = auth('api')->user();
-
 
         $user = $this->getOne($id);
 
@@ -107,7 +116,6 @@ class UserService extends BaseService
     public function forceDestroy($id)
     {
         $act_user = auth('api')->user();
-
 
         $user = $this->getOne($id);
 

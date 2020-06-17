@@ -177,7 +177,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   data: function data() {
     return {
@@ -187,17 +186,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     agencyCreateForm: function agencyCreateForm(e) {
-      var _this = this;
-
       var url = this.AgenciesStoreURL;
       var data = $(e.target).serializeObject();
-      this.$refs.loadingModal.initalModal();
+      $.showLoadingModal();
       axios.post(url, data).then(function (response) {
-        _this.$refs.loadingModal.successfulResponse('新增成功', response.data.url);
+        $.showSuccessModal('新增成功', response.data.url);
       })["catch"](function (error) {
         console.error('新增單位時發生錯誤，錯誤訊息：' + error);
-
-        _this.$refs.loadingModal.failureResponse(error);
+        $.showErrorModal(error);
       });
     }
   },
@@ -226,71 +222,65 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c(
-    "div",
-    [
-      _c("div", { staticClass: "row justify-content-center" }, [
-        _c("div", { staticClass: "col-md-8" }, [
-          _c(
-            "form",
-            {
-              attrs: { method: "POST", id: "agency_create_form", action: "" },
-              on: {
-                submit: function($event) {
-                  $event.preventDefault()
-                  return _vm.agencyCreateForm($event)
-                }
+  return _c("div", [
+    _c("div", { staticClass: "row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "form",
+          {
+            attrs: { method: "POST", id: "agency_create_form", action: "" },
+            on: {
+              submit: function($event) {
+                $event.preventDefault()
+                return _vm.agencyCreateForm($event)
               }
-            },
-            [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _vm._m(2),
-              _vm._v(" "),
-              _c(
-                "div",
-                { staticClass: "form-group row justify-content-center" },
-                [
-                  _c("div", { staticClass: "col-md-8" }, [
-                    _c(
-                      "button",
-                      {
-                        staticClass: "btn btn-block btn-primary",
-                        attrs: { type: "submit" }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            確認新增\n                        "
-                        )
-                      ]
-                    ),
-                    _vm._v(" "),
-                    _c(
-                      "a",
-                      {
-                        staticClass: "btn btn-block btn-danger",
-                        attrs: { href: _vm.AgenciesIndexURL }
-                      },
-                      [
-                        _vm._v(
-                          "\n                            返回列表\n                        "
-                        )
-                      ]
-                    )
-                  ])
-                ]
-              )
-            ]
-          )
-        ])
-      ]),
-      _vm._v(" "),
-      _c("loading-modal", { ref: "loadingModal" })
-    ],
-    1
-  )
+            }
+          },
+          [
+            _vm._m(0),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2),
+            _vm._v(" "),
+            _c(
+              "div",
+              { staticClass: "form-group row justify-content-center" },
+              [
+                _c("div", { staticClass: "col-md-8" }, [
+                  _c(
+                    "button",
+                    {
+                      staticClass: "btn btn-block btn-primary",
+                      attrs: { type: "submit" }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                            確認新增\r\n                        "
+                      )
+                    ]
+                  ),
+                  _vm._v(" "),
+                  _c(
+                    "a",
+                    {
+                      staticClass: "btn btn-block btn-danger",
+                      attrs: { href: _vm.AgenciesIndexURL }
+                    },
+                    [
+                      _vm._v(
+                        "\r\n                            返回列表\r\n                        "
+                      )
+                    ]
+                  )
+                ])
+              ]
+            )
+          ]
+        )
+      ])
+    ])
+  ])
 }
 var staticRenderFns = [
   function() {
@@ -302,7 +292,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "name" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("單位名稱\n                            ")
+            _vm._v("單位名稱\r\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -650,7 +640,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\agencies\create.js */"./resources/js/agencies/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\agencies\create.js */"./resources/js/agencies/create.js");
 
 
 /***/ })

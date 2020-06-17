@@ -77,7 +77,6 @@
             </form>
         </div>
     </div>
-    <loading-modal ref="loadingModal"></loading-modal>
 </div>
 </template>
 
@@ -94,12 +93,12 @@ export default {
             let url = this.AgenciesStoreURL;
             let data = $(e.target).serializeObject();
 
-            this.$refs.loadingModal.initalModal();
+            $.showLoadingModal();
             axios.post(url, data).then(response => {
-                this.$refs.loadingModal.successfulResponse('新增成功', response.data.url);
+                $.showSuccessModal('新增成功', response.data.url);
             }).catch((error) => {
                 console.error('新增單位時發生錯誤，錯誤訊息：' + error);
-                this.$refs.loadingModal.failureResponse(error);
+                $.showErrorModal(error);
             });
         }
     },

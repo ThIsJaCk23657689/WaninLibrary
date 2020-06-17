@@ -1,8 +1,9 @@
 <?php
 
 namespace App\Services;
-use App\Donor as DonorEloquent;
 
+use App\Donor as DonorEloquent;
+use Log;
 
 class DonorService extends BaseService
 {
@@ -22,6 +23,9 @@ class DonorService extends BaseService
             'content' => $request->content,
             'exposure' => $request->exposure,
         ]);
+
+        $act_user = auth('api')->user();
+        Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 新增了一筆捐贈人，編號為：' . $donor->id . '。');
         return $donor->id;
     }
 

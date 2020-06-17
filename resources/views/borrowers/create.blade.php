@@ -21,6 +21,7 @@
         <span id="BorrowersIndexURL" class="d-none">{{ route('borrowers.index') }}</span>
         <span id="BorrowersStoreURL" class="d-none">{{ route('borrowers.store') }}</span>
         <span id="AgenciesListURL" class="d-none">{{ route('agencies.getList') }}</span>
+        <span id="AgenciesStoreURL" class="d-none">{{ route('agencies.store') }}</span>
 
         <borrower-create-form></borrower-create-form>
     </div>

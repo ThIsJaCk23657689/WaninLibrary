@@ -80,6 +80,9 @@ class User extends Authenticatable implements JWTSubject
     }
 
     public function showStatus(){
+        if($this->id == 1){
+            return '最高管理者';
+        }
         return ($this->status)? '一般使用者' : '管理者' ;
     }
 

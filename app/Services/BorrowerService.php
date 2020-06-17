@@ -5,6 +5,7 @@ namespace App\Services;
 use Illuminate\Http\Request;
 use App\Borrower as BorrowerEloquent;
 use Carbon\Carbon;
+use Log;
 
 class BorrowerService extends BaseService
 {
@@ -28,6 +29,10 @@ class BorrowerService extends BaseService
             'content' => $request->content,
             'count' => $request->count ?? 0,
         ]);
+
+        $act_user = auth('api')->user();
+        Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 新增了一筆借閱人，編號為：' . $borrower->id . '。');
+
         return $borrower->id;
     }
 
@@ -134,8 +139,8 @@ class BorrowerService extends BaseService
 
     public function update($request, $id)
     {
-        $borrowers = $this->getOne($id);
-        $borrowers->update([
+        $borrower = $this->getOne($id);
+        $borrower->update([
             'agency_id' => $request->agency_id,
 
             'name' => $request->name,
@@ -154,13 +159,19 @@ class BorrowerService extends BaseService
             'count' => $request->count ?? 0,
         ]);
 
-        return $borrowers->id;
+        $act_user = auth('api')->user();
+        Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 修改了一筆借閱人，編號為：' . $borrower->id . '。');
+
+        return $borrower->id;
     }
 
     public function delete($id)
     {
-        $borrowers = $this->getOne($id);
-        $borrowers->delete();
+        $borrower = $this->getOne($id);
+        $borrower->delete();
+
+        $act_user = auth('api')->user();
+        Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 刪除了一筆借閱人，編號為：' . $borrower->id . '。');
     }
 
     public function activated($request)

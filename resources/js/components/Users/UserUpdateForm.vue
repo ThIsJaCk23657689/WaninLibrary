@@ -44,13 +44,13 @@
                             <label>地址</label>
                             <div class="row mb-2">
                                 <div class="col-md-4">
-                                    <div data-role="county" data-style="form-control" data-name="address_county" data-value=""></div>
+                                    <div data-role="county" data-style="form-control" data-name="address_county" :data-value="user.address_county"></div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div data-role="district" data-style="form-control" data-name="address_district" data-value=""></div>
+                                    <div data-role="district" data-style="form-control" data-name="address_district" :data-value="user.address_district"></div>
                                 </div>
                                 <div class="col-md-4">
-                                    <div data-role="zipcode" data-style="form-control" data-name="address_zipcode" data-value=""></div>
+                                    <div data-role="zipcode" data-style="form-control" data-name="address_zipcode" :data-value="user.address_zipcode"></div>
                                 </div>
                             </div>
                             <div class="row">
@@ -103,6 +103,7 @@ export default {
             let url = this.UsersUpdateURL;
             let data = $(e.target).serializeObject();
 
+            $.showLoadingModal();
             axios.patch(url, data).then(response => {
                 $.showSuccessModal('編輯成功', response.data.url);
             }).catch((error) => {
@@ -115,10 +116,7 @@ export default {
         
     },
     mounted(){
-        // 地址
-        $('#address_twzipcode').twzipcode({
-            'readonly': false
-        });
+        
     }
 }
 </script>

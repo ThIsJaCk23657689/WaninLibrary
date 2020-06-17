@@ -43,19 +43,22 @@
                         </div>
                     </div>
 
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <div class="form-group">
                             <label for="agency_id">隸屬單位</label>
-                            <select id="agency_id" name="agency_id" class="form-control">
-                                <option value="0">請選擇...</option>
-                            </select>
-                        </div>
-                    </div>
-
-                    <div class="col-md-4">
-                        <div class="form-group">
-                            <label for="job_title">職稱</label>
-                            <input id="job_title" name="job_title" type="text" class="form-control mb-2" value="" autocomplete="off">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <select id="agency_id" name="agency_id" class="form-control">
+                                        <option value="0">請選擇...</option>
+                                    </select>
+                                </div>
+                                <div class="col-md-6">
+                                    <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#CreateAgencyModal">
+                                        <i class="fas fa-plus mr-2"></i>
+                                        新增隸屬單位
+                                    </button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -76,7 +79,7 @@
                 </div>
 
                 <div class="row">
-                    <div class="col-md-12">
+                    <div class="col-md-8">
                         <div id="address_twzipcode" class="form-group">
                             <label>地址</label>
                             <div class="row mb-2">
@@ -97,6 +100,12 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="job_title">職稱</label>
+                            <input id="job_title" name="job_title" type="text" class="form-control mb-2" value="" autocomplete="off">
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group row justify-content-center">
@@ -113,6 +122,7 @@
             </form>
         </div>
     </div>
+    <create-angcey-modal @refresh-agency="refreshAgency"></create-angcey-modal>
 </div>
 </template>
 
@@ -136,18 +146,24 @@ export default {
                 console.error('新增借閱人時發生錯誤，錯誤訊息：' + error);
                 $.showErrorModal(error);
             });
+        },
+        generateAgenciesOption(){
+            // 生成 機構 下拉式選單
+            let AgenciesListURL = $('#AgenciesListURL').html();
+            axios.get(AgenciesListURL).then(response => {
+                this.agencies = response.data.agencies;
+                for(let i = 0; i < this.agencies.length; i++){
+                    $("#agency_id").append($("<option></option>").attr("value", this.agencies[i].id).text(this.agencies[i].name));
+                }
+                $('#agency_id').selectpicker('refresh');
+            });
+        },
+        refreshAgency(){
+            this.generateAgenciesOption();
         }
     },
     created() {
-        // 生成 機構 下拉式選單
-        let AgenciesListURL = $('#AgenciesListURL').html();
-        axios.get(AgenciesListURL).then(response => {
-            this.agencies = response.data.agencies;
-            for(let i = 0; i < this.agencies.length; i++){
-                $("#agency_id").append($("<option></option>").attr("value", this.agencies[i].id).text(this.agencies[i].name));
-            }
-            $('#agency_id').selectpicker('refresh');
-        });
+        this.generateAgenciesOption();
     },
     mounted(){
         // 地址

@@ -27,7 +27,7 @@
                             <label for="is_top">是否置頂</label>
                             <select name="is_top" id="is_top" class="form-control">
                                 <option value="1">置頂</option>
-                                <option value="0">不置頂</option>
+                                <option value="0" selected>不置頂</option>
                             </select>
                         </div>
                     </div>
@@ -35,7 +35,7 @@
 
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <upload-images ref="uploadCoverImages" :title="'上傳封面圖片'" :aspect-ratio="1/1" :prefix="'activity'"></upload-images>
+                        <upload-images ref="uploadCoverImages" :title="'上傳封面圖片'"  :prefix="'activity'"></upload-images>
                     </div>
                 </div>
 

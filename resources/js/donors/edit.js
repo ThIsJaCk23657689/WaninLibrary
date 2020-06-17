@@ -17,7 +17,6 @@ const app = new Vue({
 
             // 地址
             $('#address_twzipcode').twzipcode({
-                // 'zipcodeSel': response.data.donor.address_zipcode,
                 'readonly': false,
                 'zipcodeSel': response.data.donor.address_zipcode,
                 'county': response.data.donor.address_county,

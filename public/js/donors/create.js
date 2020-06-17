@@ -228,42 +228,12 @@ __webpack_require__.r(__webpack_exports__);
       e.preventDefault();
       var url = $(this).attr('action');
       var data = $(this).serializeObject();
-      $('#modal_good').css({
-        'display': 'none'
-      });
-      $('#modal_error').css({
-        'display': 'none'
-      });
-      $('#modal_spinner').slideDown();
-      $('#modal_msg').html('請稍等...');
-      $('#modal_link').slideUp();
-      $('#modal_close').slideUp();
-      $('#LoadingModal').modal('show');
+      $.showLoadingModal();
       axios.post(url, data).then(function (response) {
-        $('#modal_good').css({
-          'display': 'flex'
-        });
-        $('#modal_spinner').css({
-          'display': 'none'
-        });
-        $('#modal_msg').html('新增成功');
-        $('#modal_link').attr('href', response.data.url);
-        $('#modal_link').slideDown();
+        $.showSuccessModal('新增成功', response.data.url);
       })["catch"](function (error) {
         console.error('新增捐贈人時發生錯誤，錯誤訊息：' + error);
-        $('#modal_error').css({
-          'display': 'flex'
-        });
-        $('#modal_spinner').css({
-          'display': 'none'
-        });
-        $('#modal_msg').html('發生錯誤<br>錯誤訊息：' + error + '<br>');
-        $('#modal_close').slideDown();
-        var $key = Object.keys(error.response.data.errors);
-        $key.forEach(function (item, index) {
-          $('#modal_msg').append(error.response.data.errors[item] + '<br>');
-          $('#' + item).addClass('is-invalid');
-        });
+        $.showErrorModal(error);
       });
     });
   }
@@ -314,7 +284,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                        確認新增\n                    "
+                    "\r\n                        確認新增\r\n                    "
                   )
                 ]
               ),
@@ -327,7 +297,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\n                        返回列表\n                    "
+                    "\r\n                        返回列表\r\n                    "
                   )
                 ]
               )
@@ -348,7 +318,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "name" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("名稱\n                        ")
+            _vm._v("名稱\r\n                        ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -428,7 +398,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "exposure" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("曝光程度\n                        ")
+            _vm._v("曝光程度\r\n                        ")
           ]),
           _vm._v(" "),
           _c(
@@ -753,7 +723,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\donors\create.js */"./resources/js/donors/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\donors\create.js */"./resources/js/donors/create.js");
 
 
 /***/ })

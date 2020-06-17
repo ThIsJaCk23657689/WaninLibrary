@@ -141,31 +141,12 @@ export default {
             let url = $(this).attr('action');
             let data = $(this).serializeObject();
 
-            $('#modal_good').css({'display':'none'});
-            $('#modal_error').css({'display':'none'});
-            $('#modal_spinner').slideDown();
-            $('#modal_msg').html('請稍等...');
-            $('#modal_link').slideUp();
-            $('#modal_close').slideUp();
-            $('#LoadingModal').modal('show');
+            $.showLoadingModal();
             axios.post(url, data).then(response => {
-                $('#modal_good').css({'display':'flex'});
-                $('#modal_spinner').css({'display':'none'});
-                $('#modal_msg').html('新增成功');
-                $('#modal_link').attr('href', response.data.url);
-                $('#modal_link').slideDown();
+                $.showSuccessModal('新增成功', response.data.url);
             }).catch((error) => {
                 console.error('新增捐贈人時發生錯誤，錯誤訊息：' + error);
-                $('#modal_error').css({'display':'flex'});
-                $('#modal_spinner').css({'display':'none'});
-                $('#modal_msg').html('發生錯誤<br>錯誤訊息：' + error + '<br>');
-                $('#modal_close').slideDown();
-
-                let $key = Object.keys(error.response.data.errors);
-                $key.forEach(function(item, index){
-                    $('#modal_msg').append(error.response.data.errors[item]+ '<br>');
-                    $('#' + item).addClass('is-invalid');
-                });
+                $.showErrorModal(error);
             });
         });
     },

@@ -34,7 +34,7 @@
                     <a class="nav-link active" id="a_actived" href="#"><i class="fas fa-table mr-2" id="i_actived"></i>員工名單</a>
                 </li>
                 <li class="nav-item" id="nav_block">
-                    <a class="nav-link" href="#" id="a_block"><i class="fas fa-user-slash mr-2" id="i_block" style="display:none;"></i>封鎖員工名單</a>
+                    <a class="nav-link" href="#" id="a_block"><i class="fas fa-user-slash mr-2" id="i_block" style="display:none;"></i>停權員工名單</a>
                 </li>
             </ul>
 		</div>
@@ -73,13 +73,24 @@
                                         @if($user->id != 1 && $user->id != auth('api')->id())
                                                 <a href="#" class="btn btn-md btn-danger" onclick="
                                                     event.preventDefault();
-                                                    ans = confirm('確定要封鎖此帳號嗎?');
-                                                    if(ans){
-                                                        $('#deleteform-{{ $user->id }}').submit();
-                                                    }
+                                                    
+                                                    Swal.fire({
+                                                        title: '注意！',
+                                                        text: '您確定要停權此帳號嗎？',
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#3085d6',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: '確認',
+                                                        cancelButtonText: '取消',
+                                                    }).then((result) => {
+                                                        if (result.value) {
+                                                            $('#deleteform-{{ $user->id }}').submit();
+                                                        }
+                                                    });
                                                 ">
                                                     <i class="fas fa-user-slash"></i>
-                                                    封鎖
+                                                    停權
                                                 </a>
                                             <form id="deleteform-{{ $user->id }}" action="{{ route('users.destroy', [$user->id]) }}" method="POST" style="displat: none;">
                                                 @csrf
@@ -93,7 +104,7 @@
                     </table>
                 </div>
             </div>
-            {{-- 封鎖名單 --}}
+            {{-- 停權名單 --}}
             <div id="div_block" style="display: none">
                 @if ($users_block->count() == 0)
                            目前無資料
@@ -131,20 +142,40 @@
                                                 @if($user->trashed())
                                                     <a href="#" class="btn btn-md btn-light" onclick="
                                                         event.preventDefault();
-                                                        ans = confirm('確定要解鎖此帳號嗎?');
-                                                        if(ans){
-                                                            $('#deleteform-{{ $user->id }}').submit();
-                                                        }
+                                                        Swal.fire({
+                                                            title: '注意！',
+                                                            text: '您確定要解鎖此帳號嗎？',
+                                                            icon: 'warning',
+                                                            showCancelButton: true,
+                                                            confirmButtonColor: '#3085d6',
+                                                            cancelButtonColor: '#d33',
+                                                            confirmButtonText: '確認',
+                                                            cancelButtonText: '取消',
+                                                        }).then((result) => {
+                                                            if (result.value) {
+                                                                $('#deleteform-{{ $user->id }}').submit();
+                                                            }
+                                                        });
                                                     ">
                                                         <i class="fas fa-unlock"></i>
                                                         解鎖
                                                     </a>
                                                     <a href="#" class="btn btn-md btn-danger" onclick="
                                                         event.preventDefault();
-                                                        ans = confirm('確定要移除此帳號嗎?');
-                                                        if(ans){
-                                                            $('#forcedeleteform-{{ $user->id }}').submit();
-                                                        }
+                                                        Swal.fire({
+                                                            title: '注意！',
+                                                            text: '您確定要移除此帳號嗎？(不可再復原！)',
+                                                            icon: 'warning',
+                                                            showCancelButton: true,
+                                                            confirmButtonColor: '#3085d6',
+                                                            cancelButtonColor: '#d33',
+                                                            confirmButtonText: '確認',
+                                                            cancelButtonText: '取消',
+                                                        }).then((result) => {
+                                                            if (result.value) {
+                                                                $('#forcedeleteform-{{ $user->id }}').submit();
+                                                            }
+                                                        });
                                                     ">
                                                         <i class="fas fa-trash-alt"></i>
                                                         移除

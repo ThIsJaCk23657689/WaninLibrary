@@ -198,6 +198,7 @@ __webpack_require__.r(__webpack_exports__);
     userUpdateForm: function userUpdateForm(e) {
       var url = this.UsersUpdateURL;
       var data = $(e.target).serializeObject();
+      $.showLoadingModal();
       axios.patch(url, data).then(function (response) {
         $.showSuccessModal('編輯成功', response.data.url);
       })["catch"](function (error) {
@@ -207,12 +208,7 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   created: function created() {},
-  mounted: function mounted() {
-    // 地址
-    $('#address_twzipcode').twzipcode({
-      'readonly': false
-    });
-  }
+  mounted: function mounted() {}
 });
 
 /***/ }),
@@ -357,7 +353,40 @@ var render = function() {
                     [
                       _c("label", [_vm._v("地址")]),
                       _vm._v(" "),
-                      _vm._m(2),
+                      _c("div", { staticClass: "row mb-2" }, [
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _c("div", {
+                            attrs: {
+                              "data-role": "county",
+                              "data-style": "form-control",
+                              "data-name": "address_county",
+                              "data-value": _vm.user.address_county
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _c("div", {
+                            attrs: {
+                              "data-role": "district",
+                              "data-style": "form-control",
+                              "data-name": "address_district",
+                              "data-value": _vm.user.address_district
+                            }
+                          })
+                        ]),
+                        _vm._v(" "),
+                        _c("div", { staticClass: "col-md-4" }, [
+                          _c("div", {
+                            attrs: {
+                              "data-role": "zipcode",
+                              "data-style": "form-control",
+                              "data-name": "address_zipcode",
+                              "data-value": _vm.user.address_zipcode
+                            }
+                          })
+                        ])
+                      ]),
                       _vm._v(" "),
                       _c("div", { staticClass: "row" }, [
                         _c("div", { staticClass: "col-md-12" }, [
@@ -494,45 +523,6 @@ var staticRenderFns = [
     return _c("label", { attrs: { for: "email" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
       _vm._v("信箱")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mb-2" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", {
-          attrs: {
-            "data-role": "county",
-            "data-style": "form-control",
-            "data-name": "address_county",
-            "data-value": ""
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", {
-          attrs: {
-            "data-role": "district",
-            "data-style": "form-control",
-            "data-name": "address_district",
-            "data-value": ""
-          }
-        })
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", {
-          attrs: {
-            "data-role": "zipcode",
-            "data-style": "form-control",
-            "data-name": "address_zipcode",
-            "data-value": ""
-          }
-        })
-      ])
     ])
   }
 ]
@@ -737,13 +727,19 @@ var app = new Vue({
   created: function created() {
     var _this = this;
 
+    $.showLoadingModal();
     var UsersGetOneURL = $('#UsersGetOneURL').html();
     axios.get(UsersGetOneURL).then(function (response) {
       _this.user = response.data.user; // 地址
 
       $('#address_twzipcode').twzipcode({
-        'zipcodeSel': response.data.user.address_zipcode
+        'readonly': false,
+        'zipcodeSel': _this.user.address_zipcode,
+        'county': _this.user.address_county,
+        'district': _this.user.address_district,
+        'zipcode': _this.user.address_zipcode
       });
+      $.closeModal();
     });
   },
   mounted: function mounted() {}
@@ -758,7 +754,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\users\edit.js */"./resources/js/users/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\users\edit.js */"./resources/js/users/edit.js");
 
 
 /***/ })

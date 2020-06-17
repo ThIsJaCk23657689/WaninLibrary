@@ -12,10 +12,10 @@ const app = new Vue({
     },
     created() {
         let BorrowersGetOneURL = $('#BorrowersGetOneURL').html();
+        $.showLoadingModal();
         axios.get(BorrowersGetOneURL).then(response => {
             this.borrower = response.data.borrower;
             // 地址
-            // console.log((response.data.borrower));
             $('#address_twzipcode').twzipcode({
                 'readonly': false,
                 'zipcodeSel': response.data.borrower.address_zipcode,
@@ -23,6 +23,7 @@ const app = new Vue({
                 'district': response.data.borrower.address_district,
                 'zipcode': response.data.borrower.address_zipcode
             });
+            $.closeModal();
         });
 
         // 生成 機構 下拉式選單
