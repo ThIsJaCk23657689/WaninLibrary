@@ -16,9 +16,6 @@
                         <button type="submit" class="btn btn-block btn-success">
                             確認修改
                         </button>
-                        <a :href="InformationIndexURL" class="btn btn-block btn-danger">
-                            取消編輯
-                        </a>
                     </div>
                 </div>
 

@@ -122,9 +122,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['information'],
   data: function data() {
@@ -345,46 +342,36 @@ var render = function() {
               )
             ]),
             _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "form-group row justify-content-center" },
-              [
-                _c("div", { staticClass: "col-md-8" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-block btn-success",
-                      attrs: { type: "submit" }
-                    },
-                    [
-                      _vm._v(
-                        "\n                            確認修改\n                        "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-block btn-danger",
-                      attrs: { href: _vm.InformationIndexURL }
-                    },
-                    [
-                      _vm._v(
-                        "\n                            取消編輯\n                        "
-                      )
-                    ]
-                  )
-                ])
-              ]
-            )
+            _vm._m(0)
           ]
         )
       ])
     ])
   ])
 }
-var staticRenderFns = []
+var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-block btn-success",
+            attrs: { type: "submit" }
+          },
+          [
+            _vm._v(
+              "\n                            確認修改\n                        "
+            )
+          ]
+        )
+      ])
+    ])
+  }
+]
 render._withStripped = true
 
 
