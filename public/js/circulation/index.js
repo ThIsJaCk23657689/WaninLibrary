@@ -264,7 +264,7 @@ __webpack_require__.r(__webpack_exports__);
         }).then(function (response) {
           if (response.data.book == null || response.data.book == []) {
             $(e.target).addClass('is-invalid');
-            $('#barcode_error').html('<strong>查無此書本，請檢查條碼是否有誤。</strong>');
+            $('#barcode_error').html('<strong>查無此書籍，請檢查條碼是否有誤。</strong>');
             _this.book = [];
           } else {
             _this.book = response.data.book;
@@ -285,7 +285,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       } else {
         $(e.target).addClass('is-invalid');
-        $('#barcode_error').html('<strong>請輸入正確格式的書本條碼。</strong>');
+        $('#barcode_error').html('<strong>請輸入正確格式的書籍條碼。</strong>');
       }
     },
     // 更新頁碼
@@ -861,7 +861,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                            確認\r\n                        "
+                        "\n                            確認\n                        "
                       )
                     ]
                   ),
@@ -874,7 +874,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                            取消\r\n                        "
+                        "\n                            取消\n                        "
                       )
                     ]
                   )
@@ -895,7 +895,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row", attrs: { id: "step1" } }, [
       _c("div", { staticClass: "col-md-12 mb-2" }, [
-        _c("h4", [_vm._v("1. 請掃描書本條碼或自行輸入書本條碼號")])
+        _c("h4", [_vm._v("1. 請掃描書籍條碼或自行輸入書籍條碼號")])
       ])
     ])
   },
@@ -905,7 +905,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "barcode" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("書本條碼\r\n                            ")
+      _vm._v("書籍條碼\n                            ")
     ])
   },
   function() {

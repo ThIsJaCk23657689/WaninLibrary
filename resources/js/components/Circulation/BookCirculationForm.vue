@@ -3,18 +3,18 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <form method="POST" id="circulation_index_form" action="#" @submit.prevent="circulationIndexForm">
-                
+
                 <div id="step1" class="row">
                     <div class="col-md-12 mb-2">
-                        <h4>1. 請掃描書本條碼或自行輸入書本條碼號</h4>
+                        <h4>1. 請掃描書籍條碼或自行輸入書籍條碼號</h4>
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="barcode">
-                                <span class="text-danger mr-2">*</span>書本條碼
+                                <span class="text-danger mr-2">*</span>書籍條碼
                             </label>
                             <input id="barcode" name="barcode" type="text" class="form-control mb-2" value="" required autocomplete="off" autofocus @change="getBookDataByBarcode">
                             <span id="barcode_error" class="invalid-feedback" role="alert"></span>
@@ -153,7 +153,7 @@ export default {
             currentBorrower: []
         }
     },
-    methods: { 
+    methods: {
         // 透過條碼尋找書籍
         getBookDataByBarcode(e) {
             $(e.target).removeClass('is-invalid');
@@ -168,7 +168,7 @@ export default {
                 }).then(response => {
                     if(response.data.book == null || response.data.book == []){
                         $(e.target).addClass('is-invalid');
-                        $('#barcode_error').html('<strong>查無此書本，請檢查條碼是否有誤。</strong>');
+                        $('#barcode_error').html('<strong>查無此書籍，請檢查條碼是否有誤。</strong>');
                         this.book = [];
                     }else{
                         this.book = response.data.book;
@@ -189,7 +189,7 @@ export default {
                 });
             }else{
                 $(e.target).addClass('is-invalid');
-                $('#barcode_error').html('<strong>請輸入正確格式的書本條碼。</strong>');
+                $('#barcode_error').html('<strong>請輸入正確格式的書籍條碼。</strong>');
             }
         },
 
@@ -233,7 +233,7 @@ export default {
         },
     },
     created(){
-        
+
     },
     mounted(){
         // 生日
@@ -256,7 +256,7 @@ export default {
                         return data ? data : '無' ;
                     }
                 },
-                { 
+                {
                     data: 'getOneUrl',
                     render: function(data, type, full){
                         return '<button type="button" class="btn btn-info btn-select">選擇</button><span class="d-none">' + data + '</span>';

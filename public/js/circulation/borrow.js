@@ -344,7 +344,7 @@ __webpack_require__.r(__webpack_exports__);
         return false;
       }
 
-      $.showLoadingModal('抓取書本資料中');
+      $.showLoadingModal('抓取書籍資料中');
       axios.get(url, {
         params: {
           barcode: $barcode
@@ -353,9 +353,9 @@ __webpack_require__.r(__webpack_exports__);
         var $book = response.data.book;
 
         if (!$book) {
-          $.showErrorModalWithoutError('發生錯誤，無法找尋書本。');
+          $.showErrorModalWithoutError('發生錯誤，無法找尋書籍。');
         } else {
-          // 先判斷是否有重複加入書本
+          // 先判斷是否有重複加入書籍
           var isRepeated = false;
 
           _this3.currentBooks.forEach(function (book) {
@@ -366,12 +366,12 @@ __webpack_require__.r(__webpack_exports__);
 
 
           if ($book.status != 1) {
-            $.showWarningModal('此書本狀態為：' + $book.showStatus + '，所以無法進行借閱！');
+            $.showWarningModal('此書籍狀態為：' + $book.showStatus + '，所以無法進行借閱！');
             return false;
           }
 
           if (isRepeated) {
-            $.showWarningModal('此書本已經加入借閱清單中了！');
+            $.showWarningModal('此書籍已經加入借閱清單中了！');
           } else {
             var $today = new Date();
 
@@ -386,7 +386,7 @@ __webpack_require__.r(__webpack_exports__);
           }
         }
       })["catch"](function (error) {
-        console.error('抓取書本資料時發生錯誤，錯誤訊息：' + error);
+        console.error('抓取書籍資料時發生錯誤，錯誤訊息：' + error);
 
         if (error.response.data.errors) {
           $('#barcode_error').html('<span>' + error.response.data.errors.barcode[0] + '</span>');
@@ -664,7 +664,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#borrowList tbody tr:nth-child(even){\r\n    background-color: #eee;\n}\r\n", ""]);
+exports.push([module.i, "\n#borrowList tbody tr:nth-child(even){\n    background-color: #eee;\n}\n", ""]);
 
 // exports
 
@@ -1476,7 +1476,7 @@ var render = function() {
                       [
                         _c("i", { staticClass: "fas fa-undo-alt mr-2" }),
                         _vm._v(
-                          "\r\n                                重新選擇借閱人\r\n                            "
+                          "\n                                重新選擇借閱人\n                            "
                         )
                       ]
                     )
@@ -1495,7 +1495,7 @@ var render = function() {
               _vm._v(" "),
               _c("div", { staticClass: "row" }, [
                 _c("div", { staticClass: "col-md-12 mb-2" }, [
-                  _c("h4", [_vm._v("2. 請掃描書本條碼。")]),
+                  _c("h4", [_vm._v("2. 請掃描書籍條碼。")]),
                   _vm._v(" "),
                   _c("small", [
                     _vm._v(
@@ -1511,7 +1511,7 @@ var render = function() {
                 _c("div", { staticClass: "col-md-6" }, [
                   _c("div", { staticClass: "form-group" }, [
                     _c("label", { attrs: { for: "barcode" } }, [
-                      _vm._v("書本條碼")
+                      _vm._v("書籍條碼")
                     ]),
                     _vm._v(" "),
                     _c("input", {
@@ -1679,7 +1679,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-block btn-primary", attrs: { type: "submit" } },
-        [_vm._v("\r\n                        確認\r\n                    ")]
+        [_vm._v("\n                        確認\n                    ")]
       )
     ])
   }

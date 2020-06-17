@@ -57,7 +57,7 @@
 
                 <div class="row">
                     <div class="col-md-12 mb-2">
-                        <h4>2. 請掃描書本條碼。</h4>
+                        <h4>2. 請掃描書籍條碼。</h4>
                         <small>每人最多只能借閱5本書，目前還只能再借{{ borrowCounts - notReturnCounts }}本</small>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                 <div class="row mb-2">
                     <div class="col-md-6">
                         <div class="form-group">
-                            <label for="barcode">書本條碼</label>
+                            <label for="barcode">書籍條碼</label>
                             <input id="barcode" name="barcode" type="text" class="form-control" value="" required autocomplete="off" v-model="barcodeText" @keyup.enter="addBook">
                             <span id="barcode_error" class="invalid-feedback" role="alert">
                                 <strong></strong>
@@ -166,7 +166,7 @@ export default {
                 this.borrowers = response.data.borrowers;
                 this.totalCount = response.data.count;
                 this.totalPage = Math.ceil(this.totalCount / this.countPerPage);
-                
+
                 $.closeModal();
             }).catch(error => {
                 console.error('抓取借閱人列表時發生錯誤，錯誤訊息：' + error);
@@ -252,7 +252,7 @@ export default {
                 return false;
             }
 
-            $.showLoadingModal('抓取書本資料中');
+            $.showLoadingModal('抓取書籍資料中');
             axios.get(url, {
                 params: {
                     barcode: $barcode
@@ -260,9 +260,9 @@ export default {
             }).then(response => {
                 let $book = response.data.book;
                 if(!$book){
-                    $.showErrorModalWithoutError('發生錯誤，無法找尋書本。');
+                    $.showErrorModalWithoutError('發生錯誤，無法找尋書籍。');
                 }else{
-                    // 先判斷是否有重複加入書本
+                    // 先判斷是否有重複加入書籍
                     let isRepeated = false;
                     this.currentBooks.forEach(book => {
                         if(book.barcode == $book.barcode){
@@ -272,12 +272,12 @@ export default {
 
                     // 再判斷此書狀態是否可以出借。
                     if($book.status != 1){
-                        $.showWarningModal('此書本狀態為：' + $book.showStatus + '，所以無法進行借閱！');
+                        $.showWarningModal('此書籍狀態為：' + $book.showStatus + '，所以無法進行借閱！');
                         return false;
                     }
 
                     if(isRepeated){
-                        $.showWarningModal('此書本已經加入借閱清單中了！');
+                        $.showWarningModal('此書籍已經加入借閱清單中了！');
                     }else{
                         let $today = new Date();
                         this.currentBooks.push({
@@ -290,7 +290,7 @@ export default {
                     }
                 }
             }).catch(error => {
-                console.error('抓取書本資料時發生錯誤，錯誤訊息：' + error);
+                console.error('抓取書籍資料時發生錯誤，錯誤訊息：' + error);
                 if(error.response.data.errors){
                     $('#barcode_error').html('<span>' + error.response.data.errors.barcode[0] + '</span>');
                 }
