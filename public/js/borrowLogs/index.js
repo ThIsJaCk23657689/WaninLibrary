@@ -404,7 +404,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table mr-2" }),
-      _vm._v("借還書紀錄\r\n        ")
+      _vm._v("借還書紀錄\n        ")
     ])
   },
   function() {
@@ -471,7 +471,7 @@ var staticRenderFns = [
         { staticClass: "btn btn-block btn-primary", attrs: { type: "submit" } },
         [
           _vm._v(
-            "\r\n                                    確認\r\n                                "
+            "\n                                    確認\n                                "
           )
         ]
       )
@@ -497,7 +497,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("th", [_vm._v("書名")]),
               _vm._v(" "),
-              _c("th", [_vm._v("索書號")]),
+              _c("th", [_vm._v("圖書類別")]),
               _vm._v(" "),
               _c("th", [_vm._v("狀態")]),
               _vm._v(" "),

@@ -60,7 +60,7 @@ class BorrowLog extends Model
         $callNum = $this->callnum;
         $category = [
             '000 總類', '100 哲學類', '200 宗教類', '300 科學類', '400 應用科學類', '500 社會學類',
-            '600 史地類', '710 世界史地類', '800 語文文學類', '900 藝術類', '其他'
+            '600 史地類', '610 中國史地類', '710 世界史地類', '800 語文文學類', '900 藝術類', '其他'
         ];
 
         if(strlen($callNum) >= 3){
@@ -71,16 +71,16 @@ class BorrowLog extends Model
                 // 第六類到第七類，必須還要再看第二碼。
                 if($callNum[0] == 6){
                     if($callNum[1] == 0){
-                        return $category[$callNum[6]];
+                        return $category[$callNum[0]];
                     }else{
-                        return $category[$callNum[7]];
+                        return $category[$callNum[0]];
                     }
                 }else{
                     if($callNum[0] == 7){
                         if($callNum[1] == 0){
-                            return $category[$callNum[7]];
+                            return $category[$callNum[0]];
                         }else{
-                            return $category[$callNum[8]];
+                            return $category[$callNum[0]];
                         }
                     }else{
                         return $category[$callNum[0] + 1];
