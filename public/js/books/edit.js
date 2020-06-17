@@ -543,7 +543,7 @@ __webpack_require__.r(__webpack_exports__);
       BooksUpdateURL: $('#BooksUpdateURL').html(),
       DonorsNameURL: $('#DonorsNameURL').html(),
       BooksCoverImageURL: $('#BooksCoverImageURL').html(),
-      title: '書本圖片',
+      title: '書籍圖片',
       category_options: [{
         id: null,
         text: '請選擇...'
@@ -595,13 +595,13 @@ __webpack_require__.r(__webpack_exports__);
         text: '請選擇...'
       }, {
         id: 1,
-        text: '在庫'
+        text: '可借閱'
       }, {
         id: 2,
-        text: '借出'
+        text: '借閱中'
       }, {
         id: 3,
-        text: '逾期'
+        text: '逾期中'
       }, {
         id: 4,
         text: '庫藏待上架'
@@ -613,7 +613,7 @@ __webpack_require__.r(__webpack_exports__);
         text: '已轉贈'
       }, {
         id: 7,
-        text: '待索取'
+        text: '可供免費索取'
       }, {
         id: 8,
         text: '已被索取'
@@ -670,11 +670,11 @@ __webpack_require__.r(__webpack_exports__);
       } else {
         console.log('ccc');
         this.$emit('update-add-type', 2); // this.addType = 2;
-        // 購買入庫 - 一般圖書
+        // 採購入庫 - 一般圖書
 
         $('.donor_div').fadeOut();
         $('.price_div').fadeIn();
-        $('#price').val(0); // 購買入庫 - 論文雜誌
+        $('#price').val(0); // 採購入庫 - 論文雜誌
       }
     },
     updateCategory: function updateCategory(e) {
@@ -728,7 +728,7 @@ __webpack_require__.r(__webpack_exports__);
         // this.$refs.uploadBookImages.stopCropper();
         $.showSuccessModal('修改成功', response.data.url, '檢視書籍');
       })["catch"](function (error) {
-        console.error('修改書本時發生錯誤，錯誤訊息：' + error);
+        console.error('修改書籍時發生錯誤，錯誤訊息：' + error);
         $.showErrorModal(error);
       });
     }
@@ -1000,7 +1000,7 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "2" } }, [
-                                  _vm._v("購買入庫")
+                                  _vm._v("採購入庫")
                                 ])
                               ]
                             )
@@ -1023,7 +1023,9 @@ var render = function() {
                                 [
                                   _c("select-donor-custom", {
                                     ref: "DonorsOption",
-                                    attrs: { placeholder: "請輸入捐贈人名稱" },
+                                    attrs: {
+                                      placeholder: "請輸入捐贈人(單位)名稱"
+                                    },
                                     on: {
                                       search: _vm.onSearch,
                                       "update-value": _vm.updateValue
@@ -1123,7 +1125,7 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "2" } }, [
-                                  _vm._v("購買入庫")
+                                  _vm._v("採購入庫")
                                 ])
                               ]
                             )
@@ -1174,7 +1176,9 @@ var render = function() {
                               [
                                 _c("select-donor-custom", {
                                   ref: "DonorsOption",
-                                  attrs: { placeholder: "請輸入捐贈人名稱" },
+                                  attrs: {
+                                    placeholder: "請輸入捐贈人(單位)名稱"
+                                  },
                                   on: {
                                     search: _vm.onSearch,
                                     "update-value": _vm.updateValue
@@ -1788,7 +1792,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            確認修改\r\n                        "
+                            "\n                            確認修改\n                        "
                           )
                         ]
                       ),
@@ -1801,7 +1805,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            返回列表\r\n                        "
+                            "\n                            返回列表\n                        "
                           )
                         ]
                       )
@@ -1852,7 +1856,7 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "2" } }, [
-                                  _vm._v("購買入庫")
+                                  _vm._v("採購入庫")
                                 ])
                               ]
                             )
@@ -1875,7 +1879,9 @@ var render = function() {
                                 [
                                   _c("select-donor-custom", {
                                     ref: "DonorsOption",
-                                    attrs: { placeholder: "請輸入捐贈人名稱" },
+                                    attrs: {
+                                      placeholder: "請輸入捐贈人(單位)名稱"
+                                    },
                                     on: {
                                       search: _vm.onSearch,
                                       "update-value": _vm.updateValue
@@ -1975,7 +1981,7 @@ var render = function() {
                                 ]),
                                 _vm._v(" "),
                                 _c("option", { attrs: { value: "2" } }, [
-                                  _vm._v("購買入庫")
+                                  _vm._v("採購入庫")
                                 ])
                               ]
                             )
@@ -2026,7 +2032,9 @@ var render = function() {
                               [
                                 _c("select-donor-custom", {
                                   ref: "DonorsOption",
-                                  attrs: { placeholder: "請輸入捐贈人名稱" },
+                                  attrs: {
+                                    placeholder: "請輸入捐贈人(單位)名稱名稱"
+                                  },
                                   on: {
                                     search: _vm.onSearch,
                                     "update-value": _vm.updateValue
@@ -2565,7 +2573,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            確認修改\r\n                        "
+                            "\n                            確認修改\n                        "
                           )
                         ]
                       ),
@@ -2578,7 +2586,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            返回列表\r\n                        "
+                            "\n                            返回列表\n                        "
                           )
                         ]
                       )
@@ -2598,7 +2606,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人")
+      _vm._v("捐贈人(單位)名稱")
     ])
   },
   function() {
@@ -2623,7 +2631,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人")
+      _vm._v("捐贈人(單位)名稱")
     ])
   },
   function() {
@@ -2648,7 +2656,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "title" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("書名（主標題）\r\n                                    ")
+      _vm._v("書名（主標題）\n                                    ")
     ])
   },
   function() {
@@ -2657,7 +2665,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("分類號\r\n                            ")
+      _vm._v("分類號\n                            ")
     ])
   },
   function() {
@@ -2679,7 +2687,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人")
+      _vm._v("捐贈人(單位)名稱")
     ])
   },
   function() {
@@ -2704,7 +2712,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人")
+      _vm._v("捐贈人(單位)名稱")
     ])
   },
   function() {
@@ -2729,7 +2737,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "title" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("書名（主標題）\r\n                                    ")
+      _vm._v("書名（主標題）\n                                    ")
     ])
   }
 ]
@@ -2772,9 +2780,7 @@ var render = function() {
           fn: function(option) {
             return [
               _c("div", { staticClass: "d-center" }, [
-                _vm._v(
-                  "\r\n            " + _vm._s(option.name) + "\r\n        "
-                )
+                _vm._v("\n            " + _vm._s(option.name) + "\n        ")
               ])
             ]
           }
@@ -2784,9 +2790,7 @@ var render = function() {
           fn: function(option) {
             return [
               _c("div", { staticClass: "selected d-center" }, [
-                _vm._v(
-                  "\r\n            " + _vm._s(option.name) + "\r\n        "
-                )
+                _vm._v("\n            " + _vm._s(option.name) + "\n        ")
               ])
             ]
           }
@@ -2802,7 +2806,7 @@ var render = function() {
     },
     [
       _c("template", { slot: "no-options" }, [
-        _vm._v("\r\n        " + _vm._s(_vm.placeholder) + "\r\n    ")
+        _vm._v("\n        " + _vm._s(_vm.placeholder) + "\n    ")
       ])
     ],
     2
@@ -3288,7 +3292,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\edit.js */"./resources/js/books/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\edit.js */"./resources/js/books/edit.js");
 
 
 /***/ })

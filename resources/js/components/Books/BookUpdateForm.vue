@@ -11,14 +11,14 @@
                                 <label for="addType">入庫方式</label>
                                 <select id="addType" name="addType" class="form-control" :value="addType" @change="changeAddType">
                                     <option value="1">捐贈入庫</option>
-                                    <option value="2">購買入庫</option>
+                                    <option value="2">採購入庫</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-md-3" >
                             <div class="form-group donor_div" style="display:none;">
-                                <label><span class="text-danger mr-2">*</span>捐贈人</label>
+                                <label><span class="text-danger mr-2">*</span>捐贈人(單位)名稱</label>
                                 <!-- <div id="donor_id_input" class="input-group mb-3">
                                     <input type="text" class="form-control" :value="book.donor.name" readonly>
                                     <div class="input-group-append">
@@ -26,7 +26,7 @@
                                     </div>
                                 </div> -->
                                 <div id="donor_id">
-                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人(單位)名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
                                 </div>
                             </div>
                         </div>
@@ -56,14 +56,14 @@
                                 <label for="addType">入庫方式</label>
                                 <select id="addType" name="addType" class="form-control" v-bind:value = "addType" @change="changeAddType">
                                     <option value="1">捐贈入庫</option>
-                                    <option value="2">購買入庫</option>
+                                    <option value="2">採購入庫</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label><span class="text-danger mr-2">*</span>捐贈人</label>
+                                <label><span class="text-danger mr-2">*</span>捐贈人(單位)名稱</label>
                                 <div id="donor_id_input" class="input-group mb-3">
                                     <input type="text" class="form-control" :value="book.donor.name" readonly>
                                     <div class="input-group-append">
@@ -71,7 +71,7 @@
                                     </div>
                                 </div>
                                 <div id="donor_id" style="display:none;">
-                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人(單位)名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
                                 </div>
                             </div>
                         </div>
@@ -236,14 +236,14 @@
                                 <label for="addType">入庫方式</label>
                                 <select id="addType" name="addType" class="form-control" :value="addType" @change="changeAddType">
                                     <option value="1">捐贈入庫</option>
-                                    <option value="2">購買入庫</option>
+                                    <option value="2">採購入庫</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-md-3" >
                             <div class="form-group donor_div" style="display:none;">
-                                <label><span class="text-danger mr-2">*</span>捐贈人</label>
+                                <label><span class="text-danger mr-2">*</span>捐贈人(單位)名稱</label>
                                 <!-- <div id="donor_id_input" class="input-group mb-3">
                                     <input type="text" class="form-control" :value="book.donor.name" readonly>
                                     <div class="input-group-append">
@@ -251,7 +251,7 @@
                                     </div>
                                 </div> -->
                                 <div id="donor_id">
-                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人(單位)名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
                                 </div>
                             </div>
                         </div>
@@ -281,14 +281,14 @@
                                 <label for="addType">入庫方式</label>
                                 <select id="addType" name="addType" class="form-control" v-bind:value = "addType" @change="changeAddType">
                                     <option value="1">捐贈入庫</option>
-                                    <option value="2">購買入庫</option>
+                                    <option value="2">採購入庫</option>
                                 </select>
                             </div>
                         </div>
 
                         <div class="col-md-3">
                             <div class="form-group">
-                                <label><span class="text-danger mr-2">*</span>捐贈人</label>
+                                <label><span class="text-danger mr-2">*</span>捐贈人(單位)名稱</label>
                                 <div id="donor_id_input" class="input-group mb-3">
                                     <input type="text" class="form-control" :value="book.donor.name" readonly>
                                     <div class="input-group-append">
@@ -296,7 +296,7 @@
                                     </div>
                                 </div>
                                 <div id="donor_id" style="display:none;">
-                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人(單位)名稱名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
                                 </div>
                             </div>
                         </div>
@@ -447,7 +447,7 @@ export default {
             BooksUpdateURL: $('#BooksUpdateURL').html(),
             DonorsNameURL: $('#DonorsNameURL').html(),
             BooksCoverImageURL: $('#BooksCoverImageURL').html(),
-            title: '書本圖片',
+            title: '書籍圖片',
             category_options: [
                 {id: null, text: '請選擇...'},
                 {id: 0, text: '000 總類'},
@@ -467,13 +467,13 @@ export default {
             ],
             status_options:[
                 {id: null, text: '請選擇...'},
-                {id: 1, text: '在庫'},
-                {id: 2, text: '借出'},
-                {id: 3, text: '逾期'},
+                {id: 1, text: '可借閱'},
+                {id: 2, text: '借閱中'},
+                {id: 3, text: '逾期中'},
                 {id: 4, text: '庫藏待上架'},
                 {id: 5, text: '已淘汰'},
                 {id: 6, text: '已轉贈'},
-                {id: 7, text: '待索取'},
+                {id: 7, text: '可供免費索取'},
                 {id: 8, text: '已被索取'},
                 {id: 9, text: '無外借'},
                 {id: 10, text: '無歸還'},
@@ -528,11 +528,11 @@ export default {
                 console.log('ccc');
                 this.$emit('update-add-type', 2);
                 // this.addType = 2;
-                // 購買入庫 - 一般圖書
+                // 採購入庫 - 一般圖書
                 $('.donor_div').fadeOut();
                 $('.price_div').fadeIn();
                 $('#price').val(0);
-                // 購買入庫 - 論文雜誌
+                // 採購入庫 - 論文雜誌
 
             }
         },
@@ -587,7 +587,7 @@ export default {
                 // this.$refs.uploadBookImages.stopCropper();
                 $.showSuccessModal('修改成功', response.data.url, '檢視書籍');
             }).catch(error => {
-                console.error('修改書本時發生錯誤，錯誤訊息：' + error);
+                console.error('修改書籍時發生錯誤，錯誤訊息：' + error);
                 $.showErrorModal(error);
             });
         }

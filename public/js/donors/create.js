@@ -284,7 +284,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        確認新增\r\n                    "
+                    "\n                        確認新增\n                    "
                   )
                 ]
               ),
@@ -297,7 +297,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        返回列表\r\n                    "
+                    "\n                        返回列表\n                    "
                   )
                 ]
               )
@@ -318,7 +318,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "name" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("名稱\r\n                        ")
+            _vm._v("捐贈人(單位)名稱\n                        ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -398,7 +398,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "exposure" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("曝光程度\r\n                        ")
+            _vm._v("曝光程度\n                        ")
           ]),
           _vm._v(" "),
           _c(
@@ -723,7 +723,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\donors\create.js */"./resources/js/donors/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\donors\create.js */"./resources/js/donors/create.js");
 
 
 /***/ })

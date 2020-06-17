@@ -505,7 +505,7 @@ __webpack_require__.r(__webpack_exports__);
       DonorsNameURL: $('#DonorsNameURL').html(),
       FormErrorsMsg: [],
       donors: [],
-      title: '書本圖片',
+      title: '書籍圖片',
       category_options: [{
         id: null,
         text: '請選擇...'
@@ -552,6 +552,40 @@ __webpack_require__.r(__webpack_exports__);
         id: 13,
         text: '1300 外文圖書'
       }],
+      status_options: [{
+        id: null,
+        text: '請選擇...'
+      }, {
+        id: 1,
+        text: '可借閱'
+      }, {
+        id: 2,
+        text: '借閱中'
+      }, {
+        id: 3,
+        text: '逾期中'
+      }, {
+        id: 4,
+        text: '庫藏待上架'
+      }, {
+        id: 5,
+        text: '已淘汰'
+      }, {
+        id: 6,
+        text: '已轉贈'
+      }, {
+        id: 7,
+        text: '可供免費索取'
+      }, {
+        id: 8,
+        text: '已被索取'
+      }, {
+        id: 9,
+        text: '無外借'
+      }, {
+        id: 10,
+        text: '無歸還'
+      }],
       donorValue: null,
       bookInfo: []
     };
@@ -589,7 +623,7 @@ __webpack_require__.r(__webpack_exports__);
         $('.price_div').fadeOut();
         $('#price').val(0);
       } else {
-        this.$emit('update-add-type', 2); // 購買入庫
+        this.$emit('update-add-type', 2); // 採購入庫
 
         $('.donor_div').fadeOut();
         $('.price_div').fadeIn();
@@ -723,7 +757,7 @@ __webpack_require__.r(__webpack_exports__);
         // console.log('aaa');
         $.showSuccessModal('新增成功', response.data.url, '檢視書籍');
       })["catch"](function (error) {
-        console.error('新增書本時發生錯誤，錯誤訊息：' + error);
+        console.error('新增書籍時發生錯誤，錯誤訊息：' + error);
         $.showErrorModal(error);
       });
       $('#category').attr('disabled', true);
@@ -753,7 +787,7 @@ __webpack_require__.r(__webpack_exports__);
       $('#paper_btn').attr('disabled', false);
       $('#step1').slideDown();
       $('#goback2step1').slideUp();
-    }); // 捐贈人
+    }); // 捐贈人(單位)
     // $('#donor_id').selectpicker({
     //     liveSearch: true
     // });
@@ -1142,7 +1176,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nimg {\r\n  height: auto;\r\n  max-width: 2.5rem;\r\n  margin-right: 1rem;\n}\n.d-center {\r\n  display: flex;\r\n  align-items: center;\n}\n.selected img {\r\n  width: auto;\r\n  max-height: 23px;\r\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\r\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\r\n  border-bottom: none;\n}\n.v-select .dropdown li a {\r\n  padding: 10px 20px;\r\n  width: 100%;\r\n  font-size: 1.25em;\r\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\r\n  color: #fff;\n}\r\n\r\n\r\n", ""]);
+exports.push([module.i, "\nimg {\n  height: auto;\n  max-width: 2.5rem;\n  margin-right: 1rem;\n}\n.d-center {\n  display: flex;\n  align-items: center;\n}\n.selected img {\n  width: auto;\n  max-height: 23px;\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\n  border-bottom: none;\n}\n.v-select .dropdown li a {\n  padding: 10px 20px;\n  width: 100%;\n  font-size: 1.25em;\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\n  color: #fff;\n}\n\n\n", ""]);
 
 // exports
 
@@ -1837,7 +1871,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("option", { attrs: { value: "2" } }, [
-                        _vm._v("購買入庫")
+                        _vm._v("採購入庫")
                       ])
                     ]
                   )
@@ -1856,7 +1890,7 @@ var render = function() {
                         [
                           _c("select-donor-custom", {
                             ref: "DonorsOption",
-                            attrs: { placeholder: "請輸入捐贈人名稱" },
+                            attrs: { placeholder: "請輸入捐贈人(單位)名稱" },
                             on: {
                               search: _vm.onSearch,
                               "update-value": _vm.updateValue
@@ -1990,7 +2024,31 @@ var render = function() {
               ])
             ]),
             _vm._v(" "),
-            _vm._m(14),
+            _c("div", { staticClass: "row mb-2" }, [
+              _vm._m(14),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "status" } }, [_vm._v("狀態")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      attrs: { id: "status", name: "status" }
+                    },
+                    _vm._l(_vm.status_options, function(option) {
+                      return _c(
+                        "option",
+                        { key: option.id, domProps: { value: option.id } },
+                        [_vm._v(_vm._s(option.text))]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ]),
             _vm._v(" "),
             _c(
               "div",
@@ -2005,7 +2063,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                        確認新增\r\n                    "
+                        "\n                        確認新增\n                    "
                       )
                     ]
                   ),
@@ -2018,7 +2076,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                        返回列表\r\n                    "
+                        "\n                        返回列表\n                    "
                       )
                     ]
                   )
@@ -2066,7 +2124,7 @@ var render = function() {
                       ]),
                       _vm._v(" "),
                       _c("option", { attrs: { value: "2" } }, [
-                        _vm._v("購買入庫")
+                        _vm._v("採購入庫")
                       ])
                     ]
                   )
@@ -2085,7 +2143,7 @@ var render = function() {
                         [
                           _c("select-donor-custom", {
                             ref: "PaperDonorsOption",
-                            attrs: { placeholder: "請輸入捐贈人名稱" },
+                            attrs: { placeholder: "請輸入捐贈人(單位)名稱" },
                             on: {
                               search: _vm.onSearch,
                               "update-value": _vm.updateValue
@@ -2127,7 +2185,31 @@ var render = function() {
             _vm._v(" "),
             _vm._m(19),
             _vm._v(" "),
-            _vm._m(20),
+            _c("div", { staticClass: "row mb-2" }, [
+              _vm._m(20),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", { attrs: { for: "p_status" } }, [_vm._v("狀態")]),
+                  _vm._v(" "),
+                  _c(
+                    "select",
+                    {
+                      staticClass: "form-control",
+                      attrs: { id: "p_status", name: "status" }
+                    },
+                    _vm._l(_vm.status_options, function(option) {
+                      return _c(
+                        "option",
+                        { key: option.id, domProps: { value: option.id } },
+                        [_vm._v(_vm._s(option.text))]
+                      )
+                    }),
+                    0
+                  )
+                ])
+              ])
+            ]),
             _vm._v(" "),
             _c(
               "div",
@@ -2142,7 +2224,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                        確認新增\r\n                    "
+                        "\n                        確認新增\n                    "
                       )
                     ]
                   ),
@@ -2155,7 +2237,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                        返回列表\r\n                    "
+                        "\n                        返回列表\n                    "
                       )
                     ]
                   )
@@ -2178,9 +2260,9 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "row", attrs: { id: "step1" } }, [
       _c("div", { staticClass: "col-md-12 mb-2" }, [
-        _c("h4", [_vm._v("1. 書本類型")]),
+        _c("h4", [_vm._v("1. 書籍類型")]),
         _vm._v(" "),
-        _c("small", [_vm._v("請先選擇欲要創建書本的類型")])
+        _c("small", [_vm._v("請先選擇欲要創建書籍的類型")])
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-6" }, [
@@ -2194,7 +2276,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "fas fa-user-tie mr-2" }),
               _vm._v(
-                "\r\n                        一般書籍(有ISBN)\r\n                    "
+                "\n                        一般書籍(有ISBN)\n                    "
               )
             ]
           )
@@ -2212,7 +2294,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "far fa-building mr-2" }),
               _vm._v(
-                "\r\n                        論文、期刊、雜誌等(無ISBN)\r\n                    "
+                "\n                        論文、期刊、雜誌等(無ISBN)\n                    "
               )
             ]
           )
@@ -2243,7 +2325,7 @@ var staticRenderFns = [
               [
                 _c("i", { staticClass: "fas fa-undo-alt mr-2" }),
                 _vm._v(
-                  "\r\n                        重新選擇書本類型\r\n                    "
+                  "\n                        重新選擇書籍類型\n                    "
                 )
               ]
             )
@@ -2258,7 +2340,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人\r\n                        ")
+      _vm._v("捐贈人(單位)名稱\n                        ")
     ])
   },
   function() {
@@ -2279,7 +2361,7 @@ var staticRenderFns = [
         [
           _c("i", { staticClass: "fas fa-plus mr-2" }),
           _vm._v(
-            "\r\n                                    新增捐贈人\r\n                                "
+            "\n                                    新增捐贈人(單位)名稱\n                                "
           )
         ]
       )
@@ -2306,7 +2388,7 @@ var staticRenderFns = [
               },
               [_vm._v("*")]
             ),
-            _vm._v("價格\r\n                        ")
+            _vm._v("價格\n                        ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -2332,7 +2414,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("書名（主標題）\r\n                                ")
+            _vm._v("書名（主標題）\n                                ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -2541,7 +2623,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("分類號\r\n                        ")
+      _vm._v("分類號\n                        ")
     ])
   },
   function() {
@@ -2561,31 +2643,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mb-2" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "content" } }, [_vm._v("備註內容")]),
-          _vm._v(" "),
-          _c("textarea", {
-            staticClass: "form-control",
-            attrs: { name: "content", id: "content", cols: "30", rows: "3" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "status" } }, [_vm._v("狀態")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              staticClass: "form-control",
-              attrs: { id: "status", name: "status", disabled: "" }
-            },
-            [_c("option", { attrs: { value: "4" } }, [_vm._v("庫藏待上架")])]
-          )
-        ])
+    return _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "content" } }, [_vm._v("備註內容")]),
+        _vm._v(" "),
+        _c("textarea", {
+          staticClass: "form-control",
+          attrs: { name: "content", id: "content", cols: "30", rows: "3" }
+        })
       ])
     ])
   },
@@ -2595,7 +2660,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人\r\n                        ")
+      _vm._v("捐贈人(單位)名稱\n                        ")
     ])
   },
   function() {
@@ -2616,7 +2681,7 @@ var staticRenderFns = [
         [
           _c("i", { staticClass: "fas fa-plus mr-2" }),
           _vm._v(
-            "\r\n                                    新增捐贈人\r\n                                "
+            "\n                                    新增捐贈人(單位)名稱\n                                "
           )
         ]
       )
@@ -2643,7 +2708,7 @@ var staticRenderFns = [
               },
               [_vm._v("*")]
             ),
-            _vm._v("價格\r\n                        ")
+            _vm._v("價格\n                        ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -2670,7 +2735,7 @@ var staticRenderFns = [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "p_title" } }, [
               _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-              _vm._v("主標題\r\n                                ")
+              _vm._v("主標題\n                                ")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -2799,7 +2864,7 @@ var staticRenderFns = [
         _vm._v(" "),
         _c("div", { staticClass: "col-md-4" }, [
           _c("div", { staticClass: "form-group" }, [
-            _c("label", { attrs: { for: "p_edition" } }, [_vm._v("版次")]),
+            _c("label", { attrs: { for: "p_edition" } }, [_vm._v("期數/版次")]),
             _vm._v(" "),
             _c("input", {
               staticClass: "form-control",
@@ -2824,7 +2889,7 @@ var staticRenderFns = [
       _c("div", { staticClass: "col-md-6" }, [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "p_published_date" } }, [
-            _vm._v("期數/出版日期")
+            _vm._v("出版日期")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -2864,31 +2929,14 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row mb-2" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "p_content" } }, [_vm._v("備註內容")]),
-          _vm._v(" "),
-          _c("textarea", {
-            staticClass: "form-control",
-            attrs: { name: "content", id: "p_content", cols: "30", rows: "3" }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "p_status" } }, [_vm._v("狀態")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              staticClass: "form-control",
-              attrs: { id: "p_status", name: "status", disabled: "" }
-            },
-            [_c("option", { attrs: { value: "4" } }, [_vm._v("庫藏待上架")])]
-          )
-        ])
+    return _c("div", { staticClass: "col-md-8" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "p_content" } }, [_vm._v("備註內容")]),
+        _vm._v(" "),
+        _c("textarea", {
+          staticClass: "form-control",
+          attrs: { name: "content", id: "p_content", cols: "30", rows: "3" }
+        })
       ])
     ])
   }
@@ -2993,7 +3041,7 @@ var staticRenderFns = [
           staticClass: "modal-title",
           attrs: { id: "CreateDonorModalModalLabel" }
         },
-        [_vm._v("新增捐贈人")]
+        [_vm._v("新增捐贈人(單位)")]
       ),
       _vm._v(" "),
       _c(
@@ -3024,7 +3072,7 @@ var staticRenderFns = [
         [
           _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
           _vm._v(
-            "\r\n                                名稱\r\n                            "
+            "\n                                名稱\n                            "
           )
         ]
       ),
@@ -3235,7 +3283,7 @@ var staticRenderFns = [
         [
           _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
           _vm._v(
-            "\r\n                                曝光程度\r\n                            "
+            "\n                                曝光程度\n                            "
           )
         ]
       ),
@@ -3294,7 +3342,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                                    確認新增\r\n                                "
+              "\n                                    確認新增\n                                "
             )
           ]
         ),
@@ -3307,7 +3355,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                                    取消\r\n                                "
+              "\n                                    取消\n                                "
             )
           ]
         )
@@ -3354,9 +3402,7 @@ var render = function() {
           fn: function(option) {
             return [
               _c("div", { staticClass: "d-center" }, [
-                _vm._v(
-                  "\r\n            " + _vm._s(option.name) + "\r\n        "
-                )
+                _vm._v("\n            " + _vm._s(option.name) + "\n        ")
               ])
             ]
           }
@@ -3366,9 +3412,7 @@ var render = function() {
           fn: function(option) {
             return [
               _c("div", { staticClass: "selected d-center" }, [
-                _vm._v(
-                  "\r\n            " + _vm._s(option.name) + "\r\n        "
-                )
+                _vm._v("\n            " + _vm._s(option.name) + "\n        ")
               ])
             ]
           }
@@ -3384,7 +3428,7 @@ var render = function() {
     },
     [
       _c("template", { slot: "no-options" }, [
-        _vm._v("\r\n        " + _vm._s(_vm.placeholder) + "\r\n    ")
+        _vm._v("\n        " + _vm._s(_vm.placeholder) + "\n    ")
       ])
     ],
     2
@@ -3929,7 +3973,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\create.js */"./resources/js/books/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\create.js */"./resources/js/books/create.js");
 
 
 /***/ })

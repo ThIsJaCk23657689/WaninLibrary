@@ -21,7 +21,7 @@
         <div class="col-md-12">
             <a href="{{ route('donors.create') }}" class="btn btn-md btn-primary">
                 <i class="fas fa-plus"></i>
-                新增捐贈人
+                新增捐贈人(單位)名稱
 			</a>
 		</div>
 	</div>

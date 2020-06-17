@@ -21,7 +21,7 @@
         <div class="col-md-12">
             <a href="{{ route('books.create') }}" class="btn btn-md btn-primary">
                 <i class="fas fa-plus"></i>
-                新增書本
+                新增書籍
 			</a>
 		</div>
 	</div>

@@ -4,8 +4,8 @@
 
         <div id="step1" class="row">
             <div class="col-md-12 mb-2">
-                <h4>1. 書本類型</h4>
-                <small>請先選擇欲要創建書本的類型</small>
+                <h4>1. 書籍類型</h4>
+                <small>請先選擇欲要創建書籍的類型</small>
             </div>
             <div class="col-md-6">
                 <div class="form-group">
@@ -30,7 +30,7 @@
                 <div class="form-group">
                     <button id="goback2step1_btn" type="button" class="btn btn-block btn-secondary">
                         <i class="fas fa-undo-alt mr-2"></i>
-                        重新選擇書本類型
+                        重新選擇書籍類型
                     </button>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                         <label for="add_type">入庫方式</label>
                         <select id="add_type" name="addType" class="form-control" @change="changeAddType">
                             <option value="1" selected>捐贈入庫</option>
-                            <option value="2">購買入庫</option>
+                            <option value="2">採購入庫</option>
                         </select>
                     </div>
                 </div>
@@ -52,18 +52,18 @@
                 <div class="col-md-6">
                     <div class="form-group donor_div">
                         <label>
-                            <span class="text-danger mr-2">*</span>捐贈人
+                            <span class="text-danger mr-2">*</span>捐贈人(單位)名稱
                         </label>
                         <div class="row">
                             <div class="col-md-7">
                                 <div id="donor_id">
-                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人(單位)名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#CreateDonorModal">
                                     <i class="fas fa-plus mr-2"></i>
-                                    新增捐贈人
+                                    新增捐贈人(單位)名稱
                                 </button>
                             </div>
                         </div>
@@ -209,8 +209,8 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="status">狀態</label>
-                        <select id="status" name="status" class="form-control" disabled>
-                            <option value="4">庫藏待上架</option>
+                        <select id="status" name="status" class="form-control">
+                            <option v-for="option in status_options" :key="option.id" :value="option.id">{{ option.text }}</option>
                         </select>
                     </div>
                 </div>
@@ -236,7 +236,7 @@
                         <label for="p_add_type">入庫方式</label>
                         <select id="p_add_type" name="addType" class="form-control" @change="changeAddType">
                             <option value="1" selected>捐贈入庫</option>
-                            <option value="2">購買入庫</option>
+                            <option value="2">採購入庫</option>
                         </select>
                     </div>
                 </div>
@@ -244,18 +244,18 @@
                 <div class="col-md-6">
                     <div class="form-group donor_div">
                         <label>
-                            <span class="text-danger mr-2">*</span>捐贈人
+                            <span class="text-danger mr-2">*</span>捐贈人(單位)名稱
                         </label>
                         <div class="row">
                             <div class="col-md-7">
                                 <div id="p_donor_id">
-                                    <select-donor-custom ref="PaperDonorsOption" :placeholder="'請輸入捐贈人名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                                    <select-donor-custom ref="PaperDonorsOption" :placeholder="'請輸入捐贈人(單位)名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
                                 </div>
                             </div>
                             <div class="col-md-5">
                                 <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#CreateDonorModal">
                                     <i class="fas fa-plus mr-2"></i>
-                                    新增捐贈人
+                                    新增捐贈人(單位)名稱
                                 </button>
                             </div>
                         </div>
@@ -338,7 +338,7 @@
                         </div>
                         <div class="col-md-4">
                             <div class="form-group">
-                                <label for="p_edition">版次</label>
+                                <label for="p_edition">期數/版次</label>
                                 <input id="p_edition" name="edition" type="text" class="form-control" value="" autocomplete="off">
                             </div>
                         </div>
@@ -349,7 +349,7 @@
             <div class="row">
                 <div class="col-md-6">
                     <div class="form-group">
-                        <label for="p_published_date">期數/出版日期</label>
+                        <label for="p_published_date">出版日期</label>
                         <input id="p_published_date" name="published_date" type="text" class="form-control" value="" autocomplete="off">
                     </div>
                 </div>
@@ -376,8 +376,8 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="p_status">狀態</label>
-                        <select id="p_status" name="status" class="form-control" disabled>
-                            <option value="4">庫藏待上架</option>
+                        <select id="p_status" name="status" class="form-control">
+                            <option v-for="option in status_options" :key="option.id" :value="option.id">{{ option.text }}</option>
                         </select>
                     </div>
                 </div>
@@ -409,7 +409,7 @@ export default {
             DonorsNameURL: $('#DonorsNameURL').html(),
             FormErrorsMsg: [],
             donors: [],
-            title: '書本圖片',
+            title: '書籍圖片',
             category_options: [
                 {id: null, text: '請選擇...'},
                 {id: 0, text: '000 總類'},
@@ -426,6 +426,19 @@ export default {
                 {id: 11, text: '1100 論文類'},
                 {id: 12, text: '1200 雜誌類'},
                 {id: 13, text: '1300 外文圖書'},
+            ],
+            status_options:[
+                {id: null, text: '請選擇...'},
+                {id: 1, text: '可借閱'},
+                {id: 2, text: '借閱中'},
+                {id: 3, text: '逾期中'},
+                {id: 4, text: '庫藏待上架'},
+                {id: 5, text: '已淘汰'},
+                {id: 6, text: '已轉贈'},
+                {id: 7, text: '可供免費索取'},
+                {id: 8, text: '已被索取'},
+                {id: 9, text: '無外借'},
+                {id: 10, text: '無歸還'},
             ],
             donorValue: null,
             bookInfo: [],
@@ -466,7 +479,7 @@ export default {
 
             }else{
                 this.$emit('update-add-type', 2);
-                // 購買入庫
+                // 採購入庫
                 $('.donor_div').fadeOut();
                 $('.price_div').fadeIn();
                 $('#price').val(0);
@@ -598,7 +611,7 @@ export default {
                 // console.log('aaa');
                 $.showSuccessModal('新增成功', response.data.url, '檢視書籍');
             }).catch(error => {
-                console.error('新增書本時發生錯誤，錯誤訊息：' + error);
+                console.error('新增書籍時發生錯誤，錯誤訊息：' + error);
                 $.showErrorModal(error);
             });
             $('#category').attr('disabled', true);
@@ -634,7 +647,7 @@ export default {
             $('#goback2step1').slideUp();
         });
 
-        // 捐贈人
+        // 捐贈人(單位)
         // $('#donor_id').selectpicker({
         //     liveSearch: true
         // });

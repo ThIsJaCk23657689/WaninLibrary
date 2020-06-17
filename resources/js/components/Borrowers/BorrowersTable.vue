@@ -58,7 +58,7 @@
                     <thead>
                         <tr>
                             <th>編號</th>
-                            <th>名稱</th>
+                            <th>姓名</th>
                             <th>電話</th>
                             <th>隸屬單位</th>
                             <th>總借閱數量</th>

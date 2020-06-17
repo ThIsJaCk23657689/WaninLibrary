@@ -2,7 +2,7 @@
 <div>
     <div class="card mb-3">
         <div class="card-header">
-            <i class="fas fa-table mr-2"></i>書本列表
+            <i class="fas fa-table mr-2"></i>書籍列表
         </div>
         <div class="card-body">
             <div class="row justify-content-center">

@@ -7,7 +7,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="name">
-                            <span class="text-danger mr-2">*</span>名稱
+                            <span class="text-danger mr-2">*</span>捐贈人(單位)名稱
                         </label>
                         <input id="name" name="name" type="text" class="form-control mb-2" value="" required autocomplete="off" autofocus>
                     </div>

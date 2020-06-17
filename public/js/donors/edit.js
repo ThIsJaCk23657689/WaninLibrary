@@ -593,7 +593,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            確認修改\r\n                        "
+                          "\n                            確認修改\n                        "
                         )
                       ]
                     ),
@@ -606,7 +606,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            返回列表\r\n                        "
+                          "\n                            返回列表\n                        "
                         )
                       ]
                     )
@@ -630,7 +630,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "name" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("姓名\r\n                            ")
+      _vm._v("姓名\n                            ")
     ])
   },
   function() {
@@ -639,7 +639,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "exposure" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("曝光程度\r\n                            ")
+      _vm._v("曝光程度\n                            ")
     ])
   }
 ]
@@ -869,7 +869,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\donors\edit.js */"./resources/js/donors/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\donors\edit.js */"./resources/js/donors/edit.js");
 
 
 /***/ })
