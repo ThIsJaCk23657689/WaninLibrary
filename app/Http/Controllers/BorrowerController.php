@@ -19,7 +19,10 @@ class BorrowerController extends Controller
             'index', 'create', 'show', 'edit',
         ]);
         $this->middleware('auth.jwt')->only([
-            'store', 'update', 'destroy', 'getList', 'getOne', 'activate', 'filter'
+            'store', 'update', 'destroy', 'getList', 'getOne', 'filter',
+        ]);
+        $this->middleware('admin.auth.jwt')->only([
+            'activate'
         ]);
         $this->BorrowerService = new BorrowerService();
         $this->BookService = new BookService();
@@ -67,18 +70,18 @@ class BorrowerController extends Controller
         ], 200);
     }
 
-    public function activate(Request $request)
+    public function activate(Request $request, $id)
     {
-        $request->validate([
-            'id' => 'required|exist:borrowers,id',
-            'content' => 'nullable|max:255|string',
-        ]);
+        // $request->validate([
+        //     'id' => 'required|exist:borrowers,id',
+        //     'content' => 'nullable|max:255|string',
+        // ]);
 
-        $borrower = $this->BorrowerService->activated($request);
+        $borrower = $this->BorrowerService->activated($id);
 
         return response()->json([
             'status' => 'OK',
-            'massage' => $borrower
+            'message' => $borrower
         ], 200);
     }
 

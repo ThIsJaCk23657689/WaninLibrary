@@ -332,7 +332,7 @@ var render = function() {
                           },
                           [
                             _c("option", { attrs: { value: "0" } }, [
-                              _vm._v("全部書籍")
+                              _vm._v("書籍狀態")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "1" } }, [
@@ -388,7 +388,7 @@ var render = function() {
                           },
                           [
                             _c("option", { attrs: { value: "14" } }, [
-                              _vm._v("全部書籍")
+                              _vm._v("書籍類別")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "0" } }, [

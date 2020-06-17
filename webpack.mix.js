@@ -66,6 +66,7 @@ mix.js('resources/js/backend.js', 'public/js')
     .js('resources/js/activities/edit.js', 'public/js/activities')
 
 .js('resources/js/information/edit.js', 'public/js/information')
+    .js('resources/js/information/donate.js', 'public/js/information')
     .js('resources/js/chart/index.js', 'public/js/chart')
 
 .sass('resources/sass/backend/backend.scss', 'public/css')

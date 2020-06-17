@@ -24,7 +24,6 @@
         <span id="InformationCoverImageURL" class="d-none">{{ asset($information->cover_image) }}</span>
 
         <information-update-form :information="information"></information-update-form>
-        <loading-modal></loading-modal>
     </div>
 
 @endsection

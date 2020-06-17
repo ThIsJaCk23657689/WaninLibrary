@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Donor as DonorEloquent;
+use App\Book as BookEloquent;
 use Log;
 
 class DonorService extends BaseService
@@ -132,6 +133,11 @@ class DonorService extends BaseService
     public function delete($id)
     {
         $donor = $this->getOne($id);
+        $books = BookEloquent::where('donor_id', $donor->id)->get();
+        foreach($books as $book){
+            $book->donor_id = 1;
+            $book->save();
+        }
         $donor->delete();
     }
 

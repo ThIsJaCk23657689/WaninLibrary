@@ -115,6 +115,7 @@ const app = new Vue({
                     { data: 'showContact' },
                     { data: 'showExposure' },
                     { data: 'donateAmount' },
+                    { data: 'created_at' },
                     { data: 'action' },
                 ],
                 lengthChange: false,

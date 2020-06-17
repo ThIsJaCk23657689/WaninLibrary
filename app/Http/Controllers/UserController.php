@@ -15,7 +15,7 @@ class UserController extends Controller
 
     public function __construct(){
         $this->middleware('admin.auth.jwt')->except([
-            'getUserByToken', 'index', 'create', 'show', 'edit'
+            'getUserByToken', 'index', 'create', 'show', 'edit', 'changeStatus'
         ]);
 
         $this->middleware('admin.auth.web')->only([
@@ -105,5 +105,10 @@ class UserController extends Controller
             'status' => 'OK',
             'user' => $user
         ]);
+    }
+
+    public function changeStatus($id){
+        $msg = $this->UserService->changeStatus($id);
+        return redirect()->route('users.index');
     }
 }

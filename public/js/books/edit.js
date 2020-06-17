@@ -591,18 +591,11 @@ __webpack_require__.r(__webpack_exports__);
         text: '1300 外文圖書'
       }],
       status_options: [{
-        id: null,
-        text: '請選擇...'
-      }, {
         id: 1,
         text: '可借閱'
-      }, {
-        id: 2,
-        text: '借閱中'
-      }, {
-        id: 3,
-        text: '逾期中'
-      }, {
+      }, // {id: 2, text: '借閱中'},
+      // {id: 3, text: '逾期中'},
+      {
         id: 4,
         text: '庫藏待上架'
       }, {
@@ -632,13 +625,14 @@ __webpack_require__.r(__webpack_exports__);
   methods: {
     onSearch: function onSearch(search, loading, index) {
       loading(true);
-      this.search(loading, search, this, index);
+      this.search(loading, search, this, index, this.donorValue);
     },
-    search: _.debounce(function (loading, search, vm, index) {
+    search: _.debounce(function (loading, search, vm, index, selectID) {
       // alert(vm.DonorsNameURL);
       axios.get(vm.DonorsNameURL, {
         params: {
-          keyword: search
+          keyword: search,
+          selectID: selectID
         }
       }).then(function (response) {
         // console.log(response.data.book_list);
@@ -1273,7 +1267,7 @@ var render = function() {
                         attrs: {
                           uploadimg: _vm.BooksCoverImageURL,
                           title: _vm.title,
-                          "aspect-ratio": 1 / 1,
+                          "aspect-ratio": 15 / 21,
                           prefix: "book"
                         }
                       })
@@ -2129,7 +2123,7 @@ var render = function() {
                         attrs: {
                           uploadimg: _vm.BooksCoverImageURL,
                           title: _vm.title,
-                          "aspect-ratio": 1 / 1,
+                          "aspect-ratio": 15 / 21,
                           prefix: "book"
                         }
                       })

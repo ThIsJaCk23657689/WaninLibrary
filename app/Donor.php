@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\Book as BookEloquent;
+use DateTimeInterface;
 
 class Donor extends Model
 {
@@ -11,6 +12,11 @@ class Donor extends Model
         'name', 'birthday', 'email', 'tel', 'cellphone',
         'address_zipcode', 'address_county', 'address_district', 'address_others', 'content', 'exposure',
     ];
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format($this->dateFormat ?: 'Y-m-d');
+    }
 
     public function books(){
         return $this->hasMany(BookEloquent::class);
@@ -55,18 +61,8 @@ class Donor extends Model
                 $length = mb_strlen($this->name);
                 if($length == 1){
                     $result = '〇';
-                }else if($length == 2){
-                    $result = mb_substr($this->name, 0, 1) . '〇';
-                }else{
-                    $result = mb_substr($this->name, 0, 1);
-                    for($i = 0; $i < $length-2; $i++){
-                        if(mb_substr($this->name, $i+1, 1) != ' '){
-                            $result = $result . '〇';
-                        }else{
-                            $result = $result . ' ';
-                        }
-                    }
-                    $result = $result . mb_substr($this->name, -1);
+                }else if($length >= 2){
+                    $result = mb_substr($this->name, 0, 1) . '〇' . mb_substr($this->name, 2);
                 }
                 break;
             case '3':

@@ -16,21 +16,21 @@
                         <div class="form-group">
                             <label for="search_name">姓名</label>
                             <input id="search_name" name="search_name" type="text" class="form-control mb-2"
-                                v-model="keywords.name" @change="searchBorrower">
+                                v-model="keywords.name" @input="onSearch">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="search_tel">電話</label>
                             <input id="search_tel" name="search_tel" type="text" class="form-control mb-2"
-                                v-model="keywords.tel" @change="searchBorrower">
+                                v-model="keywords.tel" @input="onSearch">
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="search_birthday">生日</label>
                             <input id="search_birthday" name="search_birthday" type="text" class="form-control mb-2"
-                                v-model="keywords.birthday" autocomplete="off" @change="searchBorrower">
+                                v-model="keywords.birthday" autocomplete="off" @input="onSearch">
                         </div>
                     </div>
                 </div>
@@ -144,6 +144,16 @@ export default {
         }
     },
     methods: {
+        onSearch(e){
+            if(this.keywords.name != '' || this.keywords.tel != '' || this.keywords.birthday != ''){
+                this.search(this);
+            }
+        },
+
+        search: _.debounce((vm) => {
+            vm.updateTable();
+        }, 600),
+
         // 更新借閱人搜尋頁碼
         updatePageNum(pageNum){
             this.pageNum = pageNum;

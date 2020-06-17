@@ -110,6 +110,7 @@ class BorrowerService extends BaseService
 
         }
 
+        $act_user = auth('api')->user();
         foreach ($borrowers as $borrower) {
             $borrower['showAgencyName'] = $borrower->showAgencyName();
             $borrower['borrowCounts'] = $borrower->borrowCounts();
@@ -119,6 +120,15 @@ class BorrowerService extends BaseService
                 <a href="' . route('borrowers.edit', [$borrower->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
                 <button type="button" class="btn btn-md btn-danger delete-btn"><i class="far fa-trash-alt"></i></button type="button">
                 <span class="d-none">' . route('borrowers.destroy', [$borrower->id]) . '</span>';
+            if($act_user->status == 0){
+                if($borrower->activated){
+                    $borrower['action'] .= '<button type="button" class="btn btn-md btn-warning activate-btn"><i class="fa fa-user-slash"></i>停權</button type="button">
+                                            <span class="d-none">' . route('borrowers.activate', [$borrower->id]) . '</span>';
+                }else{
+                    $borrower['action'] .= '<button type="button" class="btn btn-md btn-light activate-btn"><i class="fas fa-unlock"></i>解除停權</button type="button">
+                                            <span class="d-none">' . route('borrowers.activate', [$borrower->id]) . '</span>';
+                }
+            }
         }
         $res = ['borrowers' => $borrowers, 'count' => $count];
         return $res;
@@ -174,22 +184,20 @@ class BorrowerService extends BaseService
         Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 刪除了一筆借閱人，編號為：' . $borrower->id . '。');
     }
 
-    public function activated($request)
+    public function activated($id)
     {
-        $borrower = $this->getOne($request->id);
+        $borrower = $this->getOne($id);
         // 1.代表未停權 0.停權
-        if ($borrower->acticated == 1) {
+        if ($borrower->activated == 1) {
             $borrower->update([
-                'content' => $request->content,
                 'activated' => 0,
             ]);
-            return $borrower->name . "已被停權";
+            return $borrower->name . "已成功停權";
         } else {
             $borrower->update([
-                'content' => $request->content,
                 'activated' => 1,
             ]);
-            return $borrower->name . "已被解除停權";
+            return $borrower->name . "已成功解除停權";
         }
     }
 

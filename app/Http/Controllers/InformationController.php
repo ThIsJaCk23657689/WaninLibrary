@@ -15,10 +15,10 @@ class InformationController extends Controller
     public function __construct(){
         $this->middleware('admin.auth.web')->only([
             'index', 'edit',
-            'recommendation_index', 'recommendation_edit',
+            'recommendation_index', 'recommendation_edit', 'showDonatePage'
         ]);
         $this->middleware('admin.auth.jwt')->only([
-            'getFirst', 'update', 'recommendation_update'
+            'getFirst', 'update', 'recommendation_update', 'donateImage'
         ]);
         $this->InformationService = new InformationService();
     }
@@ -42,12 +42,22 @@ class InformationController extends Controller
         ], 200);
     }
 
+    public function showDonatePage(){
+        $information = $this->InformationService->getFirst();
+        return view('information.donate', compact('information'));
+    }
+
     public function getFirst(){
         $information = $this->InformationService->getFirst();
         return response()->json([
             'status' => 'OK',
             'information' => $information
         ]);
+    }
+
+    public function donateImage(Request $request){
+        $message = $this->InformationService->donateImage($request);
+        return response()->json($message, $message['status']);
     }
 
     public function recommendation_index(){

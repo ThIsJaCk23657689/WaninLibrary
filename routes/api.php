@@ -41,7 +41,7 @@ Route::prefix('/backend')->group(function(){
     ]]);
 
     // 借閱者管理相關路由
-    Route::post('/borrowers/activate','BorrowerController@activate');
+    Route::post('/borrowers/activate/{id}','BorrowerController@activate')->name('borrowers.activate');
     Route::get('/borrowers/json', 'BorrowerController@getList')->name('borrowers.getList');
     Route::get('/borrowers/{id}/json', 'BorrowerController@getOne')->name('borrowers.getOne');
     Route::get('/borrowers/filter', 'BorrowerController@filter')->name('borrowers.filter');
@@ -54,6 +54,7 @@ Route::prefix('/backend')->group(function(){
         'update'
     ]]);
     Route::get('/information/getFirst','InformationController@getFirst')->name('information.getFirst');
+    Route::post('/information/donateImage','InformationController@donateImage')->name('information.donateImage');
 
     // 推薦十本好書相關路由
     Route::patch('/recommendation/update','InformationController@recommendation_update')->name('recommendation.update');
@@ -121,6 +122,7 @@ Route::group(['middleware' => 'auth.jwt'], function () {
     Route::get('/users/{id}/json', 'UserController@getOne')->name('users.getOne');
     // 硬刪除
     Route::delete('/users/{id}/forceDelete', 'UserController@forceDestroy')->name('users.forceDestroy');
+    Route::post('/users/{id}/changeStatus', 'UserController@changeStatus')->name('users.changeStatus');
         // POST api/users   PATCH api/users/{user}  DELETE api/users/{user}
         // postman 測試的話用post 然後 多一個 _method = PATCH
     Route::resource('users', 'UserController')->only(['store', 'update', 'destroy']);

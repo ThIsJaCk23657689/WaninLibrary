@@ -16,7 +16,7 @@ class BookSeeder extends Seeder
         //     $books = factory(BookEloquent::class, 1000)->create();
         // }
         for ($i=0; $i < 20; $i++) {
-            $books = factory(BookEloquent::class, 10)->create();
+            $books = factory(BookEloquent::class, 2)->create();
         }
 
     }

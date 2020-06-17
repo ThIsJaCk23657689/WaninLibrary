@@ -9,8 +9,7 @@ use App\Borrower as BorrowerEloquent;
 class BorrowLog extends Model
 {
     protected $fillable = [
-        'borrower_id', 'borrower_name', 'book_id', 'book_title', 'callnum',
-         'status'
+        'borrower_id', 'borrower_name', 'book_id', 'book_title', 'callnum', 'status'
     ];
 
     protected $casts = [
@@ -33,16 +32,16 @@ class BorrowLog extends Model
     public function showStatus(){
         switch ($this->status){
             case 1:
-                $result = '出借';
+                $result = '借閱中';
                 break;
             case 2:
-                $result = '歸還';
+                $result = '已歸還';
                 break;
             case 3:
                 $result = '逾期過久無法討回';
                 break;
             case 4:
-                $result = '逾期';
+                $result = '逾期中';
                 break;
         }
         return $result;
@@ -54,6 +53,42 @@ class BorrowLog extends Model
             return mb_substr($this->book_title, 0, $maxString) . '...';
         }else{
             return $this->book_title;
+        }
+    }
+
+    public function showCallNum(){
+        $callNum = $this->callnum;
+        $category = [
+            '000 總類', '100 哲學類', '200 宗教類', '300 科學類', '400 應用科學類', '500 社會學類',
+            '600 史地類', '710 世界史地類', '800 語文文學類', '900 藝術類', '其他'
+        ];
+
+        if(strlen($callNum) >= 3){
+            if($callNum[0] < 6){
+                // 前面6類，可以靠分類號第一碼來判斷。
+                return $category[$callNum[0]];
+            }else{
+                // 第六類到第七類，必須還要再看第二碼。
+                if($callNum[0] == 6){
+                    if($callNum[1] == 0){
+                        return $category[$callNum[6]];
+                    }else{
+                        return $category[$callNum[7]];
+                    }
+                }else{
+                    if($callNum[0] == 7){
+                        if($callNum[1] == 0){
+                            return $category[$callNum[7]];
+                        }else{
+                            return $category[$callNum[8]];
+                        }
+                    }else{
+                        return $category[$callNum[0] + 1];
+                    }
+                }
+            }
+        }else{
+            return $category[10];
         }
     }
 

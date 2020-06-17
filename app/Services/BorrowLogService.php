@@ -50,6 +50,7 @@ class BorrowLogService extends BaseService
         foreach($logs as $log){
             $log['showStatus'] = $log->showStatus();
             $log['showTitle'] = $log->showTitle();
+            $log['showCallNum'] = $log->showCallNum();
             $log['action'] =
                 '<a href="' . route('borrowLogs.show', [$log->id]) . '" class="btn btn-md btn-info"><i class="fas fa-info-circle"></i></a>';
         }

@@ -23,7 +23,7 @@ class BoughtBooksExport implements FromCollection, WithHeadings, WithColumnForma
     //注入資料
     public function collection()
     {
-        return Book::select('created_at', 'title', 'price')->where('donor_id', '=', 0)->get();
+        return Book::select('created_at', 'title', 'price')->where('donor_id', '=', null)->get();
     }
 
     // public function collection()
@@ -37,7 +37,7 @@ class BoughtBooksExport implements FromCollection, WithHeadings, WithColumnForma
     //         ['202ddddddd0年9月', 123456789],
     //         ['20ddddddd20年10月', 123123589],
     //         ['2020年11月', 987654321],
-            
+
     //     ];
     // }
 

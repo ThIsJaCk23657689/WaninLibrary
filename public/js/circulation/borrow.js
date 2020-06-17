@@ -236,6 +236,14 @@ __webpack_require__.r(__webpack_exports__);
     };
   },
   methods: {
+    onSearch: function onSearch(e) {
+      if (this.keywords.name != '' || this.keywords.tel != '' || this.keywords.birthday != '') {
+        this.search(this);
+      }
+    },
+    search: _.debounce(function (vm) {
+      vm.updateTable();
+    }, 600),
     // 更新借閱人搜尋頁碼
     updatePageNum: function updatePageNum(pageNum) {
       this.pageNum = pageNum;
@@ -1356,13 +1364,15 @@ var render = function() {
                       },
                       domProps: { value: _vm.keywords.name },
                       on: {
-                        change: _vm.searchBorrower,
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.keywords, "name", $event.target.value)
-                        }
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.keywords, "name", $event.target.value)
+                          },
+                          _vm.onSearch
+                        ]
                       }
                     })
                   ])
@@ -1391,13 +1401,15 @@ var render = function() {
                       },
                       domProps: { value: _vm.keywords.tel },
                       on: {
-                        change: _vm.searchBorrower,
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(_vm.keywords, "tel", $event.target.value)
-                        }
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(_vm.keywords, "tel", $event.target.value)
+                          },
+                          _vm.onSearch
+                        ]
                       }
                     })
                   ])
@@ -1427,17 +1439,19 @@ var render = function() {
                       },
                       domProps: { value: _vm.keywords.birthday },
                       on: {
-                        change: _vm.searchBorrower,
-                        input: function($event) {
-                          if ($event.target.composing) {
-                            return
-                          }
-                          _vm.$set(
-                            _vm.keywords,
-                            "birthday",
-                            $event.target.value
-                          )
-                        }
+                        input: [
+                          function($event) {
+                            if ($event.target.composing) {
+                              return
+                            }
+                            _vm.$set(
+                              _vm.keywords,
+                              "birthday",
+                              $event.target.value
+                            )
+                          },
+                          _vm.onSearch
+                        ]
                       }
                     })
                   ])

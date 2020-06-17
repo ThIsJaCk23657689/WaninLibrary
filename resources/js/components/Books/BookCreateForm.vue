@@ -82,7 +82,7 @@
 
             <div class="row">
                 <div class="col-md-6 text-center">
-                    <upload-images ref="uploadBookImages" :uploadimg="uploadimg" :title="title" :aspect-ratio="1/1" :prefix="'book'"></upload-images>
+                    <upload-images ref="uploadBookImages" :uploadimg="uploadimg" :title="title" :aspect-ratio="15/21" :prefix="'book'"></upload-images>
                 </div>
 
                 <div class="col-md-6">
@@ -274,7 +274,7 @@
 
             <div class="row">
                 <div class="col-md-6 text-center">
-                    <upload-images ref="uploadPapperImages" :uploadimg="uploadimg" :title="title" :aspect-ratio="1/1" :prefix="'papper'"></upload-images>
+                    <upload-images ref="uploadPapperImages" :uploadimg="uploadimg" :title="title" :aspect-ratio="15/21" :prefix="'papper'"></upload-images>
                 </div>
 
                 <div class="col-md-6">
@@ -428,10 +428,9 @@ export default {
                 {id: 13, text: '1300 外文圖書'},
             ],
             status_options:[
-                {id: null, text: '請選擇...'},
                 {id: 1, text: '可借閱'},
-                {id: 2, text: '借閱中'},
-                {id: 3, text: '逾期中'},
+                // {id: 2, text: '借閱中'},
+                // {id: 3, text: '逾期中'},
                 {id: 4, text: '庫藏待上架'},
                 {id: 5, text: '已淘汰'},
                 {id: 6, text: '已轉贈'},

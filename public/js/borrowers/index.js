@@ -173,6 +173,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['borrowers', 'rowsPerPage', 'pageNum', 'totalPage'],
   data: function data() {
@@ -472,6 +473,8 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("th", [_vm._v("逾期數量")]),
               _vm._v(" "),
+              _c("th", [_vm._v("建立日期")]),
+              _vm._v(" "),
               _c("th", [_vm._v("操作")])
             ])
           ])
@@ -714,6 +717,8 @@ var app = new Vue({
         }
 
         _this.refreshDeleteBtn();
+
+        _this.refreshActivateBtn();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -740,8 +745,36 @@ var app = new Vue({
             axios.post($url, {
               _method: 'DELETE'
             }).then(function (response) {
-              console.log(response);
               $.showSuccessModal('刪除成功！');
+              $vm.updateBorrowers($vm.pageNum, true);
+            })["catch"](function (error) {
+              $.showErrorModal(error);
+            });
+          }
+        });
+      });
+    },
+    refreshActivateBtn: function refreshActivateBtn() {
+      var $vm = this;
+      $('.activate-btn').click(function (e) {
+        var _this3 = this;
+
+        e.preventDefault();
+        Swal.fire({
+          title: '注意！',
+          text: "你確定要停權此借閱人嗎？",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '確認',
+          cancelButtonText: '取消'
+        }).then(function (result) {
+          if (result.value) {
+            $.showLoadingModal();
+            var $url = $(_this3).next().html();
+            axios.post($url).then(function (response) {
+              $.showSuccessModal(response.data.message);
               $vm.updateBorrowers($vm.pageNum, true);
             })["catch"](function (error) {
               $.showErrorModal(error);
@@ -752,19 +785,19 @@ var app = new Vue({
     }
   },
   created: function created() {
-    var _this3 = this;
+    var _this4 = this;
 
     var BorrowersGetList = $('#BorrowersGetList').html();
     axios.get(BorrowersGetList).then(function (response) {
-      _this3.DataTotalCount = response.data.DataTotalCount;
-      _this3.totalPage = Math.ceil(_this3.DataTotalCount / _this3.rowsPerPage);
-      _this3.borrowers = response.data.borrowers;
+      _this4.DataTotalCount = response.data.DataTotalCount;
+      _this4.totalPage = Math.ceil(_this4.DataTotalCount / _this4.rowsPerPage);
+      _this4.borrowers = response.data.borrowers;
       $('#BorrowersDataTable').on('draw.dt', function () {
         console.log('drawing a table');
       }).on('init.dt', function () {
         console.log('intial a table');
       }).dataTable({
-        data: _this3.borrowers,
+        data: _this4.borrowers,
         columns: [{
           data: 'id'
         }, {
@@ -778,17 +811,21 @@ var app = new Vue({
         }, {
           data: 'expiredCounts'
         }, {
+          data: 'created_at'
+        }, {
           data: 'action'
         }],
         lengthChange: false,
         searching: false,
-        pageLength: _this3.rowsPerPage,
+        pageLength: _this4.rowsPerPage,
         info: false,
         paging: false,
         processing: true
       });
 
-      _this3.refreshDeleteBtn();
+      _this4.refreshDeleteBtn();
+
+      _this4.refreshActivateBtn();
     });
   },
   mounted: function mounted() {// this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);

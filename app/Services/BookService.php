@@ -235,14 +235,18 @@ class BookService extends BaseService
             }
             $request->price = 0;
         }
-
-
+        // 借閱中或逾期中不能更改狀態
+        if($book->status == 2 || $book->status == 3){
+            $status = $book->status;
+        }else{
+            $status = $request->status;
+        }
         $book->update([
             'donor_id' => $request->donor_id,
             // 'barcode' => $request->barcode,
             'callnum' => $request->callnum ?? '000',
             'category' => $request->category,
-            'status' => $request->status,
+            'status' => $status,
             'title' => $request->title,
             'subtitle' => $request->subtitle,
             'cover_image' => $result['url'],

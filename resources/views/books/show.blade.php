@@ -31,8 +31,8 @@
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
-                            <label for="donor_name">捐贈人</label>
-                            <input id="donor_name" name="donor_name" type="text" class="form-control" value="{{ $book->donor->name }}"  readonly>
+                            <label for="donor_name">捐贈人(單位)名稱</label>
+                            <input id="donor_name" name="donor_name" type="text" class="form-control" value="{{ $book->donor->name ?? '無' }}"  readonly>
                         </div>
                     </div>
 

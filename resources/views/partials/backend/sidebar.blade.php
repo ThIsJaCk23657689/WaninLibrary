@@ -66,6 +66,7 @@
             <a class="dropdown-item" href="{{ route('activities.index' )}}">{{ __('Events') }}</a>
                 <a class="dropdown-item" href="{{ route('recommendation.index') }}">{{ __('Recommend') }}</a>
                 <a class="dropdown-item" href="{{ route('information.index') }}">{{ __('Information') }}</a>
+                <a class="dropdown-item" href="{{ route('information.donate') }}">好書捐贈</a>
             </div>
         </li>
     @endif

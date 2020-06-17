@@ -134,6 +134,8 @@ class BorrowService extends BaseService
             'status' => 2
         ]);
 
+
+
         $borrow->delete();
 
         $book->status = config('book.status.LISTED');

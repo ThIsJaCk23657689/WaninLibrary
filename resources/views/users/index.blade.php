@@ -73,7 +73,7 @@
                                         @if($user->id != 1 && $user->id != auth('api')->id())
                                                 <a href="#" class="btn btn-md btn-danger" onclick="
                                                     event.preventDefault();
-                                                    
+
                                                     Swal.fire({
                                                         title: '注意！',
                                                         text: '您確定要停權此帳號嗎？',
@@ -92,11 +92,61 @@
                                                     <i class="fas fa-user-slash"></i>
                                                     停權
                                                 </a>
-                                            <form id="deleteform-{{ $user->id }}" action="{{ route('users.destroy', [$user->id]) }}" method="POST" style="displat: none;">
+                                        @endif
+                                        @if(auth('api')->id() == 1 && $user->id != 1)
+                                            @if($user->status)
+                                                <a href="#" class="btn btn-md btn-warning" onclick="
+                                                    event.preventDefault();
+
+                                                    Swal.fire({
+                                                        title: '注意！',
+                                                        text: '您確定要升級此帳號嗎？',
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#3085d6',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: '確認',
+                                                        cancelButtonText: '取消',
+                                                    }).then((result) => {
+                                                        if (result.value) {
+                                                            $('#change-status-form-{{ $user->id }}').submit();
+                                                        }
+                                                    });
+                                                ">
+                                                    <i class="fas fa-angle-double-up"></i>
+                                                    升級
+                                                </a>
+                                            @else
+                                                <a href="#" class="btn btn-md btn-warning" onclick="
+                                                    event.preventDefault();
+
+                                                    Swal.fire({
+                                                        title: '注意！',
+                                                        text: '您確定要降級此帳號嗎？',
+                                                        icon: 'warning',
+                                                        showCancelButton: true,
+                                                        confirmButtonColor: '#3085d6',
+                                                        cancelButtonColor: '#d33',
+                                                        confirmButtonText: '確認',
+                                                        cancelButtonText: '取消',
+                                                    }).then((result) => {
+                                                        if (result.value) {
+                                                            $('#change-status-form-{{ $user->id }}').submit();
+                                                        }
+                                                    });
+                                                ">
+                                                    <i class="fas fa-angle-double-down"></i>
+                                                    降級
+                                                </a>
+                                            @endif
+                                            <form id="change-status-form-{{ $user->id }}" action="{{ route('users.changeStatus', [$user->id]) }}" method="POST" style="displat: none;">
                                                 @csrf
-                                                @method('DELETE')
                                             </form>
                                         @endif
+                                        <form id="deleteform-{{ $user->id }}" action="{{ route('users.destroy', [$user->id]) }}" method="POST" style="displat: none;">
+                                            @csrf
+                                            @method('DELETE')
+                                        </form>
                                     </td>
                                 </tr>
                             @endforeach

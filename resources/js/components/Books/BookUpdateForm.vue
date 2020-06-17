@@ -97,7 +97,7 @@
 
                 <div class="row">
                     <div class="col-md-6 text-center">
-                        <upload-images ref="uploadBookImages" :uploadimg="BooksCoverImageURL" :title="title" :aspect-ratio="1/1" :prefix="'book'"></upload-images>
+                        <upload-images ref="uploadBookImages" :uploadimg="BooksCoverImageURL" :title="title" :aspect-ratio="15/21" :prefix="'book'"></upload-images>
                     </div>
 
                     <div class="col-md-6">
@@ -322,7 +322,7 @@
 
                 <div class="row">
                     <div class="col-md-6 text-center">
-                        <upload-images ref="uploadBookImages" :uploadimg="BooksCoverImageURL" :title="title" :aspect-ratio="1/1" :prefix="'book'"></upload-images>
+                        <upload-images ref="uploadBookImages" :uploadimg="BooksCoverImageURL" :title="title" :aspect-ratio="15/21" :prefix="'book'"></upload-images>
                     </div>
 
                     <div class="col-md-6">
@@ -466,10 +466,9 @@ export default {
                 {id: 13, text: '1300 外文圖書'},
             ],
             status_options:[
-                {id: null, text: '請選擇...'},
                 {id: 1, text: '可借閱'},
-                {id: 2, text: '借閱中'},
-                {id: 3, text: '逾期中'},
+                // {id: 2, text: '借閱中'},
+                // {id: 3, text: '逾期中'},
                 {id: 4, text: '庫藏待上架'},
                 {id: 5, text: '已淘汰'},
                 {id: 6, text: '已轉贈'},
@@ -486,13 +485,14 @@ export default {
     methods : {
         onSearch(search, loading, index) {
             loading(true);
-            this.search(loading, search, this, index);
+            this.search(loading, search, this, index, this.donorValue);
         },
-        search: _.debounce((loading, search, vm, index) => {
+        search: _.debounce((loading, search, vm, index, selectID) => {
             // alert(vm.DonorsNameURL);
             axios.get(vm.DonorsNameURL, {
                 params:{
-                    keyword: search
+                    keyword: search,
+                    selectID: selectID
                 }
             }).then(response => {
                     // console.log(response.data.book_list);

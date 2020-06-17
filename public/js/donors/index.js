@@ -164,6 +164,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['donors', 'rowsPerPage', 'pageNum', 'totalPage'],
   data: function data() {
@@ -442,6 +443,8 @@ var staticRenderFns = [
               _c("th", [_vm._v("曝光程度")]),
               _vm._v(" "),
               _c("th", [_vm._v("捐贈數量")]),
+              _vm._v(" "),
+              _c("th", [_vm._v("建立日期")]),
               _vm._v(" "),
               _c("th", [_vm._v("操作")])
             ])
@@ -876,6 +879,8 @@ var app = new Vue({
           data: 'showExposure'
         }, {
           data: 'donateAmount'
+        }, {
+          data: 'created_at'
         }, {
           data: 'action'
         }],

@@ -31,7 +31,6 @@ const app = new Vue({
         changeActivated(activated) {
             this.activated = activated;
             this.updateBorrowers(this.pageNum, true)
-
         },
         updateBorrowers(pageNum, first_page) {
             if (first_page) {
@@ -69,6 +68,7 @@ const app = new Vue({
                     $('#BorrowersDataTable').dataTable().fnAddData(this.borrowers);
                 }
                 this.refreshDeleteBtn();
+                this.refreshActivateBtn();
             }).catch(error => {
                 console.log(error);
             });
@@ -94,8 +94,35 @@ const app = new Vue({
                         axios.post($url, {
                             _method: 'DELETE'
                         }).then(response => {
-                            console.log(response);
                             $.showSuccessModal('刪除成功！');
+                            $vm.updateBorrowers($vm.pageNum, true);
+                        }).catch(error => {
+                            $.showErrorModal(error);
+                        });
+                    }
+                });
+            });
+        },
+        refreshActivateBtn() {
+            let $vm = this;
+            $('.activate-btn').click(function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: '注意！',
+                    text: "你確定要停權此借閱人嗎？",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '確認',
+                    cancelButtonText: '取消',
+                }).then((result) => {
+                    if (result.value) {
+                        $.showLoadingModal();
+                        let $url = $(this).next().html();
+                        axios.post($url).then(response => {
+                            $.showSuccessModal(response.data.message);
                             $vm.updateBorrowers($vm.pageNum, true);
                         }).catch(error => {
                             $.showErrorModal(error);
@@ -125,6 +152,7 @@ const app = new Vue({
                     { data: 'showAgencyName' },
                     { data: 'borrowCounts' },
                     { data: 'expiredCounts' },
+                    { data: 'created_at' },
                     { data: 'action' },
                 ],
                 lengthChange: false,
@@ -136,6 +164,7 @@ const app = new Vue({
             });
 
             this.refreshDeleteBtn();
+            this.refreshActivateBtn();
         });
     },
     mounted() {

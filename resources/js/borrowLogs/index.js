@@ -88,7 +88,7 @@ const app = new Vue({
                     { data: 'id' },
                     { data: 'borrower_name' },
                     { data: 'showTitle' },
-                    { data: 'callnum' },
+                    { data: 'showCallNum' },
                     { data: 'showStatus' },
                     { data: 'created_at' },
                     { data: 'action' },

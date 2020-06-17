@@ -64,6 +64,7 @@ Route::prefix('/backend')->group(function () {
     ]]);
 
     // 基本資料管理相關路由
+    Route::get('/information/donate', 'InformationController@showDonatePage')->name('information.donate');
     Route::resource('/information', 'InformationController', ['only' => [
         'index', 'edit'
     ]]);

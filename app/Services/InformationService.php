@@ -47,6 +47,35 @@ class InformationService extends BaseService
         return $information->id;
     }
 
+    public function donateImage($request){
+        $information = $this->getFirst();
+
+        if(!is_null($request->image_data) && !is_null($_FILES['image_file'])){
+            // 圖片路徑生成與裁切
+            $crop = new CropImageService($request->image_data, $_FILES['image_file'], 'informations');
+            $result = $crop->getResult();
+            if($result['status'] == 'ERROR'){
+                return [
+                    'status' => '422',
+                    'message' => $result['message']
+                ];
+            }else{
+                $url = $result['url'];
+            }
+        }else{
+            $url = $information->donate_image;
+        }
+
+        $information->donate_image = $url;
+        $information->save();
+
+        return [
+            'status' => '200',
+            'url' => route('information.donate'),
+            'image_url' => $url
+        ];
+    }
+
     public function recommendation_getFirst(){
         $books = BookEloquent::where("is_recommended", '>', 0)->orderBy('is_recommended')->get();
         $information = $this->getFirst();

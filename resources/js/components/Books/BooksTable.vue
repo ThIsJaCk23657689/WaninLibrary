@@ -11,7 +11,7 @@
                         <div class="row mb-3 justify-content-center">
                             <div class="col-md-3">
                                 <select name="status" id="status" class="form-control" @change="changeStatus">
-                                    <option value="0">全部書籍</option>
+                                    <option value="0">書籍狀態</option>
                                     <option value="1">在庫中</option>
                                     <option value="2">借出</option>
                                     <option value="3">逾期</option>
@@ -26,7 +26,7 @@
                             </div>
                             <div class="col-md-3">
                                 <select name="category" id="category" class="form-control" @change="changeCategory">
-                                    <option value="14">全部書籍</option>
+                                    <option value="14">書籍類別</option>
                                     <option value="0">000 總類</option>
                                     <option value="1">100 哲學類</option>
                                     <option value="2">200 宗教類</option>

@@ -768,7 +768,7 @@ var app = new Vue({
         }, {
           data: 'showTitle'
         }, {
-          data: 'callnum'
+          data: 'showCallNum'
         }, {
           data: 'showStatus'
         }, {

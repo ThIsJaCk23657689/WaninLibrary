@@ -37,7 +37,7 @@ class UserService extends BaseService
         $users = UserEloquent::get();
         $users_block = UserEloquent::onlyTrashed()->get();
         return [
-            'users' => $users, 
+            'users' => $users,
             'users_block' => $users_block
         ];
     }
@@ -128,9 +128,30 @@ class UserService extends BaseService
         }
 
         return [
-            'status' => 'OK', 
+            'status' => 'OK',
             'url' => route('users.index')
         ];
+    }
+
+    public function changeStatus($id){
+        $act_user = auth('api')->user();
+
+        $user = $this->getOne($id);
+
+        // 只有最高管理者可以操控
+        if($act_user->id == 1 && $id !=1){
+            if($user->status){
+                $user->status = 0;
+                $user->save();
+                Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 降級 編號：' . $user->id . '，姓名：' . $user->name . ' 為一般使用者。');
+            }else{
+                $user->status = 1;
+                $user->save();
+                Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 升級了 編號：' . $user->id . '，姓名：' . $user->name . ' 為管理者。');
+            }
+        }
+
+        return ['status'=>'OK','url'=>route('users.index')];
     }
 
     public function getlastupdate()

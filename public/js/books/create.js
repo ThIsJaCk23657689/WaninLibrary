@@ -553,18 +553,11 @@ __webpack_require__.r(__webpack_exports__);
         text: '1300 外文圖書'
       }],
       status_options: [{
-        id: null,
-        text: '請選擇...'
-      }, {
         id: 1,
         text: '可借閱'
-      }, {
-        id: 2,
-        text: '借閱中'
-      }, {
-        id: 3,
-        text: '逾期中'
-      }, {
+      }, // {id: 2, text: '借閱中'},
+      // {id: 3, text: '逾期中'},
+      {
         id: 4,
         text: '庫藏待上架'
       }, {
@@ -1919,7 +1912,7 @@ var render = function() {
                     attrs: {
                       uploadimg: _vm.uploadimg,
                       title: _vm.title,
-                      "aspect-ratio": 1 / 1,
+                      "aspect-ratio": 15 / 21,
                       prefix: "book"
                     }
                   })
@@ -2172,7 +2165,7 @@ var render = function() {
                     attrs: {
                       uploadimg: _vm.uploadimg,
                       title: _vm.title,
-                      "aspect-ratio": 1 / 1,
+                      "aspect-ratio": 15 / 21,
                       prefix: "papper"
                     }
                   })
