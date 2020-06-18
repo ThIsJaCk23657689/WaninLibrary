@@ -36,7 +36,13 @@ class BoughtBooksExport implements FromCollection, WithHeadings, WithColumnForma
     //注入資料
     public function collection()
     {
-        return Book::select('created_at', 'title', 'price')->where('donor_id', '=', null)->get();
+        $books = Book::select('created_at', 'title', 'price')->where('donor_id', '=', null)->get();
+        foreach($books as $book){
+            if($book->price == 0){
+                $book->price = '無';
+            }
+        }
+        return $books;
     }
 
     // public function collection()
