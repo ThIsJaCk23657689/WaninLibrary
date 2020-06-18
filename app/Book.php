@@ -70,10 +70,10 @@ class Book extends Model
                 $result = '庫藏待上架';
                 break;
             case config('book.status.ELIMINATED'):
-                $result = '已淘汰';
+                $result = '已淘汰'; //前台顯是為已轉贈02
                 break;
             case config('book.status.GIFTED'):
-                $result = '已轉贈';
+                $result = '已轉贈';  //前台顯是為已轉贈01
                 break;
             case config('book.status.WAITINGFORTAKE'):
                 $result = '可供免費索取';

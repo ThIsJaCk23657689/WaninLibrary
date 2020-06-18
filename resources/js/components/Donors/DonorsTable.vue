@@ -49,7 +49,7 @@
                 <table id="DonorsDataTable" class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>編號</th>
+                            <th>序號</th>
 							<th>捐贈人(單位)名稱</th>
 							<th>聯絡方式</th>
 							<th>曝光程度</th>

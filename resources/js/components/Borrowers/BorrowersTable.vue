@@ -57,7 +57,7 @@
                 <table id="BorrowersDataTable" class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>編號</th>
+                            <th>序號</th>
                             <th>姓名</th>
                             <th>電話</th>
                             <th>隸屬單位</th>
