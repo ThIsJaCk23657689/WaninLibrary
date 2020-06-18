@@ -15,7 +15,7 @@
                         <div class="form-group row">
                             <label for="donor_name" class="col-md-4 col-form-label text-md-right">
                                 <span class="text-danger">*</span>
-                                名稱
+                                捐贈人(單位)名稱
                             </label>
 
                             <div class="col-md-6">

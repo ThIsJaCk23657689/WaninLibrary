@@ -49,7 +49,7 @@ export default {
 		},
 
 		redemption: _.debounce((barcode, vm) => {
-			$.showLoadingModal("歸還書本中...");
+			$.showLoadingModal("歸還書籍中...");
 			axios.post(vm.ReturnBookURL, {
 				barcode: escape(barcode)
 			}).then(response => {

@@ -26,7 +26,7 @@
                             </div>
                         </div>
                         <div :id="'book_select_' + index" style="display: none;">
-                            <select-book-custom ref="BookOption" :select-index="index" :placeholder="'請輸入書本名稱'" @search="onSearch" @update-value="updateValue"></select-book-custom>
+                            <select-book-custom ref="BookOption" :select-index="index" :placeholder="'請輸入書籍名稱'" @search="onSearch" @update-value="updateValue"></select-book-custom>
                         </div>
                     </div>
                 </div>
@@ -66,7 +66,7 @@ export default {
             }
     },
     methods: {
-		// 及時搜尋書本
+		// 及時搜尋書籍
         onSearch(search, loading, index) {
             loading(true);
             this.search(loading, search, this, index);
@@ -115,7 +115,7 @@ export default {
 			return result;
 		},
 
-		// 查看是否有書本被重複選擇到
+		// 查看是否有書籍被重複選擇到
 		isRepeat(array){
 			let result = false;
 			for(let i = 0; i < array.length; i++){
@@ -135,15 +135,15 @@ export default {
 
 		// 發送修改拾本好書request
         recommendationUpdateForm(e) {
-			// 如果 this.books 是空的，代表一筆資料都沒有，所以必須要一口氣新增所有的書本書單(10本)。
+			// 如果 this.books 是空的，代表一筆資料都沒有，所以必須要一口氣新增所有的書籍書單(10本)。
 			if(this.books.length == 0 && this.countingNull(this.bookValues) != 0){
 				$.showErrorModalWithoutError('10本好書都必須要填寫好哦！');
 				return false;
             }
 
-			// 不可以選擇到重複的書本。
+			// 不可以選擇到重複的書籍。
 			if(this.isRepeat(this.bookValues)){
-				$.showErrorModalWithoutError('請不要重複選擇書本。');
+				$.showErrorModalWithoutError('請不要重複選擇書籍。');
 				return false;
             }
 
