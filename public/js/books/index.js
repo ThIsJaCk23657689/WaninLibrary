@@ -336,15 +336,15 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "1" } }, [
-                              _vm._v("在庫中")
+                              _vm._v("可借閱")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "2" } }, [
-                              _vm._v("借出")
+                              _vm._v("借閱中")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "3" } }, [
-                              _vm._v("逾期")
+                              _vm._v("逾期中")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "4" } }, [
@@ -360,7 +360,7 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "7" } }, [
-                              _vm._v("待索取")
+                              _vm._v("可供免費索取")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "8" } }, [

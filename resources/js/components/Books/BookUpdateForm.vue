@@ -467,8 +467,8 @@ export default {
             ],
             status_options:[
                 {id: 1, text: '可借閱'},
-                // {id: 2, text: '借閱中'},
-                // {id: 3, text: '逾期中'},
+                {id: 2, text: '借閱中'},
+                {id: 3, text: '逾期中'},
                 {id: 4, text: '庫藏待上架'},
                 {id: 5, text: '已淘汰'},
                 {id: 6, text: '已轉贈'},

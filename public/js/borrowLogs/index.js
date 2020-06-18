@@ -322,11 +322,11 @@ var render = function() {
                           },
                           [
                             _c("option", { attrs: { value: "5" } }, [
-                              _vm._v("全部書籍")
+                              _vm._v("書籍狀態")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "1" } }, [
-                              _vm._v("出借")
+                              _vm._v("借閱中")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "2" } }, [
@@ -334,11 +334,11 @@ var render = function() {
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "3" } }, [
-                              _vm._v("逾期過久")
+                              _vm._v("逾期過久無法討回")
                             ]),
                             _vm._v(" "),
                             _c("option", { attrs: { value: "4" } }, [
-                              _vm._v("逾期")
+                              _vm._v("逾期中")
                             ])
                           ]
                         )
@@ -404,7 +404,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table mr-2" }),
-      _vm._v("借還書紀錄\n        ")
+      _vm._v("借還書紀錄\r\n        ")
     ])
   },
   function() {
@@ -471,7 +471,7 @@ var staticRenderFns = [
         { staticClass: "btn btn-block btn-primary", attrs: { type: "submit" } },
         [
           _vm._v(
-            "\n                                    確認\n                                "
+            "\r\n                                    確認\r\n                                "
           )
         ]
       )

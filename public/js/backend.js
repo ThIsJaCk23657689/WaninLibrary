@@ -2098,7 +2098,7 @@ __webpack_require__.r(__webpack_exports__);
       this.redemption(barcode, this);
     },
     redemption: _.debounce(function (barcode, vm) {
-      $.showLoadingModal("歸還書本中...");
+      $.showLoadingModal("歸還書籍中...");
       axios.post(vm.ReturnBookURL, {
         barcode: escape(barcode)
       }).then(function (response) {

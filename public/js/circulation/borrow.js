@@ -370,7 +370,7 @@ __webpack_require__.r(__webpack_exports__);
             if (book.barcode == $book.barcode) {
               isRepeated = true;
             }
-          }); // 再判斷此書狀態是否可以出借。
+          }); // 再判斷此書狀態是否可以借出。
 
 
           if ($book.status != 1) {

@@ -2,20 +2,20 @@
 
 @push('CustomJS')
     <script src="{{ asset('js/circulation/borrow.js') }}" defer></script>
-@endpush   
+@endpush
 
 @section('content')
-				
+
 	@component('components.breadcrumbs')
 		<li class="breadcrumb-item">
 			<a href="#">{{ __('Circulation') }}</a>
 		</li>
 		<li class="breadcrumb-item">
-			<a href="{{ route('circulation') }}">書籍出借</a>
+			<a href="{{ route('circulation') }}">書籍借出</a>
 		</li>
 		<li class="breadcrumb-item active">{{ __('Index') }}</li>
     @endcomponent
-    
+
     <div id="circulation">
 		<span id="BorrowersFilterURL" class="d-none">{{ route('borrowers.filter') }}</span>
 		<span id="getBookDataByBarcode" class="d-none">{{ route('books.barcode.json') }}</span>

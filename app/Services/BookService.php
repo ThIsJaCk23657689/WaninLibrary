@@ -241,6 +241,7 @@ class BookService extends BaseService
         }else{
             $status = $request->status;
         }
+
         $book->update([
             'donor_id' => $request->donor_id,
             // 'barcode' => $request->barcode,

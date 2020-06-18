@@ -280,7 +280,7 @@ export default {
                         }
                     });
 
-                    // 再判斷此書狀態是否可以出借。
+                    // 再判斷此書狀態是否可以借出。
                     if($book.status != 1){
                         $.showWarningModal('此書籍狀態為：' + $book.showStatus + '，所以無法進行借閱！');
                         return false;

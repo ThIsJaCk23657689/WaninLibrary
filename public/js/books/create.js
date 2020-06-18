@@ -3065,7 +3065,7 @@ var staticRenderFns = [
         [
           _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
           _vm._v(
-            "\n                                名稱\n                            "
+            "\r\n                                捐贈人(單位)名稱\r\n                            "
           )
         ]
       ),
@@ -3276,7 +3276,7 @@ var staticRenderFns = [
         [
           _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
           _vm._v(
-            "\n                                曝光程度\n                            "
+            "\r\n                                曝光程度\r\n                            "
           )
         ]
       ),
@@ -3335,7 +3335,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                                    確認新增\n                                "
+              "\r\n                                    確認新增\r\n                                "
             )
           ]
         ),
@@ -3348,7 +3348,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                                    取消\n                                "
+              "\r\n                                    取消\r\n                                "
             )
           ]
         )

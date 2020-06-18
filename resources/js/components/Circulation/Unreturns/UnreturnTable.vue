@@ -2,7 +2,7 @@
 <div>
     <div class="card mb-3">
         <div class="card-header">
-            <i class="fas fa-table mr-2"></i>目前已出借和逾期列表
+            <i class="fas fa-table mr-2"></i>目前已借出和逾期列表
         </div>
         <div class="card-body">
             <div class="table-responsive">

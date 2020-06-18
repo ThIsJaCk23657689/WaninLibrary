@@ -12,13 +12,13 @@
                             <div class="col-md-3">
                                 <select name="status" id="status" class="form-control" @change="changeStatus">
                                     <option value="0">書籍狀態</option>
-                                    <option value="1">在庫中</option>
-                                    <option value="2">借出</option>
-                                    <option value="3">逾期</option>
+                                    <option value="1">可借閱</option>
+                                    <option value="2">借閱中</option>
+                                    <option value="3">逾期中</option>
                                     <option value="4">庫藏待上架</option>
                                     <option value="5">已淘汰</option>
                                     <option value="6">已轉贈</option>
-                                    <option value="7">待索取</option>
+                                    <option value="7">可供免費索取</option>
                                     <option value="8">已被索取</option>
                                     <option value="9">無外借</option>
                                     <option value="10">無歸還</option>

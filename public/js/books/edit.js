@@ -593,9 +593,13 @@ __webpack_require__.r(__webpack_exports__);
       status_options: [{
         id: 1,
         text: '可借閱'
-      }, // {id: 2, text: '借閱中'},
-      // {id: 3, text: '逾期中'},
-      {
+      }, {
+        id: 2,
+        text: '借閱中'
+      }, {
+        id: 3,
+        text: '逾期中'
+      }, {
         id: 4,
         text: '庫藏待上架'
       }, {
