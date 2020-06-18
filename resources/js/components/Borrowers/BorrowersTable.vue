@@ -24,6 +24,13 @@
                                     <option value="1">未停權</option>
                                 </select>
                             </div>
+                            <div class="col-md-3">
+                                <select name="orderby" id="orderby" class="form-control" @change="changeOrder">
+                                    <option value="2">排序方式</option>
+                                    <option value="2">建立日期(新->舊)</option>
+                                    <option value="1">建立日期(舊->新)</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="row justify-content-center">
@@ -93,13 +100,18 @@ export default {
             let status = e.target.value;
             this.$emit('change-status', status);
         },
+        changeOrder(e){
+            let orderby = e.target.value;
+            this.$emit('change-order', orderby);
+        },
         changeKeywordsType(e){
             let data = $(e.target).serializeObject();
             let keywords = data.keywords;
             let type = data.type;
             let activated = data.activated;
             let status = data.status;
-            this.$emit('change-keywords-type', keywords, type, status, activated);
+            let orderby = data.orderby;
+            this.$emit('change-keywords-type', keywords, type, status, activated, orderby);
         },
         changeActivated: function(e){
             let activated = e.target.value;

@@ -44,17 +44,18 @@ class DonorService extends BaseService
         }
         $take = $request->take ?? 10;
         $type = $request->type ?? 0;
+        $orderby = $request->orderby ?? 2;
         $exposure = $request->exposure ?? 0;
         $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
 
         $type_arr = ['','name', 'tel', 'cellphone', 'email'];
 
         // 搜尋
-        if($keywords == [] && $exposure== 0 && $type== 0){
+        if($keywords == [] && $exposure== 0 && $type== 0 && $orderby == 2){
             // all default
             $donorsModel = new DonorEloquent();
             $count = $donorsModel->count();
-            $donors = $donorsModel->skip($skip)->take($take)->get();
+            $donors = $donorsModel->orderBy('created_at','desc')->skip($skip)->take($take)->get();
 
         }else{
             $donorsModel = DonorEloquent::query()->where(function ($query) use ($keywords, $type, $exposure, $type_arr) {
@@ -78,11 +79,16 @@ class DonorService extends BaseService
                 $donorsModel->where('exposure', $exposure);
             }
             $count = $donorsModel->count();
-            $donors = $donorsModel->skip($skip)->take($take)->get();
+            if($orderby == 2){ //DESC
+                $donors = $donorsModel->orderBy('created_at','desc')->skip($skip)->take($take)->get();
+            }else { //ASC
+                $donors = $donorsModel->orderBy('created_at','asc')->skip($skip)->take($take)->get();
+            }
 
         }
-
+        $c = 1;
         foreach($donors as $donor){
+            $donor['index'] = $skip + $c;
             $donor['showContact'] = $donor->showContact();
             $donor['showExposure'] = $donor->showExposure();
             $donor['donateAmount'] = $donor->books()->count();
@@ -97,6 +103,7 @@ class DonorService extends BaseService
                 <button type="button" class="btn btn-md btn-danger delete-btn"><i class="far fa-trash-alt"></i></button type="button">
                 <span class="d-none">' . route('donors.destroy', [$donor->id]) . '</span>';
             }
+            $c ++;
         }
         return [
             'donors' => $donors,

@@ -63,11 +63,21 @@ class BookController extends Controller
     }
 
     public function destroy($id){
-        $this->BookService->delete($id);
-        return response()->json([
-            'status' => 'OK',
-            'url' => route('books.index')
-        ], 200);
+        $book = $this->BookService->getOne($id);
+        if($book->status != 2 && $book->status != 3){
+            return response()->json([
+                'status' => 'OK',
+                'message' => '此書籍為借閱中或逾期中，因此不能刪除',
+                'url' => route('books.index')
+            ], 400);
+        }else{
+            $this->BookService->delete($id);
+            return response()->json([
+                'status' => 'OK',
+                'url' => route('books.index')
+            ], 200);
+        }
+
     }
 
     // API

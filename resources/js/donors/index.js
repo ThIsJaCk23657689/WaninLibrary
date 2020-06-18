@@ -11,15 +11,21 @@ const app = new Vue({
             donors: [],
             DataTotalCount: 0,
             exposure: 0,
+            orderby: 2,
             type: 0,
             keywords: '',
         }
     },
     methods: {
-        changeKeywordsType(keywords, type, exposure) {
+        changeKeywordsType(keywords, type, exposure, orderby) {
             this.exposure = exposure;
             this.keywords = keywords;
+            this.orderby = orderby;
             this.type = type;
+            this.updateDonors(this.pageNum, true)
+        },
+        changeOrder(orderby) {
+            this.orderby = orderby;
             this.updateDonors(this.pageNum, true)
         },
         changeExposure(exposure) {
@@ -38,6 +44,7 @@ const app = new Vue({
             let exposure = this.exposure;
             let keywords = this.keywords;
             let type = this.type;
+            let orderby = this.orderby;
 
             let DonorsGetList = $('#DonorsGetList').html();
             $('.dataTables_processing', $('#DonorsDataTable').closest('.dataTables_wrapper')).fadeIn();
@@ -49,6 +56,7 @@ const app = new Vue({
                     type: type,
                     exposure: exposure,
                     first_page: first_page,
+                    orderby: orderby,
                 }
             }).then(response => {
                 this.donors = response.data.donors;
@@ -110,7 +118,7 @@ const app = new Vue({
             }).dataTable({
                 data: this.donors,
                 columns: [
-                    { data: 'id' },
+                    { data: 'index' },
                     { data: 'name' },
                     { data: 'showContact' },
                     { data: 'showExposure' },
@@ -123,7 +131,8 @@ const app = new Vue({
                 pageLength: this.rowsPerPage,
                 info: false,
                 paging: false,
-                processing: true
+                processing: true,
+                "ordering": false
             });
             this.refreshDeleteBtn();
         });

@@ -5,12 +5,35 @@ namespace App\Exports;
 use App\Book;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
 use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class DonatedExport implements FromCollection, WithHeadings, ShouldAutoSize, WithColumnFormatting
+
+
+class DonatedExport implements FromCollection, WithHeadings,  WithColumnFormatting, WithEvents
 {
+
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class    => function(AfterSheet $event) {
+                $cellRange = 'A1:W1'; // All headers
+                // 標頭字體放大
+                $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(14);
+                // 日期
+                $event->sheet->getDelegate()->getColumnDimension('A')->setAutoSize(true);
+                // 捐贈人姓名
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(18);
+                // 書名
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(80);
+                // 書本狀態
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(15);
+
+            },
+        ];
+    }
     /**
     * @return \Illuminate\Support\Collection
     */
@@ -24,12 +47,13 @@ class DonatedExport implements FromCollection, WithHeadings, ShouldAutoSize, Wit
         return $books;
     }
 
+
     public function headings(): array
     {
         return [
             '日期',
             '捐贈人姓名',
-            '書名', 
+            '書名',
             '書本狀態'
         ];
     }

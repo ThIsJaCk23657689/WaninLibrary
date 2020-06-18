@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\DonorRequest;
 use App\Services\DonorService;
+use Illuminate\Validation\Rule;
 
 class DonorController extends Controller
 {
@@ -73,7 +74,11 @@ class DonorController extends Controller
             'keywords' => 'nullable|string|',
             'exposure' => 'nullable|integer|', //(default)0.all  1.完全公開 2.半公開 3.前台不曝光
             'skip' => 'nullable|integer|',
-            'take' => 'nullable|integer|max:100'
+            'take' => 'nullable|integer|max:100',
+            'orderby' => [
+                'nullable',
+                Rule::in([1, 2, 0]), //  1.建立日期(舊->新) 2.建立日期(新->舊)
+            ],
         ]);
 
         $result = $this->DonorService->getList($request);

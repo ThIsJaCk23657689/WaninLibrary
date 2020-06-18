@@ -30,7 +30,7 @@
         <span id="BorrowersGetList" class="d-none">{{ route('borrowers.getList') }}</span>
 
         <borrowers-table :borrowers="borrowers" :rows-per-page="rowsPerPage" :page-num="pageNum" :total-page="totalPage"
-        v-on:update-borrowers="updateBorrowers" v-on:change-status="changeStatus" v-on:change-activated="changeActivated"
+        v-on:update-borrowers="updateBorrowers" v-on:change-status="changeStatus" v-on:change-order="changeOrder" v-on:change-activated="changeActivated"
         v-on:change-keywords-type="changeKeywordsType"></borrowers-table>
 	</div>
 

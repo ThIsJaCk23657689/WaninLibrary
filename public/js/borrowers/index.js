@@ -174,6 +174,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['borrowers', 'rowsPerPage', 'pageNum', 'totalPage'],
   data: function data() {
@@ -187,13 +194,18 @@ __webpack_require__.r(__webpack_exports__);
       var status = e.target.value;
       this.$emit('change-status', status);
     },
+    changeOrder: function changeOrder(e) {
+      var orderby = e.target.value;
+      this.$emit('change-order', orderby);
+    },
     changeKeywordsType: function changeKeywordsType(e) {
       var data = $(e.target).serializeObject();
       var keywords = data.keywords;
       var type = data.type;
       var activated = data.activated;
       var status = data.status;
-      this.$emit('change-keywords-type', keywords, type, status, activated);
+      var orderby = data.orderby;
+      this.$emit('change-keywords-type', keywords, type, status, activated, orderby);
     },
     changeActivated: function changeActivated(e) {
       var activated = e.target.value;
@@ -352,6 +364,30 @@ var render = function() {
                             ])
                           ]
                         )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c(
+                          "select",
+                          {
+                            staticClass: "form-control",
+                            attrs: { name: "orderby", id: "orderby" },
+                            on: { change: _vm.changeOrder }
+                          },
+                          [
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("排序方式")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("建立日期(新->舊)")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("建立日期(舊->新)")
+                            ])
+                          ]
+                        )
                       ])
                     ]
                   ),
@@ -387,7 +423,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table" }),
-      _vm._v("借閱人列表\r\n        ")
+      _vm._v("借閱人列表\n        ")
     ])
   },
   function() {
@@ -440,7 +476,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                                    確認\r\n                                "
+              "\n                                    確認\n                                "
             )
           ]
         )
@@ -657,9 +693,11 @@ var app = new Vue({
       borrowers: [],
       DataTotalCount: 0,
       status: 2,
+      orderby: 2,
       activated: 2,
       type: 0,
-      keywords: ''
+      keywords: '',
+      order_type: 'desc'
     };
   },
   methods: {
@@ -667,11 +705,16 @@ var app = new Vue({
       this.status = status;
       this.updateBorrowers(this.pageNum, true);
     },
-    changeKeywordsType: function changeKeywordsType(keywords, type, status, activated) {
+    changeOrder: function changeOrder(orderby) {
+      this.orderby = orderby;
+      this.updateBorrowers(this.pageNum, true);
+    },
+    changeKeywordsType: function changeKeywordsType(keywords, type, status, activated, orderby) {
       this.activated = activated;
       this.keywords = keywords;
       this.type = type;
       this.status = status;
+      this.orderby = orderby;
       this.updateBorrowers(this.pageNum, true);
     },
     changeActivated: function changeActivated(activated) {
@@ -691,6 +734,7 @@ var app = new Vue({
       var keywords = this.keywords;
       var type = this.type;
       var activated = this.activated;
+      var orderby = this.orderby;
       var skip = (pageNum - 1) * this.rowsPerPage;
       var take = this.rowsPerPage;
       var BorrowersGetList = $('#BorrowersGetList').html();
@@ -703,7 +747,8 @@ var app = new Vue({
           keywords: keywords,
           type: type,
           activated: activated,
-          first_page: first_page
+          first_page: first_page,
+          orderby: orderby
         }
       }).then(function (response) {
         _this.borrowers = response.data.borrowers;
@@ -792,6 +837,13 @@ var app = new Vue({
       _this4.DataTotalCount = response.data.DataTotalCount;
       _this4.totalPage = Math.ceil(_this4.DataTotalCount / _this4.rowsPerPage);
       _this4.borrowers = response.data.borrowers;
+
+      if (_this4.orderby == 2) {
+        _this4.order_type = 'desc';
+      } else {
+        _this4.order_type = 'asc';
+      }
+
       $('#BorrowersDataTable').on('draw.dt', function () {
         console.log('drawing a table');
       }).on('init.dt', function () {
@@ -799,7 +851,7 @@ var app = new Vue({
       }).dataTable({
         data: _this4.borrowers,
         columns: [{
-          data: 'id'
+          data: 'index'
         }, {
           data: 'name'
         }, {
@@ -820,7 +872,8 @@ var app = new Vue({
         pageLength: _this4.rowsPerPage,
         info: false,
         paging: false,
-        processing: true
+        processing: true,
+        "ordering": false
       });
 
       _this4.refreshDeleteBtn();

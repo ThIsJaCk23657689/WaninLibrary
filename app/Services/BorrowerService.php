@@ -51,16 +51,17 @@ class BorrowerService extends BaseService
         $take = $request->take ?? 10;
         $status = $request->status ?? 2;
         $activated = $request->activated ?? 2;
+        $orderby = $request->orderby ?? 2;
         $type = $request->type ?? 0;
         $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
 
          // 0. default 1.'agency_id', 2.'name', 3. 'email', 4. 'tel'
         $type_arr = ['', '', 'name', 'email', 'tel'];
 
-        if($keywords == [] && $status== 2 && $activated == 2 && $type == 0){
+        if($keywords == [] && $status== 2 && $activated == 2 && $type == 0 && $orderby == 2){
             $borrowers_tmp = new BorrowerEloquent();
             $count = $borrowers_tmp->count();
-            $borrowers = $borrowers_tmp->skip($skip)->take($take)->get();
+            $borrowers = $borrowers_tmp->orderBy('created_at','desc')->skip($skip)->take($take)->get();
         }else{
             $borrowers_tmp = BorrowerEloquent::query()->where(function ($query) use ($keywords, $type, $type_arr) {
 
@@ -106,12 +107,19 @@ class BorrowerService extends BaseService
                 $borrowers_tmp->where('activated', $activated);
             }
             $count = $borrowers_tmp->count();
-            $borrowers = $borrowers_tmp->skip($skip)->take($take)->get();
+            if($orderby == 2){ //DESC
+                $borrowers = $borrowers_tmp->orderBy('created_at','desc')->skip($skip)->take($take)->get();
+            }else { //ASC
+                $borrowers = $borrowers_tmp->orderBy('created_at','asc')->skip($skip)->take($take)->get();
+            }
+
 
         }
 
         $act_user = auth('api')->user();
+        $c = 1;
         foreach ($borrowers as $borrower) {
+            $borrower['index'] = $skip + $c;
             $borrower['showAgencyName'] = $borrower->showAgencyName();
             $borrower['borrowCounts'] = $borrower->borrowCounts();
             $borrower['expiredCounts'] = $borrower->expiredCounts();
@@ -129,6 +137,7 @@ class BorrowerService extends BaseService
                                             <span class="d-none">' . route('borrowers.activate', [$borrower->id]) . '</span>';
                 }
             }
+            $c ++;
         }
         $res = ['borrowers' => $borrowers, 'count' => $count];
         return $res;

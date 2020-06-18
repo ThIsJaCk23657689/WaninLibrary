@@ -108,6 +108,10 @@ class BorrowerController extends Controller
                 'nullable',
                 Rule::in([1, 2, 0]), // 0.一般民眾 1.符合社福資格 2.全部
             ],
+            'orderby' => [
+                'nullable',
+                Rule::in([1, 2, 0]), //  1.建立日期(舊->新) 2.建立日期(新->舊)
+            ],
             'activated' => [
                 'nullable',
                 Rule::in([1, 2, 0]), // 0.停權 1.未停權 2.全部

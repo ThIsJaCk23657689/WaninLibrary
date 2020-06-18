@@ -35,6 +35,10 @@ class StatisticController extends Controller
 
     public function boughtBooksExport()
     {
+
+        // $sheet = new BoughtBooksExport();
+        // $sheet->setAutoSize(true);
+        // return Excel::download($sheet, 'bought_books.xlsx');
         return Excel::download(new BoughtBooksExport, 'bought_books.xlsx');
     }
 

@@ -30,7 +30,7 @@
 		<span id="DonorsGetList" class="d-none">{{ route('donors.getList') }}</span>
 
         <donors-table :donors="donors" :rows-per-page="rowsPerPage" :page-num="pageNum" :total-page="totalPage" v-on:update-donors="updateDonors"
-        v-on:change-keywords-type="changeKeywordsType" v-on:change-exposure="changeExposure"></donors-table>
+        v-on:change-keywords-type="changeKeywordsType" v-on:change-exposure="changeExposure" v-on:change-order="changeOrder"></donors-table>
 	</div>
 
 @endsection

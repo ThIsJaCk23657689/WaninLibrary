@@ -11,9 +11,11 @@ const app = new Vue({
             borrowers: [],
             DataTotalCount: 0,
             status: 2,
+            orderby: 2,
             activated: 2,
             type: 0,
             keywords: '',
+            order_type: 'desc'
         }
     },
     methods: {
@@ -21,11 +23,16 @@ const app = new Vue({
             this.status = status;
             this.updateBorrowers(this.pageNum, true)
         },
-        changeKeywordsType(keywords, type, status, activated) {
+        changeOrder(orderby) {
+            this.orderby = orderby;
+            this.updateBorrowers(this.pageNum, true)
+        },
+        changeKeywordsType(keywords, type, status, activated, orderby) {
             this.activated = activated;
             this.keywords = keywords;
             this.type = type;
             this.status = status;
+            this.orderby = orderby;
             this.updateBorrowers(this.pageNum, true)
         },
         changeActivated(activated) {
@@ -42,6 +49,7 @@ const app = new Vue({
             let keywords = this.keywords;
             let type = this.type;
             let activated = this.activated;
+            let orderby = this.orderby;
 
             let skip = (pageNum - 1) * this.rowsPerPage;
             let take = this.rowsPerPage;
@@ -57,6 +65,7 @@ const app = new Vue({
                     type: type,
                     activated: activated,
                     first_page: first_page,
+                    orderby: orderby,
                 }
             }).then(response => {
                 this.borrowers = response.data.borrowers;
@@ -139,6 +148,12 @@ const app = new Vue({
             this.totalPage = Math.ceil(this.DataTotalCount / this.rowsPerPage);
             this.borrowers = response.data.borrowers;
 
+            if (this.orderby == 2) {
+                this.order_type = 'desc';
+            } else {
+                this.order_type = 'asc';
+            }
+
             $('#BorrowersDataTable').on('draw.dt', function() {
                 console.log('drawing a table');
             }).on('init.dt', function() {
@@ -146,7 +161,7 @@ const app = new Vue({
             }).dataTable({
                 data: this.borrowers,
                 columns: [
-                    { data: 'id' },
+                    { data: 'index' },
                     { data: 'name' },
                     { data: 'tel' },
                     { data: 'showAgencyName' },
@@ -160,7 +175,8 @@ const app = new Vue({
                 pageLength: this.rowsPerPage,
                 info: false,
                 paging: false,
-                processing: true
+                processing: true,
+                "ordering": false
             });
 
             this.refreshDeleteBtn();
