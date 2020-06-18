@@ -15,8 +15,8 @@ class CreateBorrowsTable extends Migration
     {
         Schema::create('borrows', function (Blueprint $table) {
             $table->bigIncrements('id')->comment('編號');
-            $table->unsignedBigInteger('borrower_id')->comment('借閱者編號');//若為空表示為購買書
-            $table->unsignedBigInteger('book_id')->comment('書籍編號');//若為空表示為購買書
+            $table->unsignedBigInteger('borrower_id')->comment('借閱者編號');
+            $table->unsignedBigInteger('book_id')->comment('書籍編號');
 
             $table->date('borrow_date')->comment('借閱日');
             $table->date('return_date')->comment('到期日');

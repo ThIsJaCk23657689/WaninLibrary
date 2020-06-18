@@ -84,7 +84,7 @@ class UserService extends BaseService
         ]);
 
         $act_user = auth('api')->user();
-        Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 後台修改了 編號：' . $user->id . '，姓名：' . $user->name . '。');
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 後台修改了 編號：' . $user->id . '，姓名：' . $user->name . '。');
 
         return [
             'status' => 'OK',
@@ -103,10 +103,10 @@ class UserService extends BaseService
         if($act_user->id != $id && $id !=1){
             if($user->trashed()){
                 $user->restore();
-                Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 解除了 編號：' . $user->id . '，姓名：' . $user->name . ' 的停權限制。');
+                Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 解除了 編號：' . $user->id . '，姓名：' . $user->name . ' 的停權限制。');
             }else{
                 $user->delete();
-                Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 停權了 編號：' . $user->id . '，姓名：' . $user->name . '。');
+                Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 停權了 編號：' . $user->id . '，姓名：' . $user->name . '。');
             }
         }
 
@@ -124,7 +124,7 @@ class UserService extends BaseService
             $user->loginLogs()->delete();
             $user->forceDelete();
 
-            Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 刪除了 編號：' . $user->id . '，姓名：' . $user->name . '。');
+            Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 刪除了 編號：' . $user->id . '，姓名：' . $user->name . '。');
         }
 
         return [
@@ -143,11 +143,11 @@ class UserService extends BaseService
             if($user->status){
                 $user->status = 0;
                 $user->save();
-                Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 降級 編號：' . $user->id . '，姓名：' . $user->name . ' 為一般使用者。');
+                Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 降級 編號：' . $user->id . '，姓名：' . $user->name . ' 為一般使用者。');
             }else{
                 $user->status = 1;
                 $user->save();
-                Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 升級了 編號：' . $user->id . '，姓名：' . $user->name . ' 為管理者。');
+                Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 升級了 編號：' . $user->id . '，姓名：' . $user->name . ' 為管理者。');
             }
         }
 

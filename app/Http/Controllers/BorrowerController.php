@@ -148,6 +148,7 @@ class BorrowerController extends Controller
         ]);
     }
 
+    // 這邊的借閱人搜尋是提供給書籍借出頁面中的(1.請選擇借閱人)所使用。
     public function filter(Request $request)
     {
         $this->validate($request, [
@@ -158,10 +159,29 @@ class BorrowerController extends Controller
             'take' => 'nullable|integer|max:100'
         ]);
 
+        if(is_null($request->name) && is_null($request->tel) && is_null($request->birthday)){
+            // 如果 搜尋欄位中的 姓名、電話、生日 三個欄位都為空值，就回傳 空陣列回去。
+            return response()->json([
+                'status' => 'OK',
+                'count' => 0,
+                'borrowers' => [],
+            ]);
+        }
+
         $result = $this->BorrowerService->filter($request);
         $borrowers = $result['borrowers'];
         foreach ($borrowers as $borrower){
             $borrower['getOneUrl'] = route('borrowers.getOne', [$borrower->id]);
+        }
+
+        if(!$result['totalCount'] || !$borrowers){
+            // 如果查詢後沒有任何資料，回傳訊息告訴使用者。
+            return [
+                'status' => 'OK',
+                'count' => $result['totalCount'],
+                'borrowers' => $borrowers,
+                'message' => '查無資料，換個關鍵字搜尋看看？'
+            ];
         }
 
         return response()->json([

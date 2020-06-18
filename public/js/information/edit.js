@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 35);
+/******/ 	return __webpack_require__(__webpack_require__.s = 36);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1075,14 +1075,14 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 35:
+/***/ 36:
 /*!************************************************!*\
   !*** multi ./resources/js/information/edit.js ***!
   \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\information\edit.js */"./resources/js/information/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\information\edit.js */"./resources/js/information/edit.js");
 
 
 /***/ })

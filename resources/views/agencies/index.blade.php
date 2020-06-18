@@ -61,10 +61,21 @@
 									</a>
 									<a href="#" class="btn btn-md btn-danger" onclick="
 										event.preventDefault();
-										ans = confirm('確定要刪除此單位嗎?');
-										if(ans){
-											$('#deleteform-{{ $agency->id }}').submit();
-										}
+
+										Swal.fire({
+											title: '注意！',
+											text: '您確定要刪除此單位嗎？',
+											icon: 'warning',
+											showCancelButton: true,
+											confirmButtonColor: '#3085d6',
+											cancelButtonColor: '#d33',
+											confirmButtonText: '確認',
+											cancelButtonText: '取消',
+										}).then((result) => {
+											if (result.value) {
+												$('#deleteform-{{ $agency->id }}').submit();
+											}
+										});
 									">
 										<i class="far fa-trash-alt"></i>
 									</a>

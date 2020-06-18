@@ -113,6 +113,10 @@ Route::prefix('/backend')->group(function(){
 
     // 顯示已借出和逾期之書本
     Route::get('circulation/unreturns','UnreturnController@getList')->name('unreturns.getList');
+    Route::get('/circulation/unreturns/{id}/json', 'UnreturnController@getOne')->name('unreturns.getOne');
+    Route::resource('/circulation/unreturns', 'UnreturnController', ['only' => [
+        'update',
+    ]]);
 });
 
 Route::group(['middleware' => 'auth.jwt'], function () {

@@ -4,7 +4,6 @@ namespace App\Services;
 use App\Information as InformationEloquent;
 use App\Book as BookEloquent;
 
-
 class InformationService extends BaseService
 {
     public function getFirst()

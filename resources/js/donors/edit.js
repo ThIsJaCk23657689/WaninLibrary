@@ -12,6 +12,8 @@ const app = new Vue({
     },
     created() {
         let DonorsGetOneURL = $('#DonorsGetOneURL').html();
+
+        $.showLoadingModal();
         axios.get(DonorsGetOneURL).then(response => {
             this.donor = response.data.donor;
 
@@ -23,6 +25,7 @@ const app = new Vue({
                 'district': response.data.donor.address_district,
                 'zipcode': response.data.donor.address_zipcode
             });
+            $.closeModal();
         });
     },
     mounted() {

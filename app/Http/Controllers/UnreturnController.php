@@ -10,10 +10,13 @@ class UnreturnController extends Controller
     public function __construct()
     {
         $this->middleware('auth.web')->only([
-            'index', 'create', 'show', 'edit',
+            'index', 'edit',
         ]);
         $this->middleware('auth.jwt')->only([
-            'getList',
+            'getList', 'getOne'
+        ]);
+        $this->middleware('admin.auth.jwt')->only([
+            'update',
         ]);
         $this->UnreturnService = new UnreturnService();
     }
@@ -27,34 +30,20 @@ class UnreturnController extends Controller
     public function getList(Request $request)
     {
         $unreturns = $this->UnreturnService->getList($request);
-        return response()->json($unreturns);
+        return response()->json([
+            'status' => 'OK',
+            'unreturns' => $unreturns['borrows'],
+            'DataTotalCount' => $unreturns['DataTotalCount'],
+        ]);
     }
 
-    public function create()
+    public function getOne($id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
+        $unreturn = $this->UnreturnService->getOne($id);
+        return response()->json([
+            'status' => 'OK',
+            'unreturn' => $unreturn,
+        ]);
     }
 
     /**
@@ -65,7 +54,8 @@ class UnreturnController extends Controller
      */
     public function edit($id)
     {
-        //
+        $unreturn = $this->UnreturnService->getOne($id);
+        return view('circulation.unreturns.edit', compact('unreturn'));
     }
 
     /**
@@ -77,17 +67,10 @@ class UnreturnController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($id)
-    {
-        //
+        $unreturn_id = $this->UnreturnService->update($request, $id);
+        return response()->json([
+            'status' => 'OK',
+            'url' => route('unreturns.index')
+        ], 200);
     }
 }

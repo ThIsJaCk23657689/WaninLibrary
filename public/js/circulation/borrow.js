@@ -213,6 +213,29 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: [],
   data: function data() {
@@ -223,9 +246,9 @@ __webpack_require__.r(__webpack_exports__);
       totalCount: 0,
       countPerPage: 5,
       keywords: {
-        name: null,
-        tel: null,
-        birthday: null
+        name: '',
+        tel: '',
+        birthday: ''
       },
       currentBorrower: [],
       historyBorrowRecords: [],
@@ -237,13 +260,13 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     onSearch: function onSearch(e) {
-      if (this.keywords.name != '' || this.keywords.tel != '' || this.keywords.birthday != '') {
-        this.search(this);
-      }
+      var loading = $(e.target).next();
+      this.search(loading, this);
     },
-    search: _.debounce(function (vm) {
-      vm.updateTable();
-    }, 600),
+    search: _.debounce(function (loading, vm) {
+      loading.fadeIn();
+      vm.updateTable(loading);
+    }, 500),
     // 更新借閱人搜尋頁碼
     updatePageNum: function updatePageNum(pageNum) {
       this.pageNum = pageNum;
@@ -253,8 +276,11 @@ __webpack_require__.r(__webpack_exports__);
     updateTable: function updateTable() {
       var _this = this;
 
+      var loading = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
+      this.borrowers = [];
+      this.totalCount = 0;
+      this.totalPage = 0;
       var BorrowersFilterURL = $('#BorrowersFilterURL').html();
-      $.showLoadingModal();
       axios.get(BorrowersFilterURL, {
         params: {
           name: this.keywords.name,
@@ -267,7 +293,16 @@ __webpack_require__.r(__webpack_exports__);
         _this.borrowers = response.data.borrowers;
         _this.totalCount = response.data.count;
         _this.totalPage = Math.ceil(_this.totalCount / _this.countPerPage);
-        $.closeModal();
+
+        if (loading != null) {
+          loading.fadeOut();
+        }
+
+        if (_this.keywords.name != '' || _this.keywords.tel != '' || _this.keywords.birthday != '') {
+          if (_this.totalCount == 0) {
+            $.showWarningModal(response.data.message);
+          }
+        }
       })["catch"](function (error) {
         console.error('抓取借閱人列表時發生錯誤，錯誤訊息：' + error);
         $.showErrorModal(error);
@@ -672,7 +707,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\n#borrowList tbody tr:nth-child(even){\n    background-color: #eee;\n}\n", ""]);
+exports.push([module.i, "\n#borrowList tbody tr:nth-child(even){\r\n    background-color: #eee;\n}\n.input-container{\r\n    position: relative;\n}\n.icon-container{\r\n    position: absolute;\r\n    right: 10px;\r\n    top: calc(50% - 14px);\n}\r\n", ""]);
 
 // exports
 
@@ -1347,34 +1382,42 @@ var render = function() {
                       _vm._v("姓名")
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.keywords.name,
-                          expression: "keywords.name"
+                    _c("div", { staticClass: "input-container" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.keywords.name,
+                            expression: "keywords.name"
+                          }
+                        ],
+                        staticClass: "form-control mb-2",
+                        attrs: {
+                          id: "search_name",
+                          name: "search_name",
+                          type: "text"
+                        },
+                        domProps: { value: _vm.keywords.name },
+                        on: {
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.keywords,
+                                "name",
+                                $event.target.value
+                              )
+                            },
+                            _vm.onSearch
+                          ]
                         }
-                      ],
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "search_name",
-                        name: "search_name",
-                        type: "text"
-                      },
-                      domProps: { value: _vm.keywords.name },
-                      on: {
-                        input: [
-                          function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.keywords, "name", $event.target.value)
-                          },
-                          _vm.onSearch
-                        ]
-                      }
-                    })
+                      }),
+                      _vm._v(" "),
+                      _vm._m(1)
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
@@ -1384,34 +1427,38 @@ var render = function() {
                       _vm._v("電話")
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.keywords.tel,
-                          expression: "keywords.tel"
+                    _c("div", { staticClass: "input-container" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.keywords.tel,
+                            expression: "keywords.tel"
+                          }
+                        ],
+                        staticClass: "form-control mb-2",
+                        attrs: {
+                          id: "search_tel",
+                          name: "search_tel",
+                          type: "text"
+                        },
+                        domProps: { value: _vm.keywords.tel },
+                        on: {
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(_vm.keywords, "tel", $event.target.value)
+                            },
+                            _vm.onSearch
+                          ]
                         }
-                      ],
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "search_tel",
-                        name: "search_tel",
-                        type: "text"
-                      },
-                      domProps: { value: _vm.keywords.tel },
-                      on: {
-                        input: [
-                          function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(_vm.keywords, "tel", $event.target.value)
-                          },
-                          _vm.onSearch
-                        ]
-                      }
-                    })
+                      }),
+                      _vm._v(" "),
+                      _vm._m(2)
+                    ])
                   ])
                 ]),
                 _vm._v(" "),
@@ -1421,39 +1468,43 @@ var render = function() {
                       _vm._v("生日")
                     ]),
                     _vm._v(" "),
-                    _c("input", {
-                      directives: [
-                        {
-                          name: "model",
-                          rawName: "v-model",
-                          value: _vm.keywords.birthday,
-                          expression: "keywords.birthday"
+                    _c("div", { staticClass: "input-container" }, [
+                      _c("input", {
+                        directives: [
+                          {
+                            name: "model",
+                            rawName: "v-model",
+                            value: _vm.keywords.birthday,
+                            expression: "keywords.birthday"
+                          }
+                        ],
+                        staticClass: "form-control mb-2",
+                        attrs: {
+                          id: "search_birthday",
+                          name: "search_birthday",
+                          type: "text",
+                          autocomplete: "off"
+                        },
+                        domProps: { value: _vm.keywords.birthday },
+                        on: {
+                          input: [
+                            function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.$set(
+                                _vm.keywords,
+                                "birthday",
+                                $event.target.value
+                              )
+                            },
+                            _vm.onSearch
+                          ]
                         }
-                      ],
-                      staticClass: "form-control mb-2",
-                      attrs: {
-                        id: "search_birthday",
-                        name: "search_birthday",
-                        type: "text",
-                        autocomplete: "off"
-                      },
-                      domProps: { value: _vm.keywords.birthday },
-                      on: {
-                        input: [
-                          function($event) {
-                            if ($event.target.composing) {
-                              return
-                            }
-                            _vm.$set(
-                              _vm.keywords,
-                              "birthday",
-                              $event.target.value
-                            )
-                          },
-                          _vm.onSearch
-                        ]
-                      }
-                    })
+                      }),
+                      _vm._v(" "),
+                      _vm._m(3)
+                    ])
                   ])
                 ])
               ]),
@@ -1490,7 +1541,7 @@ var render = function() {
                       [
                         _c("i", { staticClass: "fas fa-undo-alt mr-2" }),
                         _vm._v(
-                          "\n                                重新選擇借閱人\n                            "
+                          "\r\n                                重新選擇借閱人\r\n                            "
                         )
                       ]
                     )
@@ -1572,7 +1623,7 @@ var render = function() {
                       }
                     }),
                     _vm._v(" "),
-                    _vm._m(1)
+                    _vm._m(4)
                   ])
                 ])
               ]),
@@ -1588,7 +1639,7 @@ var render = function() {
                         "table",
                         { staticClass: "table", attrs: { id: "borrowList" } },
                         [
-                          _vm._m(2),
+                          _vm._m(5),
                           _vm._v(" "),
                           _c(
                             "tbody",
@@ -1635,7 +1686,7 @@ var render = function() {
                   staticClass: "form-group row justify-content-center",
                   attrs: { id: "submit_btn" }
                 },
-                [_vm._m(3)]
+                [_vm._m(6)]
               )
             : _vm._e()
         ]
@@ -1655,6 +1706,63 @@ var staticRenderFns = [
         _c("small", [_vm._v("請輸入姓名、電話或生日來找尋借閱人")])
       ])
     ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "icon-container", staticStyle: { display: "none" } },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "spinner-border spinner-border-sm text-dark",
+            attrs: { role: "status" }
+          },
+          [_c("span", { staticClass: "sr-only" }, [_vm._v("讀取中...")])]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "icon-container", staticStyle: { display: "none" } },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "spinner-border spinner-border-sm text-dark",
+            attrs: { role: "status" }
+          },
+          [_c("span", { staticClass: "sr-only" }, [_vm._v("讀取中...")])]
+        )
+      ]
+    )
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c(
+      "div",
+      { staticClass: "icon-container", staticStyle: { display: "none" } },
+      [
+        _c(
+          "div",
+          {
+            staticClass: "spinner-border spinner-border-sm text-dark",
+            attrs: { role: "status" }
+          },
+          [_c("span", { staticClass: "sr-only" }, [_vm._v("讀取中...")])]
+        )
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -1693,7 +1801,7 @@ var staticRenderFns = [
       _c(
         "button",
         { staticClass: "btn btn-block btn-primary", attrs: { type: "submit" } },
-        [_vm._v("\n                        確認\n                    ")]
+        [_vm._v("\r\n                        確認\r\n                    ")]
       )
     ])
   }
@@ -2466,7 +2574,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\circulation\borrow.js */"./resources/js/circulation/borrow.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\circulation\borrow.js */"./resources/js/circulation/borrow.js");
 
 
 /***/ })

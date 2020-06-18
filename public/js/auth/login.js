@@ -161,22 +161,22 @@ __webpack_require__.r(__webpack_exports__);
   mounted: function mounted() {
     $('#login_form').submit(function (e) {
       e.preventDefault();
+      $.showLoadingModal('驗證帳戶資訊中...');
+      $('#login_form input.is-invalid').removeClass('is-invalid');
+      $('#LoginBtn').attr('disabled', true);
       var url = $('#LoginAPI').html();
       var data = $(this).serializeObject();
-      $('#login_form input.is-invalid').removeClass('is-invalid');
       axios.post(url, data).then(function (response) {
-        console.log(response.data);
-
         if ($('#IntendedURL').html() != '' && $('#IntendedURL').html() != null) {
           location.href = $('#IntendedURL').html();
         } else {
           location.href = response.data.redirect_url;
         }
       })["catch"](function (error) {
-        console.error('登入失敗，錯誤訊息：' + error); // console.error(error.response);
+        console.error('登入失敗，錯誤訊息：' + error);
 
         if (error.response.data.errors == null) {
-          alert('登入失敗，錯誤訊息：' + error.response.data.message + '\n請聯絡系統設計師處理。');
+          $.showErrorModalWithoutError('登入失敗，錯誤訊息：' + error.response.data.message + '\n請聯絡系統設計師處理。');
         } else {
           console.error(error.response.data.errors);
           var $key = Object.keys(error.response.data.errors);
@@ -229,11 +229,11 @@ var render = function() {
                     "button",
                     {
                       staticClass: "btn btn-primary",
-                      attrs: { type: "submit" }
+                      attrs: { id: "LoginBtn", type: "submit" }
                     },
                     [
                       _vm._v(
-                        "\n                                登入\n                            "
+                        "\r\n                                登入\r\n                            "
                       )
                     ]
                   ),
@@ -246,7 +246,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                                忘記密碼？\n                            "
+                        "\r\n                                忘記密碼？\r\n                            "
                       )
                     ]
                   )
@@ -567,7 +567,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\auth\login.js */"./resources/js/auth/login.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\auth\login.js */"./resources/js/auth/login.js");
 
 
 /***/ })

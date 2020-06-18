@@ -54,7 +54,7 @@ Route::prefix('/backend')->group(function () {
     Route::get('/circulation', 'BorrowController@circulation')->name('circulation');
     Route::get('/circulation/borrow', 'BorrowController@showBorrowPage')->name('circulation.showBorrowPage');
     Route::resource('/circulation/unreturns', 'UnreturnController', ['only' => [
-        'index', 'show', 'create', 'edit'
+        'index', 'edit'
     ]]);
 
     // 使用者帳號管理相關路由

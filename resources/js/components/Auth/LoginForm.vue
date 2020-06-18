@@ -39,7 +39,7 @@
 
                     <div class="form-group row mb-0">
                         <div class="col-md-8 offset-md-4">
-                            <button type="submit" class="btn btn-primary">
+                            <button id="LoginBtn" type="submit" class="btn btn-primary">
                                 登入
                             </button>
 
@@ -66,12 +66,14 @@ export default {
         $('#login_form').submit(function(e){
             e.preventDefault();
 
+            $.showLoadingModal('驗證帳戶資訊中...');
+            $('#login_form input.is-invalid').removeClass('is-invalid')
+            $('#LoginBtn').attr('disabled', true);
+            
             let url = $('#LoginAPI').html();
             let data = $(this).serializeObject();
-
-            $('#login_form input.is-invalid').removeClass('is-invalid')
+            
             axios.post(url, data).then(response => {
-                console.log(response.data);
                 if($('#IntendedURL').html() != '' &&  $('#IntendedURL').html() != null){
                     location.href = $('#IntendedURL').html();
                 }else{
@@ -79,9 +81,8 @@ export default {
                 }
             }).catch((error) => {
                 console.error('登入失敗，錯誤訊息：' + error);
-                // console.error(error.response);
                 if(error.response.data.errors == null){
-                    alert('登入失敗，錯誤訊息：' + error.response.data.message + '\n請聯絡系統設計師處理。');
+                    $.showErrorModalWithoutError('登入失敗，錯誤訊息：' + error.response.data.message + '\n請聯絡系統設計師處理。');
                 }else{
                     console.error(error.response.data.errors);
                     let $key = Object.keys(error.response.data.errors);

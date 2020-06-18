@@ -42,7 +42,7 @@ class JWTAuthService extends BaseService
 
         if($user){
             $act_user = auth('api')->user();
-            Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 後台註冊了 編號：' . $user->id . '，姓名：' . $user->name . '。');
+            Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 後台註冊了 編號：' . $user->id . '，姓名：' . $user->name . '。');
             return $user;
         }else{
             return "failed";

@@ -33,7 +33,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="birthday">生日</label>
-                            <input id="birthday" name="birthday" type="text" class="form-control" v-model="donor.birthday">
+                            <input id="birthday" name="birthday" type="text" class="form-control" v-model="donor.birthday" autocomplete="off">
                         </div>
                     </div>
 
@@ -103,7 +103,6 @@
             </form>
         </div>
     </div>
-    <loading-modal ref="loadingModal"></loading-modal>
 </div>
 </template>
 
@@ -121,12 +120,12 @@ export default {
             let url = this.DonorsUpdateURL;
             let data = $(e.target).serializeObject();
 
-            this.$refs.loadingModal.initalModal();
+            $.showLoadingModal();
             axios.patch(url, data).then(response => {
-                this.$refs.loadingModal.successfulResponse('編輯成功', response.data.url);
+                $.showSuccessModal('編輯成功', response.data.url);
             }).catch((error) => {
                 console.error('編輯借閱人時發生錯誤，錯誤訊息：' + error);
-                this.$refs.loadingModal.failureResponse(error);
+                $.showErrorModal(error);
             });
         }
     },
@@ -134,11 +133,12 @@ export default {
 
     },
     mounted(){
-        // 地址
-        // $('#address_twzipcode').twzipcode({
-        //     'readonly': false
-        // });
-
+        $("#birthday").datepicker({
+            dateFormat: 'yy-mm-dd',
+            changeYear: true,
+            changeMonth: true,
+            yearRange: "-80:+0",
+        });
     }
 }
 </script>

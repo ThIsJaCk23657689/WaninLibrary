@@ -50,6 +50,7 @@ mix.js('resources/js/backend.js', 'public/js')
 .js('resources/js/circulation/index.js', 'public/js/circulation')
     .js('resources/js/circulation/borrow.js', 'public/js/circulation')
     .js('resources/js/circulation/unreturns/index.js', 'public/js/circulation/unreturns')
+    .js('resources/js/circulation/unreturns/edit.js', 'public/js/circulation/unreturns')
 
 .js('resources/js/loginLogs/index.js', 'public/js/loginLogs')
 

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use App\Book as BookEloquent;
 use App\Services\CropImageService;
 use Exception;
-use Illuminate\Support\Facades\Log;
+use Log;
 
 class BookService extends BaseService
 {
@@ -68,6 +68,9 @@ class BookService extends BaseService
             'content' => $request->content,
             'count' => 0,
         ]);
+
+        $act_user = auth('api')->user();
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 新增了一筆書籍，編號為：' . $book->id . '。');
 
         return [
             'status' => '200',
@@ -266,6 +269,9 @@ class BookService extends BaseService
             // 'count' => $request->count,
         ]);
 
+        $act_user = auth('api')->user();
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 編輯了一筆書籍，編號為：' . $book->id . '。');
+
         return [
             'status' => 200,
             'book_id' => $book->id,
@@ -278,6 +284,9 @@ class BookService extends BaseService
     public function delete($id){
         $book = $this->getOne($id);
         $book->delete();
+
+        $act_user = auth('api')->user();
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 刪除了一筆書籍，編號為：' . $book->id . '，名稱為：' . $book->title . '。');
     }
 
     public function getBookDataByBarcode($barcode) {

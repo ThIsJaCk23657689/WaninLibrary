@@ -19,7 +19,7 @@ class LoginLogService extends BaseService
             'content' => '系統於24小時後自動登出',
         ]);
 
-        Log::info('編號：' . $user->id . '，姓名：' . $user->name . '登入了後台。', ['IP' => $this->getLoggingIP()]);
+        Log::channel('trace')->info('編號：' . $user->id . '，姓名：' . $user->name . ' 登入了後台。', ['IP' => $this->getLoggingIP()]);
     }
 
     public function update(){
@@ -31,7 +31,7 @@ class LoginLogService extends BaseService
             'logout_date' => Carbon::now(),
         ]);
 
-        Log::info('編號：' . $user->id . '，姓名：' . $user->name . '登出了後台。', ['IP' => $this->getLoggingIP()]);
+        Log::channel('trace')->info('編號：' . $user->id . '，姓名：' . $user->name . ' 登出了後台。', ['IP' => $this->getLoggingIP()]);
     }
 
     public function getList(){

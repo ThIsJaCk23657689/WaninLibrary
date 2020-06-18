@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 36);
+/******/ 	return __webpack_require__(__webpack_require__.s = 37);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -364,7 +364,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                            確認修改\n                        "
+              "\r\n                            確認修改\r\n                        "
             )
           ]
         )
@@ -754,14 +754,14 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 36:
+/***/ 37:
 /*!**************************************************!*\
   !*** multi ./resources/js/information/donate.js ***!
   \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\information\donate.js */"./resources/js/information/donate.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\information\donate.js */"./resources/js/information/donate.js");
 
 
 /***/ })

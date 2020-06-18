@@ -7,7 +7,6 @@ use App\Http\Requests\InformationRequest;
 use App\Services\InformationService;
 use Illuminate\Http\Request;
 
-
 class InformationController extends Controller
 {
     public $InformationService;

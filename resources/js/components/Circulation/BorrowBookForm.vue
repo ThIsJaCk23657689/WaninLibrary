@@ -15,28 +15,51 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="search_name">姓名</label>
-                            <input id="search_name" name="search_name" type="text" class="form-control mb-2"
-                                v-model="keywords.name" @input="onSearch">
+                            <div class="input-container">
+                                <input id="search_name" name="search_name" type="text" class="form-control mb-2" v-model="keywords.name" @input="onSearch">
+                                <div class="icon-container" style="display: none;">
+                                    <div class="spinner-border spinner-border-sm text-dark" role="status">
+                                        <span class="sr-only">讀取中...</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="search_tel">電話</label>
-                            <input id="search_tel" name="search_tel" type="text" class="form-control mb-2"
-                                v-model="keywords.tel" @input="onSearch">
+                            <div class="input-container">
+                                <input id="search_tel" name="search_tel" type="text" class="form-control mb-2" v-model="keywords.tel" @input="onSearch">
+                                <div class="icon-container" style="display: none;">
+                                    <div class="spinner-border spinner-border-sm text-dark" role="status">
+                                        <span class="sr-only">讀取中...</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="search_birthday">生日</label>
-                            <input id="search_birthday" name="search_birthday" type="text" class="form-control mb-2"
-                                v-model="keywords.birthday" autocomplete="off" @input="onSearch">
+                            <div class="input-container">
+                                <input id="search_birthday" name="search_birthday" type="text" class="form-control mb-2" v-model="keywords.birthday" autocomplete="off" @input="onSearch">
+                                <div class="icon-container" style="display: none;">
+                                    <div class="spinner-border spinner-border-sm text-dark" role="status">
+                                        <span class="sr-only">讀取中...</span>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
 
-                <borrower-filter-table :borrowers="borrowers" :pageNum="pageNum" :totalPage="totalPage"
-                    @update-page-num="updatePageNum" @update-current-borrower="updateCurrentBorrower"></borrower-filter-table>
+                <borrower-filter-table 
+                    :borrowers="borrowers" 
+                    :pageNum="pageNum" 
+                    :totalPage="totalPage"
+                    @update-page-num="updatePageNum" 
+                    @update-current-borrower="updateCurrentBorrower">
+                </borrower-filter-table>
             </div>
 
             <div id="step2" style="display: none;">
@@ -129,9 +152,9 @@ export default {
             countPerPage: 5,
 
             keywords: {
-                name: null,
-                tel: null,
-                birthday: null
+                name: '',
+                tel: '',
+                birthday: ''
             },
             currentBorrower: [],
             historyBorrowRecords: [],
@@ -145,14 +168,14 @@ export default {
     },
     methods: {
         onSearch(e){
-            if(this.keywords.name != '' || this.keywords.tel != '' || this.keywords.birthday != ''){
-                this.search(this);
-            }
+            let loading = $(e.target).next();
+            this.search(loading, this);
         },
 
-        search: _.debounce((vm) => {
-            vm.updateTable();
-        }, 600),
+        search: _.debounce((loading, vm) => {
+            loading.fadeIn();
+            vm.updateTable(loading);
+        }, 500),
 
         // 更新借閱人搜尋頁碼
         updatePageNum(pageNum){
@@ -161,9 +184,12 @@ export default {
         },
 
         // 更新借閱人搜尋資料
-        updateTable(){
+        updateTable(loading = null){
+            this.borrowers = [];
+            this.totalCount = 0;
+            this.totalPage = 0;
+
             let BorrowersFilterURL = $('#BorrowersFilterURL').html();
-            $.showLoadingModal();
             axios.get(BorrowersFilterURL, {
                 params: {
                     name: this.keywords.name,
@@ -176,8 +202,15 @@ export default {
                 this.borrowers = response.data.borrowers;
                 this.totalCount = response.data.count;
                 this.totalPage = Math.ceil(this.totalCount / this.countPerPage);
+                if(loading != null){
+                    loading.fadeOut();
+                }
 
-                $.closeModal();
+                if(this.keywords.name != '' || this.keywords.tel != '' || this.keywords.birthday != ''){
+                    if(this.totalCount == 0){
+                        $.showWarningModal(response.data.message);
+                    }   
+                }
             }).catch(error => {
                 console.error('抓取借閱人列表時發生錯誤，錯誤訊息：' + error);
                 $.showErrorModal(error);
@@ -338,5 +371,15 @@ export default {
 <style>
 #borrowList tbody tr:nth-child(even){
     background-color: #eee;
+}
+
+.input-container{
+    position: relative;
+}
+
+.icon-container{
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 14px);
 }
 </style>

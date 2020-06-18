@@ -1,99 +1,97 @@
-// Vue.component('unreturn-table', require('./../../components/Circulation/Unreturns/UnreturnTable.vue').default);
-// Vue.component('paginate-custom', require('./../../components/Partials/PaginateCustom.vue').default);
-// Vue.component('table-button', required('./../../components/Partials/DataTable/TableButton.vue').default);
-import TableButton from './../../components/Partials/DataTable/TableButton.vue';
+Vue.component('unreturns-table', require('./../../components/Circulation/Unreturns/UnreturnTable.vue').default);
+Vue.component('paginate-custom', require('./../../components/Partials/PaginateCustom.vue').default);
 
 const app = new Vue({
     el: '#unreturn',
     data() {
         return {
-            perPage: ['10', '25', '50'],
-            columns: [
-                {
-                    label: '借閱人名稱',
-                    name: 'borrower_name',
-                    filterable: true,
-                    orderable: true,
-                },
-                {
-                    label: '書籍名稱',
-                    name: 'book_title',
-                    filterable: true,
-                    orderable: true,
-                },
-                {
-                    label: '狀態',
-                    name: 'showStatus',
-                    filterable: true,
-                    orderable: false,
-                },
-                {
-                    label: '借閱日期',
-                    name: 'borrow_date',
-                    filterable: true,
-                    orderable: true,
-                },
-                {
-                    label: '期限日期',
-                    name: 'return_date',
-                    filterable: true,
-                    orderable: true,
-                },
-                {
-                    label: '通知狀態',
-                    name: 'showNoticed',
-                    filterable: true,
-                    orderable: false,
-                },
-                // {
-                //     label: '操作',
-                //     name: '檢視',
-                //     filterable: false,
-                //     component: TableButton,
-                //     event: 'click',
-                //     handler: this.alertMe,
-                //     classes: {
-                //         'btn': true,
-                //         'btn-md': true,
-                //         'btn-primary': true,
-                //     }
-                // },
-            ],
-            translate: {
-                nextButton: '下一頁', 
-                previousButton: '上一頁', 
-                placeholderSearch: '搜尋...'
-            }
+            rowsPerPage: 10,
+            pageNum: 1,
+            totalPage: 0,
+            unreturns: [],
+            DataTotalCount: 0,
         }
-    },
-    components: {
-        TableButton,
     },
     methods: {
-        alertMe(data) {
-            console.log(data);
-            alert("hey");
-        }
-        // refreshUnreturns($skip, $take){
-        //     $.showLoadingModal();
-        //     axios.get(this.UnreturnsGetList, {
-        //         params: {
-        //             skip: $skip,
-        //             take: $take
-        //         }
-        //     })
-        //     .then(response => {
-        //         this.unreturns = response.data.unreturns;
-        //         $.closeModal();
-        //     }).catch(error => {
-        //         $.showErrorModal(error);
-        //     });
-        // }
+        updateUnreturns(pageNum, filter, keyword, order, first_page) {
+            let UnreturnsGetList = $('#UnreturnsGetList').html();
+
+            if (first_page) {
+                this.pageNum = 1;
+            } else {
+                this.pageNum = pageNum;
+            }
+
+            let skip = (pageNum - 1) * this.rowsPerPage;
+            let take = this.rowsPerPage;
+
+            $('.dataTables_processing', $('#UnreturnsDataTable').closest('.dataTables_wrapper')).fadeIn();
+            axios.get(UnreturnsGetList, {
+                params: {
+                    skip: skip,
+                    take: take,
+
+                    filter_status: filter.status,
+                    filter_noticed: filter.noticed,
+                    keyword_column: keyword.column,
+                    keyword_content: keyword.content,
+                    order_column: order.column,
+                    order_dir: order.dir,
+
+                    first_page: first_page,
+                }
+            }).then(response => {
+                this.unreturns = response.data.unreturns;
+                this.DataTotalCount = response.data.DataTotalCount;
+                this.totalPage = Math.ceil(this.DataTotalCount / this.rowsPerPage);
+                $('.dataTables_processing', $('#UnreturnsDataTable').closest('.dataTables_wrapper')).fadeOut();
+                $('#UnreturnsDataTable').dataTable().fnClearTable();
+                if (this.unreturns.length != 0) {
+                    $('#UnreturnsDataTable').dataTable().fnAddData(this.unreturns);
+                }
+            }).catch(error => {
+                console.log(error);
+                $.showErrorModal(error);
+            });
+        },
     },
-    created(){        
-        // this.refreshUnreturns(0, 10);
+    created() {
+        let UnreturnsGetList = $('#UnreturnsGetList').html();
+
+        $.showLoadingModal();
+        axios.get(UnreturnsGetList).then(response => {
+            this.unreturns = response.data.unreturns;
+            this.DataTotalCount = response.data.DataTotalCount;
+            this.totalPage = Math.ceil(this.DataTotalCount / this.rowsPerPage);
+
+            $('#UnreturnsDataTable').on('draw.dt', function() {
+                console.log('drawing a table');
+            }).on('init.dt', function() {
+                console.log('intial a table');
+            }).dataTable({
+                data: this.unreturns,
+                columns: [
+                    { data: 'index' },
+                    { data: 'borrowerLink' },
+                    { data: 'bookLink' },
+                    { data: 'showStatus' },
+                    { data: 'borrow_date' },
+                    { data: 'return_date' },
+                    { data: 'showNoticed' },
+                    { data: 'action' },
+                ],
+                lengthChange: false,
+                searching: false,
+                pageLength: this.rowsPerPage,
+                info: false,
+                paging: false,
+                processing: true,
+                "ordering": false
+            });
+            $.closeModal();
+        });
     },
-    mounted(){
+    mounted() {
 
     }
 });

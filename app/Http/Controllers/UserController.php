@@ -10,7 +10,6 @@ use App\Services\JWTAuthService;
 
 class UserController extends Controller
 {
-
     public $UserService;
 
     public function __construct(){
@@ -71,7 +70,6 @@ class UserController extends Controller
         $users = $this->UserService->getUsersByName($name);
         return response()->json($users, 200);
     }
-
 
     public function store(UserRequest $request)
     {

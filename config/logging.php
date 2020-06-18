@@ -35,6 +35,11 @@ return [
     */
 
     'channels' => [
+        'trace' => [
+            'driver' => 'single',
+            'path' => storage_path('logs/trace.log'),
+        ],
+
         'stack' => [
             'driver' => 'stack',
             'channels' => ['single'],

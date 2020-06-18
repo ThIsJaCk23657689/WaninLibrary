@@ -15,16 +15,16 @@
         </li>
         <li class="breadcrumb-item active">{{ __('Index') }}</li>
     @endcomponent
-
+    
 	<div id="unreturn">
-        <span id="UnreturnsGetList" class="d-none">{{ route('unreturns.getList') }}</span>
-        
-        <data-table 
-            url="{{ route('unreturns.getList') }}" 
-            :per-page="perPage" 
-            :columns="columns"
-            :translate="translate">
-        </data-table>
-	</div>
+		<span id="UnreturnsGetList" class="d-none">{{ route('unreturns.getList') }}</span>
 
+        <unreturns-table 
+            :unreturns="unreturns" 
+            :rows-per-page="rowsPerPage" 
+            :page-num="pageNum" 
+            :total-page="totalPage" 
+            v-on:update-unreturns="updateUnreturns">
+        </unreturns-table>
+	</div>
 @endsection

@@ -29,6 +29,7 @@
     "/js/chart/index.js": "/js/chart/index.js",
     "/js/circulation/borrow.js": "/js/circulation/borrow.js",
     "/js/circulation/index.js": "/js/circulation/index.js",
+    "/js/circulation/unreturns/edit.js": "/js/circulation/unreturns/edit.js",
     "/js/circulation/unreturns/index.js": "/js/circulation/unreturns/index.js",
     "/js/donors/create.js": "/js/donors/create.js",
     "/js/donors/edit.js": "/js/donors/edit.js",

@@ -23,6 +23,10 @@
 	<script src="{{ asset('js/admin/sb-admin.min.js') }}" defer></script>
 	@stack('CustomJS')
 
+	<!-- favicon -->
+	<link rel="shortcut icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon">
+	<link rel="icon" href="{{ asset('/favicon.ico') }}" type="image/x-icon">
+
     <!-- Styles -->
     <link href="{{ asset('vendor/ckeditor/contents.css') }}" rel="stylesheet">
 	<link href="{{ asset('css/backend.css') }}" rel="stylesheet">

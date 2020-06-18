@@ -31,7 +31,7 @@ class BorrowerService extends BaseService
         ]);
 
         $act_user = auth('api')->user();
-        Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 新增了一筆借閱人，編號為：' . $borrower->id . '。');
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 新增了一筆借閱人，編號為：' . $borrower->id . '。');
 
         return $borrower->id;
     }
@@ -170,7 +170,7 @@ class BorrowerService extends BaseService
         ]);
 
         $act_user = auth('api')->user();
-        Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 修改了一筆借閱人，編號為：' . $borrower->id . '。');
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 修改了一筆借閱人，編號為：' . $borrower->id . '。');
 
         return $borrower->id;
     }
@@ -181,7 +181,7 @@ class BorrowerService extends BaseService
         $borrower->delete();
 
         $act_user = auth('api')->user();
-        Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 刪除了一筆借閱人，編號為：' . $borrower->id . '。');
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 刪除了一筆借閱人，編號為：' . $borrower->id . '，名稱為：' . $borrower->name .  '。');
     }
 
     public function activated($id)
@@ -192,11 +192,19 @@ class BorrowerService extends BaseService
             $borrower->update([
                 'activated' => 0,
             ]);
+
+            $act_user = auth('api')->user();
+            Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 停權了一筆借閱人，編號為：' . $borrower->id . '。');
+            
             return $borrower->name . "已成功停權";
         } else {
             $borrower->update([
                 'activated' => 1,
             ]);
+
+            $act_user = auth('api')->user();
+            Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 解除停權一筆借閱人，編號為：' . $borrower->id . '。');
+            
             return $borrower->name . "已成功解除停權";
         }
     }

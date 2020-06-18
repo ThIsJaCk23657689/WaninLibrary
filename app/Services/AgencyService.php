@@ -2,7 +2,7 @@
 
 namespace App\Services;
 use App\Agency as AgencyEloquent;
-
+use Log;
 
 class AgencyService extends BaseService
 {
@@ -19,6 +19,10 @@ class AgencyService extends BaseService
             'address_others' => $request->address_others,
             'content' => $request->content,
         ]);
+        
+        $act_user = auth('api')->user();
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 新增了一筆隸屬單位，編號為：' . $agency->id . '。');
+
         return $agency->id;
     }
 
@@ -49,6 +53,9 @@ class AgencyService extends BaseService
             'content' => $request->content,
         ]);
 
+        $act_user = auth('api')->user();
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 修改了一筆隸屬單位，編號為：' . $agency->id . '。');
+
         return $agency->id;
     }
 
@@ -56,5 +63,8 @@ class AgencyService extends BaseService
     {
         $agency = $this->getOne($id);
         $agency->delete();
+
+        $act_user = auth('api')->user();
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 刪除了一筆隸屬單位，編號為：' . $agency->id . '，名稱為：' . $agency->name . '。');
     }
 }

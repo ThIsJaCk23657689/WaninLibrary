@@ -63,7 +63,7 @@
                             <div class="col-md-5">
                                 <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#CreateDonorModal">
                                     <i class="fas fa-plus mr-2"></i>
-                                    新增捐贈人(單位)名稱
+                                    新增捐贈人(單位)
                                 </button>
                             </div>
                         </div>

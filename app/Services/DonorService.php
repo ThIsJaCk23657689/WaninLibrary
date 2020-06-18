@@ -26,7 +26,8 @@ class DonorService extends BaseService
         ]);
 
         $act_user = auth('api')->user();
-        Log::info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 新增了一筆捐贈人，編號為：' . $donor->id . '。');
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 新增了一筆捐贈人，編號為：' . $donor->id . '。');
+        
         return $donor->id;
     }
 
@@ -127,6 +128,9 @@ class DonorService extends BaseService
             'exposure' => $request->exposure,
         ]);
 
+        $act_user = auth('api')->user();
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 修改了一筆捐贈人，編號為：' . $donor->id . '。');
+
         return $donor->id;
     }
 
@@ -139,6 +143,9 @@ class DonorService extends BaseService
             $book->save();
         }
         $donor->delete();
+
+        $act_user = auth('api')->user();
+        Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 刪除了一筆捐贈人，編號為：' . $donor->id . '，名稱為：' . $donor->name .  '。');
     }
 
     public function getDonorsByName($request){
