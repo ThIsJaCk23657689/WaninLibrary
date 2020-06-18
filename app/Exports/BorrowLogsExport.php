@@ -5,12 +5,35 @@ namespace App\Exports;
 use App\BorrowLog;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
+use Maatwebsite\Excel\Concerns\WithEvents;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class BorrowLogsExport implements FromCollection, WithHeadings, ShouldAutoSize, WithColumnFormatting
+class BorrowLogsExport implements FromCollection, WithHeadings,  WithColumnFormatting, WithEvents
 {
+
+    public function registerEvents(): array
+    {
+
+        return [
+            AfterSheet::class    => function(AfterSheet $event) {
+                $cellRange = 'A1:W1'; // All headers
+                // 標頭字體放大
+                $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(14);
+                // 日期
+                $event->sheet->getDelegate()->getColumnDimension('A')->setAutoSize(true);
+                // 借閱人
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(18);
+                // 書名
+                $event->sheet->getDelegate()->getColumnDimension('C')->setWidth(80);
+                // 分類號
+                $event->sheet->getDelegate()->getColumnDimension('D')->setWidth(20);
+                // 狀態
+                $event->sheet->getDelegate()->getColumnDimension('E')->setWidth(10);
+
+            },
+        ];
+    }
     /**
     * @return \Illuminate\Support\Collection
     */
@@ -18,10 +41,14 @@ class BorrowLogsExport implements FromCollection, WithHeadings, ShouldAutoSize, 
     {
         $borrowLogs = BorrowLog::select('created_at', 'borrower_name', 'book_title', 'callnum', 'status')->get();
         foreach($borrowLogs as $log){
+            $log->callnum = $log->showCallNum();
             $log->status = $log->showStatus();
+
         }
         return $borrowLogs;
     }
+
+
 
     public function headings(): array
     {
@@ -29,7 +56,7 @@ class BorrowLogsExport implements FromCollection, WithHeadings, ShouldAutoSize, 
             '日期',
             '借閱人',
             '書名',
-            '書本索書號',
+            '分類號',
             '狀態',
         ];
     }

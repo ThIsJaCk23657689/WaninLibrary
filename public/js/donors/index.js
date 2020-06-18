@@ -165,6 +165,16 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['donors', 'rowsPerPage', 'pageNum', 'totalPage'],
   data: function data() {
@@ -178,12 +188,17 @@ __webpack_require__.r(__webpack_exports__);
       var exposure = e.target.value;
       this.$emit('change-exposure', exposure);
     },
+    changeOrder: function changeOrder(e) {
+      var orderby = e.target.value;
+      this.$emit('change-order', orderby);
+    },
     changeKeywordsType: function changeKeywordsType(e) {
       var data = $(e.target).serializeObject();
       var keywords = data.keywords;
       var type = data.type;
       var exposure = data.exposure;
-      this.$emit('change-keywords-type', keywords, type, exposure);
+      var orderby = data.orderby;
+      this.$emit('change-keywords-type', keywords, type, exposure, orderby);
     }
   },
   created: function created() {},
@@ -322,18 +337,40 @@ var render = function() {
                       _vm._v(" "),
                       _vm._m(1),
                       _vm._v(" "),
-                      _vm._m(2),
-                      _vm._v(" "),
-                      _vm._m(3)
+                      _c("div", { staticClass: "col-md-2" }, [
+                        _c(
+                          "select",
+                          {
+                            staticClass: "form-control",
+                            attrs: { name: "orderby", id: "orderby" },
+                            on: { change: _vm.changeOrder }
+                          },
+                          [
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("排序方式")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("建立日期(新->舊)")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("建立日期(舊->新)")
+                            ])
+                          ]
+                        )
+                      ])
                     ]
-                  )
+                  ),
+                  _vm._v(" "),
+                  _vm._m(2)
                 ]
               )
             ]
           )
         ]),
         _vm._v(" "),
-        _vm._m(4)
+        _vm._m(3)
       ]),
       _vm._v(" "),
       _c(
@@ -357,7 +394,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table" }),
-      _vm._v("借閱人列表\r\n        ")
+      _vm._v("借閱人列表\n        ")
     ])
   },
   function() {
@@ -388,36 +425,37 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-4" }, [
-      _c("div", { staticClass: "form-group" }, [
-        _c("input", {
-          staticClass: "form-control mb-2",
-          attrs: {
-            id: "keywords",
-            name: "keywords",
-            type: "text",
-            value: "",
-            autocomplete: "off",
-            placeholder: "關鍵字搜尋..."
-          }
-        })
+    return _c("div", { staticClass: "row mb-3 justify-content-center" }, [
+      _c("div", { staticClass: "col-md-6" }, [
+        _c("div", { staticClass: "form-group" }, [
+          _c("input", {
+            staticClass: "form-control mb-2",
+            attrs: {
+              id: "keywords",
+              name: "keywords",
+              type: "text",
+              value: "",
+              autocomplete: "off",
+              placeholder: "關鍵字搜尋..."
+            }
+          })
+        ])
+      ]),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-2" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn btn-block btn-primary",
+            attrs: { type: "submit" }
+          },
+          [
+            _vm._v(
+              "\n                                    確認\n                                "
+            )
+          ]
+        )
       ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "col-md-2" }, [
-      _c(
-        "button",
-        { staticClass: "btn btn-block btn-primary", attrs: { type: "submit" } },
-        [
-          _vm._v(
-            "\r\n                                    確認\r\n                                "
-          )
-        ]
-      )
     ])
   },
   function() {
@@ -766,15 +804,21 @@ var app = new Vue({
       donors: [],
       DataTotalCount: 0,
       exposure: 0,
+      orderby: 2,
       type: 0,
       keywords: ''
     };
   },
   methods: {
-    changeKeywordsType: function changeKeywordsType(keywords, type, exposure) {
+    changeKeywordsType: function changeKeywordsType(keywords, type, exposure, orderby) {
       this.exposure = exposure;
       this.keywords = keywords;
+      this.orderby = orderby;
       this.type = type;
+      this.updateDonors(this.pageNum, true);
+    },
+    changeOrder: function changeOrder(orderby) {
+      this.orderby = orderby;
       this.updateDonors(this.pageNum, true);
     },
     changeExposure: function changeExposure(exposure) {
@@ -795,6 +839,7 @@ var app = new Vue({
       var exposure = this.exposure;
       var keywords = this.keywords;
       var type = this.type;
+      var orderby = this.orderby;
       var DonorsGetList = $('#DonorsGetList').html();
       $('.dataTables_processing', $('#DonorsDataTable').closest('.dataTables_wrapper')).fadeIn();
       axios.get(DonorsGetList, {
@@ -804,7 +849,8 @@ var app = new Vue({
           keywords: keywords,
           type: type,
           exposure: exposure,
-          first_page: first_page
+          first_page: first_page,
+          orderby: orderby
         }
       }).then(function (response) {
         _this.donors = response.data.donors;
@@ -870,7 +916,7 @@ var app = new Vue({
       }).dataTable({
         data: _this3.donors,
         columns: [{
-          data: 'id'
+          data: 'index'
         }, {
           data: 'name'
         }, {
@@ -889,7 +935,8 @@ var app = new Vue({
         pageLength: _this3.rowsPerPage,
         info: false,
         paging: false,
-        processing: true
+        processing: true,
+        "ordering": false
       });
 
       _this3.refreshDeleteBtn();

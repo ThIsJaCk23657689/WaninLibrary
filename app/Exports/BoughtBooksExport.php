@@ -6,16 +6,29 @@ use App\Book;
 use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithEvents;
-use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use Maatwebsite\Excel\Concerns\WithColumnFormatting;
-use Maatwebsite\Excel\Concerns\ShouldAutoSize;
-use Maatwebsite\Excel\Events\BeforeExport;
-use Maatwebsite\Excel\Events\BeforeWriting;
-use Maatwebsite\Excel\Events\BeforeSheet;
-use Illuminate\Support\Collection;
+use Maatwebsite\Excel\Events\AfterSheet;
 
-class BoughtBooksExport implements FromCollection, WithHeadings, WithColumnFormatting, ShouldAutoSize
+class BoughtBooksExport implements FromCollection, WithHeadings, WithColumnFormatting, WithEvents
 {
+    public function registerEvents(): array
+    {
+        return [
+            AfterSheet::class    => function(AfterSheet $event) {
+                $cellRange = 'A1:W1'; // All headers
+                // 標頭字體放大
+                $event->sheet->getDelegate()->getStyle($cellRange)->getFont()->setSize(14);
+                // 日期
+                $event->sheet->getDelegate()->getColumnDimension('A')->setAutoSize(true);
+                // 書名
+                $event->sheet->getDelegate()->getColumnDimension('B')->setWidth(80);
+                // 價格
+                $event->sheet->getDelegate()->getColumnDimension('C')->setAutoSize(true);
+
+            },
+        ];
+    }
+
     /**
     * @return \Illuminate\Support\Collection
     */

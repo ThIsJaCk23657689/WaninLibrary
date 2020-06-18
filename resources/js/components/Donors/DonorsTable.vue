@@ -29,7 +29,17 @@
                                     <option value="4">信箱</option>
                                 </select>
                             </div>
-                            <div class="col-md-4">
+
+                            <div class="col-md-2">
+                                <select name="orderby" id="orderby" class="form-control" @change="changeOrder">
+                                    <option value="2">排序方式</option>
+                                    <option value="2">建立日期(新->舊)</option>
+                                    <option value="1">建立日期(舊->新)</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="row mb-3 justify-content-center">
+                            <div class="col-md-6">
                                 <div class="form-group">
                                     <input id="keywords" name="keywords" type="text" class="form-control mb-2" value="" autocomplete="off" placeholder="關鍵字搜尋...">
                                 </div>
@@ -84,12 +94,17 @@ export default {
             let exposure = e.target.value;
             this.$emit('change-exposure', exposure);
         },
+        changeOrder(e){
+            let orderby = e.target.value;
+            this.$emit('change-order', orderby);
+        },
         changeKeywordsType(e){
             let data = $(e.target).serializeObject();
             let keywords = data.keywords;
             let type = data.type;
             let exposure = data.exposure;
-            this.$emit('change-keywords-type', keywords, type, exposure);
+            let orderby = data.orderby;
+            this.$emit('change-keywords-type', keywords, type, exposure, orderby);
         }
     },
     created() {
