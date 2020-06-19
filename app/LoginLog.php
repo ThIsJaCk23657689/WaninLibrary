@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use App\User as UserEloquent;
 use DateTimeInterface;
+use Carbon\Carbon;
 
 class LoginLog extends Model
 {
@@ -28,10 +29,13 @@ class LoginLog extends Model
 
     // scope
     public function scopeOfRange($query, $type, $start_date, $end_date){
+        $start = Carbon::createFromFormat('Y-m-d', $start_date)->toDateTimeString();
+        $end = Carbon::createFromFormat('Y-m-d', $end_date)->toDateTimeString();
+
         if($type == 1){
-            $query->whereBetween('created_at', [$start_date, $end_date]);
+            $query->whereBetween('created_at', [$start, $end]);
         }else{
-            $query->whereBetween('logout_date', [$start_date, $end_date]);
+            $query->whereBetween('logout_date', [$start, $end]);
         }
     }
 
