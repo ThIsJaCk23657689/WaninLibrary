@@ -54,10 +54,10 @@ class BorrowLogsExport implements FromCollection, WithHeadings,  WithColumnForma
     {
         return [
             '日期',
-            '借閱人',
-            '書名',
+            '借閱人姓名',
+            '書名(主標題)',
             '分類號',
-            '狀態',
+            '書籍狀態',
         ];
     }
 

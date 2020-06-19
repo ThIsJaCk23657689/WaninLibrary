@@ -65,7 +65,7 @@ class BoughtBooksExport implements FromCollection, WithHeadings, WithColumnForma
     {
         return [
             '日期',
-            '書名',
+            '書名(主標題)',
             '價格'
             // '編號',
             // '捐贈者編號',

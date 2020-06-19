@@ -38,7 +38,7 @@ class TopBooksExport implements FromCollection, WithHeadings,  WithColumnFormatt
     public function headings(): array
     {
         return [
-            '書名',
+            '書名(主標題)',
             '借閱次數'
         ];
     }

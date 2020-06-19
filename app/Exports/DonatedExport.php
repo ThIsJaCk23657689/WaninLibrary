@@ -53,8 +53,8 @@ class DonatedExport implements FromCollection, WithHeadings,  WithColumnFormatti
         return [
             '日期',
             '捐贈人姓名',
-            '書名',
-            '書本狀態'
+            '書名(主標題)',
+            '書籍狀態'
         ];
     }
 

@@ -77,7 +77,7 @@
                     <thead>
                         <tr>
                             <th>編號</th>
-                            <th>標題</th>
+                            <th>書名(主標題)</th>
                             <th>借閱次數</th>
                             <th>狀態</th>
                             <th>操作</th>
