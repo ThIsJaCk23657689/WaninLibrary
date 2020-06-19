@@ -684,7 +684,7 @@ var app = new Vue({
       totalPage: 0,
       borrowLogs: [],
       DataTotalCount: 0,
-      status: 4,
+      status: 5,
       keywords: '',
       start_date: '',
       end_date: ''

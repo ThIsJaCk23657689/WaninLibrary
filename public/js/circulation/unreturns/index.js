@@ -535,7 +535,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\r\n                                搜尋\r\n                            "
+                      "\n                                搜尋\n                            "
                     )
                   ]
                 )
@@ -666,7 +666,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table mr-2" }),
-      _vm._v("目前已借出和逾期列表\r\n        ")
+      _vm._v("目前已借出和逾期列表\n        ")
     ])
   },
   function() {
@@ -685,7 +685,7 @@ var staticRenderFns = [
             _c("tr", [
               _c("th", [_vm._v("序號")]),
               _vm._v(" "),
-              _c("th", [_vm._v("借閱人名稱")]),
+              _c("th", [_vm._v("借閱人姓名")]),
               _vm._v(" "),
               _c("th", [_vm._v("書籍名稱")]),
               _vm._v(" "),

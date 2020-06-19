@@ -7,7 +7,7 @@
         <div class="card-body">
             <div class="row justify-content-center">
                 <div class="col-md-12 justify-content-center">
-                    
+
                     <div class="row mb-3 justify-content-center">
                         <div class="col-md-3">
                             <select id="status" name="status" class="form-control" v-model="filter.status" @change="changeStatus">
@@ -76,7 +76,7 @@
                     <thead>
                         <tr>
                             <th>序號</th>
-                            <th>借閱人名稱</th>
+                            <th>借閱人姓名</th>
                             <th>書籍名稱</th>
                             <th>目前狀態</th>
                             <th>借閱日期</th>

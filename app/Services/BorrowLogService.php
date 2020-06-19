@@ -19,8 +19,8 @@ class BorrowLogService extends BaseService
         }else{
             $skip = $request->skip ?? 0 ;
         }
-        $take = $request->take;
-        $status = $request->status;
+        $take = $request->take  ?? 10;
+        $status = $request->status  ?? 5;
         $start_date = ($request->start_date != "") ? $request->start_date : null;
         $end_date = ($request->end_date != "") ? $request->end_date : null;
         $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
