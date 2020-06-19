@@ -27,7 +27,7 @@ class BorrowLogService extends BaseService
 
         if($keywords == [] && $status== 5 && $start_date == null && $end_date== null){
             $logs_tmp = new BorrowLogEloquent();
-            $count = $logs->count();
+            $count = $logs_tmp->count();
             $logs = $logs_tmp->skip($skip)->take($take)->get();
 
 
