@@ -764,6 +764,8 @@ var app = new Vue({
         _this.refreshDeleteBtn();
 
         _this.refreshActivateBtn();
+
+        _this.refreshUnactivateBtn();
       })["catch"](function (error) {
         console.log(error);
       });
@@ -827,21 +829,50 @@ var app = new Vue({
           }
         });
       });
+    },
+    refreshUnactivateBtn: function refreshUnactivateBtn() {
+      var $vm = this;
+      $('.unactivate-btn').click(function (e) {
+        var _this4 = this;
+
+        e.preventDefault();
+        Swal.fire({
+          title: '注意！',
+          text: "你確定要解鎖此借閱人嗎？",
+          icon: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: '確認',
+          cancelButtonText: '取消'
+        }).then(function (result) {
+          if (result.value) {
+            $.showLoadingModal();
+            var $url = $(_this4).next().html();
+            axios.post($url).then(function (response) {
+              $.showSuccessModal(response.data.message);
+              $vm.updateBorrowers($vm.pageNum, true);
+            })["catch"](function (error) {
+              $.showErrorModal(error);
+            });
+          }
+        });
+      });
     }
   },
   created: function created() {
-    var _this4 = this;
+    var _this5 = this;
 
     var BorrowersGetList = $('#BorrowersGetList').html();
     axios.get(BorrowersGetList).then(function (response) {
-      _this4.DataTotalCount = response.data.DataTotalCount;
-      _this4.totalPage = Math.ceil(_this4.DataTotalCount / _this4.rowsPerPage);
-      _this4.borrowers = response.data.borrowers;
+      _this5.DataTotalCount = response.data.DataTotalCount;
+      _this5.totalPage = Math.ceil(_this5.DataTotalCount / _this5.rowsPerPage);
+      _this5.borrowers = response.data.borrowers;
 
-      if (_this4.orderby == 2) {
-        _this4.order_type = 'desc';
+      if (_this5.orderby == 2) {
+        _this5.order_type = 'desc';
       } else {
-        _this4.order_type = 'asc';
+        _this5.order_type = 'asc';
       }
 
       $('#BorrowersDataTable').on('draw.dt', function () {
@@ -849,7 +880,7 @@ var app = new Vue({
       }).on('init.dt', function () {
         console.log('intial a table');
       }).dataTable({
-        data: _this4.borrowers,
+        data: _this5.borrowers,
         columns: [{
           data: 'index'
         }, {
@@ -869,16 +900,18 @@ var app = new Vue({
         }],
         lengthChange: false,
         searching: false,
-        pageLength: _this4.rowsPerPage,
+        pageLength: _this5.rowsPerPage,
         info: false,
         paging: false,
         processing: true,
         "ordering": false
       });
 
-      _this4.refreshDeleteBtn();
+      _this5.refreshDeleteBtn();
 
-      _this4.refreshActivateBtn();
+      _this5.refreshActivateBtn();
+
+      _this5.refreshUnactivateBtn();
     });
   },
   mounted: function mounted() {// this.totalPage = Math.ceil($('#DataTotalCount').html() / this.rowsPerPage);

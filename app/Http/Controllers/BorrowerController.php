@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\BorrowerRequest;
+use App\Http\Requests\BorrowerUpdateRequest;
 use App\Services\BorrowerService;
 use App\Services\BookService as BookService;
 use Illuminate\Validation\Rule;
@@ -60,8 +61,15 @@ class BorrowerController extends Controller
         return view('borrowers.edit', compact('borrower'));
     }
 
-    public function update(BorrowerRequest $request, $id)
+    public function update(BorrowerUpdateRequest $request, $id)
     {
+        $this->validate($request, [
+            'email' => [
+                'nullable',
+                'email',
+                Rule::unique('borrowers')->ignore($id),
+            ],
+        ]);
         $borrower_id = $this->BorrowerService->update($request, $id);
         return response()->json([
             'status' => 'OK',

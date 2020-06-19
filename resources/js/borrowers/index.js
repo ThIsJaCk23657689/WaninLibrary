@@ -78,6 +78,7 @@ const app = new Vue({
                 }
                 this.refreshDeleteBtn();
                 this.refreshActivateBtn();
+                this.refreshUnactivateBtn();
             }).catch(error => {
                 console.log(error);
             });
@@ -139,6 +140,34 @@ const app = new Vue({
                     }
                 });
             });
+        },
+        refreshUnactivateBtn() {
+            let $vm = this;
+            $('.unactivate-btn').click(function(e) {
+                e.preventDefault();
+
+                Swal.fire({
+                    title: '注意！',
+                    text: "你確定要解鎖此借閱人嗎？",
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#3085d6',
+                    cancelButtonColor: '#d33',
+                    confirmButtonText: '確認',
+                    cancelButtonText: '取消',
+                }).then((result) => {
+                    if (result.value) {
+                        $.showLoadingModal();
+                        let $url = $(this).next().html();
+                        axios.post($url).then(response => {
+                            $.showSuccessModal(response.data.message);
+                            $vm.updateBorrowers($vm.pageNum, true);
+                        }).catch(error => {
+                            $.showErrorModal(error);
+                        });
+                    }
+                });
+            });
         }
     },
     created() {
@@ -181,6 +210,7 @@ const app = new Vue({
 
             this.refreshDeleteBtn();
             this.refreshActivateBtn();
+            this.refreshUnactivateBtn();
         });
     },
     mounted() {

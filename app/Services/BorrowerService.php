@@ -133,7 +133,7 @@ class BorrowerService extends BaseService
                     $borrower['action'] .= '<button type="button" class="btn btn-md btn-warning activate-btn"><i class="fa fa-user-slash"></i>停權</button type="button">
                                             <span class="d-none">' . route('borrowers.activate', [$borrower->id]) . '</span>';
                 }else{
-                    $borrower['action'] .= '<button type="button" class="btn btn-md btn-light activate-btn"><i class="fas fa-unlock"></i>解除停權</button type="button">
+                    $borrower['action'] .= '<button type="button" class="btn btn-md btn-light unactivate-btn"><i class="fas fa-unlock"></i>解除停權</button type="button">
                                             <span class="d-none">' . route('borrowers.activate', [$borrower->id]) . '</span>';
                 }
             }
@@ -168,14 +168,14 @@ class BorrowerService extends BaseService
             'tel' => $request->tel,
             'job_title' => $request->job_title,
             'status' => $request->status,
-            'activated' => $request->activated ?? 0,
+            'activated' => $request->activated ?? $borrower->activated ,
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
             'address_district' => $request->address_district,
             'address_others' => $request->address_others,
             'content' => $request->content,
-            'count' => $request->count ?? 0,
+            'count' => $request->count ?? $borrower->count ,
         ]);
 
         $act_user = auth('api')->user();
@@ -204,7 +204,7 @@ class BorrowerService extends BaseService
 
             $act_user = auth('api')->user();
             Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 停權了一筆借閱人，編號為：' . $borrower->id . '。');
-            
+
             return $borrower->name . "已成功停權";
         } else {
             $borrower->update([
@@ -213,7 +213,7 @@ class BorrowerService extends BaseService
 
             $act_user = auth('api')->user();
             Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 解除停權一筆借閱人，編號為：' . $borrower->id . '。');
-            
+
             return $borrower->name . "已成功解除停權";
         }
     }

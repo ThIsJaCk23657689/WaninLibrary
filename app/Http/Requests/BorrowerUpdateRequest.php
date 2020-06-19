@@ -4,8 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-use Log;
-class BorrowerRequest extends FormRequest
+class BorrowerUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -28,7 +27,6 @@ class BorrowerRequest extends FormRequest
             'agency_id' => "nullable",
             'name' => 'required|string|max:100',
             'birthday' => 'nullable|date',
-            'email' => 'nullable|email|unique:borrowers,email,',
             'tel' => 'required|string|max:30',
             'job_title' => 'nullable|string|max:100',
             'status' => 'required|integer',
@@ -39,12 +37,6 @@ class BorrowerRequest extends FormRequest
             'address_others' => 'nullable|string|max:255',
             'content' => 'nullable|string|max:255',
             'count' => 'nullable|integer',
-        ];
-    }
-
-    public function messages(){
-        return [
-            'individual_phone.required_without' => '手機與電話必須擇一必填。',
         ];
     }
 }
