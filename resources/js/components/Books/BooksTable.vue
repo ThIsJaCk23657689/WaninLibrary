@@ -34,10 +34,10 @@
                                     <option value="4">400 應用科學類</option>
                                     <option value="5">500 社會學類</option>
                                     <option value="6">600 史地類</option>
-                                    <option value="6">610 中國史地類</option>
-                                    <option value="7">710 世界史地類</option>
-                                    <option value="8">800 語文文學類</option>
-                                    <option value="9">900 藝術類</option>
+                                    <option value="7">610 中國史地類</option>
+                                    <option value="8">710 世界史地類</option>
+                                    <option value="9">800 語文文學類</option>
+                                    <option value="10">900 藝術類</option>
                                     <option value="11">論文</option>
                                     <option value="12">期刊雜誌</option>
                                     <option value="13">非中文圖書</option>

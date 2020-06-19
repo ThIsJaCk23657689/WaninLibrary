@@ -13,7 +13,7 @@ const app = new Vue({
             books: [],
 
             status: 0,
-            category: 13,
+            category: 14,
             type: 0,
             keywords: '',
         }

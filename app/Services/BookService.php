@@ -138,13 +138,13 @@ class BookService extends BaseService
 
         $take = $request->take ?? 10;
         $status = $request->status ?? 0; //default 0
-        $category = $request->category ?? 14; //default 13
+        $category = $request->category ?? 14; //default 14
         $type = $request->type ?? 0; //default 0
         $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
 
         $type_arr = ['','title', 'author', 'ISBN', 'publisher'];
 
-        if($keywords == [] && $status== 0 && $category == 13 && $type== 0){
+        if($keywords == [] && $status== 0 && $category == 14 && $type== 0){
             // all default
             $books_tmp = new BookEloquent();
             $books = $books_tmp->skip($skip)->take($take)->get();

@@ -419,19 +419,19 @@ var render = function() {
                               _vm._v("600 史地類")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "6" } }, [
+                            _c("option", { attrs: { value: "7" } }, [
                               _vm._v("610 中國史地類")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "7" } }, [
+                            _c("option", { attrs: { value: "8" } }, [
                               _vm._v("710 世界史地類")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "8" } }, [
+                            _c("option", { attrs: { value: "9" } }, [
                               _vm._v("800 語文文學類")
                             ]),
                             _vm._v(" "),
-                            _c("option", { attrs: { value: "9" } }, [
+                            _c("option", { attrs: { value: "10" } }, [
                               _vm._v("900 藝術類")
                             ]),
                             _vm._v(" "),
@@ -747,7 +747,7 @@ var app = new Vue({
       DataTotalCount: 0,
       books: [],
       status: 0,
-      category: 13,
+      category: 14,
       type: 0,
       keywords: ''
     };
