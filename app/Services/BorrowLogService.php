@@ -40,7 +40,9 @@ class BorrowLogService extends BaseService
                 $logs_tmp->where('status', $status);
             }
             if($start_date != null &&  $end_date != null){
-                $logs_tmp->whereBetween('created_at', [$start_date, $end_date]);
+                $start = Carbon::createFromFormat('Y-m-d', $start_date)->toDateTimeString();
+                $end = Carbon::createFromFormat('Y-m-d', $end_date)->toDateTimeString();
+                $logs_tmp->whereBetween('created_at', [$start, $end]);
             }
             $count = $logs_tmp->count();
             $logs = $logs_tmp->skip($skip)->take($take)->get();
