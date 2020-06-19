@@ -29,8 +29,8 @@ class LoginLog extends Model
 
     // scope
     public function scopeOfRange($query, $type, $start_date, $end_date){
-        $start = Carbon::createFromFormat('Y-m-d', $start_date)->toDateTimeString();
-        $end = Carbon::createFromFormat('Y-m-d', $end_date)->toDateTimeString();
+        $start = Carbon::createFromFormat('Y-m-d H:i', $start_date.' 00:00')->toDateTimeString();
+        $end = Carbon::createFromFormat('Y-m-d H:i', $end_date.' 23:59')->toDateTimeString();
 
         if($type == 1){
             $query->whereBetween('created_at', [$start, $end]);
