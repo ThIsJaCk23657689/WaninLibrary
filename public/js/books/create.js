@@ -3395,9 +3395,7 @@ var render = function() {
           fn: function(option) {
             return [
               _c("div", { staticClass: "d-center" }, [
-                _vm._v(
-                  "\r\n            " + _vm._s(option.name) + "\r\n        "
-                )
+                _vm._v("\n            " + _vm._s(option.name) + "\n        ")
               ])
             ]
           }
@@ -3407,9 +3405,7 @@ var render = function() {
           fn: function(option) {
             return [
               _c("div", { staticClass: "selected d-center" }, [
-                _vm._v(
-                  "\r\n            " + _vm._s(option.name) + "\r\n        "
-                )
+                _vm._v("\n            " + _vm._s(option.name) + "\n        ")
               ])
             ]
           }
@@ -3425,7 +3421,7 @@ var render = function() {
     },
     [
       _c("template", { slot: "no-options" }, [
-        _vm._v("\r\n        " + _vm._s(_vm.placeholder) + "\r\n    ")
+        _vm._v("\n        " + _vm._s(_vm.placeholder) + "\n    ")
       ])
     ],
     2
@@ -3970,7 +3966,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\create.js */"./resources/js/books/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\create.js */"./resources/js/books/create.js");
 
 
 /***/ })

@@ -17,7 +17,7 @@
             <div id="headerbox" class="container-fluid">
                 <div class="row headerRow">
                     <div class="left col-md-6">
-                        <span>有不要的二手書嗎？</span>
+                        <span>為知識繼續傳遞與分享</span>
                         <h3>好書捐贈！</h3>
                         <div class="checkBtn">
                             <a href="#">
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <div class="right col-md-6">
-                        <span>趕快去瞧瞧！</span>
+                        <span>或許它已陳舊泛黃，卻依舊是珍寶</span>
                         <h3>免費索取書單</h3>
                         <div class="checkBtn">
                             <a href="#">
@@ -209,7 +209,7 @@
                             </div>
                         </div>
                     @endif
-                    
+
                 </div>
             </div>
         </div>
