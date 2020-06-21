@@ -105,4 +105,12 @@ class DonorController extends Controller
             'donors' => $donors
         ], 200);
     }
+
+    public function getInfo(Request $request){
+        $donor = $this->DonorService->getOne($request->id);
+        return response()->json([
+            'status' => 'OK',
+            'donor' => $donor
+        ]);
+    }
 }

@@ -25,7 +25,7 @@ class BorrowLog extends Model
         return $this->belongsTo(BookEloquent::class);
     }
 
-    public function borrow(){
+    public function borrower(){
         return $this->belongsTo(BorrowerEloquent::class);
     }
 

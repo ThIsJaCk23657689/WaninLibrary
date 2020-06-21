@@ -8,6 +8,8 @@ const app = new Vue({
         return {
             book: [],
             addType: null,
+            status_options: [],
+            isOKModifyStatus: true,
         }
     },
     methods: {
@@ -26,11 +28,32 @@ const app = new Vue({
             } else {
                 // 採購
                 this.addType = 2;
-                $('#donor_id').prop('disabled', true);
-                $('#donor_id_required_star').fadeOut();
-                $('#price').val('0').prop('disabled', false).attr('required', true);
             }
 
+            if (this.book.status == 2) {
+                // 此書籍為借閱中
+                this.isOKModifyStatus = false;
+                this.status_options = [
+                    { id: 2, text: '借閱中' },
+                ];
+            } else if (this.book.status == 3 || this.book.status == 10) {
+                // 此書籍為逾期中
+                this.status_options = [
+                    { id: 3, text: '逾期中' },
+                    { id: 10, text: '無歸還' },
+                ];
+            } else {
+                // 其他狀態可以修改
+                this.status_options = [
+                    { id: 1, text: '可借閱' },
+                    { id: 4, text: '庫藏待上架' },
+                    { id: 5, text: '已淘汰' },
+                    { id: 6, text: '已轉贈' },
+                    { id: 7, text: '可供免費索取' },
+                    { id: 8, text: '已被索取' },
+                    { id: 9, text: '無外借' },
+                ];
+            }
         });
     },
     mounted() {

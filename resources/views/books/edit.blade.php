@@ -21,9 +21,16 @@
         <span id="BooksGetOneURL" class="d-none">{{ route('books.getOne', [$book->id]) }}</span>
         <span id="BooksUpdateURL" class="d-none">{{ route('books.update', [$book->id]) }}</span>
         <span id="DonorsListURL" class="d-none">{{ route('donors.getList') }}</span>
+        <span id="DonorsGetInfoURL" class="d-none">{{ route('donors.getInfo') }}</span>
         <span id="DonorsNameURL" class="d-none">{{ route('donors.getDonorsByName') }}</span>
         <span id="BooksCoverImageURL" class="d-none">{{ asset($book->showCoverImage()) }}</span>
-        <book-update-form :book='book' :add-type='addType' @update-add-type="updateAddType"></book-update-form>
+        <book-update-form
+            :book='book'
+            :add-type='addType'
+            :status-options="status_options"
+            :is-modify-status="isOKModifyStatus"
+            @update-add-type="updateAddType"
+        ></book-update-form>
     </div>
 
 @endsection

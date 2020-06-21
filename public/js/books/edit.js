@@ -500,48 +500,14 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['book', 'addType'],
+  props: ['book', 'addType', 'statusOptions', 'isModifyStatus'],
   data: function data() {
     return {
       BooksIndexURL: $('#BooksIndexURL').html(),
       BooksUpdateURL: $('#BooksUpdateURL').html(),
       DonorsNameURL: $('#DonorsNameURL').html(),
+      DonorsGetInfoURL: $('#DonorsGetInfoURL').text(),
       BooksCoverImageURL: $('#BooksCoverImageURL').html(),
       title: '書籍圖片',
       category_options: [{
@@ -590,40 +556,10 @@ __webpack_require__.r(__webpack_exports__);
         id: 13,
         text: '1300 外文圖書'
       }],
-      status_options: [{
-        id: 1,
-        text: '可借閱'
-      }, {
-        id: 2,
-        text: '借閱中'
-      }, {
-        id: 3,
-        text: '逾期中'
-      }, {
-        id: 4,
-        text: '庫藏待上架'
-      }, {
-        id: 5,
-        text: '已淘汰'
-      }, {
-        id: 6,
-        text: '已轉贈'
-      }, {
-        id: 7,
-        text: '可供免費索取'
-      }, {
-        id: 8,
-        text: '已被索取'
-      }, {
-        id: 9,
-        text: '無外借'
-      }, {
-        id: 10,
-        text: '無歸還'
-      }],
       donors: [],
       donorValue: null,
-      bookInfo: []
+      bookInfo: [],
+      current_donor: []
     };
   },
   methods: {
@@ -647,7 +583,16 @@ __webpack_require__.r(__webpack_exports__);
       });
     }, 350),
     updateValue: function updateValue(value) {
+      var _this = this;
+
       this.donorValue = value;
+      axios.get(this.DonorsGetInfoURL, {
+        params: {
+          id: this.donorValue
+        }
+      }).then(function (response) {
+        _this.current_donor = response.data.donor;
+      });
     },
     startUpdate: function startUpdate() {
       $('#donor_id_input').slideUp();
@@ -658,21 +603,11 @@ __webpack_require__.r(__webpack_exports__);
       var x = $(e.target).val();
 
       if (x == '1') {
-        console.log('bbb');
-        this.$emit('update-add-type', 1); // this.addType = 1;
-        // 捐贈入庫 - 一般圖書
-
-        $('.donor_div').fadeIn();
-        $('.price_div').fadeOut();
-        $('#price').val(0); // 捐贈入庫 - 論文雜誌
+        // 捐贈入庫
+        this.$emit('update-add-type', 1);
       } else {
-        console.log('ccc');
-        this.$emit('update-add-type', 2); // this.addType = 2;
-        // 採購入庫 - 一般圖書
-
-        $('.donor_div').fadeOut();
-        $('.price_div').fadeIn();
-        $('#price').val(0); // 採購入庫 - 論文雜誌
+        // 採購入庫
+        this.$emit('update-add-type', 2);
       }
     },
     updateCategory: function updateCategory(e) {
@@ -975,291 +910,189 @@ var render = function() {
                 }
               },
               [
-                _vm.addType === 2
-                  ? _c("div", [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-3" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "addType" } }, [
-                              _vm._v("入庫方式")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                staticClass: "form-control",
-                                attrs: { id: "addType", name: "addType" },
-                                domProps: { value: _vm.addType },
-                                on: { change: _vm.changeAddType }
-                              },
-                              [
-                                _c("option", { attrs: { value: "1" } }, [
-                                  _vm._v("捐贈入庫")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "2" } }, [
-                                  _vm._v("採購入庫")
-                                ])
-                              ]
-                            )
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "addType" } }, [
+                        _vm._v("入庫方式")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          staticClass: "form-control",
+                          attrs: { id: "addType", name: "addType" },
+                          domProps: { value: _vm.addType },
+                          on: { change: _vm.changeAddType }
+                        },
+                        [
+                          _c("option", { attrs: { value: "1" } }, [
+                            _vm._v("捐贈入庫")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "2" } }, [
+                            _vm._v("採購入庫")
                           ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-3" }, [
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _vm.addType === 1
+                      ? _c("div", { staticClass: "form-group" }, [
+                          _vm._m(0),
+                          _vm._v(" "),
                           _c(
                             "div",
                             {
-                              staticClass: "form-group donor_div",
-                              staticStyle: { display: "none" }
+                              staticClass: "input-group mb-3",
+                              attrs: { id: "donor_id_input" }
                             },
                             [
-                              _vm._m(0),
-                              _vm._v(" "),
-                              _c(
-                                "div",
-                                { attrs: { id: "donor_id" } },
-                                [
-                                  _c("select-donor-custom", {
-                                    ref: "DonorsOption",
-                                    attrs: {
-                                      placeholder: "請輸入捐贈人(單位)名稱"
-                                    },
-                                    on: {
-                                      search: _vm.onSearch,
-                                      "update-value": _vm.updateValue
-                                    }
-                                  })
-                                ],
-                                1
-                              )
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-2" }, [
-                          _c("div", { staticClass: "form-group price_div" }, [
-                            _vm._m(1),
-                            _vm._v(" "),
-                            _c("input", {
-                              directives: [
-                                {
-                                  name: "model",
-                                  rawName: "v-model",
-                                  value: _vm.book.price,
-                                  expression: "book.price"
-                                }
-                              ],
-                              staticClass: "form-control",
-                              attrs: {
-                                id: "price",
-                                name: "price",
-                                type: "text"
-                              },
-                              domProps: { value: _vm.book.price },
-                              on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
-                                  _vm.$set(
-                                    _vm.book,
-                                    "price",
-                                    $event.target.value
-                                  )
-                                }
-                              }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "status" } }, [
-                              _vm._v("狀態")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
+                              _c("input", {
                                 staticClass: "form-control",
-                                attrs: { id: "status", name: "status" },
-                                domProps: { value: _vm.book.status }
-                              },
-                              _vm._l(_vm.status_options, function(option) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: option.id,
-                                    domProps: { value: option.id }
-                                  },
-                                  [_vm._v(_vm._s(option.text))]
-                                )
+                                attrs: { type: "text", readonly: "" },
+                                domProps: { value: _vm.book.donor.name }
                               }),
-                              0
-                            )
-                          ])
+                              _vm._v(" "),
+                              _c("div", { staticClass: "input-group-append" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-dark",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.startUpdate }
+                                  },
+                                  [_vm._v("編輯")]
+                                )
+                              ])
+                            ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: { display: "none" },
+                              attrs: { id: "donor_id" }
+                            },
+                            [
+                              _c("select-donor-custom", {
+                                ref: "DonorsOption",
+                                attrs: {
+                                  placeholder: "請輸入捐贈人(單位)名稱名稱"
+                                },
+                                on: {
+                                  search: _vm.onSearch,
+                                  "update-value": _vm.updateValue
+                                }
+                              })
+                            ],
+                            1
+                          )
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-2" }, [
+                    _vm.addType === 2
+                      ? _c("div", { staticClass: "form-group" }, [
+                          _vm._m(1),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.book.price,
+                                expression: "book.price"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "price", name: "price", type: "text" },
+                            domProps: { value: _vm.book.price },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.book, "price", $event.target.value)
+                              }
+                            }
+                          })
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "status" } }, [
+                        _vm._v("狀態")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          staticClass: "form-control",
+                          attrs: { id: "status", name: "status" },
+                          domProps: { value: _vm.book.status }
+                        },
+                        _vm._l(_vm.statusOptions, function(option) {
+                          return _c(
+                            "option",
+                            { key: option.id, domProps: { value: option.id } },
+                            [_vm._v(_vm._s(option.text))]
+                          )
+                        }),
+                        0
+                      )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.addType === 1
+                  ? _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", [_vm._v("捐贈人電話")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text", readonly: "" },
+                            domProps: { value: _vm.current_donor.tel || "無" }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", [_vm._v("捐贈人手機")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text", readonly: "" },
+                            domProps: { value: _vm.current_donor.phone || "無" }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", [_vm._v("捐贈人生日")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text", readonly: "" },
+                            domProps: {
+                              value: _vm.current_donor.birthday || "無"
+                            }
+                          })
                         ])
                       ])
                     ])
-                  : _c("div", [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-3" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "addType" } }, [
-                              _vm._v("入庫方式")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                staticClass: "form-control",
-                                attrs: { id: "addType", name: "addType" },
-                                domProps: { value: _vm.addType },
-                                on: { change: _vm.changeAddType }
-                              },
-                              [
-                                _c("option", { attrs: { value: "1" } }, [
-                                  _vm._v("捐贈入庫")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "2" } }, [
-                                  _vm._v("採購入庫")
-                                ])
-                              ]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-3" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _vm._m(2),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "input-group mb-3",
-                                attrs: { id: "donor_id_input" }
-                              },
-                              [
-                                _c("input", {
-                                  staticClass: "form-control",
-                                  attrs: { type: "text", readonly: "" },
-                                  domProps: { value: _vm.book.donor.name }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "input-group-append" },
-                                  [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-dark",
-                                        attrs: { type: "button" },
-                                        on: { click: _vm.startUpdate }
-                                      },
-                                      [_vm._v("編輯")]
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticStyle: { display: "none" },
-                                attrs: { id: "donor_id" }
-                              },
-                              [
-                                _c("select-donor-custom", {
-                                  ref: "DonorsOption",
-                                  attrs: {
-                                    placeholder: "請輸入捐贈人(單位)名稱"
-                                  },
-                                  on: {
-                                    search: _vm.onSearch,
-                                    "update-value": _vm.updateValue
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-2" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "form-group price_div",
-                              staticStyle: { display: "none" }
-                            },
-                            [
-                              _vm._m(3),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.book.price,
-                                    expression: "book.price"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  id: "price",
-                                  name: "price",
-                                  type: "text"
-                                },
-                                domProps: { value: _vm.book.price },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.book,
-                                      "price",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "status" } }, [
-                              _vm._v("狀態")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                staticClass: "form-control",
-                                attrs: { id: "status", name: "status" },
-                                domProps: { value: _vm.book.status }
-                              },
-                              _vm._l(_vm.status_options, function(option) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: option.id,
-                                    domProps: { value: option.id }
-                                  },
-                                  [_vm._v(_vm._s(option.text))]
-                                )
-                              }),
-                              0
-                            )
-                          ])
-                        ])
-                      ])
-                    ]),
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("hr"),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
                   _c(
@@ -1283,7 +1116,7 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col-md-12" }, [
                         _c("div", { staticClass: "form-group" }, [
-                          _vm._m(4),
+                          _vm._m(2),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -1674,7 +1507,7 @@ var render = function() {
                   _vm._v(" "),
                   _c("div", { staticClass: "col-md-3" }, [
                     _c("div", { staticClass: "form-group" }, [
-                      _vm._m(5),
+                      _vm._m(3),
                       _vm._v(" "),
                       _c("input", {
                         directives: [
@@ -1706,7 +1539,7 @@ var render = function() {
                         }
                       }),
                       _vm._v(" "),
-                      _vm._m(6)
+                      _vm._m(4)
                     ])
                   ]),
                   _vm._v(" "),
@@ -1831,291 +1664,274 @@ var render = function() {
                 }
               },
               [
-                _vm.addType === 2
-                  ? _c("div", [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-3" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "addType" } }, [
-                              _vm._v("入庫方式")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                staticClass: "form-control",
-                                attrs: { id: "addType", name: "addType" },
-                                domProps: { value: _vm.addType },
-                                on: { change: _vm.changeAddType }
-                              },
-                              [
-                                _c("option", { attrs: { value: "1" } }, [
-                                  _vm._v("捐贈入庫")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "2" } }, [
-                                  _vm._v("採購入庫")
-                                ])
-                              ]
-                            )
+                _c("div", { staticClass: "row" }, [
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "addType" } }, [
+                        _vm._v("入庫方式")
+                      ]),
+                      _vm._v(" "),
+                      _c(
+                        "select",
+                        {
+                          staticClass: "form-control",
+                          attrs: { id: "addType", name: "addType" },
+                          domProps: { value: _vm.addType },
+                          on: { change: _vm.changeAddType }
+                        },
+                        [
+                          _c("option", { attrs: { value: "1" } }, [
+                            _vm._v("捐贈入庫")
+                          ]),
+                          _vm._v(" "),
+                          _c("option", { attrs: { value: "2" } }, [
+                            _vm._v("採購入庫")
                           ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-3" }, [
+                        ]
+                      )
+                    ])
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-3" }, [
+                    _vm.addType === 1
+                      ? _c("div", { staticClass: "form-group" }, [
+                          _vm._m(5),
+                          _vm._v(" "),
                           _c(
                             "div",
                             {
-                              staticClass: "form-group donor_div",
-                              staticStyle: { display: "none" }
+                              staticClass: "input-group mb-3",
+                              attrs: { id: "donor_id_input" }
                             },
                             [
-                              _vm._m(7),
+                              _c("input", {
+                                staticClass: "form-control",
+                                attrs: { type: "text", readonly: "" },
+                                domProps: {
+                                  value: _vm.book.donor
+                                    ? _vm.book.donor.name
+                                    : "無"
+                                }
+                              }),
                               _vm._v(" "),
-                              _c(
-                                "div",
-                                { attrs: { id: "donor_id" } },
-                                [
-                                  _c("select-donor-custom", {
-                                    ref: "DonorsOption",
-                                    attrs: {
-                                      placeholder: "請輸入捐贈人(單位)名稱"
-                                    },
-                                    on: {
-                                      search: _vm.onSearch,
-                                      "update-value": _vm.updateValue
-                                    }
-                                  })
-                                ],
-                                1
-                              )
+                              _c("div", { staticClass: "input-group-append" }, [
+                                _c(
+                                  "button",
+                                  {
+                                    staticClass: "btn btn-dark",
+                                    attrs: { type: "button" },
+                                    on: { click: _vm.startUpdate }
+                                  },
+                                  [_vm._v("編輯")]
+                                )
+                              ])
                             ]
+                          ),
+                          _vm._v(" "),
+                          _c(
+                            "div",
+                            {
+                              staticStyle: { display: "none" },
+                              attrs: { id: "donor_id" }
+                            },
+                            [
+                              _c("select-donor-custom", {
+                                ref: "DonorsOption",
+                                attrs: {
+                                  placeholder: "請輸入捐贈人(單位)名稱名稱"
+                                },
+                                on: {
+                                  search: _vm.onSearch,
+                                  "update-value": _vm.updateValue
+                                }
+                              })
+                            ],
+                            1
                           )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-2" }, [
-                          _c("div", { staticClass: "form-group price_div" }, [
-                            _vm._m(8),
-                            _vm._v(" "),
-                            _c("input", {
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-2" }, [
+                    _vm.addType === 2
+                      ? _c("div", { staticClass: "form-group" }, [
+                          _vm._m(6),
+                          _vm._v(" "),
+                          _c("input", {
+                            directives: [
+                              {
+                                name: "model",
+                                rawName: "v-model",
+                                value: _vm.book.price,
+                                expression: "book.price"
+                              }
+                            ],
+                            staticClass: "form-control",
+                            attrs: { id: "price", name: "price", type: "text" },
+                            domProps: { value: _vm.book.price },
+                            on: {
+                              input: function($event) {
+                                if ($event.target.composing) {
+                                  return
+                                }
+                                _vm.$set(_vm.book, "price", $event.target.value)
+                              }
+                            }
+                          })
+                        ])
+                      : _vm._e()
+                  ]),
+                  _vm._v(" "),
+                  _c("div", { staticClass: "col-md-4" }, [
+                    _c("div", { staticClass: "form-group" }, [
+                      _c("label", { attrs: { for: "status" } }, [
+                        _vm._v("狀態")
+                      ]),
+                      _vm._v(" "),
+                      _vm.isModifyStatus
+                        ? _c(
+                            "select",
+                            {
                               directives: [
                                 {
                                   name: "model",
                                   rawName: "v-model",
-                                  value: _vm.book.price,
-                                  expression: "book.price"
+                                  value: _vm.book.status,
+                                  expression: "book.status"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { id: "status", name: "status" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.book,
+                                    "status",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.statusOptions, function(option) {
+                              return _c(
+                                "option",
+                                {
+                                  key: option.id,
+                                  domProps: { value: option.id }
+                                },
+                                [_vm._v(_vm._s(option.text))]
+                              )
+                            }),
+                            0
+                          )
+                        : _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.book.status,
+                                  expression: "book.status"
                                 }
                               ],
                               staticClass: "form-control",
                               attrs: {
-                                id: "price",
-                                name: "price",
-                                type: "text"
+                                id: "status",
+                                name: "status",
+                                readonly: ""
                               },
-                              domProps: { value: _vm.book.price },
                               on: {
-                                input: function($event) {
-                                  if ($event.target.composing) {
-                                    return
-                                  }
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
                                   _vm.$set(
                                     _vm.book,
-                                    "price",
-                                    $event.target.value
+                                    "status",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
                                   )
                                 }
                               }
-                            })
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "status" } }, [
-                              _vm._v("狀態")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                staticClass: "form-control",
-                                attrs: { id: "status", name: "status" },
-                                domProps: { value: _vm.book.status }
-                              },
-                              _vm._l(_vm.status_options, function(option) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: option.id,
-                                    domProps: { value: option.id }
-                                  },
-                                  [_vm._v(_vm._s(option.text))]
-                                )
-                              }),
-                              0
-                            )
-                          ])
+                            },
+                            _vm._l(_vm.statusOptions, function(option) {
+                              return _c(
+                                "option",
+                                {
+                                  key: option.id,
+                                  domProps: { value: option.id }
+                                },
+                                [_vm._v(_vm._s(option.text))]
+                              )
+                            }),
+                            0
+                          )
+                    ])
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm.addType === 1
+                  ? _c("div", { staticClass: "row" }, [
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", [_vm._v("捐贈人電話")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text", readonly: "" },
+                            domProps: { value: _vm.current_donor.tel || "無" }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", [_vm._v("捐贈人手機")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text", readonly: "" },
+                            domProps: { value: _vm.current_donor.phone || "無" }
+                          })
+                        ])
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-4" }, [
+                        _c("div", { staticClass: "form-group" }, [
+                          _c("label", [_vm._v("捐贈人生日")]),
+                          _vm._v(" "),
+                          _c("input", {
+                            staticClass: "form-control",
+                            attrs: { type: "text", readonly: "" },
+                            domProps: {
+                              value: _vm.current_donor.birthday || "無"
+                            }
+                          })
                         ])
                       ])
                     ])
-                  : _c("div", [
-                      _c("div", { staticClass: "row" }, [
-                        _c("div", { staticClass: "col-md-3" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "addType" } }, [
-                              _vm._v("入庫方式")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                staticClass: "form-control",
-                                attrs: { id: "addType", name: "addType" },
-                                domProps: { value: _vm.addType },
-                                on: { change: _vm.changeAddType }
-                              },
-                              [
-                                _c("option", { attrs: { value: "1" } }, [
-                                  _vm._v("捐贈入庫")
-                                ]),
-                                _vm._v(" "),
-                                _c("option", { attrs: { value: "2" } }, [
-                                  _vm._v("採購入庫")
-                                ])
-                              ]
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-3" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _vm._m(9),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticClass: "input-group mb-3",
-                                attrs: { id: "donor_id_input" }
-                              },
-                              [
-                                _c("input", {
-                                  staticClass: "form-control",
-                                  attrs: { type: "text", readonly: "" },
-                                  domProps: { value: _vm.book.donor.name }
-                                }),
-                                _vm._v(" "),
-                                _c(
-                                  "div",
-                                  { staticClass: "input-group-append" },
-                                  [
-                                    _c(
-                                      "button",
-                                      {
-                                        staticClass: "btn btn-dark",
-                                        attrs: { type: "button" },
-                                        on: { click: _vm.startUpdate }
-                                      },
-                                      [_vm._v("編輯")]
-                                    )
-                                  ]
-                                )
-                              ]
-                            ),
-                            _vm._v(" "),
-                            _c(
-                              "div",
-                              {
-                                staticStyle: { display: "none" },
-                                attrs: { id: "donor_id" }
-                              },
-                              [
-                                _c("select-donor-custom", {
-                                  ref: "DonorsOption",
-                                  attrs: {
-                                    placeholder: "請輸入捐贈人(單位)名稱名稱"
-                                  },
-                                  on: {
-                                    search: _vm.onSearch,
-                                    "update-value": _vm.updateValue
-                                  }
-                                })
-                              ],
-                              1
-                            )
-                          ])
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-2" }, [
-                          _c(
-                            "div",
-                            {
-                              staticClass: "form-group price_div",
-                              staticStyle: { display: "none" }
-                            },
-                            [
-                              _vm._m(10),
-                              _vm._v(" "),
-                              _c("input", {
-                                directives: [
-                                  {
-                                    name: "model",
-                                    rawName: "v-model",
-                                    value: _vm.book.price,
-                                    expression: "book.price"
-                                  }
-                                ],
-                                staticClass: "form-control",
-                                attrs: {
-                                  id: "price",
-                                  name: "price",
-                                  type: "text"
-                                },
-                                domProps: { value: _vm.book.price },
-                                on: {
-                                  input: function($event) {
-                                    if ($event.target.composing) {
-                                      return
-                                    }
-                                    _vm.$set(
-                                      _vm.book,
-                                      "price",
-                                      $event.target.value
-                                    )
-                                  }
-                                }
-                              })
-                            ]
-                          )
-                        ]),
-                        _vm._v(" "),
-                        _c("div", { staticClass: "col-md-4" }, [
-                          _c("div", { staticClass: "form-group" }, [
-                            _c("label", { attrs: { for: "status" } }, [
-                              _vm._v("狀態")
-                            ]),
-                            _vm._v(" "),
-                            _c(
-                              "select",
-                              {
-                                staticClass: "form-control",
-                                attrs: { id: "status", name: "status" },
-                                domProps: { value: _vm.book.status }
-                              },
-                              _vm._l(_vm.status_options, function(option) {
-                                return _c(
-                                  "option",
-                                  {
-                                    key: option.id,
-                                    domProps: { value: option.id }
-                                  },
-                                  [_vm._v(_vm._s(option.text))]
-                                )
-                              }),
-                              0
-                            )
-                          ])
-                        ])
-                      ])
-                    ]),
+                  : _vm._e(),
+                _vm._v(" "),
+                _c("hr"),
                 _vm._v(" "),
                 _c("div", { staticClass: "row" }, [
                   _c(
@@ -2139,7 +1955,7 @@ var render = function() {
                     _c("div", { staticClass: "row" }, [
                       _c("div", { staticClass: "col-md-12" }, [
                         _c("div", { staticClass: "form-group" }, [
-                          _vm._m(11),
+                          _vm._m(7),
                           _vm._v(" "),
                           _c("input", {
                             directives: [
@@ -2604,7 +2420,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱")
+      _vm._v("捐贈人(單位)名稱\n                            ")
     ])
   },
   function() {
@@ -2612,40 +2428,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "price" } }, [
-      _c(
-        "span",
-        {
-          staticClass: "text-danger mr-2",
-          attrs: { id: "price_required_star" }
-        },
-        [_vm._v("*")]
-      ),
-      _vm._v("價格")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "price" } }, [
-      _c(
-        "span",
-        {
-          staticClass: "text-danger mr-2",
-          attrs: { id: "price_required_star" }
-        },
-        [_vm._v("*")]
-      ),
-      _vm._v("價格")
+      _vm._v("價格\n                            ")
     ])
   },
   function() {
@@ -2685,7 +2469,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱")
+      _vm._v("捐贈人(單位)名稱\n                            ")
     ])
   },
   function() {
@@ -2693,40 +2477,8 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "price" } }, [
-      _c(
-        "span",
-        {
-          staticClass: "text-danger mr-2",
-          attrs: { id: "price_required_star" }
-        },
-        [_vm._v("*")]
-      ),
-      _vm._v("價格")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱")
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("label", { attrs: { for: "price" } }, [
-      _c(
-        "span",
-        {
-          staticClass: "text-danger mr-2",
-          attrs: { id: "price_required_star" }
-        },
-        [_vm._v("*")]
-      ),
-      _vm._v("價格")
+      _vm._v("價格\n                            ")
     ])
   },
   function() {
@@ -3044,7 +2796,9 @@ var app = new Vue({
   data: function data() {
     return {
       book: [],
-      addType: null
+      addType: null,
+      status_options: [],
+      isOKModifyStatus: true
     };
   },
   methods: {
@@ -3066,9 +2820,48 @@ var app = new Vue({
       } else {
         // 採購
         _this.addType = 2;
-        $('#donor_id').prop('disabled', true);
-        $('#donor_id_required_star').fadeOut();
-        $('#price').val('0').prop('disabled', false).attr('required', true);
+      }
+
+      if (_this.book.status == 2) {
+        // 此書籍為借閱中
+        _this.isOKModifyStatus = false;
+        _this.status_options = [{
+          id: 2,
+          text: '借閱中'
+        }];
+      } else if (_this.book.status == 3 || _this.book.status == 10) {
+        // 此書籍為逾期中
+        _this.status_options = [{
+          id: 3,
+          text: '逾期中'
+        }, {
+          id: 10,
+          text: '無歸還'
+        }];
+      } else {
+        // 其他狀態可以修改
+        _this.status_options = [{
+          id: 1,
+          text: '可借閱'
+        }, {
+          id: 4,
+          text: '庫藏待上架'
+        }, {
+          id: 5,
+          text: '已淘汰'
+        }, {
+          id: 6,
+          text: '已轉贈'
+        }, {
+          id: 7,
+          text: '可供免費索取'
+        }, {
+          id: 8,
+          text: '已被索取'
+        }, {
+          id: 9,
+          text: '無外借'
+        }];
       }
     });
   },

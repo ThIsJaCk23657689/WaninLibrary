@@ -496,6 +496,56 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['uploadimg'],
   data: function data() {
@@ -503,6 +553,7 @@ __webpack_require__.r(__webpack_exports__);
       BooksIndexURL: $('#BooksIndexURL').html(),
       BooksStoreURL: $('#BooksStoreURL').html(),
       DonorsNameURL: $('#DonorsNameURL').html(),
+      DonorsGetInfoURL: $('#DonorsGetInfoURL').text(),
       FormErrorsMsg: [],
       donors: [],
       title: '書籍圖片',
@@ -575,12 +626,11 @@ __webpack_require__.r(__webpack_exports__);
       }, {
         id: 9,
         text: '無外借'
-      }, {
-        id: 10,
-        text: '無歸還'
-      }],
+      } // {id: 10, text: '無歸還'},
+      ],
       donorValue: null,
-      bookInfo: []
+      bookInfo: [],
+      current_donor: []
     };
   },
   methods: {
@@ -603,24 +653,55 @@ __webpack_require__.r(__webpack_exports__);
       });
     }, 350),
     updateValue: function updateValue(value) {
+      var _this = this;
+
       this.donorValue = value;
+      axios.get(this.DonorsGetInfoURL, {
+        params: {
+          id: this.donorValue
+        }
+      }).then(function (response) {
+        _this.current_donor = response.data.donor;
+      });
     },
-    changeAddType: function changeAddType(e) {
+    changeAddTypeForBook: function changeAddTypeForBook(e) {
       // 更動入庫方式
       var x = $(e.target).val();
 
       if (x == '1') {
         this.$emit('update-add-type', 1); // 捐贈入庫
 
-        $('.donor_div').fadeIn();
-        $('.price_div').fadeOut();
-        $('#price').val(0);
+        $('.book_donor_div').fadeIn();
+        $('.book_price_div').fadeOut();
+        $('#book_price').val(0);
+        $('.book_donor_info').fadeIn();
       } else {
         this.$emit('update-add-type', 2); // 採購入庫
 
-        $('.donor_div').fadeOut();
-        $('.price_div').fadeIn();
-        $('#price').val(0);
+        $('.book_donor_div').fadeOut();
+        $('.book_price_div').fadeIn();
+        $('#book_price').val(0);
+        $('.book_donor_info').fadeOut();
+      }
+    },
+    changeAddTypeForPapper: function changeAddTypeForPapper(e) {
+      // 更動入庫方式
+      var x = $(e.target).val();
+
+      if (x == '1') {
+        this.$emit('update-add-type', 1); // 捐贈入庫
+
+        $('.papper_donor_div').fadeIn();
+        $('.papper_price_div').fadeOut();
+        $('#papper_price').val(0);
+        $('.papper_donor_info').fadeIn();
+      } else {
+        this.$emit('update-add-type', 2); // 採購入庫
+
+        $('.papper_donor_div').fadeOut();
+        $('.papper_price_div').fadeIn();
+        $('#papper_price').val(0);
+        $('.papper_donor_info').fadeOut();
       }
     },
     updateCategory: function updateCategory(e) {
@@ -658,7 +739,7 @@ __webpack_require__.r(__webpack_exports__);
       }
     },
     getBookDataFromWeb: function getBookDataFromWeb(e) {
-      var _this = this;
+      var _this2 = this;
 
       var $url = $(e.target).val();
 
@@ -677,12 +758,12 @@ __webpack_require__.r(__webpack_exports__);
             $.showLoadingModal();
             axios.post(BooksBugURL, data).then(function (response) {
               console.log(response.data.data);
-              _this.bookInfo = response.data.data;
+              _this2.bookInfo = response.data.data;
 
-              if (_this.bookInfo == null) {} else {
+              if (_this2.bookInfo == null) {} else {
                 $.closeModal();
 
-                _this.keyBookDataInForm();
+                _this2.keyBookDataInForm();
               }
             })["catch"](function (error) {
               console.error('爬蟲時發生錯誤，錯誤訊息：' + error);
@@ -1169,7 +1250,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nimg {\r\n  height: auto;\r\n  max-width: 2.5rem;\r\n  margin-right: 1rem;\n}\n.d-center {\r\n  display: flex;\r\n  align-items: center;\n}\n.selected img {\r\n  width: auto;\r\n  max-height: 23px;\r\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\r\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\r\n  border-bottom: none;\n}\n.v-select .dropdown li a {\r\n  padding: 10px 20px;\r\n  width: 100%;\r\n  font-size: 1.25em;\r\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\r\n  color: #fff;\n}\r\n\r\n\r\n", ""]);
+exports.push([module.i, "\nimg {\n  height: auto;\n  max-width: 2.5rem;\n  margin-right: 1rem;\n}\n.d-center {\n  display: flex;\n  align-items: center;\n}\n.selected img {\n  width: auto;\n  max-height: 23px;\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\n  border-bottom: none;\n}\n.v-select .dropdown li a {\n  padding: 10px 20px;\n  width: 100%;\n  font-size: 1.25em;\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\n  color: #fff;\n}\n\n\n", ""]);
 
 // exports
 
@@ -1856,7 +1937,7 @@ var render = function() {
                     {
                       staticClass: "form-control",
                       attrs: { id: "add_type", name: "addType" },
-                      on: { change: _vm.changeAddType }
+                      on: { change: _vm.changeAddTypeForBook }
                     },
                     [
                       _c("option", { attrs: { value: "1", selected: "" } }, [
@@ -1872,7 +1953,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
-                _c("div", { staticClass: "form-group donor_div" }, [
+                _c("div", { staticClass: "form-group book_donor_div" }, [
                   _vm._m(2),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
@@ -1901,6 +1982,46 @@ var render = function() {
               _vm._v(" "),
               _vm._m(4)
             ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row book_donor_info" }, [
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("捐贈人電話")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", readonly: "" },
+                    domProps: { value: _vm.current_donor.tel || "無" }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("捐贈人手機")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", readonly: "" },
+                    domProps: { value: _vm.current_donor.phone || "無" }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("捐贈人生日")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", readonly: "" },
+                    domProps: { value: _vm.current_donor.birthday || "無" }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("hr"),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
               _c(
@@ -2056,7 +2177,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                        確認新增\r\n                    "
+                        "\n                        確認新增\n                    "
                       )
                     ]
                   ),
@@ -2069,7 +2190,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                        返回列表\r\n                    "
+                        "\n                        返回列表\n                    "
                       )
                     ]
                   )
@@ -2109,7 +2230,7 @@ var render = function() {
                     {
                       staticClass: "form-control",
                       attrs: { id: "p_add_type", name: "addType" },
-                      on: { change: _vm.changeAddType }
+                      on: { change: _vm.changeAddTypeForPapper }
                     },
                     [
                       _c("option", { attrs: { value: "1", selected: "" } }, [
@@ -2125,7 +2246,7 @@ var render = function() {
               ]),
               _vm._v(" "),
               _c("div", { staticClass: "col-md-6" }, [
-                _c("div", { staticClass: "form-group donor_div" }, [
+                _c("div", { staticClass: "form-group papper_donor_div" }, [
                   _vm._m(15),
                   _vm._v(" "),
                   _c("div", { staticClass: "row" }, [
@@ -2154,6 +2275,46 @@ var render = function() {
               _vm._v(" "),
               _vm._m(17)
             ]),
+            _vm._v(" "),
+            _c("div", { staticClass: "row papper_donor_info" }, [
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("捐贈人電話")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", readonly: "" },
+                    domProps: { value: _vm.current_donor.tel || "無" }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("捐贈人手機")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", readonly: "" },
+                    domProps: { value: _vm.current_donor.phone || "無" }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _c("label", [_vm._v("捐贈人生日")]),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control",
+                    attrs: { type: "text", readonly: "" },
+                    domProps: { value: _vm.current_donor.birthday || "無" }
+                  })
+                ])
+              ])
+            ]),
+            _vm._v(" "),
+            _c("hr"),
             _vm._v(" "),
             _c("div", { staticClass: "row" }, [
               _c(
@@ -2217,7 +2378,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                        確認新增\r\n                    "
+                        "\n                        確認新增\n                    "
                       )
                     ]
                   ),
@@ -2230,7 +2391,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                        返回列表\r\n                    "
+                        "\n                        返回列表\n                    "
                       )
                     ]
                   )
@@ -2269,7 +2430,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "fas fa-user-tie mr-2" }),
               _vm._v(
-                "\r\n                        一般書籍(有ISBN)\r\n                    "
+                "\n                        一般書籍(有ISBN)\n                    "
               )
             ]
           )
@@ -2287,7 +2448,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "far fa-building mr-2" }),
               _vm._v(
-                "\r\n                        論文、期刊、雜誌等(無ISBN)\r\n                    "
+                "\n                        論文、期刊、雜誌等(無ISBN)\n                    "
               )
             ]
           )
@@ -2318,7 +2479,7 @@ var staticRenderFns = [
               [
                 _c("i", { staticClass: "fas fa-undo-alt mr-2" }),
                 _vm._v(
-                  "\r\n                        重新選擇書籍類型\r\n                    "
+                  "\n                        重新選擇書籍類型\n                    "
                 )
               ]
             )
@@ -2333,7 +2494,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱\r\n                        ")
+      _vm._v("捐贈人(單位)名稱\n                        ")
     ])
   },
   function() {
@@ -2354,7 +2515,7 @@ var staticRenderFns = [
         [
           _c("i", { staticClass: "fas fa-plus mr-2" }),
           _vm._v(
-            "\r\n                                    新增捐贈人(單位)\r\n                                "
+            "\n                                    新增捐贈人(單位)\n                                "
           )
         ]
       )
@@ -2368,26 +2529,19 @@ var staticRenderFns = [
       _c(
         "div",
         {
-          staticClass: "form-group price_div",
+          staticClass: "form-group book_price_div",
           staticStyle: { display: "none" }
         },
         [
-          _c("label", { attrs: { for: "price" } }, [
-            _c(
-              "span",
-              {
-                staticClass: "text-danger mr-2",
-                attrs: { id: "price_required_star" }
-              },
-              [_vm._v("*")]
-            ),
-            _vm._v("價格\r\n                        ")
+          _c("label", { attrs: { for: "book_price" } }, [
+            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+            _vm._v("價格\n                        ")
           ]),
           _vm._v(" "),
           _c("input", {
             staticClass: "form-control",
             attrs: {
-              id: "price",
+              id: "book_price",
               name: "price",
               type: "text",
               value: "0",
@@ -2407,7 +2561,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("書名（主標題）\r\n                                ")
+            _vm._v("書名（主標題）\n                                ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -2616,7 +2770,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("分類號\r\n                        ")
+      _vm._v("分類號\n                        ")
     ])
   },
   function() {
@@ -2653,7 +2807,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱\r\n                        ")
+      _vm._v("捐贈人(單位)名稱\n                        ")
     ])
   },
   function() {
@@ -2674,7 +2828,7 @@ var staticRenderFns = [
         [
           _c("i", { staticClass: "fas fa-plus mr-2" }),
           _vm._v(
-            "\r\n                                    新增捐贈人(單位)名稱\r\n                                "
+            "\n                                    新增捐贈人(單位)名稱\n                                "
           )
         ]
       )
@@ -2688,26 +2842,19 @@ var staticRenderFns = [
       _c(
         "div",
         {
-          staticClass: "form-group price_div",
+          staticClass: "form-group papper_price_div",
           staticStyle: { display: "none" }
         },
         [
-          _c("label", { attrs: { for: "p_price" } }, [
-            _c(
-              "span",
-              {
-                staticClass: "text-danger mr-2",
-                attrs: { id: "p_price_required_star" }
-              },
-              [_vm._v("*")]
-            ),
-            _vm._v("價格\r\n                        ")
+          _c("label", { attrs: { for: "papper_price" } }, [
+            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+            _vm._v("價格\n                        ")
           ]),
           _vm._v(" "),
           _c("input", {
             staticClass: "form-control",
             attrs: {
-              id: "p_price",
+              id: "papper_price",
               name: "price",
               type: "text",
               value: "0",
@@ -2728,7 +2875,7 @@ var staticRenderFns = [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "p_title" } }, [
               _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-              _vm._v("主標題\r\n                                ")
+              _vm._v("主標題\n                                ")
             ]),
             _vm._v(" "),
             _c("input", {

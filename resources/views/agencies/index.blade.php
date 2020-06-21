@@ -51,7 +51,7 @@
 								<td>{{ $agency->name }}</td>
 								<td>{{ $agency->principal }}</td>
 								<td>{{ $agency->tel }}</td>
-								<td>0</td>
+								<td>{{ $agency->borrowers()->count() }}</td>
 								<td>
 									<a href="{{ route('agencies.show', [$agency->id]) }}" class="btn btn-md btn-info">
 										<i class="fas fa-info-circle"></i>

@@ -179,12 +179,15 @@ __webpack_require__.r(__webpack_exports__);
           $.showErrorModalWithoutError('登入失敗，錯誤訊息：' + error.response.data.message + '\n請聯絡系統設計師處理。');
         } else {
           console.error(error.response.data.errors);
+          $.showErrorModal(error);
           var $key = Object.keys(error.response.data.errors);
           $key.forEach(function (item, index) {
             $('#' + item).addClass('is-invalid');
             $('#' + item + '_error').html('<strong>' + error.response.data.errors[item] + '</strong>');
           });
         }
+
+        $('#LoginBtn').attr('disabled', false);
       });
     });
   }
@@ -233,7 +236,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                                登入\r\n                            "
+                        "\n                                登入\n                            "
                       )
                     ]
                   ),
@@ -246,7 +249,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                                忘記密碼？\r\n                            "
+                        "\n                                忘記密碼？\n                            "
                       )
                     ]
                   )
