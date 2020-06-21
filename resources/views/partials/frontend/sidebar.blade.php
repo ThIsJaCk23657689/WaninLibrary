@@ -38,17 +38,17 @@
         <ul id="bottomSidebar" class="navbar-nav">
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <img src="{{ asset('images/frontend/icons/facebook.png') }}" alt="facebook">
+                    <img src="{{ asset('images/frontend/icons/facebook_blue.png') }}" alt="facebook">
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <img src="{{ asset('images/frontend/icons/web.png') }}" alt="web">
+                    <img src="{{ asset('images/frontend/icons/web_blue.png') }}" alt="web">
                 </a>
             </li>
             <li class="nav-item">
                 <a href="#" class="nav-link">
-                    <img src="{{ asset('images/frontend/icons/instagram.png') }}" alt="instagram">
+                    <img src="{{ asset('images/frontend/icons/instagram_blue.png') }}" alt="instagram">
                 </a>
             </li>
         </ul>
