@@ -69,10 +69,10 @@ export default {
             $.showLoadingModal('驗證帳戶資訊中...');
             $('#login_form input.is-invalid').removeClass('is-invalid')
             $('#LoginBtn').attr('disabled', true);
-            
+
             let url = $('#LoginAPI').html();
             let data = $(this).serializeObject();
-            
+
             axios.post(url, data).then(response => {
                 if($('#IntendedURL').html() != '' &&  $('#IntendedURL').html() != null){
                     location.href = $('#IntendedURL').html();
@@ -85,12 +85,14 @@ export default {
                     $.showErrorModalWithoutError('登入失敗，錯誤訊息：' + error.response.data.message + '\n請聯絡系統設計師處理。');
                 }else{
                     console.error(error.response.data.errors);
+                    $.showErrorModal(error);
                     let $key = Object.keys(error.response.data.errors);
                     $key.forEach(function(item, index){
                         $('#' + item).addClass('is-invalid');
                         $('#' + item + '_error').html('<strong>'+ error.response.data.errors[item] + '</strong>');
                     });
                 }
+                $('#LoginBtn').attr('disabled', false);
             });
         });
     }

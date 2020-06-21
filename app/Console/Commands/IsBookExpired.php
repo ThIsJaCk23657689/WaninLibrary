@@ -57,6 +57,8 @@ class IsBookExpired extends Command
                 $borrow->save();
                 $borrow->borrower->activated = 0;
                 $borrow->borrower->save();
+                $borrow->book->status = 3;
+                $borrow->book->save();
 
                 // 新增借閱紀錄
                 BorrowLogEloquent::create([

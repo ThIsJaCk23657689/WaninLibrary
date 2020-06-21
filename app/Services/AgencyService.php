@@ -19,7 +19,7 @@ class AgencyService extends BaseService
             'address_others' => $request->address_others,
             'content' => $request->content,
         ]);
-        
+
         $act_user = auth('api')->user();
         Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 新增了一筆隸屬單位，編號為：' . $agency->id . '。');
 

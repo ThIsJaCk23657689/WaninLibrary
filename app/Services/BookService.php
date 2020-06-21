@@ -238,9 +238,12 @@ class BookService extends BaseService
             }
             $request->price = 0;
         }
-        // 借閱中或逾期中不能更改狀態
-        if($book->status == 2 || $book->status == 3){
+        // 借閱中不能更改狀態
+        if($book->status == 2){
             $status = $book->status;
+        }elseif($book->status == 3 && ($request->status == 10 || $request->status == 3)){
+            //逾期中只能被改成無歸還或逾期中
+            $status = $request->status;
         }else{
             $status = $request->status;
         }

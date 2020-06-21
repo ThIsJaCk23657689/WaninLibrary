@@ -42,7 +42,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="add_type">入庫方式</label>
-                        <select id="add_type" name="addType" class="form-control" @change="changeAddType">
+                        <select id="add_type" name="addType" class="form-control" @change="changeAddTypeForBook">
                             <option value="1" selected>捐贈入庫</option>
                             <option value="2">採購入庫</option>
                         </select>
@@ -50,7 +50,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="form-group donor_div">
+                    <div class="form-group book_donor_div">
                         <label>
                             <span class="text-danger mr-2">*</span>捐贈人(單位)名稱
                         </label>
@@ -71,14 +71,39 @@
                 </div>
 
                 <div class="col-md-3">
-                    <div class="form-group price_div" style="display:none;">
-                        <label for="price">
-                            <span id="price_required_star" class="text-danger mr-2">*</span>價格
+                    <div class="form-group book_price_div" style="display:none;">
+                        <label for="book_price">
+                            <span class="text-danger mr-2">*</span>價格
                         </label>
-                        <input id="price" name="price" type="text" class="form-control" value="0" autocomplete="off">
+                        <input id="book_price" name="price" type="text" class="form-control" value="0" autocomplete="off">
                     </div>
                 </div>
             </div>
+
+            <div class="row book_donor_info">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>捐贈人電話</label>
+                        <input class="form-control" type="text" :value="current_donor.tel || '無'" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>捐贈人手機</label>
+                        <input class="form-control" type="text" :value="current_donor.phone || '無'" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>捐贈人生日</label>
+                        <input class="form-control" type="text" :value="current_donor.birthday || '無'" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
 
             <div class="row">
                 <div class="col-md-6 text-center">
@@ -234,7 +259,7 @@
                 <div class="col-md-3">
                     <div class="form-group">
                         <label for="p_add_type">入庫方式</label>
-                        <select id="p_add_type" name="addType" class="form-control" @change="changeAddType">
+                        <select id="p_add_type" name="addType" class="form-control" @change="changeAddTypeForPapper">
                             <option value="1" selected>捐贈入庫</option>
                             <option value="2">採購入庫</option>
                         </select>
@@ -242,7 +267,7 @@
                 </div>
 
                 <div class="col-md-6">
-                    <div class="form-group donor_div">
+                    <div class="form-group papper_donor_div">
                         <label>
                             <span class="text-danger mr-2">*</span>捐贈人(單位)名稱
                         </label>
@@ -263,14 +288,39 @@
                 </div>
 
                 <div class="col-md-3">
-                    <div class="form-group price_div" style="display:none;">
-                        <label for="p_price">
-                            <span id="p_price_required_star" class="text-danger mr-2">*</span>價格
+                    <div class="form-group papper_price_div" style="display:none;">
+                        <label for="papper_price">
+                            <span class="text-danger mr-2">*</span>價格
                         </label>
-                        <input id="p_price" name="price" type="text" class="form-control" value="0" autocomplete="off">
+                        <input id="papper_price" name="price" type="text" class="form-control" value="0" autocomplete="off">
                     </div>
                 </div>
             </div>
+
+            <div class="row papper_donor_info">
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>捐贈人電話</label>
+                        <input class="form-control" type="text" :value="current_donor.tel || '無'" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>捐贈人手機</label>
+                        <input class="form-control" type="text" :value="current_donor.phone || '無'" readonly>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="form-group">
+                        <label>捐贈人生日</label>
+                        <input class="form-control" type="text" :value="current_donor.birthday || '無'" readonly>
+                    </div>
+                </div>
+            </div>
+
+            <hr>
 
             <div class="row">
                 <div class="col-md-6 text-center">
@@ -407,6 +457,7 @@ export default {
             BooksIndexURL: $('#BooksIndexURL').html(),
             BooksStoreURL: $('#BooksStoreURL').html(),
             DonorsNameURL: $('#DonorsNameURL').html(),
+            DonorsGetInfoURL: $('#DonorsGetInfoURL').text(),
             FormErrorsMsg: [],
             donors: [],
             title: '書籍圖片',
@@ -437,10 +488,11 @@ export default {
                 {id: 7, text: '可供免費索取'},
                 {id: 8, text: '已被索取'},
                 {id: 9, text: '無外借'},
-                {id: 10, text: '無歸還'},
+                // {id: 10, text: '無歸還'},
             ],
             donorValue: null,
             bookInfo: [],
+            current_donor: [],
         }
     },
     methods: {
@@ -465,24 +517,50 @@ export default {
         }, 350),
         updateValue(value){
             this.donorValue = value;
+            axios.get(this.DonorsGetInfoURL, {
+                params:{
+                    id: this.donorValue
+                }
+            }).then(response => {
+                this.current_donor = response.data.donor;
+            });
         },
-        changeAddType(e){
+        changeAddTypeForBook(e){
             // 更動入庫方式
             let x = $(e.target).val();
             if(x == '1'){
                 this.$emit('update-add-type', 1);
                 // 捐贈入庫
-                $('.donor_div').fadeIn();
-                $('.price_div').fadeOut();
-                $('#price').val(0);
-
+                $('.book_donor_div').fadeIn();
+                $('.book_price_div').fadeOut();
+                $('#book_price').val(0);
+                $('.book_donor_info').fadeIn();
             }else{
                 this.$emit('update-add-type', 2);
                 // 採購入庫
-                $('.donor_div').fadeOut();
-                $('.price_div').fadeIn();
-                $('#price').val(0);
-
+                $('.book_donor_div').fadeOut();
+                $('.book_price_div').fadeIn();
+                $('#book_price').val(0);
+                $('.book_donor_info').fadeOut();
+            }
+        },
+        changeAddTypeForPapper(e){
+            // 更動入庫方式
+            let x = $(e.target).val();
+            if(x == '1'){
+                this.$emit('update-add-type', 1);
+                // 捐贈入庫
+                $('.papper_donor_div').fadeIn();
+                $('.papper_price_div').fadeOut();
+                $('#papper_price').val(0);
+                $('.papper_donor_info').fadeIn();
+            }else{
+                this.$emit('update-add-type', 2);
+                // 採購入庫
+                $('.papper_donor_div').fadeOut();
+                $('.papper_price_div').fadeIn();
+                $('#papper_price').val(0);
+                $('.papper_donor_info').fadeOut();
             }
         },
         updateCategory(e){

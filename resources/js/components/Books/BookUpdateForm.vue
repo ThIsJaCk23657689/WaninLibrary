@@ -3,97 +3,78 @@
     <div class="col-md-10">
         <div v-if="book.category < 11 || book.category === 13">
             <form id="book_update_form" method="POST" :action="BooksUpdateURL" enctype="multipart/form-data" @submit.prevent="bookUpdateForm">
-                <!-- 採購 -->
-                <div v-if="addType === 2">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="addType">入庫方式</label>
-                                <select id="addType" name="addType" class="form-control" :value="addType" @change="changeAddType">
-                                    <option value="1">捐贈入庫</option>
-                                    <option value="2">採購入庫</option>
-                                </select>
-                            </div>
-                        </div>
 
-                        <div class="col-md-3" >
-                            <div class="form-group donor_div" style="display:none;">
-                                <label><span class="text-danger mr-2">*</span>捐贈人(單位)名稱</label>
-                                <!-- <div id="donor_id_input" class="input-group mb-3">
-                                    <input type="text" class="form-control" :value="book.donor.name" readonly>
-                                    <div class="input-group-append">
-                                        <button type="button" class="btn btn-dark" @click="startUpdate">編輯</button>
-                                    </div>
-                                </div> -->
-                                <div id="donor_id">
-                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人(單位)名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="addType">入庫方式</label>
+                            <select id="addType" name="addType" class="form-control" :value="addType" @change="changeAddType">
+                                <option value="1">捐贈入庫</option>
+                                <option value="2">採購入庫</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group" v-if="addType === 1">
+                            <label>
+                                <span class="text-danger mr-2">*</span>捐贈人(單位)名稱
+                            </label>
+                            <div id="donor_id_input" class="input-group mb-3">
+                                <input type="text" class="form-control" :value="book.donor.name" readonly>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-dark" @click="startUpdate">編輯</button>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group price_div">
-                                <label for="price"><span id="price_required_star" class="text-danger mr-2">*</span>價格</label>
-                                <input id="price" name="price" type="text" class="form-control" v-model="book.price">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="status">狀態</label>
-                                <select id="status" name="status" class="form-control" v-bind:value = "book.status">
-                                    <option v-for="option in status_options" :key="option.id" :value="option.id">{{ option.text }}</option>
-                                </select>
+                            <div id="donor_id" style="display:none;">
+                                <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人(單位)名稱名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- 捐贈 -->
-                <div v-else>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="addType">入庫方式</label>
-                                <select id="addType" name="addType" class="form-control" v-bind:value = "addType" @change="changeAddType">
-                                    <option value="1">捐贈入庫</option>
-                                    <option value="2">採購入庫</option>
-                                </select>
-                            </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label><span class="text-danger mr-2">*</span>捐贈人(單位)名稱</label>
-                                <div id="donor_id_input" class="input-group mb-3">
-                                    <input type="text" class="form-control" :value="book.donor.name" readonly>
-                                    <div class="input-group-append">
-                                        <button type="button" class="btn btn-dark" @click="startUpdate">編輯</button>
-                                    </div>
-                                </div>
-                                <div id="donor_id" style="display:none;">
-                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人(單位)名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
-                                </div>
-                            </div>
+                    <div class="col-md-2">
+                        <div class="form-group" v-if="addType === 2">
+                            <label for="price">
+                                <span class="text-danger mr-2">*</span>價格
+                            </label>
+                            <input id="price" name="price" type="text" class="form-control" v-model="book.price">
                         </div>
+                    </div>
 
-                        <div class="col-md-2">
-                            <div class="form-group price_div" style="display:none;">
-                                <label for="price"><span id="price_required_star" class="text-danger mr-2">*</span>價格</label>
-                                <input id="price" name="price" type="text" class="form-control" v-model="book.price">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="status">狀態</label>
-                                <select id="status" name="status" class="form-control" v-bind:value = "book.status">
-                                    <option v-for="option in status_options" :key="option.id" :value="option.id">{{ option.text }}</option>
-                                </select>
-                            </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="status">狀態</label>
+                            <select id="status" name="status" class="form-control" :value="book.status">
+                                <option v-for="option in statusOptions" :key="option.id" :value="option.id">{{ option.text }}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
+                <div class="row" v-if="addType === 1">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>捐贈人電話</label>
+                            <input class="form-control" type="text" :value="current_donor.tel || '無'" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>捐贈人手機</label>
+                            <input class="form-control" type="text" :value="current_donor.phone || '無'" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>捐贈人生日</label>
+                            <input class="form-control" type="text" :value="current_donor.birthday || '無'" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
 
                 <div class="row">
                     <div class="col-md-6 text-center">
@@ -228,97 +209,81 @@
         </div>
         <div v-else>
             <form id="book_update_form" method="POST" :action="BooksUpdateURL" enctype="multipart/form-data" @submit.prevent="bookUpdateForm">
-                <!-- 採購 -->
-                <div v-if="addType === 2">
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="addType">入庫方式</label>
-                                <select id="addType" name="addType" class="form-control" :value="addType" @change="changeAddType">
-                                    <option value="1">捐贈入庫</option>
-                                    <option value="2">採購入庫</option>
-                                </select>
-                            </div>
-                        </div>
 
-                        <div class="col-md-3" >
-                            <div class="form-group donor_div" style="display:none;">
-                                <label><span class="text-danger mr-2">*</span>捐贈人(單位)名稱</label>
-                                <!-- <div id="donor_id_input" class="input-group mb-3">
-                                    <input type="text" class="form-control" :value="book.donor.name" readonly>
-                                    <div class="input-group-append">
-                                        <button type="button" class="btn btn-dark" @click="startUpdate">編輯</button>
-                                    </div>
-                                </div> -->
-                                <div id="donor_id">
-                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人(單位)名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label for="addType">入庫方式</label>
+                            <select id="addType" name="addType" class="form-control" :value="addType" @change="changeAddType">
+                                <option value="1">捐贈入庫</option>
+                                <option value="2">採購入庫</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="col-md-3">
+                        <div class="form-group" v-if="addType === 1">
+                            <label>
+                                <span class="text-danger mr-2">*</span>捐贈人(單位)名稱
+                            </label>
+                            <div id="donor_id_input" class="input-group mb-3">
+                                <input type="text" class="form-control" :value="(book.donor)?book.donor.name:'無'" readonly>
+                                <div class="input-group-append">
+                                    <button type="button" class="btn btn-dark" @click="startUpdate">編輯</button>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="col-md-2">
-                            <div class="form-group price_div">
-                                <label for="price"><span id="price_required_star" class="text-danger mr-2">*</span>價格</label>
-                                <input id="price" name="price" type="text" class="form-control" v-model="book.price">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="status">狀態</label>
-                                <select id="status" name="status" class="form-control" v-bind:value = "book.status">
-                                    <option v-for="option in status_options" :key="option.id" :value="option.id">{{ option.text }}</option>
-                                </select>
+                            <div id="donor_id" style="display:none;">
+                                <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人(單位)名稱名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
                             </div>
                         </div>
                     </div>
-                </div>
-                <!-- 捐贈 -->
-                <div v-else>
-                    <div class="row">
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label for="addType">入庫方式</label>
-                                <select id="addType" name="addType" class="form-control" v-bind:value = "addType" @change="changeAddType">
-                                    <option value="1">捐贈入庫</option>
-                                    <option value="2">採購入庫</option>
-                                </select>
-                            </div>
-                        </div>
 
-                        <div class="col-md-3">
-                            <div class="form-group">
-                                <label><span class="text-danger mr-2">*</span>捐贈人(單位)名稱</label>
-                                <div id="donor_id_input" class="input-group mb-3">
-                                    <input type="text" class="form-control" :value="book.donor.name" readonly>
-                                    <div class="input-group-append">
-                                        <button type="button" class="btn btn-dark" @click="startUpdate">編輯</button>
-                                    </div>
-                                </div>
-                                <div id="donor_id" style="display:none;">
-                                    <select-donor-custom ref="DonorsOption" :placeholder="'請輸入捐贈人(單位)名稱名稱'" @search="onSearch" @update-value="updateValue"></select-donor-custom>
-                                </div>
-                            </div>
+                    <div class="col-md-2">
+                        <div class="form-group" v-if="addType === 2">
+                            <label for="price">
+                                <span class="text-danger mr-2">*</span>價格
+                            </label>
+                            <input id="price" name="price" type="text" class="form-control" v-model="book.price">
                         </div>
+                    </div>
 
-                        <div class="col-md-2">
-                            <div class="form-group price_div" style="display:none;">
-                                <label for="price"><span id="price_required_star" class="text-danger mr-2">*</span>價格</label>
-                                <input id="price" name="price" type="text" class="form-control" v-model="book.price">
-                            </div>
-                        </div>
-
-                        <div class="col-md-4">
-                            <div class="form-group">
-                                <label for="status">狀態</label>
-                                <select id="status" name="status" class="form-control" v-bind:value = "book.status">
-                                    <option v-for="option in status_options" :key="option.id" :value="option.id">{{ option.text }}</option>
-                                </select>
-                            </div>
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label for="status">狀態</label>
+                            <select id="status" name="status" class="form-control" v-model="book.status" v-if="isModifyStatus">
+                                <option v-for="option in statusOptions" :key="option.id" :value="option.id">{{ option.text }}</option>
+                            </select>
+                            <select id="status" name="status" class="form-control" v-model="book.status" v-else readonly>
+                                <option v-for="option in statusOptions" :key="option.id" :value="option.id">{{ option.text }}</option>
+                            </select>
                         </div>
                     </div>
                 </div>
 
+                <div class="row" v-if="addType === 1">
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>捐贈人電話</label>
+                            <input class="form-control" type="text" :value="current_donor.tel || '無'" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>捐贈人手機</label>
+                            <input class="form-control" type="text" :value="current_donor.phone || '無'" readonly>
+                        </div>
+                    </div>
+
+                    <div class="col-md-4">
+                        <div class="form-group">
+                            <label>捐贈人生日</label>
+                            <input class="form-control" type="text" :value="current_donor.birthday || '無'" readonly>
+                        </div>
+                    </div>
+                </div>
+
+                <hr>
 
                 <div class="row">
                     <div class="col-md-6 text-center">
@@ -440,12 +405,13 @@
 
 <script>
 export default {
-    props: ['book', 'addType'],
+    props: ['book', 'addType', 'statusOptions', 'isModifyStatus'],
     data(){
         return {
             BooksIndexURL: $('#BooksIndexURL').html(),
             BooksUpdateURL: $('#BooksUpdateURL').html(),
             DonorsNameURL: $('#DonorsNameURL').html(),
+            DonorsGetInfoURL: $('#DonorsGetInfoURL').text(),
             BooksCoverImageURL: $('#BooksCoverImageURL').html(),
             title: '書籍圖片',
             category_options: [
@@ -465,21 +431,10 @@ export default {
                 {id: 12, text: '1200 雜誌類'},
                 {id: 13, text: '1300 外文圖書'},
             ],
-            status_options:[
-                {id: 1, text: '可借閱'},
-                {id: 2, text: '借閱中'},
-                {id: 3, text: '逾期中'},
-                {id: 4, text: '庫藏待上架'},
-                {id: 5, text: '已淘汰'},
-                {id: 6, text: '已轉贈'},
-                {id: 7, text: '可供免費索取'},
-                {id: 8, text: '已被索取'},
-                {id: 9, text: '無外借'},
-                {id: 10, text: '無歸還'},
-            ],
             donors: [],
             donorValue: null,
             bookInfo: [],
+            current_donor: [],
         }
     },
     methods : {
@@ -505,6 +460,13 @@ export default {
         }, 350),
         updateValue(value){
             this.donorValue = value;
+            axios.get(this.DonorsGetInfoURL, {
+                params:{
+                    id: this.donorValue
+                }
+            }).then(response => {
+                this.current_donor = response.data.donor;
+            });
         },
         startUpdate(){
             $('#donor_id_input').slideUp();
@@ -513,27 +475,12 @@ export default {
         changeAddType(e){
             // 更動入庫方式
             let x = $(e.target).val();
-
             if(x == '1'){
-                console.log('bbb');
+                // 捐贈入庫
                 this.$emit('update-add-type', 1);
-                // this.addType = 1;
-                // 捐贈入庫 - 一般圖書
-                $('.donor_div').fadeIn();
-                $('.price_div').fadeOut();
-                $('#price').val(0);
-                // 捐贈入庫 - 論文雜誌
-
             }else{
-                console.log('ccc');
+                // 採購入庫
                 this.$emit('update-add-type', 2);
-                // this.addType = 2;
-                // 採購入庫 - 一般圖書
-                $('.donor_div').fadeOut();
-                $('.price_div').fadeIn();
-                $('#price').val(0);
-                // 採購入庫 - 論文雜誌
-
             }
         },
         updateCategory(e){

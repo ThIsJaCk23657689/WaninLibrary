@@ -20,7 +20,7 @@ class UnreturnController extends Controller
         ]);
         $this->UnreturnService = new UnreturnService();
     }
-    
+
     public function index()
     {
         $totalPage = $this->UnreturnService->count();
@@ -67,10 +67,11 @@ class UnreturnController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $unreturn_id = $this->UnreturnService->update($request, $id);
+        $result = $this->UnreturnService->update($request, $id);
         return response()->json([
             'status' => 'OK',
+            'message' => $result['message'],
             'url' => route('unreturns.index')
-        ], 200);
+        ], $result['status']);
     }
 }

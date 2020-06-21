@@ -64,6 +64,7 @@ Route::prefix('/backend')->group(function(){
     // 捐書人管理路由
     Route::get('/donors/json', 'DonorController@getList')->name('donors.getList');
     Route::get('/donors/getDonorsByName', 'DonorController@getDonorsByName')->name('donors.getDonorsByName');
+    Route::get('/donors/getInfo', 'DonorController@getInfo')->name('donors.getInfo');
     Route::get('/donors/{id}/json', 'DonorController@getOne')->name('donors.getOne');
     Route::resource('/donors', 'DonorController', ['only' => [
         'store', 'update', 'destroy'
