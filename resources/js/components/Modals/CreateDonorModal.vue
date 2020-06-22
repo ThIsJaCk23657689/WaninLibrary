@@ -19,7 +19,7 @@
                             </label>
 
                             <div class="col-md-6">
-                                <input id="donor_name" type="text" class="form-control" name="name" required autocomplete="off" autofocus>
+                                <input id="donor_name" type="text" class="form-control" name="name" required autocomplete="off" autofocus v-model="donorName">
                             </div>
                         </div>
 
@@ -127,6 +127,7 @@ export default {
     data(){
         return {
             DonorsStoreURL: $('#DonorsStoreURL').text(),
+            donorName: '',
         }
     },
     methods: {
@@ -138,6 +139,10 @@ export default {
             axios.post(url, data).then(response => {
                 // $('#CreateDonorModal').modal('hide');
                 $.showSuccessModal('新增成功');
+                this.$emit('new-donor-selected', {
+                    id: response.data.added_id,
+                    name: this.donorName
+                });
                 $('#CreateDonorModalForm').trigger('reset');
             }).catch((error) => {
                 console.error('新增捐贈人時發生錯誤，錯誤訊息：' + error);

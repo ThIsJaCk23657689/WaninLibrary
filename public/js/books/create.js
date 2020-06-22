@@ -664,6 +664,16 @@ __webpack_require__.r(__webpack_exports__);
         _this.current_donor = response.data.donor;
       });
     },
+    newDonorSelected: function newDonorSelected(data) {
+      // 選擇剛新增好的捐贈人
+      this.updateValue(data.id);
+      this.options = [{
+        id: data.id,
+        name: data.name
+      }];
+      this.$refs.DonorsOption.givenValue(data.id, this.options);
+      this.$refs.PaperDonorsOption.givenValue(data.id, this.options);
+    },
     changeAddTypeForBook: function changeAddTypeForBook(e) {
       // 更動入庫方式
       var x = $(e.target).val();
@@ -1009,17 +1019,26 @@ __webpack_require__.r(__webpack_exports__);
   props: [],
   data: function data() {
     return {
-      DonorsStoreURL: $('#DonorsStoreURL').text()
+      DonorsStoreURL: $('#DonorsStoreURL').text(),
+      donorName: ''
     };
   },
   methods: {
     storeDonor: function storeDonor(e) {
+      var _this = this;
+
       var url = this.DonorsStoreURL;
       var data = $(e.target).serializeObject();
       $.showLoadingModal();
       axios.post(url, data).then(function (response) {
         // $('#CreateDonorModal').modal('hide');
         $.showSuccessModal('新增成功');
+
+        _this.$emit('new-donor-selected', {
+          id: response.data.added_id,
+          name: _this.donorName
+        });
+
         $('#CreateDonorModalForm').trigger('reset');
       })["catch"](function (error) {
         console.error('新增捐贈人時發生錯誤，錯誤訊息：' + error);
@@ -1096,6 +1115,10 @@ __webpack_require__.r(__webpack_exports__);
     },
     changeOptions: function changeOptions(options) {
       this.options = options;
+    },
+    givenValue: function givenValue(value, options) {
+      this.selectValue = value;
+      this.changeOptions(options);
     }
   },
   created: function created() {},
@@ -1250,7 +1273,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nimg {\n  height: auto;\n  max-width: 2.5rem;\n  margin-right: 1rem;\n}\n.d-center {\n  display: flex;\n  align-items: center;\n}\n.selected img {\n  width: auto;\n  max-height: 23px;\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\n  border-bottom: none;\n}\n.v-select .dropdown li a {\n  padding: 10px 20px;\n  width: 100%;\n  font-size: 1.25em;\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\n  color: #fff;\n}\n\n\n", ""]);
+exports.push([module.i, "\nimg {\r\n  height: auto;\r\n  max-width: 2.5rem;\r\n  margin-right: 1rem;\n}\n.d-center {\r\n  display: flex;\r\n  align-items: center;\n}\n.selected img {\r\n  width: auto;\r\n  max-height: 23px;\r\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\r\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\r\n  border-bottom: none;\n}\n.v-select .dropdown li a {\r\n  padding: 10px 20px;\r\n  width: 100%;\r\n  font-size: 1.25em;\r\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\r\n  color: #fff;\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -2177,7 +2200,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        確認新增\n                    "
+                        "\r\n                        確認新增\r\n                    "
                       )
                     ]
                   ),
@@ -2190,7 +2213,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        返回列表\n                    "
+                        "\r\n                        返回列表\r\n                    "
                       )
                     ]
                   )
@@ -2378,7 +2401,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        確認新增\n                    "
+                        "\r\n                        確認新增\r\n                    "
                       )
                     ]
                   ),
@@ -2391,7 +2414,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        返回列表\n                    "
+                        "\r\n                        返回列表\r\n                    "
                       )
                     ]
                   )
@@ -2402,7 +2425,9 @@ var render = function() {
         )
       ]),
       _vm._v(" "),
-      _c("create-donor-modal")
+      _c("create-donor-modal", {
+        on: { "new-donor-selected": _vm.newDonorSelected }
+      })
     ],
     1
   )
@@ -2430,7 +2455,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "fas fa-user-tie mr-2" }),
               _vm._v(
-                "\n                        一般書籍(有ISBN)\n                    "
+                "\r\n                        一般書籍(有ISBN)\r\n                    "
               )
             ]
           )
@@ -2448,7 +2473,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "far fa-building mr-2" }),
               _vm._v(
-                "\n                        論文、期刊、雜誌等(無ISBN)\n                    "
+                "\r\n                        論文、期刊、雜誌等(無ISBN)\r\n                    "
               )
             ]
           )
@@ -2479,7 +2504,7 @@ var staticRenderFns = [
               [
                 _c("i", { staticClass: "fas fa-undo-alt mr-2" }),
                 _vm._v(
-                  "\n                        重新選擇書籍類型\n                    "
+                  "\r\n                        重新選擇書籍類型\r\n                    "
                 )
               ]
             )
@@ -2494,7 +2519,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱\n                        ")
+      _vm._v("捐贈人(單位)名稱\r\n                        ")
     ])
   },
   function() {
@@ -2515,7 +2540,7 @@ var staticRenderFns = [
         [
           _c("i", { staticClass: "fas fa-plus mr-2" }),
           _vm._v(
-            "\n                                    新增捐贈人(單位)\n                                "
+            "\r\n                                    新增捐贈人(單位)\r\n                                "
           )
         ]
       )
@@ -2535,7 +2560,7 @@ var staticRenderFns = [
         [
           _c("label", { attrs: { for: "book_price" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("價格\n                        ")
+            _vm._v("價格\r\n                        ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -2561,7 +2586,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("書名（主標題）\n                                ")
+            _vm._v("書名（主標題）\r\n                                ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -2770,7 +2795,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("分類號\n                        ")
+      _vm._v("分類號\r\n                        ")
     ])
   },
   function() {
@@ -2807,7 +2832,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱\n                        ")
+      _vm._v("捐贈人(單位)名稱\r\n                        ")
     ])
   },
   function() {
@@ -2828,7 +2853,7 @@ var staticRenderFns = [
         [
           _c("i", { staticClass: "fas fa-plus mr-2" }),
           _vm._v(
-            "\n                                    新增捐贈人(單位)名稱\n                                "
+            "\r\n                                    新增捐贈人(單位)名稱\r\n                                "
           )
         ]
       )
@@ -2848,7 +2873,7 @@ var staticRenderFns = [
         [
           _c("label", { attrs: { for: "papper_price" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("價格\n                        ")
+            _vm._v("價格\r\n                        ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -2875,7 +2900,7 @@ var staticRenderFns = [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "p_title" } }, [
               _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-              _vm._v("主標題\n                                ")
+              _vm._v("主標題\r\n                                ")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -3140,7 +3165,40 @@ var render = function() {
                     }
                   },
                   [
-                    _vm._m(1),
+                    _c("div", { staticClass: "form-group row" }, [
+                      _vm._m(1),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-6" }, [
+                        _c("input", {
+                          directives: [
+                            {
+                              name: "model",
+                              rawName: "v-model",
+                              value: _vm.donorName,
+                              expression: "donorName"
+                            }
+                          ],
+                          staticClass: "form-control",
+                          attrs: {
+                            id: "donor_name",
+                            type: "text",
+                            name: "name",
+                            required: "",
+                            autocomplete: "off",
+                            autofocus: ""
+                          },
+                          domProps: { value: _vm.donorName },
+                          on: {
+                            input: function($event) {
+                              if ($event.target.composing) {
+                                return
+                              }
+                              _vm.donorName = $event.target.value
+                            }
+                          }
+                        })
+                      ])
+                    ]),
                     _vm._v(" "),
                     _vm._m(2),
                     _vm._v(" "),
@@ -3202,35 +3260,19 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "form-group row" }, [
-      _c(
-        "label",
-        {
-          staticClass: "col-md-4 col-form-label text-md-right",
-          attrs: { for: "donor_name" }
-        },
-        [
-          _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
-          _vm._v(
-            "\r\n                                捐贈人(單位)名稱\r\n                            "
-          )
-        ]
-      ),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-6" }, [
-        _c("input", {
-          staticClass: "form-control",
-          attrs: {
-            id: "donor_name",
-            type: "text",
-            name: "name",
-            required: "",
-            autocomplete: "off",
-            autofocus: ""
-          }
-        })
-      ])
-    ])
+    return _c(
+      "label",
+      {
+        staticClass: "col-md-4 col-form-label text-md-right",
+        attrs: { for: "donor_name" }
+      },
+      [
+        _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
+        _vm._v(
+          "\r\n                                捐贈人(單位)名稱\r\n                            "
+        )
+      ]
+    )
   },
   function() {
     var _vm = this
@@ -3542,7 +3584,9 @@ var render = function() {
           fn: function(option) {
             return [
               _c("div", { staticClass: "d-center" }, [
-                _vm._v("\n            " + _vm._s(option.name) + "\n        ")
+                _vm._v(
+                  "\r\n            " + _vm._s(option.name) + "\r\n        "
+                )
               ])
             ]
           }
@@ -3552,7 +3596,9 @@ var render = function() {
           fn: function(option) {
             return [
               _c("div", { staticClass: "selected d-center" }, [
-                _vm._v("\n            " + _vm._s(option.name) + "\n        ")
+                _vm._v(
+                  "\r\n            " + _vm._s(option.name) + "\r\n        "
+                )
               ])
             ]
           }
@@ -3568,7 +3614,7 @@ var render = function() {
     },
     [
       _c("template", { slot: "no-options" }, [
-        _vm._v("\n        " + _vm._s(_vm.placeholder) + "\n    ")
+        _vm._v("\r\n        " + _vm._s(_vm.placeholder) + "\r\n    ")
       ])
     ],
     2
@@ -4113,7 +4159,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\create.js */"./resources/js/books/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\create.js */"./resources/js/books/create.js");
 
 
 /***/ })

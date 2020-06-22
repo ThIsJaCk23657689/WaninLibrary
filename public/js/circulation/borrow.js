@@ -437,6 +437,7 @@ __webpack_require__.r(__webpack_exports__);
 
         $.showErrorModal(error);
       });
+      this.barcodeText = '';
     },
     removeBook: function removeBook(id) {
       this.currentBooks = this.currentBooks.filter(function (el, $i, $arr) {
@@ -1593,8 +1594,6 @@ var render = function() {
                         id: "barcode",
                         name: "barcode",
                         type: "text",
-                        value: "",
-                        required: "",
                         autocomplete: "off"
                       },
                       domProps: { value: _vm.barcodeText },
@@ -2574,7 +2573,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\circulation\borrow.js */"./resources/js/circulation/borrow.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\circulation\borrow.js */"./resources/js/circulation/borrow.js");
 
 
 /***/ })

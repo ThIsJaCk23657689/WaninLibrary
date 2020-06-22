@@ -40,6 +40,10 @@ export default {
         },
         changeOptions(options){
             this.options = options;
+        },
+        givenValue(value, options){
+            this.selectValue = value;
+            this.changeOptions(options);
         }
     },
     created(){

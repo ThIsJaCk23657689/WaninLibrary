@@ -89,7 +89,7 @@
                     <div class="col-md-6">
                         <div class="form-group">
                             <label for="barcode">書籍條碼</label>
-                            <input id="barcode" name="barcode" type="text" class="form-control" value="" required autocomplete="off" v-model="barcodeText" @keyup.enter="addBook">
+                            <input id="barcode" name="barcode" type="text" class="form-control" autocomplete="off" v-model="barcodeText" @keyup.enter="addBook">
                             <span id="barcode_error" class="invalid-feedback" role="alert">
                                 <strong></strong>
                             </span>
@@ -339,6 +339,8 @@ export default {
                 }
                 $.showErrorModal(error);
             });
+
+            this.barcodeText = '';
         },
 
         removeBook(id){

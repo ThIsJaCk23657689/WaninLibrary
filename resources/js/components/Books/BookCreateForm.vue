@@ -445,7 +445,7 @@
             </div>
         </form>
     </div>
-    <create-donor-modal></create-donor-modal>
+    <create-donor-modal @new-donor-selected="newDonorSelected"></create-donor-modal>
 </div>
 </template>
 
@@ -524,6 +524,16 @@ export default {
             }).then(response => {
                 this.current_donor = response.data.donor;
             });
+        },
+        newDonorSelected(data){
+            // 選擇剛新增好的捐贈人
+            this.updateValue(data.id);
+            this.options = [{
+                id: data.id,
+                name: data.name
+            }];
+            this.$refs.DonorsOption.givenValue(data.id, this.options);
+            this.$refs.PaperDonorsOption.givenValue(data.id, this.options);
         },
         changeAddTypeForBook(e){
             // 更動入庫方式
