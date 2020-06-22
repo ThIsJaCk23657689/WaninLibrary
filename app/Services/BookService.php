@@ -262,6 +262,7 @@ class BookService extends BaseService
             }
             $status = $request->status;
         }elseif($book->status == 10){
+            // 無歸還不能更改狀態
             $status = $book->status;
         }else{
              $status = $request->status;
