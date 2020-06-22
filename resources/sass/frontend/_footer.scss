@@ -1,149 +1,149 @@
-footer{
-	width: 100%;
-	min-width: $web-min-width;
+footer {
+    width: 100%;
+    min-width: $web-min-width;
     height: $footer-height;
-	display: flex;
-	background-color: $brown;
-	color: $darkwhite;
-	.container{
-		position: relative;
-		padding-top: 10px;
-		.footerTable{
-			font-size: 1rem;
-			letter-spacing: 3px;
-			th{
-				color: $white;
-				font-weight: bold;
-				padding: 10px 0px;
-			}
-			td{
-				padding-right: 10px;
-			}
-		}
-		.footerText{
-			width: 100%;
-			position: absolute;
-			right: 0;
-			bottom: 30px;
-			font-size: 0.8rem;
-			text-align: right;
-			.button-area{
-				width: 120px;
-				height: 45px;
-				display: block;
-				margin-bottom: 0px;
-				padding: 0;
-				li{
-					float: left;
-				}
-				.nav-item {
-					width: 40px;
-					margin: 0px;
-					.nav-link {
-						img {
-							width: 25px;
-						}
-						&:hover{
-							border: none;
-						}
-					}
-					&:hover{
-						border: none;
-					}
-				}
-			}
-			.footerLink{
-				a{
-					color: $darkwhite;
-					letter-spacing: 2px;
-				}
-			}
-			.copyright {
-				line-height: 2rem;
-			}
-			@media (max-width: 1300px) {
-				right: 3%;
-			}
-			@media (max-width: 992px) {
-				bottom: 20px;
-			}
-			@media (max-width: 768px) {
-				text-align: left;
-				right: -15px;
-				.button-area{
-					margin: 0;
-				}
-			}
-		}
-	}
-	.top{
-		float: right;
-		width: 90px;
-		border-left: 1px solid $white;
-		padding: 10px 5px;
-		position: relative;
-		text-align: center;
-		cursor: pointer;
-		img{
-			width: 6px;
-			height: 100px;
-			margin: 10px 10px 5px 10px;
-		}
-		span{
-			font-weight: bold;
-			font-size: 1.2rem;
-			letter-spacing: 5px;
-			transform: rotate(90deg);
-			position: absolute;
-			bottom: 21px;
-			left: 18px;
-			transition: all 0.5s ease;
-		}
-		&:hover{
-			span{
-				color: $green;
-			}
-		}
-		@media (max-width: 1300px) {
-			margin-left: 10px;
-		}
-		@media (max-width: 1100px) {
-			span{
-				left: 14px;
-			}
-		}
-		@media (max-width: 992px) {
-			width: 100px;
-			img{
-				width: 10px;
-				height: 145px;
-			}
-			span{
-				bottom: 33px;
-				left: 19%;
-			}
-		}
-		@media (max-width: 768px) {
-			width: 150px;
-			img{
-				width: 15px;
-				height: 240px;
-			}
-			span{
-				bottom: 31px;
-				left: 31%;
-			}
-		}
-		@media (max-width: 680px) {
-			span{
-				left: 26%;
-			}
-		}
-	}
-	@media (max-width: 992px) {
-		height: calc(#{$footer-height} + 61px);
-	}
-	@media (max-width: 768px) {
-		height: calc(#{$footer-height} + 160px);
-	}
+    display: flex;
+    background-color: $brown;
+    color: $darkwhite;
+    .container {
+        position: relative;
+        padding-top: 10px;
+        .footerTable {
+            font-size: 1rem;
+            letter-spacing: 3px;
+            th {
+                color: $white;
+                font-weight: bold;
+                padding: 10px 0px;
+            }
+            td {
+                padding-right: 10px;
+            }
+        }
+        .footerText {
+            width: 100%;
+            position: absolute;
+            right: 0;
+            bottom: 30px;
+            font-size: 0.8rem;
+            text-align: right;
+            .button-area {
+                width: 120px;
+                height: 45px;
+                display: block;
+                margin-bottom: 0px;
+                padding: 0;
+                li {
+                    float: left;
+                }
+                .nav-item {
+                    width: 40px;
+                    margin: 0px;
+                    .nav-link {
+                        img {
+                            width: 25px;
+                        }
+                        &:hover {
+                            border: none;
+                        }
+                    }
+                    &:hover {
+                        border: none;
+                    }
+                }
+            }
+            .footerLink {
+                a {
+                    color: $darkwhite;
+                    letter-spacing: 2px;
+                }
+            }
+            .copyright {
+                line-height: 2rem;
+            }
+            @media (max-width: 1300px) {
+                right: 3%;
+            }
+            @media (max-width: 992px) {
+                bottom: 20px;
+            }
+            @media (max-width: 768px) {
+                text-align: left;
+                right: -15px;
+                .button-area {
+                    margin: 0;
+                }
+            }
+        }
+    }
+    .top {
+        float: right;
+        width: 50px;
+        border-left: 1px solid $white;
+        padding: 10px 5px;
+        position: relative;
+        text-align: center;
+        cursor: pointer;
+        img {
+            width: 6px;
+            height: 100px;
+            margin: 10px 10px 5px 10px;
+        }
+        span {
+            font-weight: bold;
+            font-size: 1.2rem;
+            letter-spacing: 5px;
+            transform: rotate(90deg);
+            position: absolute;
+            bottom: 21px;
+            left: -1px;
+            transition: all 0.5s ease;
+        }
+        &:hover {
+            span {
+                color: $green;
+            }
+        }
+        @media (max-width: 1300px) {
+            margin-left: 10px;
+        }
+        @media (max-width: 1100px) {
+            span {
+                left: -1px;
+            }
+        }
+        @media (max-width: 992px) {
+            width: 100px;
+            img {
+                width: 10px;
+                height: 145px;
+            }
+            span {
+                bottom: 33px;
+                left: 19%;
+            }
+        }
+        @media (max-width: 768px) {
+            width: 150px;
+            img {
+                width: 15px;
+                height: 240px;
+            }
+            span {
+                bottom: 31px;
+                left: 31%;
+            }
+        }
+        @media (max-width: 680px) {
+            span {
+                left: 26%;
+            }
+        }
+    }
+    @media (max-width: 992px) {
+        height: calc(#{$footer-height} + 61px);
+    }
+    @media (max-width: 768px) {
+        height: calc(#{$footer-height} + 160px);
+    }
 }

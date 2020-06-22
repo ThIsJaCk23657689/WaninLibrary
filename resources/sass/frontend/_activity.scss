@@ -133,7 +133,7 @@
                     display: flex;
                     width: 50%;
                     background-image: url(../../images/frontend/icons/book_bg.png);
-                    background-size: 96% 75%;
+                    background-size: 80% 75%;
                     background-repeat: no-repeat;
                     background-position: center;
                     .container {
@@ -147,12 +147,13 @@
                                 background-position: bottom;
                                 padding-bottom: 10px;
                                 margin-bottom: 30px;
+                                background-size: 100%;
                             }
                             .bookCol {
                                 height: 225px;
                             }
                             img {
-                                width: 100%;
+                                width: 90%;
                             }
                         }
                         .checkRecommendationBtn {

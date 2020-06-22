@@ -9,7 +9,7 @@ section#header {
 header {
     position: relative;
     height: 100%;
-    .bg_cover{
+    .bg_cover {
         height: calc(100% - 120px);
         position: relative;
         img.background-image {
@@ -20,14 +20,20 @@ header {
             transform: translateX(-50%);
             transition: all 1s ease;
         }
-        .coverText{
+        .coverText {
             position: absolute;
             bottom: 15%;
             left: 8%;
             color: $white;
             letter-spacing: 10px;
             z-index: 1;
-            text-shadow: 2px 2px 2px black
+            text-shadow: 2px 2px 2px black;
+            h2 {
+                font-size: 2rem;
+            }
+            span {
+                font-size: 1.2rem;
+            }
         }
     }
 }

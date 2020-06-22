@@ -35,7 +35,7 @@
 
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <upload-images ref="uploadCoverImages" :title="'上傳封面圖片'"  :prefix="'activity'"></upload-images>
+                        <upload-images ref="uploadCoverImages" :title="'上傳封面圖片'" :aspect-ratio="1.5/1"  :prefix="'activity'"></upload-images>
                     </div>
                 </div>
 

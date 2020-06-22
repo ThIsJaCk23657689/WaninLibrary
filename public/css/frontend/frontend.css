@@ -11845,6 +11845,12 @@ header .bg_cover .coverText {
   z-index: 1;
   text-shadow: 2px 2px 2px black;
 }
+header .bg_cover .coverText h2 {
+  font-size: 2rem;
+}
+header .bg_cover .coverText span {
+  font-size: 1.2rem;
+}
 
 @media (max-width: 720px) {
   header img.background-image {
@@ -11943,6 +11949,7 @@ div#headerbox .headerRow h3 {
   background-position: bottom;
   padding-bottom: 10px;
   margin-bottom: 30px;
+  background-size: 100%;
 }
 #news .container .newsTable .newsRow .newsDate {
   font-weight: bold;
@@ -12116,7 +12123,7 @@ div#headerbox .headerRow h3 {
   display: flex;
   width: 50%;
   background-image: url(../../images/frontend/icons/book_bg.png);
-  background-size: 96% 75%;
+  background-size: 80% 75%;
   background-repeat: no-repeat;
   background-position: center;
 }
@@ -12133,12 +12140,13 @@ div#headerbox .headerRow h3 {
   background-position: bottom;
   padding-bottom: 10px;
   margin-bottom: 30px;
+  background-size: 100%;
 }
 #activity .content #activity_container .slider .recommandation-area .container .bookTable .bookCol {
   height: 225px;
 }
 #activity .content #activity_container .slider .recommandation-area .container .bookTable img {
-  width: 100%;
+  width: 90%;
 }
 #activity .content #activity_container .slider .recommandation-area .container .checkRecommendationBtn {
   font-size: 1.5rem;
@@ -12249,7 +12257,7 @@ footer .container .footerText .copyright {
 }
 footer .top {
   float: right;
-  width: 90px;
+  width: 50px;
   border-left: 1px solid #ffffff;
   padding: 10px 5px;
   position: relative;
@@ -12268,7 +12276,7 @@ footer .top span {
   transform: rotate(90deg);
   position: absolute;
   bottom: 21px;
-  left: 18px;
+  left: -1px;
   transition: all 0.5s ease;
 }
 footer .top:hover span {
@@ -12281,7 +12289,7 @@ footer .top:hover span {
 }
 @media (max-width: 1100px) {
   footer .top span {
-    left: 14px;
+    left: -1px;
   }
 }
 @media (max-width: 992px) {

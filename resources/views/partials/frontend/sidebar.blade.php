@@ -5,7 +5,7 @@
     <ul class="navbar-nav">
         <li class="nav-item">
             <a class="nav-link" href="#">
-                關於網銀
+                關於拾本書堂
                 <div class="underline"></div>
             </a>
         </li>

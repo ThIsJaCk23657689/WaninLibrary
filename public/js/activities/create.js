@@ -372,7 +372,11 @@ var render = function() {
                 [
                   _c("upload-images", {
                     ref: "uploadCoverImages",
-                    attrs: { title: "上傳封面圖片", prefix: "activity" }
+                    attrs: {
+                      title: "上傳封面圖片",
+                      "aspect-ratio": 1.5 / 1,
+                      prefix: "activity"
+                    }
                   })
                 ],
                 1
@@ -398,7 +402,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("活動標題\r\n                            ")
+            _vm._v("活動標題\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -466,7 +470,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "content" } }, [
             _vm._v(
-              "\r\n                                活動內容\r\n                            "
+              "\n                                活動內容\n                            "
             )
           ]),
           _vm._v(" "),
@@ -492,7 +496,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                            確認新增\r\n                        "
+              "\n                            確認新增\n                        "
             )
           ]
         ),
@@ -502,7 +506,7 @@ var staticRenderFns = [
           { staticClass: "btn btn-block btn-danger", attrs: { href: "#" } },
           [
             _vm._v(
-              "\r\n                            返回列表\r\n                        "
+              "\n                            返回列表\n                        "
             )
           ]
         )
@@ -890,7 +894,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\activities\create.js */"./resources/js/activities/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\activities\create.js */"./resources/js/activities/create.js");
 
 
 /***/ })

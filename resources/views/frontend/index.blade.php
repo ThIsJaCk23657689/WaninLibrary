@@ -17,8 +17,8 @@
             <div id="headerbox" class="container-fluid">
                 <div class="row headerRow">
                     <div class="left col-md-6">
-                        <span>為知識繼續傳遞與分享</span>
                         <h3>好書捐贈！</h3>
+                        <span>為知識繼續傳遞與分享</span>
                         <div class="checkBtn">
                             <a href="#">
                                 <img src="{{ asset('images/frontend/icons/donate_btn.png') }}" alt="好書捐贈">
@@ -26,8 +26,8 @@
                         </div>
                     </div>
                     <div class="right col-md-6">
-                        <span>或許它已陳舊泛黃，卻依舊是珍寶</span>
                         <h3>免費索取書單</h3>
+                        <span>或許它已陳舊泛黃，卻依舊是珍寶</span>
                         <div class="checkBtn">
                             <a href="#">
                                 <img src="{{ asset('images/frontend/icons/free_btn.png') }}" alt="免費索取書單">
@@ -87,10 +87,10 @@
 
     <section id="activity">
         <div class="content">
-            <div id="activity_container" class="container">
+            <div id="activity_container" class="container-fluid">
                 <div class="slider">
                     <div class="activities-area">
-                        <div class="container" style="padding-top: 0px;">
+                        <div class="container-fluid" style="padding-top: 0px; width:90%;">
                             <div class="row">
                                 <div class="col-md-12">
                                     <h1>
@@ -104,7 +104,7 @@
 
                             @if(!is_null($activities_top))
                                 <div class="row activityRow">
-                                    <div class="col-md-6">
+                                    <div class="col" style="margin-right: 15px;">
                                         <a href="#" class="activity_unit_top">
                                             <div class="cover_image">
                                                 <img src="{{ asset($activities_top->cover_image) }}" alt="">
@@ -120,11 +120,11 @@
                                         </a>
                                     </div>
                                     @if($activities->isNotEmpty())
-                                        <div class="col-md-6">
+                                        <div class="col">
                                             @foreach($activities as $activity)
                                                 <a href="#" class="activity_unit">
-                                                    <div class="row" style="height: 50%; {{ ($loop->iteration == 1)?'padding-bottom:12px;':'padding-top:12px;' }}">
-                                                        <div class="col-md-6">
+                                                    <div class="row" style="height: 50%; {{ ($loop->iteration == 1)?'padding-bottom:6px;':'padding-top:6px;' }}">
+                                                        <div class="col-md-6" style="padding: 0;">
                                                             <div class="cover_image">
                                                                 <img src="{{ asset($activity->cover_image) }}" alt="">
                                                             </div>
@@ -168,7 +168,7 @@
 
                     @if($recommendation_books->isNotEmpty())
                         <div class="recommandation-area">
-                            <div class="container">
+                            <div class="container" style="width:90%;">
                                 <div class="row">
                                     <div class="col-md-12">
                                         <h1>
