@@ -236,7 +236,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                                登入\n                            "
+                        "\r\n                                登入\r\n                            "
                       )
                     ]
                   ),
@@ -249,7 +249,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                                忘記密碼？\n                            "
+                        "\r\n                                忘記密碼？\r\n                            "
                       )
                     ]
                   )

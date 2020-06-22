@@ -2420,7 +2420,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱\n                            ")
+      _vm._v("捐贈人(單位)名稱\r\n                            ")
     ])
   },
   function() {
@@ -2429,7 +2429,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "price" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("價格\n                            ")
+      _vm._v("價格\r\n                            ")
     ])
   },
   function() {
@@ -2469,7 +2469,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱\n                            ")
+      _vm._v("捐贈人(單位)名稱\r\n                            ")
     ])
   },
   function() {
@@ -2478,7 +2478,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "price" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("價格\n                            ")
+      _vm._v("價格\r\n                            ")
     ])
   },
   function() {
