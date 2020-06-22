@@ -36,10 +36,16 @@ const app = new Vue({
                 this.status_options = [
                     { id: 2, text: '借閱中' },
                 ];
-            } else if (this.book.status == 3 || this.book.status == 10) {
+            } else if (this.book.status == 3) {
                 // 此書籍為逾期中
                 this.status_options = [
                     { id: 3, text: '逾期中' },
+                    { id: 10, text: '無歸還' },
+                ];
+            } else if (this.book.status == 10) {
+                // 此書籍為無歸還
+                this.isOKModifyStatus = false;
+                this.status_options = [
                     { id: 10, text: '無歸還' },
                 ];
             } else {

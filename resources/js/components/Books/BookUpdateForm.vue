@@ -44,7 +44,10 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="status">狀態</label>
-                            <select id="status" name="status" class="form-control" :value="book.status">
+                            <select id="status" name="status" class="form-control" v-model="book.status" v-if="isModifyStatus">
+                                <option v-for="option in statusOptions" :key="option.id" :value="option.id">{{ option.text }}</option>
+                            </select>
+                            <select id="status" name="status" class="form-control" v-model="book.status" v-else readonly>
                                 <option v-for="option in statusOptions" :key="option.id" :value="option.id">{{ option.text }}</option>
                             </select>
                         </div>

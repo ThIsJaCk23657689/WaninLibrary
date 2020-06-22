@@ -500,6 +500,9 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['book', 'addType', 'statusOptions', 'isModifyStatus'],
   data: function data() {
@@ -1030,22 +1033,103 @@ var render = function() {
                         _vm._v("狀態")
                       ]),
                       _vm._v(" "),
-                      _c(
-                        "select",
-                        {
-                          staticClass: "form-control",
-                          attrs: { id: "status", name: "status" },
-                          domProps: { value: _vm.book.status }
-                        },
-                        _vm._l(_vm.statusOptions, function(option) {
-                          return _c(
-                            "option",
-                            { key: option.id, domProps: { value: option.id } },
-                            [_vm._v(_vm._s(option.text))]
+                      _vm.isModifyStatus
+                        ? _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.book.status,
+                                  expression: "book.status"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: { id: "status", name: "status" },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.book,
+                                    "status",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.statusOptions, function(option) {
+                              return _c(
+                                "option",
+                                {
+                                  key: option.id,
+                                  domProps: { value: option.id }
+                                },
+                                [_vm._v(_vm._s(option.text))]
+                              )
+                            }),
+                            0
                           )
-                        }),
-                        0
-                      )
+                        : _c(
+                            "select",
+                            {
+                              directives: [
+                                {
+                                  name: "model",
+                                  rawName: "v-model",
+                                  value: _vm.book.status,
+                                  expression: "book.status"
+                                }
+                              ],
+                              staticClass: "form-control",
+                              attrs: {
+                                id: "status",
+                                name: "status",
+                                readonly: ""
+                              },
+                              on: {
+                                change: function($event) {
+                                  var $$selectedVal = Array.prototype.filter
+                                    .call($event.target.options, function(o) {
+                                      return o.selected
+                                    })
+                                    .map(function(o) {
+                                      var val =
+                                        "_value" in o ? o._value : o.value
+                                      return val
+                                    })
+                                  _vm.$set(
+                                    _vm.book,
+                                    "status",
+                                    $event.target.multiple
+                                      ? $$selectedVal
+                                      : $$selectedVal[0]
+                                  )
+                                }
+                              }
+                            },
+                            _vm._l(_vm.statusOptions, function(option) {
+                              return _c(
+                                "option",
+                                {
+                                  key: option.id,
+                                  domProps: { value: option.id }
+                                },
+                                [_vm._v(_vm._s(option.text))]
+                              )
+                            }),
+                            0
+                          )
                     ])
                   ])
                 ]),
@@ -2825,12 +2909,19 @@ var app = new Vue({
           id: 2,
           text: '借閱中'
         }];
-      } else if (_this.book.status == 3 || _this.book.status == 10) {
+      } else if (_this.book.status == 3) {
         // 此書籍為逾期中
         _this.status_options = [{
           id: 3,
           text: '逾期中'
         }, {
+          id: 10,
+          text: '無歸還'
+        }];
+      } else if (_this.book.status == 10) {
+        // 此書籍為無歸還
+        _this.isOKModifyStatus = false;
+        _this.status_options = [{
           id: 10,
           text: '無歸還'
         }];

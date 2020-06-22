@@ -4,6 +4,8 @@ namespace App\Services;
 
 use Illuminate\Http\Request;
 use App\Book as BookEloquent;
+use App\Borrow as BorrowEloquent;
+use App\BorrowLog as BorrowLogEloquent;
 use App\Services\CropImageService;
 use Exception;
 use Log;
@@ -243,9 +245,26 @@ class BookService extends BaseService
             $status = $book->status;
         }elseif($book->status == 3 && ($request->status == 10 || $request->status == 3)){
             //逾期中只能被改成無歸還或逾期中
+            if($request->status == 10 ){
+                // 改成無歸還
+                $borrow = BorrowEloquent::where('book_id', $id)->where('status', 2)->orderBy('created_at', 'desc')->first();
+                $borrow->status = 3;
+                $borrow->save();
+                // 新增借閱紀錄
+                BorrowLogEloquent::create([
+                    'borrower_id' => $borrow->borrower_id,
+                    'borrower_name' => $borrow->borrower->name,
+                    'book_id' => $id,
+                    'book_title' => $book->title,
+                    'callnum' => $book->callnum,
+                    'status' => 3,
+                ]);
+            }
             $status = $request->status;
+        }elseif($book->status == 10){
+            $status = $book->status;
         }else{
-            $status = $request->status;
+             $status = $request->status;
         }
 
         $book->update([
