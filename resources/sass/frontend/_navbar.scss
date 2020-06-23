@@ -125,6 +125,20 @@
                     display: none;
                 }
             }
+            .dropdown-menu{
+                .dropdown-item{
+                    color: $blue;
+                    &:hover{
+                        background-color: white;
+                    }
+                    span{
+                        padding-bottom: 3px;
+                        &:hover{
+                            border-bottom: 2px solid $blue;
+                        }
+                    }
+                }
+            }
         }
         .nav-link {
             font-size: 1.2rem;
