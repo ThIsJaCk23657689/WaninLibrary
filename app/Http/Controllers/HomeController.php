@@ -33,6 +33,11 @@ class HomeController extends Controller
         return view('frontend.index', compact('active_num', 'newsList', 'activities', 'activities_top', 'information', 'recommendation_books', 'recommendation_title'));
     }
 
+    public function about(){
+        $active_num = 0;
+        return view('frontend.about', compact('active_num'));
+    }
+
     public function announcements(){
         $active_num = 1;
         return view('frontend.announcements', compact('active_num'));

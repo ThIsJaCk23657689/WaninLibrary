@@ -18,6 +18,9 @@ use Illuminate\Support\Facades\Route;
 // 首頁
 Route::get('/', 'HomeController@index')->name('index');
 
+// 首頁
+Route::get('/about', 'HomeController@about')->name('front.about');
+
 // 即時公告 / 重要消息
 Route::get('/announcements', 'HomeController@announcements')->name('front.announcements');
 
