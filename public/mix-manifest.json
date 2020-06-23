@@ -11,6 +11,7 @@
     "/js/app.js": "/js/app.js",
     "/css/app.css": "/css/app.css",
     "/css/frontend/frontend.css": "/css/frontend/frontend.css",
+    "/css/frontend/donations/index.css": "/css/frontend/donations/index.css",
     "/css/backend.css": "/css/backend.css",
     "/css/errors.css": "/css/errors.css",
     "/js/auth/forgetPassword.js": "/js/auth/forgetPassword.js",

@@ -13,7 +13,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// 前台路由
+
+// 首頁
 Route::get('/', 'HomeController@index')->name('index');
+
+// 即時公告 / 重要消息
+Route::get('/announcements', 'HomeController@announcements')->name('front.announcements');
+
+// 近期活動
+Route::get('/activities', 'HomeController@activities')->name('front.activities');
+
+// 主題書單
+Route::get('/recommandations', 'HomeController@recommandations')->name('front.recommandations');
+
+// 館藏查詢
+Route::get('/books', 'HomeController@books')->name('front.books');
+
+// 捐書芳名錄
+Route::get('/donors', 'HomeController@donatedBooks')->name('front.donors');
+
+// 捐贈書籍查詢
+Route::get('/donatedBooks', 'HomeController@donatedBooks')->name('front.donatedBooks');
+
+// 好書捐贈
+Route::get('/donations', 'HomeController@donations')->name('front.donations');
+
+// 免費索取書單
+Route::get('/freeBooks', 'HomeController@freeBooks')->name('front.freeBooks');
+
+
+
+
+
+
 
 // Auth::routes();
 Route::get('login', 'JWTAuthController@showLoginForm')->name('login');

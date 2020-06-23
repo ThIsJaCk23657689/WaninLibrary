@@ -11521,6 +11521,24 @@ body {
   z-index: 1;
 }
 
+.full-height {
+  height: 100%;
+}
+
+.flex-center {
+  align-items: center;
+  display: flex;
+  justify-content: center;
+}
+
+.position-ref {
+  position: relative;
+}
+
+.content {
+  text-align: center;
+}
+
 #navbar {
   background-color: #f3f3f3;
   color: #5f6b82;

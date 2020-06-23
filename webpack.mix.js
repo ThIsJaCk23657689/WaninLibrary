@@ -19,6 +19,7 @@ mix.js('resources/js/app.js', 'public/js')
 
 .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/frontend/frontend.scss', 'public/css/frontend')
+    .sass('resources/sass/frontend/donations/index.scss', 'public/css/frontend/donations')
     .options({
         processCssUrls: false,
     });

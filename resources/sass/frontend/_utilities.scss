@@ -1,18 +1,36 @@
 // Additional Text Helper Class
 .smaller {
-  font-size: 0.7rem;
+    font-size: 0.7rem;
 }
 
 // Helper class for the overflow property
 .o-hidden {
-  overflow: hidden !important;
+    overflow: hidden !important;
 }
 
 // Helper classes for z-index
 .z-0 {
-  z-index: 0;
+    z-index: 0;
 }
 
 .z-1 {
-  z-index: 1;
+    z-index: 1;
+}
+
+.full-height {
+    height: 100%;
+}
+
+.flex-center {
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
+
+.position-ref {
+    position: relative;
+}
+
+.content {
+    text-align: center;
 }
