@@ -525,7 +525,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            確認編輯\r\n                        "
+                          "\n                            確認編輯\n                        "
                         )
                       ]
                     ),
@@ -538,7 +538,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            返回列表\r\n                        "
+                          "\n                            返回列表\n                        "
                         )
                       ]
                     )
@@ -952,7 +952,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\activities\edit.js */"./resources/js/activities/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\activities\edit.js */"./resources/js/activities/edit.js");
 
 
 /***/ })
