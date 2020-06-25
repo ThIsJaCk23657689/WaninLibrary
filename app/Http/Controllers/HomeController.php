@@ -6,18 +6,24 @@ use Illuminate\Http\Request;
 use App\Services\AnnouncementService;
 use App\Services\ActivityService;
 use App\Services\InformationService;
+use App\Services\BookService;
+use App\Services\DonorService;
 
 class HomeController extends Controller
 {
     public $AnnouncementService;
     public $ActivityService;
     public $InformationService;
+    public $BookService;
+    public $DonorService;
 
     public function __construct(){
         $this->middleware('auth.web')->only('backend');
         $this->AnnouncementService = new AnnouncementService();
         $this->ActivityService = new ActivityService();
         $this->InformationService = new InformationService();
+        $this->BookService = new BookService();
+        $this->DonorService = new DonorService();
     }
 
     public function index(){
@@ -43,6 +49,13 @@ class HomeController extends Controller
         return view('frontend.announcements', compact('active_num'));
     }
 
+    // 即時公告/重要訊息 detail
+    public function announcements_show($id){
+        $active_num = 1;
+        $announcement = $this->AnnouncementService->getOne($id);
+        return view('frontend.announcements_show', compact('active_num', 'announcement'));
+    }
+
     public function activities(){
         $active_num = 2;
         return view('frontend.activities', compact('active_num'));
@@ -53,9 +66,23 @@ class HomeController extends Controller
         return view('frontend.recommandations', compact('active_num'));
     }
 
+    // 近期活動/主題書單 detail
+    public function activities_show($id){
+        $active_num = 1;
+        $activity = $this->ActivityService->getOne($id);
+        return view('frontend.activities_show', compact('active_num', 'activity'));
+    }
+
     public function books(){
         $active_num = 3;
         return view('frontend.books', compact('active_num'));
+    }
+
+    // 館藏查詢/索取書單 detail
+    public function books_show($id){
+        $active_num = 1;
+        $book = $this->BookService->getOne($id);
+        return view('frontend.activities_show', compact('active_num', 'book'));
     }
 
     public function donors(){
@@ -63,9 +90,39 @@ class HomeController extends Controller
         return view('frontend.donors', compact('active_num'));
     }
 
+    // 捐書人捐贈書籍查詢 detail
+    public function donatedBooks_show($id){
+        $active_num = 1;
+        $donor = $this->DonorService->getOne($id);
+        $bookList = $donor->books;
+        $isSearched = 0; //判斷是否從捐贈書籍查詢來的結果
+        return view('frontend.donatedBooks_show', compact('active_num', 'donor', 'bookList', 'isSearched'));
+    }
+
     public function donatedBooks(){
         $active_num = 4;
         return view('frontend.donatedBooks', compact('active_num'));
+    }
+
+    public function searchDonatedBooks(Request $request){
+        $this->validate($request, [
+            'donor_name' => 'required',
+            'donor_tel' => 'nullable',
+
+        ]);
+        $active_num = 4;
+        $result = $this->DonorService->searchDonatedBooks($request);
+        if($result['status'] == 200){
+            $id = $result['donor_id'];
+            $isSearched = $result['isSearched'];
+            return view('frontend.donatedBooks_show', compact('id', 'isSearched'));
+        }else{
+            return response()->json([
+                'status' => $result['status'],
+                'message' => $result['message']
+            ]);
+        }
+
     }
 
     public function donations(){

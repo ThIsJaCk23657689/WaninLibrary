@@ -70,10 +70,49 @@ class Book extends Model
                 $result = '庫藏待上架';
                 break;
             case config('book.status.ELIMINATED'):
-                $result = '已淘汰'; //前台顯是為已轉贈02
+                $result = '已淘汰'; //前台顯示為已轉贈02
                 break;
             case config('book.status.GIFTED'):
-                $result = '已轉贈';  //前台顯是為已轉贈01
+                $result = '已轉贈';  //前台顯示為已轉贈01
+                break;
+            case config('book.status.WAITINGFORTAKE'):
+                $result = '可供免費索取';
+                break;
+            case config('book.status.TAKEN'):
+                $result = '已被索取';
+                break;
+            case config('book.status.NOBORROW'):
+                $result = '無外借';
+                break;
+            case config('book.status.NORETURNED'):
+                $result = '無歸還';
+                break;
+            default:
+                $result = '未知狀態碼';
+                break;
+        }
+        return $result;
+    }
+
+    public function showStatusFrontEnd(){
+        switch ($this->status) {
+            case config('book.status.LISTED'):
+                $result = '可借閱';
+                break;
+            case config('book.status.BORROWED'):
+                $result = '借閱中';
+                break;
+            case config('book.status.EXPIRED'):
+                $result = '逾期中';
+                break;
+            case config('book.status.INSTOCK'):
+                $result = '庫藏待上架';
+                break;
+            case config('book.status.ELIMINATED'):
+                $result = '已轉贈02'; //前台顯示為已轉贈02
+                break;
+            case config('book.status.GIFTED'):
+                $result = '已轉贈01';  //前台顯示為已轉贈01
                 break;
             case config('book.status.WAITINGFORTAKE'):
                 $result = '可供免費索取';
