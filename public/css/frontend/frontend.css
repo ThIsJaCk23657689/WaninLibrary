@@ -11555,6 +11555,7 @@ body {
   position: absolute;
   right: 4%;
   bottom: 20%;
+  z-index: 999;
 }
 #navbar #sidebarToggle #sidebarContent {
   position: relative;
@@ -11770,10 +11771,10 @@ body {
 }
 #navSidebar .bottom div#search .inputBox {
   border: 2px solid #5f6b82;
-  border-radius: 20px;
+  border-radius: 25px;
   padding: 1px 0px;
   margin: 0px;
-  height: 40px;
+  height: 45px;
   position: relative;
 }
 #navSidebar .bottom div#search .inputBox input {
@@ -11792,17 +11793,17 @@ body {
 }
 #navSidebar .bottom div#search .inputBox button {
   outline: none;
-  width: 40px;
-  height: 40px;
+  width: 45px;
+  height: 45px;
   margin: 0;
   padding: 5px;
   text-align: center;
   border: 2px solid #5f6b82;
-  border-radius: 20px;
+  border-radius: 25px;
   background-color: rgba(255, 255, 255, 0);
   position: relative;
   top: -3px;
-  left: 8px;
+  left: 3px;
 }
 #navSidebar .bottom div#search .inputBox button img {
   width: 90%;

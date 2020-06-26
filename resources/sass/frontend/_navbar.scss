@@ -5,7 +5,7 @@
     height: $navbar-base-height;
     min-width: $web-min-width;
     box-shadow: 0px 2px 15px 1px rgba(0, 0, 0, 0.2);
-    .navbar-brand{
+    .navbar-brand {
         position: absolute;
         top: 15px;
         left: 40px;
@@ -17,6 +17,7 @@
         position: absolute;
         right: 4%;
         bottom: 20%;
+        z-index: 999;
         #sidebarContent {
             position: relative;
             #searchbox {
@@ -125,15 +126,15 @@
                     display: none;
                 }
             }
-            .dropdown-menu{
-                .dropdown-item{
+            .dropdown-menu {
+                .dropdown-item {
                     color: $blue;
-                    &:hover{
+                    &:hover {
                         background-color: white;
                     }
-                    span{
+                    span {
                         padding-bottom: 3px;
-                        &:hover{
+                        &:hover {
                             border-bottom: 2px solid $blue;
                         }
                     }
@@ -223,7 +224,6 @@
 //         overflow: hidden;
 //     }
 // }
-
 // @media (min-width: 768px) {
 //     .sidebar {
 //         width: $sidebar-base-width !important;
