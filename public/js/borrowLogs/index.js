@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 31);
+/******/ 	return __webpack_require__(__webpack_require__.s = 32);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -928,7 +928,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 31:
+/***/ 32:
 /*!************************************************!*\
   !*** multi ./resources/js/borrowLogs/index.js ***!
   \************************************************/

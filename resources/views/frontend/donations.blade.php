@@ -9,7 +9,7 @@
 @endpush
 
 @section('content')
-<section id="donation">
+<section class="content-page-header">
     <header>
         <div class="flex-center position-ref full-height">
             <div class="content">
@@ -20,7 +20,7 @@
     </header>
 </section>
 
-<section id="donation-content">
+<section class="content-page-body">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">

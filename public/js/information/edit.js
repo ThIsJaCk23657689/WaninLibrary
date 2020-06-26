@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 36);
+/******/ 	return __webpack_require__(__webpack_require__.s = 37);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -589,8 +589,8 @@ var render = function() {
                     attrs: {
                       uploadimg: _vm.InformationCoverImageURL,
                       title: "上傳封面圖片",
-                      "aspect-ratio": 4 / 2,
-                      prefix: "info"
+                      prefix: "info",
+                      helptext: "寬不得低於1536px，高不得低於630px。"
                     }
                   })
                 ],
@@ -611,7 +611,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                            確認修改\r\n                        "
+                        "\n                            確認修改\n                        "
                       )
                     ]
                   ),
@@ -624,7 +624,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                            取消編輯\r\n                        "
+                        "\n                            取消編輯\n                        "
                       )
                     ]
                   )
@@ -1080,7 +1080,7 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 36:
+/***/ 37:
 /*!************************************************!*\
   !*** multi ./resources/js/information/edit.js ***!
   \************************************************/

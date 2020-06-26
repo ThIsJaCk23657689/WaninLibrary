@@ -61,6 +61,22 @@ class HomeController extends Controller
         return view('frontend.activities', compact('active_num'));
     }
 
+    public function getActivitiesList(Request $request){
+        $this->validate($request, [
+            'skip' => 'nullable|integer',
+            'type' => 'nullable|integer',
+
+        ]);
+        $type = $request->type ?? 1; // 1:近期活動 2:主題書單
+        $activities = $this->ActivityService->getListFrontend($request, $type);
+        $totalcount = $this->ActivityService->count($type);
+        return response()->json([
+            'status' => 'OK',
+            'activities' => $activities,
+            'totalcount' => $totalcount
+        ]);
+    }
+
     public function recommandations(){
         $active_num = 2;
         return view('frontend.recommandations', compact('active_num'));
@@ -115,6 +131,7 @@ class HomeController extends Controller
         if($result['status'] == 200){
             $id = $result['donor_id'];
             $isSearched = $result['isSearched'];
+            // return redirect()->action('homecontroller@', [$id]);
             return view('frontend.donatedBooks_show', compact('id', 'isSearched'));
         }else{
             return response()->json([

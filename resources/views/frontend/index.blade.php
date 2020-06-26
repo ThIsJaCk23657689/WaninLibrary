@@ -8,10 +8,10 @@
 	<section id="header">
         <header>
             <div class="bg_cover">
-                <div class="coverText">
+                {{-- <div class="coverText">
                     <h2>閱讀可以拓展視野，更擁有改變的力量。</h2>
                     <span>-拾本書堂-</span>
-                </div>
+                </div> --}}
                 <img class="background-image" src="{{ $information->showCoverImage() }}" alt="封面圖片">
             </div>
             <div id="headerbox" class="container-fluid">

@@ -1,30 +1,24 @@
 // navbar 基本高度
 $navbar-base-height: 100px;
-
 // sidebar 寬度
 $navbar-lg-width: 460px;
-
 // footer 高度
 $footer-height: 200px;
-
 // 封面圖寬高，比例為1:2。
 $cover-width: 1920px;
 $cover-height: 960px;
 $cover-raito: $cover-width / $cover-height;
-
 // 網站的最小寬度
 $web-min-width: 300px;
-
 // // Change below variable to change the width of the sidenav
 // $sidebar-base-width: 225px;
 // // Change below variable to change the width of the sidenav when collapsed
 // $sidebar-collapsed-width: 90px;
-
 // Typography
-$font-family-sans-serif: 'Nunito', sans-serif;
-$font-size-base: 0.9rem;
+$font-family-sans-serif: 'Nunito',
+sans-serif;
+$font-size: 18px;
 $line-height-base: 1.6;
-
 // 顏色
 $white: #ffffff;
 $darkwhite: #f3f3f3;

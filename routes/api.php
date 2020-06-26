@@ -28,6 +28,9 @@ Route::post('logout', 'JWTAuthController@logout')->name('api.logout');
 Route::post('forgetPassword', 'JWTAuthController@forgetPassword')->name('api.forgetPassword');
 Route::post('refreshToken', 'JWTAuthController@refreshToken');
 
+// 前台所需之api
+Route::get('/activities/json', 'HomeController@getActivitiesList')->name('frontend.activities.getList');
+
 Route::prefix('/backend')->group(function(){
     //JWT
     Route::post('resetPassword', 'JWTAuthController@resetPassword')->name('auth.resetPassword');

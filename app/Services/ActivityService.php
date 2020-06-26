@@ -46,6 +46,30 @@ class ActivityService extends BaseService
         return $activities;
     }
 
+    public function getListFrontend($request, $type)
+    {
+        $take = 4;
+        $skip = $request->skip ?? 0;
+        $activities = ActivityEloquent::where('type', $type)->orderBy('is_top', 'desc')->orderBy('updated_at', 'desc')->skip($skip)->take($take)->get();
+        foreach($activities as $activity){
+            $activity->showTitle = $activity->showTitle();
+            $activity->showCoverImage = $activity->showCoverImage();
+            $activity->showDay = $activity->showDay();
+            $activity->showYear = $activity->showYear();
+            $activity->showMonth = $activity->showMonth();
+            $activity->detailURL = route('front.activities.show', [$activity->id]);
+        }
+        return $activities;
+    }
+
+
+
+    public function count($type)
+    {
+        $total = ActivityEloquent::where('type', $type)->count();
+        return $total;
+    }
+
     public function getOne($id)
     {
         $activity = ActivityEloquent::findOrFail($id);

@@ -60,7 +60,7 @@ div#headerbox {
         height: 100%;
         div.left {
             height: 100%;
-            padding-top: 2%;
+            padding-top: 1.5%;
             padding-left: 12%;
             background-color: $gray;
             @media (max-width: 992px) {
@@ -70,7 +70,7 @@ div#headerbox {
         }
         div.right {
             height: 100%;
-            padding-top: 2%;
+            padding-top: 1.5%;
             padding-left: 12%;
             background-color: $green;
             @media (max-width: 992px) {
@@ -88,7 +88,7 @@ div#headerbox {
             padding: 0;
             a {
                 img {
-                    width: 100%;
+                    width: 95%;
                 }
             }
             @media (max-width: 992px) {

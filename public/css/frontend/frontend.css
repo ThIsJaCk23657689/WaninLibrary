@@ -1575,7 +1575,7 @@ article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
 body {
   margin: 0;
   font-family: "Nunito", sans-serif;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.6;
   color: #212529;
@@ -1881,31 +1881,31 @@ h1, h2, h3, h4, h5, h6,
 }
 
 h1, .h1 {
-  font-size: 2.25rem;
+  font-size: 2.5rem;
 }
 
 h2, .h2 {
-  font-size: 1.8rem;
+  font-size: 2rem;
 }
 
 h3, .h3 {
-  font-size: 1.575rem;
+  font-size: 1.75rem;
 }
 
 h4, .h4 {
-  font-size: 1.35rem;
+  font-size: 1.5rem;
 }
 
 h5, .h5 {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
 
 h6, .h6 {
-  font-size: 0.9rem;
+  font-size: 1rem;
 }
 
 .lead {
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   font-weight: 300;
 }
 
@@ -1976,7 +1976,7 @@ mark,
 
 .blockquote {
   margin-bottom: 1rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
 
 .blockquote-footer {
@@ -3505,7 +3505,7 @@ pre code {
   width: 100%;
   height: calc(1.6em + 0.75rem + 2px);
   padding: 0.375rem 0.75rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.6;
   color: #495057;
@@ -3582,14 +3582,14 @@ select.form-control:focus::-ms-value {
 .col-form-label-lg {
   padding-top: calc(0.5rem + 1px);
   padding-bottom: calc(0.5rem + 1px);
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   line-height: 1.5;
 }
 
 .col-form-label-sm {
   padding-top: calc(0.25rem + 1px);
   padding-bottom: calc(0.25rem + 1px);
-  font-size: 0.7875rem;
+  font-size: 0.875rem;
   line-height: 1.5;
 }
 
@@ -3598,7 +3598,7 @@ select.form-control:focus::-ms-value {
   width: 100%;
   padding: 0.375rem 0;
   margin-bottom: 0;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.6;
   color: #212529;
   background-color: transparent;
@@ -3613,7 +3613,7 @@ select.form-control:focus::-ms-value {
 .form-control-sm {
   height: calc(1.5em + 0.5rem + 2px);
   padding: 0.25rem 0.5rem;
-  font-size: 0.7875rem;
+  font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 0.2rem;
 }
@@ -3621,7 +3621,7 @@ select.form-control:focus::-ms-value {
 .form-control-lg {
   height: calc(1.5em + 1rem + 2px);
   padding: 0.5rem 1rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 0.3rem;
 }
@@ -3703,7 +3703,7 @@ textarea.form-control {
   max-width: 100%;
   padding: 0.25rem 0.5rem;
   margin-top: 0.1rem;
-  font-size: 0.7875rem;
+  font-size: 0.875rem;
   line-height: 1.6;
   color: #212529;
   background-color: rgba(147, 229, 180, 0.9);
@@ -3795,7 +3795,7 @@ textarea.form-control {
   max-width: 100%;
   padding: 0.25rem 0.5rem;
   margin-top: 0.1rem;
-  font-size: 0.7875rem;
+  font-size: 0.875rem;
   line-height: 1.6;
   color: #ffffff;
   background-color: rgba(220, 53, 69, 0.9);
@@ -3942,7 +3942,7 @@ textarea.form-control {
   background-color: transparent;
   border: 1px solid transparent;
   padding: 0.375rem 0.75rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   line-height: 1.6;
   border-radius: 0.25rem;
   transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
@@ -4428,14 +4428,14 @@ fieldset:disabled a.btn {
 
 .btn-lg, .btn-group-lg > .btn {
   padding: 0.5rem 1rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 0.3rem;
 }
 
 .btn-sm, .btn-group-sm > .btn {
   padding: 0.25rem 0.5rem;
-  font-size: 0.7875rem;
+  font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 0.2rem;
 }
@@ -4516,7 +4516,7 @@ input[type=button].btn-block {
   min-width: 10rem;
   padding: 0.5rem 0;
   margin: 0.125rem 0 0;
-  font-size: 0.9rem;
+  font-size: 1rem;
   color: #212529;
   text-align: left;
   list-style: none;
@@ -4704,7 +4704,7 @@ input[type=button].btn-block {
   display: block;
   padding: 0.5rem 1.5rem;
   margin-bottom: 0;
-  font-size: 0.7875rem;
+  font-size: 0.875rem;
   color: #6c757d;
   white-space: nowrap;
 }
@@ -4917,7 +4917,7 @@ input[type=button].btn-block {
   align-items: center;
   padding: 0.375rem 0.75rem;
   margin-bottom: 0;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.6;
   color: #495057;
@@ -4944,7 +4944,7 @@ input[type=button].btn-block {
 .input-group-lg > .input-group-prepend > .btn,
 .input-group-lg > .input-group-append > .btn {
   padding: 0.5rem 1rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   line-height: 1.5;
   border-radius: 0.3rem;
 }
@@ -4961,7 +4961,7 @@ input[type=button].btn-block {
 .input-group-sm > .input-group-prepend > .btn,
 .input-group-sm > .input-group-append > .btn {
   padding: 0.25rem 0.5rem;
-  font-size: 0.7875rem;
+  font-size: 0.875rem;
   line-height: 1.5;
   border-radius: 0.2rem;
 }
@@ -4994,7 +4994,7 @@ input[type=button].btn-block {
 .custom-control {
   position: relative;
   display: block;
-  min-height: 1.44rem;
+  min-height: 1.6rem;
   padding-left: 1.5rem;
 }
 
@@ -5008,7 +5008,7 @@ input[type=button].btn-block {
   left: 0;
   z-index: -1;
   width: 1rem;
-  height: 1.22rem;
+  height: 1.3rem;
   opacity: 0;
 }
 .custom-control-input:checked ~ .custom-control-label::before {
@@ -5041,7 +5041,7 @@ input[type=button].btn-block {
 }
 .custom-control-label::before {
   position: absolute;
-  top: 0.22rem;
+  top: 0.3rem;
   left: -1.5rem;
   display: block;
   width: 1rem;
@@ -5053,7 +5053,7 @@ input[type=button].btn-block {
 }
 .custom-control-label::after {
   position: absolute;
-  top: 0.22rem;
+  top: 0.3rem;
   left: -1.5rem;
   display: block;
   width: 1rem;
@@ -5102,7 +5102,7 @@ input[type=button].btn-block {
   border-radius: 0.5rem;
 }
 .custom-switch .custom-control-label::after {
-  top: calc(0.22rem + 2px);
+  top: calc(0.3rem + 2px);
   left: calc(-2.25rem + 2px);
   width: calc(1rem - 4px);
   height: calc(1rem - 4px);
@@ -5128,7 +5128,7 @@ input[type=button].btn-block {
   width: 100%;
   height: calc(1.6em + 0.75rem + 2px);
   padding: 0.375rem 1.75rem 0.375rem 0.75rem;
-  font-size: 0.9rem;
+  font-size: 1rem;
   font-weight: 400;
   line-height: 1.6;
   color: #495057;
@@ -5171,7 +5171,7 @@ input[type=button].btn-block {
   padding-top: 0.25rem;
   padding-bottom: 0.25rem;
   padding-left: 0.5rem;
-  font-size: 0.7875rem;
+  font-size: 0.875rem;
 }
 
 .custom-select-lg {
@@ -5179,7 +5179,7 @@ input[type=button].btn-block {
   padding-top: 0.5rem;
   padding-bottom: 0.5rem;
   padding-left: 1rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
 }
 
 .custom-file {
@@ -5496,10 +5496,10 @@ input[type=button].btn-block {
 }
 .navbar-brand {
   display: inline-block;
-  padding-top: 0.32rem;
-  padding-bottom: 0.32rem;
+  padding-top: 0.3rem;
+  padding-bottom: 0.3rem;
   margin-right: 1rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   line-height: inherit;
   white-space: nowrap;
 }
@@ -5537,7 +5537,7 @@ input[type=button].btn-block {
 
 .navbar-toggler {
   padding: 0.25rem 0.75rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   line-height: 1;
   background-color: transparent;
   border: 1px solid transparent;
@@ -6131,7 +6131,7 @@ input[type=button].btn-block {
 
 .pagination-lg .page-link {
   padding: 0.75rem 1.5rem;
-  font-size: 1.125rem;
+  font-size: 1.25rem;
   line-height: 1.5;
 }
 .pagination-lg .page-item:first-child .page-link {
@@ -6145,7 +6145,7 @@ input[type=button].btn-block {
 
 .pagination-sm .page-link {
   padding: 0.25rem 0.5rem;
-  font-size: 0.7875rem;
+  font-size: 0.875rem;
   line-height: 1.5;
 }
 .pagination-sm .page-item:first-child .page-link {
@@ -6332,7 +6332,7 @@ a.badge-dark:focus, a.badge-dark.focus {
 }
 
 .alert-dismissible {
-  padding-right: 3.85rem;
+  padding-right: 4rem;
 }
 .alert-dismissible .close {
   position: absolute;
@@ -6459,7 +6459,7 @@ a.badge-dark:focus, a.badge-dark.focus {
   display: flex;
   height: 1rem;
   overflow: hidden;
-  font-size: 0.675rem;
+  font-size: 0.75rem;
   background-color: #e9ecef;
   border-radius: 0.25rem;
 }
@@ -6808,7 +6808,7 @@ a.badge-dark:focus, a.badge-dark.focus {
 
 .close {
   float: right;
-  font-size: 1.35rem;
+  font-size: 1.5rem;
   font-weight: 700;
   line-height: 1;
   color: #000;
@@ -7087,7 +7087,7 @@ a.close.disabled {
   word-spacing: normal;
   white-space: normal;
   line-break: auto;
-  font-size: 0.7875rem;
+  font-size: 0.875rem;
   word-wrap: break-word;
   opacity: 0;
 }
@@ -7189,7 +7189,7 @@ a.close.disabled {
   word-spacing: normal;
   white-space: normal;
   line-break: auto;
-  font-size: 0.7875rem;
+  font-size: 0.875rem;
   word-wrap: break-word;
   background-color: #ffffff;
   background-clip: padding-box;
@@ -7298,7 +7298,7 @@ a.close.disabled {
 .popover-header {
   padding: 0.5rem 0.75rem;
   margin-bottom: 0;
-  font-size: 0.9rem;
+  font-size: 1rem;
   background-color: #f7f7f7;
   border-bottom: 1px solid #ebebeb;
   border-top-left-radius: calc(0.3rem - 1px);
@@ -11466,6 +11466,7 @@ h3 {
 html {
   position: relative;
   min-height: 100%;
+  font-size: 18px;
 }
 
 body {
@@ -11897,7 +11898,7 @@ div#headerbox .headerRow {
 }
 div#headerbox .headerRow div.left {
   height: 100%;
-  padding-top: 2%;
+  padding-top: 1.5%;
   padding-left: 12%;
   background-color: #eaeaea;
 }
@@ -11909,7 +11910,7 @@ div#headerbox .headerRow div.left {
 }
 div#headerbox .headerRow div.right {
   height: 100%;
-  padding-top: 2%;
+  padding-top: 1.5%;
   padding-left: 12%;
   background-color: #93e5b4;
 }
@@ -11929,7 +11930,7 @@ div#headerbox .headerRow .checkBtn {
   padding: 0;
 }
 div#headerbox .headerRow .checkBtn a img {
-  width: 100%;
+  width: 95%;
 }
 @media (max-width: 992px) {
   div#headerbox .headerRow .checkBtn {
@@ -12137,7 +12138,7 @@ div#headerbox .headerRow h3 {
   text-align: center;
   font-size: 1.5rem;
   letter-spacing: 3px;
-  margin-top: 48px;
+  margin-top: 46px;
   padding: 17px;
   cursor: pointer;
 }
@@ -12152,6 +12153,10 @@ div#headerbox .headerRow h3 {
   background-size: 80% 75%;
   background-repeat: no-repeat;
   background-position: center;
+}
+#activity .content #activity_container .slider .recommandation-area h1 {
+  letter-spacing: 20px;
+  font-weight: bold;
 }
 #activity .content #activity_container .slider .recommandation-area .container {
   padding-top: 0px !important;
@@ -12194,7 +12199,7 @@ div#headerbox .headerRow h3 {
   width: 60px;
   height: 60px;
   display: inline-block;
-  padding: 5px 10px 10px 10px;
+  padding: 0px 10px 10px 10px;
 }
 #activityIcon img {
   width: 100%;
