@@ -21,7 +21,7 @@
         </div>
 
         <div class="recommandation-card-arrow-container">
-            <a href="#" class="recommandation-card-arrow"></a>
+            <a :href="recommandation.detailURL" class="recommandation-card-arrow"></a>
         </div>
     </div>
 </div>

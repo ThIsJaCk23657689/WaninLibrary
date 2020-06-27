@@ -27,7 +27,7 @@ class Announcement extends Model
     }
 
     public function showTitle(){
-        $maxString = 20;
+        $maxString = 16;
         if(strlen($this->title) >= $maxString*2 ){
             return mb_substr($this->title, 0, $maxString) . '...';
         }else{
