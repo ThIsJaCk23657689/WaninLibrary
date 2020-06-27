@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Announcement as AnnouncementEloquent;
+use Carbon\Carbon;
 
 
 class AnnouncementService extends BaseService
@@ -33,6 +34,26 @@ class AnnouncementService extends BaseService
                 <a href="#" class="btn btn-md btn-danger"><i class="far fa-trash-alt"></i></a>';
         }
         return $announcements;
+    }
+
+    public function getListFrontend($request)
+    {
+        $take = 8;
+        $skip = $request->skip ?? 0;
+        $today = Carbon::today();
+        $announcements = AnnouncementEloquent::orderBy('is_top', 'desc')->orderBy('updated_at', 'desc')->skip($skip)->take($take)->get();
+        foreach ($announcements as $announcement) {
+            $announcement->showTitle = $announcement->showTitle();
+            $announcement->isNew = $today->eq($announcement->created_at);
+            $announcement->detailURL = route('front.announcements.show', [$announcement->id]);
+        }
+        return $announcements;
+    }
+
+    public function count()
+    {
+        $total = AnnouncementEloquent::count();
+        return $total;
     }
 
     public function getOne($id)

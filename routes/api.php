@@ -30,6 +30,8 @@ Route::post('refreshToken', 'JWTAuthController@refreshToken');
 
 // 前台所需之api
 Route::get('/activities/json', 'HomeController@getActivitiesList')->name('frontend.activities.getList');
+Route::get('/announcements/json', 'HomeController@getAnnouncementsList')->name('frontend.announcements.getList');
+Route::post('/donor/searchDonatedBooks', 'HomeController@searchDonatedBooks')->name('frontend.donor.searchDonatedBooks');
 
 Route::prefix('/backend')->group(function(){
     //JWT

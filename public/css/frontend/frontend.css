@@ -11578,7 +11578,7 @@ body {
   height: 100%;
   padding: 5px;
   position: absolute;
-  top: 0;
+  top: -3px;
   left: 0;
   cursor: pointer;
 }

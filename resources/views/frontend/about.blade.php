@@ -9,18 +9,18 @@
 @endpush
 
 @section('content')
-<section id="donation">
+<section class="content-page-header">
     <header>
         <div class="flex-center position-ref full-height">
             <div class="content">
-                <img src="{{ asset('images\frontend\icons\book_icon.png') }}" class="title-icon" alt="好書捐贈">
+                <img src="{{ asset('images\frontend\icons\about_icon.png') }}" class="title-icon" alt="關於拾本書堂">
                 <h1>關於拾本書堂</h1>
             </div>
         </div>
     </header>
 </section>
 
-<section id="donation-content">
+<section class="content-page-body">
     <div class="container">
         <div class="row">
             <div class="col-md-12 text-center">

@@ -18,11 +18,14 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/auth/forgetPassword.js', 'public/js/auth')
 
 .js('resources/js/frontend/activities/index.js', 'public/js/frontend/activities')
+    .js('resources/js/frontend/recommandations/index.js', 'public/js/frontend/recommandations')
 
 .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/frontend/frontend.scss', 'public/css/frontend')
     .sass('resources/sass/frontend/donations/index.scss', 'public/css/frontend/donations')
     .sass('resources/sass/frontend/activities/index.scss', 'public/css/frontend/activities')
+    .sass('resources/sass/frontend/recommandations/index.scss', 'public/css/frontend/recommandations')
+    .sass('resources/sass/frontend/about/index.scss', 'public/css/frontend/about')
     .options({
         processCssUrls: false,
     });

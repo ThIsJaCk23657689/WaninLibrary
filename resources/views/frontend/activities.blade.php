@@ -26,15 +26,15 @@
 
             <div class="row switch-btn-row">
                 <div class="col-md-6 switch-btn-container actived">
-                    <a href="#" class="switch-btn text-center">近期活動</a>
+                    <a href="{{ route('front.activities') }}" class="switch-btn text-center">近期活動</a>
                 </div>
                 <div class="col-md-6 switch-btn-container">
-                    <a href="#" class="switch-btn text-center">主題書單</a>
+                    <a href="{{ route('front.recommandations') }}" class="switch-btn text-center">主題書單</a>
                 </div>
             </div>
 
             <activity-container :activities="activities"></activity-container>
-            <content-paginate></content-paginate>
+            <content-paginate :current-page="currentPage" :total-page="totalPage" v-on:chage-page="chagePage"></content-paginate>
 
             <span id="GetActivitiesList" class="d-none">{{ route('frontend.activities.getList') }}</span>
 

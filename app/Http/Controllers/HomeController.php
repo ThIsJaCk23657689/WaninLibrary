@@ -39,14 +39,31 @@ class HomeController extends Controller
         return view('frontend.index', compact('active_num', 'newsList', 'activities', 'activities_top', 'information', 'recommendation_books', 'recommendation_title'));
     }
 
+    // 關於拾本書堂
     public function about(){
         $active_num = 0;
         return view('frontend.about', compact('active_num'));
     }
 
+    // 即時公告/重要消息頁面
     public function announcements(){
         $active_num = 1;
         return view('frontend.announcements', compact('active_num'));
+    }
+
+    // 即時公告/重要消息 api
+    public function getAnnouncementsList(Request $request){
+        $this->validate($request, [
+            'skip' => 'nullable|integer',
+        ]);
+        // take = 8 一頁8筆資料
+        $announcements = $this->AnnouncementService->getListFrontend($request);
+        $totalcount = $this->AnnouncementService->count();
+        return response()->json([
+            'status' => 'OK',
+            'announcements' => $announcements,
+            'totalcount' => $totalcount
+        ]);
     }
 
     // 即時公告/重要訊息 detail
@@ -56,17 +73,20 @@ class HomeController extends Controller
         return view('frontend.announcements_show', compact('active_num', 'announcement'));
     }
 
+    // 近期活動 頁面
     public function activities(){
         $active_num = 2;
         return view('frontend.activities', compact('active_num'));
     }
 
+    // 近期活動/主題書單  api
     public function getActivitiesList(Request $request){
         $this->validate($request, [
             'skip' => 'nullable|integer',
-            'type' => 'nullable|integer',
+            'type' => 'nullable|integer',  // 1:近期活動 2:主題書單
 
         ]);
+        // take = 4 一頁4筆資料
         $type = $request->type ?? 1; // 1:近期活動 2:主題書單
         $activities = $this->ActivityService->getListFrontend($request, $type);
         $totalcount = $this->ActivityService->count($type);
@@ -77,6 +97,7 @@ class HomeController extends Controller
         ]);
     }
 
+    // 主題書單  頁面
     public function recommandations(){
         $active_num = 2;
         return view('frontend.recommandations', compact('active_num'));
