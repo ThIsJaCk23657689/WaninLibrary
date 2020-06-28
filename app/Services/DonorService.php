@@ -201,4 +201,60 @@ class DonorService extends BaseService
         return $result;
 
     }
+
+    // getListFrontend
+    public function getListFrontend($request)
+    {
+        if($request->first_page){
+            $skip = 0;
+        }else{
+            $skip = $request->skip ?? 0 ;
+        }
+        $take = 8;
+
+        $month = $request->month ?? "";
+
+        $orderby = $request->orderby ?? 1;
+        $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
+
+        // 搜尋
+        if($keywords == [] && $orderby == 2 && $month == ""){
+            // all default
+            $donorsModel = new DonorEloquent();
+            $count = $donorsModel->count();
+            $donors = $donorsModel->orderBy('created_at','desc')->skip($skip)->take($take)->get();
+
+        }else{
+            $donorsModel = DonorEloquent::query()->where(function ($query) use ($keywords) {
+                if($keywords != []){
+                    foreach ($keywords as $keyword) {
+                        $keyword = '%'.$keyword.'%';
+                        $query->orWhere('name', 'like',$keyword);
+                    }
+                }
+            });
+            if($month != ""){
+                // 以年份查詢(?)
+                $donorsModel->where('updated_at','like',$month.'%');
+            }
+            $count = $donorsModel->count();
+            if($orderby == 2){ //DESC
+                $donors = $donorsModel->orderBy('created_at','desc')->skip($skip)->take($take)->get();
+            }else { //ASC
+                $donors = $donorsModel->orderBy('created_at','asc')->skip($skip)->take($take)->get();
+            }
+        }
+        $c = 1;
+        foreach($donors as $donor){
+            $donor->index = $skip + $c;
+            $donor->name = $donor->showName();
+            $donor->donateAmount = $donor->books()->count();
+            $donor->donatedBookURL = route('front.donatedBooks.show', [$donor->id]);
+            $c ++;
+        }
+        return [
+            'donors' => $donors,
+            'count' => $count
+        ];
+    }
 }

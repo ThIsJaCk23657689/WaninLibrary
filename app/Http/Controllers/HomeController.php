@@ -110,50 +110,95 @@ class HomeController extends Controller
         return view('frontend.activities_show', compact('active_num', 'activity'));
     }
 
+    // 館藏查詢
     public function books(){
         $active_num = 3;
         return view('frontend.books', compact('active_num'));
+    }
+
+    // 館藏查詢/索取書單 api
+    public function getBooksList(Request $request){
+        $this->validate($request, [
+            'skip' => 'nullable|integer',
+
+             // 0.預設 1~6:欄位(1.書名 2.作者 3.出版商 4. 出版年份 5.譯者 6.ISBN)
+             // 7~20 書籍種類 (7.總類 8.哲學類 9.宗教類 10.科學類 11.應用科學類 12.社會學類
+             // 13.史地類 14.中國史地類 15.世界史地類  16.語文文學類 17.藝術類 18.論文 19.期刊雜誌 20 .非中文圖書)
+            'type' => 'nullable|integer',
+            'keyword' => 'nullable',
+            'orderBy' => 'nullable|integer',  // 1:最新-最舊desc 2:最舊-最新asc
+            'first_page' => 'nullable|integer',
+            'status' => 'nullable|integer', //1 可借閱; 7 免費索取
+        ]);
+
+        $result = $this->BookService->getListFrontend($request);
+
+        return response()->json([
+            'status' => 'OK',
+            'books' => $result['books'],
+            'totalcount' => $result['count']
+        ]);
     }
 
     // 館藏查詢/索取書單 detail
     public function books_show($id){
         $active_num = 1;
         $book = $this->BookService->getOne($id);
-        return view('frontend.activities_show', compact('active_num', 'book'));
+        return view('frontend.books_show', compact('active_num', 'book'));
     }
 
+    // 捐書芳名錄頁面
     public function donors(){
         $active_num = 4;
         return view('frontend.donors', compact('active_num'));
     }
 
+    // 捐書芳名錄 api
+    public function getDonorsList(Request $request){
+        $this->validate($request, [
+            'skip' => 'nullable|integer',
+            'keyword' => 'nullable',
+            'orderBy' => 'nullable|integer',  // 1:最新-最舊desc 2:最舊-最新asc
+            'first_page' => 'nullable|integer',
+            'month' => 'nullable'
+        ]);
+
+        $result = $this->DonorService->getListFrontend($request);
+
+        return response()->json([
+            'status' => 'OK',
+            'books' => $result['books'],
+            'totalcount' => $result['count']
+        ]);
+    }
+
     // 捐書人捐贈書籍查詢 detail
-    public function donatedBooks_show($id){
-        $active_num = 1;
+    public function donatedBooks_show($id, $isSearched = 0){
+        $active_num = 4;
         $donor = $this->DonorService->getOne($id);
         $bookList = $donor->books;
         $isSearched = 0; //判斷是否從捐贈書籍查詢來的結果
         return view('frontend.donatedBooks_show', compact('active_num', 'donor', 'bookList', 'isSearched'));
     }
 
+    // 捐書人捐贈書籍查詢頁面
     public function donatedBooks(){
         $active_num = 4;
         return view('frontend.donatedBooks', compact('active_num'));
     }
 
+    // 捐贈人捐書查詢api
     public function searchDonatedBooks(Request $request){
         $this->validate($request, [
             'donor_name' => 'required',
             'donor_tel' => 'nullable',
-
         ]);
-        $active_num = 4;
         $result = $this->DonorService->searchDonatedBooks($request);
         if($result['status'] == 200){
             $id = $result['donor_id'];
             $isSearched = $result['isSearched'];
-            // return redirect()->action('homecontroller@', [$id]);
-            return view('frontend.donatedBooks_show', compact('id', 'isSearched'));
+            return redirect()->action('homecontroller@donatedBooks_show', [$id, $isSearched]);
+            // return view('frontend.donatedBooks_show', compact('id', 'isSearched'));
         }else{
             return response()->json([
                 'status' => $result['status'],
