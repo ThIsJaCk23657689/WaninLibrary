@@ -94,96 +94,85 @@
   color: #93e5b4;
 }
 
-.switch-btn-row {
-  border-bottom: 1px solid #5f6b82;
-  margin-bottom: 25px;
-}
-.switch-btn-row .switch-btn-container {
-  padding: 6px 0px;
-}
-.switch-btn-row .switch-btn-container.actived {
-  border-left: 1px solid #5f6b82;
-  border-top: 1px solid #5f6b82;
-  border-right: 1px solid #5f6b82;
-}
-.switch-btn-row .switch-btn-container.actived .switch-btn {
-  color: #93e5b4;
-}
-.switch-btn-row .switch-btn-container .switch-btn {
-  display: block;
+.detail-page-header {
   width: 100%;
+  height: 200px;
+  background-color: #eaeaea;
+}
+.detail-page-header .activity-detail-title {
   height: 100%;
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #55473f;
-  transition: color 0.1s ease-in-out;
-}
-.switch-btn-row .switch-btn-container .switch-btn:hover {
-  text-decoration: none;
-  color: #93e5b4;
-}
-
-.activity-card {
-  margin: 25px 28px;
-  padding: 30px 40px;
-  border: 1px solid #5f6b82;
-  color: #55473f;
-  width: calc(50% - 56px);
-  height: 580px;
-}
-.activity-card .activity-card-date {
+  display: flex;
   position: relative;
-  border-bottom: 3px solid #93e5b4;
-  margin-bottom: 28px;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 80px;
 }
-.activity-card .activity-card-date h3 {
+.detail-page-header .activity-detail-title .activity-detail-title-container {
+  width: 1100px;
+  border-bottom: 3px solid #93e5b4;
+}
+.detail-page-header .activity-detail-title .activity-detail-title-container h1 {
+  color: #55473f;
+  font-size: 2.2rem;
+  letter-spacing: 10px;
+  display: inline-block;
+}
+.detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
+  position: relative;
+  float: right;
+  width: 15%;
   margin: 0;
+}
+.detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date h2 {
+  margin: 0;
+  margin-left: 25px;
+  letter-spacing: 3px;
+  float: left;
   font-size: 2.7rem;
   font-weight: bold;
   display: inline-block;
   color: #93e5b4;
 }
-.activity-card .activity-card-date span {
+@media (max-width: 800px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date h2 {
+    margin-left: 0px;
+  }
+}
+.detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date span {
   display: inline-block;
   float: right;
-  font-style: italic;
   position: relative;
   right: 5px;
-  font-weight: lighter;
+  margin-right: 10px;
 }
-.activity-card .activity-card-image {
-  margin-bottom: 25px;
-}
-.activity-card .activity-card-image .image-link {
-  display: inline-block;
-  width: 100%;
-}
-.activity-card .activity-card-image .image-link .cover-image {
-  height: 288px;
-  overflow: hidden;
+.detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-title-content {
+  text-align: left;
   position: relative;
+  width: 60%;
+  float: left;
+  margin: 0;
 }
-.activity-card .activity-card-image .image-link .cover-image img {
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: calc(50% + 0px);
-  transform: translateX(-50%);
+.detail-page-header .recommandation-detail-title .recommandation-detail-title-container {
+  width: 1100px;
+  border-bottom: 3px solid #93e5b4;
 }
-.activity-card .activity-card-image .image-link .cover-image .image-gray {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(95, 107, 130, 0.3);
-  transition: background-color 0.1s ease-in-out;
-}
-.activity-card .activity-card-image .image-link:hover .image-gray {
-  background-color: rgba(95, 107, 130, 0);
-}
-.activity-card .activity-card-title .title-link {
+.detail-page-header .recommandation-detail-title .recommandation-detail-title-container .recommandation-detail-title-content h1 {
   color: #55473f;
-  font-size: 1.3rem;
-  font-weight: bold;
+  font-size: 2.2rem;
+  letter-spacing: 10px;
+  display: inline-block;
+}
+
+.activity-detail-row {
+  width: 100%;
+  padding: 20px;
+  margin: 0;
+  background-color: rgba(147, 229, 180, 0.25);
+}
+
+.recommandation-detail-row {
+  width: 100%;
+  padding: 20px;
+  margin: 0;
+  background-color: #eaeaea;
 }

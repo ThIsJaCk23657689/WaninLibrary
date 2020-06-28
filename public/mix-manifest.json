@@ -13,6 +13,7 @@
     "/css/frontend/frontend.css": "/css/frontend/frontend.css",
     "/css/frontend/donations/index.css": "/css/frontend/donations/index.css",
     "/css/frontend/activities/index.css": "/css/frontend/activities/index.css",
+    "/css/frontend/activities/show.css": "/css/frontend/activities/show.css",
     "/css/frontend/recommandations/index.css": "/css/frontend/recommandations/index.css",
     "/css/frontend/about/index.css": "/css/frontend/about/index.css",
     "/css/backend.css": "/css/backend.css",
