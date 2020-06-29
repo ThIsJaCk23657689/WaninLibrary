@@ -26,7 +26,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav">
                 <li class="nav-item {{ ($active_num == 1)?'active':'' }}">
-                    <a class="nav-link" href="{{ route('front.announcements') }}">
+                    <a class="nav-link" href="#">{{-- {{ route('front.announcements') }} --}}
                         即時公告/重要消息
                     </a>
                 </li>
@@ -35,16 +35,16 @@
                         近期活動
                     </a>
                     <div class="dropdown-menu" aria-labelledby="activitiesDropdown">
-                        <a class="dropdown-item" href="{{ route('front.activities') }}">
+                        <a class="dropdown-item" href="#">{{-- {{ route('front.activities') }} --}}
                             <span>近期活動</span>
                         </a>
-                        <a class="dropdown-item" href="{{ route('front.recommandations') }}">
+                        <a class="dropdown-item" href="#">{{-- {{ route('front.recommandations') }} --}}
                             <span>主題書單</span>
                         </a>
                     </div>
                 </li>
                 <li class="nav-item {{ ($active_num == 3)?'active':'' }}">
-                    <a class="nav-link" href="{{ route('front.books') }}">館藏查詢</a>
+                    <a class="nav-link" href="{{ route('front.books') }}">館藏查詢</a>{{-- {{ route('front.books') }} --}}
                 </li>
                 <li class="nav-item dropdown no-arrow {{ ($active_num == 4)?'active':'' }}">
                     <a class="nav-link dropdown-toggle" href="#" id="donorDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
