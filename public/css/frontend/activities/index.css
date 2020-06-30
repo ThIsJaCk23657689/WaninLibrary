@@ -138,7 +138,9 @@
 }
 .activity-card .activity-card-date h3 {
   margin: 0;
-  font-size: 2.7rem;
+  font-size: 3rem;
+  font-weight: bold;
+  position: relative;
   font-weight: bold;
   display: inline-block;
   color: #93e5b4;
@@ -149,7 +151,8 @@
   font-style: italic;
   position: relative;
   right: 5px;
-  font-weight: lighter;
+  bottom: 10px;
+  font-size: 1.2rem;
 }
 .activity-card .activity-card-image {
   margin-bottom: 25px;

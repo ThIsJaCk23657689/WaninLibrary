@@ -93,3 +93,31 @@
 .content-paginate-container .content-paginate li.disabled:hover {
   color: #93e5b4;
 }
+
+#get_donated_book_form {
+  color: #55473f;
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+}
+#get_donated_book_form .search-input-row {
+  margin-bottom: 30px;
+}
+#get_donated_book_form .search-label {
+  padding-right: 30px;
+}
+#get_donated_book_form .search-input {
+  border: none;
+  border-radius: 15px;
+  height: 3rem;
+  padding: 20px;
+}
+#get_donated_book_form .search-btn {
+  background-color: #93e5b4;
+  font-weight: bold;
+  color: #55473f;
+  width: 220px;
+  border-radius: 15px;
+  height: 3rem;
+  margin-bottom: 0px;
+}

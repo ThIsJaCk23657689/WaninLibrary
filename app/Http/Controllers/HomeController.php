@@ -211,7 +211,7 @@ class HomeController extends Controller
             return response()->json([
                 'status' => $result['status'],
                 'message' => $result['message']
-            ]);
+            ], $result['status']);
         }
 
     }

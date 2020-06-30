@@ -20,9 +20,9 @@
             </a>
         </div>
 
-        <div class="recommandation-card-arrow-container">
+        <!-- <div class="recommandation-card-arrow-container">
             <a :href="recommandation.detailURL" class="recommandation-card-arrow"></a>
-        </div>
+        </div> -->
     </div>
 </div>
 </template>

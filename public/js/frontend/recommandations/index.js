@@ -585,13 +585,6 @@ var render = function() {
             )
           ]
         )
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "recommandation-card-arrow-container" }, [
-        _c("a", {
-          staticClass: "recommandation-card-arrow",
-          attrs: { href: _vm.recommandation.detailURL }
-        })
       ])
     ])
   ])

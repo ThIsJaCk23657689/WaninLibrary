@@ -9,7 +9,7 @@
 @endpush
 
 @section('content')
-<div id="content-activity">
+<div id="content-donated-book">
     <section class="content-page-header">
         <header>
             <div class="flex-center position-ref full-height">
@@ -24,9 +24,9 @@
     <section class="content-page-body">
         <div class="container">
 
-            {{-- <donated-book-form></donated-book-form> --}}
+            <donated-book-form></donated-book-form>
 
-            <span id="GetActivitiesList" class="d-none">{{ route('frontend.activities.getList') }}</span>
+            <span id="GetDonatedBooksURL" class="d-none">{{ route('frontend.donor.searchDonatedBooks') }}</span>
 
         </div>
     </section>
