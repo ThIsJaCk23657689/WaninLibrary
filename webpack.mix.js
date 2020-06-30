@@ -19,6 +19,7 @@ mix.js('resources/js/app.js', 'public/js')
 
 .js('resources/js/frontend/activities/index.js', 'public/js/frontend/activities')
     .js('resources/js/frontend/recommandations/index.js', 'public/js/frontend/recommandations')
+    .js('resources/js/frontend/donatedBooks/index.js', 'public/js/frontend/donatedBooks')
 
 .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/frontend/frontend.scss', 'public/css/frontend')
@@ -26,6 +27,7 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/frontend/activities/index.scss', 'public/css/frontend/activities')
     .sass('resources/sass/frontend/activities/show.scss', 'public/css/frontend/activities')
     .sass('resources/sass/frontend/recommandations/index.scss', 'public/css/frontend/recommandations')
+    .sass('resources/sass/frontend/donatedBooks/index.scss', 'public/css/frontend/donatedBooks')
     .sass('resources/sass/frontend/books/show.scss', 'public/css/frontend/books')
     .sass('resources/sass/frontend/about/index.scss', 'public/css/frontend/about')
     .options({

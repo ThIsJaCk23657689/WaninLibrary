@@ -81,45 +81,30 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 18);
+/******/ 	return __webpack_require__(__webpack_require__.s = 7);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./resources/js/users/index.js":
-/*!*************************************!*\
-  !*** ./resources/js/users/index.js ***!
-  \*************************************/
+/***/ "./resources/js/frontend/donatedBooks/index.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/frontend/donatedBooks/index.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-$('#nav_actived').click(function (e) {
-  $('#a_actived').addClass('active');
-  $('#a_block').removeClass('active');
-  $('#div_block').hide();
-  $('#div_act').fadeIn();
-  $('#i_block').hide();
-  $('#i_actived').fadeIn();
-});
-$('#nav_block').click(function (e) {
-  $('#a_actived').removeClass('active');
-  $('#a_block').addClass('active');
-  $('#div_act').hide();
-  $('#div_block').fadeIn();
-  $('#i_block').fadeIn();
-  $('#i_actived').hide();
-});
+
 
 /***/ }),
 
-/***/ 18:
-/*!*******************************************!*\
-  !*** multi ./resources/js/users/index.js ***!
-  \*******************************************/
+/***/ 7:
+/*!***********************************************************!*\
+  !*** multi ./resources/js/frontend/donatedBooks/index.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\users\index.js */"./resources/js/users/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\donatedBooks\index.js */"./resources/js/frontend/donatedBooks/index.js");
 
 
 /***/ })
