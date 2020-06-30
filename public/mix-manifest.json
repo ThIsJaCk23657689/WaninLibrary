@@ -15,6 +15,7 @@
     "/css/frontend/activities/index.css": "/css/frontend/activities/index.css",
     "/css/frontend/activities/show.css": "/css/frontend/activities/show.css",
     "/css/frontend/recommandations/index.css": "/css/frontend/recommandations/index.css",
+    "/css/frontend/books/show.css": "/css/frontend/books/show.css",
     "/css/frontend/about/index.css": "/css/frontend/about/index.css",
     "/css/backend.css": "/css/backend.css",
     "/css/errors.css": "/css/errors.css",

@@ -144,6 +144,14 @@ class HomeController extends Controller
     public function books_show($id){
         $active_num = 1;
         $book = $this->BookService->getOne($id);
+        if(is_null($book->donor_id)){
+            // 採購書籍
+            $book->source = "採購";
+        }else{
+            // 捐贈書籍
+            $donor_name = $book->donor->showName();
+            $book->source = '捐贈 / '.$donor_name;
+        }
         return view('frontend.books_show', compact('active_num', 'book'));
     }
 

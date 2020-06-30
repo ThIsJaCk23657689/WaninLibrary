@@ -55507,6 +55507,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/frontend/books/show.scss":
+/*!*************************************************!*\
+  !*** ./resources/sass/frontend/books/show.scss ***!
+  \*************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/frontend/donations/index.scss":
 /*!******************************************************!*\
   !*** ./resources/sass/frontend/donations/index.scss ***!
@@ -55541,9 +55552,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/frontend/frontend.scss ./resources/sass/frontend/donations/index.scss ./resources/sass/frontend/activities/index.scss ./resources/sass/frontend/activities/show.scss ./resources/sass/frontend/recommandations/index.scss ./resources/sass/frontend/about/index.scss ./resources/sass/backend/backend.scss ./resources/sass/errors.scss ***!
-  \**********************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/frontend/frontend.scss ./resources/sass/frontend/donations/index.scss ./resources/sass/frontend/activities/index.scss ./resources/sass/frontend/activities/show.scss ./resources/sass/frontend/recommandations/index.scss ./resources/sass/frontend/books/show.scss ./resources/sass/frontend/about/index.scss ./resources/sass/backend/backend.scss ./resources/sass/errors.scss ***!
+  \****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -55554,6 +55565,7 @@ __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\donat
 __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\activities\index.scss */"./resources/sass/frontend/activities/index.scss");
 __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\activities\show.scss */"./resources/sass/frontend/activities/show.scss");
 __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\recommandations\index.scss */"./resources/sass/frontend/recommandations/index.scss");
+__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\books\show.scss */"./resources/sass/frontend/books/show.scss");
 __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\about\index.scss */"./resources/sass/frontend/about/index.scss");
 __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\backend\backend.scss */"./resources/sass/backend/backend.scss");
 module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\errors.scss */"./resources/sass/errors.scss");
