@@ -27,7 +27,7 @@ class DonorService extends BaseService
 
         $act_user = auth('api')->user();
         Log::channel('trace')->info('編號：' . $act_user->id . '，姓名：' . $act_user->name . ' 新增了一筆捐贈人，編號為：' . $donor->id . '。');
-        
+
         return $donor->id;
     }
 
@@ -169,5 +169,92 @@ class DonorService extends BaseService
         }
 
         return $donors;
+    }
+
+    public function searchDonatedBooks($request){
+        $donor_name = $request->donor_name;
+        $donor_tel = $request->donor_tel ?? null;
+        if($donor_tel == null){
+            // 第一步 輸入姓名
+            $donor_tmp = DonorEloquent::where('name', $donor_name);
+            $count = $donor_tmp->count();
+            if($count == 1){
+                $donor = $donor_tmp->first();
+                $result = ['status' => 200, 'donor_id' => $donor->id, 'isSearched' => 1];
+            }elseif($count > 1){
+                $result = ['status' => 422, 'message' => '有多位擁有相同條件之捐贈人，請協助輸入您的聯絡電話繼續查詢。'];
+            }else{
+                $result = ['status' => 404, 'message' => '您好，查無此資料，可能是我們疏忽了，請來電或mail與我們聯繫，我們將提供您協助。'];
+            }
+        }else{
+            // 第二步 輸入姓名、電話號碼
+            $donor_tmp = DonorEloquent::where('name', $donor_name)->where('tel', $donor_tel)->orWhere('name', $donor_name)->where('cellphone', $donor_tel);
+            $count = $donor_tmp->count();
+            if($count == 1){
+                $donor = $donor_tmp->first();
+                $result = ['status' => 200, 'donor_id' => $donor->id, 'isSearched' => 1];
+            }else{
+                $result = ['status' => 404, 'message' => '您好，查無此資料，可能是我們疏忽了，請來電或mail與我們聯繫，我們將提供您協助。'];
+            }
+        }
+
+        return $result;
+
+    }
+
+    // getListFrontend
+    public function getListFrontend($request)
+    {
+        if($request->first_page){
+            $skip = 0;
+        }else{
+            $skip = $request->skip ?? 0 ;
+        }
+        $take = 8;
+
+        $month = $request->month ?? "";
+
+        $orderby = $request->orderby ?? 1;
+        $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
+
+        // 搜尋
+        if($keywords == [] && $orderby == 2 && $month == ""){
+            // all default
+            $donorsModel = new DonorEloquent();
+            $count = $donorsModel->count();
+            $donors = $donorsModel->orderBy('created_at','desc')->skip($skip)->take($take)->get();
+
+        }else{
+            $donorsModel = DonorEloquent::query()->where(function ($query) use ($keywords) {
+                if($keywords != []){
+                    foreach ($keywords as $keyword) {
+                        $keyword = '%'.$keyword.'%';
+                        $query->orWhere('name', 'like',$keyword);
+                    }
+                }
+            });
+            if($month != ""){
+                // 以年份查詢(?)
+                $donorsModel->where('updated_at','like',$month.'%');
+            }
+            $count = $donorsModel->count();
+            if($orderby == 2){ //DESC
+                $donors = $donorsModel->orderBy('created_at','desc')->skip($skip)->take($take)->get();
+            }else { //ASC
+                $donors = $donorsModel->orderBy('created_at','asc')->skip($skip)->take($take)->get();
+            }
+        }
+        $c = 1;
+        foreach($donors as $donor){
+            $donor->index = $skip + $c;
+            $donor->name = $donor->showName();
+            $donor->donateAmount = $donor->books()->count();
+            $donor->donatedBookURL = route('front.donatedBooks.show', [$donor->id]);
+            $c ++;
+        }
+        return [
+            'donors' => $donors,
+            'count' => $count
+        ];
     }
 }

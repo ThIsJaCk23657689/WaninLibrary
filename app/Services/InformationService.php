@@ -51,7 +51,7 @@ class InformationService extends BaseService
 
         if(!is_null($request->image_data) && !is_null($_FILES['image_file'])){
             // 圖片路徑生成與裁切
-            $crop = new CropImageService($request->image_data, $_FILES['image_file'], 'informations');
+            $crop = new CropImageService($request->image_data, $_FILES['image_file'], 'donations');
             $result = $crop->getResult();
             if($result['status'] == 'ERROR'){
                 return [

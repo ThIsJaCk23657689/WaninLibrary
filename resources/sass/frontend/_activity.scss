@@ -120,7 +120,7 @@
                         text-align: center;
                         font-size: 1.5rem;
                         letter-spacing: 3px;
-                        margin-top: 48px;
+                        margin-top: 46px;
                         padding: 17px;
                         cursor: pointer;
                         img {
@@ -136,6 +136,10 @@
                     background-size: 80% 75%;
                     background-repeat: no-repeat;
                     background-position: center;
+                    h1 {
+                        letter-spacing: 20px;
+                        font-weight: bold;
+                    }
                     .container {
                         padding-top: 0px !important;
                         .bookTable {
@@ -182,7 +186,7 @@
     width: 60px;
     height: 60px;
     display: inline-block;
-    padding: 5px 10px 10px 10px;
+    padding: 0px 10px 10px 10px;
     img {
         width: 100%;
     }

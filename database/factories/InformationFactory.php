@@ -15,6 +15,6 @@ $factory->define(Information::class, function (Faker $faker) {
         'close_at' => '18:00',
         'recommendation_title' => '五月推薦好書',
         'cover_image' => 'images\informations\cover_images\1591692000.jpeg',
-        'donate_image' => 'images\informations\0_nkMHIYllnotYcos_.jpg',
+        'donate_image' => 'images\informations\1592409002.jpeg',
     ];
 });

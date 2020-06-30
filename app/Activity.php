@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User as UserEloquent;
+use URL;
+use Carbon\Carbon;
 
 class Activity extends Model
 {
@@ -49,5 +51,24 @@ class Activity extends Model
         }else{
             return $this->title;
         }
+    }
+
+    public function showCoverImage(){
+        if(empty($this->cover_image)){
+            return URL::asset('images/activities/cover_images/default.jpg');
+        }else{
+            return URL::asset($this->cover_image);
+        }
+    }
+
+    public function showDay(){
+        return $this->updated_at->isoFormat('DD');
+    }
+    public function showYear(){
+        return $this->updated_at->isoFormat('YYYY');
+    }
+    public function showMonth(){
+        $date = Carbon::parse($this->updated_at)->format('F');
+        return strtoupper($date);
     }
 }

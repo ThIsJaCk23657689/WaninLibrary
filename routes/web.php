@@ -13,7 +13,50 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+// 前台路由
+
+// 首頁
 Route::get('/', 'HomeController@index')->name('index');
+
+// 關於拾本書堂
+Route::get('/about', 'HomeController@about')->name('front.about');
+
+// 即時公告 / 重要消息
+Route::get('/announcements', 'HomeController@announcements')->name('front.announcements');
+Route::get('/announcements/{id}', 'HomeController@announcements_show')->name('front.announcements.show');
+
+// 近期活動
+Route::get('/activities', 'HomeController@activities')->name('front.activities');
+Route::get('/activities/{id}', 'HomeController@activities_show')->name('front.activities.show');
+
+// 主題書單
+Route::get('/recommandations', 'HomeController@recommandations')->name('front.recommandations');
+
+
+// 館藏查詢
+Route::get('/books', 'HomeController@books')->name('front.books');
+Route::get('/books/{id}', 'HomeController@books_show')->name('front.books.show');
+
+// 捐書芳名錄
+Route::get('/donors', 'HomeController@donors')->name('front.donors');
+Route::get('/donatedBooks/{id}', 'HomeController@donatedBooks_show')->name('front.donatedBooks.show');
+
+
+// 捐贈書籍查詢
+Route::get('/donatedBooks', 'HomeController@donatedBooks')->name('front.donatedBooks');
+
+// 好書捐贈
+Route::get('/donations', 'HomeController@donations')->name('front.donations');
+
+// 免費索取書單
+Route::get('/freeBooks', 'HomeController@freeBooks')->name('front.freeBooks');
+
+
+
+
+
+
+
 
 // Auth::routes();
 Route::get('login', 'JWTAuthController@showLoginForm')->name('login');

@@ -16,7 +16,7 @@
 			<input type="hidden" :id="prefix + '_image_data'" name="image_data" :value="cropData">
             <input type="file" :id="prefix + '_image_file'" name="image_file" class="custom-file-input"
                 accept="image/jpeg,image/png,image/bmp" aria-describedby="PictureHelp" @change="spwanPreviewImg">
-            <small :id="prefix + '_PictureHelp'" class="form-text text-muted">僅支援JPG、JPEG、PNG與BMP格式圖片，且檔案大小上限為20MB。</small>
+            <small :id="prefix + '_PictureHelp'" class="form-text text-muted">僅支援JPG、JPEG、PNG與BMP格式圖片，且檔案大小上限為20MB。{{ helptext || '' }}</small>
             <label :id="prefix + '_file_label'" class="custom-file-label" :for="prefix + '_image_file'">請選擇檔案</label>
         </div>
     </div>
@@ -25,7 +25,7 @@
 
 <script>
 export default {
-    props: ['uploadimg', 'title', 'aspectRatio', 'prefix'],
+    props: ['uploadimg', 'title', 'aspectRatio', 'prefix', 'helptext'],
     data(){
         return {
             url: null,

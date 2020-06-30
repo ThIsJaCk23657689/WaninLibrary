@@ -56,7 +56,7 @@
 
                 <div class="row">
                     <div class="col-md-12 text-center">
-                        <upload-images ref="uploadCoverImages" :uploadimg="InformationCoverImageURL" :title="'上傳封面圖片'" :aspect-ratio="4/2" :prefix="'info'"></upload-images>
+                        <upload-images ref="uploadCoverImages" :uploadimg="InformationCoverImageURL" :title="'上傳封面圖片'" :prefix="'info'" :helptext="'寬不得低於1536px，高不得低於630px。'"></upload-images>
                     </div>
                 </div>
 

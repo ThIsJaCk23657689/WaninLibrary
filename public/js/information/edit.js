@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 36);
+/******/ 	return __webpack_require__(__webpack_require__.s = 38);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -244,7 +244,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['uploadimg', 'title', 'aspectRatio', 'prefix'],
+  props: ['uploadimg', 'title', 'aspectRatio', 'prefix', 'helptext'],
   data: function data() {
     return {
       url: null,
@@ -589,8 +589,8 @@ var render = function() {
                     attrs: {
                       uploadimg: _vm.InformationCoverImageURL,
                       title: "上傳封面圖片",
-                      "aspect-ratio": 4 / 2,
-                      prefix: "info"
+                      prefix: "info",
+                      helptext: "寬不得低於1536px，高不得低於630px。"
                     }
                   })
                 ],
@@ -611,7 +611,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                            確認修改\r\n                        "
+                        "\n                            確認修改\n                        "
                       )
                     ]
                   ),
@@ -624,7 +624,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\r\n                            取消編輯\r\n                        "
+                        "\n                            取消編輯\n                        "
                       )
                     ]
                   )
@@ -735,7 +735,7 @@ var render = function() {
       _c(
         "label",
         { staticClass: "mb-2", attrs: { for: _vm.prefix + "_image_file" } },
-        [_vm._v("\r\n            " + _vm._s(_vm.title) + "\r\n        ")]
+        [_vm._v("\n            " + _vm._s(_vm.title) + "\n        ")]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "custom-file" }, [
@@ -775,7 +775,12 @@ var render = function() {
             staticClass: "form-text text-muted",
             attrs: { id: _vm.prefix + "_PictureHelp" }
           },
-          [_vm._v("僅支援JPG、JPEG、PNG與BMP格式圖片，且檔案大小上限為20MB。")]
+          [
+            _vm._v(
+              "僅支援JPG、JPEG、PNG與BMP格式圖片，且檔案大小上限為20MB。" +
+                _vm._s(_vm.helptext || "")
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
@@ -1075,7 +1080,7 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ 36:
+/***/ 38:
 /*!************************************************!*\
   !*** multi ./resources/js/information/edit.js ***!
   \************************************************/

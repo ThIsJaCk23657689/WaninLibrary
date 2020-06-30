@@ -8,10 +8,10 @@
 	<section id="header">
         <header>
             <div class="bg_cover">
-                <div class="coverText">
+                {{-- <div class="coverText">
                     <h2>閱讀可以拓展視野，更擁有改變的力量。</h2>
                     <span>-拾本書堂-</span>
-                </div>
+                </div> --}}
                 <img class="background-image" src="{{ $information->showCoverImage() }}" alt="封面圖片">
             </div>
             <div id="headerbox" class="container-fluid">
@@ -20,7 +20,7 @@
                         <h3>好書捐贈！</h3>
                         <span>為知識繼續傳遞與分享</span>
                         <div class="checkBtn">
-                            <a href="#">
+                            <a href="{{ route('front.donations') }}">
                                 <img src="{{ asset('images/frontend/icons/donate_btn.png') }}" alt="好書捐贈">
                             </a>
                         </div>
@@ -29,7 +29,7 @@
                         <h3>免費索取書單</h3>
                         <span>或許它已陳舊泛黃，卻依舊是珍寶</span>
                         <div class="checkBtn">
-                            <a href="#">
+                            <a href="{{ route('front.freeBooks') }}">
                                 <img src="{{ asset('images/frontend/icons/free_btn.png') }}" alt="免費索取書單">
                             </a>
                         </div>
@@ -67,7 +67,7 @@
                                 </div>
                             @endforeach
                             <div class="col-md-12 newsFooter">
-                                <a href="#">
+                                <a href="{{ route('front.announcements') }}">
                                     查看更多公告及訊息
                                     <i class="fas fa-arrow-right"></i>
                                 </a>

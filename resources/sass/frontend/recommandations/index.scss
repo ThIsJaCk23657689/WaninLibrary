@@ -1,0 +1,133 @@
+@import "../variables";
+@import "../contents";
+.switch-btn-row {
+    border-bottom: 1px solid $blue;
+    margin-bottom: 25px;
+    .switch-btn-container {
+        padding: 6px 0px;
+        &.actived {
+            border-left: 1px solid $blue;
+            border-top: 1px solid $blue;
+            border-right: 1px solid $blue;
+            .switch-btn {
+                color: $green;
+            }
+        }
+        .switch-btn {
+            display: block;
+            width: 100%;
+            height: 100%;
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: $brown;
+            transition: color 0.1s ease-in-out;
+            &:hover {
+                text-decoration: none;
+                color: $green;
+            }
+        }
+    }
+}
+
+.recommandation-card {
+    margin: 25px 28px;
+    border: 1px solid $blue;
+    color: $brown;
+    width: calc(100% - 56px);
+    &:nth-child(even) {
+        .recommandation-card-image {
+            float: right !important;
+        }
+        .recommandation-card-arrow-container {
+            left: 40px !important;
+            bottom: 30px !important;
+            .recommandation-card-arrow {
+                background-image: url(../../../images/frontend/icons/arrow-left.png) !important;
+            }
+        }
+    }
+    .recommandation-card-image {
+        width: 50%;
+        float: left;
+        .image-link {
+            display: block;
+            width: 100%;
+            height: 100%;
+            .cover-image {
+                height: 360px;
+                overflow: hidden;
+                position: relative;
+                img {
+                    width: 100%;
+                    position: absolute;
+                    top: calc(50% + 0px);
+                    left: 0;
+                    transform: translateY(-50%);
+                }
+                .image-gray {
+                    position: absolute;
+                    top: 0;
+                    left: 0;
+                    width: 100%;
+                    height: 100%;
+                    background-color: rgba($blue, 0.3);
+                    transition: background-color 0.1s ease-in-out;
+                }
+            }
+            &:hover {
+                .image-gray {
+                    background-color: rgba($blue, 0);
+                }
+            }
+        }
+    }
+    .recommandation-card-info {
+        width: 50%;
+        height: 100%;
+        float: right;
+        padding: 30px 40px;
+        position: relative;
+        .recommandation-card-date {
+            position: relative;
+            border-bottom: 3px solid $green;
+            margin-bottom: 28px;
+            h3 {
+                margin: 0;
+                font-size: 2.7rem;
+                font-weight: bold;
+                display: inline-block;
+                color: $green;
+            }
+            span {
+                display: inline-block;
+                float: right;
+                font-style: italic;
+                position: relative;
+                right: 5px;
+                font-weight: lighter;
+            }
+        }
+        .recommandation-card-title {
+            .title-link {
+                color: $brown;
+                font-size: 1.3rem;
+                font-weight: bold;
+            }
+        }
+        .recommandation-card-arrow-container {
+            width: 120px;
+            height: 40px;
+            right: 40px;
+            bottom: 30px;
+            position: absolute;
+            .recommandation-card-arrow {
+                display: block;
+                width: 100%;
+                height: 100%;
+                background-image: url(../../../images/frontend/icons/arrow-right.png);
+                background-repeat: no-repeat;
+                background-size: 100% 100%;
+            }
+        }
+    }
+}

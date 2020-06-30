@@ -1,0 +1,178 @@
+.content-page-header {
+  width: 100%;
+  height: 200px;
+  background-color: #ffffff;
+}
+.content-page-header h1 {
+  color: #55473f;
+  font-size: 2.5rem;
+  letter-spacing: 15px;
+  display: inline-block;
+}
+.content-page-header .title-icon {
+  width: 60px;
+  margin-bottom: 18px;
+  margin-right: 15px;
+}
+.content-page-header .content {
+  text-align: center;
+}
+
+.content-page-body {
+  background-color: #eaeaea;
+  padding: 70px 0px 60px 0px;
+}
+.content-page-body .goback-container {
+  margin-top: 40px;
+  border-bottom: 0.5px solid #5f6b82;
+}
+.content-page-body .goback-container .goback-text {
+  font-size: 1.2rem;
+  color: #55473f;
+}
+.content-page-body .goback-container .goback-text:hover {
+  text-decoration: none;
+}
+
+.detail-page-body {
+  background-color: #eaeaea;
+  padding: 0px 0px 60px 0px;
+}
+.detail-page-body .goback-container {
+  margin-top: 40px;
+  border-bottom: 0.5px solid #5f6b82;
+}
+.detail-page-body .goback-container .goback-text {
+  font-size: 1.2rem;
+  color: #55473f;
+}
+.detail-page-body .goback-container .goback-text:hover {
+  text-decoration: none;
+}
+
+.content-paginate-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 2.3rem;
+  margin-top: 18px;
+}
+.content-paginate-container .content-paginate {
+  list-style: none;
+  margin: 0;
+}
+.content-paginate-container .content-paginate li {
+  display: block;
+  width: 60px;
+  height: 2rem;
+  color: #93e5b4;
+  float: left;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+.content-paginate-container .content-paginate li:hover {
+  color: #55473f;
+}
+.content-paginate-container .content-paginate li span {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.content-paginate-container .content-paginate li span.activated {
+  color: #55473f;
+  cursor: default;
+}
+.content-paginate-container .content-paginate li.disabled {
+  cursor: default;
+}
+.content-paginate-container .content-paginate li.disabled:hover {
+  color: #93e5b4;
+}
+
+.detail-page-header {
+  width: 100%;
+  height: 200px;
+  background-color: #eaeaea;
+}
+.detail-page-header .activity-detail-title {
+  height: 100%;
+  display: flex;
+  position: relative;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 80px;
+}
+.detail-page-header .activity-detail-title .activity-detail-title-container {
+  width: 1100px;
+  border-bottom: 3px solid #93e5b4;
+}
+.detail-page-header .activity-detail-title .activity-detail-title-container h1 {
+  color: #55473f;
+  font-size: 2.2rem;
+  letter-spacing: 10px;
+  display: inline-block;
+}
+.detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
+  position: relative;
+  float: right;
+  width: 15%;
+  margin: 0;
+}
+.detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date h2 {
+  margin: 0;
+  margin-left: 25px;
+  letter-spacing: 3px;
+  float: left;
+  font-size: 2.7rem;
+  font-weight: bold;
+  display: inline-block;
+  color: #93e5b4;
+}
+@media (max-width: 800px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date h2 {
+    margin-left: 0px;
+  }
+}
+.detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date span {
+  display: inline-block;
+  float: right;
+  position: relative;
+  right: 5px;
+  margin-right: 10px;
+}
+.detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-title-content {
+  text-align: left;
+  position: relative;
+  width: 80%;
+  float: left;
+  margin: 0;
+}
+.detail-page-header .recommandation-detail-title .recommandation-detail-title-container {
+  width: 1100px;
+  border-bottom: 3px solid #93e5b4;
+}
+.detail-page-header .recommandation-detail-title .recommandation-detail-title-container .recommandation-detail-title-content h1 {
+  color: #55473f;
+  font-size: 2.2rem;
+  letter-spacing: 10px;
+  display: inline-block;
+}
+
+.activity-detail-row {
+  width: 100%;
+  padding: 20px;
+  margin: 0;
+  background-color: rgba(147, 229, 180, 0.25);
+}
+
+.recommandation-detail-row {
+  width: 100%;
+  padding: 20px;
+  margin: 0;
+  background-color: #eaeaea;
+}

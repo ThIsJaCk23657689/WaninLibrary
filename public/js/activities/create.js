@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 33);
+/******/ 	return __webpack_require__(__webpack_require__.s = 35);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -234,7 +234,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 /* harmony default export */ __webpack_exports__["default"] = ({
-  props: ['uploadimg', 'title', 'aspectRatio', 'prefix'],
+  props: ['uploadimg', 'title', 'aspectRatio', 'prefix', 'helptext'],
   data: function data() {
     return {
       url: null,
@@ -374,8 +374,9 @@ var render = function() {
                     ref: "uploadCoverImages",
                     attrs: {
                       title: "上傳封面圖片",
-                      "aspect-ratio": 1.5 / 1,
-                      prefix: "activity"
+                      "aspect-ratio": 6 / 5.8,
+                      prefix: "activity",
+                      helptext: "（建議尺寸：600px * 580px）"
                     }
                   })
                 ],
@@ -556,7 +557,7 @@ var render = function() {
       _c(
         "label",
         { staticClass: "mb-2", attrs: { for: _vm.prefix + "_image_file" } },
-        [_vm._v("\r\n            " + _vm._s(_vm.title) + "\r\n        ")]
+        [_vm._v("\n            " + _vm._s(_vm.title) + "\n        ")]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "custom-file" }, [
@@ -596,7 +597,12 @@ var render = function() {
             staticClass: "form-text text-muted",
             attrs: { id: _vm.prefix + "_PictureHelp" }
           },
-          [_vm._v("僅支援JPG、JPEG、PNG與BMP格式圖片，且檔案大小上限為20MB。")]
+          [
+            _vm._v(
+              "僅支援JPG、JPEG、PNG與BMP格式圖片，且檔案大小上限為20MB。" +
+                _vm._s(_vm.helptext || "")
+            )
+          ]
         ),
         _vm._v(" "),
         _c(
@@ -887,7 +893,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 33:
+/***/ 35:
 /*!*************************************************!*\
   !*** multi ./resources/js/activities/create.js ***!
   \*************************************************/
