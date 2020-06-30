@@ -84,11 +84,13 @@ const navbar = new Vue({
         $.showWarningModal = function(message = '發生不明原因，此操作具有警告性，請聯絡系統工程師。') {
             Swal.fire({
                 title: '注意',
-                text: message,
+                // text: message,
+                html: message,
                 icon: 'warning',
                 allowOutsideClick: false,
                 confirmButtonText: '確認',
             });
+            // console.log(message)
         }
 
         $.showSuccessModal = function(message = '', url = '', buttonText = '返回列表') {

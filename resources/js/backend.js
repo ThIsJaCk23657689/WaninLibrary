@@ -45,8 +45,8 @@ Vue.use(DataTable);
 
 const navbar = new Vue({
     el: '#navbar',
-    created(){
-        
+    created() {
+
         // ==================== Swal 函式操作 ====================
         $.showLoadingModal = function(message = '資料讀取中') {
             $('input').removeClass('is-invalid')
@@ -126,9 +126,9 @@ const navbar = new Vue({
         }
 
         $.closeModal = function() {
-            Swal.close();
-        }
-        // ==================== Swal 函式操作 ====================
+                Swal.close();
+            }
+            // ==================== Swal 函式操作 ====================
     }
 });
 

@@ -46,7 +46,6 @@ export default {
             }).catch((error) => {
                 // console.error(error);
                 if (error.response.status == 422) {
-                    console.log(error.response.data.message);
                     $('#donor_tel').attr('disabled',false);
                     $.showWarningModal(error.response.data.message);
                 }else{

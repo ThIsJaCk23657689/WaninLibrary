@@ -55121,11 +55121,12 @@ var navbar = new Vue({
       var message = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '發生不明原因，此操作具有警告性，請聯絡系統工程師。';
       sweetalert2__WEBPACK_IMPORTED_MODULE_1___default.a.fire({
         title: '注意',
-        text: message,
+        // text: message,
+        html: message,
         icon: 'warning',
         allowOutsideClick: false,
         confirmButtonText: '確認'
-      });
+      }); // console.log(message)
     };
 
     $.showSuccessModal = function () {
