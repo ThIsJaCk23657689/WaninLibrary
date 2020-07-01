@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User as UserEloquent;
+use Carbon\Carbon;
 
 class Announcement extends Model
 {
@@ -33,5 +34,16 @@ class Announcement extends Model
         }else{
             return $this->title;
         }
+    }
+
+    public function showDay(){
+        return $this->updated_at->isoFormat('DD');
+    }
+    public function showYear(){
+        return $this->updated_at->isoFormat('YYYY');
+    }
+    public function showMonth(){
+        $date = Carbon::parse($this->updated_at)->format('F');
+        return strtoupper($date);
     }
 }

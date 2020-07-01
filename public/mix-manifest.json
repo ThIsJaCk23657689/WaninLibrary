@@ -16,6 +16,7 @@
     "/css/frontend/activities/show.css": "/css/frontend/activities/show.css",
     "/css/frontend/recommandations/index.css": "/css/frontend/recommandations/index.css",
     "/css/frontend/donatedBooks/index.css": "/css/frontend/donatedBooks/index.css",
+    "/css/frontend/announcements/show.css": "/css/frontend/announcements/show.css",
     "/css/frontend/books/show.css": "/css/frontend/books/show.css",
     "/css/frontend/about/index.css": "/css/frontend/about/index.css",
     "/css/frontend/books/index.css": "/css/frontend/books/index.css",

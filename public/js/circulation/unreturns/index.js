@@ -535,7 +535,7 @@ var render = function() {
                   },
                   [
                     _vm._v(
-                      "\r\n                                搜尋\r\n                            "
+                      "\n                                搜尋\n                            "
                     )
                   ]
                 )
@@ -666,7 +666,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table mr-2" }),
-      _vm._v("目前已借出和逾期列表\r\n        ")
+      _vm._v("目前已借出和逾期列表\n        ")
     ])
   },
   function() {
@@ -1116,7 +1116,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\circulation\unreturns\index.js */"./resources/js/circulation/unreturns/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\circulation\unreturns\index.js */"./resources/js/circulation/unreturns/index.js");
 
 
 /***/ })
