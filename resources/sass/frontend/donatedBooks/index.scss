@@ -1,0 +1,29 @@
+@import "../variables";
+@import "../contents";
+#get_donated_book_form {
+    color: $brown;
+    font-size: 1.2rem;
+    font-weight: bold;
+    text-align: center;
+    .search-input-row {
+        margin-bottom: 30px;
+    }
+    .search-label {
+        padding-right: 30px;
+    }
+    .search-input {
+        border: none;
+        border-radius: 15px;
+        height: 3rem;
+        padding: 20px;
+    }
+    .search-btn {
+        background-color: $green;
+        font-weight: bold;
+        color: $brown;
+        width: 220px;
+        border-radius: 15px;
+        height: 3rem;
+        margin-bottom: 0px;
+    }
+}

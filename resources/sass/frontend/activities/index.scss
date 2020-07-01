@@ -42,7 +42,9 @@
         margin-bottom: 28px;
         h3 {
             margin: 0;
-            font-size: 2.7rem;
+            font-size: 3rem;
+            font-weight: bold;
+            position: relative;
             font-weight: bold;
             display: inline-block;
             color: $green;
@@ -53,7 +55,9 @@
             font-style: italic;
             position: relative;
             right: 5px;
-            font-weight: lighter;
+            bottom: 10px;
+            font-size: 1.2rem;
+            // font-weight: lighter;
         }
     }
     .activity-card-image {

@@ -81,14 +81,14 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 33);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
 
-/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=script&lang=js&":
+/***/ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue?vue&type=script&lang=js&":
 /*!***********************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=script&lang=js& ***!
+  !*** ./node_modules/babel-loader/lib??ref--4-0!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue?vue&type=script&lang=js& ***!
   \***********************************************************************************************************************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -124,60 +124,39 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
+  props: [],
   data: function data() {
     return {
-      AnnouncementsIndexURL: $('#AnnouncementsIndexURL').text(),
-      AnnouncementsStoreURL: $('#AnnouncementsStoreURL').text()
+      GetDonatedBooksURL: $('#GetDonatedBooksURL').text()
     };
   },
   methods: {
-    announcementCreateForm: function announcementCreateForm(e) {
-      var url = this.AnnouncementsStoreURL;
-      var formData = new FormData($(e.target)[0]);
-      var content = CKEDITOR.instances.content.getData();
-      formData.append('content', content);
-      $.showLoadingModal();
-      axios.post(url, formData).then(function (response) {
-        $.showSuccessModal('新增成功', response.data.url);
+    getDonatedBookForm: function getDonatedBookForm(e) {
+      var url = this.GetDonatedBooksURL;
+      var data = $(e.target).serializeObject();
+      axios.post(url, data).then(function (response) {// console.log(response.data);
+        // $.showSuccessModal('查詢成功', response.data.url);
       })["catch"](function (error) {
-        console.error('新增最新消息時發生錯誤，錯誤訊息：' + error);
-        $.showErrorModal(error);
+        // console.error(error);
+        if (error.response.status == 422) {
+          $('#donor_tel').attr('disabled', false);
+          $.showWarningModal(error.response.data.message);
+        } else {
+          $.showWarningModal(error.response.data.message);
+        }
       });
     }
   },
-  mounted: function mounted() {
-    CKEDITOR.replace('content');
-  }
+  created: function created() {},
+  mounted: function mounted() {}
 });
 
 /***/ }),
 
-/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816&":
+/***/ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue?vue&type=template&id=6438dcbf&":
 /*!***************************************************************************************************************************************************************************************************************************************!*\
-  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816& ***!
+  !*** ./node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!./node_modules/vue-loader/lib??vue-loader-options!./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue?vue&type=template&id=6438dcbf& ***!
   \***************************************************************************************************************************************************************************************************************************************/
 /*! exports provided: render, staticRenderFns */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
@@ -190,65 +169,21 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", [
-    _c("div", { staticClass: "row justify-content-center" }, [
-      _c("div", { staticClass: "col-md-8" }, [
-        _c(
-          "form",
-          {
-            attrs: {
-              method: "POST",
-              id: "announcement_create_form",
-              action: ""
-            },
-            on: {
-              submit: function($event) {
-                $event.preventDefault()
-                return _vm.announcementCreateForm($event)
-              }
+  return _c("div", { staticClass: "row justify-content-center" }, [
+    _c("div", { staticClass: "col-md-8" }, [
+      _c(
+        "form",
+        {
+          attrs: { method: "POST", id: "get_donated_book_form", action: "#" },
+          on: {
+            submit: function($event) {
+              $event.preventDefault()
+              return _vm.getDonatedBookForm($event)
             }
-          },
-          [
-            _vm._m(0),
-            _vm._v(" "),
-            _vm._m(1),
-            _vm._v(" "),
-            _c(
-              "div",
-              { staticClass: "form-group row justify-content-center" },
-              [
-                _c("div", { staticClass: "col-md-8" }, [
-                  _c(
-                    "button",
-                    {
-                      staticClass: "btn btn-block btn-primary",
-                      attrs: { type: "submit" }
-                    },
-                    [
-                      _vm._v(
-                        "\r\n                            確認新增\r\n                        "
-                      )
-                    ]
-                  ),
-                  _vm._v(" "),
-                  _c(
-                    "a",
-                    {
-                      staticClass: "btn btn-block btn-danger",
-                      attrs: { href: _vm.AnnouncementsIndexURL }
-                    },
-                    [
-                      _vm._v(
-                        "\r\n                            返回列表\r\n                        "
-                      )
-                    ]
-                  )
-                ])
-              ]
-            )
-          ]
-        )
-      ])
+          }
+        },
+        [_vm._m(0), _vm._v(" "), _vm._m(1), _vm._v(" "), _vm._m(2)]
+      )
     ])
   ])
 }
@@ -257,46 +192,30 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-10" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "title" } }, [
-            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("標題\r\n                            ")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-2",
-            attrs: {
-              id: "title",
-              name: "title",
-              type: "text",
-              value: "",
-              required: "",
-              autocomplete: "off",
-              autofocus: ""
-            }
-          })
-        ])
-      ]),
+    return _c("div", { staticClass: "form-group row search-input-row" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-md-4 col-form-label text-md-right search-label",
+          attrs: { for: "donor_name" }
+        },
+        [_vm._v("姓名")]
+      ),
       _vm._v(" "),
-      _c("div", { staticClass: "col-md-2" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "is_top" } }, [_vm._v("是否置頂")]),
-          _vm._v(" "),
-          _c(
-            "select",
-            {
-              staticClass: "form-control",
-              attrs: { name: "is_top", id: "is_top" }
-            },
-            [
-              _c("option", { attrs: { value: "1" } }, [_vm._v("置頂")]),
-              _vm._v(" "),
-              _c("option", { attrs: { value: "0" } }, [_vm._v("不置頂")])
-            ]
-          )
-        ])
+      _c("div", { staticClass: "col-md-5" }, [
+        _c("input", {
+          staticClass: "form-control search-input",
+          attrs: {
+            id: "donor_name",
+            type: "text",
+            name: "donor_name",
+            value: "",
+            required: "",
+            autocomplete: "off",
+            placeholder: "請輸入姓名",
+            autofocus: ""
+          }
+        })
       ])
     ])
   },
@@ -304,23 +223,51 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-12" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-          _c("label", { attrs: { for: "content" } }, [_vm._v("內容")]),
-          _vm._v(" "),
-          _c("textarea", {
-            staticClass: "form-control",
-            attrs: {
-              name: "content",
-              id: "content",
-              cols: "30",
-              rows: "5",
-              required: ""
-            }
-          })
-        ])
+    return _c("div", { staticClass: "form-group row search-input-row" }, [
+      _c(
+        "label",
+        {
+          staticClass: "col-md-4 col-form-label text-md-right search-label",
+          attrs: { for: "donor_tel" }
+        },
+        [_vm._v("電話")]
+      ),
+      _vm._v(" "),
+      _c("div", { staticClass: "col-md-5" }, [
+        _c("input", {
+          staticClass: "form-control search-input",
+          attrs: {
+            id: "donor_tel",
+            type: "text",
+            name: "donor_tel",
+            value: "",
+            required: "",
+            autocomplete: "off",
+            placeholder: "請輸入電話",
+            disabled: ""
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "form-group row justify-content-center" }, [
+      _c("div", { staticClass: "col-md-8" }, [
+        _c(
+          "button",
+          {
+            staticClass: "btn search-btn",
+            attrs: { id: "SearchBtn", type: "submit" }
+          },
+          [
+            _vm._v(
+              "\r\n                        查詢捐贈書籍\r\n                    "
+            )
+          ]
+        )
       ])
     ])
   }
@@ -438,16 +385,85 @@ function normalizeComponent (
 
 /***/ }),
 
-/***/ "./resources/js/announcements/create.js":
-/*!**********************************************!*\
-  !*** ./resources/js/announcements/create.js ***!
-  \**********************************************/
+/***/ "./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue":
+/*!**************************************************************************!*\
+  !*** ./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _DonatedBookForm_vue_vue_type_template_id_6438dcbf___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./DonatedBookForm.vue?vue&type=template&id=6438dcbf& */ "./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue?vue&type=template&id=6438dcbf&");
+/* harmony import */ var _DonatedBookForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./DonatedBookForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
+
+
+
+
+
+/* normalize component */
+
+var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
+  _DonatedBookForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
+  _DonatedBookForm_vue_vue_type_template_id_6438dcbf___WEBPACK_IMPORTED_MODULE_0__["render"],
+  _DonatedBookForm_vue_vue_type_template_id_6438dcbf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
+  false,
+  null,
+  null,
+  null
+  
+)
+
+/* hot reload */
+if (false) { var api; }
+component.options.__file = "resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue"
+/* harmony default export */ __webpack_exports__["default"] = (component.exports);
+
+/***/ }),
+
+/***/ "./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue?vue&type=script&lang=js&":
+/*!***************************************************************************************************!*\
+  !*** ./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue?vue&type=script&lang=js& ***!
+  \***************************************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DonatedBookForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/babel-loader/lib??ref--4-0!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DonatedBookForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue?vue&type=script&lang=js&");
+/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_DonatedBookForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
+
+/***/ }),
+
+/***/ "./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue?vue&type=template&id=6438dcbf&":
+/*!*********************************************************************************************************!*\
+  !*** ./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue?vue&type=template&id=6438dcbf& ***!
+  \*********************************************************************************************************/
+/*! exports provided: render, staticRenderFns */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DonatedBookForm_vue_vue_type_template_id_6438dcbf___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../../node_modules/vue-loader/lib??vue-loader-options!./DonatedBookForm.vue?vue&type=template&id=6438dcbf& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue?vue&type=template&id=6438dcbf&");
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DonatedBookForm_vue_vue_type_template_id_6438dcbf___WEBPACK_IMPORTED_MODULE_0__["render"]; });
+
+/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_DonatedBookForm_vue_vue_type_template_id_6438dcbf___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
+
+
+
+/***/ }),
+
+/***/ "./resources/js/frontend/donatedBooks/index.js":
+/*!*****************************************************!*\
+  !*** ./resources/js/frontend/donatedBooks/index.js ***!
+  \*****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-Vue.component('announcement-create-form', __webpack_require__(/*! ./../components/Announcements/AnnouncementCreateForm.vue */ "./resources/js/components/Announcements/AnnouncementCreateForm.vue")["default"]);
+Vue.component('donated-book-form', __webpack_require__(/*! ../../components/Frontend/DonatedBook/DonatedBookForm.vue */ "./resources/js/components/Frontend/DonatedBook/DonatedBookForm.vue")["default"]);
 var app = new Vue({
-  el: '#announcement',
+  el: '#content-donated-book',
   data: function data() {
     return {};
   },
@@ -458,83 +474,14 @@ var app = new Vue({
 
 /***/ }),
 
-/***/ "./resources/js/components/Announcements/AnnouncementCreateForm.vue":
-/*!**************************************************************************!*\
-  !*** ./resources/js/components/Announcements/AnnouncementCreateForm.vue ***!
-  \**************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _AnnouncementCreateForm_vue_vue_type_template_id_8dfa8816___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816& */ "./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816&");
-/* harmony import */ var _AnnouncementCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AnnouncementCreateForm.vue?vue&type=script&lang=js& */ "./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport *//* harmony import */ var _node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../node_modules/vue-loader/lib/runtime/componentNormalizer.js */ "./node_modules/vue-loader/lib/runtime/componentNormalizer.js");
-
-
-
-
-
-/* normalize component */
-
-var component = Object(_node_modules_vue_loader_lib_runtime_componentNormalizer_js__WEBPACK_IMPORTED_MODULE_2__["default"])(
-  _AnnouncementCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_1__["default"],
-  _AnnouncementCreateForm_vue_vue_type_template_id_8dfa8816___WEBPACK_IMPORTED_MODULE_0__["render"],
-  _AnnouncementCreateForm_vue_vue_type_template_id_8dfa8816___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"],
-  false,
-  null,
-  null,
-  null
-  
-)
-
-/* hot reload */
-if (false) { var api; }
-component.options.__file = "resources/js/components/Announcements/AnnouncementCreateForm.vue"
-/* harmony default export */ __webpack_exports__["default"] = (component.exports);
-
-/***/ }),
-
-/***/ "./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=script&lang=js&":
-/*!***************************************************************************************************!*\
-  !*** ./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=script&lang=js& ***!
-  \***************************************************************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnnouncementCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/babel-loader/lib??ref--4-0!../../../../node_modules/vue-loader/lib??vue-loader-options!./AnnouncementCreateForm.vue?vue&type=script&lang=js& */ "./node_modules/babel-loader/lib/index.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=script&lang=js&");
-/* empty/unused harmony star reexport */ /* harmony default export */ __webpack_exports__["default"] = (_node_modules_babel_loader_lib_index_js_ref_4_0_node_modules_vue_loader_lib_index_js_vue_loader_options_AnnouncementCreateForm_vue_vue_type_script_lang_js___WEBPACK_IMPORTED_MODULE_0__["default"]); 
-
-/***/ }),
-
-/***/ "./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816&":
-/*!*********************************************************************************************************!*\
-  !*** ./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816& ***!
-  \*********************************************************************************************************/
-/*! exports provided: render, staticRenderFns */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnnouncementCreateForm_vue_vue_type_template_id_8dfa8816___WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! -!../../../../node_modules/vue-loader/lib/loaders/templateLoader.js??vue-loader-options!../../../../node_modules/vue-loader/lib??vue-loader-options!./AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816& */ "./node_modules/vue-loader/lib/loaders/templateLoader.js?!./node_modules/vue-loader/lib/index.js?!./resources/js/components/Announcements/AnnouncementCreateForm.vue?vue&type=template&id=8dfa8816&");
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "render", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnnouncementCreateForm_vue_vue_type_template_id_8dfa8816___WEBPACK_IMPORTED_MODULE_0__["render"]; });
-
-/* harmony reexport (safe) */ __webpack_require__.d(__webpack_exports__, "staticRenderFns", function() { return _node_modules_vue_loader_lib_loaders_templateLoader_js_vue_loader_options_node_modules_vue_loader_lib_index_js_vue_loader_options_AnnouncementCreateForm_vue_vue_type_template_id_8dfa8816___WEBPACK_IMPORTED_MODULE_0__["staticRenderFns"]; });
-
-
-
-/***/ }),
-
-/***/ 33:
-/*!****************************************************!*\
-  !*** multi ./resources/js/announcements/create.js ***!
-  \****************************************************/
+/***/ 8:
+/*!***********************************************************!*\
+  !*** multi ./resources/js/frontend/donatedBooks/index.js ***!
+  \***********************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\announcements\create.js */"./resources/js/announcements/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\donatedBooks\index.js */"./resources/js/frontend/donatedBooks/index.js");
 
 
 /***/ })

@@ -1,0 +1,79 @@
+@import "../variables";
+@import "../contents";
+.detail-page-header {
+    width: 100%;
+    height: 200px;
+    background-color: $gray;
+    .book-detail-title {
+        .book-detail-title-container {
+            width: 1100px;
+            .book-detail-title-content {
+                h1 {
+                    color: $brown;
+                    font-size: 2rem;
+                    letter-spacing: 10px;
+                    font-weight: bold;
+                    display: inline-block;
+                }
+                h2 {
+                    color: $blue;
+                    font-size: 1.5rem;
+                    font-weight: bold;
+                    letter-spacing: 10px;
+                    display: inline-block;
+                }
+            }
+        }
+    }
+}
+
+.book-detail-container {
+    height: 650px;
+    font-size: 1.2rem;
+    color: $brown;
+    .book-detail-row {
+        width: 100%;
+        padding: 50px;
+        height: 100%;
+        margin: 0;
+        background-image: url(../../../images/frontend/icons/book_bg.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        .book-detail-row-left {
+            padding: 20px 60px 25px 40px;
+            text-align: center;
+            .row {
+                margin-top: 15px;
+            }
+            .book-detail-img {
+                img {
+                    width: 80%;
+                    margin-bottom: 10px;
+                    box-shadow: 2px 5px 15px 2px rgba(0, 0, 0, 0.5);
+                }
+            }
+        }
+        .book-detail-row-right {
+            padding: 20px;
+            .paper-row-col {
+                padding: 20px 0px;
+                p {
+                    display: inline;
+                    word-break: break-word;
+                }
+                .book-rows {
+                    margin: 30px 20px;
+                }
+            }
+            .book-row-col {
+                p {
+                    display: inline;
+                    word-break: break-word;
+                }
+                .book-rows {
+                    margin: 23px 20px;
+                }
+            }
+        }
+    }
+}
