@@ -423,7 +423,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "card-header" }, [
       _c("i", { staticClass: "fas fa-table" }),
-      _vm._v("借閱人列表\r\n        ")
+      _vm._v("借閱人列表\n        ")
     ])
   },
   function() {
@@ -476,7 +476,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                                    確認\r\n                                "
+              "\n                                    確認\n                                "
             )
           ]
         )
@@ -1065,7 +1065,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\borrowers\index.js */"./resources/js/borrowers/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\borrowers\index.js */"./resources/js/borrowers/index.js");
 
 
 /***/ })

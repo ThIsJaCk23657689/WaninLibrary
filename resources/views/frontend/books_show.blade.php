@@ -35,7 +35,7 @@
                     </div>
                     <div class="row">
                         <div class="col-md-12">
-                            書籍來源&nbsp;:&nbsp;{{ $book->source }}
+                            書籍來源&nbsp;:&nbsp;{{ $book->source  ?? "無" }}
                         </div>
                     </div>
                 </div>
@@ -47,17 +47,17 @@
                             <div class="row book-rows">
                                 <div class="col-md-12">
                                     <span>作者&nbsp;:&nbsp;</span>
-                                    <p>{{ $book->author }}</p>
+                                    <p>{{ $book->author ?? "無"  }}</p>
                                 </div>
                             </div>
                             <div class="row book-rows">
                                 <div class="col-md-12">
-                                    譯者&nbsp;:&nbsp;{{ $book->translator }}
+                                    譯者&nbsp;:&nbsp;{{ $book->translator ?? "無"  }}
                                 </div>
                             </div>
                             <div class="row book-rows">
                                 <div class="col-md-12">
-                                    出版商&nbsp;:&nbsp;{{ $book->publisher }}
+                                    出版商&nbsp;:&nbsp;{{ $book->publisher ?? "無"  }}
                                 </div>
                             </div>
                             <div class="row book-rows">
@@ -67,12 +67,12 @@
                             </div>
                             <div class="row book-rows">
                                 <div class="col-md-12">
-                                    圖書類別&nbsp;:&nbsp;{{ $book->showCategory() }}
+                                    圖書類別&nbsp;:&nbsp;{{ $book->showCategory() ?? "無"  }}
                                 </div>
                             </div>
                             <div class="row book-rows">
                                 <div class="col-md-12">
-                                    語言別&nbsp;:&nbsp;{{ $book->language }}
+                                    語言別&nbsp;:&nbsp;{{ $book->language ?? "無"  }}
                                 </div>
                             </div>
                             @if(!is_null($book->position))
@@ -93,42 +93,42 @@
                             <div class="row book-rows">
                                 <div class="col-md-12">
                                     <span>作者&nbsp;:&nbsp;</span>
-                                    <p>{{ $book->author }}</p>
+                                    <p>{{ $book->author ?? "無"  }}</p>
                                 </div>
                             </div>
                             <div class="row book-rows">
                                 <div class="col-md-12">
-                                    譯者&nbsp;:&nbsp;{{ $book->translator }}
+                                    譯者&nbsp;:&nbsp;{{ $book->translator  ?? "無" }}
                                 </div>
                             </div>
                             <div class="row book-rows">
                                 <div class="col-md-12">
-                                    出版商&nbsp;:&nbsp;{{ $book->publisher }}
+                                    出版商&nbsp;:&nbsp;{{ $book->publisher ?? "無"  }}
                                 </div>
                             </div>
                             <div class="row book-rows">
                                 <div class="col-md-12">
-                                    <span>出版日期&nbsp;:&nbsp;{{ $book->published_date }}&nbsp;/&nbsp;版次&nbsp;:&nbsp;{{ $book->edition }}</span>
+                                    <span>出版日期&nbsp;:&nbsp;{{ $book->published_date ?? "無"  }}&nbsp;/&nbsp;版次&nbsp;:&nbsp;{{ $book->edition  ?? "無"  }}</span>
                                 </div>
                             </div>
                             <div class="row book-rows">
                                 <div class="col-md-12">
-                                    ISBN&nbsp;:&nbsp; {{ $book->ISBN }}
+                                    ISBN&nbsp;:&nbsp; {{ $book->ISBN ?? "無"  }}
                                 </div>
                             </div>
                             <div class="row book-rows">
                                 <div class="col-md-12">
-                                    分類號&nbsp;:&nbsp; {{ $book->callnum }}
+                                    分類號&nbsp;:&nbsp; {{ $book->callnum ?? "無"  }}
                                 </div>
                             </div>
                             <div class="row book-rows">
                                 <div class="col-md-12">
-                                    圖書類別&nbsp;:&nbsp; {{ $book->showCategory() }}
+                                    圖書類別&nbsp;:&nbsp; {{ $book->showCategory() ?? "無"  }}
                                 </div>
                             </div>
                             <div class="row book-rows">
                                 <div class="col-md-12">
-                                    語言別&nbsp;:&nbsp; {{ $book->language }}
+                                    語言別&nbsp;:&nbsp; {{ $book->language  ?? "無" }}
                                 </div>
                             </div>
                             @if(!is_null($book->position))

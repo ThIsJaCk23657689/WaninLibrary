@@ -117,7 +117,6 @@
   display: inline-block;
   width: calc(100% - 135px);
   border: none;
-  font-weight: bold;
   padding: 0;
   font-size: 1rem;
 }
@@ -183,7 +182,7 @@
   margin-bottom: 5px;
 }
 .freebook-container .freebook-card .freebook-card-link .freebook-info .check-detail {
-  color: pink;
+  color: #f4ac9e;
   position: absolute;
   right: 0;
   bottom: 0;
