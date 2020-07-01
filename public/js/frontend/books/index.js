@@ -1345,7 +1345,6 @@ var app = new Vue({
           status: 1
         }
       }).then(function (response) {
-        console.log(response.data);
         _this.books = response.data.books;
         _this.totalcount = response.data.totalcount;
         _this.totalPage = Math.ceil(_this.totalcount / 4);

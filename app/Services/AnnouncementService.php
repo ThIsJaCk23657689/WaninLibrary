@@ -44,7 +44,7 @@ class AnnouncementService extends BaseService
         $announcements = AnnouncementEloquent::orderBy('is_top', 'desc')->orderBy('updated_at', 'desc')->skip($skip)->take($take)->get();
         foreach ($announcements as $announcement) {
             $announcement->showTitle = $announcement->showTitle();
-            $announcement->isNew = $today->eq($announcement->created_at);
+            $announcement->isNew = $today->eq($announcement->updated_at);
             $announcement->detailURL = route('front.announcements.show', [$announcement->id]);
         }
         return $announcements;

@@ -4,12 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use App\User as UserEloquent;
+use DateTimeInterface;
 
 class Announcement extends Model
 {
     protected $fillable = [
         'last_update_user_id', 'title', 'content', 'is_top',
     ];
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format($this->dateFormat ?: 'Y.m.d');
+    }
 
     public function user(){
         return $this->belongsTo(UserEloquent::class,'last_update_user_id');
@@ -28,7 +34,7 @@ class Announcement extends Model
 
     public function showTitle(){
         $maxString = 16;
-        if(strlen($this->title) >= $maxString*2 ){
+        if(mb_strlen($this->title) >= $maxString){
             return mb_substr($this->title, 0, $maxString) . '...';
         }else{
             return $this->title;

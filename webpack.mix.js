@@ -22,6 +22,7 @@ mix.js('resources/js/app.js', 'public/js')
     .js('resources/js/frontend/books/index.js', 'public/js/frontend/books')
     .js('resources/js/frontend/donatedBooks/index.js', 'public/js/frontend/donatedBooks')
     .js('resources/js/frontend/freebooks/index.js', 'public/js/frontend/freebooks')
+    .js('resources/js/frontend/announcements/index.js', 'public/js/frontend/announcements')
 
 .sass('resources/sass/app.scss', 'public/css')
     .sass('resources/sass/frontend/frontend.scss', 'public/css/frontend')
@@ -34,6 +35,7 @@ mix.js('resources/js/app.js', 'public/js')
     .sass('resources/sass/frontend/about/index.scss', 'public/css/frontend/about')
     .sass('resources/sass/frontend/books/index.scss', 'public/css/frontend/books')
     .sass('resources/sass/frontend/freebooks/index.scss', 'public/css/frontend/freebooks')
+    .sass('resources/sass/frontend/announcements/index.scss', 'public/css/frontend/announcements')
     .options({
         processCssUrls: false,
     });
