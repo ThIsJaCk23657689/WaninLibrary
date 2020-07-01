@@ -331,100 +331,117 @@ class BookService extends BaseService
     // 7~20 書籍種類 -7 (7.總類 8.哲學類 9.宗教類 10.科學類 11.應用科學類 12.社會學類
     // 13.史地類 14.中國史地類 15.世界史地類  16.語文文學類 17.藝術類 18.論文 19.期刊雜誌 20 .非中文圖書)
     // orderBy 1:最新-最舊desc 2:最舊-最新asc
-    // $status = 1 可借閱; 7 免費索取
     public function getListFrontend($request){
-        if($request->first_page){
+        
+        if($request->firstPage == 1){
+            // 強制從第一頁開始。
             $skip = 0;
         }else{
+            // 看從第幾頁開始。
             $skip = $request->skip ?? 0 ;
         }
 
+        // $status = 1可借閱(館藏查詢); 7免費索取(免費索取書單)
         $status =  $request->status ?? 1;
         if($status == 1){
+            // 如果是館藏查詢，一次抓4筆資料。
             $take = 4;
         }else{
+            // 否則會是免費索取書單，一次抓6筆資料。
             $take = 6;
         }
-        $type = $request->type ?? 0; //default 0
-        $orderBy = $request->orderBy ?? 1; //default 1
+
+        // 看是什麼條件，預設就是沒有限制條件。
+        $type = $request->type ?? 0;
+        // 看排序的方法。
+        $orderBy = ($request->orderBy == 0 || $request->orderBy == 1) ? 1 : 2 ;
+        // 看關鍵字，會切割成陣列。
         $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
 
-        // $type_arr = [1=>'title', 2=>'author', 6=>'ISBN', 3=>'publisher', 5=>'translator'];
         $type_arr = ['', 'title', 'author', 'publisher', 'published_date', 'translator', 'ISBN'];
 
-        if($keywords == [] && ($status== 1 && $status== 7) && $type== 0 && $orderBy==1){
-            // all default
-            $books_tmp = BookEloquent::where('status', $status)->orderBy('created_at', 'desc');
-            $count = $books_tmp->count();
-            $books = $books_tmp->skip($skip)->take($take)->get();
+        $books = new BookEloquent();
 
+        // 可借閱或免費書單。
+        if(!is_null($status) && $status != 0){
+            $books = $books->where('status', '=', $status);
+        }
+
+        // 過濾
+        if(!is_null($type) && ($type > 6)){
+            // type 不為null 而且 大於6 => 類別 過濾
+            $books = $books->where('category', '=', $type - 7);
+        } 
+
+        if(!is_null($type) && ($type >= 0 && $type <= 6)){
+            // type 不為null 而且 介於0到6之間 => keyword 搜尋
+            if(!is_null($keywords) && $keywords != []){
+                // $keywords 不是空陣列才需要進行搜尋
+                if($type == 0){
+                    $books = $this->keywordSearch($books, $type_arr, $keywords, 'all');
+                }else{
+                    $books = $this->keywordSearch($books, $type_arr, $keywords, $type);
+                }
+            }
         }else{
-            $books_tmp = BookEloquent::query()->where(function ($query) use ($keywords, $type, $type_arr) {
+            if(!is_null($keywords) && $keywords != []){
+                $books = $this->keywordSearch($books, $type_arr, $keywords, 'all');
+            }
+        }
+
+        if($orderBy == 1){
+            $books->orderBy('created_at', 'desc');
+        }else{
+            $books->orderBy('created_at', 'asc');
+        }
+        
+        $count = $books->count();
+        $books = $books->skip($skip)->take($take)->get();
+
+        foreach($books as $book){
+            $book->showTitle = $book->showTitle();
+            $book->showCoverImage = $book->showCoverImage();
+            $book->showURL = route('front.books.show', $book->id);
+            $book->source = $book->showSource();
+        }
+
+        return [
+            'books' => $books, 
+            'count' => $count
+        ];
+    }
+
+    private function keywordSearch($model, $column, $keywords, $searchType){
+        if($searchType == 'all'){
+            $result = $model->where(function ($query) use ($column, $keywords){
                 $c = 0;
-                if($type != 0 && $type < 7 && $keywords != []){
-                     //以欄位搜尋
+                for($i = 1; $i <= 6; $i++){
                     foreach ($keywords as $keyword) {
                         $keyword = '%'.$keyword.'%';
                         if($c == 0){
-                            $query->where($type_arr[$type], 'like',$keyword);
+                            $query->where($column[$i], 'like', $keyword);
                             $c++;
                         }else{
-                            $query->orWhere($type_arr[$type], 'like',$keyword);
-                        }
-
-                    }
-
-                }elseif($type != 0 && $type > 6 && $keywords != []){
-                    // 以種類時，搜所有欄位
-                    foreach ($keywords as $keyword) {
-                        $keyword = '%'.$keyword.'%';
-
-                        for($i = 1; $i<=6; $i++){
-                            if($i != 4){
-                                if($c == 0){
-                                    $query->where($type_arr[$i], 'like',$keyword);
-                                    $c++;
-                                }else{
-                                    $query->orWhere($type_arr[$i], 'like',$keyword);
-                                }
-                            }
+                            $query->orWhere($column[$i], 'like', $keyword);
                         }
                     }
                 }
-
             });
-            // 可借閱 or 免費索取
-            $books_tmp->where('status', $status);
-            // 種類
-            if($type != 0 && $type > 6){
-                $category = $type - 7;
-                $books_tmp->where('category', $category);
-            }
-            if($orderBy == 1){
-                $books_tmp->orderBy('created_at', 'desc');
-            }else{
-                $books_tmp->orderBy('created_at', 'asc');
-            }
-
-            $count = $books_tmp->count();
-            $books = $books_tmp->skip($skip)->take($take)->get();
+        }else{
+            $result = $model->where(function ($query) use ($column, $keywords, $searchType){
+                $c = 0;
+                foreach ($keywords as $keyword) {
+                    $keyword = '%'.$keyword.'%';
+                    if($c == 0){
+                        $query->where($column[$searchType], 'like', $keyword);
+                        $c++;
+                    }else{
+                        $query->orWhere($column[$searchType], 'like', $keyword);
+                    }
+                }
+            });
         }
-
-        foreach($books as $book){
-            $book['showTitle'] = $book->showTitle();
-
-            if(is_null($book->donor_id)){
-                // 採購書籍
-                $book->source = "採購";
-            }else{
-                // 捐贈書籍
-                $donor_name = $book->donor->showName();
-                $book->source = '捐贈/'.$donor_name;
-            }
-
-        }
-        $res = ['books'=>$books, 'count' => $count];
-        return $res;
+        return $result;
     }
 
     public function getBookDataByURL($url){

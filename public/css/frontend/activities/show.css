@@ -110,17 +110,20 @@
 .detail-page-header .activity-detail-title .activity-detail-title-container {
   width: 1100px;
   border-bottom: 3px solid #93e5b4;
+  position: relative;
 }
 .detail-page-header .activity-detail-title .activity-detail-title-container h1 {
   color: #55473f;
   font-size: 2.2rem;
   letter-spacing: 10px;
   display: inline-block;
+  font-weight: bold;
 }
 .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
-  position: relative;
-  float: right;
   width: 15%;
+  position: absolute;
+  right: 0;
+  bottom: 5px;
   margin: 0;
 }
 .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date h2 {
@@ -128,7 +131,7 @@
   margin-left: 25px;
   letter-spacing: 3px;
   float: left;
-  font-size: 2.7rem;
+  font-size: 3rem;
   font-weight: bold;
   display: inline-block;
   color: #93e5b4;
@@ -143,12 +146,13 @@
   float: right;
   position: relative;
   right: 5px;
+  top: 3px;
   margin-right: 10px;
 }
 .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-title-content {
   text-align: left;
   position: relative;
-  width: 80%;
+  width: calc(100% - 15%);
   float: left;
   margin: 0;
 }

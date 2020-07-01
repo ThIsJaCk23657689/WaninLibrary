@@ -1,0 +1,96 @@
+@import "../variables";
+@import "../contents";
+
+.filter-row{
+    margin-bottom: 90px;
+    .filter-dropbox{
+        letter-spacing: 3px;
+        height: 56px;
+        border-radius: 20px;
+    }
+    .filter-search{
+        background-color: white;
+        border-radius: 20px;
+        padding: 5px 0px 5px 15px;
+        position: relative;
+        .search-icon{
+            display: inline-block;
+            width: 30px;
+            height: 30px;
+        }
+        // .search-image{
+        //     display: inline-block;
+        //     width: 30px;
+        //     height: 30px;
+        //     margin-right: 11px;
+        //     position: relative;
+        //     top: -1px;
+        //     left: 4px;
+        //     img{
+        //         width: 100%;
+        //     }
+        // }
+        .search-input{
+            display: inline-block;
+            width: calc(100% - 135px);
+            border: none;
+            font-weight: bold;
+            padding: 0;
+            font-size: 1rem;
+        }
+        .search-button{
+            color: black;
+            display: inline-block;
+            width: 75px;
+            text-align: center;
+            border-left: 2px solid $blue;
+            font-weight: bold;
+            &:hover{
+                text-decoration: none;
+            }
+        }
+    }
+}
+
+.book-container{
+    padding: 0px 70px;
+    .book-card{
+        width: calc(100%);
+        margin-bottom: 50px;
+        border: 1px solid $blue;
+        border-radius: 50px;
+        .book-card-link{
+            display: inline-block;
+            width: 100%;
+            padding: 20px 0px 15px 0px;
+            .book-cover-image{
+                float: left;
+                width: 40%;
+                padding: 0px 0px 0px 10px;
+                text-align: center;
+                border-right: 5px solid $green;
+                img{
+                    width: 60%;
+                }
+            }
+            .book-info{
+                float: right;
+                width: 60%;
+                color: $brown;
+                padding-left: 30px;
+                padding-top: 15px;
+                .book-title{
+                    font-weight: bold;
+                    font-size: 1.5rem;
+                    margin-bottom: 15px;
+                    line-height: 2.3rem;
+                }
+                .book-small{
+                    display: block;
+                    font-size: 1.2rem;
+                    margin-bottom: 10px;
+                }
+            }
+        }
+    }
+}

@@ -71,6 +71,7 @@
                     top: 0;
                     left: calc(50% + 0px);
                     transform: translateX(-50%);
+                    transition: all 0.8s ease-in-out;
                 }
                 .image-gray {
                     position: absolute;
@@ -83,6 +84,9 @@
                 }
             }
             &:hover {
+                img{
+                    transform: translateX(-50%) scale(1.1);
+                }
                 .image-gray {
                     background-color: rgba($blue, 0);
                 }

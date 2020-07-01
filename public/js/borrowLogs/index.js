@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 33);
+/******/ 	return __webpack_require__(__webpack_require__.s = 34);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -928,14 +928,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 33:
+/***/ 34:
 /*!************************************************!*\
   !*** multi ./resources/js/borrowLogs/index.js ***!
   \************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\borrowLogs\index.js */"./resources/js/borrowLogs/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\borrowLogs\index.js */"./resources/js/borrowLogs/index.js");
 
 
 /***/ })

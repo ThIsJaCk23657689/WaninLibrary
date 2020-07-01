@@ -94,100 +94,84 @@
   color: #93e5b4;
 }
 
-.switch-btn-row {
-  border-bottom: 1px solid #5f6b82;
-  margin-bottom: 25px;
+.filter-row {
+  margin-bottom: 90px;
 }
-.switch-btn-row .switch-btn-container {
-  padding: 6px 0px;
+.filter-row .filter-dropbox {
+  letter-spacing: 3px;
+  height: 56px;
+  border-radius: 20px;
 }
-.switch-btn-row .switch-btn-container.actived {
-  border-left: 1px solid #5f6b82;
-  border-top: 1px solid #5f6b82;
-  border-right: 1px solid #5f6b82;
+.filter-row .filter-search {
+  background-color: white;
+  border-radius: 20px;
+  padding: 5px 0px 5px 15px;
+  position: relative;
 }
-.switch-btn-row .switch-btn-container.actived .switch-btn {
-  color: #93e5b4;
+.filter-row .filter-search .search-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
 }
-.switch-btn-row .switch-btn-container .switch-btn {
-  display: block;
-  width: 100%;
-  height: 100%;
-  font-size: 1.8rem;
+.filter-row .filter-search .search-input {
+  display: inline-block;
+  width: calc(100% - 135px);
+  border: none;
   font-weight: bold;
-  color: #55473f;
-  transition: color 0.1s ease-in-out;
+  padding: 0;
+  font-size: 1rem;
 }
-.switch-btn-row .switch-btn-container .switch-btn:hover {
+.filter-row .filter-search .search-button {
+  color: black;
+  display: inline-block;
+  width: 75px;
+  text-align: center;
+  border-left: 2px solid #5f6b82;
+  font-weight: bold;
+}
+.filter-row .filter-search .search-button:hover {
   text-decoration: none;
-  color: #93e5b4;
 }
 
-.activity-card {
-  margin: 25px 28px;
-  padding: 30px 40px;
+.book-container {
+  padding: 0px 70px;
+}
+.book-container .book-card {
+  width: calc(100%);
+  margin-bottom: 50px;
   border: 1px solid #5f6b82;
-  color: #55473f;
-  width: calc(50% - 56px);
-  height: 580px;
+  border-radius: 50px;
 }
-.activity-card .activity-card-date {
-  position: relative;
-  border-bottom: 3px solid #93e5b4;
-  margin-bottom: 28px;
-}
-.activity-card .activity-card-date h3 {
-  margin: 0;
-  font-size: 2.7rem;
-  font-weight: bold;
+.book-container .book-card .book-card-link {
   display: inline-block;
-  color: #93e5b4;
+  width: 100%;
+  padding: 20px 0px 15px 0px;
 }
-.activity-card .activity-card-date span {
-  display: inline-block;
+.book-container .book-card .book-card-link .book-cover-image {
+  float: left;
+  width: 40%;
+  padding: 0px 0px 0px 10px;
+  text-align: center;
+  border-right: 5px solid #93e5b4;
+}
+.book-container .book-card .book-card-link .book-cover-image img {
+  width: 60%;
+}
+.book-container .book-card .book-card-link .book-info {
   float: right;
-  font-style: italic;
-  position: relative;
-  right: 5px;
-  font-weight: lighter;
-}
-.activity-card .activity-card-image {
-  margin-bottom: 25px;
-}
-.activity-card .activity-card-image .image-link {
-  display: inline-block;
-  width: 100%;
-}
-.activity-card .activity-card-image .image-link .cover-image {
-  height: 288px;
-  overflow: hidden;
-  position: relative;
-}
-.activity-card .activity-card-image .image-link .cover-image img {
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: calc(50% + 0px);
-  transform: translateX(-50%);
-  transition: all 0.8s ease-in-out;
-}
-.activity-card .activity-card-image .image-link .cover-image .image-gray {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(95, 107, 130, 0.3);
-  transition: background-color 0.1s ease-in-out;
-}
-.activity-card .activity-card-image .image-link:hover img {
-  transform: translateX(-50%) scale(1.1);
-}
-.activity-card .activity-card-image .image-link:hover .image-gray {
-  background-color: rgba(95, 107, 130, 0);
-}
-.activity-card .activity-card-title .title-link {
+  width: 60%;
   color: #55473f;
-  font-size: 1.3rem;
+  padding-left: 30px;
+  padding-top: 15px;
+}
+.book-container .book-card .book-card-link .book-info .book-title {
   font-weight: bold;
+  font-size: 1.5rem;
+  margin-bottom: 15px;
+  line-height: 2.3rem;
+}
+.book-container .book-card .book-card-link .book-info .book-small {
+  display: block;
+  font-size: 1.2rem;
+  margin-bottom: 10px;
 }

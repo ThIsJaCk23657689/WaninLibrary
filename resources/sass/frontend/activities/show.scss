@@ -14,16 +14,19 @@
         .activity-detail-title-container {
             width: 1100px;
             border-bottom: 3px solid $green;
+            position: relative;
             h1 {
                 color: $brown;
                 font-size: 2.2rem;
                 letter-spacing: 10px;
                 display: inline-block;
+                font-weight: bold;
             }
             .activity-detail-date {
-                position: relative;
-                float: right;
                 width: 15%;
+                position: absolute;
+                right: 0;
+                bottom: 5px;
                 margin: 0;
                 // margin-bottom: 28px;
                 h2 {
@@ -31,7 +34,7 @@
                     margin-left: 25px;
                     letter-spacing: 3px;
                     float: left;
-                    font-size: 2.7rem;
+                    font-size: 3rem;
                     font-weight: bold;
                     display: inline-block;
                     color: $green;
@@ -44,13 +47,14 @@
                     float: right;
                     position: relative;
                     right: 5px;
+                    top: 3px;
                     margin-right: 10px;
                 }
             }
             .activity-detail-title-content {
                 text-align: left;
                 position: relative;
-                width: 80%;
+                width: calc(100% - 15%);
                 float: left;
                 margin: 0;
             }

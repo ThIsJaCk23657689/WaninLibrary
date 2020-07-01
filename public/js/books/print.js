@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 24);
+/******/ 	return __webpack_require__(__webpack_require__.s = 25);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -109,14 +109,14 @@ $(function () {
 
 /***/ }),
 
-/***/ 24:
+/***/ 25:
 /*!*******************************************!*\
   !*** multi ./resources/js/books/print.js ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\print.js */"./resources/js/books/print.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\print.js */"./resources/js/books/print.js");
 
 
 /***/ })

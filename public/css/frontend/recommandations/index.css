@@ -159,6 +159,7 @@
   top: calc(50% + 0px);
   left: 0;
   transform: translateY(-50%);
+  transition: all 0.8s ease-in-out;
 }
 .recommandation-card .recommandation-card-image .image-link .cover-image .image-gray {
   position: absolute;
@@ -168,6 +169,9 @@
   height: 100%;
   background-color: rgba(95, 107, 130, 0.3);
   transition: background-color 0.1s ease-in-out;
+}
+.recommandation-card .recommandation-card-image .image-link:hover img {
+  transform: translateY(-50%) scale(1.1);
 }
 .recommandation-card .recommandation-card-image .image-link:hover .image-gray {
   background-color: rgba(95, 107, 130, 0);

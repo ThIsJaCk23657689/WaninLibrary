@@ -197,6 +197,17 @@ class Book extends Model
         }
     }
 
+    public function showSource(){
+        if(is_null($this->donor_id)){
+            // 採購書籍
+            return "採購";
+        }else{
+            // 捐贈書籍
+            $donorName = $this->donor->showName();
+            return '捐贈 / ' . $donorName;
+        }
+    }
+
     public function scopeNormalCh($query){
         $query->where('category', '<', 10);
     }

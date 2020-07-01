@@ -27,6 +27,7 @@
     <!-- Styles -->
 	<link href="{{ asset('css/frontend/frontend.css') }}" rel="stylesheet">
 	<link href="{{ asset('vendor/fontawesome/css/all.min.css') }}" rel="stylesheet" type='text/css'>
+	<link href="https://fonts.googleapis.com/css?family=Noto+Serif+TC&amp;display=swap" rel="stylesheet"/>
 
     <!-- Page level plugin CSS-->
 	<link href="{{ asset('vendor/datatables/dataTables.bootstrap4.css') }}" rel="stylesheet">

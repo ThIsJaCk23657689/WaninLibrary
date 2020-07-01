@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 31);
+/******/ 	return __webpack_require__(__webpack_require__.s = 32);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -527,14 +527,14 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 31:
+/***/ 32:
 /*!****************************************************!*\
   !*** multi ./resources/js/announcements/create.js ***!
   \****************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\announcements\create.js */"./resources/js/announcements/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\announcements\create.js */"./resources/js/announcements/create.js");
 
 
 /***/ })

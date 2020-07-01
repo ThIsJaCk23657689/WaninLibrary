@@ -4,7 +4,7 @@
 
         <ul v-if="totalPage <= 7" class="content-paginate">
             <li>
-                <span v-if="currentPage != 1" @click="prevPage">
+                <span v-if="currentPage > 1" @click="prevPage">
                     <i class="fa fa-angle-left" aria-hidden="true"></i>
                 </span>
             </li>

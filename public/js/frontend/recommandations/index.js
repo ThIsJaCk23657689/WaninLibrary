@@ -316,7 +316,7 @@ var render = function() {
             { staticClass: "content-paginate" },
             [
               _c("li", [
-                _vm.currentPage != 1
+                _vm.currentPage > 1
                   ? _c("span", { on: { click: _vm.prevPage } }, [
                       _c("i", {
                         staticClass: "fa fa-angle-left",
@@ -579,9 +579,9 @@ var render = function() {
           },
           [
             _vm._v(
-              "\n            " +
+              "\r\n            " +
                 _vm._s(_vm.recommandation.showTitle) +
-                "\n            "
+                "\r\n            "
             )
           ]
         )
@@ -1016,7 +1016,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\recommandations\index.js */"./resources/js/frontend/recommandations/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\recommandations\index.js */"./resources/js/frontend/recommandations/index.js");
 
 
 /***/ })
