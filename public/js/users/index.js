@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 21);
+/******/ 	return __webpack_require__(__webpack_require__.s = 22);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -112,7 +112,7 @@ $('#nav_block').click(function (e) {
 
 /***/ }),
 
-/***/ 21:
+/***/ 22:
 /*!*******************************************!*\
   !*** multi ./resources/js/users/index.js ***!
   \*******************************************/

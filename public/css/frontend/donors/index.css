@@ -1,0 +1,193 @@
+.content-page-header {
+  width: 100%;
+  height: 200px;
+  background-color: #ffffff;
+}
+.content-page-header h1 {
+  color: #55473f;
+  font-size: 2.5rem;
+  letter-spacing: 15px;
+  display: inline-block;
+}
+.content-page-header .title-icon {
+  width: 60px;
+  margin-bottom: 18px;
+  margin-right: 15px;
+}
+.content-page-header .content {
+  text-align: center;
+}
+
+.content-page-body {
+  background-color: #eaeaea;
+  padding: 70px 0px 60px 0px;
+}
+.content-page-body .goback-container {
+  margin-top: 40px;
+  border-bottom: 0.5px solid #5f6b82;
+}
+.content-page-body .goback-container .goback-text {
+  font-size: 1.2rem;
+  color: #55473f;
+}
+.content-page-body .goback-container .goback-text:hover {
+  text-decoration: none;
+}
+
+.detail-page-body {
+  background-color: #eaeaea;
+  padding: 0px 0px 60px 0px;
+}
+.detail-page-body .goback-container {
+  margin-top: 40px;
+  border-bottom: 0.5px solid #5f6b82;
+}
+.detail-page-body .goback-container .goback-text {
+  font-size: 1.2rem;
+  color: #55473f;
+}
+.detail-page-body .goback-container .goback-text:hover {
+  text-decoration: none;
+}
+
+.content-paginate-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 2.3rem;
+  margin-top: 18px;
+}
+.content-paginate-container .content-paginate {
+  list-style: none;
+  margin: 0;
+}
+.content-paginate-container .content-paginate li {
+  display: block;
+  width: 60px;
+  height: 2rem;
+  color: #93e5b4;
+  float: left;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease-in-out;
+}
+.content-paginate-container .content-paginate li:hover {
+  color: #55473f;
+}
+.content-paginate-container .content-paginate li span {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+.content-paginate-container .content-paginate li span.activated {
+  color: #55473f;
+  cursor: default;
+}
+.content-paginate-container .content-paginate li.disabled {
+  cursor: default;
+}
+.content-paginate-container .content-paginate li.disabled:hover {
+  color: #93e5b4;
+}
+
+.filter-row {
+  margin-bottom: 90px;
+}
+.filter-row .filter-dropbox {
+  letter-spacing: 3px;
+  height: 56px;
+  border-radius: 20px;
+}
+.filter-row .filter-search {
+  background-color: white;
+  border-radius: 20px;
+  padding: 5px 0px 5px 15px;
+  position: relative;
+}
+.filter-row .filter-search .search-icon {
+  display: inline-block;
+  width: 30px;
+  height: 30px;
+}
+.filter-row .filter-search .search-input {
+  display: inline-block;
+  width: calc(100% - 135px);
+  border: none;
+  font-weight: bold;
+  padding: 0;
+  font-size: 1rem;
+}
+.filter-row .filter-search .search-button {
+  color: black;
+  display: inline-block;
+  width: 75px;
+  text-align: center;
+  border-left: 2px solid #5f6b82;
+  font-weight: bold;
+}
+.filter-row .filter-search .search-button:hover {
+  text-decoration: none;
+}
+
+.filter-row {
+  margin-bottom: 45px;
+}
+
+.donor-container {
+  background-color: #ffffff;
+  border: 25px solid #93e5b4;
+  padding: 60px 30px 30px;
+}
+.donor-container .donor-table {
+  display: flex;
+  flex-flow: column nowrap;
+  width: 100%;
+}
+.donor-container .donor-table .donor-row {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: left;
+  align-items: stretch;
+  height: 3.5rem;
+  border-bottom: 2px solid #93e5b4;
+}
+.donor-container .donor-table .donor-row:not(:last-child) {
+  margin-bottom: 35px;
+}
+.donor-container .donor-table .donor-row .donor-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  color: #55473f;
+  letter-spacing: 3px;
+}
+.donor-container .donor-table .donor-row .donor-col .donor-link {
+  color: #55473f;
+}
+.donor-container .donor-table .donor-row .donor-col.th {
+  font-weight: bold;
+  font-size: 1.3rem;
+}
+.donor-container .donor-table .donor-row .donor-col.td {
+  font-size: 1.2rem;
+}
+.donor-container .donor-table .donor-row .w-10 {
+  width: 10%;
+}
+.donor-container .donor-table .donor-row .w-18 {
+  width: 18%;
+}
+.donor-container .donor-table .donor-row .w-20 {
+  width: 20%;
+}
+.donor-container .donor-table .donor-row .w-30 {
+  width: 30%;
+}
+.donor-container .donor-table .donor-row .w-adj {
+  flex-grow: 1;
+}

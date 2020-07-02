@@ -390,9 +390,9 @@ class BookService extends BaseService
         }
 
         if($orderBy == 1){
-            $books->orderBy('created_at', 'desc');
+            $books = $books->orderBy('created_at', 'desc');
         }else{
-            $books->orderBy('created_at', 'asc');
+            $books = $books->orderBy('created_at', 'asc');
         }
         
         $count = $books->count();

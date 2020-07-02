@@ -72,6 +72,12 @@ class Donor extends Model
                 $result = $this->name;
                 break;
         }
-        return $result;
+
+        $maxString = 16;
+        if(strlen($result) >= $maxString){
+            return mb_substr($result, 0, $maxString) . '...';
+        }else{
+            return $result;
+        }
     }
 }

@@ -1,44 +1,6 @@
 @import "../variables";
 @import "../contents";
-
-.filter-row{
-    margin-bottom: 90px;
-    .filter-dropbox{
-        letter-spacing: 3px;
-        height: 56px;
-        border-radius: 20px;
-    }
-    .filter-search{
-        background-color: white;
-        border-radius: 20px;
-        padding: 5px 0px 5px 15px;
-        position: relative;
-        .search-icon{
-            display: inline-block;
-            width: 30px;
-            height: 30px;
-        }
-        .search-input{
-            display: inline-block;
-            width: calc(100% - 135px);
-            border: none;
-            font-weight: bold;
-            padding: 0;
-            font-size: 1rem;
-        }
-        .search-button{
-            color: black;
-            display: inline-block;
-            width: 75px;
-            text-align: center;
-            border-left: 2px solid $blue;
-            font-weight: bold;
-            &:hover{
-                text-decoration: none;
-            }
-        }
-    }
-}
+@import "../filter";
 
 .book-container{
     padding: 0px 70px;

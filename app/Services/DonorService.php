@@ -5,6 +5,7 @@ namespace App\Services;
 use App\Donor as DonorEloquent;
 use App\Book as BookEloquent;
 use Log;
+use Carbon\Carbon;
 
 class DonorService extends BaseService
 {
@@ -206,56 +207,67 @@ class DonorService extends BaseService
     // getListFrontend
     public function getListFrontend($request)
     {
-        if($request->first_page){
+        if($request->firstPage == 1){
+            // 強制從第一頁開始。
             $skip = 0;
         }else{
+            // 看從第幾頁開始。
             $skip = $request->skip ?? 0 ;
         }
+
         $take = 8;
-
-        $month = $request->month ?? "";
-
-        $orderby = $request->orderby ?? 1;
+        $year = ($request->year == 0) ? null : $request->year ;
+        $orderBy = ($request->orderBy == 0 || $request->orderBy == 1) ? 1 : 2 ;
         $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
 
-        // 搜尋
-        if($keywords == [] && $orderby == 2 && $month == ""){
-            // all default
-            $donorsModel = new DonorEloquent();
-            $count = $donorsModel->count();
-            $donors = $donorsModel->orderBy('created_at','desc')->skip($skip)->take($take)->get();
+        $donors = new DonorEloquent();
 
-        }else{
-            $donorsModel = DonorEloquent::query()->where(function ($query) use ($keywords) {
-                if($keywords != []){
-                    foreach ($keywords as $keyword) {
-                        $keyword = '%'.$keyword.'%';
-                        $query->orWhere('name', 'like',$keyword);
-                    }
-                }
-            });
-            if($month != ""){
-                // 以年份查詢(?)
-                $donorsModel->where('updated_at','like',$month.'%');
-            }
-            $count = $donorsModel->count();
-            if($orderby == 2){ //DESC
-                $donors = $donorsModel->orderBy('created_at','desc')->skip($skip)->take($take)->get();
-            }else { //ASC
-                $donors = $donorsModel->orderBy('created_at','asc')->skip($skip)->take($take)->get();
-            }
+        // 年份
+        if(!is_null($year)){
+            $donors = $donors->where('updated_at', 'like', $year.'%');
         }
+
+        if(!is_null($keywords) && $keywords != []){
+            $donors = $this->keywordSearch($donors, $keywords);
+        }
+
+        if($orderBy == 1){
+            $donors = $donors->orderBy('created_at', 'desc');
+        }else{
+            $donors = $donors->orderBy('created_at', 'asc');
+        }
+
+        $count = $donors->count();
+        $donors = $donors->skip($skip)->take($take)->get();
+
         $c = 1;
         foreach($donors as $donor){
             $donor->index = $skip + $c;
-            $donor->name = $donor->showName();
+            $donor->showName = $donor->showName();
             $donor->donateAmount = $donor->books()->count();
             $donor->donatedBookURL = route('front.donatedBooks.show', [$donor->id]);
             $c ++;
         }
+
         return [
             'donors' => $donors,
             'count' => $count
         ];
+    }
+
+    private function keywordSearch($model, $keywords){
+        $result = $model->where(function ($query) use ($keywords){
+            $c = 0;
+            foreach ($keywords as $keyword) {
+                $keyword = '%'.$keyword.'%';
+                if($c == 0){
+                    $query->where('name', 'like', $keyword);
+                    $c++;
+                }else{
+                    $query->orWhere('name', 'like', $keyword);
+                }
+            }
+        });
+        return $result;
     }
 }

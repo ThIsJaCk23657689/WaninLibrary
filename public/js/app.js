@@ -55573,6 +55573,17 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
+/***/ "./resources/sass/frontend/donors/index.scss":
+/*!***************************************************!*\
+  !*** ./resources/sass/frontend/donors/index.scss ***!
+  \***************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+// removed by extract-text-webpack-plugin
+
+/***/ }),
+
 /***/ "./resources/sass/frontend/freebooks/index.scss":
 /*!******************************************************!*\
   !*** ./resources/sass/frontend/freebooks/index.scss ***!
@@ -55607,9 +55618,9 @@ __webpack_require__.r(__webpack_exports__);
 /***/ }),
 
 /***/ 0:
-/*!*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
-  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/frontend/frontend.scss ./resources/sass/frontend/donations/index.scss ./resources/sass/frontend/activities/index.scss ./resources/sass/frontend/activities/show.scss ./resources/sass/frontend/recommandations/index.scss ./resources/sass/frontend/donatedBooks/index.scss ./resources/sass/frontend/announcements/show.scss ./resources/sass/frontend/books/show.scss ./resources/sass/frontend/about/index.scss ./resources/sass/frontend/books/index.scss ./resources/sass/frontend/freebooks/index.scss ./resources/sass/frontend/announcements/index.scss ./resources/sass/backend/backend.scss ./resources/sass/errors.scss ***!
-  \*****************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
+/*!*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************!*\
+  !*** multi ./resources/js/app.js ./resources/sass/app.scss ./resources/sass/frontend/frontend.scss ./resources/sass/frontend/donations/index.scss ./resources/sass/frontend/activities/index.scss ./resources/sass/frontend/activities/show.scss ./resources/sass/frontend/recommandations/index.scss ./resources/sass/frontend/donatedBooks/index.scss ./resources/sass/frontend/announcements/show.scss ./resources/sass/frontend/books/show.scss ./resources/sass/frontend/about/index.scss ./resources/sass/frontend/books/index.scss ./resources/sass/frontend/freebooks/index.scss ./resources/sass/frontend/announcements/index.scss ./resources/sass/frontend/donors/index.scss ./resources/sass/backend/backend.scss ./resources/sass/errors.scss ***!
+  \*************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -55627,6 +55638,7 @@ __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\about
 __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\books\index.scss */"./resources/sass/frontend/books/index.scss");
 __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\freebooks\index.scss */"./resources/sass/frontend/freebooks/index.scss");
 __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\announcements\index.scss */"./resources/sass/frontend/announcements/index.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\donors\index.scss */"./resources/sass/frontend/donors/index.scss");
 __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\backend\backend.scss */"./resources/sass/backend/backend.scss");
 module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\errors.scss */"./resources/sass/errors.scss");
 
