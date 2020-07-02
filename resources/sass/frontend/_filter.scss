@@ -1,15 +1,28 @@
 .filter-row{
     margin-bottom: 90px;
+    @media (max-width: 767px) {
+        margin-bottom: 30px !important;
+    }
+    .filter-dropbox-container{
+        width: 100%;
+    }
     .filter-dropbox{
         letter-spacing: 3px;
         height: 56px;
         border-radius: 20px;
+        @media (max-width: 767px) {
+            margin-bottom: 20px;
+        }
     }
     .filter-search{
+        width: 100%;
         background-color: white;
         border-radius: 20px;
         padding: 5px 0px 5px 15px;
         position: relative;
+        @media (max-width: 767px) {
+            margin-bottom: 10px;
+        }
         .search-icon{
             display: inline-block;
             width: 30px;
@@ -33,6 +46,11 @@
             &:hover{
                 text-decoration: none;
             }
+        }
+    }
+    .search-div{
+        @media (max-width: 767px) {
+            order: 3;
         }
     }
 }

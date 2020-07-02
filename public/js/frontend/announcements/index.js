@@ -355,7 +355,11 @@ var render = function() {
         attrs: { href: _vm.announcement.detailURL }
       },
       [
-        _vm._m(0),
+        _c("div", { staticClass: "announcement-new-container" }, [
+          _vm.announcement.isNew
+            ? _c("span", { staticClass: "announcement-new" }, [_vm._v("NEW")])
+            : _vm._e()
+        ]),
         _vm._v(" "),
         _c("div", { staticClass: "announcement-info-container" }, [
           _c("div", { staticClass: "announcement-date" }, [
@@ -367,20 +371,12 @@ var render = function() {
           ])
         ]),
         _vm._v(" "),
-        _vm._m(1)
+        _vm._m(0)
       ]
     )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "announcement-new-container" }, [
-      _c("span", { staticClass: "announcement-new" }, [_vm._v("NEW")])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

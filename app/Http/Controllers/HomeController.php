@@ -184,9 +184,26 @@ class HomeController extends Controller
     public function donatedBooks_show($id, $isSearched = 0){
         $active_num = 4;
         $donor = $this->DonorService->getOne($id);
-        $bookList = $donor->books;
+        // $bookList = $donor->books;
         $isSearched = 0; //判斷是否從捐贈書籍查詢來的結果
-        return view('frontend.donatedBooks_show', compact('active_num', 'donor', 'bookList', 'isSearched'));
+        return view('frontend.donatedBooks_show', compact('active_num', 'donor', 'isSearched'));
+    }
+
+    // 捐書芳名錄 detail api
+    public function getDonorBooksList(Request $request){
+        $this->validate($request, [
+            'skip' => 'nullable|integer',
+            'first_page' => 'nullable|integer',
+            'id' => 'requried|integer'
+        ]);
+
+        $result = $this->DonorService->getDonorBooksListFrontend($request);
+
+        return response()->json([
+            'status' => 'OK',
+            'books' => $result['books'],
+            'totalcount' => $result['count']
+        ]);
     }
 
     // 捐書人捐贈書籍查詢頁面

@@ -2,7 +2,7 @@
 <div class="row announcement-row">
     <a :href="announcement.detailURL" class="announcement-link">
         <div class="announcement-new-container">
-            <span class="announcement-new">NEW</span>
+            <span class="announcement-new" v-if="announcement.isNew">NEW</span>
         </div>
         <div class="announcement-info-container">
             <div class="announcement-date">{{ announcement.updated_at }}</div>

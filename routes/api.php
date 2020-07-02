@@ -34,6 +34,7 @@ Route::get('/announcements/json', 'HomeController@getAnnouncementsList')->name('
 Route::get('/books/json', 'HomeController@getBooksList')->name('frontend.books.getList');
 Route::get('/donors/json', 'HomeController@getDonorsList')->name('frontend.donors.getList');
 Route::post('/donor/searchDonatedBooks', 'HomeController@searchDonatedBooks')->name('frontend.donor.searchDonatedBooks');
+Route::post('/donor/books/json', 'HomeController@getDonorBooksList')->name('frontend.donor.getDonorBooksList');
 
 Route::prefix('/backend')->group(function(){
     //JWT

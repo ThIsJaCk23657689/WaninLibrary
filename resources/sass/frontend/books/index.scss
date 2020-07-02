@@ -2,40 +2,40 @@
 @import "../contents";
 @import "../filter";
 
-.book-container{
+.book-container {
     padding: 0px 70px;
-    .book-card{
+    .book-card {
         width: calc(100%);
         margin-bottom: 50px;
         border: 1px solid $blue;
         border-radius: 50px;
-        .book-card-link{
+        .book-card-link {
             display: inline-block;
             width: 100%;
             padding: 20px 0px 15px 0px;
-            .book-cover-image{
+            .book-cover-image {
                 float: left;
                 width: 40%;
                 padding: 0px 0px 0px 10px;
                 text-align: center;
                 border-right: 5px solid $green;
-                img{
+                img {
                     width: 60%;
                 }
             }
-            .book-info{
+            .book-info {
                 float: right;
                 width: 60%;
                 color: $brown;
                 padding-left: 30px;
                 padding-top: 15px;
-                .book-title{
+                .book-title {
                     font-weight: bold;
                     font-size: 1.5rem;
                     margin-bottom: 15px;
                     line-height: 2.3rem;
                 }
-                .book-small{
+                .book-small {
                     display: block;
                     font-size: 1.2rem;
                     margin-bottom: 10px;

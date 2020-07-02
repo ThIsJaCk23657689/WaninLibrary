@@ -270,4 +270,28 @@ class DonorService extends BaseService
         });
         return $result;
     }
+    
+    public function getDonorBooksListFrontend($request){
+        if($request->first_page){
+            $skip = 0;
+        }else{
+            $skip = $request->skip ?? 0 ;
+        }
+        $take = 8;
+        $books_tmp = BookEloquent::where('donor_id', $request->id);
+        $count = $books_tmp->count();
+        $books = $books_tmp->orderBy('created_at','desc')->skip($skip)->take($take)->get();
+        $c = 1;
+
+        foreach($books as $book){
+            $book->index = $skip + $c;
+            $book->showName = $book->showName();
+            $book->bookURL = route('front.books.show', [$book->id]);
+            $c ++;
+        }
+        return [
+            'books' => $books,
+            'count' => $count
+        ];
+    }
 }

@@ -1,5 +1,6 @@
 .content-page-header {
   width: 100%;
+  min-width: 300px;
   height: 200px;
   background-color: #ffffff;
 }
@@ -9,16 +10,29 @@
   letter-spacing: 15px;
   display: inline-block;
 }
+@media (max-width: 379px) {
+  .content-page-header h1 {
+    font-size: 1.5rem;
+  }
+}
 .content-page-header .title-icon {
   width: 60px;
   margin-bottom: 18px;
   margin-right: 15px;
+}
+@media (max-width: 379px) {
+  .content-page-header .title-icon {
+    width: 40px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
 }
 .content-page-header .content {
   text-align: center;
 }
 
 .content-page-body {
+  min-width: 300px;
   background-color: #eaeaea;
   padding: 70px 0px 60px 0px;
 }
@@ -92,4 +106,61 @@
 }
 .content-paginate-container .content-paginate li.disabled:hover {
   color: #93e5b4;
+}
+
+.content-page-body {
+  padding: 70px 0px 0px 0px;
+}
+.content-page-body .container .about-detail-row-up {
+  background-color: rgba(255, 255, 255, 0.7);
+  font-size: 1.2rem;
+  letter-spacing: 3px;
+  padding: 52px;
+  line-height: 50px;
+}
+
+.about-down {
+  width: 100%;
+  background-color: #eaeaea;
+}
+.about-down .about-down-container {
+  position: absolute;
+  width: 100%;
+}
+.about-down .about-detail-row-down {
+  margin: 0;
+  height: 150px;
+  width: 100%;
+}
+.about-down .about-detail-row-down .about-detail-row {
+  width: 100%;
+  text-align: center;
+  font-size: 1.3rem;
+  font-weight: bold;
+  letter-spacing: 3px;
+  margin: 0;
+}
+.about-down .about-detail-row-down .about-detail-row p {
+  margin: 0;
+}
+.about-down .about-detail-row-down .about-detail-row .about-down-images-left {
+  position: relative;
+  top: 40px;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  display: flex;
+}
+.about-down .about-detail-row-down .about-detail-row .about-down-images-right {
+  position: relative;
+  bottom: 42px;
+  height: 100%;
+  align-items: center;
+  display: flex;
+  float: right;
+  width: 20%;
+  right: 0;
+}
+.about-down .about-detail-row-down .about-detail-row .about-down-images-right img {
+  width: 100%;
 }

@@ -24,9 +24,29 @@ footer {
             width: 100%;
             position: absolute;
             right: 0;
-            bottom: 30px;
+            bottom: 16px;
             font-size: 0.8rem;
             text-align: right;
+            @media (max-width: 1300px) {
+                right: 3%;
+            }
+            @media (max-width: 1199px) {
+                right: -3%;
+            }
+            @media (max-width: 1089px) {
+                right: 4%;
+            }
+            @media (max-width: 991px) {
+                right: -5%;
+                bottom: 18px;
+            }
+            @media (max-width: 768px) {
+                text-align: left;
+                right: -15px;
+                .button-area {
+                    margin: 0;
+                }
+            }
             .button-area {
                 width: 120px;
                 height: 45px;
@@ -60,19 +80,6 @@ footer {
             }
             .copyright {
                 line-height: 2rem;
-            }
-            @media (max-width: 1300px) {
-                right: 3%;
-            }
-            @media (max-width: 992px) {
-                bottom: 20px;
-            }
-            @media (max-width: 768px) {
-                text-align: left;
-                right: -15px;
-                .button-area {
-                    margin: 0;
-                }
             }
         }
     }
@@ -141,7 +148,7 @@ footer {
         }
     }
     @media (max-width: 992px) {
-        height: calc(#{$footer-height} + 61px);
+        height: calc(#{$footer-height} + 80px);
     }
     @media (max-width: 768px) {
         height: calc(#{$footer-height} + 160px);

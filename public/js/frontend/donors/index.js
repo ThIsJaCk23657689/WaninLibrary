@@ -439,7 +439,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row filter-row" }, [
-    _c("div", { staticClass: "col-md-3" }, [
+    _c("div", { staticClass: "col-md-3 col-6 d-flex" }, [
       _c("div", { staticClass: "filter-dropbox-container" }, [
         _c(
           "select",
@@ -492,7 +492,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-6" }, [
+    _c("div", { staticClass: "col-md-6 col-12 d-flex search-div" }, [
       _c("div", { staticClass: "filter-search" }, [
         _vm._m(0),
         _vm._v(" "),
@@ -549,7 +549,7 @@ var render = function() {
       ])
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "col-md-3" }, [
+    _c("div", { staticClass: "col-md-3 col-6 d-flex order-2" }, [
       _c(
         "select",
         {
