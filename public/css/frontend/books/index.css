@@ -1,5 +1,6 @@
 .content-page-header {
   width: 100%;
+  min-width: 300px;
   height: 200px;
   background-color: #ffffff;
 }
@@ -9,16 +10,29 @@
   letter-spacing: 15px;
   display: inline-block;
 }
+@media (max-width: 379px) {
+  .content-page-header h1 {
+    font-size: 1.5rem;
+  }
+}
 .content-page-header .title-icon {
   width: 60px;
   margin-bottom: 18px;
   margin-right: 15px;
+}
+@media (max-width: 379px) {
+  .content-page-header .title-icon {
+    width: 40px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
 }
 .content-page-header .content {
   text-align: center;
 }
 
 .content-page-body {
+  min-width: 300px;
   background-color: #eaeaea;
   padding: 70px 0px 60px 0px;
 }
@@ -97,16 +111,35 @@
 .filter-row {
   margin-bottom: 90px;
 }
+@media (max-width: 767px) {
+  .filter-row {
+    margin-bottom: 30px !important;
+  }
+}
+.filter-row .filter-dropbox-container {
+  width: 100%;
+}
 .filter-row .filter-dropbox {
   letter-spacing: 3px;
   height: 56px;
   border-radius: 20px;
 }
+@media (max-width: 767px) {
+  .filter-row .filter-dropbox {
+    margin-bottom: 20px;
+  }
+}
 .filter-row .filter-search {
+  width: 100%;
   background-color: white;
   border-radius: 20px;
   padding: 5px 0px 5px 15px;
   position: relative;
+}
+@media (max-width: 767px) {
+  .filter-row .filter-search {
+    margin-bottom: 10px;
+  }
 }
 .filter-row .filter-search .search-icon {
   display: inline-block;
@@ -117,6 +150,7 @@
   display: inline-block;
   width: calc(100% - 135px);
   border: none;
+  font-weight: bold;
   padding: 0;
   font-size: 1rem;
 }
@@ -130,6 +164,11 @@
 }
 .filter-row .filter-search .search-button:hover {
   text-decoration: none;
+}
+@media (max-width: 767px) {
+  .filter-row .search-div {
+    order: 3;
+  }
 }
 
 .book-container {

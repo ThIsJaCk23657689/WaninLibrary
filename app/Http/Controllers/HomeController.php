@@ -127,7 +127,7 @@ class HomeController extends Controller
             'type' => 'nullable|integer',
             'keyword' => 'nullable',
             'orderBy' => 'nullable|integer',  // 1:最新-最舊desc 2:最舊-最新asc
-            'first_page' => 'nullable|integer',
+            'firstPage' => 'nullable|integer',
             'status' => 'nullable|integer', //1 可借閱; 7 免費索取
         ]);
 
@@ -167,8 +167,8 @@ class HomeController extends Controller
             'skip' => 'nullable|integer',
             'keyword' => 'nullable',
             'orderBy' => 'nullable|integer',  // 1:最新-最舊desc 2:最舊-最新asc
-            'first_page' => 'nullable|integer',
-            'month' => 'nullable'
+            'firstPage' => 'nullable|integer',
+            'year' => 'nullable'
         ]);
 
         $result = $this->DonorService->getListFrontend($request);

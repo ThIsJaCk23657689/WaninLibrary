@@ -1,0 +1,64 @@
+@import "../variables";
+@import "../contents";
+@import "../filter";
+
+.filter-row{
+    margin-bottom: 45px;
+}
+
+.donor-container{
+    background-color: $white;
+    border: 25px solid $green;
+    padding: 60px 30px 30px;
+    .donor-table{
+        display: flex;
+        flex-flow: column nowrap;
+        width: 100%;
+        .donor-row{
+            display: flex;
+            flex-flow: row nowrap;
+            justify-content: left;
+            align-items: stretch;
+            height: 3.5rem;
+            border-bottom: 2px solid $green;
+            &:not(:last-child){
+                margin-bottom: 35px;
+            }
+            .donor-col{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-shrink: 0;
+
+                color: $brown;
+                letter-spacing: 3px;
+                .donor-link{
+                    color: $brown;
+                }
+                &.th{
+                    font-weight: bold;
+                    font-size: 1.3rem;
+                }
+                &.td{
+                    font-size: 1.2rem;
+                }
+            }
+            
+            .w-10{
+                width: 10%;
+            }
+            .w-18{
+                width: 18%;
+            }
+            .w-20{
+                width: 20%;
+            }
+            .w-30{
+                width: 30%;
+            }
+            .w-adj{
+                flex-grow: 1;
+            }
+        }
+    }
+}

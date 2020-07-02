@@ -12235,9 +12235,39 @@ footer .container .footerText {
   width: 100%;
   position: absolute;
   right: 0;
-  bottom: 30px;
+  bottom: 16px;
   font-size: 0.8rem;
   text-align: right;
+}
+@media (max-width: 1300px) {
+  footer .container .footerText {
+    right: 3%;
+  }
+}
+@media (max-width: 1199px) {
+  footer .container .footerText {
+    right: -3%;
+  }
+}
+@media (max-width: 1089px) {
+  footer .container .footerText {
+    right: 4%;
+  }
+}
+@media (max-width: 991px) {
+  footer .container .footerText {
+    right: -5%;
+    bottom: 18px;
+  }
+}
+@media (max-width: 768px) {
+  footer .container .footerText {
+    text-align: left;
+    right: -15px;
+  }
+  footer .container .footerText .button-area {
+    margin: 0;
+  }
 }
 footer .container .footerText .button-area {
   width: 120px;
@@ -12268,25 +12298,6 @@ footer .container .footerText .footerLink a {
 }
 footer .container .footerText .copyright {
   line-height: 2rem;
-}
-@media (max-width: 1300px) {
-  footer .container .footerText {
-    right: 3%;
-  }
-}
-@media (max-width: 992px) {
-  footer .container .footerText {
-    bottom: 20px;
-  }
-}
-@media (max-width: 768px) {
-  footer .container .footerText {
-    text-align: left;
-    right: -15px;
-  }
-  footer .container .footerText .button-area {
-    margin: 0;
-  }
 }
 footer .top {
   float: right;
@@ -12358,7 +12369,7 @@ footer .top:hover span {
 }
 @media (max-width: 992px) {
   footer {
-    height: calc(200px + 61px);
+    height: calc(200px + 80px);
   }
 }
 @media (max-width: 768px) {

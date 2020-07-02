@@ -1,5 +1,6 @@
 .content-page-header {
   width: 100%;
+  min-width: 300px;
   height: 200px;
   background-color: #ffffff;
 }
@@ -9,16 +10,29 @@
   letter-spacing: 15px;
   display: inline-block;
 }
+@media (max-width: 379px) {
+  .content-page-header h1 {
+    font-size: 1.5rem;
+  }
+}
 .content-page-header .title-icon {
   width: 60px;
   margin-bottom: 18px;
   margin-right: 15px;
+}
+@media (max-width: 379px) {
+  .content-page-header .title-icon {
+    width: 40px;
+    margin-bottom: 10px;
+    margin-right: 10px;
+  }
 }
 .content-page-header .content {
   text-align: center;
 }
 
 .content-page-body {
+  min-width: 300px;
   background-color: #eaeaea;
   padding: 70px 0px 60px 0px;
 }
