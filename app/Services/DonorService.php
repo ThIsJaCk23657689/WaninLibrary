@@ -248,7 +248,7 @@ class DonorService extends BaseService
         $c = 1;
         foreach($donors as $donor){
             $donor->index = $skip + $c;
-            $donor->name = $donor->showName();
+            $donor->showName = $donor->showName();
             $donor->donateAmount = $donor->books()->count();
             $donor->donatedBookURL = route('front.donatedBooks.show', [$donor->id]);
             $c ++;
@@ -273,7 +273,8 @@ class DonorService extends BaseService
 
         foreach($books as $book){
             $book->index = $skip + $c;
-            $book->showName = $book->showName();
+            $book->showTitle =  $book->showTitle();
+            $book->showStatus =  $book->showStatus();
             $book->bookURL = route('front.books.show', [$book->id]);
             $c ++;
         }

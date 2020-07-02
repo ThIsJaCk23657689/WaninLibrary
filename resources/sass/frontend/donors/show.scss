@@ -1,0 +1,90 @@
+@import "../variables";
+@import "../contents";
+.content-page-header {
+    background-color: $gray;
+    height: 150px;
+}
+
+.content-page-body {
+    height: 1200px;
+    padding: 0px 0px 60px 0px;
+    .container {
+        height: 100%;
+        .donor-show-container {
+            height: 90%;
+            background-image: url('../../../images/frontend/icons/donated_book_bg.png');
+            background-repeat: no-repeat;
+            background-position: bottom;
+            background-size: 100% 100%;
+            padding: 110px 60px;
+            .title-rows {
+                font-size: 1.3rem;
+                font-weight: bold;
+                margin-bottom: 35px;
+            }
+            .book-row {
+                background-color: rgba(255, 255, 255, 0.7);
+                width: 100%;
+                font-size: 1.2rem;
+                margin-bottom: 35px;
+                a {
+                    display: block;
+                    width: 100%;
+                }
+                .book-info-container {
+                    width: 90%;
+                    display: inline-block;
+                    .book-index {
+                        display: inline-block;
+                        letter-spacing: 3px;
+                        width: 15%;
+                        padding: 0px 30px;
+                    }
+                    .book-date {
+                        display: inline-block;
+                        letter-spacing: 3px;
+                        width: 25%;
+                    }
+                    .book-title {
+                        display: inline-block;
+                        letter-spacing: 5px;
+                        width: 55%;
+                    }
+                    .book-title-status {
+                        display: inline-block;
+                        letter-spacing: 5px;
+                        width: 38%;
+                    }
+                    .book-status {
+                        display: inline-block;
+                        letter-spacing: 5px;
+                        font-size: 1rem;
+                        width: 18%;
+                    }
+                }
+                .book-readmore {
+                    display: inline-block;
+                    text-align: right;
+                    // width: 5%;
+                    height: 100%;
+                    color: $brown;
+                    float: right;
+                    font-size: 1.6rem;
+                }
+                .book-link {
+                    &:hover {
+                        text-decoration: none;
+                    }
+                }
+            }
+        }
+        .content-paginate-container {
+            margin-top: 60px;
+            .content-paginate {
+                li {
+                    color: $green;
+                }
+            }
+        }
+    }
+}

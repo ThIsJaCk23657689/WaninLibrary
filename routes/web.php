@@ -39,7 +39,7 @@ Route::get('/books/{id}', 'HomeController@books_show')->name('front.books.show')
 
 // 捐書芳名錄
 Route::get('/donors', 'HomeController@donors')->name('front.donors');
-Route::get('/donatedBooks/{id}', 'HomeController@donatedBooks_show')->name('front.donatedBooks.show');
+Route::get('/donatedBooks/{id}/{isSearched?}', 'HomeController@donatedBooks_show')->name('front.donatedBooks.show');
 
 
 // 捐贈書籍查詢

@@ -135,8 +135,9 @@ __webpack_require__.r(__webpack_exports__);
     getDonatedBookForm: function getDonatedBookForm(e) {
       var url = this.GetDonatedBooksURL;
       var data = $(e.target).serializeObject();
-      axios.post(url, data).then(function (response) {// console.log(response.data);
-        // $.showSuccessModal('查詢成功', response.data.url);
+      axios.post(url, data).then(function (response) {
+        console.log(response.data);
+        location.href = response.data.url; // $.showSuccessModal('查詢成功', response.data.url);
       })["catch"](function (error) {
         // console.error(error);
         if (error.response.status == 422) {

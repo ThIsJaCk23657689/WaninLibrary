@@ -23,7 +23,7 @@ class Book extends Model
     // DateTimeInterface 是原生PHP提供的，直接 use 即可。
     protected function serializeDate(DateTimeInterface $date)
     {
-        return $date->format($this->dateFormat ?: 'Y-m-d H:i:s');
+        return $date->format($this->dateFormat ?: 'Y-m-d');
     }
 
     public function donor(){
@@ -47,7 +47,7 @@ class Book extends Model
     }
 
     public function showTitle(){
-        $maxString = 80;
+        $maxString = 16;
         if(strlen($this->title) >= $maxString){
             return mb_substr($this->title, 0, $maxString) . '...';
         }else{

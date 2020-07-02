@@ -175,7 +175,7 @@ class HomeController extends Controller
 
         return response()->json([
             'status' => 'OK',
-            'books' => $result['books'],
+            'donors' => $result['donors'],
             'totalcount' => $result['count']
         ]);
     }
@@ -185,7 +185,7 @@ class HomeController extends Controller
         $active_num = 4;
         $donor = $this->DonorService->getOne($id);
         // $bookList = $donor->books;
-        $isSearched = 0; //判斷是否從捐贈書籍查詢來的結果
+        // $isSearched = 0; //判斷是否從捐贈書籍查詢來的結果
         return view('frontend.donatedBooks_show', compact('active_num', 'donor', 'isSearched'));
     }
 
@@ -194,7 +194,7 @@ class HomeController extends Controller
         $this->validate($request, [
             'skip' => 'nullable|integer',
             'first_page' => 'nullable|integer',
-            'id' => 'requried|integer'
+            'id' => 'required|integer'
         ]);
 
         $result = $this->DonorService->getDonorBooksListFrontend($request);
@@ -222,7 +222,13 @@ class HomeController extends Controller
         if($result['status'] == 200){
             $id = $result['donor_id'];
             $isSearched = $result['isSearched'];
-            return redirect()->action('homecontroller@donatedBooks_show', [$id, $isSearched]);
+            return response()->json([
+                'status' => $result['status'],
+                'isSearched' => $isSearched,
+                'id' => $id,
+                'url' => route('front.donatedBooks.show', [$id, $isSearched])
+            ], $result['status']);
+            // return redirect()->action('HomeController@donatedBooks_show', [$id, $isSearched]);
             // return view('frontend.donatedBooks_show', compact('id', 'isSearched'));
         }else{
             return response()->json([

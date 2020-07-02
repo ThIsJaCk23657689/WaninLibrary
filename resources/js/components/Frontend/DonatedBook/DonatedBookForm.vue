@@ -41,7 +41,8 @@ export default {
             let data = $(e.target).serializeObject();
 
             axios.post(url, data).then(response => {
-                // console.log(response.data);
+                console.log(response.data);
+                location.href = response.data.url;
                 // $.showSuccessModal('查詢成功', response.data.url);
             }).catch((error) => {
                 // console.error(error);

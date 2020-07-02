@@ -81,7 +81,7 @@
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 44);
+/******/ 	return __webpack_require__(__webpack_require__.s = 45);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -557,7 +557,7 @@ __webpack_require__.r(__webpack_exports__);
 
 /***/ }),
 
-/***/ 44:
+/***/ 45:
 /*!*******************************************!*\
   !*** multi ./resources/js/chart/index.js ***!
   \*******************************************/
