@@ -19,13 +19,13 @@ const app = new Vue({
             let url = $('#GetAnnouncementsList').text();
             axios.get(url, {
                 params: {
-                    skip: (this.currentPage - 1) * 4,
+                    skip: (this.currentPage - 1) * 8,
                 }
             }).then(response => {
                 this.announcements = response.data.announcements;
                 this.totalcount = response.data.totalcount;
-                this.totalPage = Math.ceil(this.totalcount / 4);
-                if(this.totalcount == 0){
+                this.totalPage = Math.ceil(this.totalcount / 8);
+                if (this.totalcount == 0) {
                     this.currentPage = 0;
                 }
                 $.closeModal();
@@ -39,7 +39,7 @@ const app = new Vue({
             this.getAnnouncements();
             this.goBackToTop();
         },
-        goBackToTop(){
+        goBackToTop() {
             $('html, body').animate({
                 scrollTop: 200
             }, 500);

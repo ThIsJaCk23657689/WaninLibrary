@@ -23,14 +23,14 @@ const app = new Vue({
         getDonors(firstPage = 0) {
             $.showLoadingModal();
 
-            if(firstPage == 1 || this.currentPage == 0){
+            if (firstPage == 1 || this.currentPage == 0) {
                 this.currentPage = 1;
             }
 
             let url = $('#GetDonorsList').text();
             axios.get(url, {
                 params: {
-                    skip: (this.currentPage - 1) * 4,
+                    skip: (this.currentPage - 1) * 8,
                     year: this.filter.year,
                     keywords: this.filter.keyword,
                     orderBy: this.filter.order,
@@ -40,8 +40,8 @@ const app = new Vue({
             }).then(response => {
                 this.donors = response.data.donors;
                 this.totalcount = response.data.totalcount;
-                this.totalPage = Math.ceil(this.totalcount / 4);
-                if(this.totalcount == 0){
+                this.totalPage = Math.ceil(this.totalcount / 8);
+                if (this.totalcount == 0) {
                     this.currentPage = 0;
                 }
                 $.closeModal();
@@ -55,11 +55,11 @@ const app = new Vue({
             this.getDonors();
             this.goBackToTop();
         },
-        refreshDonor(firstPage){
+        refreshDonor(firstPage) {
             this.getDonors(firstPage);
             this.goBackToTop();
         },
-        goBackToTop(){
+        goBackToTop() {
             $('html, body').animate({
                 scrollTop: 200
             }, 500);

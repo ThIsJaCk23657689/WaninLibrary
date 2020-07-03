@@ -1352,7 +1352,7 @@ var app = new Vue({
       var url = $('#GetBooksList').text();
       axios.get(url, {
         params: {
-          skip: (this.currentPage - 1) * 4,
+          skip: (this.currentPage - 1) * 6,
           type: this.filter.type,
           keywords: this.filter.keyword,
           orderBy: this.filter.order,
@@ -1362,7 +1362,7 @@ var app = new Vue({
       }).then(function (response) {
         _this.books = response.data.books;
         _this.totalcount = response.data.totalcount;
-        _this.totalPage = Math.ceil(_this.totalcount / 4);
+        _this.totalPage = Math.ceil(_this.totalcount / 6);
 
         if (_this.totalcount == 0) {
           _this.currentPage = 0;
@@ -1404,7 +1404,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\freebooks\index.js */"./resources/js/frontend/freebooks/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\freebooks\index.js */"./resources/js/frontend/freebooks/index.js");
 
 
 /***/ })

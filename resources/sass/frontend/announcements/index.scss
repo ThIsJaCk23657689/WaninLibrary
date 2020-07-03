@@ -8,9 +8,27 @@
     }
 }
 
+.content-page-header h1 {
+    @media (max-width: 460px) {
+        font-size: 1.5rem;
+    }
+}
+
+.content-page-body {
+    min-width: 768px !important;
+    .container {
+        @media (max-width: 767px) {
+            max-width: initial;
+        }
+    }
+}
+
 .announcement-container {
     border: 2px solid $pink;
     padding: 100px 100px 50px;
+    @media (max-width: 991px) {
+        padding: 60px 50px;
+    }
     .announcement-row {
         background-image: url('../../../images/frontend/icons/news_underline.png');
         background-repeat: no-repeat;
@@ -27,6 +45,10 @@
                 width: 15%;
                 // height: 100%;
                 text-align: right;
+                @media (max-width: 991px) {
+                    width: 12%;
+                    position: relative;
+                }
                 .announcement-new {
                     display: inline-block;
                     background-color: $pink;
@@ -34,6 +56,12 @@
                     padding: 5px 15px;
                     border-radius: 40px;
                     font-size: 1.2rem;
+                    @media (max-width: 991px) {
+                        font-size: 1rem;
+                        position: absolute;
+                        bottom: 6px;
+                        left: 15px;
+                    }
                 }
             }
             .announcement-info-container {
@@ -43,14 +71,25 @@
                 width: 60%;
                 height: 100%;
                 margin: 0px 25px 0px 30px;
+                @media (max-width: 991px) {
+                    font-size: 1rem;
+                    position: relative;
+                }
                 .announcement-date {
                     display: inline-block;
                     letter-spacing: 3px;
                     margin-right: 20px;
+                    @media (max-width: 991px) {
+                        position: absolute;
+                    }
                 }
                 .announcement-title {
                     display: inline-block;
                     letter-spacing: 5px;
+                    @media (max-width: 991px) {
+                        top: 25px;
+                        position: absolute;
+                    }
                 }
             }
             .announcement-readmore {
@@ -59,6 +98,11 @@
                 width: 10%;
                 height: 100%;
                 color: $pink;
+                @media (max-width: 991px) {
+                    font-size: 0.8rem;
+                    position: relative;
+                    bottom: 7px;
+                }
             }
             &:hover {
                 text-decoration: none;

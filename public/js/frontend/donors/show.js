@@ -160,6 +160,7 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['book', 'isSearched'],
   data: function data() {
@@ -323,24 +324,32 @@ var render = function() {
       { staticClass: "col-md-12" },
       [
         _vm.isSearched === 1
-          ? _c("div", { staticClass: "title-rows row" }, [
-              _c("div", { staticClass: "col-md-2" }, [_vm._v("序號")]),
+          ? _c("div", { staticClass: "title-status-rows row" }, [
+              _c("div", { staticClass: "col-2 status-row-col" }, [
+                _vm._v("序號")
+              ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-md-3" }, [_vm._v("日期")]),
+              _c("div", { staticClass: "col-3 status-row-col" }, [
+                _vm._v("日期")
+              ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-md-3" }, [_vm._v("書籍名稱")]),
+              _c("div", { staticClass: "col-3 status-col-title" }, [
+                _vm._v("書籍名稱")
+              ]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-md-2" }, [_vm._v("書籍狀態")])
+              _c("div", { staticClass: "col-2 status-col-status" }, [
+                _vm._v("書籍狀態")
+              ])
             ])
           : _vm._e(),
         _vm._v(" "),
         _vm.isSearched === 0
           ? _c("div", { staticClass: "title-rows row" }, [
-              _c("div", { staticClass: "col-md-2" }, [_vm._v("序號")]),
+              _c("div", { staticClass: "col-2 row-col" }, [_vm._v("序號")]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-md-3" }, [_vm._v("日期")]),
+              _c("div", { staticClass: "col-3 row-col" }, [_vm._v("日期")]),
               _vm._v(" "),
-              _c("div", { staticClass: "col-md-6" }, [_vm._v("書籍名稱")])
+              _c("div", { staticClass: "col-6 row-col" }, [_vm._v("書籍名稱")])
             ])
           : _vm._e(),
         _vm._v(" "),
@@ -354,7 +363,7 @@ var render = function() {
         _vm.books.length == 0
           ? _c("span", { staticClass: "not-found-message" }, [
               _vm._v(
-                "\r\n            很抱歉，無法找到您所查詢的資料，請重新查詢謝謝。\r\n        "
+                "\n            很抱歉，無法找到您所查詢的資料，請重新查詢謝謝。\n        "
               )
             ])
           : _vm._e()
@@ -388,7 +397,7 @@ var render = function() {
   return _c("div", { staticClass: "row book-row" }, [
     _c("a", { staticClass: "book-link", attrs: { href: _vm.book.bookURL } }, [
       _vm.isSearched === 1
-        ? _c("div", { staticClass: "book-info-container" }, [
+        ? _c("div", { staticClass: "book-info-status-container" }, [
             _c("div", { staticClass: "book-index" }, [
               _vm._v(_vm._s(_vm.book.index))
             ]),
@@ -1019,13 +1028,13 @@ var app = new Vue({
       this.isSearched = parseInt($('#getIsSearched').text());
       axios.get(url, {
         params: {
-          skip: (this.currentPage - 1) * 4,
+          skip: (this.currentPage - 1) * 8,
           id: donor_id
         }
       }).then(function (response) {
         _this.books = response.data.books;
         _this.totalcount = response.data.totalcount;
-        _this.totalPage = Math.ceil(_this.totalcount / 4);
+        _this.totalPage = Math.ceil(_this.totalcount / 8);
 
         if (_this.totalcount == 0) {
           _this.currentPage = 0;
@@ -1063,7 +1072,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\donors\show.js */"./resources/js/frontend/donors/show.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\donors\show.js */"./resources/js/frontend/donors/show.js");
 
 
 /***/ })

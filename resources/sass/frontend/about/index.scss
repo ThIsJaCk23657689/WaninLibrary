@@ -2,6 +2,14 @@
 @import "../contents";
 .content-page-body {
     padding: 70px 0px 0px 0px;
+    .rwd-container {
+        @media (max-width: 991px) {
+            max-width: 760px !important;
+        }
+        @media (max-width: 767px) {
+            max-width: 720px !important;
+        }
+    }
     .container {
         .about-detail-row-up {
             background-color: rgba(255, 255, 255, 0.7);
@@ -9,11 +17,20 @@
             letter-spacing: 3px;
             padding: 52px;
             line-height: 50px;
+            p {
+                @media (max-width: 575px) {
+                    font-size: 1rem;
+                }
+                @media (max-width: 400px) {
+                    font-size: 0.9rem;
+                }
+            }
         }
     }
 }
 
 .about-down {
+    min-width: $web-min-width;
     .about-down-container {
         position: absolute;
         width: 100%;
@@ -34,6 +51,15 @@
             margin: 0;
             p {
                 margin: 0;
+                @media (max-width: 767px) {
+                    font-size: 1rem;
+                }
+                @media (max-width: 575px) {
+                    font-size: 0.8rem;
+                }
+                @media (max-width: 400px) {
+                    font-size: 0.6rem;
+                }
             }
             .about-down-images-left {
                 position: relative;
@@ -42,6 +68,17 @@
                 width: 100%;
                 align-items: center;
                 display: flex;
+                @media (max-width: 575px) {
+                    top: 30px;
+                }
+                @media (max-width: 400px) {
+                    top: 20px;
+                }
+                img {
+                    @media (max-width: 575px) {
+                        width: 15% !important;
+                    }
+                }
             }
             .about-down-images-right {
                 position: relative;
@@ -53,6 +90,15 @@
                 width: 20%;
                 // left: 1240px;
                 right: 0;
+                @media (max-width: 575px) {
+                    width: 15%;
+                }
+                @media (max-width: 575px) {
+                    bottom: 25px;
+                }
+                @media (max-width: 400px) {
+                    bottom: 15px;
+                }
                 img {
                     width: 100%;
                 }

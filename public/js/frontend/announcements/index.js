@@ -965,12 +965,12 @@ var app = new Vue({
       var url = $('#GetAnnouncementsList').text();
       axios.get(url, {
         params: {
-          skip: (this.currentPage - 1) * 4
+          skip: (this.currentPage - 1) * 8
         }
       }).then(function (response) {
         _this.announcements = response.data.announcements;
         _this.totalcount = response.data.totalcount;
-        _this.totalPage = Math.ceil(_this.totalcount / 4);
+        _this.totalPage = Math.ceil(_this.totalcount / 8);
 
         if (_this.totalcount == 0) {
           _this.currentPage = 0;
@@ -1008,7 +1008,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\announcements\index.js */"./resources/js/frontend/announcements/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\announcements\index.js */"./resources/js/frontend/announcements/index.js");
 
 
 /***/ })

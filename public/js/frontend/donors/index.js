@@ -639,7 +639,7 @@ var render = function() {
       _vm._v(_vm._s(_vm.donor.showName))
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "donor-col w-18 td" }, [
+    _c("div", { staticClass: "donor-col w-18 td donor-col-amount" }, [
       _vm._v(_vm._s(_vm.donor.donateAmount))
     ]),
     _vm._v(" "),
@@ -1316,7 +1316,7 @@ var app = new Vue({
       var url = $('#GetDonorsList').text();
       axios.get(url, {
         params: {
-          skip: (this.currentPage - 1) * 4,
+          skip: (this.currentPage - 1) * 8,
           year: this.filter.year,
           keywords: this.filter.keyword,
           orderBy: this.filter.order,
@@ -1326,7 +1326,7 @@ var app = new Vue({
       }).then(function (response) {
         _this.donors = response.data.donors;
         _this.totalcount = response.data.totalcount;
-        _this.totalPage = Math.ceil(_this.totalcount / 4);
+        _this.totalPage = Math.ceil(_this.totalcount / 8);
 
         if (_this.totalcount == 0) {
           _this.currentPage = 0;
@@ -1368,7 +1368,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\donors\index.js */"./resources/js/frontend/donors/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\donors\index.js */"./resources/js/frontend/donors/index.js");
 
 
 /***/ })

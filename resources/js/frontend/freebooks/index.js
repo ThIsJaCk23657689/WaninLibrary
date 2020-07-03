@@ -23,14 +23,14 @@ const app = new Vue({
         getBooks(firstPage = 0) {
             $.showLoadingModal();
 
-            if(firstPage == 1 || this.currentPage == 0){
+            if (firstPage == 1 || this.currentPage == 0) {
                 this.currentPage = 1;
             }
 
             let url = $('#GetBooksList').text();
             axios.get(url, {
                 params: {
-                    skip: (this.currentPage - 1) * 4,
+                    skip: (this.currentPage - 1) * 6,
                     type: this.filter.type,
                     keywords: this.filter.keyword,
                     orderBy: this.filter.order,
@@ -40,8 +40,8 @@ const app = new Vue({
             }).then(response => {
                 this.books = response.data.books;
                 this.totalcount = response.data.totalcount;
-                this.totalPage = Math.ceil(this.totalcount / 4);
-                if(this.totalcount == 0){
+                this.totalPage = Math.ceil(this.totalcount / 6);
+                if (this.totalcount == 0) {
                     this.currentPage = 0;
                 }
                 $.closeModal();
@@ -55,11 +55,11 @@ const app = new Vue({
             this.getBooks();
             this.goBackToTop();
         },
-        refreshBook(firstPage){
+        refreshBook(firstPage) {
             this.getBooks(firstPage);
             this.goBackToTop();
         },
-        goBackToTop(){
+        goBackToTop() {
             $('html, body').animate({
                 scrollTop: 200
             }, 500);
