@@ -27,10 +27,25 @@
     }
 }
 
-.book-detail-container {
+.rwd-container {
+    @media (max-width: 767px) {
+        max-width: 650px !important;
+    }
+}
+
+.paper-rwd-detail-container {
     height: 650px;
     font-size: 1.2rem;
     color: $brown;
+    @media (max-width: 767px) {
+        height: 800px;
+    }
+    @media (max-width: 575px) {
+        height: 700px;
+    }
+    @media (max-width: 500px) {
+        height: 600px;
+    }
     .book-detail-row {
         width: 100%;
         padding: 50px;
@@ -39,9 +54,24 @@
         background-image: url(../../../images/frontend/icons/book_bg.png);
         background-repeat: no-repeat;
         background-size: 100% 100%;
+        @media (max-width: 991px) {
+            font-size: 1rem;
+        }
+        @media (max-width: 575px) {
+            font-size: 0.8rem;
+        }
+        @media (max-width: 350px) {
+            padding: 65px 0px;
+        }
         .book-detail-row-left {
             padding: 20px 60px 25px 40px;
             text-align: center;
+            @media (max-width: 991px) {
+                padding: 70px 0px;
+            }
+            @media (max-width: 767px) {
+                padding: 20px 60px 0px 60px;
+            }
             .row {
                 margin-top: 15px;
             }
@@ -50,28 +80,179 @@
                     width: 80%;
                     margin-bottom: 10px;
                     box-shadow: 2px 5px 15px 2px rgba(0, 0, 0, 0.5);
+                    @media (max-width: 767px) {
+                        width: 75%;
+                    }
                 }
             }
         }
         .book-detail-row-right {
             padding: 20px;
+            @media (max-width: 991px) {
+                max-width: 100% !important;
+                padding: 35px 20px;
+            }
+            @media (max-width: 767px) {
+                padding: 0px 20px;
+            }
+            .row {
+                @media (max-width: 991px) {
+                    width: 100%;
+                    margin: 0;
+                }
+            }
             .paper-row-col {
                 padding: 20px 0px;
+                @media (max-width: 767px) {
+                    padding: 0px;
+                    text-align: center;
+                }
                 p {
                     display: inline;
                     word-break: break-word;
                 }
                 .book-rows {
                     margin: 30px 20px;
+                    @media (max-width: 767px) {
+                        margin: 0px;
+                        margin-bottom: 15px;
+                    }
                 }
             }
             .book-row-col {
+                @media (max-width: 991x) {
+                    padding: 0;
+                }
+                @media (max-width: 767px) {
+                    text-align: center;
+                }
                 p {
                     display: inline;
                     word-break: break-word;
                 }
                 .book-rows {
                     margin: 23px 20px;
+                    @media (max-width: 991px) {
+                        padding: 0;
+                        margin: 0;
+                        margin-bottom: 15px;
+                    }
+                    @media (max-width: 767px) {
+                        margin: 9px 40px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.book-detail-container {
+    height: 650px;
+    font-size: 1.2rem;
+    color: $brown;
+    @media (max-width: 767px) {
+        height: 960px;
+    }
+    @media (max-width: 575px) {
+        height: 800px;
+    }
+    @media (max-width: 500px) {
+        height: 700px;
+    }
+    .book-detail-row {
+        width: 100%;
+        padding: 50px;
+        height: 100%;
+        margin: 0;
+        background-image: url(../../../images/frontend/icons/book_bg.png);
+        background-repeat: no-repeat;
+        background-size: 100% 100%;
+        @media (max-width: 991px) {
+            font-size: 1rem;
+        }
+        @media (max-width: 575px) {
+            font-size: 0.8rem;
+        }
+        @media (max-width: 350px) {
+            padding: 65px 0px;
+        }
+        .book-detail-row-left {
+            padding: 20px 60px 25px 40px;
+            text-align: center;
+            @media (max-width: 991px) {
+                padding: 70px 0px;
+            }
+            @media (max-width: 767px) {
+                padding: 20px 60px 0px 60px;
+            }
+            .row {
+                margin-top: 15px;
+            }
+            .book-detail-img {
+                img {
+                    width: 80%;
+                    margin-bottom: 10px;
+                    box-shadow: 2px 5px 15px 2px rgba(0, 0, 0, 0.5);
+                    @media (max-width: 767px) {
+                        width: 75%;
+                    }
+                }
+            }
+        }
+        .book-detail-row-right {
+            padding: 20px;
+            @media (max-width: 991px) {
+                max-width: 100% !important;
+                padding: 35px 20px;
+            }
+            @media (max-width: 767px) {
+                padding: 0px 20px;
+            }
+            .row {
+                @media (max-width: 991px) {
+                    width: 100%;
+                    margin: 0;
+                }
+            }
+            .paper-row-col {
+                padding: 20px 0px;
+                @media (max-width: 767px) {
+                    padding: 0px;
+                    text-align: center;
+                }
+                p {
+                    display: inline;
+                    word-break: break-word;
+                }
+                .book-rows {
+                    margin: 30px 20px;
+                    @media (max-width: 767px) {
+                        margin: 0px;
+                        margin-bottom: 15px;
+                    }
+                }
+            }
+            .book-row-col {
+                @media (max-width: 991x) {
+                    padding: 0;
+                }
+                @media (max-width: 767px) {
+                    text-align: center;
+                }
+                p {
+                    display: inline;
+                    word-break: break-word;
+                }
+                .book-rows {
+                    margin: 23px 20px;
+                    @media (max-width: 991px) {
+                        padding: 0;
+                        margin: 0;
+                        margin-bottom: 15px;
+                    }
+                    @media (max-width: 767px) {
+                        margin: 9px 0px;
+                    }
                 }
             }
         }

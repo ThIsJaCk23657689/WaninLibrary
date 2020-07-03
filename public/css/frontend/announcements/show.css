@@ -49,6 +49,7 @@
 }
 
 .detail-page-body {
+  min-width: 300px;
   background-color: #eaeaea;
   padding: 0px 0px 60px 0px;
 }
@@ -109,6 +110,7 @@
 }
 
 .announcement-detail {
+  min-width: 300px;
   width: 100%;
   height: 1000px;
   background-color: #eaeaea;
@@ -119,6 +121,11 @@
   background-repeat: no-repeat;
   background-size: 100% 100%;
   position: relative;
+}
+@media (max-width: 991px) {
+  .announcement-detail .content-container {
+    margin: 0;
+  }
 }
 .announcement-detail .content-container header {
   height: 35%;
@@ -136,18 +143,124 @@
   top: 230px;
   left: 235px;
 }
-.announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container h1 {
+@media (max-width: 991px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container {
+    top: 250px;
+    left: 165px;
+    width: 80%;
+  }
+}
+@media (max-width: 767px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container {
+    top: 228px;
+    left: 115px;
+    width: 100%;
+  }
+}
+@media (max-width: 575px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container {
+    left: 90px;
+    top: 238px;
+  }
+}
+@media (max-width: 450px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container {
+    left: 75px;
+  }
+}
+@media (max-width: 350px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container {
+    left: 60px;
+  }
+}
+@media (max-width: 300px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container {
+    top: 255px;
+  }
+}
+.announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content {
+  text-align: left;
+  float: left;
+  margin: 0;
+}
+@media (max-width: 991px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content {
+    width: 60%;
+  }
+}
+.announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
   color: #55473f;
   font-size: 2.2rem;
   letter-spacing: 10px;
   display: inline-block;
   font-weight: bold;
 }
+@media (max-width: 991px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
+    font-size: 1.6rem;
+  }
+}
+@media (max-width: 767px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
+    font-size: 1.5rem;
+    letter-spacing: 5px;
+  }
+}
+@media (max-width: 575px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
+    font-size: 1.1rem;
+  }
+}
+@media (max-width: 450px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 300px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 767px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content {
+    width: 45%;
+  }
+}
 .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
   position: absolute;
   right: 430px;
   bottom: 3px;
   margin: 0;
+}
+@media (max-width: 991px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
+    right: 90px;
+  }
+}
+@media (max-width: 767px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
+    right: 215px;
+    bottom: 15px;
+    width: 20%;
+  }
+}
+@media (max-width: 575px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
+    right: 175px;
+    bottom: 8px;
+    width: 20%;
+  }
+}
+@media (max-width: 450px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
+    right: 140px;
+  }
+}
+@media (max-width: 450px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
+    width: 22%;
+    right: 110px;
+  }
 }
 .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date h2 {
   margin: 0;
@@ -164,6 +277,27 @@
     margin-left: 0px;
   }
 }
+@media (max-width: 767px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date h2 {
+    margin: 0;
+    font-size: 2.5rem;
+  }
+}
+@media (max-width: 575px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date h2 {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 450px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date h2 {
+    font-size: 1.5rem;
+  }
+}
+@media (max-width: 300px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date h2 {
+    font-size: 1.3rem;
+  }
+}
 .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date span {
   letter-spacing: 2px;
   display: inline-block;
@@ -173,10 +307,26 @@
   top: 3px;
   margin-right: 10px;
 }
-.announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content {
-  text-align: left;
-  float: left;
-  margin: 0;
+@media (max-width: 767px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date span {
+    margin: 0;
+    top: 0;
+  }
+}
+@media (max-width: 575px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date span {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 450px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date span {
+    font-size: 0.6rem;
+  }
+}
+@media (max-width: 300px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date span {
+    font-size: 0.5rem;
+  }
 }
 .announcement-detail .content-container .annoucement-detail-content {
   height: 48%;
@@ -184,6 +334,11 @@
   width: 880px;
   margin-left: auto;
   margin-right: auto;
+}
+@media (max-width: 991px) {
+  .announcement-detail .content-container .annoucement-detail-content {
+    width: 60%;
+  }
 }
 .announcement-detail .content-container .annoucement-detail-content .announcement-detail-row {
   width: 100%;

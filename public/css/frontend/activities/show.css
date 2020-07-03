@@ -49,6 +49,7 @@
 }
 
 .detail-page-body {
+  min-width: 300px;
   background-color: #eaeaea;
   padding: 0px 0px 60px 0px;
 }
@@ -108,8 +109,20 @@
   color: #93e5b4;
 }
 
+@media (max-width: 991px) {
+  .rwd-container {
+    max-width: 850px !important;
+  }
+}
+@media (max-width: 767px) {
+  .rwd-container {
+    max-width: 620px !important;
+  }
+}
+
 .detail-page-header {
   width: 100%;
+  min-width: 300px;
   height: 200px;
   background-color: #eaeaea;
 }
@@ -120,6 +133,11 @@
   align-items: center;
   justify-content: center;
   padding: 50px 80px;
+}
+@media (max-width: 575px) {
+  .detail-page-header .activity-detail-title {
+    padding: 40px 15px;
+  }
 }
 .detail-page-header .activity-detail-title .activity-detail-title-container {
   width: 1100px;
@@ -133,12 +151,43 @@
   display: inline-block;
   font-weight: bold;
 }
+@media (max-width: 767px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container h1 {
+    font-size: 1.8rem;
+  }
+}
+@media (max-width: 767px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container h1 {
+    font-size: 1.5rem;
+  }
+}
 .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
   width: 15%;
   position: absolute;
   right: 0;
   bottom: 5px;
   margin: 0;
+}
+@media (max-width: 991px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
+    width: 20%;
+  }
+}
+@media (max-width: 767px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
+    width: 20%;
+    right: -10px;
+  }
+}
+@media (max-width: 575px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
+    width: 25%;
+  }
+}
+@media (max-width: 420px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
+    width: 30%;
+  }
 }
 .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date h2 {
   margin: 0;
@@ -155,6 +204,21 @@
     margin-left: 0px;
   }
 }
+@media (max-width: 767px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date h2 {
+    font-size: 2.7rem;
+  }
+}
+@media (max-width: 420px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date h2 {
+    font-size: 2rem;
+  }
+}
+@media (max-width: 385px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date h2 {
+    font-size: 1.8rem;
+  }
+}
 .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date span {
   display: inline-block;
   float: right;
@@ -163,12 +227,43 @@
   top: 3px;
   margin-right: 10px;
 }
+@media (max-width: 420px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date span {
+    font-size: 0.8rem;
+  }
+}
+@media (max-width: 385px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date span {
+    font-size: 0.7rem;
+  }
+}
 .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-title-content {
   text-align: left;
   position: relative;
   width: calc(100% - 15%);
   float: left;
   margin: 0;
+}
+@media (max-width: 767px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-title-content {
+    width: 80%;
+    padding-left: 10px;
+  }
+}
+@media (max-width: 575px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-title-content {
+    width: 75%;
+  }
+}
+@media (max-width: 767px) {
+  .detail-page-header .recommandation-detail-title {
+    padding: 0px 60px;
+  }
+}
+@media (max-width: 767px) {
+  .detail-page-header .recommandation-detail-title {
+    padding: 0px 20px;
+  }
 }
 .detail-page-header .recommandation-detail-title .recommandation-detail-title-container {
   width: 1100px;
@@ -179,6 +274,11 @@
   font-size: 2.2rem;
   letter-spacing: 10px;
   display: inline-block;
+}
+@media (max-width: 767px) {
+  .detail-page-header .recommandation-detail-title .recommandation-detail-title-container .recommandation-detail-title-content h1 {
+    font-size: 2rem;
+  }
 }
 
 .activity-detail-row {

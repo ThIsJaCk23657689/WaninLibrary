@@ -45,6 +45,7 @@
 }
 
 .detail-page-body {
+    min-width: $web-min-width;
     background-color: $gray;
     padding: 0px 0px 60px 0px;
     .goback-container {
