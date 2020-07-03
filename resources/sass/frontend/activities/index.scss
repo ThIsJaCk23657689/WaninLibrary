@@ -3,12 +3,25 @@
 .switch-btn-row {
     border-bottom: 1px solid $blue;
     margin-bottom: 25px;
+    @media (max-width: 767px) {
+        border: none;
+    }
     .switch-btn-container {
         padding: 6px 0px;
+        @media (max-width: 767px) {
+            padding: 0px;
+            border: 1px solid $blue !important;
+            &:first-child{
+                border-bottom: none !important;
+            }
+        }
         &.actived {
             border-left: 1px solid $blue;
             border-top: 1px solid $blue;
             border-right: 1px solid $blue;
+            @media (max-width: 767px) {
+                border: none;
+            }
             .switch-btn {
                 color: $green;
             }
@@ -36,6 +49,16 @@
     color: $brown;
     width: calc(50% - 56px);
     height: 580px;
+    @media (max-width: 991px) {
+        width: calc(100% - 56px);
+    }
+    @media (max-width: 575px) {
+        margin: 25px 0px;
+        width: 100%;
+    }
+    @media (max-width: 519px) {
+        padding: 30px 10px;
+    }
     .activity-card-date {
         position: relative;
         border-bottom: 3px solid $green;
@@ -76,6 +99,34 @@
                     left: calc(50% + 0px);
                     transform: translateX(-50%);
                     transition: all 0.8s ease-in-out;
+                    @media (max-width: 991px) {
+                        width: 100%;
+                        height: auto;
+                        top: calc(50% + 0px);
+                        left: 0;
+                        transform: translateY(-50%);
+                    }
+                    @media (max-width: 767px) {
+                        width: auto;
+                        height: 100%;
+                        top: 0;
+                        left: calc(50% + 0px);
+                        transform: translateX(-50%);
+                    }
+                    @media (max-width: 575px) {
+                        width: 100%;
+                        height: auto;
+                        top: calc(50% + 0px);
+                        left: 0;
+                        transform: translateY(-50%);
+                    }
+                    @media (max-width: 459px) {
+                        width: auto;
+                        height: 100%;
+                        top: 0;
+                        left: calc(50% + 0px);
+                        transform: translateX(-50%);
+                    }
                 }
                 .image-gray {
                     position: absolute;

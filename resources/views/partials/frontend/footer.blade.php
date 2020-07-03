@@ -2,7 +2,7 @@
     <footer>
         <div class="container">
             <div class="row">
-                <div class="col-lg-6 col-md-12">
+                <div class="col-lg-6 col-md-12 footer-text-container">
                     <table class="footerTable">
                         <thead>
                             <tr>
@@ -49,7 +49,7 @@
                 </div>
             </div>
             <div class="footerText">
-                <div>
+                <div class="d-inline-block">
                     <ul class="navbar-nav button-area">
                         <li class="nav-item">
                             <a href="#" class="nav-link">

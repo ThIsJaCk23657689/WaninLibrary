@@ -1,5 +1,5 @@
 <template>
-<div class="col-md-6 pd-25">
+<div class="col-xl-6 col-12 pd-25">
     <div class="freebook-card">
         <a :href="book.showURL" class="freebook-card-link">
             <div class="freebook-cover-image">

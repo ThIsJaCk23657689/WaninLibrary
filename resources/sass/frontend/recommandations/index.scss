@@ -3,12 +3,25 @@
 .switch-btn-row {
     border-bottom: 1px solid $blue;
     margin-bottom: 25px;
+    @media (max-width: 767px) {
+        border: none;
+    }
     .switch-btn-container {
         padding: 6px 0px;
+        @media (max-width: 767px) {
+            padding: 0px;
+            border: 1px solid $blue !important;
+            &:first-child{
+                border-bottom: none !important;
+            }
+        }
         &.actived {
             border-left: 1px solid $blue;
             border-top: 1px solid $blue;
             border-right: 1px solid $blue;
+            @media (max-width: 767px) {
+                border: none;
+            }
             .switch-btn {
                 color: $green;
             }
@@ -34,6 +47,10 @@
     border: 1px solid $blue;
     color: $brown;
     width: calc(100% - 56px);
+    @media (max-width: 767px) {
+        margin: 25px 0px;
+        width: 100%;
+    }
     &:nth-child(even) {
         .recommandation-card-image {
             float: right !important;
@@ -64,6 +81,41 @@
                     left: 0;
                     transform: translateY(-50%);
                     transition: all 0.8s ease-in-out;
+                    @media (max-width: 1199px) {
+                        width: auto;
+                        height: 100%;
+                        top: 0;
+                        left: calc(50% + 0px);
+                        transform: translateX(-50%);
+                    }
+                    // @media (max-width: 991px) {
+                    //     width: 100%;
+                    //     height: auto;
+                    //     top: calc(50% + 0px);
+                    //     left: 0;
+                    //     transform: translateY(-50%);
+                    // }
+                    // @media (max-width: 767px) {
+                    //     width: auto;
+                    //     height: 100%;
+                    //     top: 0;
+                    //     left: calc(50% + 0px);
+                    //     transform: translateX(-50%);
+                    // }
+                    // @media (max-width: 575px) {
+                    //     width: 100%;
+                    //     height: auto;
+                    //     top: calc(50% + 0px);
+                    //     left: 0;
+                    //     transform: translateY(-50%);
+                    // }
+                    // @media (max-width: 459px) {
+                    //     width: auto;
+                    //     height: 100%;
+                    //     top: 0;
+                    //     left: calc(50% + 0px);
+                    //     transform: translateX(-50%);
+                    // }
                 }
                 .image-gray {
                     position: absolute;
@@ -78,6 +130,9 @@
             &:hover {
                 img{
                     transform: translateY(-50%) scale(1.1);
+                    @media (max-width: 1199px) {
+                        transform: translateX(-50%) scale(1.1);
+                    }
                 }
                 .image-gray {
                     background-color: rgba($blue, 0);
@@ -91,6 +146,12 @@
         float: right;
         padding: 30px 40px;
         position: relative;
+        @media (max-width: 767px) {
+            padding: 20px 25px;
+        }
+        @media (max-width: 575px) {
+            padding: 10px 15px;
+        }
         .recommandation-card-date {
             position: relative;
             border-bottom: 3px solid $green;
@@ -103,6 +164,9 @@
                 font-weight: bold;
                 display: inline-block;
                 color: $green;
+                @media (max-width: 575px) {
+                    font-size: 2rem;
+                }
             }
             span {
                 display: inline-block;
@@ -112,7 +176,10 @@
                 right: 5px;
                 bottom: 10px;
                 font-size: 1.2rem;
-                // font-weight: lighter;
+                @media (max-width: 575px) {
+                    font-size: 0.8rem;
+                    bottom: 5px;
+                }
             }
         }
         .recommandation-card-title {
@@ -120,6 +187,9 @@
                 color: $brown;
                 font-size: 1.3rem;
                 font-weight: bold;
+                @media (max-width: 575px) {
+                    font-size: 1rem;
+                }
             }
         }
         .recommandation-card-arrow-container {

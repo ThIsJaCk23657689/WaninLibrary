@@ -1273,7 +1273,7 @@ exports = module.exports = __webpack_require__(/*! ../../../../node_modules/css-
 
 
 // module
-exports.push([module.i, "\nimg {\n  height: auto;\n  max-width: 2.5rem;\n  margin-right: 1rem;\n}\n.d-center {\n  display: flex;\n  align-items: center;\n}\n.selected img {\n  width: auto;\n  max-height: 23px;\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\n  border-bottom: none;\n}\n.v-select .dropdown li a {\n  padding: 10px 20px;\n  width: 100%;\n  font-size: 1.25em;\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\n  color: #fff;\n}\n\n\n", ""]);
+exports.push([module.i, "\nimg {\r\n  height: auto;\r\n  max-width: 2.5rem;\r\n  margin-right: 1rem;\n}\n.d-center {\r\n  display: flex;\r\n  align-items: center;\n}\n.selected img {\r\n  width: auto;\r\n  max-height: 23px;\r\n  margin-right: 0.5rem;\n}\n.v-select .dropdown li {\r\n  border-bottom: 1px solid rgba(112, 128, 144, 0.1);\n}\n.v-select .dropdown li:last-child {\r\n  border-bottom: none;\n}\n.v-select .dropdown li a {\r\n  padding: 10px 20px;\r\n  width: 100%;\r\n  font-size: 1.25em;\r\n  color: #3c3c3c;\n}\n.v-select .dropdown-menu .active > a {\r\n  color: #fff;\n}\r\n\r\n\r\n", ""]);
 
 // exports
 
@@ -2200,7 +2200,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        確認新增\n                    "
+                        "\r\n                        確認新增\r\n                    "
                       )
                     ]
                   ),
@@ -2213,7 +2213,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        返回列表\n                    "
+                        "\r\n                        返回列表\r\n                    "
                       )
                     ]
                   )
@@ -2401,7 +2401,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        確認新增\n                    "
+                        "\r\n                        確認新增\r\n                    "
                       )
                     ]
                   ),
@@ -2414,7 +2414,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                        返回列表\n                    "
+                        "\r\n                        返回列表\r\n                    "
                       )
                     ]
                   )
@@ -2455,7 +2455,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "fas fa-user-tie mr-2" }),
               _vm._v(
-                "\n                        一般書籍(有ISBN)\n                    "
+                "\r\n                        一般書籍(有ISBN)\r\n                    "
               )
             ]
           )
@@ -2473,7 +2473,7 @@ var staticRenderFns = [
             [
               _c("i", { staticClass: "far fa-building mr-2" }),
               _vm._v(
-                "\n                        論文、期刊、雜誌等(無ISBN)\n                    "
+                "\r\n                        論文、期刊、雜誌等(無ISBN)\r\n                    "
               )
             ]
           )
@@ -2504,7 +2504,7 @@ var staticRenderFns = [
               [
                 _c("i", { staticClass: "fas fa-undo-alt mr-2" }),
                 _vm._v(
-                  "\n                        重新選擇書籍類型\n                    "
+                  "\r\n                        重新選擇書籍類型\r\n                    "
                 )
               ]
             )
@@ -2519,7 +2519,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱\n                        ")
+      _vm._v("捐贈人(單位)名稱\r\n                        ")
     ])
   },
   function() {
@@ -2540,7 +2540,7 @@ var staticRenderFns = [
         [
           _c("i", { staticClass: "fas fa-plus mr-2" }),
           _vm._v(
-            "\n                                    新增捐贈人(單位)\n                                "
+            "\r\n                                    新增捐贈人(單位)\r\n                                "
           )
         ]
       )
@@ -2560,7 +2560,7 @@ var staticRenderFns = [
         [
           _c("label", { attrs: { for: "book_price" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("價格\n                        ")
+            _vm._v("價格\r\n                        ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -2586,7 +2586,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "title" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("書名（主標題）\n                                ")
+            _vm._v("書名（主標題）\r\n                                ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -2795,7 +2795,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("分類號\n                        ")
+      _vm._v("分類號\r\n                        ")
     ])
   },
   function() {
@@ -2832,7 +2832,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱\n                        ")
+      _vm._v("捐贈人(單位)名稱\r\n                        ")
     ])
   },
   function() {
@@ -2853,7 +2853,7 @@ var staticRenderFns = [
         [
           _c("i", { staticClass: "fas fa-plus mr-2" }),
           _vm._v(
-            "\n                                    新增捐贈人(單位)\n                                "
+            "\r\n                                    新增捐贈人(單位)\r\n                                "
           )
         ]
       )
@@ -2873,7 +2873,7 @@ var staticRenderFns = [
         [
           _c("label", { attrs: { for: "papper_price" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("價格\n                        ")
+            _vm._v("價格\r\n                        ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -2900,7 +2900,7 @@ var staticRenderFns = [
           _c("div", { staticClass: "form-group" }, [
             _c("label", { attrs: { for: "p_title" } }, [
               _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-              _vm._v("主標題\n                                ")
+              _vm._v("主標題\r\n                                ")
             ]),
             _vm._v(" "),
             _c("input", {
@@ -3663,7 +3663,7 @@ var render = function() {
       _c(
         "label",
         { staticClass: "mb-2", attrs: { for: _vm.prefix + "_image_file" } },
-        [_vm._v("\n            " + _vm._s(_vm.title) + "\n        ")]
+        [_vm._v("\r\n            " + _vm._s(_vm.title) + "\r\n        ")]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "custom-file" }, [
@@ -4164,7 +4164,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\create.js */"./resources/js/books/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\create.js */"./resources/js/books/create.js");
 
 
 /***/ })
