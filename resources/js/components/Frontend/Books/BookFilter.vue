@@ -1,6 +1,6 @@
 <template>
 <div class="row filter-row">
-    <div class="col-md-3">
+    <div class="col-md-3 col-6 d-flex">
         <div class="filter-dropbox-container">
             <select id="filter-column" name="column" class="form-control filter-dropbox" v-model="filter.type" @change="changeType">
                 <option value="0">依條件</option>
@@ -28,7 +28,7 @@
             </select>
         </div>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6 col-12 d-flex search-div">
         <div class="filter-search">
             <div class="search-icon">
                 <i class="fas fa-search"></i>
@@ -39,7 +39,7 @@
             </a>
         </div>
     </div>
-    <div class="col-md-3">
+    <div class="col-md-3 col-6 d-flex order-2">
         <select id="filter-order" name="order" class="form-control filter-dropbox" v-model="filter.order" @change="changeOrder">
             <option value="0">排序方式</option>
             <option value="1">最新 -> 最舊</option>

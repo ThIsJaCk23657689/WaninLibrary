@@ -4,13 +4,13 @@
     </button>
     <ul class="navbar-nav">
         <li class="nav-item">
-            <a class="nav-link" href="#">
+            <a class="nav-link" href="{{ route('front.about') }}">
                 關於拾本書堂
-                <div class="underline"></div> {{-- {{ route('front.abour') }} --}}
+                <div class="underline"></div>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">{{-- {{ route('front.announcements') }} --}}
+            <a class="nav-link" href="{{ route('front.announcements') }}">
                 即時公告/重要訊息
                 <div class="underline"></div>
             </a>
@@ -22,13 +22,13 @@
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">{{-- {{ route('front.books') }} --}}
+            <a class="nav-link" href="{{ route('front.books') }}">
                 館藏查詢
                 <div class="underline"></div>
             </a>
         </li>
         <li class="nav-item">
-            <a class="nav-link" href="#">{{-- {{ route('front.donors') }} --}}
+            <a class="nav-link" href="{{ route('front.donors') }}">
                 捐書芳名錄
                 <div class="underline"></div>
             </a>

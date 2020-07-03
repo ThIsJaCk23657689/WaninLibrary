@@ -2,13 +2,34 @@
 @import "../contents";
 @import "../filter";
 
+.filter-row{
+    @media (max-width: 991px) {
+        margin-bottom: 60px;
+    }
+}
+
 .book-container {
     padding: 0px 70px;
+    @media (max-width: 1199px) {
+        padding: 0px 35px;
+    }
+    @media (max-width: 767px) {
+        padding: 0px 0px;
+    }
     .book-card {
         width: calc(100%);
         margin-bottom: 50px;
         border: 1px solid $blue;
         border-radius: 50px;
+        @media (max-width: 991px) {
+            margin-bottom: 30px;
+        }
+        @media (max-width: 767px) {
+            border-radius: 20px;
+        }
+        @media (max-width: 575px) {
+            border-radius: 10px;
+        }
         .book-card-link {
             display: inline-block;
             width: 100%;
@@ -21,6 +42,12 @@
                 border-right: 5px solid $green;
                 img {
                     width: 60%;
+                    @media (max-width: 1199px) {
+                        width: 69%;
+                    }
+                    @media (max-width: 767px) {
+                        width: 90%;
+                    }
                 }
             }
             .book-info {
@@ -29,16 +56,45 @@
                 color: $brown;
                 padding-left: 30px;
                 padding-top: 15px;
+                @media (max-width: 991px) {
+                    padding-left: 15px;
+                    padding-top: 0px;
+                }
                 .book-title {
                     font-weight: bold;
                     font-size: 1.5rem;
                     margin-bottom: 15px;
                     line-height: 2.3rem;
+                    @media (max-width: 991px) {
+                        font-size: 1.4rem;
+                        margin-bottom: 0px;
+                        line-height: inherit;
+                    }
+                    @media (max-width: 499px) {
+                        font-size: 1.2rem;
+                    }
+                    @media (max-width: 369px) {
+                        font-size: 0.8rem;
+                    }
                 }
                 .book-small {
                     display: block;
                     font-size: 1.2rem;
                     margin-bottom: 10px;
+                    @media (max-width: 991px) {
+                        font-size: 0.9rem;
+                    }
+                    @media (max-width: 767px) {
+                        font-size: 0.8rem;
+                    }
+                    @media (max-width: 499px) {
+                        font-size: 0.6rem;
+                        margin-bottom: 5px;
+                    }
+                    @media (max-width: 369px) {
+                        font-size: 0.5rem;
+                        margin-bottom: 0px;
+                    }
                 }
             }
         }
