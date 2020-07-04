@@ -22,13 +22,13 @@ const app = new Vue({
             this.isSearched = parseInt($('#getIsSearched').text());
             axios.get(url, {
                 params: {
-                    skip: (this.currentPage - 1) * 4,
+                    skip: (this.currentPage - 1) * 8,
                     id: donor_id,
                 }
             }).then(response => {
                 this.books = response.data.books;
                 this.totalcount = response.data.totalcount;
-                this.totalPage = Math.ceil(this.totalcount / 4);
+                this.totalPage = Math.ceil(this.totalcount / 8);
                 if (this.totalcount == 0) {
                     this.currentPage = 0;
                 }

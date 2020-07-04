@@ -1,7 +1,8 @@
 <template>
 <div class="row book-row">
     <a :href="book.bookURL" class="book-link">
-        <div class="book-info-container" v-if="isSearched === 1">
+        <div class="book-info-status-container" v-if="isSearched === 1">
+            <!-- 有書籍狀態 -->
             <div class="book-index">{{ book.index }}</div>
             <div class="book-date">{{ book.updated_at }}</div>
             <div class="book-title-status">{{ book.showTitle }}</div>

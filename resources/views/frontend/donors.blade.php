@@ -22,8 +22,8 @@
     </section>
 
     <section class="content-page-body">
-        <div class="container">
-			
+        <div class="container rwd-container">
+
 			<donor-filter :filter="filter" v-on:refresh-donor="refreshDonor"></donor-filter>
 
             <donor-container :donors="donors"></donor-container>

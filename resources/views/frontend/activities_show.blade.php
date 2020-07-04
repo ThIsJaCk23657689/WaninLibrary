@@ -39,7 +39,7 @@
 </section>
 
 <section class="detail-page-body">
-    <div class="container">
+    <div class="container rwd-container">
         @if ($activity->type == 1)
         {{-- 近期活動 --}}
         <div class="row activity-detail-row">

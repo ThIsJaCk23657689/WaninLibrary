@@ -8,6 +8,9 @@
         font-size: 2.5rem;
         letter-spacing: 15px;
         display: inline-block;
+        @media (max-width: 767px) {
+            font-size: 1.8rem;
+        }
         @media (max-width: 379px) {
             font-size: 1.5rem;
         }
@@ -48,6 +51,7 @@
 }
 
 .detail-page-body {
+    min-width: $web-min-width;
     background-color: $gray;
     padding: 0px 0px 60px 0px;
     .goback-container {

@@ -1,7 +1,17 @@
 @import "../variables";
 @import "../contents";
+.rwd-container {
+    @media (max-width: 991px) {
+        max-width: 850px !important;
+    }
+    @media (max-width: 767px) {
+        max-width: 620px !important;
+    }
+}
+
 .detail-page-header {
     width: 100%;
+    min-width: $web-min-width;
     height: 200px;
     background-color: $gray;
     .activity-detail-title {
@@ -11,6 +21,9 @@
         align-items: center;
         justify-content: center;
         padding: 50px 80px;
+        @media (max-width: 575px) {
+            padding: 40px 15px;
+        }
         .activity-detail-title-container {
             width: 1100px;
             border-bottom: 3px solid $green;
@@ -21,6 +34,12 @@
                 letter-spacing: 10px;
                 display: inline-block;
                 font-weight: bold;
+                @media (max-width: 767px) {
+                    font-size: 1.8rem;
+                }
+                @media (max-width: 767px) {
+                    font-size: 1.5rem;
+                }
             }
             .activity-detail-date {
                 width: 15%;
@@ -28,6 +47,19 @@
                 right: 0;
                 bottom: 5px;
                 margin: 0;
+                @media (max-width: 991px) {
+                    width: 20%;
+                }
+                @media (max-width: 767px) {
+                    width: 20%;
+                    right: -10px;
+                }
+                @media (max-width: 575px) {
+                    width: 25%;
+                }
+                @media (max-width: 420px) {
+                    width: 30%;
+                }
                 // margin-bottom: 28px;
                 h2 {
                     margin: 0;
@@ -41,6 +73,15 @@
                     @media (max-width: 800px) {
                         margin-left: 0px;
                     }
+                    @media (max-width: 767px) {
+                        font-size: 2.7rem;
+                    }
+                    @media (max-width: 420px) {
+                        font-size: 2rem;
+                    }
+                    @media (max-width: 385px) {
+                        font-size: 1.8rem;
+                    }
                 }
                 span {
                     display: inline-block;
@@ -49,6 +90,12 @@
                     right: 5px;
                     top: 3px;
                     margin-right: 10px;
+                    @media (max-width: 420px) {
+                        font-size: 0.8rem;
+                    }
+                    @media (max-width: 385px) {
+                        font-size: 0.7rem;
+                    }
                 }
             }
             .activity-detail-title-content {
@@ -57,10 +104,23 @@
                 width: calc(100% - 15%);
                 float: left;
                 margin: 0;
+                @media (max-width: 767px) {
+                    width: 80%;
+                    padding-left: 10px;
+                }
+                @media (max-width: 575px) {
+                    width: 75%;
+                }
             }
         }
     }
     .recommandation-detail-title {
+        @media (max-width: 767px) {
+            padding: 0px 60px;
+        }
+        @media (max-width: 767px) {
+            padding: 0px 20px;
+        }
         .recommandation-detail-title-container {
             width: 1100px;
             border-bottom: 3px solid $green;
@@ -70,6 +130,9 @@
                     font-size: 2.2rem;
                     letter-spacing: 10px;
                     display: inline-block;
+                    @media (max-width: 767px) {
+                        font-size: 2rem;
+                    }
                 }
             }
         }

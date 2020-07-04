@@ -27,12 +27,11 @@
 </section>
 
 <section class="content-page-body">
-    <div class="container">
+    <div class="container rwd-container">
         <div class="row about-detail-row-up">
             <div class="col-md-12">
                 <p>
                     網銀基金會於2012年9月成立，以音樂教育為起點，提供家庭境遇弱勢與身心障礙的學童，免費學習音樂才藝的機會，預備完善師資及樂器，讓音樂學習為家庭帶進希望。一路走來，我們看見音樂為孩子們帶來的希望與成長，而網銀基金會深信我們可以做的更多更好!!
-                    <br>
                     <br>
                     於2017年，網銀基金會開始計畫、籌備、成立一圖書館，期盼為弱勢學子助學盡一份心力，我們相信教育與學習可以翻轉人生，閱讀可以帶來改變，於2020年「拾本書堂」落成啟用。
                     <br>

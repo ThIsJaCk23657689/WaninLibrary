@@ -10,6 +10,11 @@
   letter-spacing: 15px;
   display: inline-block;
 }
+@media (max-width: 767px) {
+  .content-page-header h1 {
+    font-size: 1.8rem;
+  }
+}
 @media (max-width: 379px) {
   .content-page-header h1 {
     font-size: 1.5rem;
@@ -54,6 +59,7 @@
 }
 
 .detail-page-body {
+  min-width: 300px;
   background-color: #eaeaea;
   padding: 0px 0px 60px 0px;
 }

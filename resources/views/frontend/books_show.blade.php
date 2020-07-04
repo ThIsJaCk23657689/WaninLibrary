@@ -23,129 +23,149 @@
 </section>
 
 <section class="detail-page-body">
-    <div class="container">
-
-        <div class="book-detail-container">
-            <div class="row book-detail-row">
-                <div class="col-md-6 book-detail-row-left">
-                    <div class="row book-detail-img">
-                        <div class="col-md-12">
-                            <img src="{{ asset($book->showCoverImage()) }}">
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-md-12">
-                            書籍來源&nbsp;:&nbsp;{{ $book->source  ?? "無" }}
-                        </div>
+    <div class="container rwd-container">
+    {{-- 雜誌期刊類 --}}
+    @if ($book->category == 11 || $book->category == 12)
+    <div class="paper-rwd-detail-container">
+        <div class="row book-detail-row">
+            <div class="col-md-6 book-detail-row-left">
+                <div class="row book-detail-img">
+                    <div class="col-md-12">
+                        <img src="{{ asset($book->showCoverImage()) }}">
                     </div>
                 </div>
-                {{-- 雜誌期刊類 --}}
-                @if ($book->category == 11 || $book->category == 12)
-                <div class="col-md-6 paper-detail-info book-detail-row-right">
-                    <div class="row">
-                        <div class="col-md-12 paper-row-col">
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    <span>作者&nbsp;:&nbsp;</span>
-                                    <p>{{ $book->author ?? "無"  }}</p>
-                                </div>
-                            </div>
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    譯者&nbsp;:&nbsp;{{ $book->translator ?? "無"  }}
-                                </div>
-                            </div>
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    出版商&nbsp;:&nbsp;{{ $book->publisher ?? "無"  }}
-                                </div>
-                            </div>
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                期數/出版日期 :{{$book->edition ?? "無" }}/{{ $book->published_date ?? "無" }}
-                                </div>
-                            </div>
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    圖書類別&nbsp;:&nbsp;{{ $book->showCategory() ?? "無"  }}
-                                </div>
-                            </div>
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    語言別&nbsp;:&nbsp;{{ $book->language ?? "無"  }}
-                                </div>
-                            </div>
-                            @if(!is_null($book->position))
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    書籍位置&nbsp;:&nbsp; {{ $book->position ?? "無" }}
-                                </div>
-                            </div>
-                            @endif
-                        </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        書籍來源&nbsp;:&nbsp;{{ $book->source  ?? "無" }}
                     </div>
                 </div>
-                @else
-                {{-- 一般圖書類 --}}
-                <div class="col-md-6 book-detail-info book-detail-row-right">
-                    <div class="row">
-                        <div class="col-md-12 book-row-col">
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    <span>作者&nbsp;:&nbsp;</span>
-                                    <p>{{ $book->author ?? "無"  }}</p>
-                                </div>
-                            </div>
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    譯者&nbsp;:&nbsp;{{ $book->translator  ?? "無" }}
-                                </div>
-                            </div>
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    出版商&nbsp;:&nbsp;{{ $book->publisher ?? "無"  }}
-                                </div>
-                            </div>
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    <span>出版日期&nbsp;:&nbsp;{{ $book->published_date ?? "無"  }}&nbsp;/&nbsp;版次&nbsp;:&nbsp;{{ $book->edition  ?? "無"  }}</span>
-                                </div>
-                            </div>
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    ISBN&nbsp;:&nbsp; {{ $book->ISBN ?? "無"  }}
-                                </div>
-                            </div>
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    分類號&nbsp;:&nbsp; {{ $book->callnum ?? "無"  }}
-                                </div>
-                            </div>
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    圖書類別&nbsp;:&nbsp; {{ $book->showCategory() ?? "無"  }}
-                                </div>
-                            </div>
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    語言別&nbsp;:&nbsp; {{ $book->language  ?? "無" }}
-                                </div>
-                            </div>
-                            @if(!is_null($book->position))
-                            <div class="row book-rows">
-                                <div class="col-md-12">
-                                    書籍位置&nbsp;:&nbsp; {{ $book->position ?? "無" }}
-                                </div>
-                            </div>
-                            @endif
-                        </div>
-
-                    </div>
-                </div>
-                @endif
-
             </div>
+            <div class="col-md-6 paper-detail-info book-detail-row-right">
+                <div class="row">
+                    <div class="col-md-12 paper-row-col">
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                <span>作者&nbsp;:&nbsp;</span>
+                                <p>{{ $book->author ?? "無"  }}</p>
+                            </div>
+                        </div>
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                譯者&nbsp;:&nbsp;{{ $book->translator ?? "無"  }}
+                            </div>
+                        </div>
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                出版商&nbsp;:&nbsp;{{ $book->publisher ?? "無"  }}
+                            </div>
+                        </div>
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                            期數/出版日期 :{{$book->edition ?? "無" }}/{{ $book->published_date ?? "無" }}
+                            </div>
+                        </div>
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                圖書類別&nbsp;:&nbsp;{{ $book->showCategory() ?? "無"  }}
+                            </div>
+                        </div>
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                語言別&nbsp;:&nbsp;{{ $book->language ?? "無"  }}
+                            </div>
+                        </div>
+                        @if(!is_null($book->position))
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                書籍位置&nbsp;:&nbsp; {{ $book->position ?? "無" }}
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+                </div>
+            </div>
+
         </div>
+    </div>
+    @else
+    {{-- 一般圖書類 --}}
+    <div class="book-detail-container">
+        <div class="row book-detail-row">
+            <div class="col-md-6 book-detail-row-left">
+                <div class="row book-detail-img">
+                    <div class="col-md-12">
+                        <img src="{{ asset($book->showCoverImage()) }}">
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-12">
+                        書籍來源&nbsp;:&nbsp;{{ $book->source  ?? "無" }}
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-6 book-detail-info book-detail-row-right">
+                <div class="row">
+                    <div class="col-md-12 book-row-col">
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                <span>作者&nbsp;:&nbsp;</span>
+                                <p>{{ $book->author ?? "無"  }}</p>
+                            </div>
+                        </div>
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                譯者&nbsp;:&nbsp;{{ $book->translator  ?? "無" }}
+                            </div>
+                        </div>
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                出版商&nbsp;:&nbsp;{{ $book->publisher ?? "無"  }}
+                            </div>
+                        </div>
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                <span>出版日期&nbsp;:&nbsp;{{ $book->published_date ?? "無"  }}&nbsp;/&nbsp;版次&nbsp;:&nbsp;{{ $book->edition  ?? "無"  }}</span>
+                            </div>
+                        </div>
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                ISBN&nbsp;:&nbsp; {{ $book->ISBN ?? "無"  }}
+                            </div>
+                        </div>
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                分類號&nbsp;:&nbsp; {{ $book->callnum ?? "無"  }}
+                            </div>
+                        </div>
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                圖書類別&nbsp;:&nbsp; {{ $book->showCategory() ?? "無"  }}
+                            </div>
+                        </div>
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                語言別&nbsp;:&nbsp; {{ $book->language  ?? "無" }}
+                            </div>
+                        </div>
+                        @if(!is_null($book->position))
+                        <div class="row book-rows">
+                            <div class="col-md-12">
+                                書籍位置&nbsp;:&nbsp; {{ $book->position ?? "無" }}
+                            </div>
+                        </div>
+                        @endif
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+    @endif
+
+
 
         <div class="goback-container">
             <a href="#" class="goback-text" onclick="history.go(-1);">
