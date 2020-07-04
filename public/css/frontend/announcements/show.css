@@ -173,12 +173,23 @@
 .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container {
   position: absolute;
   width: 100%;
-  top: 230px;
+  top: 200px;
+  height: 30%;
   left: 235px;
+}
+@media (max-width: 1210px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container {
+    left: 200px;
+  }
+}
+@media (max-width: 1100px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container {
+    left: 190px;
+  }
 }
 @media (max-width: 991px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container {
-    top: 250px;
+    top: 220px;
     left: 165px;
     width: 80%;
   }
@@ -201,6 +212,12 @@
     left: 75px;
   }
 }
+@media (max-width: 399px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container {
+    left: 70px;
+    top: 250px;
+  }
+}
 @media (max-width: 350px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container {
     left: 60px;
@@ -215,18 +232,24 @@
   text-align: left;
   float: left;
   margin: 0;
+  width: 40%;
 }
 @media (max-width: 991px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content {
-    width: 60%;
+    width: 50%;
   }
 }
 .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
   color: #55473f;
   font-size: 2.2rem;
-  letter-spacing: 10px;
+  letter-spacing: 5px;
   display: inline-block;
   font-weight: bold;
+}
+@media (max-width: 1210px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
+    font-size: 2rem;
+  }
 }
 @media (max-width: 991px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
@@ -236,20 +259,22 @@
 @media (max-width: 767px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
     font-size: 1.5rem;
-    letter-spacing: 5px;
+    letter-spacing: 3px;
   }
 }
 @media (max-width: 575px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
-    font-size: 1.1rem;
-  }
-}
-@media (max-width: 450px) {
-  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
     font-size: 1rem;
+    letter-spacing: 2px;
   }
 }
-@media (max-width: 300px) {
+@media (max-width: 399px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
+    font-size: 0.9rem;
+    letter-spacing: 1px;
+  }
+}
+@media (max-width: 329px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content h1 {
     font-size: 0.8rem;
   }
@@ -264,40 +289,74 @@
   right: 430px;
   bottom: 3px;
   margin: 0;
+  width: 10%;
+}
+@media (max-width: 1350px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
+    width: 11%;
+    right: 370px;
+  }
+}
+@media (max-width: 1210px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
+    width: 12%;
+  }
+}
+@media (max-width: 1100px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
+    width: 13%;
+  }
 }
 @media (max-width: 991px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
-    right: 90px;
+    width: 16%;
+    right: 115px;
+    top: 10px;
+    bottom: 0;
+  }
+}
+@media (max-width: 900px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
+    width: 18%;
+  }
+}
+@media (max-width: 850px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
+    width: 20%;
   }
 }
 @media (max-width: 767px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
     right: 215px;
     bottom: 15px;
-    width: 20%;
   }
 }
 @media (max-width: 575px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
     right: 175px;
     bottom: 8px;
-    width: 20%;
   }
 }
 @media (max-width: 450px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
+    width: 18%;
     right: 140px;
   }
 }
-@media (max-width: 450px) {
+@media (max-width: 350px) {
+  .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
+    width: 20%;
+    right: 110px;
+  }
+}
+@media (max-width: 320px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date {
     width: 22%;
-    right: 110px;
+    right: 100px;
   }
 }
 .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date h2 {
   margin: 0;
-  margin-right: 15px;
   letter-spacing: 3px;
   float: left;
   font-size: 3rem;
@@ -326,7 +385,7 @@
     font-size: 1.5rem;
   }
 }
-@media (max-width: 300px) {
+@media (max-width: 399px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date h2 {
     font-size: 1.3rem;
   }
@@ -338,7 +397,6 @@
   position: relative;
   right: 5px;
   top: 3px;
-  margin-right: 10px;
 }
 @media (max-width: 767px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date span {
@@ -356,7 +414,7 @@
     font-size: 0.6rem;
   }
 }
-@media (max-width: 300px) {
+@media (max-width: 399px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-date span {
     font-size: 0.5rem;
   }
@@ -364,14 +422,9 @@
 .announcement-detail .content-container .annoucement-detail-content {
   height: 48%;
   overflow-y: auto;
-  width: 880px;
+  width: 60%;
   margin-left: auto;
   margin-right: auto;
-}
-@media (max-width: 991px) {
-  .announcement-detail .content-container .annoucement-detail-content {
-    width: 60%;
-  }
 }
 .announcement-detail .content-container .annoucement-detail-content .announcement-detail-row {
   width: 100%;

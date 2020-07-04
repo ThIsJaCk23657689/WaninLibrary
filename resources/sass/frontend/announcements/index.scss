@@ -45,7 +45,7 @@
                 width: 15%;
                 // height: 100%;
                 text-align: right;
-                @media (max-width: 991px) {
+                @media (max-width: 1199px) {
                     width: 12%;
                     position: relative;
                 }
@@ -56,7 +56,7 @@
                     padding: 5px 15px;
                     border-radius: 40px;
                     font-size: 1.2rem;
-                    @media (max-width: 991px) {
+                    @media (max-width: 1199px) {
                         font-size: 1rem;
                         position: absolute;
                         bottom: 6px;
@@ -71,22 +71,25 @@
                 width: 60%;
                 height: 100%;
                 margin: 0px 25px 0px 30px;
+                @media (max-width: 1199px) {
+                    font-size: 1.2rem;
+                    position: relative;
+                }
                 @media (max-width: 991px) {
                     font-size: 1rem;
-                    position: relative;
                 }
                 .announcement-date {
                     display: inline-block;
                     letter-spacing: 3px;
                     margin-right: 20px;
-                    @media (max-width: 991px) {
+                    @media (max-width: 1199px) {
                         position: absolute;
                     }
                 }
                 .announcement-title {
                     display: inline-block;
                     letter-spacing: 5px;
-                    @media (max-width: 991px) {
+                    @media (max-width: 1199px) {
                         top: 25px;
                         position: absolute;
                     }
@@ -98,7 +101,7 @@
                 width: 10%;
                 height: 100%;
                 color: $pink;
-                @media (max-width: 991px) {
+                @media (max-width: 1199px) {
                     font-size: 0.8rem;
                     position: relative;
                     bottom: 7px;
