@@ -53,6 +53,11 @@ class Activity extends Model
         }
     }
 
+    public function isNew(){
+        $today = Carbon::today();
+        return ($today->diffInHours($this->updated_at) <= 24);
+    }
+
     public function showCoverImage(){
         if(empty($this->cover_image)){
             return URL::asset('images/activities/cover_images/default.jpg');

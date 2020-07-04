@@ -55232,7 +55232,7 @@ $(function () {
       scrollTop: 0
     }, 500);
   });
-  $('.checkRecommendationBtn').click(function () {
+  $('.switch-link').click(function () {
     $('#activity .slider').toggleClass('activated');
   });
 });

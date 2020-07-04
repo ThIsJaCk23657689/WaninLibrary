@@ -12,6 +12,7 @@ header {
     .bg_cover {
         height: calc(100% - 120px);
         position: relative;
+        z-index: -1;
         img.background-image {
             position: absolute;
             top: 0;
@@ -49,63 +50,94 @@ header {
     }
 }
 
-div#headerbox {
+.header-button-container{
     width: 100%;
+    min-width: $web-min-width;
     height: 120px;
-    position: absolute;
-    bottom: 0px;
-    left: 0px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    align-items: stretch;
     z-index: 1;
-    .headerRow {
-        height: 100%;
-        div.left {
-            height: 100%;
-            padding-top: 1.5%;
-            padding-left: 12%;
+    .header-button{
+        width: 50%;
+        padding: 10px;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        justify-content: space-around;
+        @media (max-width: 479px) {
+            flex-direction: column;
+        }
+        &.left{
             background-color: $gray;
-            @media (max-width: 992px) {
-                padding-top: 3%;
-                padding-left: 9%;
-            }
         }
-        div.right {
-            height: 100%;
-            padding-top: 1.5%;
-            padding-left: 12%;
+        &.right{
             background-color: $green;
-            @media (max-width: 992px) {
-                padding-top: 3%;
-                padding-left: 9%;
-            }
         }
-        .checkBtn {
-            width: 75px;
-            min-width: 50px;
-            display: inline-block;
-            position: absolute;
-            top: 24px;
-            right: 10%;
-            padding: 0;
-            a {
-                img {
-                    width: 95%;
+        .header-text{
+            display: flex;
+            flex-direction: column;
+            flex-wrap: nowrap;
+            @media (max-width: 479px) {
+                order: 1;
+            }
+            .button-title{
+                color: $brown;
+                letter-spacing: 15px;
+                @media (max-width: 991px) {
+                    font-size: 1.5rem;
+                    letter-spacing: 12px;
+                }
+                @media (max-width: 849px) {
+                    font-size: 1.3rem;
+                    letter-spacing: 8px;
+                }
+                @media (max-width: 719px) {
+                    font-size: 1.5rem;
+                    margin: 0;
+                }
+                @media (max-width: 575px) {
+                    letter-spacing: 3px;
+                }
+                @media (max-width: 509px) {
+                    font-size: 1.3rem;
+                    letter-spacing: 3px;
+                }
+                @media (max-width: 359px) {
+                    font-size: 1rem;
                 }
             }
-            @media (max-width: 992px) {
-                width: 60px;
-                top: 30px;
+            .button-subtitle{
+                color: $darkgray;
+                letter-spacing: 5px;
+                @media (max-width: 991px) {
+                    font-size: 0.9rem;
+                }
+                @media (max-width: 849px) {
+                    letter-spacing: 0px;
+                }
+                @media (max-width: 719px) {
+                    display: none;
+                }
             }
         }
-        span {
-            color: $darkgray;
-            letter-spacing: 5px;
-        }
-        h3 {
-            color: $brown;
-            margin-top: 1%;
-            letter-spacing: 15px;
-            @media (max-width: 992px) {
-                letter-spacing: 7px;
+        .button-check-link{
+            display: flex;
+            width: 75px;
+            padding: 0;
+            @media (max-width: 991px) {
+                width: 65px;
+            }
+            @media (max-width: 719px) {
+                width: 50px;
+            }
+            a{
+                display: inline-block;
+                img{
+                    width: 95%;
+                }
             }
         }
     }

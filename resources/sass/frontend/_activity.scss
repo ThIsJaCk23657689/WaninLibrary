@@ -1,193 +1,549 @@
 #activity {
     width: 100%;
-    height: 720px;
+    min-width: $web-min-width;
+    height: 910px;
     color: $brown;
     background-color: $white;
     position: relative;
-    .content {
-        width: 90%;
-        height: 910px;
-        border-radius: 40px;
-        position: absolute;
-        top: -35%;
-        left: 5%;
-        background-color: $green;
-        #activity_container {
-            height: 875px;
-            padding-top: 70px;
-            overflow: hidden;
-            position: relative;
-            .slider {
-                display: flex;
-                width: calc(200% + 15px);
-                height: 805px;
-                position: absolute;
-                left: 0;
-                transition: all 0.5s ease;
-                .activities-area {
-                    display: flex;
-                    margin-right: 15px;
-                    width: 50%;
-                    height: 100%;
-                    h1 {
-                        letter-spacing: 20px;
-                        font-weight: bold;
-                    }
-                    .activityRow {
-                        height: 610px;
-                        padding-top: 3%;
-                        .activity_unit_top {
-                            .cover_image {
-                                overflow: hidden;
+    padding: 10px 110px 50px 110px;
+    @media (max-width: 1399px) {
+        padding: 10px 80px 50px 80px;
+    }
+    @media (max-width: 1199px) {
+        padding: 10px 50px 50px 50px;
+    }
+    @media (max-width: 991px) {
+        padding: 10px 30px 50px 30px;
+    }
+    @media (max-width: 575px) {
+        padding: 0px 10px 30px 10px;
+    }
+}
+
+.background{
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    .background-darkwhite{
+        height: 20%;
+        background-color: $darkwhite;
+    }
+}
+
+.activity-container{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+
+.activity-card{
+    width: 100%;
+    height: 100%;
+    border-radius: 40px;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    background-color: rgba($green, 0.8);
+    padding: 55px 96px;
+    @media (max-width: 1399px) {
+        padding: 55px 68px;
+    }
+    @media (max-width: 1199px) {
+        padding: 42px 85px;
+    }
+    @media (max-width: 991px) {
+        padding: 36px 50px;
+    }
+    @media (max-width: 575px) {
+        padding: 20px 10px;
+        border-radius: 20px;
+    }
+}
+
+.activity-visible{
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.slider{
+    width: 200%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    display: flex;
+    flex-direction: row;
+    flex-wrap: nowrap;
+
+    transition: left 0.5s ease;
+    &.activated{
+        left: -100%;
+    }
+}
+
+.base-area{
+    width: 50%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    .base-title-container{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        align-items: center;
+        margin-bottom: 30px;
+        @media (max-width: 991px) {
+            margin-bottom: 15px;
+            padding-left: 10px;
+        }
+        .base-icon{
+            width: 60px;
+            margin-right: 20px;
+            @media (max-width: 379px) {
+                width: 40px;
+                margin-right: 10px;
+            } 
+        }
+        .base-title{
+            margin: 0;
+            font-size: 2rem;
+            font-weight: bold;
+            letter-spacing: 20px;
+            line-height: 3rem;
+            @media (max-width: 599px) {
+                font-size: 1.8rem;
+                letter-spacing: 5px;
+                line-height: 3rem;
+            }
+            @media (max-width: 379px) {
+                font-size: 1.2rem;
+                line-height: 1.2rem;
+            } 
+        }
+    }
+    .base-content{
+        display: flex;
+        flex-grow: 1;
+        margin-bottom: 30px;
+        &.activity-content{
+            flex-direction: row;
+            flex-wrap: nowrap;
+            @media (max-width: 1199px) {
+                flex-direction: column;
+            }
+            .activity-unit-container{
+                width: 50%;
+                height: 100%;
+                @media (max-width: 1199px) {
+                    width: 100%;
+                    height: 50%;
+                }
+                &.left-side{
+                    // 這裡是左邊大顆的活動
+                    .activity-unit{
+                        width: 100%;
+                        height: 100%;
+                        padding: 10px 5px 10px 10px;
+                        @media (max-width: 1199px) {
+                            padding: 10px 10px 0px 10px;
+                        }
+                        .activity-link{
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            flex-direction: column;
+                            flex-wrap: nowrap;
+                            position: relative;
+                            &:hover{
+                                text-decoration: none;
+                            }
+                            .activity-image{
+                                width: 100%;
                                 height: 100%;
+                                overflow: hidden;
                                 position: relative;
-                                img {
+                                img{
                                     height: 100%;
                                     position: absolute;
                                     top: 0;
                                     left: calc(50% + 0px);
                                     transform: translateX(-50%);
+                                    transition: all 0.8s ease-in-out;
+                                    @media (max-width: 1199px) {
+                                        width: 100%;
+                                        height: auto;
+                                        top: calc(50% + 0px);
+                                        left: 0;
+                                        transform: translateY(-50%);
+                                    }
+                                    @media (max-width: 639px) {
+                                        width: auto;
+                                        height: 100%;
+                                        top: 0;
+                                        left: calc(50% + 0px);
+                                        transform: translateX(-50%);
+                                    }
                                 }
-                                .activity_text {
+                                .image-gray{
                                     width: 100%;
-                                    position: absolute;
-                                    left: 0;
-                                    bottom: 0;
-                                    padding: 20px;
-                                    color: $white;
-                                    z-index: 1;
-                                    .datetime {
-                                        font-size: 1.2rem;
-                                        letter-spacing: 3px;
-                                    }
-                                    .title {
-                                        letter-spacing: 3px;
-                                        line-height: 2.5rem;
-                                        font-weight: bold;
-                                    }
-                                    .readmore {
-                                        text-align: right;
-                                        letter-spacing: 3px;
-                                    }
-                                }
-                                .gray {
+                                    height: 100%;
                                     position: absolute;
                                     top: 0;
                                     left: 0;
-                                    width: 100%;
-                                    height: 100%;
-                                    background: linear-gradient(#fff0, 80%, $darkgray);
+                                    background-color: rgba($blue, 0.3);
+                                    transition: background-color 0.1s ease-in-out;
+                                }
+                                &:hover {
+                                    img{
+                                        transform: translateX(-50%) scale(1.1);
+                                        @media (max-width: 1199px) {
+                                            transform: translateY(-50%) scale(1.1);
+                                        }
+                                        @media (max-width: 639px) {
+                                            transform: translateX(-50%) scale(1.1);
+                                        }
+                                    }
+                                    .image-gray {
+                                        background-color: rgba($blue, 0);
+                                    }
+                                }
+                            }
+                            .activity-info{
+                                width: 100%;
+                                display: flex;
+                                flex-direction: column;
+                                flex-wrap: nowrap;
+                                padding: 30px 40px;
+                                color: $white;
+                                position: absolute;
+                                left: 0;
+                                bottom: 0;
+                                @media (max-width: 399px) {
+                                    padding: 15px 25px;
+                                }
+                                @media (max-width: 359px) {
+                                    padding: 10px 20px;
+                                }
+                                .activity-date{
+                                    font-size: 1.2rem;
+                                    letter-spacing: 3px;
+                                    @media (max-width: 575px) {
+                                        font-size: 1rem;
+                                        letter-spacing: 0px;
+                                    }
+                                    @media (max-width: 399px) {
+                                        font-size: 0.8rem;
+                                    }
+                                }
+                                .activity-title{
+                                    font-size: 1.5rem;
+                                    font-weight: bold;
+                                    letter-spacing: 3px;
+                                    @media (max-width: 575px) {
+                                        font-size: 1rem;
+                                        letter-spacing: 0px;
+                                    }
+                                    @media (max-width: 399px) {
+                                        font-size: 0.8rem;
+                                    }
+                                }
+                                .activity-readmore{
+                                    text-align: right;
+                                    letter-spacing: 3px;
+                                    @media (max-width: 575px) {
+                                        letter-spacing: 0px;
+                                    }
+                                    @media (max-width: 399px) {
+                                        font-size: 0.8rem;
+                                    }
+                                }
+                            }
+                            .activity-new-container{
+                                width: 100%;
+                                display: flex;
+                                flex-direction: row;
+                                flex-wrap: nowrap;
+                                position: absolute;
+                                top: 0;
+                                left: 0;
+                                padding: 15px;
+                                .activity-new{
+                                    color: $white;
+                                    background-color: $pink;
+                                    border-radius: 40px;
+                                    padding: 5px 20px;
+                                    font-size: 1.5rem;
                                 }
                             }
                         }
-                        .activity_unit {
-                            .cover_image {
+                    }
+                }
+                &.right-side{
+                    // 這裡是右邊小顆的活動
+                    display: flex;
+                    flex-direction: column;
+                    flex-wrap: nowrap;
+                    .activity-unit{
+                        width: 100%;
+                        height: 50%;
+                        padding: 10px 10px 10px 5px;
+                        @media (max-width: 1199px) {
+                            padding: 10px 10px 0px 10px;
+                        }
+                        &:first-child{
+                            padding-bottom: 5px;
+                            @media (max-width: 1199px) {
+                                padding-bottom: 0px;
+                            }
+                        }
+                        &:last-child{
+                            padding-top: 5px;
+                            @media (max-width: 1199px) {
+                                padding-top: 10px;
+                            }
+                        }
+                        .activity-link{
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            flex-direction: row;
+                            flex-wrap: nowrap;
+                            &:hover{
+                                text-decoration: none;
+                            }
+                            .activity-image{
+                                width: 50%;
                                 overflow: hidden;
-                                height: 100%;
                                 position: relative;
-                                img {
+                                img{
                                     height: 100%;
                                     position: absolute;
                                     top: 0;
                                     left: calc(50% + 0px);
                                     transform: translateX(-50%);
+                                    transition: all 0.8s ease-in-out;
+                                    @media (max-width: 1199px) {
+                                        width: 100%;
+                                        height: auto;
+                                        position: absolute;
+                                        top: calc(50% + 0px);
+                                        left: 0;
+                                        transform: translateY(-50%);
+                                    }
+                                    @media (max-width: 639px) {
+                                        width: auto;
+                                        height: 100%;
+                                        top: 0;
+                                        left: calc(50% + 0px);
+                                        transform: translateX(-50%);
+                                    }
+                                }
+                                .image-gray{
+                                    width: 100%;
+                                    height: 100%;
+                                    position: absolute;
+                                    top: 0;
+                                    left: 0;
+                                    background-color: rgba($blue, 0.3);
+                                    transition: background-color 0.1s ease-in-out;
+                                }
+                                &:hover {
+                                    img{
+                                        transform: translateX(-50%) scale(1.1);
+                                        @media (max-width: 1199px) {
+                                            transform: translateY(-50%) scale(1.1);
+                                        }
+                                        @media (max-width: 639px) {
+                                            transform: translateX(-50%) scale(1.1);
+                                        }
+                                    }
+                                    .image-gray {
+                                        background-color: rgba($blue, 0);
+                                    }
                                 }
                             }
-                            .activity_text {
+                            .activity-info{
+                                width: 50%;
+                                display: flex;
+                                flex-direction: column;
+                                flex-wrap: nowrap;
+                                padding: 0px 0px 0px 15px;
                                 color: $brown;
-                                .datetime {
+                                .activity-date{
                                     font-size: 1rem;
                                     letter-spacing: 3px;
+                                    @media (max-width: 575px) {
+                                        font-size: 1rem;
+                                        letter-spacing: 0px;
+                                    }
+                                    @media (max-width: 399px) {
+                                        font-size: 0.8rem;
+                                    }
                                 }
-                                .title {
+                                .activity-title{
                                     letter-spacing: 3px;
                                     line-height: 2rem;
                                     font-weight: bold;
+                                    @media (max-width: 991px) {
+                                        line-height: 1.2rem;
+                                    }
+                                    @media (max-width: 575px) {
+                                        font-size: 1rem;
+                                        letter-spacing: 0px;
+                                    }
+                                    @media (max-width: 399px) {
+                                        font-size: 0.8rem;
+                                    }
                                 }
-                                .readmore {
+                                .activity-readmore{
                                     color: $white;
                                     text-align: right;
                                     letter-spacing: 3px;
+                                    @media (max-width: 575px) {
+                                        letter-spacing: 0px;
+                                    }
+                                    @media (max-width: 399px) {
+                                        font-size: 0.8rem;
+                                    }
                                 }
                             }
                         }
                     }
-                    .checkRecommendationBtn {
-                        border: 1px solid $white;
-                        border-radius: 25px;
-                        margin-left: auto;
-                        width: 35%;
-                        text-align: center;
-                        font-size: 1.5rem;
-                        letter-spacing: 3px;
-                        margin-top: 46px;
-                        padding: 17px;
-                        cursor: pointer;
-                        img {
-                            width: 6%;
-                            margin-top: -2%;
-                        }
-                    }
                 }
-                .recommandation-area {
-                    display: flex;
+            }
+        }
+        &.recommendation-content{
+            flex-direction: column;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            background-image: url(../../images/frontend/icons/book_bg.png);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            padding: 30px 30px 10px;
+            @media (max-width: 1199px) {
+                background-size: 100% 85%;
+            }
+            @media (max-width: 767px) {
+                padding: 10px 20px 10px;
+                flex-direction: row;
+                background: none;
+            }
+            .recommendation-row{
+                display: flex;
+                flex-direction: row;
+                flex-wrap: nowrap;
+
+                width: 100%;
+
+                background-image: url('../../images/frontend/icons/news_underline.png');
+                background-repeat: no-repeat;
+                background-position: bottom;
+                background-size: 100%;
+
+                padding-bottom: 10px;
+                margin-bottom: 30px;      
+                @media (max-width: 767px) {
                     width: 50%;
-                    background-image: url(../../images/frontend/icons/book_bg.png);
-                    background-size: 80% 75%;
-                    background-repeat: no-repeat;
-                    background-position: center;
-                    h1 {
-                        letter-spacing: 20px;
-                        font-weight: bold;
+                    flex-direction: column;
+                    background: none;
+                    margin-bottom: 0px; 
+                }   
+                .book-image{
+                    width: 20%;
+                    height: 200px;
+                    display: flex;
+                    @media (max-width: 1199px) {
+                        height: 160px;
                     }
-                    .container {
-                        padding-top: 0px !important;
-                        .bookTable {
-                            padding: 8% 5% 5% 8%;
-                            height: 610px;
-                            .row {
-                                background-image: url('../../images/frontend/icons/news_underline.png');
-                                background-repeat: no-repeat;
-                                background-position: bottom;
-                                padding-bottom: 10px;
-                                margin-bottom: 30px;
-                                background-size: 100%;
-                            }
-                            .bookCol {
-                                height: 225px;
-                            }
-                            img {
-                                width: 90%;
-                            }
-                        }
-                        .checkRecommendationBtn {
-                            font-size: 1.5rem;
-                            letter-spacing: 3px;
-                            margin-top: 66px;
-                            width: 230px;
-                            cursor: pointer;
-                            img {
-                                width: 40px;
-                            }
+                    @media (max-width: 767px) {
+                        width: auto;
+                        height: 105px;
+                        margin-bottom: 10px;
+                    }
+                    @media (max-width: 575px) {
+                        height: 118px;
+                    }  
+                    .book-link{
+                        width: 100%;
+                        height: 100%;
+                        display: flex;
+                        justify-content: center;
+                        img{
+                            height: 100%;
                         }
                     }
-                }
-                &.activated {
-                    left: calc(-100% - 15px);
                 }
             }
         }
     }
-}
-
-#activityIcon {
-    background-color: $white;
-    border-radius: 40px;
-    width: 60px;
-    height: 60px;
-    display: inline-block;
-    padding: 0px 10px 10px 10px;
-    img {
+    .switch-link-container{
+        display: flex;
+        flex-direction: row-reverse;
+        flex-wrap: nowrap;
         width: 100%;
+        height: 60px;
+        .switch-link{
+            width: 390px;
+            border: 1px solid $white;
+            border-radius: 25px;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            @media (max-width: 399px) {
+                width: 100%;
+            }
+            span{
+                font-size: 1.5rem;
+                letter-spacing: 3px;
+                @media (max-width: 399px) {
+                    font-size: 1rem;
+                }
+            }
+            img {
+                width: 6%;
+                margin-left: 8px;
+            }
+        }
+    }
+
+    .switch-link-container-recommendation{
+        display: flex;
+        flex-direction: row;
+        flex-wrap: nowrap;
+        width: 100%;
+        height: 60px;
+        @media (max-width: 575px) {
+            padding-left: 24px;
+        }
+        .switch-link{
+            width: 230px;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            justify-content: center;
+            align-items: center;
+            span{
+                font-size: 1.5rem;
+                letter-spacing: 3px;
+            }
+            img {
+                width: 30px;
+                margin-right: 16px;
+            }
+        }
     }
 }
