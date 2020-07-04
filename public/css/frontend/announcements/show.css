@@ -232,7 +232,7 @@
   text-align: left;
   float: left;
   margin: 0;
-  width: 40%;
+  width: 35%;
 }
 @media (max-width: 991px) {
   .announcement-detail .content-container header .announcement-detail-title .announcement-detail-title-container .announcement-detail-title-content {
