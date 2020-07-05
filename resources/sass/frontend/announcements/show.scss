@@ -25,10 +25,17 @@
                     .announcement-detail-title-container {
                         position: absolute;
                         width: 100%;
-                        top: 230px;
+                        top: 200px;
+                        height: 30%;
                         left: 235px;
+                        @media (max-width: 1210px) {
+                            left: 200px;
+                        }
+                        @media (max-width: 1100px) {
+                            left: 190px;
+                        }
                         @media (max-width: 991px) {
-                            top: 250px;
+                            top: 220px;
                             left: 165px;
                             width: 80%;
                         }
@@ -44,6 +51,10 @@
                         @media (max-width: 450px) {
                             left: 75px;
                         }
+                        @media (max-width: 399px) {
+                            left: 70px;
+                            top: 250px;
+                        }
                         @media (max-width: 350px) {
                             left: 60px;
                         }
@@ -54,29 +65,35 @@
                             text-align: left;
                             float: left;
                             margin: 0;
+                            width: 35%;
                             @media (max-width: 991px) {
-                                width: 60%;
+                                width: 50%;
                             }
                             h1 {
                                 color: $brown;
                                 font-size: 2.2rem;
-                                letter-spacing: 10px;
+                                letter-spacing: 5px;
                                 display: inline-block;
                                 font-weight: bold;
+                                @media (max-width: 1210px) {
+                                    font-size: 2rem;
+                                }
                                 @media (max-width: 991px) {
                                     font-size: 1.6rem;
                                 }
                                 @media (max-width: 767px) {
                                     font-size: 1.5rem;
-                                    letter-spacing: 5px;
+                                    letter-spacing: 3px;
                                 }
                                 @media (max-width: 575px) {
-                                    font-size: 1.1rem;
-                                }
-                                @media (max-width: 450px) {
                                     font-size: 1rem;
+                                    letter-spacing: 2px;
                                 }
-                                @media (max-width: 300px) {
+                                @media (max-width: 399px) {
+                                    font-size: 0.9rem;
+                                    letter-spacing: 1px;
+                                }
+                                @media (max-width: 329px) {
                                     font-size: 0.8rem;
                                 }
                             }
@@ -89,30 +106,52 @@
                             right: 430px;
                             bottom: 3px;
                             margin: 0;
+                            width: 10%;
+                            @media (max-width: 1350px) {
+                                width: 11%;
+                                right: 370px;
+                            }
+                            @media (max-width: 1210px) {
+                                width: 12%;
+                            }
+                            @media (max-width: 1100px) {
+                                width: 13%;
+                            }
                             @media (max-width: 991px) {
-                                right: 90px;
+                                width: 16%;
+                                right: 115px;
+                                top: 10px;
+                                bottom: 0;
+                            }
+                            @media (max-width: 900px) {
+                                width: 18%;
+                            }
+                            @media (max-width: 850px) {
+                                width: 20%;
                             }
                             @media (max-width: 767px) {
                                 right: 215px;
                                 bottom: 15px;
-                                width: 20%;
                             }
                             @media (max-width: 575px) {
                                 right: 175px;
                                 bottom: 8px;
-                                width: 20%;
                             }
                             @media (max-width: 450px) {
+                                width: 18%;
                                 right: 140px;
                             }
-                            @media (max-width: 450px) {
-                                width: 22%;
+                            @media (max-width: 350px) {
+                                width: 20%;
                                 right: 110px;
+                            }
+                            @media (max-width: 320px) {
+                                width: 22%;
+                                right: 100px;
                             }
                             // margin-bottom: 28px;
                             h2 {
                                 margin: 0;
-                                margin-right: 15px;
                                 letter-spacing: 3px;
                                 float: left;
                                 font-size: 3rem;
@@ -132,7 +171,7 @@
                                 @media (max-width: 450px) {
                                     font-size: 1.5rem;
                                 }
-                                @media (max-width: 300px) {
+                                @media (max-width: 399px) {
                                     font-size: 1.3rem;
                                 }
                             }
@@ -143,7 +182,6 @@
                                 position: relative;
                                 right: 5px;
                                 top: 3px;
-                                margin-right: 10px;
                                 @media (max-width: 767px) {
                                     margin: 0;
                                     top: 0;
@@ -154,7 +192,7 @@
                                 @media (max-width: 450px) {
                                     font-size: 0.6rem;
                                 }
-                                @media (max-width: 300px) {
+                                @media (max-width: 399px) {
                                     font-size: 0.5rem;
                                 }
                             }
@@ -165,25 +203,22 @@
             .annoucement-detail-content {
                 height: 48%;
                 overflow-y: auto;
-                width: 880px;
+                width: 60%;
                 margin-left: auto;
                 margin-right: auto;
-                @media (max-width: 991px) {
-                    width: 60%;
-                }
                 .announcement-detail-row {
                     width: 100%;
                 }
             }
         }
     }
-
+    
     .detail-page-body {
         .goback-container {
             margin-top: 0;
         }
     }
-
+    
     // .announcement-detail-row {
     //     width: 100%;
     //     padding: 20px;
