@@ -93,6 +93,9 @@ class AnnouncementService extends BaseService
 
     public function getListForIndex(){
         $news = AnnouncementEloquent::orderBy('is_top', 'desc')->orderBy('updated_at', 'desc')->take(3)->get();
+        foreach ($news as $new) {
+            $new->detailURL = route('front.announcements.show', [$new->id]);
+        }
         return $news;
     }
 }

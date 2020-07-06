@@ -65,7 +65,7 @@
                                         <div class="col-md-3 col-12 newsDate">{{ $news->showDate() }}</div>
                                         <div class="col-md-7 col-8 newsTitle">{{ $news->showTitle() }}</div>
                                         <div class="col-md-2 col-4 readMore">
-                                            <a href="#">閱讀更多</a>
+                                            <a href="{{ $news->detailURL }}">閱讀更多</a>
                                         </div>
                                     </div>
                                 </div>
@@ -102,11 +102,11 @@
                                 <img src="{{ asset('images/frontend/icons/activty_icon_white.png') }}" alt="activity" class="base-icon">
                                 <h1 class="base-title">近期活動</h1>
                             </div>
-                            
+
                             @if(!is_null($activities_top))
                             <div class="base-content activity-content">
                                 <div class="activity-unit-container left-side">
-                                    
+
                                     <div class="activity-unit">
                                         <a href="{{ route('front.activities.show', [$activities_top->id]) }}" class="activity-link">
                                             <div class="activity-image">
@@ -130,7 +130,7 @@
 
                                 @if($activities->isNotEmpty())
                                     <div class="activity-unit-container right-side">
-                                        
+
                                         @foreach($activities as $activity)
                                             <div class="activity-unit">
                                                 <a href="{{ route('front.activities.show', [$activity->id]) }}" class="activity-link">
@@ -180,7 +180,7 @@
                                         @if($i == 0 || $i == 5)
                                             <div class="recommendation-row">
                                         @endif
-                                        
+
                                         <div class="book-image">
                                             <a href="{{ route('front.books.show', $recommendation_books[$i]->id) }}" class="book-link">
                                                 <img src="{{ $recommendation_books[$i]->showCoverImage() }}" alt="{{ $recommendation_books[$i]->title }}">
@@ -201,7 +201,7 @@
                             </div>
                         @endif
 
-                        
+
 
 
                     </div>
