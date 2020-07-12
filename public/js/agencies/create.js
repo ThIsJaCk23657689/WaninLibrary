@@ -181,7 +181,8 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       AgenciesIndexURL: $('#AgenciesIndexURL').html(),
-      AgenciesStoreURL: $('#AgenciesStoreURL').html()
+      AgenciesStoreURL: $('#AgenciesStoreURL').html(),
+      NameIsIniqueURL: $('#NameIsIniqueURL').html()
     };
   },
   methods: {
@@ -195,7 +196,27 @@ __webpack_require__.r(__webpack_exports__);
         console.error('新增單位時發生錯誤，錯誤訊息：' + error);
         $.showErrorModal(error);
       });
-    }
+    },
+    onChangeForName: function onChangeForName(e) {
+      this.checkName(e.target.value, this);
+    },
+    checkName: _.debounce(function (name, vm) {
+      $.showLoadingModal();
+      axios.post(vm.NameIsIniqueURL, {
+        name: name
+      }).then(function (response) {
+        console.log(response.data.message);
+
+        if (response.data.isUnique) {
+          $.showSuccessModal(response.data.message);
+        } else {
+          $.showWarningModal(response.data.message);
+        }
+      })["catch"](function (error) {
+        console.error('檢查單位名稱是否重複時發生錯誤，錯誤訊息：' + error);
+        $.showErrorModal(error);
+      });
+    }, 750)
   },
   mounted: function mounted() {
     // 地址
@@ -237,11 +258,35 @@ var render = function() {
             }
           },
           [
-            _vm._m(0),
+            _c("div", { staticClass: "row" }, [
+              _c("div", { staticClass: "col-md-4" }, [
+                _c("div", { staticClass: "form-group" }, [
+                  _vm._m(0),
+                  _vm._v(" "),
+                  _c("input", {
+                    staticClass: "form-control mb-2",
+                    attrs: {
+                      id: "name",
+                      name: "name",
+                      type: "text",
+                      value: "",
+                      required: "",
+                      autocomplete: "off",
+                      autofocus: ""
+                    },
+                    on: { input: _vm.onChangeForName }
+                  })
+                ])
+              ]),
+              _vm._v(" "),
+              _vm._m(1),
+              _vm._v(" "),
+              _vm._m(2)
+            ]),
             _vm._v(" "),
-            _vm._m(1),
+            _vm._m(3),
             _vm._v(" "),
-            _vm._m(2),
+            _vm._m(4),
             _vm._v(" "),
             _c(
               "div",
@@ -287,64 +332,53 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "name" } }, [
-            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("單位名稱\n                            ")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-2",
-            attrs: {
-              id: "name",
-              name: "name",
-              type: "text",
-              value: "",
-              required: "",
-              autocomplete: "off",
-              autofocus: ""
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-2",
-            attrs: {
-              id: "tel",
-              name: "tel",
-              type: "text",
-              value: "",
-              placeholder: "例：0912-312312",
-              autocomplete: "off"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "principal" } }, [
-            _vm._v("負責人/單位聯絡窗口")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control",
-            attrs: {
-              id: "principal",
-              name: "principal",
-              type: "text",
-              value: "",
-              autocomplete: "off"
-            }
-          })
-        ])
+    return _c("label", { attrs: { for: "name" } }, [
+      _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+      _vm._v("單位名稱\n                            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control mb-2",
+          attrs: {
+            id: "tel",
+            name: "tel",
+            type: "text",
+            value: "",
+            placeholder: "例：0912-312312",
+            autocomplete: "off"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "principal" } }, [
+          _vm._v("負責人/單位聯絡窗口")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control",
+          attrs: {
+            id: "principal",
+            name: "principal",
+            type: "text",
+            value: "",
+            autocomplete: "off"
+          }
+        })
       ])
     ])
   },

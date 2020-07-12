@@ -30,7 +30,7 @@
 		<span id="BooksGetList" class="d-none">{{ route('books.getList') }}</span>
 
         <books-table :books="books" :rows-per-page="rowsPerPage" :page-num="pageNum" :total-page="totalPage" v-on:update-book="updateBook"
-        v-on:change-status="changeStatus" v-on:change-category="changeCategory" v-on:change-keywords-type="changeKeywordsType"></books-table>
+        v-on:change-status="changeStatus" v-on:change-order="changeOrder" v-on:change-category="changeCategory" v-on:change-keywords-type="changeKeywordsType"></books-table>
 	</div>
 
 @endsection

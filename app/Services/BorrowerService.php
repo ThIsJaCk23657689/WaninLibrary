@@ -36,6 +36,16 @@ class BorrowerService extends BaseService
         return $borrower->id;
     }
 
+    public function nameIsInique($request)
+    {
+        $count = BorrowerEloquent::where('name', $request->name)->count();
+        if($count == 0){
+            return ['status' => 200, 'isUnique' => true, 'message'=>'無重複名稱之借閱人'];
+        }else{
+            return ['status' => 200, 'isUnique' => false, 'message'=>'已有重複名稱之借閱人'];
+        }
+    }
+
     public function count()
     {
         return BorrowerEloquent::count();

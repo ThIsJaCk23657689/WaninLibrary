@@ -141,16 +141,17 @@ class BookService extends BaseService
         $take = $request->take ?? 10;
         $status = $request->status ?? 0; //default 0
         $category = $request->category ?? 14; //default 14
+        $orderby = $request->orderby ?? 2;
         $type = $request->type ?? 0; //default 0
         $keywords = ($request->keywords != "") ? explode(" ", $request->keywords) : [];
 
         $type_arr = ['','title', 'author', 'ISBN', 'publisher'];
 
-        if($keywords == [] && $status== 0 && $category == 14 && $type== 0){
+        if($keywords == [] && $status== 0 && $category == 14 && $type== 0 && $orderby == 2){
             // all default
             $books_tmp = new BookEloquent();
             $count = $books_tmp->count();
-            $books = $books_tmp->skip($skip)->take($take)->get();
+            $books = $books_tmp->orderBy('created_at','desc')->skip($skip)->take($take)->get();
 
 
         }else{
@@ -193,10 +194,16 @@ class BookService extends BaseService
                 $books_tmp->where('category', $category);
             }
             $count = $books_tmp->count();
-            $books = $books_tmp->skip($skip)->take($take)->get();
-        }
+            if($orderby == 2){ //DESC
+                $books = $books_tmp->orderBy('created_at','desc')->skip($skip)->take($take)->get();
+            }else { //ASC
+                $books = $books_tmp->orderBy('created_at','asc')->skip($skip)->take($take)->get();
+            }
 
+        }
+        $c = 1;
         foreach($books as $book){
+            $book['index'] = $skip + $c;
             $book['showTitle'] = $book->showTitle();
             $book['showStatus'] = $book->showStatus();
             $book['borrowCounts'] = $book->count;
@@ -205,6 +212,7 @@ class BookService extends BaseService
                 <a href="' . route('books.edit', [$book->id]) . '" class="btn btn-md btn-success"><i class="fas fa-pencil-alt"></i></a>
                 <button type="button" class="btn btn-md btn-danger delete-btn"><i class="far fa-trash-alt"></i></button type="button">
                 <span class="d-none">' . route('books.destroy', [$book->id]) . '</span>';
+            $c ++;
         }
         $res = ['books'=>$books, 'count' => $count];
         return $res;
@@ -607,7 +615,7 @@ class BookService extends BaseService
                 $result = '應用科學類';
                 break;
             case 5:
-                $result = '社會學類';
+                $result = '社會科學類';
                 break;
             case 6:
                 $result = '史地類';

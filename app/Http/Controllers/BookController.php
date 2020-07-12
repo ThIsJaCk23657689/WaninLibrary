@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use App\Services\BookService;
-
-use App;
-use SnappyImage;
+use Illuminate\Validation\Rule;
+// use App;
+// use SnappyImage;
 
 class BookController extends Controller
 {
@@ -88,7 +88,11 @@ class BookController extends Controller
             'status' => 'nullable| integer|', //status: (default) 0.全部 1.在庫、2.借出 3.逾期 4.庫藏待上架 5.已淘汰 6.已轉贈、7.待索取 8.已被索取、9.無外借、10.無歸還
             'keywords' => 'nullable| string|',
             'skip' => 'nullable| integer|',
-            'take' => 'nullable|integer|max:100'
+            'take' => 'nullable|integer|max:100',
+            'orderby' => [
+                'nullable',
+                Rule::in([1, 2, 0]), //  1.建立日期(舊->新) 2.建立日期(新->舊)
+            ],
         ]);
 
         $res = $this->BookService->getList($request);

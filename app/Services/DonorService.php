@@ -32,6 +32,16 @@ class DonorService extends BaseService
         return $donor->id;
     }
 
+    public function nameIsInique($request)
+    {
+        $count = DonorEloquent::where('name', $request->name)->count();
+        if($count == 0){
+            return ['status' => 200, 'isUnique' => true, 'message'=>'無重複名稱之捐贈人'];
+        }else{
+            return ['status' => 200, 'isUnique' => false, 'message'=>'已有重複名稱之捐贈人'];
+        }
+    }
+
     public function count(){
         return DonorEloquent::count();
     }

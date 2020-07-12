@@ -190,6 +190,13 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['books', 'rowsPerPage', 'pageNum', 'totalPage'],
   data: function data() {
@@ -203,13 +210,18 @@ __webpack_require__.r(__webpack_exports__);
       var status = e.target.value;
       this.$emit('change-status', status);
     },
+    changeOrder: function changeOrder(e) {
+      var orderby = e.target.value;
+      this.$emit('change-order', orderby);
+    },
     changeKeywordsType: function changeKeywordsType(e) {
       var data = $(e.target).serializeObject();
       var keywords = data.keywords;
       var type = data.type;
       var category = data.category;
       var status = data.status;
-      this.$emit('change-keywords-type', keywords, type, status, category);
+      var orderby = data.orderby;
+      this.$emit('change-keywords-type', keywords, type, status, category, orderby);
     },
     changeCategory: function changeCategory(e) {
       var category = e.target.value;
@@ -448,6 +460,30 @@ var render = function() {
                             ])
                           ]
                         )
+                      ]),
+                      _vm._v(" "),
+                      _c("div", { staticClass: "col-md-3" }, [
+                        _c(
+                          "select",
+                          {
+                            staticClass: "form-control",
+                            attrs: { name: "orderby", id: "orderby" },
+                            on: { change: _vm.changeOrder }
+                          },
+                          [
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("排序方式")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "2" } }, [
+                              _vm._v("建立日期(新->舊)")
+                            ]),
+                            _vm._v(" "),
+                            _c("option", { attrs: { value: "1" } }, [
+                              _vm._v("建立日期(舊->新)")
+                            ])
+                          ]
+                        )
                       ])
                     ]
                   ),
@@ -557,7 +593,7 @@ var staticRenderFns = [
         [
           _c("thead", [
             _c("tr", [
-              _c("th", [_vm._v("編號")]),
+              _c("th", [_vm._v("序號")]),
               _vm._v(" "),
               _c("th", [_vm._v("書名(主標題)")]),
               _vm._v(" "),
@@ -749,7 +785,8 @@ var app = new Vue({
       status: 0,
       category: 14,
       type: 0,
-      keywords: ''
+      keywords: '',
+      orderby: 2
     };
   },
   methods: {
@@ -757,11 +794,16 @@ var app = new Vue({
       this.status = status;
       this.updateBook(this.pageNum, true);
     },
-    changeKeywordsType: function changeKeywordsType(keywords, type, status, category) {
+    changeOrder: function changeOrder(orderby) {
+      this.orderby = orderby;
+      this.updateBook(this.pageNum, true);
+    },
+    changeKeywordsType: function changeKeywordsType(keywords, type, status, category, orderby) {
       this.category = category;
       this.keywords = keywords;
       this.type = type;
       this.status = status;
+      this.orderby = orderby;
       this.updateBook(this.pageNum, true);
     },
     changeCategory: function changeCategory(category) {
@@ -784,6 +826,7 @@ var app = new Vue({
       var keywords = this.keywords;
       var type = this.type;
       var category = this.category;
+      var orderby = this.orderby;
       var BooksGetList = $('#BooksGetList').html();
       $('.dataTables_processing', $('#BooksDataTable').closest('.dataTables_wrapper')).fadeIn();
       axios.get(BooksGetList, {
@@ -794,7 +837,8 @@ var app = new Vue({
           keywords: keywords,
           type: type,
           category: category,
-          first_page: first_page
+          first_page: first_page,
+          orderby: orderby
         }
       }).then(function (response) {
         _this.books = response.data.books;
@@ -860,7 +904,7 @@ var app = new Vue({
       }).dataTable({
         data: _this3.books,
         columns: [{
-          data: 'id'
+          data: 'index'
         }, {
           data: 'showTitle'
         }, {
@@ -875,7 +919,8 @@ var app = new Vue({
         pageLength: _this3.rowsPerPage,
         info: false,
         paging: false,
-        processing: true
+        processing: true,
+        "ordering": false
       });
 
       _this3.refreshDeleteBtn();

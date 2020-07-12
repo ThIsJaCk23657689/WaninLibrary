@@ -106,7 +106,7 @@ export default {
                 // $('#CreateAgencyModal').modal('hide');
                 $.showSuccessModal('新增成功');
                 $('#CreateAgencyModalForm').trigger('reset');
-                this.$emit('refresh-agency');
+                this.$emit('refresh-agency', response.data.added_id);
             }).catch((error) => {
                 console.error('新增捐贈人時發生錯誤，錯誤訊息：' + error);
                 $.showErrorModal(error);

@@ -10,7 +10,7 @@
                             <label for="name">
                                 <span class="text-danger mr-2">*</span>名稱
                             </label>
-                            <input id="name" name="name" type="text" class="form-control mb-2" value="" required autocomplete="off" autofocus>
+                            <input id="name" name="name" type="text" class="form-control mb-2" value="" required autocomplete="off" autofocus @input="onChangeForName">
                         </div>
                     </div>
 
@@ -132,6 +132,7 @@ export default {
         return {
             BorrowersIndexURL: $('#BorrowersIndexURL').html(),
             BorrowersStoreURL: $('#BorrowersStoreURL').html(),
+            NameIsIniqueURL: $('#NameIsIniqueURL').html(),
             agencies: [],
         }
     },
@@ -147,7 +148,7 @@ export default {
                 $.showErrorModal(error);
             });
         },
-        generateAgenciesOption(){
+        generateAgenciesOption(added_id = null){
             // 生成 機構 下拉式選單
             let AgenciesListURL = $('#AgenciesListURL').html();
             axios.get(AgenciesListURL).then(response => {
@@ -156,11 +157,34 @@ export default {
                     $("#agency_id").append($("<option></option>").attr("value", this.agencies[i].id).text(this.agencies[i].name));
                 }
                 $('#agency_id').selectpicker('refresh');
+                if(added_id != null){
+                    $('#agency_id').val(added_id);
+                    $('#agency_id').selectpicker('refresh');
+                }
             });
         },
-        refreshAgency(){
-            this.generateAgenciesOption();
-        }
+        refreshAgency(added_id){
+            this.generateAgenciesOption(added_id);
+        },
+        onChangeForName(e){
+            this.checkName(e.target.value, this);
+        },
+        checkName: _.debounce((name, vm) => {
+            $.showLoadingModal();
+            axios.post(vm.NameIsIniqueURL, {
+                name: name
+            }).then(response => {
+                console.log(response.data.message);
+                if(response.data.isUnique){
+                    $.showSuccessModal(response.data.message);
+                }else{
+                    $.showWarningModal(response.data.message);
+                }
+            }).catch(error => {
+                console.error('檢查借閱人名稱是否重複時發生錯誤，錯誤訊息：' + error);
+                $.showErrorModal(error);
+            });
+        }, 750),
     },
     created() {
         this.generateAgenciesOption();

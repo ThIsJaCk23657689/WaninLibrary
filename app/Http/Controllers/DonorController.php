@@ -68,6 +68,14 @@ class DonorController extends Controller
     }
 
     // API
+    public function nameIsInique(Request $request){
+        $res = $this->DonorService->nameIsInique($request);
+        return response()->json([
+            'status' =>  $res['status'],
+            'message' => $res['message']
+        ], $res['status']);
+    }
+
     public function getList(Request $request){
         $this->validate($request, [
             'type' => 'nullable|integer|', // 0.(default)全部 2.依姓名 3.依照電話 4.手機 5. 信箱

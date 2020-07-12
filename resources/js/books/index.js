@@ -16,6 +16,7 @@ const app = new Vue({
             category: 14,
             type: 0,
             keywords: '',
+            orderby: 2,
         }
     },
     methods: {
@@ -23,11 +24,16 @@ const app = new Vue({
             this.status = status;
             this.updateBook(this.pageNum, true)
         },
-        changeKeywordsType(keywords, type, status, category) {
+        changeOrder(orderby) {
+            this.orderby = orderby;
+            this.updateBook(this.pageNum, true)
+        },
+        changeKeywordsType(keywords, type, status, category, orderby) {
             this.category = category;
             this.keywords = keywords;
             this.type = type;
             this.status = status;
+            this.orderby = orderby;
             this.updateBook(this.pageNum, true)
         },
         changeCategory(category) {
@@ -48,6 +54,7 @@ const app = new Vue({
             let keywords = this.keywords;
             let type = this.type;
             let category = this.category;
+            let orderby = this.orderby;
 
             let BooksGetList = $('#BooksGetList').html();
             $('.dataTables_processing', $('#BooksDataTable').closest('.dataTables_wrapper')).fadeIn();
@@ -59,7 +66,8 @@ const app = new Vue({
                     keywords: keywords,
                     type: type,
                     category: category,
-                    first_page: first_page
+                    first_page: first_page,
+                    orderby: orderby,
                 }
             }).then(response => {
                 this.books = response.data.books;
@@ -121,7 +129,7 @@ const app = new Vue({
             }).dataTable({
                 data: this.books,
                 columns: [
-                    { data: 'id' },
+                    { data: 'index' },
                     { data: 'showTitle' },
                     { data: 'borrowCounts' },
                     { data: 'showStatus' },
@@ -132,7 +140,8 @@ const app = new Vue({
                 pageLength: this.rowsPerPage,
                 info: false,
                 paging: false,
-                processing: true
+                processing: true,
+                "ordering": false
             });
             this.refreshDeleteBtn();
         });

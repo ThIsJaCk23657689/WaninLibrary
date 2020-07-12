@@ -43,6 +43,13 @@
                                     <option value="13">非中文圖書</option>
                                 </select>
                             </div>
+                            <div class="col-md-3">
+                                <select name="orderby" id="orderby" class="form-control" @change="changeOrder">
+                                    <option value="2">排序方式</option>
+                                    <option value="2">建立日期(新->舊)</option>
+                                    <option value="1">建立日期(舊->新)</option>
+                                </select>
+                            </div>
                         </div>
 
                         <div class="row justify-content-center">
@@ -76,7 +83,7 @@
                 <table id="BooksDataTable" class="table table-bordered" width="100%" cellspacing="0">
                     <thead>
                         <tr>
-                            <th>編號</th>
+                            <th>序號</th>
                             <th>書名(主標題)</th>
                             <th>借閱次數</th>
                             <th>狀態</th>
@@ -109,13 +116,18 @@ export default {
             let status = e.target.value;
             this.$emit('change-status', status);
         },
+        changeOrder(e){
+            let orderby = e.target.value;
+            this.$emit('change-order', orderby);
+        },
         changeKeywordsType(e){
             let data = $(e.target).serializeObject();
             let keywords = data.keywords;
             let type = data.type;
             let category = data.category;
             let status = data.status;
-            this.$emit('change-keywords-type', keywords, type, status, category);
+            let orderby = data.orderby;
+            this.$emit('change-keywords-type', keywords, type, status, category, orderby);
         },
         changeCategory: function(e){
             let category = e.target.value;
