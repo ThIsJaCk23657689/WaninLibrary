@@ -50,7 +50,7 @@ header {
     }
 }
 
-.header-button-container{
+.header-button-container {
     width: 100%;
     min-width: $web-min-width;
     height: 120px;
@@ -59,7 +59,7 @@ header {
     flex-wrap: nowrap;
     align-items: stretch;
     z-index: 1;
-    .header-button{
+    .header-button {
         width: 50%;
         padding: 10px;
         display: flex;
@@ -70,21 +70,22 @@ header {
         @media (max-width: 479px) {
             flex-direction: column;
         }
-        &.left{
+        &.left {
             background-color: $gray;
         }
-        &.right{
+        &.right {
             background-color: $green;
         }
-        .header-text{
+        .header-text {
             display: flex;
             flex-direction: column;
             flex-wrap: nowrap;
             @media (max-width: 479px) {
                 order: 1;
             }
-            .button-title{
+            .button-title {
                 color: $brown;
+                font-weight: bold;
                 letter-spacing: 15px;
                 @media (max-width: 991px) {
                     font-size: 1.5rem;
@@ -109,7 +110,7 @@ header {
                     font-size: 1rem;
                 }
             }
-            .button-subtitle{
+            .button-subtitle {
                 color: $darkgray;
                 letter-spacing: 5px;
                 @media (max-width: 991px) {
@@ -123,7 +124,7 @@ header {
                 }
             }
         }
-        .button-check-link{
+        .button-check-link {
             display: flex;
             width: 75px;
             padding: 0;
@@ -133,9 +134,9 @@ header {
             @media (max-width: 719px) {
                 width: 50px;
             }
-            a{
+            a {
                 display: inline-block;
-                img{
+                img {
                     width: 95%;
                 }
             }

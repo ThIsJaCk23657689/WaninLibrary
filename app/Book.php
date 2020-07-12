@@ -48,7 +48,7 @@ class Book extends Model
 
     public function showTitle(){
         $maxString = 16;
-        if(strlen($this->title) >= $maxString){
+        if(mb_strlen($this->title) >= $maxString){
             return mb_substr($this->title, 0, $maxString) . '...';
         }else{
             return $this->title;

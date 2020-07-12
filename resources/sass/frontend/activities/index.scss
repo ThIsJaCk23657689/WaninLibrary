@@ -11,7 +11,7 @@
         @media (max-width: 767px) {
             padding: 0px;
             border: 1px solid $blue !important;
-            &:first-child{
+            &:first-child {
                 border-bottom: none !important;
             }
         }
@@ -78,8 +78,8 @@
             font-style: italic;
             position: relative;
             right: 5px;
-            bottom: 10px;
-            font-size: 1.2rem;
+            bottom: -6px;
+            font-size: 1rem;
             // font-weight: lighter;
         }
     }
@@ -139,7 +139,7 @@
                 }
             }
             &:hover {
-                img{
+                img {
                     transform: translateX(-50%) scale(1.1);
                 }
                 .image-gray {

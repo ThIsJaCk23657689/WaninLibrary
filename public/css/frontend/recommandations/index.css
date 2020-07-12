@@ -6,6 +6,7 @@
 }
 .content-page-header h1 {
   color: #55473f;
+  font-weight: bold;
   font-size: 2.5rem;
   letter-spacing: 15px;
   display: inline-block;
@@ -305,8 +306,8 @@
   font-style: italic;
   position: relative;
   right: 5px;
-  bottom: 10px;
-  font-size: 1.2rem;
+  bottom: -6px;
+  font-size: 1rem;
 }
 @media (max-width: 575px) {
   .recommandation-card .recommandation-card-info .recommandation-card-date span {

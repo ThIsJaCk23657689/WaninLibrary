@@ -18,25 +18,23 @@
     @media (max-width: 575px) {
         padding: 0px 10px 30px 10px;
     }
-    .background{
+    .background {
         width: 100%;
         height: 100%;
         position: absolute;
         top: 0;
         left: 0;
-        .background-darkwhite{
+        .background-darkwhite {
             height: 20%;
             background-color: $darkwhite;
         }
     }
-    
-    .activity-container{
+    .activity-container {
         width: 100%;
         height: 100%;
         position: relative;
     }
-    
-    .activity-card{
+    .activity-card {
         width: 100%;
         height: 100%;
         border-radius: 40px;
@@ -59,38 +57,33 @@
             border-radius: 20px;
         }
     }
-    
-    .activity-visible{
+    .activity-visible {
         width: 100%;
         height: 100%;
         overflow: hidden;
         position: relative;
     }
-    
-    .slider{
+    .slider {
         width: 200%;
         height: 100%;
         position: absolute;
         top: 0;
         left: 0;
-    
         display: flex;
         flex-direction: row;
         flex-wrap: nowrap;
-    
         transition: left 0.5s ease;
-        &.activated{
+        &.activated {
             left: -100%;
         }
     }
-    
-    .base-area{
+    .base-area {
         width: 50%;
         height: 100%;
         display: flex;
         flex-direction: column;
         flex-wrap: nowrap;
-        .base-title-container{
+        .base-title-container {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
@@ -100,15 +93,15 @@
                 margin-bottom: 15px;
                 padding-left: 10px;
             }
-            .base-icon{
+            .base-icon {
                 width: 60px;
                 margin-right: 20px;
                 @media (max-width: 379px) {
                     width: 40px;
                     margin-right: 10px;
-                } 
+                }
             }
-            .base-title{
+            .base-title {
                 margin: 0;
                 font-size: 2rem;
                 font-weight: bold;
@@ -122,51 +115,51 @@
                 @media (max-width: 379px) {
                     font-size: 1.2rem;
                     line-height: 1.2rem;
-                } 
+                }
             }
         }
-        .base-content{
+        .base-content {
             display: flex;
             flex-grow: 1;
             margin-bottom: 30px;
-            &.activity-content{
+            &.activity-content {
                 flex-direction: row;
                 flex-wrap: nowrap;
                 @media (max-width: 1199px) {
                     flex-direction: column;
                 }
-                .activity-unit-container{
+                .activity-unit-container {
                     width: 50%;
                     height: 100%;
                     @media (max-width: 1199px) {
                         width: 100%;
                         height: 50%;
                     }
-                    &.left-side{
+                    &.left-side {
                         // 這裡是左邊大顆的活動
-                        .activity-unit{
+                        .activity-unit {
                             width: 100%;
                             height: 100%;
                             padding: 10px 5px 10px 10px;
                             @media (max-width: 1199px) {
                                 padding: 10px 10px 0px 10px;
                             }
-                            .activity-link{
+                            .activity-link {
                                 width: 100%;
                                 height: 100%;
                                 display: flex;
                                 flex-direction: column;
                                 flex-wrap: nowrap;
                                 position: relative;
-                                &:hover{
+                                &:hover {
                                     text-decoration: none;
                                 }
-                                .activity-image{
+                                .activity-image {
                                     width: 100%;
                                     height: 100%;
                                     overflow: hidden;
                                     position: relative;
-                                    img{
+                                    img {
                                         height: 100%;
                                         position: absolute;
                                         top: 0;
@@ -188,7 +181,7 @@
                                             transform: translateX(-50%);
                                         }
                                     }
-                                    .image-gray{
+                                    .image-gray {
                                         width: 100%;
                                         height: 100%;
                                         position: absolute;
@@ -198,7 +191,7 @@
                                         transition: background-color 0.1s ease-in-out;
                                     }
                                     &:hover {
-                                        img{
+                                        img {
                                             transform: translateX(-50%) scale(1.1);
                                             @media (max-width: 1199px) {
                                                 transform: translateY(-50%) scale(1.1);
@@ -212,7 +205,7 @@
                                         }
                                     }
                                 }
-                                .activity-info{
+                                .activity-info {
                                     width: 100%;
                                     display: flex;
                                     flex-direction: column;
@@ -228,8 +221,9 @@
                                     @media (max-width: 359px) {
                                         padding: 10px 20px;
                                     }
-                                    .activity-date{
+                                    .activity-date {
                                         font-size: 1.2rem;
+                                        font-weight: bold;
                                         letter-spacing: 3px;
                                         @media (max-width: 575px) {
                                             font-size: 1rem;
@@ -239,7 +233,7 @@
                                             font-size: 0.8rem;
                                         }
                                     }
-                                    .activity-title{
+                                    .activity-title {
                                         font-size: 1.5rem;
                                         font-weight: bold;
                                         letter-spacing: 3px;
@@ -251,7 +245,7 @@
                                             font-size: 0.8rem;
                                         }
                                     }
-                                    .activity-readmore{
+                                    .activity-readmore {
                                         text-align: right;
                                         letter-spacing: 3px;
                                         @media (max-width: 575px) {
@@ -262,7 +256,7 @@
                                         }
                                     }
                                 }
-                                .activity-new-container{
+                                .activity-new-container {
                                     width: 100%;
                                     display: flex;
                                     flex-direction: row;
@@ -271,7 +265,7 @@
                                     top: 0;
                                     left: 0;
                                     padding: 15px;
-                                    .activity-new{
+                                    .activity-new {
                                         color: $white;
                                         background-color: $pink;
                                         border-radius: 40px;
@@ -282,44 +276,44 @@
                             }
                         }
                     }
-                    &.right-side{
+                    &.right-side {
                         // 這裡是右邊小顆的活動
                         display: flex;
                         flex-direction: column;
                         flex-wrap: nowrap;
-                        .activity-unit{
+                        .activity-unit {
                             width: 100%;
                             height: 50%;
                             padding: 10px 10px 10px 5px;
                             @media (max-width: 1199px) {
                                 padding: 10px 10px 0px 10px;
                             }
-                            &:first-child{
+                            &:first-child {
                                 padding-bottom: 5px;
                                 @media (max-width: 1199px) {
                                     padding-bottom: 0px;
                                 }
                             }
-                            &:last-child{
+                            &:last-child {
                                 padding-top: 5px;
                                 @media (max-width: 1199px) {
                                     padding-top: 10px;
                                 }
                             }
-                            .activity-link{
+                            .activity-link {
                                 width: 100%;
                                 height: 100%;
                                 display: flex;
                                 flex-direction: row;
                                 flex-wrap: nowrap;
-                                &:hover{
+                                &:hover {
                                     text-decoration: none;
                                 }
-                                .activity-image{
+                                .activity-image {
                                     width: 50%;
                                     overflow: hidden;
                                     position: relative;
-                                    img{
+                                    img {
                                         height: 100%;
                                         position: absolute;
                                         top: 0;
@@ -342,7 +336,7 @@
                                             transform: translateX(-50%);
                                         }
                                     }
-                                    .image-gray{
+                                    .image-gray {
                                         width: 100%;
                                         height: 100%;
                                         position: absolute;
@@ -352,7 +346,7 @@
                                         transition: background-color 0.1s ease-in-out;
                                     }
                                     &:hover {
-                                        img{
+                                        img {
                                             transform: translateX(-50%) scale(1.1);
                                             @media (max-width: 1199px) {
                                                 transform: translateY(-50%) scale(1.1);
@@ -366,15 +360,16 @@
                                         }
                                     }
                                 }
-                                .activity-info{
+                                .activity-info {
                                     width: 50%;
                                     display: flex;
                                     flex-direction: column;
                                     flex-wrap: nowrap;
                                     padding: 0px 0px 0px 15px;
                                     color: $brown;
-                                    .activity-date{
+                                    .activity-date {
                                         font-size: 1rem;
+                                        font-weight: bold;
                                         letter-spacing: 3px;
                                         @media (max-width: 575px) {
                                             font-size: 1rem;
@@ -384,7 +379,7 @@
                                             font-size: 0.8rem;
                                         }
                                     }
-                                    .activity-title{
+                                    .activity-title {
                                         letter-spacing: 3px;
                                         line-height: 2rem;
                                         font-weight: bold;
@@ -399,7 +394,7 @@
                                             font-size: 0.8rem;
                                         }
                                     }
-                                    .activity-readmore{
+                                    .activity-readmore {
                                         color: $white;
                                         text-align: right;
                                         letter-spacing: 3px;
@@ -416,7 +411,7 @@
                     }
                 }
             }
-            &.recommendation-content{
+            &.recommendation-content {
                 flex-direction: column;
                 flex-wrap: nowrap;
                 justify-content: center;
@@ -434,27 +429,24 @@
                     flex-direction: row;
                     background: none;
                 }
-                .recommendation-row{
+                .recommendation-row {
                     display: flex;
                     flex-direction: row;
                     flex-wrap: nowrap;
-    
                     width: 100%;
-    
                     background-image: url('../../images/frontend/icons/news_underline.png');
                     background-repeat: no-repeat;
                     background-position: bottom;
                     background-size: 100%;
-    
                     padding-bottom: 10px;
-                    margin-bottom: 30px;      
+                    margin-bottom: 30px;
                     @media (max-width: 767px) {
                         width: 50%;
                         flex-direction: column;
                         background: none;
-                        margin-bottom: 0px; 
-                    }   
-                    .book-image{
+                        margin-bottom: 0px;
+                    }
+                    .book-image {
                         width: 20%;
                         height: 200px;
                         display: flex;
@@ -468,13 +460,13 @@
                         }
                         @media (max-width: 575px) {
                             height: 118px;
-                        }  
-                        .book-link{
+                        }
+                        .book-link {
                             width: 100%;
                             height: 100%;
                             display: flex;
                             justify-content: center;
-                            img{
+                            img {
                                 height: 100%;
                             }
                         }
@@ -482,13 +474,13 @@
                 }
             }
         }
-        .switch-link-container{
+        .switch-link-container {
             display: flex;
             flex-direction: row-reverse;
             flex-wrap: nowrap;
             width: 100%;
             height: 60px;
-            .switch-link{
+            .switch-link {
                 width: 390px;
                 border: 1px solid $white;
                 border-radius: 25px;
@@ -502,7 +494,7 @@
                 @media (max-width: 399px) {
                     width: 100%;
                 }
-                span{
+                span {
                     font-size: 1.5rem;
                     letter-spacing: 3px;
                     @media (max-width: 399px) {
@@ -515,8 +507,7 @@
                 }
             }
         }
-    
-        .switch-link-container-recommendation{
+        .switch-link-container-recommendation {
             display: flex;
             flex-direction: row;
             flex-wrap: nowrap;
@@ -525,7 +516,7 @@
             @media (max-width: 575px) {
                 padding-left: 24px;
             }
-            .switch-link{
+            .switch-link {
                 width: 230px;
                 text-align: center;
                 cursor: pointer;
@@ -534,7 +525,7 @@
                 flex-wrap: nowrap;
                 justify-content: center;
                 align-items: center;
-                span{
+                span {
                     font-size: 1.5rem;
                     letter-spacing: 3px;
                 }

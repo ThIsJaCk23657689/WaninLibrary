@@ -80,6 +80,7 @@
                 }
                 .announcement-date {
                     display: inline-block;
+                    font-weight: bold;
                     letter-spacing: 3px;
                     margin-right: 20px;
                     @media (max-width: 1199px) {
@@ -88,6 +89,7 @@
                 }
                 .announcement-title {
                     display: inline-block;
+                    font-weight: bold;
                     letter-spacing: 5px;
                     @media (max-width: 1199px) {
                         top: 25px;

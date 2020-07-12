@@ -74,7 +74,7 @@ class Donor extends Model
         }
 
         $maxString = 16;
-        if(strlen($result) >= $maxString){
+        if(mb_strlen($result) >= $maxString){
             return mb_substr($result, 0, $maxString) . '...';
         }else{
             return $result;

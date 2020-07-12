@@ -11,7 +11,7 @@
         @media (max-width: 767px) {
             padding: 0px;
             border: 1px solid $blue !important;
-            &:first-child{
+            &:first-child {
                 border-bottom: none !important;
             }
         }
@@ -128,7 +128,7 @@
                 }
             }
             &:hover {
-                img{
+                img {
                     transform: translateY(-50%) scale(1.1);
                     @media (max-width: 1199px) {
                         transform: translateX(-50%) scale(1.1);
@@ -174,8 +174,8 @@
                 font-style: italic;
                 position: relative;
                 right: 5px;
-                bottom: 10px;
-                font-size: 1.2rem;
+                bottom: -6px;
+                font-size: 1rem;
                 @media (max-width: 575px) {
                     font-size: 0.8rem;
                     bottom: 5px;

@@ -11931,6 +11931,7 @@ header .bg_cover .coverText span {
 }
 .header-button-container .header-button .header-text .button-title {
   color: #55473f;
+  font-weight: bold;
   letter-spacing: 15px;
 }
 @media (max-width: 991px) {
@@ -12107,6 +12108,7 @@ header .bg_cover .coverText span {
 }
 #news .container .newsTable .newsRow .newsTitle {
   font-size: 1.5rem;
+  font-weight: bold;
   letter-spacing: 4px;
 }
 @media (max-width: 991px) {
@@ -12465,6 +12467,7 @@ header .bg_cover .coverText span {
 }
 #activity .base-area .base-content.activity-content .activity-unit-container.left-side .activity-unit .activity-link .activity-info .activity-date {
   font-size: 1.2rem;
+  font-weight: bold;
   letter-spacing: 3px;
 }
 @media (max-width: 575px) {
@@ -12633,6 +12636,7 @@ header .bg_cover .coverText span {
 }
 #activity .base-area .base-content.activity-content .activity-unit-container.right-side .activity-unit .activity-link .activity-info .activity-date {
   font-size: 1rem;
+  font-weight: bold;
   letter-spacing: 3px;
 }
 @media (max-width: 575px) {
