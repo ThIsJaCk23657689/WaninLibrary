@@ -119,7 +119,7 @@ $('#nav_block').click(function (e) {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\users\index.js */"./resources/js/users/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\users\index.js */"./resources/js/users/index.js");
 
 
 /***/ })
