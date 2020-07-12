@@ -20,11 +20,22 @@
         border: 1px solid $blue;
         border-radius: 10px;
         position: relative;
+        @media (max-width: 1199px) {
+            height: 375px;
+        }
+        @media (max-width: 767px) {
+            height: 305px;
+        }
+        @media (max-width: 575px) {
+            height: 350px;
+        }
         @media (max-width: 429px) {
+            height: 278px;
             border-radius: 8px;
             margin-bottom: 30px;
         }
         @media (max-width: 350px) {
+            height: 192px;
             border-radius: 5px;
             margin-bottom: 15px;
         }

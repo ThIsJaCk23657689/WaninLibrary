@@ -861,7 +861,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                            確認\n                        "
+                        "\r\n                            確認\r\n                        "
                       )
                     ]
                   ),
@@ -874,7 +874,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                            取消\n                        "
+                        "\r\n                            取消\r\n                        "
                       )
                     ]
                   )
@@ -905,7 +905,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "barcode" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("書籍條碼\n                            ")
+      _vm._v("書籍條碼\r\n                            ")
     ])
   },
   function() {
@@ -1435,7 +1435,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\circulation\index.js */"./resources/js/circulation/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\circulation\index.js */"./resources/js/circulation/index.js");
 
 
 /***/ })
