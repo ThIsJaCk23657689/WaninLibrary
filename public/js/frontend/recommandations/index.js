@@ -579,9 +579,9 @@ var render = function() {
           },
           [
             _vm._v(
-              "\r\n            " +
+              "\n            " +
                 _vm._s(_vm.recommandation.showTitle) +
-                "\r\n            "
+                "\n            "
             )
           ]
         )
@@ -1009,7 +1009,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\recommandations\index.js */"./resources/js/frontend/recommandations/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\recommandations\index.js */"./resources/js/frontend/recommandations/index.js");
 
 
 /***/ })

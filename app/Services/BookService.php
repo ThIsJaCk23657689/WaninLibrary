@@ -52,7 +52,7 @@ class BookService extends BaseService
             'barcode' => $barcode,
             'callnum' => $request->callnum,
             'category' => $request->category,
-            'status' => config('book.status.INSTOCK'),
+            'status' => $request->status,
             'title' => $request->title,
             'subtitle' => $request->subtitle,
 
@@ -332,7 +332,7 @@ class BookService extends BaseService
     // 13.史地類 14.中國史地類 15.世界史地類  16.語文文學類 17.藝術類 18.論文 19.期刊雜誌 20 .非中文圖書)
     // orderBy 1:最新-最舊desc 2:最舊-最新asc
     public function getListFrontend($request){
-        
+
         if($request->firstPage == 1){
             // 強制從第一頁開始。
             $skip = 0;
@@ -371,7 +371,7 @@ class BookService extends BaseService
         if(!is_null($type) && ($type > 6)){
             // type 不為null 而且 大於6 => 類別 過濾
             $books = $books->where('category', '=', $type - 7);
-        } 
+        }
 
         if(!is_null($type) && ($type >= 0 && $type <= 6)){
             // type 不為null 而且 介於0到6之間 => keyword 搜尋
@@ -394,7 +394,7 @@ class BookService extends BaseService
         }else{
             $books = $books->orderBy('created_at', 'asc');
         }
-        
+
         $count = $books->count();
         $books = $books->skip($skip)->take($take)->get();
 
@@ -406,7 +406,7 @@ class BookService extends BaseService
         }
 
         return [
-            'books' => $books, 
+            'books' => $books,
             'count' => $count
         ];
     }

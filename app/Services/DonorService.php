@@ -270,7 +270,7 @@ class DonorService extends BaseService
         });
         return $result;
     }
-    
+
     public function getDonorBooksListFrontend($request){
         if($request->first_page){
             $skip = 0;
@@ -286,7 +286,7 @@ class DonorService extends BaseService
         foreach($books as $book){
             $book->index = $skip + $c;
             $book->showTitle =  $book->showTitle();
-            $book->showStatus =  $book->showStatus();
+            $book->showStatus =  $book->showStatusFrontEnd();
             $book->bookURL = route('front.books.show', [$book->id]);
             $c ++;
         }

@@ -50,7 +50,7 @@
         </div>
         @else
         {{-- 主題書單 --}}
-        <img src="{{ asset($activity->showCoverImage()) }}" width="100%" alt="">
+        {{-- <img src="{{ asset($activity->showCoverImage()) }}" width="100%" alt=""> --}}
         <div class="row recommandation-detail-row">
             <div class="col-md-12">
                 {!! $activity->content !!}

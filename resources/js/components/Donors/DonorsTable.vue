@@ -13,8 +13,8 @@
                                 <select name="exposure" id="exposure" class="form-control" @change="changeExposure">
                                     <option value="0">曝光程度</option>
                                     <option value="1">完全公開</option>
-                                    <option value="2">姓名保護</option>
-                                    <option value="3">對外匿名</option>
+                                    <option value="2">半公開</option>
+                                    <option value="3">完全匿名</option>
                                 </select>
                             </div>
 

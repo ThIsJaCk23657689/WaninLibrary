@@ -68,7 +68,7 @@ export default {
     props:['activity', 'content'],
     data(){
         return {
-            CKEditorUploadURL: $('#CKEditorUploadURL').text(),
+
             ActivitiesIndexURL: $('#ActivitiesIndexURL').html(),
             ActivitiesUpdateURL: $('#ActivitiesUpdateURL').html(),
             ActivitiesCoverImageURL: $('#ActivitiesCoverImageURL').html(),

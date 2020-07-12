@@ -12,19 +12,19 @@
                         <tbody>
                             <tr>
                                 <td>電話</td>
-                                <td>(04)2382-5559</td>
+                                <td>{{ $information->tel }}</td>
                             </tr>
                             <tr>
                                 <td>傳真</td>
-                                <td>(04)2382-1977</td>
+                                <td>{{ $information->fax }}</td>
                             </tr>
                             <tr>
                                 <td>信箱</td>
-                                <td>wlibrary@wanin-fund.org.tw</td>
+                                <td>{{ $information->email }}</td>
                             </tr>
                             <tr>
                                 <td>地址</td>
-                                <td>412028台中市大里區泉水街86號1樓</td>
+                                <td>{{ $information->address }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -40,7 +40,7 @@
                                 </thead>
                                 <tbody>
                                     <tr>
-                                        <td>11:00 - 18:00 (國定假日依網站公告)</td>
+                                        <td>{{ $information->showOpenAt() }} - {{ $information->showCloseAt() }} (國定假日依網站公告)</td>
                                     </tr>
                                 </tbody>
                             </table>

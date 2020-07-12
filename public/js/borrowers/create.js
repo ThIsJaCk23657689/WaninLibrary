@@ -477,7 +477,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            確認新增\r\n                        "
+                          "\n                            確認新增\n                        "
                         )
                       ]
                     ),
@@ -490,7 +490,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            返回列表\r\n                        "
+                          "\n                            返回列表\n                        "
                         )
                       ]
                     )
@@ -517,7 +517,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "name" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("名稱\r\n                            ")
+            _vm._v("名稱\n                            ")
           ]),
           _vm._v(" "),
           _c("input", {
@@ -549,6 +549,7 @@ var staticRenderFns = [
               name: "tel",
               type: "text",
               value: "",
+              placeholder: "例：0912-312312",
               required: "",
               autocomplete: "off"
             }
@@ -584,7 +585,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "status" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("身分別\r\n                            ")
+            _vm._v("身分別\n                            ")
           ]),
           _vm._v(" "),
           _c(
@@ -634,7 +635,7 @@ var staticRenderFns = [
                 [
                   _c("i", { staticClass: "fas fa-plus mr-2" }),
                   _vm._v(
-                    "\r\n                                        新增隸屬單位\r\n                                    "
+                    "\n                                        新增隸屬單位\n                                    "
                   )
                 ]
               )
@@ -885,7 +886,7 @@ var staticRenderFns = [
         [
           _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
           _vm._v(
-            "\r\n                                單位名稱\r\n                            "
+            "\n                                單位名稱\n                            "
           )
         ]
       ),
@@ -926,6 +927,7 @@ var staticRenderFns = [
             id: "agency_tel",
             type: "text",
             name: "tel",
+            placeholder: "例：0912-312312",
             autocomplete: "off"
           }
         })
@@ -1069,7 +1071,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                                    確認新增\r\n                                "
+              "\n                                    確認新增\n                                "
             )
           ]
         ),
@@ -1082,7 +1084,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                                    取消\r\n                                "
+              "\n                                    取消\n                                "
             )
           ]
         )
@@ -1369,7 +1371,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\borrowers\create.js */"./resources/js/borrowers/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\borrowers\create.js */"./resources/js/borrowers/create.js");
 
 
 /***/ })

@@ -32,7 +32,7 @@
                                     <option value="2">200 宗教類</option>
                                     <option value="3">300 科學類</option>
                                     <option value="4">400 應用科學類</option>
-                                    <option value="5">500 社會學類</option>
+                                    <option value="5">500 社會科學類</option>
                                     <option value="6">600 史地類</option>
                                     <option value="7">610 中國史地類</option>
                                     <option value="8">710 世界史地類</option>

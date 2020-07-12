@@ -41,7 +41,7 @@ class Donor extends Model
                 $result = '半公開';
                 break;
             case '3':
-                $result = '對外匿名';
+                $result = '完全匿名';
                 break;
             default:
                 $result = '完全公開';

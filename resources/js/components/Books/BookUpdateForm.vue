@@ -163,7 +163,7 @@
                     <div class="col-md-3">
                         <div class="form-group">
                             <label for="isbn">ISBN</label>
-                            <input id="isbn" name="isbn" type="text" class="form-control" v-model="book.isbn" autocomplete="off">
+                            <input id="isbn" name="isbn" type="text" class="form-control" v-model="book.ISBN" autocomplete="off">
                         </div>
                     </div>
 
@@ -424,7 +424,7 @@ export default {
                 {id: 2, text: '200 宗教類'},
                 {id: 3, text: '300 科學類'},
                 {id: 4, text: '400 應用科學類'},
-                {id: 5, text: '500 社會學類'},
+                {id: 5, text: '500 社會科學類'},
                 {id: 6, text: '600 史地類'},
                 {id: 7, text: '610 中國史地類'},
                 {id: 8, text: '710 世界史地類'},

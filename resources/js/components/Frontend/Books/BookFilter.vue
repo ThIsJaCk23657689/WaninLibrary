@@ -15,7 +15,7 @@
                 <option value="9">宗教類</option>
                 <option value="10">科學類</option>
                 <option value="11">應用科學類</option>
-                <option value="12">社會學類</option>
+                <option value="12">社會科學類</option>
                 <option value="13">史地類</option>
                 <option value="14">中國史地類</option>
                 <option value="15">世界史地類</option>
@@ -54,7 +54,7 @@ export default {
     props: ['filter'],
     data(){
         return {
-            
+
         }
     },
     methods: {
