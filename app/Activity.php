@@ -41,7 +41,7 @@ class Activity extends Model
                 $result = '不明類型';
         }
 
-        return $this->type;
+        return $result;
     }
 
     public function showTitle(){
