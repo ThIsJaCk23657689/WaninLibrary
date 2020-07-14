@@ -301,7 +301,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                            確認新增\n                        "
+                        "\r\n                            確認新增\r\n                        "
                       )
                     ]
                   ),
@@ -314,7 +314,7 @@ var render = function() {
                     },
                     [
                       _vm._v(
-                        "\n                            返回列表\n                        "
+                        "\r\n                            返回列表\r\n                        "
                       )
                     ]
                   )
@@ -334,7 +334,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "name" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("單位名稱\n                            ")
+      _vm._v("單位名稱\r\n                            ")
     ])
   },
   function() {
@@ -675,7 +675,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\agencies\create.js */"./resources/js/agencies/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\agencies\create.js */"./resources/js/agencies/create.js");
 
 
 /***/ })

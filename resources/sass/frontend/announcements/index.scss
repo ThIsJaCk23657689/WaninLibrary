@@ -17,8 +17,8 @@
 .content-page-body {
     // min-width: 768px !important;
     .container {
-        overflow-x: scroll;
         @media (max-width: 767px) {
+            overflow-x: scroll;
             max-width: initial;
         }
     }

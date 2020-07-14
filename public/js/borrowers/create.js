@@ -528,7 +528,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            確認新增\n                        "
+                          "\r\n                            確認新增\r\n                        "
                         )
                       ]
                     ),
@@ -541,7 +541,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\n                            返回列表\n                        "
+                          "\r\n                            返回列表\r\n                        "
                         )
                       ]
                     )
@@ -565,7 +565,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "name" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("名稱\n                            ")
+      _vm._v("名稱\r\n                            ")
     ])
   },
   function() {
@@ -625,7 +625,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "status" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("身分別\n                            ")
+            _vm._v("身分別\r\n                            ")
           ]),
           _vm._v(" "),
           _c(
@@ -675,7 +675,7 @@ var staticRenderFns = [
                 [
                   _c("i", { staticClass: "fas fa-plus mr-2" }),
                   _vm._v(
-                    "\n                                        新增隸屬單位\n                                    "
+                    "\r\n                                        新增隸屬單位\r\n                                    "
                   )
                 ]
               )
@@ -926,7 +926,7 @@ var staticRenderFns = [
         [
           _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
           _vm._v(
-            "\n                                單位名稱\n                            "
+            "\r\n                                單位名稱\r\n                            "
           )
         ]
       ),
@@ -1111,7 +1111,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                                    確認新增\n                                "
+              "\r\n                                    確認新增\r\n                                "
             )
           ]
         ),
@@ -1124,7 +1124,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                                    取消\n                                "
+              "\r\n                                    取消\r\n                                "
             )
           ]
         )
@@ -1411,7 +1411,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\borrowers\create.js */"./resources/js/borrowers/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\borrowers\create.js */"./resources/js/borrowers/create.js");
 
 
 /***/ })

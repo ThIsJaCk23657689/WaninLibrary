@@ -153,11 +153,9 @@
   }
 }
 
-.content-page-body .container {
-  overflow-x: scroll;
-}
 @media (max-width: 767px) {
   .content-page-body .container {
+    overflow-x: scroll;
     max-width: initial;
   }
 }
