@@ -16,7 +16,7 @@ class UserService extends BaseService
             'email' => $request->email,
             'password' => bcrypt($request->password),
             'status' => $request->birthday,
-            'tel' => $request->birthday,
+            'tel' => str_replace('-','',$request->tel),
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
@@ -74,7 +74,7 @@ class UserService extends BaseService
         $user->update([
             'name' => $request->name,
             'email' => $request->email,
-            'tel' => $request->tel,
+            'tel' => str_replace('-','',$request->tel),
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,

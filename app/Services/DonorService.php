@@ -15,8 +15,8 @@ class DonorService extends BaseService
             'name' => $request->name,
             'birthday' => $request->birthday,
             'email' => $request->email,
-            'tel' => $request->tel,
-            'cellphone' => $request->cellphone,
+            'tel' => str_replace('-','',$request->tel),
+            'cellphone' => str_replace('-','',$request->cellphone),
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
@@ -135,8 +135,8 @@ class DonorService extends BaseService
             'name' => $request->name,
             'birthday' => $request->birthday,
             'email' => $request->email,
-            'tel' => $request->tel,
-            'cellphone' => $request->cellphone,
+            'tel' => str_replace('-','',$request->tel),
+            'cellphone' => str_replace('-','',$request->cellphone),
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
