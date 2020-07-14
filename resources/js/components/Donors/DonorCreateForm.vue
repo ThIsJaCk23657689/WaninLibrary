@@ -16,14 +16,14 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="tel">電話</label>
-                        <input id="tel" name="tel" type="text" class="form-control mb-2" value="" placeholder="例：0912-312312" autocomplete="off">
+                        <input id="tel" name="tel" type="text" class="form-control mb-2" value="" placeholder="例：0423825559" autocomplete="off">
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="cellphone">行動電話</label>
-                        <input id="cellphone" name="cellphone" type="text" class="form-control mb-2" value="" placeholder="例：0912-312312" autocomplete="off">
+                        <input id="cellphone" name="cellphone" type="text" class="form-control mb-2" value="" placeholder="例：0912312312" autocomplete="off">
                     </div>
                 </div>
             </div>

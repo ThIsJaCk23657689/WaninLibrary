@@ -17,7 +17,7 @@
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="tel">電話</label>
-                            <input id="tel" name="tel" type="text" class="form-control mb-2" value="" placeholder="例：0912-312312" autocomplete="off">
+                            <input id="tel" name="tel" type="text" class="form-control mb-2" value="" placeholder="例：0422112568" autocomplete="off">
                         </div>
                     </div>
 
