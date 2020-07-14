@@ -271,15 +271,12 @@ __webpack_require__.r(__webpack_exports__);
       this.checkName(e.target.value, this);
     },
     checkName: _.debounce(function (name, vm) {
-      $.showLoadingModal();
       axios.post(vm.NameIsIniqueURL, {
         name: name
       }).then(function (response) {
         console.log(response.data.message);
 
-        if (response.data.isUnique) {
-          $.showSuccessModal(response.data.message);
-        } else {
+        if (!response.data.isUnique) {
           $.showWarningModal(response.data.message);
         }
       })["catch"](function (error) {
