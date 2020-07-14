@@ -226,6 +226,7 @@
 }
 .book-container .book-card {
   width: calc(100%);
+  height: 365px;
   margin-bottom: 50px;
   border: 1px solid #5f6b82;
   border-radius: 50px;
