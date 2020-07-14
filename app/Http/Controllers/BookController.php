@@ -5,9 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Requests\BookRequest;
 use App\Services\BookService;
-
-use App;
-use SnappyImage;
+use Illuminate\Validation\Rule;
+// use App;
+// use SnappyImage;
 
 class BookController extends Controller
 {
@@ -64,7 +64,7 @@ class BookController extends Controller
 
     public function destroy($id){
         $book = $this->BookService->getOne($id);
-        if($book->status != 2 && $book->status != 3){
+        if($book->status == 2 || $book->status == 3){
             return response()->json([
                 'status' => 'OK',
                 'message' => '此書籍為借閱中或逾期中，因此不能刪除',
@@ -88,7 +88,11 @@ class BookController extends Controller
             'status' => 'nullable| integer|', //status: (default) 0.全部 1.在庫、2.借出 3.逾期 4.庫藏待上架 5.已淘汰 6.已轉贈、7.待索取 8.已被索取、9.無外借、10.無歸還
             'keywords' => 'nullable| string|',
             'skip' => 'nullable| integer|',
-            'take' => 'nullable|integer|max:100'
+            'take' => 'nullable|integer|max:100',
+            'orderby' => [
+                'nullable',
+                Rule::in([1, 2, 0]), //  1.建立日期(舊->新) 2.建立日期(新->舊)
+            ],
         ]);
 
         $res = $this->BookService->getList($request);
@@ -169,11 +173,11 @@ class BookController extends Controller
         $book = $this->BookService->getOne($id);
 
         // 圖片儲存路徑
-        $path = public_path() . '/images/books/barcode/'. $book->barcode .'.jpg';
-        if (file_exists($path)) {
-            // 如果已經有圖檔，就先刪除。
-            unlink($path);
-        }
+        // $path = public_path() . '/images/books/barcode/'. $book->barcode .'.jpg';
+        // if (file_exists($path)) {
+        //     // 如果已經有圖檔，就先刪除。
+        //     unlink($path);
+        // }
 
         // 注意：使用barryvdh/laravel-snappy套件，請務必要安裝wkhtmltox。
         // 安裝好wkhtmltox要到config/snappy.php 設定wkhtmltopdf和wkhtmltoimage兩者的路徑
@@ -183,26 +187,26 @@ class BookController extends Controller
         // $snappy->generateFromHtml(view('books.barcode', compact('book'))->render(), $path);
 
         // Laravel 5.5以上，可以到config的alias註冊，引用SnappyImage就可以了。
-        $html = view('books.barcode', compact('book'))->render();
-        SnappyImage::generateFromHtml($html, $path);
+        // $html = view('books.barcode', compact('book'))->render();
+        // SnappyImage::generateFromHtml($html, $path);
 
-        // 單位為像素px。
-        $width = 270;
-        $height = 100;
+        // // 單位為像素px。
+        // $width = 270;
+        // $height = 100;
 
-        $newimage = imagecreatetruecolor($width, $height);
-        $oimage = imagecreatefromjpeg($path);
-        imagecopy($newimage,
-            $oimage,
-            0, 0,
-            0,
-            0,
-            $width, $height);
-        $ext = 'jpg';
-        $imageName = $book->barcode . '.' . $ext;
-        $save_path = public_path() . '/images/books/barcode/';
+        // $newimage = imagecreatetruecolor($width, $height);
+        // $oimage = imagecreatefromjpeg($path);
+        // imagecopy($newimage,
+        //     $oimage,
+        //     0, 0,
+        //     0,
+        //     0,
+        //     $width, $height);
+        // $ext = 'jpg';
+        // $imageName = $book->barcode . '.' . $ext;
+        // $save_path = public_path() . '/images/books/barcode/';
 
-        imagejpeg($newimage, $save_path . $imageName);
+        // imagejpeg($newimage, $save_path . $imageName);
 
         return view('books.barcode', compact('book'));
     }

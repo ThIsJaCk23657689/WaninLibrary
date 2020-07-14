@@ -9,7 +9,7 @@
                 <div class="freebook-title">
                     <h4>{{ book.showTitle }}</h4>
                 </div>
-                <span class="freebook-small">作者：{{ book.author }}著</span>
+                <span class="freebook-small" v-if="book.author != null">作者：{{ book.author }}著</span>
                 <span class="freebook-small">出版商：{{ book.publisher }}</span>
                 <div class="check-detail">
                     查看詳細資料

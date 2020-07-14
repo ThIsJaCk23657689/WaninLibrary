@@ -9,21 +9,21 @@
                         <label for="name">
                             <span class="text-danger mr-2">*</span>捐贈人(單位)名稱
                         </label>
-                        <input id="name" name="name" type="text" class="form-control mb-2" value="" required autocomplete="off" autofocus>
+                        <input id="name" name="name" type="text" class="form-control mb-2" value="" required autocomplete="off" autofocus @input="onChangeForName">
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="tel">電話</label>
-                        <input id="tel" name="tel" type="text" class="form-control mb-2" value="" autocomplete="off">
+                        <input id="tel" name="tel" type="text" class="form-control mb-2" value="" placeholder="例：0912-312312" autocomplete="off">
                     </div>
                 </div>
 
                 <div class="col-md-4">
                     <div class="form-group">
                         <label for="cellphone">行動電話</label>
-                        <input id="cellphone" name="cellphone" type="text" class="form-control mb-2" value="" autocomplete="off">
+                        <input id="cellphone" name="cellphone" type="text" class="form-control mb-2" value="" placeholder="例：0912-312312" autocomplete="off">
                     </div>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                         <select name="exposure" id="exposure" class="form-control">
                             <option value="1">完全公開</option>
                             <option value="2">半公開</option>
-                            <option value="3">對外匿名</option>
+                            <option value="3">完全匿名</option>
                         </select>
                     </div>
                 </div>
@@ -109,11 +109,30 @@ export default {
         return {
             DonorsIndexURL: $('#DonorsIndexURL').html(),
             DonorsStoreURL: $('#DonorsStoreURL').html(),
+            NameIsIniqueURL: $('#NameIsIniqueURL').html(),
             FormErrorsMsg: [],
         }
     },
     methods: {
-
+        onChangeForName(e){
+            this.checkName(e.target.value, this);
+        },
+        checkName: _.debounce((name, vm) => {
+            $.showLoadingModal();
+            axios.post(vm.NameIsIniqueURL, {
+                name: name
+            }).then(response => {
+                console.log(response.data.message);
+                if(response.data.isUnique){
+                    $.showSuccessModal(response.data.message);
+                }else{
+                    $.showWarningModal(response.data.message);
+                }
+            }).catch(error => {
+                console.error('檢查捐贈人名稱是否重複時發生錯誤，錯誤訊息：' + error);
+                $.showErrorModal(error);
+            });
+        }, 750),
     },
     created(){
 

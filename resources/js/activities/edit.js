@@ -5,6 +5,7 @@ const app = new Vue({
     el: '#activity',
     data() {
         return {
+            CKEditorUploadURL: $('#CKEditorUploadURL').text(),
             activity: [],
             content: null,
         }

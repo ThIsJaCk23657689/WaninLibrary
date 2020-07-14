@@ -244,7 +244,7 @@ var staticRenderFns = [
             value: "",
             required: "",
             autocomplete: "off",
-            placeholder: "請輸入電話",
+            placeholder: "例：0912-312312",
             disabled: ""
           }
         })
@@ -265,7 +265,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                        查詢捐贈書籍\r\n                    "
+              "\n                        查詢捐贈書籍\n                    "
             )
           ]
         )
@@ -482,7 +482,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\donatedBooks\index.js */"./resources/js/frontend/donatedBooks/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\donatedBooks\index.js */"./resources/js/frontend/donatedBooks/index.js");
 
 
 /***/ })

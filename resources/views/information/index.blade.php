@@ -53,13 +53,13 @@
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="open_at">開館時間</label>
-                        <input id="open_at" name="open_at" type="text" class="form-control mb-2" value="{{ $information->open_at ?? '無' }}" readonly>
+                        <input id="open_at" name="open_at" type="text" class="form-control mb-2" value="{{ $information->showOpenAt() ?? '無' }}" readonly>
                     </div>
                 </div>
                 <div class="col-md-6">
                     <div class="form-group">
                         <label for="close_at">閉館時間</label>
-                        <input id="close_at" name="close_at" type="text" class="form-control mb-2" value="{{ $information->close_at ?? '無' }}" readonly>
+                        <input id="close_at" name="close_at" type="text" class="form-control mb-2" value="{{ $information->showCloseAt() ?? '無' }}" readonly>
                     </div>
                 </div>
             </div>

@@ -151,7 +151,7 @@ class Book extends Model
                 $result = '應用科學類';
                 break;
             case 5:
-                $result = '社會學類';
+                $result = '社會科學類';
                 break;
             case 6:
                 $result = '史地類';

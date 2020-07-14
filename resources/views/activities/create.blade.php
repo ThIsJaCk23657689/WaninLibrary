@@ -8,13 +8,13 @@
 @section('content')
 
 	@component('components.breadcrumbs')
-		<li class="breadcrumb-item">
-			<a href="#">{{ __('Basic:') }}</a>
-		</li>
-		<li class="breadcrumb-item">
-			<a href="{{ route('agencies.index') }}">{{ __('Agencies') }}</a>
-		</li>
-		<li class="breadcrumb-item active">{{ __('Create') }}</li>
+        <li class="breadcrumb-item">
+            <a href="#">{{ __('Basic:') }}</a>
+        </li>
+        <li class="breadcrumb-item">
+            <a href="{{ route('activities.index') }}">{{ __('Events') }}</a>
+        </li>
+        <li class="breadcrumb-item active">{{ __('Create') }}</li>
     @endcomponent
 
     <div id="activity">

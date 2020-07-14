@@ -4,6 +4,7 @@ const app = new Vue({
     el: '#announcement',
     data() {
         return {
+            CKEditorUploadURL: $('#CKEditorUploadURL').text(),
             announcement: [],
             content: null,
         }
@@ -16,7 +17,10 @@ const app = new Vue({
         axios.get(AnnouncementsGetOneURL).then(response => {
             this.announcement = response.data.announcement;
             this.content = response.data.announcement.content;
-            CKEDITOR.replace('content');
+            CKEDITOR.replace('content', {
+                filebrowserUploadUrl: this.CKEditorUploadURL,
+                filebrowserUploadMethod: 'form'
+            });
         });
     },
     mounted() {

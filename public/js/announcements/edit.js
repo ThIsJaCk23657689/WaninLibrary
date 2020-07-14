@@ -470,6 +470,7 @@ var app = new Vue({
   el: '#announcement',
   data: function data() {
     return {
+      CKEditorUploadURL: $('#CKEditorUploadURL').text(),
       announcement: [],
       content: null
     };
@@ -482,7 +483,10 @@ var app = new Vue({
     axios.get(AnnouncementsGetOneURL).then(function (response) {
       _this.announcement = response.data.announcement;
       _this.content = response.data.announcement.content;
-      CKEDITOR.replace('content');
+      CKEDITOR.replace('content', {
+        filebrowserUploadUrl: _this.CKEditorUploadURL,
+        filebrowserUploadMethod: 'form'
+      });
     });
   },
   mounted: function mounted() {}
@@ -566,7 +570,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\announcements\edit.js */"./resources/js/announcements/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\announcements\edit.js */"./resources/js/announcements/edit.js");
 
 
 /***/ })

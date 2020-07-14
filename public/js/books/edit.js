@@ -533,7 +533,7 @@ __webpack_require__.r(__webpack_exports__);
         text: '400 應用科學類'
       }, {
         id: 5,
-        text: '500 社會學類'
+        text: '500 社會科學類'
       }, {
         id: 6,
         text: '600 史地類'
@@ -1569,8 +1569,8 @@ var render = function() {
                           {
                             name: "model",
                             rawName: "v-model",
-                            value: _vm.book.isbn,
-                            expression: "book.isbn"
+                            value: _vm.book.ISBN,
+                            expression: "book.ISBN"
                           }
                         ],
                         staticClass: "form-control",
@@ -1580,13 +1580,13 @@ var render = function() {
                           type: "text",
                           autocomplete: "off"
                         },
-                        domProps: { value: _vm.book.isbn },
+                        domProps: { value: _vm.book.ISBN },
                         on: {
                           input: function($event) {
                             if ($event.target.composing) {
                               return
                             }
-                            _vm.$set(_vm.book, "isbn", $event.target.value)
+                            _vm.$set(_vm.book, "ISBN", $event.target.value)
                           }
                         }
                       })
@@ -1711,7 +1711,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            確認修改\r\n                        "
+                            "\n                            確認修改\n                        "
                           )
                         ]
                       ),
@@ -1724,7 +1724,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            返回列表\r\n                        "
+                            "\n                            返回列表\n                        "
                           )
                         ]
                       )
@@ -2475,7 +2475,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            確認修改\r\n                        "
+                            "\n                            確認修改\n                        "
                           )
                         ]
                       ),
@@ -2488,7 +2488,7 @@ var render = function() {
                         },
                         [
                           _vm._v(
-                            "\r\n                            返回列表\r\n                        "
+                            "\n                            返回列表\n                        "
                           )
                         ]
                       )
@@ -2508,7 +2508,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱\r\n                            ")
+      _vm._v("捐贈人(單位)名稱\n                            ")
     ])
   },
   function() {
@@ -2517,7 +2517,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "price" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("價格\r\n                            ")
+      _vm._v("價格\n                            ")
     ])
   },
   function() {
@@ -2526,7 +2526,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "title" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("書名（主標題）\r\n                                    ")
+      _vm._v("書名（主標題）\n                                    ")
     ])
   },
   function() {
@@ -2535,7 +2535,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "callnum" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("分類號\r\n                            ")
+      _vm._v("分類號\n                            ")
     ])
   },
   function() {
@@ -2557,7 +2557,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("捐贈人(單位)名稱\r\n                            ")
+      _vm._v("捐贈人(單位)名稱\n                            ")
     ])
   },
   function() {
@@ -2566,7 +2566,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "price" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("價格\r\n                            ")
+      _vm._v("價格\n                            ")
     ])
   },
   function() {
@@ -2575,7 +2575,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "title" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("書名（主標題）\r\n                                    ")
+      _vm._v("書名（主標題）\n                                    ")
     ])
   }
 ]
@@ -2697,7 +2697,7 @@ var render = function() {
       _c(
         "label",
         { staticClass: "mb-2", attrs: { for: _vm.prefix + "_image_file" } },
-        [_vm._v("\r\n            " + _vm._s(_vm.title) + "\r\n        ")]
+        [_vm._v("\n            " + _vm._s(_vm.title) + "\n        ")]
       ),
       _vm._v(" "),
       _c("div", { staticClass: "custom-file" }, [
@@ -3187,7 +3187,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\books\edit.js */"./resources/js/books/edit.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\books\edit.js */"./resources/js/books/edit.js");
 
 
 /***/ })

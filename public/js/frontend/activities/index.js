@@ -334,7 +334,7 @@ var render = function() {
         { staticClass: "title-link", attrs: { href: _vm.activity.detailURL } },
         [
           _vm._v(
-            "\r\n           " + _vm._s(_vm.activity.showTitle) + "\r\n        "
+            "\n           " + _vm._s(_vm.activity.showTitle) + "\n        "
           )
         ]
       )
@@ -991,7 +991,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\activities\index.js */"./resources/js/frontend/activities/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\activities\index.js */"./resources/js/frontend/activities/index.js");
 
 
 /***/ })

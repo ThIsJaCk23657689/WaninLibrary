@@ -19,6 +19,7 @@
     @endcomponent
 
     <div id="announcement">
+        <span id="CKEditorUploadURL" class="d-none">{{ route('ckeditor.upload') }}</span>
         <span id="AnnouncementsIndexURL" class="d-none">{{ route('announcements.index') }}</span>
         <span id="AnnouncementsGetOneURL" class="d-none">{{ route('announcements.getOne', [$announcement->id]) }}</span>
         <span id="AnnouncementsUpdateURL" class="d-none">{{ route('announcements.update', [$announcement->id]) }}</span>

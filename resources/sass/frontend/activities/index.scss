@@ -93,40 +93,12 @@
                 overflow: hidden;
                 position: relative;
                 img {
-                    height: 100%;
+                    width: 100%;
                     position: absolute;
-                    top: 0;
-                    left: calc(50% + 0px);
-                    transform: translateX(-50%);
+                    top: calc(50% + 0px);
+                    left: 0;
+                    transform: translateY(-50%);
                     transition: all 0.8s ease-in-out;
-                    @media (max-width: 991px) {
-                        width: 100%;
-                        height: auto;
-                        top: calc(50% + 0px);
-                        left: 0;
-                        transform: translateY(-50%);
-                    }
-                    @media (max-width: 767px) {
-                        width: auto;
-                        height: 100%;
-                        top: 0;
-                        left: calc(50% + 0px);
-                        transform: translateX(-50%);
-                    }
-                    @media (max-width: 575px) {
-                        width: 100%;
-                        height: auto;
-                        top: calc(50% + 0px);
-                        left: 0;
-                        transform: translateY(-50%);
-                    }
-                    @media (max-width: 459px) {
-                        width: auto;
-                        height: 100%;
-                        top: 0;
-                        left: calc(50% + 0px);
-                        transform: translateX(-50%);
-                    }
                 }
                 .image-gray {
                     position: absolute;
@@ -140,7 +112,7 @@
             }
             &:hover {
                 img {
-                    transform: translateX(-50%) scale(1.1);
+                    transform: translateY(-50%) scale(1.1);
                 }
                 .image-gray {
                     background-color: rgba($blue, 0);

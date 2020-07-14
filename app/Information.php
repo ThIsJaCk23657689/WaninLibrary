@@ -4,6 +4,8 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 use URL;
+use Carbon\Carbon;
+use DateTimeInterface;
 
 class Information extends Model
 {
@@ -12,6 +14,26 @@ class Information extends Model
     protected $fillable = [
         'email', 'tel', 'fax','address','open_at','close_at', 'recommendation_title', 'cover_image', 'donate_image'
     ];
+
+    protected $casts = [
+        'open_at' => 'datetime:H:i',
+        'close_at' => 'datetime:H:i',
+    ];
+
+    protected function serializeDate(DateTimeInterface $date)
+    {
+        return $date->format($this->dateFormat ?: 'H:i');
+    }
+
+    public function showOpenAt()
+    {
+        return $this->open_at->isoFormat('H:mm');
+    }
+
+    public function showCloseAt()
+    {
+        return $this->close_at->isoFormat('H:mm');
+    }
 
     public function showCoverImage(){
         if(empty($this->cover_image)){

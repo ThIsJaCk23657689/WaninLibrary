@@ -10,14 +10,14 @@
                             <label for="name">
                                 <span class="text-danger mr-2">*</span>單位名稱
                             </label>
-                            <input id="name" name="name" type="text" class="form-control mb-2" value="" required autocomplete="off" autofocus>
+                            <input id="name" name="name" type="text" class="form-control mb-2" value="" required autocomplete="off" autofocus @input="onChangeForName">
                         </div>
                     </div>
 
                     <div class="col-md-4">
                         <div class="form-group">
                             <label for="tel">電話</label>
-                            <input id="tel" name="tel" type="text" class="form-control mb-2" value="" autocomplete="off">
+                            <input id="tel" name="tel" type="text" class="form-control mb-2" value="" placeholder="例：0912-312312" autocomplete="off">
                         </div>
                     </div>
 
@@ -86,6 +86,7 @@ export default {
         return {
             AgenciesIndexURL: $('#AgenciesIndexURL').html(),
             AgenciesStoreURL: $('#AgenciesStoreURL').html(),
+            NameIsIniqueURL: $('#NameIsIniqueURL').html(),
         }
     },
     methods: {
@@ -100,7 +101,26 @@ export default {
                 console.error('新增單位時發生錯誤，錯誤訊息：' + error);
                 $.showErrorModal(error);
             });
-        }
+        },
+        onChangeForName(e){
+            this.checkName(e.target.value, this);
+        },
+        checkName: _.debounce((name, vm) => {
+            $.showLoadingModal();
+            axios.post(vm.NameIsIniqueURL, {
+                name: name
+            }).then(response => {
+                console.log(response.data.message);
+                if(response.data.isUnique){
+                    $.showSuccessModal(response.data.message);
+                }else{
+                    $.showWarningModal(response.data.message);
+                }
+            }).catch(error => {
+                console.error('檢查單位名稱是否重複時發生錯誤，錯誤訊息：' + error);
+                $.showErrorModal(error);
+            });
+        }, 750),
     },
     mounted(){
         // 地址

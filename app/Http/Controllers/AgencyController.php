@@ -12,7 +12,7 @@ class AgencyController extends Controller
 
     public function __construct(){
         $this->middleware('auth.web')->only([
-            'index', 'create', 'show', 'edit', 
+            'index', 'create', 'show', 'edit',
         ]);
         $this->middleware('auth.jwt')->only([
             'store', 'update', 'destroy', 'getList', 'getOne'
@@ -37,6 +37,8 @@ class AgencyController extends Controller
             'url' => route('agencies.index')
         ], 200);
     }
+
+
 
     public function show($id){
         $agency = $this->AgencyService->getOne($id);
@@ -65,6 +67,14 @@ class AgencyController extends Controller
     }
 
     // API
+    public function nameIsInique(Request $request){
+        $res = $this->AgencyService->nameIsInique($request);
+        return response()->json([
+            'status' =>  $res['status'],
+            'message' => $res['message']
+        ], $res['status']);
+    }
+
     public function getList(){
         $agencies = $this->AgencyService->getList();
         return response()->json([

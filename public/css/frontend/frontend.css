@@ -12833,29 +12833,29 @@ header .bg_cover .coverText span {
 footer {
   width: 100%;
   min-width: 300px;
-  height: 200px;
+  height: 220px;
   display: flex;
   background-color: #55473f;
   color: #f3f3f3;
 }
 @media (max-width: 991px) {
   footer {
-    height: calc(200px + 80px);
+    height: calc(220px + 80px);
   }
 }
 @media (max-width: 919px) {
   footer {
-    height: calc(200px + 160px);
+    height: calc(220px + 160px);
   }
 }
 @media (max-width: 567px) {
   footer {
-    height: calc(200px + 122px);
+    height: calc(220px + 122px);
   }
 }
 @media (max-width: 412px) {
   footer {
-    height: calc(200px + 232px);
+    height: calc(220px + 232px);
   }
 }
 footer .container {
@@ -12893,7 +12893,7 @@ footer .container .footerText {
   width: 100%;
   position: absolute;
   right: 0;
-  bottom: 13px;
+  bottom: 6px;
   font-size: 0.8rem;
   text-align: right;
 }
@@ -12941,7 +12941,7 @@ footer .container .footerText {
   }
 }
 footer .container .footerText .button-area {
-  width: 120px;
+  width: 150px;
   height: 45px;
   display: block;
   margin-bottom: 0px;
@@ -12953,9 +12953,10 @@ footer .container .footerText .button-area li {
 footer .container .footerText .button-area .nav-item {
   width: 40px;
   margin: 0px;
+  margin-left: 10px;
 }
 footer .container .footerText .button-area .nav-item .nav-link img {
-  width: 25px;
+  width: 35px;
 }
 footer .container .footerText .button-area .nav-item .nav-link:hover {
   border: none;

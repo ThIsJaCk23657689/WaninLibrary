@@ -45,7 +45,7 @@ footer {
             width: 100%;
             position: absolute;
             right: 0;
-            bottom: 13px;
+            bottom: 6px;
             font-size: 0.8rem;
             text-align: right;
             @media (max-width: 1299px) {
@@ -70,7 +70,7 @@ footer {
                 text-align: left;
                 left: 14px;
                 bottom: 2px;
-                .button-area{
+                .button-area {
                     margin: 0px;
                 }
             }
@@ -78,7 +78,7 @@ footer {
                 font-size: 0.6rem;
             }
             .button-area {
-                width: 120px;
+                width: 150px;
                 height: 45px;
                 display: block;
                 margin-bottom: 0px;
@@ -89,9 +89,10 @@ footer {
                 .nav-item {
                     width: 40px;
                     margin: 0px;
+                    margin-left: 10px;
                     .nav-link {
                         img {
-                            width: 25px;
+                            width: 35px;
                         }
                         &:hover {
                             border: none;
@@ -193,7 +194,7 @@ footer {
             }
         }
     }
-    .footer-text-container{
+    .footer-text-container {
         @media (max-width: 428px) {
             padding-right: 0px;
         }

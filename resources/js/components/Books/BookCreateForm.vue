@@ -324,7 +324,7 @@
 
             <div class="row">
                 <div class="col-md-6 text-center">
-                    <upload-images ref="uploadPapperImages" :uploadimg="uploadimg" :title="title" :aspect-ratio="15/21" :prefix="'papper'"></upload-images>
+                    <upload-images ref="uploadPapperImages" :uploadimg="uploadimg" :title="title" :aspect-ratio="16/21.5" :prefix="'papper'"></upload-images>
                 </div>
 
                 <div class="col-md-6">
@@ -468,7 +468,7 @@ export default {
                 {id: 2, text: '200 宗教類'},
                 {id: 3, text: '300 科學類'},
                 {id: 4, text: '400 應用科學類'},
-                {id: 5, text: '500 社會學類'},
+                {id: 5, text: '500 社會科學類'},
                 {id: 6, text: '600 史地類'},
                 {id: 7, text: '610 中國史地類'},
                 {id: 8, text: '710 世界史地類'},

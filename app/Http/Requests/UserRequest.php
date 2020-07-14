@@ -30,7 +30,7 @@ class UserRequest extends FormRequest
             'password' => 'required|string|max:20|min:6|confirmed',
             'status' => 'required|integer|max:1',
             'tel' => 'nullable|string|max:30',
-            'email' => 'required|string|max:255',
+            'email' => 'required|string|max:255|unique:users,email',
             'address_zipcode' => 'nullable|string|max:6',
             'address_county' => 'nullable|string|max:10',
             'address_district' => 'nullable|string|max:10',

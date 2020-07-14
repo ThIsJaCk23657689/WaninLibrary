@@ -11,7 +11,7 @@
             <div class="form-group row search-input-row">
                 <label for="donor_tel" class="col-md-4 col-form-label text-md-right search-label">電話</label>
                 <div class="col-md-5">
-                    <input id="donor_tel" type="text" class="form-control search-input" name="donor_tel" value="" required autocomplete="off" placeholder="請輸入電話" disabled>
+                    <input id="donor_tel" type="text" class="form-control search-input" name="donor_tel" value="" required autocomplete="off" placeholder="例：0912-312312" disabled>
                 </div>
             </div>
             <div class="form-group row justify-content-center">

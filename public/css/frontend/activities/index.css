@@ -251,48 +251,12 @@
   position: relative;
 }
 .activity-card .activity-card-image .image-link .cover-image img {
-  height: 100%;
+  width: 100%;
   position: absolute;
-  top: 0;
-  left: calc(50% + 0px);
-  transform: translateX(-50%);
+  top: calc(50% + 0px);
+  left: 0;
+  transform: translateY(-50%);
   transition: all 0.8s ease-in-out;
-}
-@media (max-width: 991px) {
-  .activity-card .activity-card-image .image-link .cover-image img {
-    width: 100%;
-    height: auto;
-    top: calc(50% + 0px);
-    left: 0;
-    transform: translateY(-50%);
-  }
-}
-@media (max-width: 767px) {
-  .activity-card .activity-card-image .image-link .cover-image img {
-    width: auto;
-    height: 100%;
-    top: 0;
-    left: calc(50% + 0px);
-    transform: translateX(-50%);
-  }
-}
-@media (max-width: 575px) {
-  .activity-card .activity-card-image .image-link .cover-image img {
-    width: 100%;
-    height: auto;
-    top: calc(50% + 0px);
-    left: 0;
-    transform: translateY(-50%);
-  }
-}
-@media (max-width: 459px) {
-  .activity-card .activity-card-image .image-link .cover-image img {
-    width: auto;
-    height: 100%;
-    top: 0;
-    left: calc(50% + 0px);
-    transform: translateX(-50%);
-  }
 }
 .activity-card .activity-card-image .image-link .cover-image .image-gray {
   position: absolute;
@@ -304,7 +268,7 @@
   transition: background-color 0.1s ease-in-out;
 }
 .activity-card .activity-card-image .image-link:hover img {
-  transform: translateX(-50%) scale(1.1);
+  transform: translateY(-50%) scale(1.1);
 }
 .activity-card .activity-card-image .image-link:hover .image-gray {
   background-color: rgba(95, 107, 130, 0);

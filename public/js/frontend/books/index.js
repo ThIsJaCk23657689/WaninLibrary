@@ -112,6 +112,12 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
+//
+//
+//
+//
+//
+//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['book'],
   data: function data() {
@@ -392,27 +398,47 @@ var render = function() {
           })
         ]),
         _vm._v(" "),
-        _c("div", { staticClass: "book-info" }, [
-          _c("h4", { staticClass: "book-title" }, [
-            _vm._v(_vm._s(_vm.book.showTitle))
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "book-small" }, [
-            _vm._v("作者：" + _vm._s(_vm.book.author) + "著")
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "book-small" }, [
-            _vm._v("出版商：" + _vm._s(_vm.book.publisher))
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "book-small" }, [
-            _vm._v("出版年：" + _vm._s(_vm.book.published_date))
-          ]),
-          _vm._v(" "),
-          _c("span", { staticClass: "book-small" }, [
-            _vm._v("書籍來源：" + _vm._s(_vm.book.source))
-          ])
-        ])
+        _vm.book.category != 11 && _vm.book.category != 12
+          ? _c("div", { staticClass: "book-info" }, [
+              _c("h4", { staticClass: "book-title" }, [
+                _vm._v(_vm._s(_vm.book.showTitle))
+              ]),
+              _vm._v(" "),
+              _vm.book.author != null
+                ? _c("span", { staticClass: "book-small" }, [
+                    _vm._v("作者：" + _vm._s(_vm.book.author) + "著")
+                  ])
+                : _vm._e(),
+              _vm._v(" "),
+              _c("span", { staticClass: "book-small" }, [
+                _vm._v("出版商：" + _vm._s(_vm.book.publisher))
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "book-small" }, [
+                _vm._v("出版年：" + _vm._s(_vm.book.published_date))
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "book-small" }, [
+                _vm._v("書籍來源：" + _vm._s(_vm.book.source))
+              ])
+            ])
+          : _c("div", { staticClass: "book-info" }, [
+              _c("h4", { staticClass: "book-title" }, [
+                _vm._v(_vm._s(_vm.book.showTitle))
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "book-small" }, [
+                _vm._v("出版商：" + _vm._s(_vm.book.publisher))
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "book-small" }, [
+                _vm._v("期數/出版日期：" + _vm._s(_vm.book.published_date))
+              ]),
+              _vm._v(" "),
+              _c("span", { staticClass: "book-small" }, [
+                _vm._v("書籍來源：" + _vm._s(_vm.book.source))
+              ])
+            ])
       ]
     )
   ])
@@ -542,7 +568,7 @@ var render = function() {
             _vm._v(" "),
             _c("option", { attrs: { value: "11" } }, [_vm._v("應用科學類")]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "12" } }, [_vm._v("社會學類")]),
+            _c("option", { attrs: { value: "12" } }, [_vm._v("社會科學類")]),
             _vm._v(" "),
             _c("option", { attrs: { value: "13" } }, [_vm._v("史地類")]),
             _vm._v(" "),
@@ -616,7 +642,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\r\n                搜尋\r\n            ")]
+          [_vm._v("\n                搜尋\n            ")]
         )
       ])
     ]),
@@ -1389,7 +1415,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\books\index.js */"./resources/js/frontend/books/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\books\index.js */"./resources/js/frontend/books/index.js");
 
 
 /***/ })

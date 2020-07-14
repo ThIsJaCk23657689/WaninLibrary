@@ -27,7 +27,7 @@
                             <label for="donor_tel" class="col-md-4 col-form-label text-md-right">電話</label>
 
                             <div class="col-md-6">
-                                <input id="donor_tel" type="text" class="form-control" name="tel" autocomplete="off">
+                                <input id="donor_tel" type="text" class="form-control" name="tel" placeholder="例：0912-312312" autocomplete="off">
                             </div>
                         </div>
 
@@ -35,7 +35,7 @@
                             <label for="donor_cellphone" class="col-md-4 col-form-label text-md-right">行動電話</label>
 
                             <div class="col-md-6">
-                                <input id="donor_cellphone" type="text" class="form-control" name="cellphone" autocomplete="off">
+                                <input id="donor_cellphone" type="text" class="form-control" placeholder="例：0912-312312" name="cellphone" autocomplete="off">
                             </div>
                         </div>
 
@@ -88,8 +88,8 @@
                             <div class="col-md-6">
                                 <select id="donor_exposure" class="form-control" name="exposure" required>
                                     <option value="1">完全公開</option>
-                                    <option value="2">姓名保護</option>
-                                    <option value="3">對外匿名</option>
+                                    <option value="2">半公開</option>
+                                    <option value="3">完全匿名</option>
                                 </select>
                             </div>
                         </div>

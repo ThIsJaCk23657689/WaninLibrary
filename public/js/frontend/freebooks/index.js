@@ -449,7 +449,7 @@ var render = function() {
             _vm._v(" "),
             _c("option", { attrs: { value: "11" } }, [_vm._v("應用科學類")]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "12" } }, [_vm._v("社會學類")]),
+            _c("option", { attrs: { value: "12" } }, [_vm._v("社會科學類")]),
             _vm._v(" "),
             _c("option", { attrs: { value: "13" } }, [_vm._v("史地類")]),
             _vm._v(" "),
@@ -523,7 +523,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\r\n                搜尋\r\n            ")]
+          [_vm._v("\n                搜尋\n            ")]
         )
       ])
     ]),
@@ -625,9 +625,11 @@ var render = function() {
               _c("h4", [_vm._v(_vm._s(_vm.book.showTitle))])
             ]),
             _vm._v(" "),
-            _c("span", { staticClass: "freebook-small" }, [
-              _vm._v("作者：" + _vm._s(_vm.book.author) + "著")
-            ]),
+            _vm.book.author != null
+              ? _c("span", { staticClass: "freebook-small" }, [
+                  _vm._v("作者：" + _vm._s(_vm.book.author) + "著")
+                ])
+              : _vm._e(),
             _vm._v(" "),
             _c("span", { staticClass: "freebook-small" }, [
               _vm._v("出版商：" + _vm._s(_vm.book.publisher))
@@ -646,7 +648,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "check-detail" }, [
-      _vm._v("\r\n                    查看詳細資料\r\n                    "),
+      _vm._v("\n                    查看詳細資料\n                    "),
       _c("i", { staticClass: "fas fa-arrow-right" })
     ])
   }

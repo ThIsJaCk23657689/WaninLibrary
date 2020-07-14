@@ -228,6 +228,7 @@ __webpack_require__.r(__webpack_exports__);
     return {
       BorrowersIndexURL: $('#BorrowersIndexURL').html(),
       BorrowersStoreURL: $('#BorrowersStoreURL').html(),
+      NameIsIniqueURL: $('#NameIsIniqueURL').html(),
       agencies: []
     };
   },
@@ -245,6 +246,7 @@ __webpack_require__.r(__webpack_exports__);
     generateAgenciesOption: function generateAgenciesOption() {
       var _this = this;
 
+      var added_id = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : null;
       // 生成 機構 下拉式選單
       var AgenciesListURL = $('#AgenciesListURL').html();
       axios.get(AgenciesListURL).then(function (response) {
@@ -255,11 +257,36 @@ __webpack_require__.r(__webpack_exports__);
         }
 
         $('#agency_id').selectpicker('refresh');
+
+        if (added_id != null) {
+          $('#agency_id').val(added_id);
+          $('#agency_id').selectpicker('refresh');
+        }
       });
     },
-    refreshAgency: function refreshAgency() {
-      this.generateAgenciesOption();
-    }
+    refreshAgency: function refreshAgency(added_id) {
+      this.generateAgenciesOption(added_id);
+    },
+    onChangeForName: function onChangeForName(e) {
+      this.checkName(e.target.value, this);
+    },
+    checkName: _.debounce(function (name, vm) {
+      $.showLoadingModal();
+      axios.post(vm.NameIsIniqueURL, {
+        name: name
+      }).then(function (response) {
+        console.log(response.data.message);
+
+        if (response.data.isUnique) {
+          $.showSuccessModal(response.data.message);
+        } else {
+          $.showWarningModal(response.data.message);
+        }
+      })["catch"](function (error) {
+        console.error('檢查借閱人名稱是否重複時發生錯誤，錯誤訊息：' + error);
+        $.showErrorModal(error);
+      });
+    }, 750)
   },
   created: function created() {
     this.generateAgenciesOption();
@@ -402,7 +429,7 @@ __webpack_require__.r(__webpack_exports__);
         $.showSuccessModal('新增成功');
         $('#CreateAgencyModalForm').trigger('reset');
 
-        _this.$emit('refresh-agency');
+        _this.$emit('refresh-agency', response.data.added_id);
       })["catch"](function (error) {
         console.error('新增捐贈人時發生錯誤，錯誤訊息：' + error);
         $.showErrorModal(error);
@@ -456,13 +483,37 @@ var render = function() {
               }
             },
             [
-              _vm._m(0),
-              _vm._v(" "),
-              _vm._m(1),
-              _vm._v(" "),
-              _vm._m(2),
+              _c("div", { staticClass: "row" }, [
+                _c("div", { staticClass: "col-md-4" }, [
+                  _c("div", { staticClass: "form-group" }, [
+                    _vm._m(0),
+                    _vm._v(" "),
+                    _c("input", {
+                      staticClass: "form-control mb-2",
+                      attrs: {
+                        id: "name",
+                        name: "name",
+                        type: "text",
+                        value: "",
+                        required: "",
+                        autocomplete: "off",
+                        autofocus: ""
+                      },
+                      on: { input: _vm.onChangeForName }
+                    })
+                  ])
+                ]),
+                _vm._v(" "),
+                _vm._m(1),
+                _vm._v(" "),
+                _vm._m(2)
+              ]),
               _vm._v(" "),
               _vm._m(3),
+              _vm._v(" "),
+              _vm._m(4),
+              _vm._v(" "),
+              _vm._m(5),
               _vm._v(" "),
               _c(
                 "div",
@@ -477,7 +528,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            確認新增\r\n                        "
+                          "\n                            確認新增\n                        "
                         )
                       ]
                     ),
@@ -490,7 +541,7 @@ var render = function() {
                       },
                       [
                         _vm._v(
-                          "\r\n                            返回列表\r\n                        "
+                          "\n                            返回列表\n                        "
                         )
                       ]
                     )
@@ -512,66 +563,56 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "name" } }, [
-            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("名稱\r\n                            ")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-2",
-            attrs: {
-              id: "name",
-              name: "name",
-              type: "text",
-              value: "",
-              required: "",
-              autocomplete: "off",
-              autofocus: ""
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "tel" } }, [
-            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("電話")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-2",
-            attrs: {
-              id: "tel",
-              name: "tel",
-              type: "text",
-              value: "",
-              required: "",
-              autocomplete: "off"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "birthday" } }, [_vm._v("生日")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-2",
-            attrs: {
-              id: "birthday",
-              name: "birthday",
-              type: "text",
-              value: "",
-              autocomplete: "off",
-              placeholder: "例：1950-01-01"
-            }
-          })
-        ])
+    return _c("label", { attrs: { for: "name" } }, [
+      _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+      _vm._v("名稱\n                            ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "tel" } }, [
+          _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+          _vm._v("電話")
+        ]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control mb-2",
+          attrs: {
+            id: "tel",
+            name: "tel",
+            type: "text",
+            value: "",
+            placeholder: "例：0912-312312",
+            required: "",
+            autocomplete: "off"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "birthday" } }, [_vm._v("生日")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control mb-2",
+          attrs: {
+            id: "birthday",
+            name: "birthday",
+            type: "text",
+            value: "",
+            autocomplete: "off",
+            placeholder: "例：1950-01-01"
+          }
+        })
       ])
     ])
   },
@@ -584,7 +625,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "status" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("身分別\r\n                            ")
+            _vm._v("身分別\n                            ")
           ]),
           _vm._v(" "),
           _c(
@@ -634,7 +675,7 @@ var staticRenderFns = [
                 [
                   _c("i", { staticClass: "fas fa-plus mr-2" }),
                   _vm._v(
-                    "\r\n                                        新增隸屬單位\r\n                                    "
+                    "\n                                        新增隸屬單位\n                                    "
                   )
                 ]
               )
@@ -885,7 +926,7 @@ var staticRenderFns = [
         [
           _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
           _vm._v(
-            "\r\n                                單位名稱\r\n                            "
+            "\n                                單位名稱\n                            "
           )
         ]
       ),
@@ -926,6 +967,7 @@ var staticRenderFns = [
             id: "agency_tel",
             type: "text",
             name: "tel",
+            placeholder: "例：0912-312312",
             autocomplete: "off"
           }
         })
@@ -1069,7 +1111,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                                    確認新增\r\n                                "
+              "\n                                    確認新增\n                                "
             )
           ]
         ),
@@ -1082,7 +1124,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                                    取消\r\n                                "
+              "\n                                    取消\n                                "
             )
           ]
         )
@@ -1369,7 +1411,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\borrowers\create.js */"./resources/js/borrowers/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\borrowers\create.js */"./resources/js/borrowers/create.js");
 
 
 /***/ })

@@ -205,10 +205,32 @@ __webpack_require__.r(__webpack_exports__);
     return {
       DonorsIndexURL: $('#DonorsIndexURL').html(),
       DonorsStoreURL: $('#DonorsStoreURL').html(),
+      NameIsIniqueURL: $('#NameIsIniqueURL').html(),
       FormErrorsMsg: []
     };
   },
-  methods: {},
+  methods: {
+    onChangeForName: function onChangeForName(e) {
+      this.checkName(e.target.value, this);
+    },
+    checkName: _.debounce(function (name, vm) {
+      $.showLoadingModal();
+      axios.post(vm.NameIsIniqueURL, {
+        name: name
+      }).then(function (response) {
+        console.log(response.data.message);
+
+        if (response.data.isUnique) {
+          $.showSuccessModal(response.data.message);
+        } else {
+          $.showWarningModal(response.data.message);
+        }
+      })["catch"](function (error) {
+        console.error('檢查捐贈人名稱是否重複時發生錯誤，錯誤訊息：' + error);
+        $.showErrorModal(error);
+      });
+    }, 750)
+  },
   created: function created() {},
   mounted: function mounted() {
     // 地址
@@ -268,11 +290,35 @@ var render = function() {
           }
         },
         [
-          _vm._m(0),
+          _c("div", { staticClass: "row" }, [
+            _c("div", { staticClass: "col-md-4" }, [
+              _c("div", { staticClass: "form-group" }, [
+                _vm._m(0),
+                _vm._v(" "),
+                _c("input", {
+                  staticClass: "form-control mb-2",
+                  attrs: {
+                    id: "name",
+                    name: "name",
+                    type: "text",
+                    value: "",
+                    required: "",
+                    autocomplete: "off",
+                    autofocus: ""
+                  },
+                  on: { input: _vm.onChangeForName }
+                })
+              ])
+            ]),
+            _vm._v(" "),
+            _vm._m(1),
+            _vm._v(" "),
+            _vm._m(2)
+          ]),
           _vm._v(" "),
-          _vm._m(1),
+          _vm._m(3),
           _vm._v(" "),
-          _vm._m(2),
+          _vm._m(4),
           _vm._v(" "),
           _c("div", { staticClass: "form-group row justify-content-center" }, [
             _c("div", { staticClass: "col-md-8" }, [
@@ -284,7 +330,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        確認新增\r\n                    "
+                    "\n                        確認新增\n                    "
                   )
                 ]
               ),
@@ -297,7 +343,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        返回列表\r\n                    "
+                    "\n                        返回列表\n                    "
                   )
                 ]
               )
@@ -313,61 +359,52 @@ var staticRenderFns = [
     var _vm = this
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "row" }, [
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "name" } }, [
-            _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("捐贈人(單位)名稱\r\n                        ")
-          ]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-2",
-            attrs: {
-              id: "name",
-              name: "name",
-              type: "text",
-              value: "",
-              required: "",
-              autocomplete: "off",
-              autofocus: ""
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-2",
-            attrs: {
-              id: "tel",
-              name: "tel",
-              type: "text",
-              value: "",
-              autocomplete: "off"
-            }
-          })
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "col-md-4" }, [
-        _c("div", { staticClass: "form-group" }, [
-          _c("label", { attrs: { for: "cellphone" } }, [_vm._v("行動電話")]),
-          _vm._v(" "),
-          _c("input", {
-            staticClass: "form-control mb-2",
-            attrs: {
-              id: "cellphone",
-              name: "cellphone",
-              type: "text",
-              value: "",
-              autocomplete: "off"
-            }
-          })
-        ])
+    return _c("label", { attrs: { for: "name" } }, [
+      _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
+      _vm._v("捐贈人(單位)名稱\n                        ")
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "tel" } }, [_vm._v("電話")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control mb-2",
+          attrs: {
+            id: "tel",
+            name: "tel",
+            type: "text",
+            value: "",
+            placeholder: "例：0912-312312",
+            autocomplete: "off"
+          }
+        })
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "col-md-4" }, [
+      _c("div", { staticClass: "form-group" }, [
+        _c("label", { attrs: { for: "cellphone" } }, [_vm._v("行動電話")]),
+        _vm._v(" "),
+        _c("input", {
+          staticClass: "form-control mb-2",
+          attrs: {
+            id: "cellphone",
+            name: "cellphone",
+            type: "text",
+            value: "",
+            placeholder: "例：0912-312312",
+            autocomplete: "off"
+          }
+        })
       ])
     ])
   },
@@ -398,7 +435,7 @@ var staticRenderFns = [
         _c("div", { staticClass: "form-group" }, [
           _c("label", { attrs: { for: "exposure" } }, [
             _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-            _vm._v("曝光程度\r\n                        ")
+            _vm._v("曝光程度\n                        ")
           ]),
           _vm._v(" "),
           _c(
@@ -412,7 +449,7 @@ var staticRenderFns = [
               _vm._v(" "),
               _c("option", { attrs: { value: "2" } }, [_vm._v("半公開")]),
               _vm._v(" "),
-              _c("option", { attrs: { value: "3" } }, [_vm._v("對外匿名")])
+              _c("option", { attrs: { value: "3" } }, [_vm._v("完全匿名")])
             ]
           )
         ])
@@ -723,7 +760,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\donors\create.js */"./resources/js/donors/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\donors\create.js */"./resources/js/donors/create.js");
 
 
 /***/ })

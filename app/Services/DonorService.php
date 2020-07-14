@@ -32,6 +32,16 @@ class DonorService extends BaseService
         return $donor->id;
     }
 
+    public function nameIsInique($request)
+    {
+        $count = DonorEloquent::where('name', $request->name)->count();
+        if($count == 0){
+            return ['status' => 200, 'isUnique' => true, 'message'=>'無重複名稱之捐贈人'];
+        }else{
+            return ['status' => 200, 'isUnique' => false, 'message'=>'已有重複名稱之捐贈人'];
+        }
+    }
+
     public function count(){
         return DonorEloquent::count();
     }
@@ -270,7 +280,7 @@ class DonorService extends BaseService
         });
         return $result;
     }
-    
+
     public function getDonorBooksListFrontend($request){
         if($request->first_page){
             $skip = 0;
@@ -286,7 +296,7 @@ class DonorService extends BaseService
         foreach($books as $book){
             $book->index = $skip + $c;
             $book->showTitle =  $book->showTitle();
-            $book->showStatus =  $book->showStatus();
+            $book->showStatus =  $book->showStatusFrontEnd();
             $book->bookURL = route('front.books.show', [$book->id]);
             $c ++;
         }

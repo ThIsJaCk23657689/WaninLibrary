@@ -26,6 +26,16 @@ class AgencyService extends BaseService
         return $agency->id;
     }
 
+    public function nameIsInique($request)
+    {
+        $count = AgencyEloquent::where('name', $request->name)->count();
+        if($count == 0){
+            return ['status' => 200, 'isUnique' => true, 'message'=>'無重複名稱之單位'];
+        }else{
+            return ['status' => 200, 'isUnique' => false, 'message'=>'已有重複名稱之單位'];
+        }
+    }
+
     public function getList()
     {
         $agencies = AgencyEloquent::get();

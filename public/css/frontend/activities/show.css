@@ -180,15 +180,10 @@
 }
 .detail-page-header .activity-detail-title .activity-detail-title-container h1 {
   color: #55473f;
-  font-size: 2.2rem;
+  font-size: 1.8rem;
   letter-spacing: 10px;
   display: inline-block;
   font-weight: bold;
-}
-@media (max-width: 767px) {
-  .detail-page-header .activity-detail-title .activity-detail-title-container h1 {
-    font-size: 1.8rem;
-  }
 }
 @media (max-width: 767px) {
   .detail-page-header .activity-detail-title .activity-detail-title-container h1 {
@@ -202,9 +197,14 @@
   bottom: 5px;
   margin: 0;
 }
-@media (max-width: 991px) {
+@media (max-width: 1110px) {
   .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
     width: 20%;
+  }
+}
+@media (max-width: 991px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
+    width: 22%;
   }
 }
 @media (max-width: 767px) {
@@ -213,9 +213,15 @@
     right: -10px;
   }
 }
-@media (max-width: 575px) {
+@media (max-width: 716px) {
   .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
     width: 25%;
+    right: -10px;
+  }
+}
+@media (max-width: 575px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
+    width: 30%;
   }
 }
 @media (max-width: 420px) {
@@ -274,7 +280,7 @@
 .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-title-content {
   text-align: left;
   position: relative;
-  width: calc(100% - 15%);
+  width: 60%;
   float: left;
   margin: 0;
 }

@@ -43,6 +43,7 @@ Route::prefix('/backend')->group(function(){
 
     // 單位管理路由
     Route::get('/agencies/json', 'AgencyController@getList')->name('agencies.getList');
+    Route::post('/agencies/nameIsInique', 'AgencyController@nameIsInique')->name('agencies.nameIsInique');
     Route::get('/agencies/{id}/json', 'AgencyController@getOne')->name('agencies.getOne');
     Route::resource('/agencies', 'AgencyController', ['only' => [
         'store', 'update', 'destroy'
@@ -51,6 +52,7 @@ Route::prefix('/backend')->group(function(){
     // 借閱者管理相關路由
     Route::post('/borrowers/activate/{id}','BorrowerController@activate')->name('borrowers.activate');
     Route::get('/borrowers/json', 'BorrowerController@getList')->name('borrowers.getList');
+    Route::post('/borrowers/nameIsInique', 'BorrowerController@nameIsInique')->name('borrowers.nameIsInique');
     Route::get('/borrowers/{id}/json', 'BorrowerController@getOne')->name('borrowers.getOne');
     Route::get('/borrowers/filter', 'BorrowerController@filter')->name('borrowers.filter');
     Route::resource('/borrowers', 'BorrowerController', ['only' => [
@@ -72,6 +74,7 @@ Route::prefix('/backend')->group(function(){
     // 捐書人管理路由
     Route::get('/donors/json', 'DonorController@getList')->name('donors.getList');
     Route::get('/donors/getDonorsByName', 'DonorController@getDonorsByName')->name('donors.getDonorsByName');
+    Route::post('/donors/nameIsInique', 'DonorController@nameIsInique')->name('donors.nameIsInique');
     Route::get('/donors/getInfo', 'DonorController@getInfo')->name('donors.getInfo');
     Route::get('/donors/{id}/json', 'DonorController@getOne')->name('donors.getOne');
     Route::resource('/donors', 'DonorController', ['only' => [
