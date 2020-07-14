@@ -70,10 +70,7 @@ class DonorController extends Controller
     // API
     public function nameIsInique(Request $request){
         $res = $this->DonorService->nameIsInique($request);
-        return response()->json([
-            'status' =>  $res['status'],
-            'message' => $res['message']
-        ], $res['status']);
+        return response()->json($res, $res['status']);
     }
 
     public function getList(Request $request){

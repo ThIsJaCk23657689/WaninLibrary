@@ -118,15 +118,12 @@ export default {
             this.checkName(e.target.value, this);
         },
         checkName: _.debounce((name, vm) => {
-            $.showLoadingModal();
             axios.post(vm.NameIsIniqueURL, {
                 name: name
             }).then(response => {
                 console.log(response.data.message);
-                if(response.data.isUnique){
-                    $.showSuccessModal(response.data.message);
-                }else{
-                    $.showWarningModal(response.data.message);
+                if(!response.data.isUnique){
+                   $.showWarningModal(response.data.message);
                 }
             }).catch(error => {
                 console.error('檢查捐贈人名稱是否重複時發生錯誤，錯誤訊息：' + error);
