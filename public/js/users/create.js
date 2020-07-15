@@ -469,7 +469,7 @@ var staticRenderFns = [
               name: "tel",
               type: "text",
               value: "",
-              placeholder: "例：0912-312312",
+              placeholder: "例：0423825559 或 0912589889",
               autocomplete: "off"
             }
           })
