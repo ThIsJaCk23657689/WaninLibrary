@@ -105,7 +105,7 @@ class HomeController extends Controller
 
     // 近期活動/主題書單 detail
     public function activities_show($id){
-        $active_num = 1;
+        $active_num = 2;
         $activity = $this->ActivityService->getOne($id);
         return view('frontend.activities_show', compact('active_num', 'activity'));
     }

@@ -583,7 +583,7 @@ var staticRenderFns = [
             name: "tel",
             type: "text",
             value: "",
-            placeholder: "例：0912-312312",
+            placeholder: "例：0423825559 或 0912569885",
             required: "",
             autocomplete: "off"
           }
@@ -923,7 +923,7 @@ var staticRenderFns = [
         [
           _c("span", { staticClass: "text-danger" }, [_vm._v("*")]),
           _vm._v(
-            "\r\n                                單位名稱\r\n                            "
+            "\n                                單位名稱\n                            "
           )
         ]
       ),
@@ -1108,7 +1108,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                                    確認新增\r\n                                "
+              "\n                                    確認新增\n                                "
             )
           ]
         ),
@@ -1121,7 +1121,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\r\n                                    取消\r\n                                "
+              "\n                                    取消\n                                "
             )
           ]
         )
@@ -1408,7 +1408,7 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\borrowers\create.js */"./resources/js/borrowers/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\borrowers\create.js */"./resources/js/borrowers/create.js");
 
 
 /***/ })

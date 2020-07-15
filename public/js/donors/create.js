@@ -376,7 +376,7 @@ var staticRenderFns = [
             name: "tel",
             type: "text",
             value: "",
-            placeholder: "例：0912-312312",
+            placeholder: "例：0423825559",
             autocomplete: "off"
           }
         })
@@ -398,7 +398,7 @@ var staticRenderFns = [
             name: "cellphone",
             type: "text",
             value: "",
-            placeholder: "例：0912-312312",
+            placeholder: "例：0912312312",
             autocomplete: "off"
           }
         })
@@ -757,7 +757,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\donors\create.js */"./resources/js/donors/create.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\donors\create.js */"./resources/js/donors/create.js");
 
 
 /***/ })
