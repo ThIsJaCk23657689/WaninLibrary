@@ -10,7 +10,7 @@ class AgencyService extends BaseService
     {
         $agency = AgencyEloquent::create([
             'name' => $request->name,
-            'tel' => $request->tel,
+            'tel' => str_replace('-','',$request->tel),
             'principal' => $request->principal,
 
             'address_zipcode' => $request->address_zipcode,
@@ -53,7 +53,7 @@ class AgencyService extends BaseService
         $agency = $this->getOne($id);
         $agency->update([
             'name' => $request->name,
-            'tel' => $request->tel,
+            'tel' => str_replace('-','',$request->tel),
             'principal' => $request->principal,
 
             'address_zipcode' => $request->address_zipcode,

@@ -15,8 +15,8 @@ class DonorService extends BaseService
             'name' => $request->name,
             'birthday' => $request->birthday,
             'email' => $request->email,
-            'tel' => $request->tel,
-            'cellphone' => $request->cellphone,
+            'tel' => str_replace('-','',$request->tel),
+            'cellphone' => str_replace('-','',$request->cellphone),
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
@@ -135,8 +135,8 @@ class DonorService extends BaseService
             'name' => $request->name,
             'birthday' => $request->birthday,
             'email' => $request->email,
-            'tel' => $request->tel,
-            'cellphone' => $request->cellphone,
+            'tel' => str_replace('-','',$request->tel),
+            'cellphone' => str_replace('-','',$request->cellphone),
 
             'address_zipcode' => $request->address_zipcode,
             'address_county' => $request->address_county,
@@ -185,6 +185,7 @@ class DonorService extends BaseService
     public function searchDonatedBooks($request){
         $donor_name = $request->donor_name;
         $donor_tel = $request->donor_tel ?? null;
+
         if($donor_tel == null){
             // 第一步 輸入姓名
             $donor_tmp = DonorEloquent::where('name', $donor_name);
@@ -199,6 +200,7 @@ class DonorService extends BaseService
                 $result = ['status' => 404, 'message' => "您好，查無此資料，可能是我們疏忽了，<br>請來電或mail與我們聯繫，我們將提供您協助。"];
             }
         }else{
+            $donor_tel = str_replace('-','',$donor_tel);
             // 第二步 輸入姓名、電話號碼
             $donor_tmp = DonorEloquent::where('name', $donor_name)->where('tel', $donor_tel)->orWhere('name', $donor_name)->where('cellphone', $donor_tel);
             $count = $donor_tmp->count();
