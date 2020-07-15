@@ -6,7 +6,8 @@
         height: 1000px;
         background-color: $gray;
         .content-container {
-            margin: 0px 70px;
+            max-width: 1140px;
+            margin: auto;
             background-image: url(../../../images/frontend/icons/annoucement_bg.png);
             background-repeat: no-repeat;
             background-size: 100% 100%;
@@ -65,9 +66,18 @@
                             text-align: left;
                             float: left;
                             margin: 0;
-                            width: 35%;
+                            width: 40%;
+                            @media (max-width: 1210px) {
+                                width: 35%;
+                            }
                             @media (max-width: 991px) {
                                 width: 50%;
+                            }
+                            @media (max-width: 767px) {
+                                width: 45%;
+                            }
+                            @media (max-width: 450px) {
+                                width: 40%;
                             }
                             h1 {
                                 color: $brown;
@@ -97,16 +107,13 @@
                                     font-size: 0.8rem;
                                 }
                             }
-                            @media (max-width: 767px) {
-                                width: 45%;
-                            }
                         }
                         .announcement-detail-date {
                             position: absolute;
                             right: 430px;
                             bottom: 3px;
                             margin: 0;
-                            width: 10%;
+                            width: 12%;
                             @media (max-width: 1350px) {
                                 width: 11%;
                                 right: 370px;
@@ -132,18 +139,32 @@
                             @media (max-width: 767px) {
                                 right: 215px;
                                 bottom: 15px;
+                                width: 16%;
                             }
-                            @media (max-width: 575px) {
+                            @media (max-width: 700px) {
+                                width: 18%;
+                            }
+                            @media (max-width: 600px) {
+                                width: 20%;
                                 right: 175px;
                                 bottom: 8px;
                             }
-                            @media (max-width: 450px) {
+                            @media (max-width: 570px) {
                                 width: 18%;
+                            }
+                            @media (max-width: 490px) {
+                                width: 19%;
                                 right: 140px;
+                            }
+                            @media (max-width: 459px) {
+                                width: 20%;
+                            }
+                            @media (max-width: 410px) {
+                                width: 18.5%;
+                                right: 130px;
                             }
                             @media (max-width: 350px) {
                                 width: 20%;
-                                right: 110px;
                             }
                             @media (max-width: 320px) {
                                 width: 22%;

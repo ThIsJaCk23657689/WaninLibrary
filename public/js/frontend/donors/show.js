@@ -363,7 +363,7 @@ var render = function() {
         _vm.books.length == 0
           ? _c("span", { staticClass: "not-found-message" }, [
               _vm._v(
-                "\r\n            很抱歉，無法找到您所查詢的資料，請重新查詢謝謝。\r\n        "
+                "\n            很抱歉，無法找到您所查詢的資料，請重新查詢謝謝。\n        "
               )
             ])
           : _vm._e()
@@ -1072,7 +1072,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\donors\show.js */"./resources/js/frontend/donors/show.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\donors\show.js */"./resources/js/frontend/donors/show.js");
 
 
 /***/ })
