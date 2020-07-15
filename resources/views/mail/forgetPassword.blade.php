@@ -18,7 +18,7 @@
         <h3 style="font-weight:bold;">您的新密碼為:{{$params['new_password']}}</h3>
         <h3 style="font-weight:bold;">請點擊下方連結後以該密碼重新登入後，重新設定密碼</h3>
         <h3><a href="http://localhost/waninlibary/public/" style="a{color:#337ab7;} a:hover{color:#0b5a9e;}">http://localhost/waninlibary/public/</a></h3>
-        <h4 style="color:#888;">xxxx敬上</h4>
+        <h4 style="color:#888;">拾本書堂敬上</h4>
     </div>
 </div>
 

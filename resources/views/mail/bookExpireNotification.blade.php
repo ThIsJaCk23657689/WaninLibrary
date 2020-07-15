@@ -18,7 +18,7 @@
         <h3 style="font-weight:bold;">即將於{{$details['return_date']}} 逾期</h3>
         <h3 style="font-weight:bold;"></h3>
         {{-- <h3><a href="http://localhost/waninlibary/public/" style="a{color:#337ab7;} a:hover{color:#0b5a9e;}">http://localhost/waninlibary/public/</a></h3> --}}
-        <h4 style="color:#888;">網銀基金會敬上</h4>
+        <h4 style="color:#888;">拾本書堂敬上</h4>
     </div>
 </div>
 
