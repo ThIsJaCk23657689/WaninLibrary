@@ -17,26 +17,26 @@
 
             <div class="header-button-container">
                 <div class="header-button left">
-                    <div class="header-text">
-                        <h3 class="button-title">好書捐贈！</h3>
-                        <span class="button-subtitle">為知識繼續傳遞與分享</span>
-                    </div>
-                    <div class="button-check-link">
-                        <a href="{{ route('front.donations') }}">
+                    <a href="{{ route('front.donations') }}" class="header-button-link">
+                        <div class="header-text">
+                            <h3 class="button-title">好書捐贈！</h3>
+                            <span class="button-subtitle">為知識繼續傳遞與分享</span>
+                        </div>
+                        <div class="button-check-link">
                             <img src="{{ asset('images/frontend/icons/donate_btn.png') }}" alt="好書捐贈">
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
                 <div class="header-button right">
-                    <div class="header-text">
-                        <h3 class="button-title">免費索取書單</h3>
-                        <span class="button-subtitle">或許它已陳舊泛黃，卻依舊是珍寶</span>
-                    </div>
-                    <div class="button-check-link">
-                        <a href="{{ route('front.freeBooks') }}">
+                    <a href="{{ route('front.freeBooks') }}" class="header-button-link">
+                        <div class="header-text">
+                            <h3 class="button-title">免費索取書單</h3>
+                            <span class="button-subtitle">或許它已陳舊泛黃，卻依舊是珍寶</span>
+                        </div>
+                        <div class="button-check-link">
                             <img src="{{ asset('images/frontend/icons/free_btn.png') }}" alt="免費索取書單">
-                        </a>
-                    </div>
+                        </div>
+                    </a>
                 </div>
             </div>
 
