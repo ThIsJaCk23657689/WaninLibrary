@@ -194,6 +194,14 @@ __webpack_require__.r(__webpack_exports__);
       filebrowserUploadUrl: this.CKEditorUploadURL,
       filebrowserUploadMethod: 'form'
     });
+    $("#type").change(function () {
+      if (this.value == 1) {
+        $('#is_top').attr('disabled', false);
+      } else {
+        $('#is_top').val(0);
+        $('#is_top').attr('disabled', true);
+      }
+    });
   }
 });
 
@@ -441,7 +449,7 @@ var staticRenderFns = [
       ]),
       _vm._v(" "),
       _c("div", { staticClass: "col-md-2" }, [
-        _c("div", { staticClass: "form-group" }, [
+        _c("div", { staticClass: "form-group is_top_div" }, [
           _c("label", { attrs: { for: "is_top" } }, [_vm._v("是否置頂")]),
           _vm._v(" "),
           _c(

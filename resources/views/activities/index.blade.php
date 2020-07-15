@@ -62,7 +62,7 @@
 								<td>{{ $activity->updated_at }}</td>
 								<td>{{ $activity->showUserName() }}</td>
 								<td>
-                                    @if (!$activity->is_top)
+                                    @if (!$activity->is_top && $activity->type == 1)
                                         <a href="{{ route('activities.change_top', [$activity->id])}}" class="btn btn-md btn-warning">
                                             <i class="far fa-star"></i>
                                         </a>

@@ -27,7 +27,7 @@
                             <label for="agency_tel" class="col-md-4 col-form-label text-md-right">電話</label>
 
                             <div class="col-md-6">
-                                <input id="agency_tel" type="text" class="form-control" name="tel" placeholder="例：0912-312312" autocomplete="off">
+                                <input id="agency_tel" type="text" class="form-control" name="tel" placeholder="例：0422115687 或 0912312312" autocomplete="off">
                             </div>
                         </div>
 

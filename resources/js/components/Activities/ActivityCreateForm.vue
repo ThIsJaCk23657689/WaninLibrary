@@ -23,7 +23,7 @@
                         </div>
                     </div>
                     <div class="col-md-2">
-                        <div class="form-group">
+                        <div class="form-group is_top_div">
                             <label for="is_top">是否置頂</label>
                             <select name="is_top" id="is_top" class="form-control">
                                 <option value="1">置頂</option>
@@ -101,6 +101,16 @@ export default {
         CKEDITOR.replace('content', {
             filebrowserUploadUrl: this.CKEditorUploadURL,
             filebrowserUploadMethod: 'form'
+        });
+        $( "#type" ).change(function() {
+            if(this.value == 1){
+                $('#is_top').attr('disabled', false);
+
+            }else{
+                $('#is_top').val(0);
+                $('#is_top').attr('disabled', true);
+
+            }
         });
     }
 }
