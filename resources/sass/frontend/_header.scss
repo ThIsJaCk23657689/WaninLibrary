@@ -61,20 +61,27 @@ header {
     z-index: 1;
     .header-button {
         width: 50%;
-        padding: 10px;
-        display: flex;
-        flex-direction: row;
-        flex-wrap: nowrap;
-        align-items: center;
-        justify-content: space-around;
-        @media (max-width: 479px) {
-            flex-direction: column;
-        }
         &.left {
             background-color: $gray;
         }
         &.right {
             background-color: $green;
+        }
+        .header-button-link{
+            width: 100%;
+            height: 100%;
+            padding: 10px;
+            display: flex;
+            flex-direction: row;
+            flex-wrap: nowrap;
+            align-items: center;
+            justify-content: space-around;
+            @media (max-width: 479px) {
+                flex-direction: column;
+            }
+            &:hover{
+                text-decoration: none;
+            }
         }
         .header-text {
             display: flex;
@@ -134,11 +141,8 @@ header {
             @media (max-width: 719px) {
                 width: 50px;
             }
-            a {
-                display: inline-block;
-                img {
-                    width: 95%;
-                }
+            img {
+                width: 95%;
             }
         }
     }

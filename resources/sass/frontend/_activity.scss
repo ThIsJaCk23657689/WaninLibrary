@@ -31,8 +31,11 @@
     }
     .activity-container {
         width: 100%;
+        max-width: 1380px;
         height: 100%;
         position: relative;
+        margin-left: auto;
+        margin-right: auto;
     }
     .activity-card {
         width: 100%;

@@ -11901,6 +11901,16 @@ header .bg_cover .coverText span {
 }
 .header-button-container .header-button {
   width: 50%;
+}
+.header-button-container .header-button.left {
+  background-color: #eaeaea;
+}
+.header-button-container .header-button.right {
+  background-color: #93e5b4;
+}
+.header-button-container .header-button .header-button-link {
+  width: 100%;
+  height: 100%;
   padding: 10px;
   display: flex;
   flex-direction: row;
@@ -11909,15 +11919,12 @@ header .bg_cover .coverText span {
   justify-content: space-around;
 }
 @media (max-width: 479px) {
-  .header-button-container .header-button {
+  .header-button-container .header-button .header-button-link {
     flex-direction: column;
   }
 }
-.header-button-container .header-button.left {
-  background-color: #eaeaea;
-}
-.header-button-container .header-button.right {
-  background-color: #93e5b4;
+.header-button-container .header-button .header-button-link:hover {
+  text-decoration: none;
 }
 .header-button-container .header-button .header-text {
   display: flex;
@@ -12002,10 +12009,7 @@ header .bg_cover .coverText span {
     width: 50px;
   }
 }
-.header-button-container .header-button .button-check-link a {
-  display: inline-block;
-}
-.header-button-container .header-button .button-check-link a img {
+.header-button-container .header-button .button-check-link img {
   width: 95%;
 }
 
@@ -12238,8 +12242,11 @@ header .bg_cover .coverText span {
 }
 #activity .activity-container {
   width: 100%;
+  max-width: 1380px;
   height: 100%;
   position: relative;
+  margin-left: auto;
+  margin-right: auto;
 }
 #activity .activity-card {
   width: 100%;
