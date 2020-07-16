@@ -199,4 +199,9 @@ footer {
             padding-right: 0px;
         }
     }
+    .information-title{
+        @media (max-width: 400px) {
+            width: 21%;
+        }
+    }
 }

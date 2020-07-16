@@ -11716,6 +11716,7 @@ body {
 #navSidebar {
   width: 460px;
   height: 100vh;
+  min-height: 550px;
   background-color: #ffffff;
   padding-right: 90px;
   position: fixed;
@@ -11735,11 +11736,39 @@ body {
   margin-top: 8%;
 }
 #navSidebar .navbar-nav .nav-item {
-  margin-bottom: 8%;
+  margin-bottom: 4%;
+}
+#navSidebar .navbar-nav .nav-item.small-title {
+  margin-bottom: 0;
+}
+#navSidebar .navbar-nav .nav-item.small {
+  margin: 0;
+}
+#navSidebar .navbar-nav .nav-item.small .nav-link {
+  font-size: 1rem;
+  padding: 0;
+  padding-left: 26px;
+  padding-bottom: 3px;
+}
+@media (max-width: 350px) {
+  #navSidebar .navbar-nav .nav-item.small .nav-link {
+    font-size: 0.6rem;
+  }
 }
 #navSidebar .navbar-nav .nav-item .nav-link {
   border: none;
   letter-spacing: 5px;
+  padding: 0;
+}
+@media (max-width: 400px) {
+  #navSidebar .navbar-nav .nav-item .nav-link {
+    font-size: 1rem;
+  }
+}
+@media (max-width: 350px) {
+  #navSidebar .navbar-nav .nav-item .nav-link {
+    font-size: 0.8rem;
+  }
 }
 #navSidebar .navbar-nav .nav-item .nav-link .underline {
   width: 0%;
@@ -11764,6 +11793,11 @@ body {
   position: absolute;
   left: 0;
   bottom: 30px;
+}
+@media (max-width: 440px) {
+  #navSidebar .bottom {
+    width: 100%;
+  }
 }
 #navSidebar .bottom div#search {
   margin: 0px 10%;
@@ -13067,5 +13101,10 @@ footer .top:hover span {
 @media (max-width: 428px) {
   footer .footer-text-container {
     padding-right: 0px;
+  }
+}
+@media (max-width: 400px) {
+  footer .information-title {
+    width: 21%;
   }
 }

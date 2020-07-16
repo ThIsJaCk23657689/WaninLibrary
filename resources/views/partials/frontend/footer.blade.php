@@ -11,19 +11,19 @@
                         </thead>
                         <tbody>
                             <tr>
-                                <td>電話</td>
+                                <td class="information-title">電話</td>
                                 <td>{{ $information->tel }}</td>
                             </tr>
                             <tr>
-                                <td>傳真</td>
+                                <td class="information-title">傳真</td>
                                 <td>{{ $information->fax }}</td>
                             </tr>
                             <tr>
-                                <td>信箱</td>
+                                <td class="information-title">信箱</td>
                                 <td>{{ $information->email }}</td>
                             </tr>
                             <tr>
-                                <td>地址</td>
+                                <td class="information-title">地址</td>
                                 <td>{{ $information->address }}</td>
                             </tr>
                         </tbody>

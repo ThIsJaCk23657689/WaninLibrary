@@ -15,9 +15,21 @@
                 <div class="underline"></div>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item small-title">
+            <a class="nav-link" href="#">
+                近期活動
+                <div class="underline"></div>
+            </a>
+        </li>
+        <li class="nav-item small">
             <a class="nav-link" href="{{ route('front.activities') }}">
                 近期活動
+                <div class="underline"></div>
+            </a>
+        </li>
+        <li class="nav-item small">
+            <a class="nav-link" href="{{ route('front.recommandations') }}">
+                主題書單
                 <div class="underline"></div>
             </a>
         </li>
@@ -27,9 +39,21 @@
                 <div class="underline"></div>
             </a>
         </li>
-        <li class="nav-item">
+        <li class="nav-item small-title">
+            <a class="nav-link" href="#">
+                捐書芳名錄
+                <div class="underline"></div>
+            </a>
+        </li>
+        <li class="nav-item small">
             <a class="nav-link" href="{{ route('front.donors') }}">
                 捐書芳名錄
+                <div class="underline"></div>
+            </a>
+        </li>
+        <li class="nav-item small">
+            <a class="nav-link" href="{{ route('front.donatedBooks') }}">
+                捐贈書籍查詢
                 <div class="underline"></div>
             </a>
         </li>

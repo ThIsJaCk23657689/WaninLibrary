@@ -1,6 +1,7 @@
 #navSidebar {
     width: $navbar-lg-width;
     height: 100vh;
+    min-height: 550px;
     background-color: $white;
     padding-right: 90px;
     position: fixed;
@@ -18,10 +19,32 @@
         margin-left: 10%;
         margin-top: 8%;
         .nav-item {
-            margin-bottom: 8%;
+            margin-bottom: 4%;
+            &.small-title{
+                margin-bottom: 0;
+            }
+            &.small{
+                margin: 0;
+                .nav-link {
+                    font-size: 1rem;
+                    padding: 0;
+                    padding-left: 26px;
+                    padding-bottom: 3px;
+                    @media (max-width: 350px) {
+                        font-size: 0.6rem;
+                    }
+                }
+            }
             .nav-link {
                 border: none;
                 letter-spacing: 5px;
+                padding: 0;
+                @media (max-width: 400px) {
+                    font-size: 1rem;
+                }
+                @media (max-width: 350px) {
+                    font-size: 0.8rem;
+                }
                 .underline {
                     width: 0%;
                     height: 2px;
@@ -47,6 +70,9 @@
     }
     .bottom {
         width: calc(100% - 90px);
+        @media (max-width: 440px) {
+            width: 100%;
+        }
         position: absolute;
         left: 0;
         bottom: 30px;
