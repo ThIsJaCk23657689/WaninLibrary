@@ -964,7 +964,7 @@ var staticRenderFns = [
             id: "agency_tel",
             type: "text",
             name: "tel",
-            placeholder: "例：0912-312312",
+            placeholder: "例：0422115687 或 0912312312",
             autocomplete: "off"
           }
         })

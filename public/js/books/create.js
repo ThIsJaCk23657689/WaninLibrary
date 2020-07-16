@@ -3295,7 +3295,7 @@ var staticRenderFns = [
             id: "donor_tel",
             type: "text",
             name: "tel",
-            placeholder: "例：0912-312312",
+            placeholder: "例：0422114569",
             autocomplete: "off"
           }
         })
@@ -3322,7 +3322,7 @@ var staticRenderFns = [
           attrs: {
             id: "donor_cellphone",
             type: "text",
-            placeholder: "例：0912-312312",
+            placeholder: "例：0912312312",
             name: "cellphone",
             autocomplete: "off"
           }
