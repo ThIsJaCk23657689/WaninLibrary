@@ -7,6 +7,7 @@ use App\Http\Requests\UserUpdateRequest;
 use Illuminate\Http\Request;
 use App\Services\UserService;
 use App\Services\JWTAuthService;
+use Illuminate\Validation\Rule;
 
 class UserController extends Controller
 {
@@ -79,6 +80,13 @@ class UserController extends Controller
 
     public function update(UserUpdateRequest $request, $id)
     {
+        $this->validate($request, [
+            'email' => [
+                'required','email',
+                Rule::unique('users')->ignore($id),
+            ],
+        ]);
+
         $msg = $this->UserService->update($request, $id);
         return response()->json($msg, 200);
     }
