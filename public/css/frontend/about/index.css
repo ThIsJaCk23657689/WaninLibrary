@@ -168,7 +168,7 @@
     font-size: 1rem;
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 450px) {
   .content-page-body .container .about-detail-row-up p {
     font-size: 0.9rem;
   }
@@ -210,7 +210,7 @@
     font-size: 0.8rem;
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 450px) {
   .about-down .about-detail-row-down .about-detail-row p {
     font-size: 0.6rem;
   }
@@ -228,7 +228,7 @@
     top: 30px;
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 450px) {
   .about-down .about-detail-row-down .about-detail-row .about-down-images-left {
     top: 20px;
   }
@@ -258,7 +258,7 @@
     bottom: 25px;
   }
 }
-@media (max-width: 400px) {
+@media (max-width: 450px) {
   .about-down .about-detail-row-down .about-detail-row .about-down-images-right {
     bottom: 15px;
   }
