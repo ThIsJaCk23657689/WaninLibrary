@@ -229,6 +229,11 @@
     width: 30%;
   }
 }
+@media (max-width: 300px) {
+  .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date {
+    width: 32%;
+  }
+}
 .detail-page-header .activity-detail-title .activity-detail-title-container .activity-detail-date h2 {
   margin: 0;
   margin-left: 25px;
