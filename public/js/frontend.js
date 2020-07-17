@@ -55235,6 +55235,21 @@ $(function () {
   $('.switch-link').click(function () {
     $('#activity .slider').toggleClass('activated');
   });
+  $('.mutilink-title').next().slideUp();
+  $('.mutilink-title').click(function (e) {
+    e.preventDefault();
+    var isOpen = $(this).next().hasClass('open');
+    $('.mutilink-title').next().removeClass('open');
+    $('.mutilink-title').next().slideUp();
+
+    if (isOpen) {
+      $(this).next().removeClass('open');
+      $(this).next().slideUp();
+    } else {
+      $(this).next().addClass('open');
+      $(this).next().slideDown();
+    }
+  });
 });
 
 /***/ }),
