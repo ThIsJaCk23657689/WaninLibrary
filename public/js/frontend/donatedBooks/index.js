@@ -265,7 +265,7 @@ var staticRenderFns = [
           },
           [
             _vm._v(
-              "\n                        查詢捐贈書籍\n                    "
+              "\r\n                        查詢捐贈書籍\r\n                    "
             )
           ]
         )
@@ -482,7 +482,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\donatedBooks\index.js */"./resources/js/frontend/donatedBooks/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\donatedBooks\index.js */"./resources/js/frontend/donatedBooks/index.js");
 
 
 /***/ })

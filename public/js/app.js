@@ -8730,7 +8730,7 @@ return $.datepicker;
 /***/ (function(module, exports, __webpack_require__) {
 
 var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
- * jQuery JavaScript Library v3.5.1
+ * jQuery JavaScript Library v3.5.0
  * https://jquery.com/
  *
  * Includes Sizzle.js
@@ -8740,7 +8740,7 @@ var __WEBPACK_AMD_DEFINE_ARRAY__, __WEBPACK_AMD_DEFINE_RESULT__;/*!
  * Released under the MIT license
  * https://jquery.org/license
  *
- * Date: 2020-05-04T22:49Z
+ * Date: 2020-04-10T15:07Z
  */
 ( function( global, factory ) {
 
@@ -8878,7 +8878,7 @@ function toType( obj ) {
 
 
 var
-	version = "3.5.1",
+	version = "3.5.0",
 
 	// Define a local copy of jQuery
 	jQuery = function( selector, context ) {
@@ -12975,7 +12975,7 @@ Data.prototype = {
 
 		// If not, create one
 		if ( !value ) {
-			value = {};
+			value = Object.create( null );
 
 			// We can accept data for non-element nodes in modern browsers,
 			// but we should not, see #8335.
@@ -55635,24 +55635,24 @@ __webpack_require__.r(__webpack_exports__);
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\app.js */"./resources/js/app.js");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\app.scss */"./resources/sass/app.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\frontend.scss */"./resources/sass/frontend/frontend.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\donations\index.scss */"./resources/sass/frontend/donations/index.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\activities\index.scss */"./resources/sass/frontend/activities/index.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\activities\show.scss */"./resources/sass/frontend/activities/show.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\recommandations\index.scss */"./resources/sass/frontend/recommandations/index.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\donatedBooks\index.scss */"./resources/sass/frontend/donatedBooks/index.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\announcements\show.scss */"./resources/sass/frontend/announcements/show.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\donors\show.scss */"./resources/sass/frontend/donors/show.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\books\show.scss */"./resources/sass/frontend/books/show.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\about\index.scss */"./resources/sass/frontend/about/index.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\books\index.scss */"./resources/sass/frontend/books/index.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\freebooks\index.scss */"./resources/sass/frontend/freebooks/index.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\announcements\index.scss */"./resources/sass/frontend/announcements/index.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\frontend\donors\index.scss */"./resources/sass/frontend/donors/index.scss");
-__webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\backend\backend.scss */"./resources/sass/backend/backend.scss");
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\sass\errors.scss */"./resources/sass/errors.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\app.js */"./resources/js/app.js");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\app.scss */"./resources/sass/app.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\frontend.scss */"./resources/sass/frontend/frontend.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\donations\index.scss */"./resources/sass/frontend/donations/index.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\activities\index.scss */"./resources/sass/frontend/activities/index.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\activities\show.scss */"./resources/sass/frontend/activities/show.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\recommandations\index.scss */"./resources/sass/frontend/recommandations/index.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\donatedBooks\index.scss */"./resources/sass/frontend/donatedBooks/index.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\announcements\show.scss */"./resources/sass/frontend/announcements/show.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\donors\show.scss */"./resources/sass/frontend/donors/show.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\books\show.scss */"./resources/sass/frontend/books/show.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\about\index.scss */"./resources/sass/frontend/about/index.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\books\index.scss */"./resources/sass/frontend/books/index.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\freebooks\index.scss */"./resources/sass/frontend/freebooks/index.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\announcements\index.scss */"./resources/sass/frontend/announcements/index.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\frontend\donors\index.scss */"./resources/sass/frontend/donors/index.scss");
+__webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\backend\backend.scss */"./resources/sass/backend/backend.scss");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\sass\errors.scss */"./resources/sass/errors.scss");
 
 
 /***/ })

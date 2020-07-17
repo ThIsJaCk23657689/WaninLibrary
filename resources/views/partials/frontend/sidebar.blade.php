@@ -15,51 +15,50 @@
                 <div class="underline"></div>
             </a>
         </li>
-        <li class="nav-item small-title">
-            <a class="nav-link" href="#">
+        
+        <li class="nav-item mutilink">
+            <a class="nav-link mutilink-title" href="#">
                 近期活動
                 <div class="underline"></div>
             </a>
+            <div class="mutilink-menu">
+                <a class="mutilink-item" href="{{ route('front.activities') }}">
+                    <span>近期活動</span>
+                    <div class="underline"></div>
+                </a>
+                <a class="mutilink-item" href="{{ route('front.recommandations') }}">
+                    <span>主題書單</span>
+                    <div class="underline"></div>
+                </a>
+            </div>
         </li>
-        <li class="nav-item small">
-            <a class="nav-link" href="{{ route('front.activities') }}">
-                近期活動
-                <div class="underline"></div>
-            </a>
-        </li>
-        <li class="nav-item small">
-            <a class="nav-link" href="{{ route('front.recommandations') }}">
-                主題書單
-                <div class="underline"></div>
-            </a>
-        </li>
+
         <li class="nav-item">
             <a class="nav-link" href="{{ route('front.books') }}">
                 館藏查詢
                 <div class="underline"></div>
             </a>
         </li>
-        <li class="nav-item small-title">
-            <a class="nav-link" href="#">
+
+        <li class="nav-item mutilink">
+            <a class="nav-link mutilink-title" href="#">
                 捐書芳名錄
                 <div class="underline"></div>
             </a>
-        </li>
-        <li class="nav-item small">
-            <a class="nav-link" href="{{ route('front.donors') }}">
-                捐書芳名錄
-                <div class="underline"></div>
-            </a>
-        </li>
-        <li class="nav-item small">
-            <a class="nav-link" href="{{ route('front.donatedBooks') }}">
-                捐贈書籍查詢
-                <div class="underline"></div>
-            </a>
+            <div class="mutilink-menu">
+                <a class="mutilink-item" href="{{ route('front.donors') }}">
+                    <span>捐書芳名錄</span>
+                    <div class="underline"></div>
+                </a>
+                <a class="mutilink-item" href="{{ route('front.donatedBooks') }}">
+                    <span>捐贈書籍查詢</span>
+                    <div class="underline"></div>
+                </a>
+            </div>
         </li>
     </ul>
-    <div class="bottom">
-        <ul id="bottomSidebar" class="navbar-nav">
+    <div class="navbar-bottom">
+        <ul class="navbar-nav-bottom">
             <li class="nav-item">
                 <a href="#" class="nav-link">
                     <img src="{{ asset('images/frontend/icons/facebook_blue.png') }}" alt="facebook">
