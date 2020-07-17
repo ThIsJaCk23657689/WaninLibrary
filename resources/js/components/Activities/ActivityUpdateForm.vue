@@ -100,6 +100,16 @@ export default {
 
     },
     mounted(){
+        $( "#type" ).change(function() {
+            if(this.value == 1){
+                $('#is_top').attr('readonly', false);
+
+            }else{
+                $('#is_top').val(0);
+                $('#is_top').attr('readonly', true);
+
+            }
+        });
 
     }
 }
