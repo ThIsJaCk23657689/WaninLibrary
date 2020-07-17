@@ -41,10 +41,10 @@ class AnnouncementService extends BaseService
         $take = 8;
         $skip = $request->skip ?? 0;
         $today = Carbon::today();
-        $announcements = AnnouncementEloquent::orderBy('is_top', 'desc')->orderBy('updated_at', 'desc')->skip($skip)->take($take)->get();
+        $announcements = AnnouncementEloquent::orderBy('is_top', 'desc')->orderBy('created_at', 'desc')->skip($skip)->take($take)->get();
         foreach ($announcements as $announcement) {
             $announcement->showTitle = $announcement->showTitle();
-            $announcement->isNew = ($today->diffInHours($announcement->updated_at) <= 24);
+            $announcement->isNew = ($today->diffInHours($announcement->created_at) <= 24);
             $announcement->detailURL = route('front.announcements.show', [$announcement->id]);
         }
         return $announcements;
@@ -92,7 +92,7 @@ class AnnouncementService extends BaseService
     }
 
     public function getListForIndex(){
-        $news = AnnouncementEloquent::orderBy('is_top', 'desc')->orderBy('updated_at', 'desc')->take(3)->get();
+        $news = AnnouncementEloquent::orderBy('is_top', 'desc')->orderBy('created_at', 'desc')->take(3)->get();
         foreach ($news as $new) {
             $new->detailURL = route('front.announcements.show', [$new->id]);
         }

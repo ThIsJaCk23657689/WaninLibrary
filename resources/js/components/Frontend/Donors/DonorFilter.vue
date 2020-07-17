@@ -5,10 +5,10 @@
             <select id="filter-year" name="year" class="form-control filter-dropbox" v-model="filter.year" @change="changeYear">
                 <option value="0">依年份</option>
                 <option value="2020">2020</option>
-                <option value="2019">2019</option>
+                <!-- <option value="2019">2019</option>
                 <option value="2018">2018</option>
                 <option value="2017">2017</option>
-                <option value="2016">2016</option>
+                <option value="2016">2016</option> -->
             </select>
         </div>
     </div>
@@ -38,7 +38,7 @@ export default {
     props: ['filter'],
     data(){
         return {
-            
+
         }
     },
     methods: {

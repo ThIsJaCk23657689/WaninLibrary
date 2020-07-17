@@ -30,7 +30,7 @@ class Announcement extends Model
 
     public function showDate()
     {
-        return $this->updated_at->isoFormat('YYYY.MM.DD');
+        return $this->created_at->isoFormat('YYYY.MM.DD');
     }
 
     public function showTitle(){
@@ -43,13 +43,13 @@ class Announcement extends Model
     }
 
     public function showDay(){
-        return $this->updated_at->isoFormat('DD');
+        return $this->created_at->isoFormat('DD');
     }
     public function showYear(){
-        return $this->updated_at->isoFormat('YYYY');
+        return $this->created_at->isoFormat('YYYY');
     }
     public function showMonth(){
-        $date = Carbon::parse($this->updated_at)->format('F');
+        $date = Carbon::parse($this->created_at)->format('F');
         return strtoupper($date);
     }
 }

@@ -58,7 +58,7 @@
                 @media (max-width: 575px) {
                     font-size: 0.8rem;
                 }
-                @media (max-width: 450px) {
+                @media (max-width: 400px) {
                     font-size: 0.6rem;
                 }
             }
@@ -72,12 +72,15 @@
                 @media (max-width: 575px) {
                     top: 30px;
                 }
-                @media (max-width: 450px) {
+                @media (max-width: 400px) {
                     top: 20px;
                 }
                 img {
                     @media (max-width: 575px) {
                         width: 15% !important;
+                    }
+                    @media (max-width: 500px) {
+                        display: none;
                     }
                 }
             }
@@ -102,6 +105,9 @@
                 }
                 img {
                     width: 100%;
+                    @media (max-width: 500px) {
+                        display: none;
+                    }
                 }
             }
             // .detail-line-image-left {
