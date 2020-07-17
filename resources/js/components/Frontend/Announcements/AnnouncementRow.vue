@@ -5,7 +5,7 @@
             <span class="announcement-new" v-if="announcement.isNew">NEW</span>
         </div>
         <div class="announcement-info-container">
-            <div class="announcement-date">{{ announcement.updated_at }}</div>
+            <div class="announcement-date">{{ announcement.created_at }}</div>
             <div class="announcement-title">{{ announcement.showTitle }}</div>
         </div>
         <div class="announcement-readmore">

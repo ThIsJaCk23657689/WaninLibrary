@@ -50,7 +50,7 @@ class ActivityService extends BaseService
     {
         $take = 4;
         $skip = $request->skip ?? 0;
-        $activities = ActivityEloquent::where('type', $type)->orderBy('is_top', 'desc')->orderBy('updated_at', 'desc')->skip($skip)->take($take)->get();
+        $activities = ActivityEloquent::where('type', $type)->orderBy('is_top', 'desc')->orderBy('created_at', 'desc')->skip($skip)->take($take)->get();
         foreach($activities as $activity){
             $activity->showTitle = $activity->showTitle();
             $activity->showCoverImage = $activity->showCoverImage();
@@ -129,7 +129,7 @@ class ActivityService extends BaseService
 
     public function getListForIndex()
     {
-        $activities = ActivityEloquent::where('is_top', 0)->where('type', 1)->orderBy('updated_at', 'desc')->take(2)->get();
+        $activities = ActivityEloquent::where('is_top', 0)->where('type', 1)->orderBy('created_at', 'desc')->take(2)->get();
         return $activities;
     }
     public function getListForIndex_top()

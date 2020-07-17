@@ -25,7 +25,7 @@ class Activity extends Model
 
     public function showDate()
     {
-        return $this->updated_at->isoFormat('YYYY.MM.DD');
+        return $this->created_at->isoFormat('YYYY.MM.DD');
     }
 
     public function showType()
@@ -55,7 +55,7 @@ class Activity extends Model
 
     public function isNew(){
         $today = Carbon::today();
-        return ($today->diffInHours($this->updated_at) <= 24);
+        return ($today->diffInHours($this->created_at) <= 24);
     }
 
     public function showCoverImage(){
@@ -67,13 +67,13 @@ class Activity extends Model
     }
 
     public function showDay(){
-        return $this->updated_at->isoFormat('DD');
+        return $this->created_at->isoFormat('DD');
     }
     public function showYear(){
-        return $this->updated_at->isoFormat('YYYY');
+        return $this->created_at->isoFormat('YYYY');
     }
     public function showMonth(){
-        $date = Carbon::parse($this->updated_at)->format('F');
+        $date = Carbon::parse($this->created_at)->format('F');
         return strtoupper($date);
     }
 }

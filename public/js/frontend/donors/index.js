@@ -478,15 +478,7 @@ var render = function() {
           [
             _c("option", { attrs: { value: "0" } }, [_vm._v("依年份")]),
             _vm._v(" "),
-            _c("option", { attrs: { value: "2020" } }, [_vm._v("2020")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "2019" } }, [_vm._v("2019")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "2018" } }, [_vm._v("2018")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "2017" } }, [_vm._v("2017")]),
-            _vm._v(" "),
-            _c("option", { attrs: { value: "2016" } }, [_vm._v("2016")])
+            _c("option", { attrs: { value: "2020" } }, [_vm._v("2020")])
           ]
         )
       ])
@@ -544,7 +536,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\r\n                搜尋\r\n            ")]
+          [_vm._v("\n                搜尋\n            ")]
         )
       ])
     ]),
@@ -1368,7 +1360,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\donors\index.js */"./resources/js/frontend/donors/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\donors\index.js */"./resources/js/frontend/donors/index.js");
 
 
 /***/ })

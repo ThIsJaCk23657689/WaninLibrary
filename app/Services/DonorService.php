@@ -236,7 +236,7 @@ class DonorService extends BaseService
 
         // 年份
         if(!is_null($year)){
-            $donors = $donors->where('updated_at', 'like', $year.'%');
+            $donors = $donors->whereBetween('updated_at', [$year.'-01-01', $year.'-12-31']);
         }
 
         if(!is_null($keywords) && $keywords != []){
