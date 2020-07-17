@@ -523,7 +523,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v("\n                搜尋\n            ")]
+          [_vm._v("\r\n                搜尋\r\n            ")]
         )
       ])
     ]),
@@ -648,7 +648,7 @@ var staticRenderFns = [
     var _h = _vm.$createElement
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "check-detail" }, [
-      _vm._v("\n                    查看詳細資料\n                    "),
+      _vm._v("\r\n                    查看詳細資料\r\n                    "),
       _c("i", { staticClass: "fas fa-arrow-right" })
     ])
   }
@@ -1406,7 +1406,7 @@ var app = new Vue({
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! C:\AppServ\www\waninlibary\resources\js\frontend\freebooks\index.js */"./resources/js/frontend/freebooks/index.js");
+module.exports = __webpack_require__(/*! C:\AppServ\www\WaninLibary\resources\js\frontend\freebooks\index.js */"./resources/js/frontend/freebooks/index.js");
 
 
 /***/ })
