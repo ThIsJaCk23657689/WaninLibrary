@@ -182,6 +182,9 @@ return [
         // Jamesdordoy\Laravelvuedatatable 套件
         JamesDordoy\LaravelVueDatatable\Providers\LaravelVueDatatableServiceProvider::class,
 
+        // Artesaos\SEOTools 套件
+        Artesaos\SEOTools\Providers\SEOToolsServiceProvider::class,
+
     ],
 
     /*
@@ -244,6 +247,11 @@ return [
         'PDF' => Barryvdh\Snappy\Facades\SnappyPdf::class,
 	    'SnappyImage' => Barryvdh\Snappy\Facades\SnappyImage::class,
 
+        // SEO
+        'SEOMeta' => Artesaos\SEOTools\Facades\SEOMeta::class,
+        'OpenGraph'=> Artesaos\SEOTools\Facades\OpenGraph::class,
+        'Twitter' => Artesaos\SEOTools\Facades\TwitterCard::class,
+        'SEO' => Artesaos\SEOTools\Facades\SEOTools::class,
     ],
 
 ];

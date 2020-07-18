@@ -8,6 +8,8 @@ use App\Services\ActivityService;
 use App\Services\InformationService;
 use App\Services\BookService;
 use App\Services\DonorService;
+use SEOMeta;
+use OpenGraph;
 
 class HomeController extends Controller
 {
@@ -70,6 +72,14 @@ class HomeController extends Controller
     public function announcements_show($id){
         $active_num = 1;
         $announcement = $this->AnnouncementService->getOne($id);
+
+        SEOMeta::setDescription($announcement->title);
+        SEOMeta::addMeta('article:published_time', $announcement->created_at->toW3CString(), 'property');
+
+        OpenGraph::setTitle($announcement->title);
+        OpenGraph::setDescription($announcement->title);
+        OpenGraph::addProperty('type', 'article');
+
         return view('frontend.announcements_show', compact('active_num', 'announcement'));
     }
 
@@ -107,6 +117,15 @@ class HomeController extends Controller
     public function activities_show($id){
         $active_num = 2;
         $activity = $this->ActivityService->getOne($id);
+
+        SEOMeta::setDescription($activity->title);
+        SEOMeta::addMeta('article:published_time', $activity->created_at->toW3CString(), 'property');
+
+        OpenGraph::setTitle($activity->title);
+        OpenGraph::setDescription($activity->title);
+        OpenGraph::addProperty('type', 'article');
+        OpenGraph::addImage($activity->showCoverImage());
+
         return view('frontend.activities_show', compact('active_num', 'activity'));
     }
 
@@ -152,6 +171,15 @@ class HomeController extends Controller
             $donor_name = $book->donor->showName();
             $book->source = '捐贈 / '.$donor_name;
         }
+
+        SEOMeta::setDescription($book->title);
+        SEOMeta::addMeta('article:published_time', $book->created_at->toW3CString(), 'property');
+
+        OpenGraph::setTitle($book->title);
+        OpenGraph::setDescription($book->subtitle);
+        OpenGraph::addProperty('type', 'article');
+        OpenGraph::addImage($book->showCoverImage());
+
         return view('frontend.books_show', compact('active_num', 'book'));
     }
 
