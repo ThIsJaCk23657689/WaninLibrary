@@ -1,5 +1,9 @@
 <template>
 <div class="recommandation-card">
+    <div class="recommandation-card-date">
+        <h3>{{ recommandation.showDay }}</h3>
+        <span>{{ recommandation.showMonth }}<br>{{ recommandation.showYear }}</span>
+    </div>
     <div class="recommandation-card-image">
         <a :href="recommandation.detailURL" class="image-link">
             <div class="cover-image">
@@ -8,21 +12,10 @@
             </div>
         </a>
     </div>
-    <div class="recommandation-card-info">
-        <div class="recommandation-card-date">
-            <h3>{{ recommandation.showDay }}</h3>
-            <span>{{ recommandation.showMonth }}<br>{{ recommandation.showYear }}</span>
-        </div>
-
-        <div class="recommandation-card-title">
-            <a :href="recommandation.detailURL" class="title-link">
-            {{ recommandation.showTitle }}
-            </a>
-        </div>
-
-        <!-- <div class="recommandation-card-arrow-container">
-            <a :href="recommandation.detailURL" class="recommandation-card-arrow"></a>
-        </div> -->
+    <div class="recommandation-card-title">
+        <a :href="recommandation.detailURL" class="title-link">
+           {{ recommandation.showTitle }}
+        </a>
     </div>
 </div>
 </template>

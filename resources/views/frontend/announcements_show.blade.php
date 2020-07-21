@@ -38,7 +38,7 @@
 
 <section class="detail-page-body">
     <div class="container">
-        <div class="goback-container">
+        <div class="goback-container text-center">
             <a href="#" class="goback-text" onclick="history.go(-1); event.preventDefault();">
                 <i class="fas fa-arrow-left"></i>
                 返回上一頁

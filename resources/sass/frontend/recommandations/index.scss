@@ -44,78 +44,62 @@
 
 .recommandation-card {
     margin: 25px 28px;
+    padding: 30px 40px;
     border: 1px solid $blue;
     color: $brown;
-    width: calc(100% - 56px);
-    @media (max-width: 767px) {
+    width: calc(50% - 56px);
+    height: 700px;
+    @media (max-width: 991px) {
+        width: calc(100% - 56px);
+    }
+    @media (max-width: 575px) {
         margin: 25px 0px;
         width: 100%;
     }
-    &:nth-child(even) {
-        .recommandation-card-image {
-            float: right !important;
+    @media (max-width: 519px) {
+        padding: 30px 10px;
+    }
+    .recommandation-card-date {
+        position: relative;
+        border-bottom: 3px solid $green;
+        margin-bottom: 28px;
+        h3 {
+            margin: 0;
+            font-size: 3rem;
+            font-weight: bold;
+            position: relative;
+            font-weight: bold;
+            display: inline-block;
+            color: $green;
         }
-        .recommandation-card-arrow-container {
-            left: 40px !important;
-            bottom: 30px !important;
-            .recommandation-card-arrow {
-                background-image: url(../../../images/frontend/icons/arrow-left.png) !important;
-            }
+        span {
+            display: inline-block;
+            float: right;
+            font-style: italic;
+            position: relative;
+            right: 5px;
+            bottom: -6px;
+            font-size: 1rem;
+            // font-weight: lighter;
         }
     }
     .recommandation-card-image {
-        width: 50%;
-        float: left;
+        margin-bottom: 25px;
         .image-link {
-            display: block;
+            display: inline-block;
             width: 100%;
-            height: 100%;
             .cover-image {
-                height: 518px;
+                height: 420px;
                 overflow: hidden;
                 position: relative;
                 img {
                     width: 100%;
+                    height: 100%;
                     position: absolute;
                     top: calc(50% + 0px);
                     left: 0;
                     transform: translateY(-50%);
                     transition: all 0.8s ease-in-out;
-                    @media (max-width: 1199px) {
-                        width: auto;
-                        height: 100%;
-                        top: 0;
-                        left: calc(50% + 0px);
-                        transform: translateX(-50%);
-                    }
-                    // @media (max-width: 991px) {
-                    //     width: 100%;
-                    //     height: auto;
-                    //     top: calc(50% + 0px);
-                    //     left: 0;
-                    //     transform: translateY(-50%);
-                    // }
-                    // @media (max-width: 767px) {
-                    //     width: auto;
-                    //     height: 100%;
-                    //     top: 0;
-                    //     left: calc(50% + 0px);
-                    //     transform: translateX(-50%);
-                    // }
-                    // @media (max-width: 575px) {
-                    //     width: 100%;
-                    //     height: auto;
-                    //     top: calc(50% + 0px);
-                    //     left: 0;
-                    //     transform: translateY(-50%);
-                    // }
-                    // @media (max-width: 459px) {
-                    //     width: auto;
-                    //     height: 100%;
-                    //     top: 0;
-                    //     left: calc(50% + 0px);
-                    //     transform: translateX(-50%);
-                    // }
                 }
                 .image-gray {
                     position: absolute;
@@ -130,9 +114,6 @@
             &:hover {
                 img {
                     transform: translateY(-50%) scale(1.1);
-                    @media (max-width: 1199px) {
-                        transform: translateX(-50%) scale(1.1);
-                    }
                 }
                 .image-gray {
                     background-color: rgba($blue, 0);
@@ -140,72 +121,11 @@
             }
         }
     }
-    .recommandation-card-info {
-        width: 50%;
-        height: 100%;
-        float: right;
-        padding: 30px 40px;
-        position: relative;
-        @media (max-width: 767px) {
-            padding: 20px 25px;
-        }
-        @media (max-width: 575px) {
-            padding: 10px 15px;
-        }
-        .recommandation-card-date {
-            position: relative;
-            border-bottom: 3px solid $green;
-            margin-bottom: 28px;
-            h3 {
-                margin: 0;
-                font-size: 3rem;
-                bottom: 4px;
-                position: relative;
-                font-weight: bold;
-                display: inline-block;
-                color: $green;
-                @media (max-width: 575px) {
-                    font-size: 2rem;
-                }
-            }
-            span {
-                display: inline-block;
-                float: right;
-                font-style: italic;
-                position: relative;
-                right: 5px;
-                bottom: -6px;
-                font-size: 1rem;
-                @media (max-width: 575px) {
-                    font-size: 0.8rem;
-                    bottom: 5px;
-                }
-            }
-        }
-        .recommandation-card-title {
-            .title-link {
-                color: $brown;
-                font-size: 1.3rem;
-                font-weight: bold;
-                @media (max-width: 575px) {
-                    font-size: 1rem;
-                }
-            }
-        }
-        .recommandation-card-arrow-container {
-            width: 120px;
-            height: 40px;
-            right: 40px;
-            bottom: 30px;
-            position: absolute;
-            .recommandation-card-arrow {
-                display: block;
-                width: 100%;
-                height: 100%;
-                background-image: url(../../../images/frontend/icons/arrow-right.png);
-                background-repeat: no-repeat;
-                background-size: 100% 100%;
-            }
+    .recommandation-card-title {
+        .title-link {
+            color: $brown;
+            font-size: 1.3rem;
+            font-weight: bold;
         }
     }
 }

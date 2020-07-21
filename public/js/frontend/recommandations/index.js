@@ -247,13 +247,6 @@ __webpack_require__.r(__webpack_exports__);
 //
 //
 //
-//
-//
-//
-//
-//
-//
-//
 /* harmony default export */ __webpack_exports__["default"] = ({
   props: ['recommandation'],
   data: function data() {
@@ -540,6 +533,16 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "recommandation-card" }, [
+    _c("div", { staticClass: "recommandation-card-date" }, [
+      _c("h3", [_vm._v(_vm._s(_vm.recommandation.showDay))]),
+      _vm._v(" "),
+      _c("span", [
+        _vm._v(_vm._s(_vm.recommandation.showMonth)),
+        _c("br"),
+        _vm._v(_vm._s(_vm.recommandation.showYear))
+      ])
+    ]),
+    _vm._v(" "),
     _c("div", { staticClass: "recommandation-card-image" }, [
       _c(
         "a",
@@ -559,33 +562,21 @@ var render = function() {
       )
     ]),
     _vm._v(" "),
-    _c("div", { staticClass: "recommandation-card-info" }, [
-      _c("div", { staticClass: "recommandation-card-date" }, [
-        _c("h3", [_vm._v(_vm._s(_vm.recommandation.showDay))]),
-        _vm._v(" "),
-        _c("span", [
-          _vm._v(_vm._s(_vm.recommandation.showMonth)),
-          _c("br"),
-          _vm._v(_vm._s(_vm.recommandation.showYear))
-        ])
-      ]),
-      _vm._v(" "),
-      _c("div", { staticClass: "recommandation-card-title" }, [
-        _c(
-          "a",
-          {
-            staticClass: "title-link",
-            attrs: { href: _vm.recommandation.detailURL }
-          },
-          [
-            _vm._v(
-              "\r\n            " +
-                _vm._s(_vm.recommandation.showTitle) +
-                "\r\n            "
-            )
-          ]
-        )
-      ])
+    _c("div", { staticClass: "recommandation-card-title" }, [
+      _c(
+        "a",
+        {
+          staticClass: "title-link",
+          attrs: { href: _vm.recommandation.detailURL }
+        },
+        [
+          _vm._v(
+            "\r\n           " +
+              _vm._s(_vm.recommandation.showTitle) +
+              "\r\n        "
+          )
+        ]
+      )
     ])
   ])
 }

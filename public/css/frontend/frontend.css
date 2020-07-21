@@ -11656,6 +11656,7 @@ body {
 }
 #navbar .navbar-nav .nav-item {
   margin-right: 4%;
+  height: 3rem;
 }
 #navbar .navbar-nav .nav-item.active .nav-link {
   color: #5f6b82;
