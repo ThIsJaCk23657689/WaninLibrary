@@ -630,7 +630,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        確認修改\r\n                    "
+                    "\n                        確認修改\n                    "
                   )
                 ]
               ),
@@ -643,7 +643,7 @@ var render = function() {
                 },
                 [
                   _vm._v(
-                    "\r\n                        返回列表\r\n                    "
+                    "\n                        返回列表\n                    "
                   )
                 ]
               )
@@ -661,7 +661,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "name" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("姓名\r\n                        ")
+      _vm._v("姓名\n                        ")
     ])
   },
   function() {
@@ -679,7 +679,7 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("label", { attrs: { for: "status" } }, [
       _c("span", { staticClass: "text-danger mr-2" }, [_vm._v("*")]),
-      _vm._v("身分別\r\n                        ")
+      _vm._v("身分別\n                        ")
     ])
   },
   function() {
@@ -688,12 +688,12 @@ var staticRenderFns = [
     var _c = _vm._self._c || _h
     return _c("div", { staticClass: "col-md-4" }, [
       _c("div", { staticClass: "form-group" }, [
-        _c("label", { staticStyle: { color: "white" } }, [_vm._v("__")]),
+        _c("label", { staticStyle: { color: "white" } }, [_vm._v("_______")]),
         _vm._v(" "),
         _c(
           "button",
           {
-            staticClass: "btn btn-md btn-primary",
+            staticClass: "btn btn-block btn-primary",
             attrs: {
               type: "button",
               "data-toggle": "modal",
@@ -703,7 +703,7 @@ var staticRenderFns = [
           [
             _c("i", { staticClass: "fas fa-plus mr-2" }),
             _vm._v(
-              "\r\n                            新增隸屬單位\r\n                        "
+              "\n                            新增隸屬單位\n                        "
             )
           ]
         )

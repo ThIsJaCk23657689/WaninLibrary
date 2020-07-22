@@ -53,8 +53,8 @@
 
                 <div class="col-md-4">
                     <div class="form-group">
-                        <label style="color:white;">__</label>
-                        <button type="button" class="btn btn-md btn-primary" data-toggle="modal" data-target="#CreateDonorModal">
+                        <label style="color:white;">_______</label>
+                        <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#CreateDonorModal">
                             <i class="fas fa-plus mr-2"></i>
                             新增隸屬單位
                         </button>
