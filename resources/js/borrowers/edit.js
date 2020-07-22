@@ -1,4 +1,5 @@
 Vue.component('borrower-update-form', require('./../components/Borrowers/BorrowerUpdateForm.vue').default);
+Vue.component('create-angcey-modal', require('./../components/Modals/CreateAgencyModal.vue').default);
 
 const app = new Vue({
     el: '#borrower',

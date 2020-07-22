@@ -54,7 +54,7 @@
                 <div class="col-md-4">
                     <div class="form-group">
                         <label style="color:white;">_______</label>
-                        <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#CreateDonorModal">
+                        <button type="button" class="btn btn-block btn-primary" data-toggle="modal" data-target="#CreateAgencyModal">
                             <i class="fas fa-plus mr-2"></i>
                             新增隸屬單位
                         </button>
@@ -120,6 +120,7 @@
 
         </form>
     </div>
+    <create-angcey-modal @refresh-agency="refreshAgency"></create-angcey-modal>
 </div>
 </template>
 
@@ -144,7 +145,25 @@ export default {
                 console.error('編輯借閱人時發生錯誤，錯誤訊息：' + error);
                 $.showErrorModal(error);
             });
-        }
+        },
+        refreshAgency(added_id){
+            this.generateAgenciesOption(added_id);
+        },
+        generateAgenciesOption(added_id = null){
+            // 生成 機構 下拉式選單
+            let AgenciesListURL = $('#AgenciesListURL').html();
+            axios.get(AgenciesListURL).then(response => {
+                this.agencies = response.data.agencies;
+                for(let i = 0; i < this.agencies.length; i++){
+                    $("#agency_id").append($("<option></option>").attr("value", this.agencies[i].id).text(this.agencies[i].name));
+                }
+                $('#agency_id').selectpicker('refresh');
+                if(added_id != null){
+                    $('#agency_id').val(added_id);
+                    $('#agency_id').selectpicker('refresh');
+                }
+            });
+        },
     },
     created(){
 

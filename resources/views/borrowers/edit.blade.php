@@ -22,6 +22,7 @@
         <span id="BorrowersGetOneURL" class="d-none">{{ route('borrowers.getOne', [$borrower->id]) }}</span>
         <span id="BorrowersUpdateURL" class="d-none">{{ route('borrowers.update', [$borrower->id]) }}</span>
         <span id="AgenciesListURL" class="d-none">{{ route('agencies.getList') }}</span>
+        <span id="AgenciesStoreURL" class="d-none">{{ route('agencies.store') }}</span>
 
         <borrower-update-form :borrower="borrower"></borrower-update-form>
     </div>
