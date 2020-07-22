@@ -193,56 +193,71 @@
 
 .recommandation-card {
   margin: 25px 28px;
+  padding: 30px 40px;
   border: 1px solid #5f6b82;
   color: #55473f;
-  width: calc(100% - 56px);
+  width: calc(50% - 56px);
+  height: 700px;
 }
-@media (max-width: 767px) {
+@media (max-width: 991px) {
+  .recommandation-card {
+    width: calc(100% - 56px);
+  }
+}
+@media (max-width: 575px) {
   .recommandation-card {
     margin: 25px 0px;
     width: 100%;
   }
 }
-.recommandation-card:nth-child(even) .recommandation-card-image {
-  float: right !important;
+@media (max-width: 519px) {
+  .recommandation-card {
+    padding: 30px 10px;
+  }
 }
-.recommandation-card:nth-child(even) .recommandation-card-arrow-container {
-  left: 40px !important;
-  bottom: 30px !important;
+.recommandation-card .recommandation-card-date {
+  position: relative;
+  border-bottom: 3px solid #93e5b4;
+  margin-bottom: 28px;
 }
-.recommandation-card:nth-child(even) .recommandation-card-arrow-container .recommandation-card-arrow {
-  background-image: url(../../../images/frontend/icons/arrow-left.png) !important;
+.recommandation-card .recommandation-card-date h3 {
+  margin: 0;
+  font-size: 3rem;
+  font-weight: bold;
+  position: relative;
+  font-weight: bold;
+  display: inline-block;
+  color: #93e5b4;
+}
+.recommandation-card .recommandation-card-date span {
+  display: inline-block;
+  float: right;
+  font-style: italic;
+  position: relative;
+  right: 5px;
+  bottom: -6px;
+  font-size: 1rem;
 }
 .recommandation-card .recommandation-card-image {
-  width: 50%;
-  float: left;
+  margin-bottom: 25px;
 }
 .recommandation-card .recommandation-card-image .image-link {
-  display: block;
+  display: inline-block;
   width: 100%;
-  height: 100%;
 }
 .recommandation-card .recommandation-card-image .image-link .cover-image {
-  height: 518px;
+  height: 420px;
   overflow: hidden;
   position: relative;
 }
 .recommandation-card .recommandation-card-image .image-link .cover-image img {
   width: 100%;
+  height: 100%;
   position: absolute;
   top: calc(50% + 0px);
   left: 0;
   transform: translateY(-50%);
   transition: all 0.8s ease-in-out;
-}
-@media (max-width: 1199px) {
-  .recommandation-card .recommandation-card-image .image-link .cover-image img {
-    width: auto;
-    height: 100%;
-    top: 0;
-    left: calc(50% + 0px);
-    transform: translateX(-50%);
-  }
 }
 .recommandation-card .recommandation-card-image .image-link .cover-image .image-gray {
   position: absolute;
@@ -256,87 +271,11 @@
 .recommandation-card .recommandation-card-image .image-link:hover img {
   transform: translateY(-50%) scale(1.1);
 }
-@media (max-width: 1199px) {
-  .recommandation-card .recommandation-card-image .image-link:hover img {
-    transform: translateX(-50%) scale(1.1);
-  }
-}
 .recommandation-card .recommandation-card-image .image-link:hover .image-gray {
   background-color: rgba(95, 107, 130, 0);
 }
-.recommandation-card .recommandation-card-info {
-  width: 50%;
-  height: 100%;
-  float: right;
-  padding: 30px 40px;
-  position: relative;
-}
-@media (max-width: 767px) {
-  .recommandation-card .recommandation-card-info {
-    padding: 20px 25px;
-  }
-}
-@media (max-width: 575px) {
-  .recommandation-card .recommandation-card-info {
-    padding: 10px 15px;
-  }
-}
-.recommandation-card .recommandation-card-info .recommandation-card-date {
-  position: relative;
-  border-bottom: 3px solid #93e5b4;
-  margin-bottom: 28px;
-}
-.recommandation-card .recommandation-card-info .recommandation-card-date h3 {
-  margin: 0;
-  font-size: 3rem;
-  bottom: 4px;
-  position: relative;
-  font-weight: bold;
-  display: inline-block;
-  color: #93e5b4;
-}
-@media (max-width: 575px) {
-  .recommandation-card .recommandation-card-info .recommandation-card-date h3 {
-    font-size: 2rem;
-  }
-}
-.recommandation-card .recommandation-card-info .recommandation-card-date span {
-  display: inline-block;
-  float: right;
-  font-style: italic;
-  position: relative;
-  right: 5px;
-  bottom: -6px;
-  font-size: 1rem;
-}
-@media (max-width: 575px) {
-  .recommandation-card .recommandation-card-info .recommandation-card-date span {
-    font-size: 0.8rem;
-    bottom: 5px;
-  }
-}
-.recommandation-card .recommandation-card-info .recommandation-card-title .title-link {
+.recommandation-card .recommandation-card-title .title-link {
   color: #55473f;
   font-size: 1.3rem;
   font-weight: bold;
-}
-@media (max-width: 575px) {
-  .recommandation-card .recommandation-card-info .recommandation-card-title .title-link {
-    font-size: 1rem;
-  }
-}
-.recommandation-card .recommandation-card-info .recommandation-card-arrow-container {
-  width: 120px;
-  height: 40px;
-  right: 40px;
-  bottom: 30px;
-  position: absolute;
-}
-.recommandation-card .recommandation-card-info .recommandation-card-arrow-container .recommandation-card-arrow {
-  display: block;
-  width: 100%;
-  height: 100%;
-  background-image: url(../../../images/frontend/icons/arrow-right.png);
-  background-repeat: no-repeat;
-  background-size: 100% 100%;
 }
