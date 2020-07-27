@@ -70,7 +70,7 @@ class BookController extends Controller
                 'message' => '此書籍為借閱中或逾期中，因此不能刪除',
                 'url' => route('books.index')
             ], 400);
-        }elseif($book->is_recommended == 0){
+        }elseif($book->is_recommended != 0){
             return response()->json([
                 'status' => 'OK',
                 'message' => '此書籍為推薦書單中的書籍，因此不能刪除',
